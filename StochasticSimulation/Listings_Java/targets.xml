@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+
+  <target name="init"
+    description="Init the build scripts.">
+
+    <mkdir dir="${build.dir}/classes"/>
+    <mkdir dir="${dist.dir}"/>
+  </target>
+
+
+  <target name="doc" depends="init"
+    description="Create documentation">
+
+    <javadoc destdir="${build.dir}/doc"
+      sourcepath="${source.dir}" >
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+  </target>
+
+  <target name="clean" 
+    description="Remove temporary dirs">
+
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+
+  <target name="h" depends="help"
+    description="Gives help information">
+  </target>
+
+  <target name="help" depends="info"
+    description="Gives help information">
+    <echo message=" Usage:"/>
+    <echo message=" (more info: type man ant running unix)"/>
+    <echo message=" ant :: do everything"/>
+    <echo message=" "/>
+    <echo message=" ant &lt;targetName&gt; :: execute target &lt;targetName&gt;"/>
+    <echo message=" ant -projecthelp  ::  list all possible targets"/>
+    <echo message=" "/>
+    <echo message=" e.g. ant compile :: just compile"/>
+  </target>
+
+  <target name="info"
+    description="Gives all information available">
+
+    <echo message="Ant Properties:"/>
+    <echo message="ant.file = ${ant.file}"/>
+    <echo message="ant.home = ${ant.home}"/>
+    <echo message="ant.java.version = ${ant.java.version}"/>
+    <echo message="ant.version = ${ant.version}"/>
+    <echo message="basedir = ${basedir}"/>
+
+    <echo message="JVM Properties:"/>
+
+    <echo message="java.home = ${java.home}"/>
+    <echo message="user.home = ${user.home}"/>
+    <echo message="user.name = ${user.name}"/>
+  </target>

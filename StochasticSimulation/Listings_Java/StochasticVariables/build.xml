@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Plotting with Java Chapter</description>
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Execute using (on Unix): cd build/classes; java HelloWorld_Application; cd -</echo>
+    <echo></echo>
+
+    <echo>Executing: FileBinary</echo>
+    <java 
+      classname="FileBinary"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: FileCheck</echo>
+    <java 
+      classname="FileCheck"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+      <arg value="testfile"/>
+    </java>
+
+    <echo>Executing: FileReadConvenience</echo>
+    <java 
+      classname="FileReadConvenience"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: FileReadSimple</echo>
+    <java 
+      classname="FileReadSimple"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: FileSaveFormatted</echo>
+    <java 
+      classname="FileSaveFormatted"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: FileWriteConvenience</echo>
+    <java 
+      classname="FileWriteConvenience"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: GZIPReadArray</echo>
+    <java 
+      classname="GZIPReadArray"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: GZIPSaveArray</echo>
+    <java 
+      classname="GZIPSaveArray"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: RedirectStandard</echo>
+    <java 
+      classname="RedirectStandard"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+    <echo>Executing: StringBufferDemo</echo>
+    <java 
+      classname="StringBufferDemo"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="10000">
+    </java>
+
+
+    <delete file="test.asc"/>
+    <delete file="test.asc.gz"/>
+    <delete file="test.bin"/>
+    <delete file="test.bin.gz"/>
+    <delete file="testbuff.asc"/>
+    <delete file="testform.asc"/>
+    <delete file="Standard.out"/>
+
+  </target>
+
+
+
+
+</project>
+

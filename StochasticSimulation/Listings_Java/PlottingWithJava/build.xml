@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Plotting with Java Chapter</description>
+
+  &properties;
+
+  &targets;
+
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Execute using (on Unix): cd build/classes; java HelloWorld_Application; cd -</echo>
+    <echo></echo>
+
+    <echo>Executing: RadioactiveDecay_easyplot</echo>
+    <java 
+      classname="RadioactiveDecay_easyplot"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: RadioactiveDecay</echo>
+    <java 
+      classname="RadioactiveDecay"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: RadioactiveDecay_printing is an APPLET</echo>
+
+    <echo>Executing: RadioactiveDecay_ptplot2</echo>
+    <java 
+      classname="RadioactiveDecay_ptplot2"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: RadioactiveDecay_ptplot</echo>
+    <java 
+      classname="RadioactiveDecay_ptplot"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+
+    <echo>Executing: DirectoryListing</echo>
+    <java 
+      classname="DirectoryListing"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: Gnuplot</echo>
+    <java 
+      classname="Gnuplot"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: PlotEasy</echo>
+    <java 
+      classname="PlotEasy"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="false"
+      timeout="7000">
+    </java>
+
+    <echo>Executing: Ptplot_Demo1 is an APPLET</echo>
+
+
+    <echo>Executing: Ptplot_Demo2</echo>
+    <java 
+      classname="Ptplot_Demo2"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+
+  </target>
+
+
+
+
+</project>
+

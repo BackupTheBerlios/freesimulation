@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Introduction Chapter</description>
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <copy 
+      file="call_HelloWorld_Applet.html"
+      todir="${build.dir}/classes"/>
+    <copy 
+      file="ParamApplet.html"
+      todir="${build.dir}/classes"/>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Execute using (on Unix): cd build/classes; java HelloWorld_Application; cd -</echo>
+
+    <echo>Executing: HelloWorld_Application</echo>
+    <java 
+      classname="HelloWorld_Application"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: DataMean_Array</echo>
+    <java 
+      classname="DataMean_Array"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: DataMeanArray</echo>
+    <java 
+      classname="DataMeanArray"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: DataUsage</echo>
+    <java 
+      classname="DataUsage"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: DiceGame</echo>
+    <java 
+      classname="DiceGame"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: DataUsage</echo>
+    <java 
+      classname="DataUsage"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: ParamCommandLine 1 checkMe 'So Me too' .</echo>
+    <java 
+      classname="ParamCommandLine"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+      <arg value="1"/>
+      <arg value="checkMe"/>
+      <arg value="'So Me too'"/>
+      <arg file="."/>
+    </java>
+
+    <echo>Executing Applet: HelloWorld_Applet</echo>
+    <echo> USE: appletviewer call_HelloWorld_Applet.html</echo>
+    <exec 
+      dir="${build.dir}/classes"
+      executable="/usr/java/j2sdk1.4.2/bin/appletviewer"
+      vmlauncher="false"
+      timeout="10000">
+      <arg value="call_HelloWorld_Applet.html"/>
+    </exec>
+
+    <echo>Executing Applet: ParamApplet</echo>
+    <echo> USE: appletviewer ParamApplet.html</echo>
+    <exec 
+      dir="${build.dir}/classes"
+      executable="/usr/java/j2sdk1.4.2/bin/appletviewer"
+      vmlauncher="false"
+      timeout="15000">
+      <arg value="ParamApplet.html"/>
+    </exec>
+
+  </target>
+
+
+
+
+</project>
+

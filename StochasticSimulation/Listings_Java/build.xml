@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="iso-8859-1"  ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:properties.xml">
+   <!ENTITY targets    SYSTEM "file:targets.xml">
+
+]>
+
+<project name="DoItAll" default="all">
+  <description>Control over all programs.</description>
+
+  <target name="h" depends="help"
+    description="Gives help information">
+  </target>
+
+  <target name="help"
+    description="Gives help information">
+    <echo message=" Usage:"/>
+    <echo message=" (more info: type man ant running unix)"/>
+    <echo message=" ant :: do everything"/>
+    <echo message=" "/>
+    <echo message=" ant &lt;targetName&gt; :: execute target &lt;targetName&gt;"/>
+    <echo message=" ant -projecthelp  ::  list all possible targets"/>
+    <echo message=" "/>
+    <echo message=" e.g. ant compile :: just compile"/>
+  </target>
+
+
+
+  <target name="do-Others">
+    <ant 
+      dir="Others" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-Listings">
+    <ant 
+      dir="Listings" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-NonEquilibriumMC">
+    <ant 
+      dir="NonEquilibriumMC" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+
+  <target name="do-Appendix">
+    <ant 
+      dir="Appendix" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+
+  <target name="do-MarkovProcesses">
+    <ant 
+      dir="MarkovProcesses" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-MonteCarlo">
+    <ant 
+      dir="MonteCarlo" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-ObjectOriented">
+    <ant 
+      dir="ObjectOriented" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-PlottingWithJava">
+    <ant 
+      dir="PlottingWithJava" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-SamplingOfProbDists">
+    <ant 
+      dir="SamplingOfProbDists" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-SDE">
+    <ant 
+      dir="SDE" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-StochasticVariables">
+    <ant 
+      dir="StochasticVariables" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-IntroToJava">
+    <ant 
+      dir="IntroToJava" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+  <target name="do-MolecularDynamics">
+    <ant 
+      dir="MolecularDynamics" 
+      antfile="build.xml"
+      target="${target}"
+      inheritAll="false"/>
+  </target>
+
+
+
+
+  <target name="do-all" 
+    depends="
+    do-MolecularDynamics,
+    do-IntroToJava,
+    do-StochasticVariables,
+    do-SDE,
+    do-SamplingOfProbDists,
+    do-MarkovProcesses,
+    do-MonteCarlo,
+    do-ObjectOriented,
+    do-PlottingWithJava,
+    do-Appendix,
+    do-NonEquilibriumMC,
+    do-Others,
+    do-Listings" />
+
+  <target 
+    name="all"
+    depends="compile">
+  </target>
+
+  <target 
+    name="compile"
+    description="Build everything">
+    <antcall target="do-all">
+      <param name="target" value="compile"/>
+    </antcall>
+  </target>
+
+  <target 
+    name="execute"
+    depends="compile"
+    description="Execute everything">
+    <antcall target="do-all">
+      <param name="target" value="execute"/>
+    </antcall>
+  </target>
+
+  <target 
+    name="clean"
+    description="Clean everything">
+    <antcall target="do-all">
+      <param name="target" value="clean"/>
+    </antcall>
+  </target>
+
+</project>

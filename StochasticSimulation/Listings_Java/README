@@ -1,0 +1,107 @@
+
+Quick Install/Compile Guide
+###########################
+
+First: Check the 2 paths in properties.xml to the
+JSci and ptplot dirs.
+
+
+cd ../SimulationLib
+ant
+cd ../Listings_Java
+ant
+
+ant execute
+
+
+Filesystem Structure
+####################
+
+All programs are sorted into subdirectories, which are
+named after the chapters of the book.
+Each subdir contains a build.xml file for ant (see next
+paragraph).
+The main dir contains also a build.xml file, which can compile
+all programs in all subdirs.
+
+
+
+Build Instructions
+##################
+
+All programs use the "ant" tool to build.
+You can still use manual compilation, but it is much
+easier to use the ant tool.
+
+Ant is an Java Program to build Java projects. It is used
+by executing "ant" on the command line. You can compile,
+execute and produce jar files with it. Please see the ant
+homepage at sourceforge (ant is a subproject of the apache
+project).
+To execute all programs in a subdir, call "ant execute".
+
+To install ant look there. You should use at least Version 1.6.x,
+but older versions (>1.4) should work too. If not please let me know.
+
+We have tested the programs using Suns JDK 1.4.x, but
+other 1.2/1.3/1.4 version should work too.
+
+The SimulationLib package has its own build.xml file to
+compile and deploy the lib. Just type "ant" and the jar
+file will be produced.
+
+
+
+Comments about used Packages
+############################
+
+0)
+The simulation package has been renamed to 
+de.berlios.StochasticSimulation.*
+and is contained in its own file structure to produce an
+nice jar file.
+
+1) 
+Visual Numerics Package no longer available !!
+
+2)
+Lava (Rocks) Package is no longer used, because it is shareware !
+We use the Format Package from CoreJava Book Codes instead. 
+It is LGPL licensed !!
+A third alternative is the simulation.FMT class, copied from the 
+ACME package.
+-> The format code is included in the simulation lib !
+
+3)
+PtPlot is part of Ptolemy package !
+Two versions available: 3.1 and 5.2 !
+Everything tested with Version 3.1!
+
+4)
+JavaSci: V0.89 and higher for JDK1.3, V0.88 for JDK 1.1.8
+- JSci3DGraph.java (LineGraph3D, ContourPlot)
+- LevyFast (JSci.maths -> Gamma Distrib)
+
+
+
+Comments about the Simulation Lib
+#################################
+
+Attention:
+class simulation.Histogram and plot.Histogram exist !!
+
+
+
+
+Still TODO
+##########
+
+- Thread.stop() suspend() and resume() deprecated in Java 1.3/4/5
+- All prgs need a window resize to display itself after startup !
+- RandomPoints_appl.java (Plotting of points is missing)
+- 3D Plotting using JSci is not working anymore.
+
+
+
+
+

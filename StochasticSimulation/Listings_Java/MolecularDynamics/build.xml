@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="iso-8859-1"  ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Plotting with Java Chapter</description>
+
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Execute using (on Unix): cd build/classes; java HelloWorld_Application; cd -</echo>
+    <echo></echo>
+
+    <echo>Executing: ButtonListenerTest</echo>
+    <java 
+      classname="ButtonListenerTest"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="false"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: ClosableFrame</echo>
+    <java 
+      classname="ClosableFrame"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: MolDynHarmOsci</echo>
+    <java 
+      classname="MolDynHarmOsci"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+    <echo>Executing: ScrollPaneDemo</echo>
+    <java 
+      classname="ScrollPaneDemo"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="false"
+      timeout="15000">
+    </java>
+
+    <echo>Executing: MolDyn</echo>
+    <java 
+      classname="MolDyn"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="false"
+      timeout="25000">
+    </java>
+
+  </target>
+
+
+
+
+</project>
+

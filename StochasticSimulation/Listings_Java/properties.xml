@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+  <property name="source.dir" location="."/>
+
+  <property name="build.dir" location="build"/>
+  <property name="dist.dir" location="dist"/>
+
+  <property name="compile.deprecation" value="true"/>
+
+
+  <property name="SimulationLib.dir" location="../../SimulationLib"/>
+  <property name="JSci.dir" location="../../../JSci/classes/"/>
+  <property name="PtPlot.dir" location="../../../ptplot3.1"/>
+
+
+  <path id="compile.classpath">
+    <pathelement location="${build.dir}/classes"/>
+
+    <pathelement location="${SimulationLib.dir}/dist/StochasticSimulation.jar"/>
+    <pathelement location="${PtPlot.dir}/ptolemy/plot/plot.jar"/>
+
+    <pathelement location="${JSci.dir}/core.jar"/>
+    <pathelement location="${JSci.dir}/xtra.jar"/>
+    <pathelement location="${JSci.dir}/sci.jar"/>
+    <pathelement location="${JSci.dir}/wavelet.jar"/>
+    <pathelement location="${JSci.dir}/JSciBeans.jar"/>
+
+  </path>

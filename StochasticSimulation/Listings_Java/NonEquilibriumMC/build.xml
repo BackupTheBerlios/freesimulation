@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"  ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Non-Equilibrium Chapter</description>
+
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Executing: DogFleaThreads</echo>
+    <java 
+      classname="DogFleaThreads"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="5000">
+    </java>
+
+
+    <echo>Executing: ConvertSymphony</echo>
+    <echo>USE: java -classpath ${compile.classpath} ConvertSymphony</echo>
+
+    <echo>Executing: DogFlea</echo>
+    <echo>USE: java -classpath ${compile.classpath} DogFlea</echo>
+
+    <echo>Executing: ShearFlow</echo>
+    <echo>USE: java -classpath ${compile.classpath} ShearFlow</echo>
+
+  </target>
+
+
+
+
+</project>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"  ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="OtherPrograms" default="compile">
+  <description>Compile Other Programs</description>
+
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Executing: test_numberformat</echo>
+    <java 
+      classname="test_numberformat"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="20000">
+    </java>
+
+    <echo>Executing: RandomPoints_appl</echo>
+    <java 
+      classname="RandomPoints_appl"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="true"
+      timeout="20000">
+      <arg value="100" />
+    </java>
+
+  </target>
+
+
+
+
+</project>
+

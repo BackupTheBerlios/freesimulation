@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE project [
+   <!ENTITY properties SYSTEM "file:../properties.xml">
+   <!ENTITY targets    SYSTEM "file:../targets.xml">
+
+]>
+
+
+<project name="IntroPrograms" default="compile">
+  <description>Compile the Examples for the Plotting with Java Chapter</description>
+
+  &properties;
+
+  &targets;
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+
+  <target name="execute" depends="compile"
+    description="Execute some applications !">
+
+    <echo>Execute using (on Unix): cd build/classes; java HelloWorld_Application; cd -</echo>
+    <echo></echo>
+
+    <echo>Executing: SDE</echo>
+    <java 
+      classname="SDE"
+      classpathref="compile.classpath"
+      fork="true"
+      failonerror="false"
+      timeout="20000">
+    </java>
+
+  </target>
+
+
+
+
+</project>
+
