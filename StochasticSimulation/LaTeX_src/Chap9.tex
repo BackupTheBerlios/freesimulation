@@ -1698,7 +1698,762 @@ the master equation describes both the macroscopic dynamics and the
 dynamics of the fluctuations.
 
 \subsection{Couette Flow and Poiseuille Flow}
-\subsection{Homogeneous turbulence: The Burgers equation}
+
+%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!!!!
+
+\section{Homogeneous turbulence: The Burgers equation}
+\subsection{Homogeneous turbulence}
+A turbulent fluid is usually characterized by irregular and disordered
+temporal variations of the velocity field at each point of the fluid and
+conversely  the variations of the velocity vary irregularly from point to
+point at a fixed time. Up to now there is no complete quantitative theory of
+turbulence, but there are well accepted  qualitative results.
+
+\paragraph{The energy cascade}
+The main aspect of the tutbulence problem is the presence in a turbulent fluid
+of different length scales. Looking at a turbulent fluid you will notice
+vortices with small and large dimensions. For very large Reynolds number there
+are very turbulent elements on very large and on very small length scales. The
+main role is played be the large vortices, which are of the order of magnitude
+of the exterior dimensions of the system under consideration. Lets call thius
+legth scale $l$. The order of magnitude of the velocity is of the order of the
+variation of the mean velocity $\Delta u$  on the length scale $l$. The large
+turbulent elemnetns contain most of the kinetic energy of the turbulent
+fluid. Small vortices contain only a small part of the kinetic energy.
+
+The general properties of a given flow are characterized by the Reynolds
+number
+\begin{displaymath}
+  R = \frac{ul}{\nu}.
+\end{displaymath}
+Abetter characterization is found by introducing Reynolds numbers  for
+turbulent elements of different size. Denoting by $\lambda$ the size of the
+turbulent element, by $v_{\lambda}$ the order of magnitude of the velocity in
+that turbulent element we can define
+\begin{displaymath}
+  R_{\lambda} \approx \frac{v_{\lambda} \Lambda}{\nu}.
+\end{displaymath}
+For large values of $R$ also the  the Reynolds numbers $R_{\lambda}$ of the
+large vortices ($\lambda \approx l$) are large. Since a large $R$ implies a
+small $\nu$, we may follow that t he viscosity does not play a great role  for
+the large turbulent elements. Hence it is not to be expected that dissipation
+will play a great role for these vortices. Viscosity will affect only the
+smallest vortices ($\Lambda_0$), for which $R_{\lambda} \approx 1$. And it is
+here that the dissipation takes place. 
+
+The physical picture of what is going on in a turbulent fluid  id due to
+L. Richardson (1922). The energy flows from the large vortices into the small
+ones. This process occurs without dissipation. The energy flow is disspipated
+inthe smallest vortices, where kinetic energy is converted into heat. To make
+this process "stationary" it is of course necessary to add energy in the large
+length scales. This picture is  called the energy cascade. As we will see, a
+major aspect of theis picture is that all quantities involved which belong to
+turbulent elements with $\lambda > \lambda_0$ do not depend upon the
+viscosity.
+
+\paragraph{The orders of magnitude of the energy dissipation}
+The enenergy dissipation is defined as the mean energy which is dissipated pro
+time unit and pro mass unit in a turbulent fluid. The order of magnitude of
+the energy dissipation may be detremined with the help of quantities which are
+characteristic of the large vortices. These quantities are the density of the
+fluid $\rho$, the linear dimesnion $l$, and the velocity $\Delta u$. Only a
+combination of these 3 quantities has the dimension of a dissipation
+$([\epsilon] = J/(kg \cdot s) = m^2 /s^3)$
+\begin{displaymath}
+  \epsilon \approx \frac{(\Delta u)^3}{l}.
+\end{displaymath}
+A turbulent flow can be described qualitative as a fluid with a turbulent
+viscosity $\nu_{\textrm{turbo}} \neq \nu$. The only dimensionless quantity
+with the dimension of aviscosity which may be constructed with the help of 
+$\rho$, $\Delta u$, and $l$ is
+\begin{displaymath}
+  \nu_{\textrm{turbo}} \approx l \Delta u.
+\end{displaymath}
+We have
+\begin{displaymath}
+  \frac{\nu_{\textrm{turbo}}}{\nu} \approx R.
+\end{displaymath}
+Note that $\nu_{\textrm{turbo}}$ gets larger for increasing Reynolds number
+$R$. In other words, we can write the energy dissipation also in the form
+\begin{displaymath}
+  \epsilon \approx \left( \frac{\Delta u}{l} \right)^2 
+\end{displaymath}
+in accordance with the usual defuinition of viscosity.
+
+\paragraph{The law of Kolmogorow} 
+Now we want to look at the properties of the turbulence on the length scale 
+$\lambda$, which is assumed to be small with respect to $l$. We look at the
+bulk of the fluid and neglect boundary effects. In these domain it is safe to
+assume that the turbulence is homogeneous and isotropic. We will now deduce
+with the help of similitartity arguments some fundamental results (Kolmogorow,
+1941; Obuchow, 1941). The local properties of the turbulence are determined for
+$l \gg \lambda \gg \lambda_0$   by $\lambda$, the density $\rho$ and the enegy
+diisipation $\epsilon$. The local properties do not depend upon $l$ and
+$\Delta u$, which are relevant for the flow as a whole. Furthermore, they do
+not depend upon $\nu$. 
+
+The variation of the velocity $v_{\lambda}$ on a length scale $\lambda$ is
+easily guessed by considering that the only quantity with the dimension of
+avelocity which can be formed with the help of $\rho$, $\epsilon$ and
+$\lambda$ is
+\begin{equation}
+\label{eq:TurboVlambda}
+  v_{\lambda} \approx (\epsilon \cdot \lambda)^{1/3}.
+\end{equation}
+This is the famous law of Kolmogorow andd Obuchow, which states that the
+variation of the velocity on a distance of he order $\lambda$ is proporional
+to the cubic root of the distance $\lambda$. The velocity $v_{\lambda}$ may be
+  regarded as the gelocity of a turbulent element of dimension $\lambda$.
+
+Similarly, the variation of the velocity at a fixed point during the time
+$\tau$, which is smaler then characteristic time scale $T \approx l/u$ 
+may be estimated by inserting $u\tau$ for $\lambda$ in the above equation 
+to be
+\begin{equation}
+\label{eq:TurboVtau}
+  v_{\tau} \approx (\epsilon \cdot \tau \cdot u)^{1/3}
+\end{equation}
+With the help of 
+\begin{displaymath}
+  \epsilon \approx \frac{(\Delta u)^3}{l}
+\end{displaymath}
+Eqs. (\ref{eq:TurboVlambda}) and (\ref{eq:TurboVtau}) 
+can be brought in the following suggestive form
+\begin{displaymath}
+  \frac{v_{\lambda}}{\Delta u} \approx \left( \frac{\lambda}{l}\right)^{1/3}
+\end{displaymath}
+and, respectively,
+\begin{displaymath}
+ \frac{v_{\tau}}{\Delta u} \approx \left( \frac{\tau}{T}\right)^{1/3} .
+\end{displaymath}
+The two above expression make evident the self--similarity property of local
+turbulence. The characteristic quantities differ only through the scales in
+which the length and the times are measured.
+
+\paragraph{Estimation of the dimensions 
+$\lambda_0$ of the smallest turbulent elements}
+On the smallest "inner" length scale $lambda_0$ of turbulence the effects of
+dissipation are important. The local Reynolds number
+we find
+\begin{displaymath}
+  R_{\lambda} \approx \frac{v_{\lambda}\cdot \lambda}{\nu}
+              \approx \frac{\Delta u \cdot \lambda^{4/3}}{\nu l^{1/3}}
+              \approx R \left( \frac{\lambda}{l}\right)^{4/3} .
+\end{displaymath}
+The smallest length scale $\lambda_0$ can be found from the condition that
+$R_{\lambda} \approx 1$. We find
+\begin{displaymath}
+  \lambda_0 \approx \frac{l}{R^{3/4}}.
+\end{displaymath}
+It is important to notice, that the inner dimesnions of the turbulence gets
+rapidly smaller for increasing Reynolds number. This point has to be kept in
+mind when performing numerical simulations of the turbulence. For large values
+of the Reynolds number a very large number of degrres of freedom is
+necessary. This makes the direct simulation of turbulence one of the hardest
+numerical problems. 
+
+\paragraph{The spectral form of the law of Kolmogorow and Obuchow}
+Summarizing, we have seen that the turbulence aloows for the distinction of
+threee well--defined regions. The energy range, ist the region for which
+$\lambda \approx l$. In this region the the greatest part of the kinetic
+energy is stored. In the dissipation range, $\lambda \le \lambda_0$, the
+kinetic energy is dissipated. In between for $\lambda_0 \ll \lambda \ll l$
+we have the inertial range. For large
+Reynolds numbers the energy and the dissipation range are clearly separate.
+The results of these subsection apply essentially to the inertial range.
+
+It is costumary to look at results obtained in this subsection in the Fourier
+space. To this end we replace the dimension of the fluctation $\lambda$ by the
+wave number $k$ 
+\begin{displaymath}
+  k \approx \frac{1}{\lambda}.
+\end{displaymath}
+By $E(k)dk$ we denote the kinetic energy pro unit mass contained in 
+the interval $(k,k+dk)$. The dimension of $E(k)$ is
+\begin{displaymath}
+  [E(k)] = \frac{m^3}{s^2}.
+\end{displaymath}
+The only combination of $\epsilon$ and $k$ with this dimension is
+\begin{displaymath}
+  E(k) \approx \epsilon^{2/3}k^{-5/3}.
+\end{displaymath}
+The above expression is the famous spectral form of the law of Kolmogorow. 
+The relation to the law we already know is made evident by integration
+\begin{displaymath}
+  \int_k^{\infty} E(k)dk \approx \epsilon^{2/3}k^{-2/3} 
+    \approx (\epsilon \lambda)^{2/3} \approx v_{lambda}^2.
+\end{displaymath}
+
+\subsection{Burgerlence}
+As a one dimensional model of turbulence we want to consider now the Burgers
+equation. There is a formal similarity between  the statistical equations for
+the Navier--Stokes equations and the Burgers equation. To establish this
+relation we consider random solutions $u(x,t)$, which are stationary random
+functions of $x$.The mean energy density $\langle u^2 \rangle/2$ decays
+according to the expression
+\begin{displaymath}
+  \epsilon = - \frac{\partial}{\partial t} \frac{1}{2} \langle u^2 \rangle
+           = \nu \langle (\frac{\partial u}{\partial x})^2 \rangle
+           =\nu \frac{\langle u^2 \rangle}{\lambda^2}
+           = \nu \langle \omega^2 \rangle.
+\end{displaymath}
+The quantity $omega = \partial u/ \partial x$ is analogous to the
+voricity. The arguments put forward by Kolmogorov which are at
+the basis of the cascade process do not depend upon the dimension of the
+system under investigation and hence they should also apply to Burgerslence. 
+Unfortunately, this is not the case. This can be seen by expoliting the 
+fact  that the Burgers equation has a
+well--known ecaxt solution
+\begin{displaymath}
+  u(x,t) = - 2 \nu \frac{\partial}{\partial x} log \theta
+\end{displaymath}
+where
+\begin{displaymath}
+  \frac{\partial \theta}{\partial t} = \nu \nabla^2 \theta.
+\end{displaymath}
+So it can be shown, that the spectru of Burgerslence is given by the
+expression
+\begin{displaymath}
+  E(k) = \frac{2 \nu^2 \pi}{4 l} \textrm{cosech}^2 
+         \left( \frac{\pi \nu k}{2 u} \right).
+\end{displaymath}
+For $k \ll u/\nu$, we have
+\begin{displaymath}
+  E(k) = \frac{2 u^2}{\pi l} k^{-2}
+\end{displaymath}
+and for $k \gg u/\nu$
+\begin{displaymath}
+  E(k) = \frac{2 \nu \pi}{l} \exp(-\pi \nu k/u),
+\end{displaymath}
+which shows the exponential cut--off due to the vscosity.
+For Burgerslence the dissipation spectra $k^2E(k)$ is constant until the
+cut--off by viscous decay.
+
+\subsection{The master equation formulation}
+We now turn to the master equation formulation of the problem.
+The stochastic process $\delta u N_{\lambda}(t)$ obviously
+represents a
+homogeneous Markov process.
+Therefore, it is characterized by the probability distribution
+$P \left( \{N_{\lambda}\} ,t \right)$ and a transition
+probability $P_2$,
+\begin{equation}
+P_2 =
+P_2 \left( \{N_{\lambda}^{(2)} \} , t_2 \mid
+\{N_{\lambda}^{(1)} \} ,
+t_1 \right)
+\;\;\; ,        
+\end{equation}
+which only depends on the difference $t_2 - t_1$ of the time
+arguments. The consistency condition connecting the probability
+distribution and the transition probability reads
+\begin{equation}
+P \left( \{N_{\lambda} \},t \right) = \sum_{\{N_{\lambda}^{(0)}\}}
+P_2 \left( \{N_{\lambda} \} , t \mid \{N_{\lambda}^{(0)} \} ,
+0 \right)
+P_0 \left( \{N_{\lambda}^{(0)} \} \right) \;\;\; ,   \label{PROBMEQ}
+\end{equation}
+where $P_0 \left( \{N_{\lambda}^{(0)} \} \right)$ denotes the initial
+probability distribution.
+
+In a first step, we derive the equation of motion
+for the
+characteristic functional $M\left( \{ z_{\lambda} \},t \right)$
+pertaining to the stochastic process $\delta u N_{\lambda}(t)$,
+\begin{equation}
+M \left( \{z_{\lambda} \},t \right) := \left\langle
+\exp \left\{ i\delta u\delta l \sum_{\lambda} z_{\lambda}
+N_{\lambda} \right\}
+\right \rangle \equiv \left\langle {\cal{F}} \left(
+\{N_{\lambda} \} \right)
+\right\rangle
+\;\;\; ,           \label{GENFUNC}
+\end{equation}
+where we have introduced the function
+\begin{displaymath}
+{\cal{F}} \left( \{N_{\lambda} \} \right)
+:= \exp \left\{ i\delta u \delta l
+\sum_{\lambda} z_{\lambda} N_{\lambda}
+\right\} \;\;\; .
+\end{displaymath}
+The equation of motion for $M$ contains,
+of course, the small mesoscopic scales
+$\delta u$ and $\delta l$ introduced
+within our discrete master equation
+formulation. This is due to the fact that the phase space $\Gamma$
+underlying our master
+equation formulation is discrete in space as well as velocity space.
+We therefore assume that in the limit of small $\delta u$
+the stochastic process
+\begin{displaymath}
+u_{\lambda}(t) := \delta u N_{\lambda}(t)
+\end{displaymath}
+represents a process which, to leading order, does not depend on
+$\delta u$.
+Thus, the second step consists of an expansion
+of the equation of motion for $M$
+with respect to this mesoscopic velocity scale
+$\delta u$. In a third step
+we then perform the continuum limit $\delta l \longrightarrow 0$.
+The leading order term of this
+expansion turns out to be identical to the functional Hopf equation.
+Furthermore, the physical origin of the next to leading order
+term is
+discussed and the mesoscopic scales are related to
+physical quantities.
+
+The equation for $M$ can be written in
+the following form which is appropriate
+to infer the structure of the continuum limit:
+\begin{eqnarray}
+\frac{\partial M}{\partial t} &=& \nu \sum_{\lambda} \delta l \;
+\frac{z_{\lambda +1} + z_{\lambda -1} -2z_{\lambda}}{\delta l^2}
+\frac{1}{\delta l} \frac{\partial M}{\partial z_{\lambda}}
+\nonumber\\
+&-& \frac{i}{2} \sum_{\lambda} \delta l \;
+\left( \frac{z_{\lambda +1} - z_{\lambda -1}}{2\delta l}
++ \frac{i\delta u \delta l}{4} \left\{
+\frac{(z_{\lambda +1} - z_{\lambda})^2}{\delta l} +
+\frac{(z_{\lambda} - z_{\lambda -1})^2}{\delta l} \right\} \right)
+\frac{1}{\delta l^2} \frac{\partial^2 M}{\partial z_{\lambda}^2}
+\nonumber\\
+&-& \frac{\nu \delta u \delta l}{2} \sum_{\lambda} \delta l
+\; \left(
+\frac{(z_{\lambda +1} - z_{\lambda})^2}{\delta l^2} +
+\frac{(z_{\lambda -1} - z_{\lambda})^2}{\delta l^2} \right)
+\left\langle \mid u_{\lambda} \mid 
+{\cal{F}} \right\rangle
+\; .
+\end{eqnarray}
+It
+It is now easy to perform, at least formally, the continuum limit
+of this equation. In the limit $\delta l \longrightarrow 0$
+the set of numbers $z_{\lambda}$ turns into a function $z(x)$.
+Correspondingly, $M \left( \{z_{\lambda} \} ;t \right)$ becomes a
+functional $M [z(x),t]$ and ordinary derivatives with respect
+to $z_{\lambda}$ translate into functional derivatives:
+\begin{equation}
+\frac{1}{\delta l} \frac{\partial}{\partial z_{\lambda}}
+\longrightarrow
+\frac{\delta}{\delta z(x)} \;\;\; .
+\end{equation}
+Moreover, we assume that the process $u_{\lambda}(t)$
+converges in the
+continuum limit to a well--defined stochastic process $u(x,t)$.
+Hence, we obtain to leading order in $\delta l$:
+\begin{eqnarray}
+\frac{\partial}{\partial t} M [z(x),t] &=&
+\nu \int dx \; \frac{\partial^2 z}{\partial x^2}
+\frac{\delta M}{\delta z(x)} - \frac{i}{2} \int dx \;
+\frac{\partial z}{\partial x} \frac{\delta^2 M}{\delta z(x)^2}
+\nonumber \\
+&-& \nu \delta u \delta l \int dx \;
+\left( \frac{\partial z}{\partial x} \right)^2 \left\langle
+\mid u(x) \mid e^{i\int dy \; z(y) u(y)} \right\rangle     \;\;\; .
+\end{eqnarray}
+Performing an integration by parts finally yields
+\begin{eqnarray}
+\frac{\partial}{\partial t} M [(z(x),t] &=&  \int dx \; z(x) \left\{
+\frac{i}{2} 
+\frac{\partial}{\partial x} \left( \frac{\delta^2 M}{\delta z(x)^2}
+ \right)
++ \nu \frac{\partial^2}{\partial x^2}
+\left( \frac{\delta M}{\delta z(x)} \right) \right\}
+\nonumber \\
+&-& \nu \delta u \delta l \int dx \;
+\left( \frac{\partial z}{\partial x} \right)^2 \left\langle
+\mid u(x) \mid e^{i\int dy \; z(y) u(y)} \right\rangle     \;\;\; .
+\label{HOPFMEQ}
+\end{eqnarray}
+Eq.~(\ref{HOPFMEQ}) 
+represents, including terms of order $\delta u \delta l$,
+the equation of motion for the characteristic
+functional $M$ of the stochastic process defined by our
+multivariate master
+equation.  Comparing
+Eq.~(\ref{HOPFMEQ}) with (\ref{HOPF}) we
+conclude that the leading order terms in Eq.~(\ref{HOPFMEQ})
+are identical
+to the Hopf functional equation. The next to leading order
+term which may
+formally be written as
+\begin{equation}
+c[z(x),t] = - \nu \delta u \delta l \int dx \; \left(
+\frac{\partial z}{\partial x} \right)^2 \left| \frac{1}{i}
+\frac{\delta}{\delta z(x)} \right| \, M [z(x),t]
+\end{equation}
+is of order $\delta u$ and, therefore, vanishes as
+$\delta u \longrightarrow 0$.
+Note that including the case of external random stirring forces
+Novikov derived a generalization\cite{NOVIKOV} of Hopf's
+functional equation in which
+an additional term appears which is
+of similar structure as $c[z(x),t]$.
+However, in our formulation the functional $c[z(x),t]$ does
+not represent the
+effect of external random forces. We shall see below that it
+has a different physical interpretation.
+
+Eq.~(\ref{HOPFMEQ}) constitutes the central result of this section.
+It leads to the conclusion that in the limit
+$\delta u \longrightarrow 0$
+the stochastic process $\delta u N_{\lambda}(t)$ underlying our
+master equation is equivalent to the stochastic process $v(x,t)$
+of the Hopf formulation.
+
+From a mathematical point of view this conclusion has to be
+taken with
+caution since we did not actually prove that the probability
+distribution
+$P$ converges to $P^H$ in a rigorous mathematical sense. In order to
+give such a proof one would first have to construct an embedding of
+the
+phase space of smooth velocity fields into the
+discrete phase space $\Gamma$ underlying our master equation.
+Secondly,
+a measure in the space of probability distributions is required
+which
+allows for a precise definition of convergence. A
+mathematical investigation
+along these lines must show, in particular, how the two
+limiting procedures
+$\delta u \rightarrow 0$ and $\delta l \rightarrow 0$ have to
+be performed
+in order to guarantee certain smoothness properties of the
+stochastic
+process $u(x,t)$.
+
+However, in spite of these
+mathematical questions we can give the above statement
+concerning the relation between the random processes
+$\delta u N_{\lambda}(t)$
+and $v(x,t)$ the following meaning. On a purely formal level,
+the Hopf equation~(\ref{HOPF}) as well as 
+Eq.~(\ref{HOPFMEQ}) for the characteristic functional of our
+multivariate
+stochastic process may be regarded as a condensed way
+of writing the hierachy of dynamic moment equations.
+In fact, functional
+differentiating $M^H$ and $M$ with respect to $z(x)$ one may
+derive the
+differential
+equations for the (equal time) $n$--point correlation
+functions for both
+processes. It is clear from the structure of the functional
+equations~(\ref{HOPF}) and~(\ref{HOPFMEQ}) that
+the resulting equations for the two stochastic processes
+differ from each
+other by the corresponding functional derivatives of the
+correction term
+$c[z(x),t]$. As one can see from the definition of $c[z(x),t]$ all
+$n$--th order functional derivatives of $c[z(x),t]$,
+taken at $n$ different points, exist. Thus, the equations for the
+$n$--point
+correlation functions differ by a term which vanishes as $\delta u
+\longrightarrow 0$. This
+is the precise formulation of the conclusion we draw from our
+investigation.
+
+It should be clear that the functional derivatives of $c[z(x),t]$
+induce
+$\delta$--function type singularities. This is due to the fact
+that for
+small but finite $\delta u$ the continuum limit
+$(\delta l \longrightarrow 0)$ of $\delta u N_{\lambda}$
+does not lead to a smooth stochastic process. We will see
+below that this
+is to be expected physically.
+
+As an example, we derive the equation for the 2--point
+correlation function
+\begin{displaymath}
+\langle u(y,t) \; u(x,t) \rangle = \left. \frac{1}{i^2}
+\frac{\delta^2}{\delta z (y) \delta z(x)} M [z,t] \right|_{z=0}
+\;\;\; .
+\end{displaymath}
+Following the usual procedure we obtain
+\begin{eqnarray}
+& & \frac{\partial}{\partial t} \langle u(y,t) \; u(x,t) \rangle
++ \frac{1}{2} \langle u(y,t) \frac{\partial}{\partial x} u^2(x,t)
+ \rangle
++ \frac{1}{2} \langle u(x,t) \frac{\partial}{\partial y} u^2(y,t)
+\rangle
+\nonumber \\
+&=& \nu \left( \frac{\partial^2}{\partial x^2} +
+\frac{\partial^2}{\partial y^2} \right) \langle u(y,t) \; u(x,t)
+\rangle
+- \left. \frac{\delta^2}{\delta z (y) \delta z(x)} c[z,t]
+\right|_{z=0}
+\;\;\; .   \label{CORR}
+\end{eqnarray}
+Apart from the last term the above equation is identical to that one
+which is obtained from the functional Hopf equation, of course. The
+functional derivatives of $c[z,t]$ yield the expression
+($\tilde{v} = \langle \mid u \mid \rangle $, see Eq.~(\ref{DEFS}))
+\begin{equation}
+\left. - \frac{\delta^2}{\delta z (y) \delta z(x)} c[z,t]
+\right|_{z=0} =
+-2\nu \delta u \delta l \frac{\partial}{\partial x}
+\tilde{v} \frac{\partial}{\partial x}
+\delta (y-x)     \label{RDMFLUX}
+\end{equation}
+which is obviously of order $\delta u$.
+
+From a physical point of view there is another reason why
+mathematical
+considerations concerning the continuum limit of
+$\delta u N_{\lambda}(t)$
+are only of secondary importance.
+The reason is that the functional $c[z(x),t]$ 
+can be given a clear physical meaning. As we will now
+show interpreting this
+term as the influence of thermal fluctuations one is forced
+to fix the
+product $\delta u \delta l$ to a {\em{finite value}}. Thus,
+questions about the
+existence of the continuum limit are only of mathematical interest.
+
+We now demonstrate that the term~(\ref{RDMFLUX}) can be
+interpreted as
+a random stress induced by thermal fluctuations. To this end,
+we assume in the following that the stochastic process is spatially
+homogeneous; in particular this implies $\tilde{v} =$ const.
+Introducing the Fourier transformation of the velocity,
+\begin{equation}
+u(x,t) = \frac{1}{L} \sum_{k} e^{ikx} u_{k}(t) \;\;\; ,
+\end{equation}
+where $k=2\pi n/L$ and $n \in {\bf{Z}}$, we obtain from
+Eq.~(\ref{CORR})
+\begin{eqnarray}
+& & \frac{\partial}{\partial t} \langle u_{k}^{\ast} u_{k} \rangle
++ \sum_{q} iq \langle u_{k+q}^{\ast} u_{k} u_{q} \rangle + c.c.
+\nonumber \\
+& & = -2\nu k^2 \langle u_{k}^{\ast} u_{k} \rangle +
+2\nu \tilde{v} \delta u \delta l L k^2 \;\;\; .
+\label{FCORR}
+\end{eqnarray}
+Recall that $\langle u_{k}^{\ast} u_{k} \rangle$ is
+proportional to the
+kinetic energy $E_{k}$ (per unit mass) pertaining to the mode $k$,
+\begin{equation}    \label{ESPEC}
+E_{k} = \frac{1}{2L} \langle u_{k}^{\ast} u_{k} \rangle \;\;\; .
+\end{equation}
+The convolution sum on the left hand side of equation~(\ref{FCORR})
+results from
+the inertial term of Burgers' equation and obviously couples the
+different
+modes. The first term on the right hand side represents the decay of
+the hydrodynamic modes due to viscous friction whereas the last term
+is the Fourier transform of~(\ref{RDMFLUX}). At small scales, that
+is for
+large $k$, the influence of the inertial term may be neglected.
+It is then easy
+to see that the effect of the last term in~(\ref{FCORR})
+is to slow down the exponential decay of
+the energy of the mode $k$ until, finally, the stationary value
+\begin{equation}
+E_{k}^{s} = \frac{1}{2} \tilde{v} \delta u \delta l
+\end{equation}
+is reached. One can go one step further by requireing that the
+kinetic energy
+$E_{k}^{s}$ of each stationary mode is equal to its thermodynamic
+equilibrium value at temperature $T$. This requirement leads to
+the relation
+$E_{k}^{s} = \frac{1}{2} k_B T / \rho$ ($\rho$ denotes the
+fluid density
+and $k_{B}$ the Boltzmann constant) which implies:
+\begin{equation}
+\tilde{v} \delta u \delta l = \frac{k_B T}{\rho}
+\;\;\; .   \label{FDT}
+\end{equation}
+The fluctuation--dissipation type relation~(\ref{FDT})
+fixes $\delta u \delta l$
+to a finite value. This means that from a physical viewpoint
+the continuum limit makes no sense. This fact should have been clear
+from the begining since below a certain length scale the assumption
+of thermodynamic equilibrium and, thus, a description by
+macroscopic variables only is no longer possible.
+
+It should be clear that performing stochastic simulations
+of our master equation (see the next section) it is by no means
+necessary to choose parameters in such a way that the
+fluctuation--dissipation relation~(\ref{FDT}) is satisfied. In other
+words, it is not necessary to take into account
+all scales ranging from the hydrodynamic to the
+thermodynamic degrees of freedom. On the contrary, 
+in view of practical applications another interpretation of
+the finite mesoscopic scales $\delta l$ and $\delta u$ is possible.
+This interpretation is based on the fact that any experimental
+measurement
+is characterized by some finite resolution in velocity space as
+well as position space. It is therefore natural to assume that
+\[ \delta l = \Delta l \; , \;\;\;
+\tilde{v} \delta u = \sigma^2  \;\;\; , \]
+where $\Delta l$ denotes the spatial resolution and $\sigma^2$ the
+variance of the error of velocity measurements. Fixing the
+mesoscopic
+parameters in this way, it might be possible to simulate
+directly that
+velocity field which is actually measured.
+
+\subsection{The stochastic simulation}
+In this subsection we will apply the stochastic simulation method
+described above to Burgers' model of homogeneous turbulence.
+Let us first
+precisely define the initial conditions and the physical quantities
+which have been used in our calculations.
+
+Within our discrete description the 2--point correlation function
+is defined by
+\begin{equation}    \label{KORRFD}
+Q(\mu,t) := \frac{1}{L} \sum_{\lambda =0}^{M} \delta l \; \delta u^2
+\langle N_{\lambda + \mu} N_{\lambda} \rangle \;\;\; ,
+\;\;\;
+\mu = 0,1,2,\ldots,M \;\;\; ,
+\end{equation}
+where, assuming spatial homogeneity, a space average has been taken.
+The
+expectation value is, as explained in the preceding subsection,
+evaluated
+by averaging over the ensemble which is generated by the stochastic
+simulation. Computing the Fourier transform of the correlation
+function
+we obtain the energy spectrum $E_{k}$ defined in Eq.~(\ref{ESPEC}).
+The total
+kinetic energy $E$ is evaluated by means of the expression
+\begin{equation}
+E(t) = \frac{1}{2L} \sum_{\lambda} \delta l \; \delta u^2
+\langle N_{\lambda}^2 \rangle
+\;\;\; ,
+\end{equation}
+which leads to the energy dissipation rate $\varepsilon(t)
+= -\dot{E}$.
+The initial random velocity
+is given by a superposition of $N = 1000$ randomly chosen modes,
+\begin{equation}     \label{INIT}
+u_0(x) = \frac{1}{\sqrt{N}} \sum_{i=1}^{N} \left( A_i \cos k_i x +
+B_i \sin k_i x  \right) + w(x) \;\;\; .
+\end{equation}
+Here, $k_i = 2\pi n_i$ (we choose $L=1$) and the $n_i$ denote
+identically distributed random integers with distribution function
+$P(n) = P(-n)$. The amplitudes $A_i$ and $B_i$ are also identically
+distributed and independent real random numbers with zero mean
+and with
+variance
+\[ \langle A_i A_j \rangle = \langle B_i B_j \rangle =
+A^2 \delta_{ij}
+\;\;\; .\]
+Furthermore, we add a small fluctuating field $w(x)$ with
+zero mean and
+correlation function
+$\langle w(y) \, w(x) \rangle = w^2 \delta l \delta (y-x)$, where
+$w^2 = \tilde{v} \delta u$.
+It follows from these conditions that the initial
+field~(\ref{INIT}) is
+homogeneous and that the initial energy spectrum is given by
+$E_k(0) = A^2 P(k/2\pi)/2 + \tilde{v} \delta u \delta l /2$.
+In our calculations we used
+$A^2=1/3$ and a Poisson--distributed initial spectrum
+\begin{equation}
+P(n+1) = \frac{1}{2} \frac{\mu^{n}}{n !} e^{-\mu} \;\;\; ,
+\end{equation}
+where $n=0,1,2,3,\ldots ,(M+1)/2$ and $P(0) = 0$.
+We shall characterize this initial condition by two Reynolds
+numbers:
+First, we define an integral Reynolds number based on the
+total length $L=1$
+and rms--velocity $U = \langle u^2 \rangle^{1/2}$,
+\begin{equation}
+R_L := \frac{U \cdot L}{\nu} \;\;\; .
+\end{equation}
+Second, we introduce a Taylor--Reynolds number by
+\begin{equation}
+R_{\Lambda} := \frac{U \cdot \Lambda}{\nu} \;\;\; ,
+\end{equation}
+where the Taylor microscale $\Lambda$ is defined by
+\begin{equation}
+\left(\frac{2\pi}{\Lambda}\right)^2 :=
+\frac{\varepsilon(0)}{2\nu E(0)} =
+\frac{\sum k^2 E_k(0)}{\sum E_k(0)} =
+\left( \frac{2\pi}{L} \right)^2 \left[ (\mu +1)^2 + \mu \right]
+\;\;\; .
+\end{equation}
+
+The following simulations have been performed along the lines
+described
+in subsection A employing the parameters
+$\delta u = 5\cdot 10^{-4}$
+and $M+1 = 1024$. The random initial configuration is given by
+\begin{equation}
+\label{INITB}
+N_{\lambda}(0) = {\mbox{int}} \left(
+\frac{u_0(x_{\lambda})}{\delta u} \right)
+\;\;\; .
+\end{equation}
+In Fig.~1 we depict one realization of the stochastic process
+$u_{\lambda} = \delta u N_{\lambda}$ for three different times and
+$\nu = 5000^{-1}$. As can be seen from the figure,
+the initial field developes a typical sawtooth structure
+consisting of
+smooth increasing ramps followed by sharp shocks.
+
+In Fig.~2 we show
+the energy dissipation rate $\varepsilon$ as function of time for 
+$\nu = 3000^{-1}$ ($R_{L}= 1733$, $R_{\Lambda}= 156$),
+and $\nu = 5000^{-1}$ ($R_{L}= 2821$, $R_{\Lambda}= 253$).
+In both cases the results have been obtained by averaging
+over $100$ realizations. Fig.~2 clearly demonstrates the
+characteristic
+features of the dissipation: During a short initial period in which
+the dissipation rate is small, shocks form and the resulting
+steep velocity gradients lead to a strong enhancement of the
+dissipation
+rate. The latter reaches a maximum at a characteristic time
+$t \approx 0.02$.
+During the post
+shock period the dissipation rate can be clearly seen to
+become independent
+of the viscosity as is predicted by analytical
+considerations\cite{KRAICHNAN,SAFFMAN}.
+
+Finally, we shall discuss the energy spectrum.
+Fig.~3 shows $E_{k}$ as
+obtained from the Fourier transform of the correlation
+function $Q(\mu,t)$.
+Again, the expectation value has been evaluated by averaging
+over 100
+realizations of the stochastic process. We show the energy
+spectrum for
+three different times and for the viscosity $\nu = 5000^{-1}$
+($R_{L}= 2821$, $R_{\Lambda}= 253$). As can be seen,
+a $k^{-2}$ power law behaviour appears which
+represents the universal inertial range of Burgers' model.
+In order to demonstrate the accuracy of the stochastic
+simulation method
+over the whole range of wavenumbers we compare the spectrum at time
+$t=0.06$ with the analytical result given by Saffman\cite{SAFFMAN}
+\begin{equation}        \label{SAFF}
+E_{k} = W \sinh^{-2}(dk/2\pi) \;\;\; .
+\end{equation}
+Saffman derived this expression for the Burgers model by assuming
+that
+the small scale structure is given by periodic trains of shocks.
+Note that
+$E_{k}$ as given by (\ref{SAFF}) approaches for
+$dk/(2 \pi) \ll 1$ the form
+$E_{k} \approx 4\pi^2 W/(dk)^2$. The energy
+scale $W$ and the dissipation length $d$ which depend on the
+large scale properties of the initial condition have been
+determined from
+our data by comparison with the limiting behaviour of the
+Saffman result
+for large wavenumbers
+($E_{k} \approx 4W \exp (-dk/\pi)$). We find
+$W=0.85\cdot 10^{-5}$ and
+$d=0.0078$. As demonstrated in Fig.~3 the agreement between the
+analytical result~(\ref{SAFF}) with our stochastic simulation is
+excellent over the whole range of wavenumbers.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
