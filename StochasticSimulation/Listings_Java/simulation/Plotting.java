@@ -59,6 +59,19 @@ public final class Plotting
     /** Plot a graph using errorbars. </p>
         yerr contains the positive, symmetric error (=standard deviation) 
         in the data points. </p>
+        The x coordinates are just the index of the y array.
+    */
+    public static void errorBarPlot(Plot plot, int plotNumber,
+                                    double[] y, double[] yerr) {
+        int N=y.length;
+        double[] x = new double[N];
+        for (int i=0; i<N; i++) {
+            x[i]=i; }
+        Plotting.errorBarPlot(plot,plotNumber,x,y,yerr,yerr); }
+
+    /** Plot a graph using errorbars. </p>
+        yerr contains the positive, symmetric error (=standard deviation) 
+        in the data points. </p>
         If the x and y arrays contain a different number of points, 
         the smaller array defines the number of points. */
     public static void errorBarPlot(Plot plot, int plotNumber,
