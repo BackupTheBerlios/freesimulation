@@ -1,3 +1,12 @@
+\chapter*{Instructions for the use of the CD ROM}
+Install Toolkit
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \chapter{Short Introduction to Programming in Java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,8 +97,11 @@ of the corresponding programs are listed in the appendix.
            & Linux &           & Pentium 133 & 16 sec. \\\hline
            & Linux & using JIT TYA (V1.0) & Pentium 133 & 10 sec.\\\hline
            & Linux &           & Pentium 200 MMX & 9 sec. \\\hline
+           & Linux & JDK 1.1.7 without JIT & DEC Alpha 21164 600 & 6 sec. \\\hline
            & Win95 & JDK 1.1.7 using Symantec JIT & Pentium 133 & 9 sec. \\\hline
            & Win95 & JDK 1.1.7 without JIT & Pentium 133 & 19 sec. \\\hline
+           & Win95 & JDK 1.2 using Symantec JIT & Pentium 133 & 8 sec. \\\hline
+           & Win95 & JDK 1.2 without JIT & Pentium 133 & 22 sec. \\\hline
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\\hline
            & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\\hline 
            & Linux & Matlab 5.2 & Pentium 133 &  224 sec.\\\hline
@@ -106,7 +118,10 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
       with the java command in the JDK. The TYA JIT for Linux is freely
       available and easy to install. Usage: with the java virtual machine of
       the JDK use \texttt{-Djava.compiler=tya} or 
-      set the environement variable \texttt{JAVA\_COMPILER=tya}.}
+      set the environement variable \texttt{JAVA\_COMPILER=tya}. To avoid
+      using the JIT use option \textt{-nojit} up to JDK1.1.7 on Windows or
+      for all other platforms set \texttt{JAVA\_COMPILER=none}
+      }
     \label{tab:performance}
   \end{center}
 \end{table}
@@ -159,7 +174,8 @@ have been omitted. For example, in Java there is no goto statement; instead
 it has labelled break and continue statements. The preprocessor of C has been 
 eliminated; the program you write is the program that the compiler sees. In 
 Java there are no  operator overloading and no multiple inheritance 
-features of C++.
+features of C++. (But you can use interfaces to simulate multiple inheritance
+and argument overloading is possible.)
 One major simplification is that Java does not have pointers!
 In Java memory is managed automatically, so the programmer is not responsible 
 for the management  of memory space. In particular Java implements an 
@@ -202,7 +218,7 @@ Java programs interpretatively. It is however possible to run Java with a
 Just In Time (JIT) compiler. JIT compiling increases the performance of Java 
 considerably.
 
-Java is multi-thread. It supports multiple threads of execution which can 
+Java is multi-threaded. It supports multiple threads of execution which can 
 handle different tasks. Multi-threading increases the interactive performance 
 of Java.
 
@@ -214,6 +230,113 @@ These are
 the freely available compression libraries used in the well-known
 gzip compressor.
 That makes it very easy to write and read compressed data. 
+
+
+\subsection{Brief history of Java}
+Java started off in 1991 as a project by James Gosling at that time called
+Oaks. Its purpose was focussed on the use as OS software for consumer
+electronic devices. A small group decided to adapt Oak to a web
+technology and released the first version of Hotjava (a web browser, at that
+time still called WebRunner)
+in late 1994. After a presentation given by James Gosling about the 
+byte codes used by Oak in 1995, the new language JAVA was officially 
+announced in April 1995 (Java 1.0), 
+including the first official release of Hotjava.
+The announcement was the source of a hype, because Java is ideally
+suited for the heterogenous world of networked computers seen today.
+
+Then in January 1996 the first version of the Java Development Kit (JDK) 
+was released by SUN. Soon the language was licensed by many companies,
+especially Netscape which included a Java Virtual Machine (JVM) into
+their widley used browser Netscape Navigator. Then in early 1997
+SUN released the second version of Java: the new language specification 
+Java 1.1 and the development kit for it JDK 1.1.
+
+Meanwhile most of the browsers adapted the new Java 1.1 language specification.
+Also many new APIs (Application Progammers Interfaces) have appeared, some
+of them have been officially included in the Java 1.2 (now called Java 2)
+specifications. Together with the JDK 1.2, Java 2 appeared in January 1999.
+But no browser supports this standard right now, although most
+of the software available for Java and written in Java seem to be
+already adapted to the new standard. Another change occurred to the
+licensing of the JDK: it is now almost Open Source Software, which
+means you can have the source code and change it, you only have to make
+sure it still conforms to the Java standard.
+At the same time SUN announced a new project called JINI, which is
+a ``small set of instructions and interfaces'' based on Java to
+be used to drive and use arbitrary electronic devices --
+the actual aim of the project started in 1991. 
+  
+
+
+\subsection{Useful Java tools (most of them 
+        used for the programs in this book)}
+\begin{description}
+\item[Programs]
+\begin{description}
+\item[JDK] The Java Development Kit, distributed freely by SUN.\\
+        This kit is available for almost all platforms, e.g. Windows,
+        Solaris, Macintosh, Linux, etc. This is the first package to get
+        for a Java compiler, virtual machine and a debugger. There
+        are of course many other compilers, JVMs and debuggers
+        available, but this is the place to start with. A disadvantage
+        of the JDK for Windows user is, that you have to use the
+        command line to use it. There are no icons coming with the
+        package to start, compile or debug Java programs.
+\item[Emacs/XEmacs] This is an editor available for most platforms.\\
+        We bascially use this very powerful but sometimes confusing
+        editor to do all our programming, text editing and more. It is
+        also available for Windows, but it is mostly used on UNIX machines.
+        You are of course free to use ANY editor you like, which is available
+        to you. 
+\item[JDE] JDE (Java Development Environement) is an Emacs/Xemacs extension
+        written in Elisp. \\
+        It enables you to write your Java code much faster, if you are
+        using the emacs or xemacs editors. 
+\item[Netscape Navigator/Communicator] A web browser like the Internet 
+        Explorer, but written by Netscape inc. and the source code is
+        freely available. \\
+        We used Natscape as a reference to check, if software is running
+        in a browser additional to using the appletviewer from the JDK.
+        Be aware that not everything is supported by the browsers and
+        sometimes you get strange results compared to using the
+        appletviewer.       
+\item[Java Workshop] ????????
+\item[Freebuilder] ?????????
+\end{description}
+
+\item[Java Packages]
+\begin{description}
+\item[simulation] This is the package developed during the writing
+        of the book. It provides only some very basic features, which
+        might be of interest or can ease writing code. We have also
+        included some freely available source codes, which also
+        try to ease writing Java code.
+\item[Ptolmey (Ptplot)] A package to produce 2D plots from data. \\
+        Ptolmey (version 1.0 from January 1999, which includes version
+        2.0 of PtPlot.)
+        is actually a whole set of useful packages, but so far only the
+        plot package, called Ptplot is currently fully funtional. We will
+        use it extensivley for all plotting in 2D. It has a nice
+        zoom feature and it allows for the most important plot styles
+        needed.
+\item[JNL] The Java Numerical Library written by Visual Numerics and
+        distributed freely\foornote{But please consult the License Agreement
+        coming with the software.}. It is also submitted to the standardizing
+        commitee for proof to include it in the next release of the
+        Java language specification to become a standard. \\
+        The JNL includes the basics for using complex numbers, it
+        provides some more important standard functions (hyperbolic
+        functions, Gamma function, etc.) and it provides 
+        the basic operations for statistical data analysis (e.g. mean,
+        variance, linear least square fit, etc.). It also provides some
+        basic functionallity for linear algebra, like matrix decomposition,
+        determinant, trace, solving linear systems, etc.
+\item[JavaSci] ???????????
+\end{description}
+
+\end{description}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -286,6 +409,20 @@ line comments. Additionally you can use /** \ldots */ for comments
 to automatically generate a HTML documentation file for the class
 defined in the file. We will see later on how this can be achieved.
  
+There are also certain disadvantages, which should not be forgotten
+to mention: The learning curve is certainly steeper for the beginner
+for Java than for Matlab or even Fortran. This is of course due
+to the full use of the object oriented approach used for all Java
+programs. This clearly shows up, when we will introduce e.g. the
+file and keyboard input/output capabilities of Java.
+But in the long term learning Java definitly pays off. 
+
+A second point to note is, that for scientists a big concern are always
+complex numbers. They are currently not supported as primitive types as 
+in Fortran for example, but there are (standardized) packages, which
+add complex number support to Java (e.g. JNL). 
+
+
 \subsection{The ``HelloWorld'' Program}
 \label{sec:HelloWorld}
 Now let's start with the traditional ``Hello World'' program written
@@ -331,6 +468,11 @@ You have just written and executed your first application in
 Java. Please, do not worry if you do not understand everything. You are
 not expected to understand everything at this stage.
 
+If you are using Emacs/XEamcs and JDE you could have started Emacs and
+then just use the ``JDE New'' method in the ``Files'' menu. Then you
+just have to type the \verb|System.out.println()| code. To compile
+just use the ``compile'' command in the ``JDE'' menu and similar
+the ``run'' command in the same menu. This saves you a lot of keystrokes. 
 
 \subsubsection{Applet}
 \label{sec:Applet}
@@ -429,6 +571,13 @@ showing the relatives of the class. The package.html gives the
 package structure (not used here). The most important file is the
 AllNames.html, which is an index of all written programs in this package
 (for an introduction to packages see later).
+
+This of course gives us the opportunity to write our 
+explanations/documentation
+betweeen the \verb|/** .... */| commands using HTML constructs like
+\verb|<hr>| for a horizontal rule or others - try it. 
+Because this code gets directly included in the HTML files produced by
+the \verb|javadoc| command, you can have nicley formatted documentation.
 
 If you load AllNames.html into a browser, you get the HTML file shown
 in figure \ref{fig:javadoc1}.
@@ -720,6 +869,10 @@ $/$ & division \\
 \end{center}
 The $+$ operator can also be used to concatenate strings, as we will
 see later in an example in section \ref{sec:Parameter}.
+There is no power operator like $**$ in FORTRAN or $^$ like in many
+different programs like TeX/LaTeX. In Java like in C/C++ you have to use
+a special mathematical function/method 
+(\verb|Math.pow()|, see in a later section).
 
 It is important to remark, that in Java integer division truncates
 toward zero (7/2=3, -7/2=-3 and -7/-2=3).
@@ -1142,7 +1295,7 @@ write \verb|int intarray[];| or \verb|int[] intarray;|.
 In Java 1.1 you can also use \emph{anonymous arrays}:
 \begin{verbatim}
         String[] texts;
-        texts = new String[] = {"a","b","c","d","e","f","g"};
+        texts = new String[] {"a","b","c","d","e","f","g"};
         System.out.println(new char[] {'h','e','l','l','o'});
 \end{verbatim}
 So you can create and initialize arrays without even using a variable.
@@ -1179,7 +1332,7 @@ and afterwards calculate the mean.
 The last important point to address is the copying of arrays. 
 You can not just write
 \begin{verbatim}
-        int[] array1 = new int[] = {1,2,3,4,5};
+        int[] array1 = new int[] {1,2,3,4,5};
         int[] array2 = new int[10];
         array2 = array1;                // WRONG ! - ERROR ! 
 \end{verbatim}
@@ -1818,9 +1971,6 @@ The first lette of the name is an uppercas letter. If the
 
 
 
-
-
-
 \subsection{Summary and Overview}
 The general structure of a Java program is:
 \begin{itemize}
@@ -1831,27 +1981,119 @@ The general structure of a Java program is:
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{More Advanced Features}
+\section{Applications and Applets revisited}
 
-%\subsection{Input/Output}
-%\label{sec:Input/Output}
-%Exception Handling, Gnuplot
+After learning many things about object oriented programming,
+we want to recapitualte the basic differences and features of
+the two possible ways of writing and starting Java programs.
 
-%\subsection{Graphics and Visualization}
-%\label{sec:Graphics_and_Visualization}
-%AWT, Graphics
+\subsection{Application}
+A Java application is in the traditional language a ``normal'' program.
+In Java slang it is a class, which only has to have a \verb|main|
+method, which has to be static and public. This is also of course the
+entrance point, if you start the Java application. Then the program
+executes sequentially the code given in the main method (of course it
+goes parallel, if you use threads somewhere in the application - see
+\ref{sec:ParallelJava}). There are no restrictions of any sort using
+features in an application.
 
-%Example: Random Points
+
+\subsection{Applet}
+An applet is a Java class, which can be loaded into a virtual machine
+and can then be executed their. For example a web browser could load
+the applet, check if it is an applet allowed to be started on the
+machine the browser is running on and then ``starts the applet''.
+
+This is basically the most confusing part of an applet: What are the
+instructions, which get executed when the browser ``starts the applet''?
+To that purpose go ahead and write a simple program, which only 
+prints out the place where the execution just takes place and ``start''
+the Java class on the command line as an application, in the appletviewer
+as an applet and in a brwoser as an applet. What you will get is the
+following:
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
+    \includegraphics{Figures/LineOfExecution.eps}
+    \caption{The line of execution in an application and an applet in
+        the appletviewer or the Netscape Navigator V4.08. For the application
+        only the part above the first line and below the second line are
+        actually the parts, which can not be avoided. The remaining
+        part is just provided to show you how to write an application,
+        which can be used as an applet, too.}
+    \label{fig:LineOfExecution}
+  \end{center}
+\end{figure}
+
+So for the applets you have to write (implement) at least the 
+\verb|init()| method to get things going. But now you will ask, why did we
+not supply an  \verb|init()| method when we wrote our first 
+HelloWorld applet? The answer is we did, but we did not write it explicitly,
+because we left it empty. The trick was that there is for an applet 
+always another thread (see \ref{ParallelJava} for an introduction to threads)
+running, which takes care of (re)painting the windows used by the applet.
+This thread is a method from the AWT package (see \ref{AWTIntro}) and
+the method is the \verb|paint()| method. And in the    HelloWorld applet
+we have overriden the \verb|paint()| method to display our message.
+
+Actually the threads and methods used for painting and repainting
+the windows or panels is a little bit more tricky and involved, so we
+have to postpone the discussion to a later chapter. Here only the basics:
+There is a method \verb|repaint()|, which calls the \verb|update()|
+method and that again calls the \verb|paint()| method, when there is the time
+to do so. This sounds very complicated in the first place, but 
+it will be resolved later on.
+
+There is another issue to be addressed here in the context of applets.
+So far we have always written a seperate HTML file to use with the
+appletviewer, which then in turn calls the applet itself. The burden
+of having two files for one applet can be avoided by putting the
+HTML Code at the beginning of the Java class file in a comment. Then
+if you call the appletviewer with the Java class file 
+(\verb|appletviewer applet.java|) it executes the HTML code supplied
+in the Java class file and starts the applet. It even starts in
+the Netscape Navigator, although it probably makes no sense for
+large programs embedded in a set of HTML pages kept uptodate in a
+different way as the Java source code. But it certainly eases
+writing small applets and getting not confused by too many files on
+your disks. 
+
+Here a small example showing the described feature:
+\begin{verbatim}
+/**
+ * test_Applet.java
+ */
+
+/*
+<HTML> 
+   <APPLET code="test_Applet.class" width=500 height=800> </applet>
+</HTML>
+*/
+  
+import java.applet.*;
+public class test_Applet extends Applet {
+  public void init() {
+    System.out.println(" !!!!!!! I am alive !!");
+  }
+} // test_Applet
+\end{verbatim}
+You can start it (first compile it) 
+by typing \verb|appletviewer test_applet.java| or 
+in the Netscape Naviagtor type \verb|file:/home/user/test_Applet.java|.
+Then on the command line or the terminal with which you started the browser  
+you see the short message.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ???????????????????
+
+%Example:Random Points
 
 %Plotting using: Graph2D, Scivis,
 %\inputlisting{Listings_Java/PlotEasy.java}
 
-%\subsection{More Features}
-%\label{sec:features}
-%Beans, EPS Output,
-
-%\subsection{Online References}
-%\label{sec:Online_Refernces}
+\subsection{Online References}
+\label{sec:Online_Refernces}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
