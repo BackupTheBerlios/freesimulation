@@ -1,68 +1,107 @@
 %%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
 %%%
-%%% Main TeX File for Lecture Stochastic Simulations in Physics 
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
 %%%
-%%%   SS 1998  PD Dr. F. Petruccione  
 %%%
 %%%
-%%% (LaTeX2e Code: Dr. P. Biechele) 
+%%% Main TeX File for the Book 
+%%%
+%%%         ``Stochastic Methods for Physics using Java - An Introduction``
 %%%
 %%%
-%%% ATTENTION: Pool Size has to be extended from 70000 !!
-%%% for TeTeX user: kpsewhich texmf.cnf
+%%% ATTENTION:    Pool Size has to be extended from 70000 !!
+%%% (for TeTeX user: kpsewhich texmf.cnf
 %%%                 edit the respective texmf.cnf and change line: 
 %%%                     pool_size= to pool_size=200000
-%%%                 texconfig init
+%%%                 texconfig init )
 %%%
 %%%
 %%%
-\documentclass[fleqn,10pt,a4paper,openright]{book}
-\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+
+\documentclass[fleqn,10pt,a4paper,openright, draft]{book}
+%%% It might work with older versions !!
+\NeedsTeXFormat{LaTeX2e}[2000/06/01]
 %
-% Options:  fleqn     Formulas left not centered
-%           leqno     formula numbers to the left, not right
-%           openright ????
+% Class Style:  book 	use parts, chapters, sections
 %
-% Create Index
+% Options:  fleqn     	Formulas left not centered
+%	    10pt	Font Size
+%	    openright 	Chapters have to be started on a right sided page
+%	    a4paper	A4 Paper Size (European size) 	
+%	    draft	Mark overfull hboxes by surrounding them with lines
+%			AND do not include pictures just boxes
+%
+%	    
+% Options Not used, but for reference:
+%           leqno     	formula numbers to the left, not right
+%           letter	american paper size
+%	    openany 	chapters can be started on any sided pages (left/right)
+%	    final	Do NOT mark overfull hboxes
+%
+%
+
+%%% Package to create an Index and start it
 \usepackage{makeidx}
 \makeindex
 
-%%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
+%%% Package to USE POSTSCRIPT FONTS (NOT TeX Fonts)
 \usepackage{times,helvet}
 
-%% Dimensions of paper
+%%% Set the dimensions of the paper to get less white borders
 \usepackage{a4wide}
 
-%%% AMS LaTeX Extensions + Fonts 
+%%% Use the AMS LaTeX Extensions + Fonts (Symbols) 
+%
+% Options:
+%
+% centertags	tags for formulas are centered vertically
+% intlimits	put the limits for integration symbols above/under the symbol
+% namelimits	same for names
+% sumlimits	same for sums
+% reqno		equation numbers are to be on the right side
+%
 \usepackage{amssymb}
-\usepackage[centertags,intlimits,namelimits,sumlimits,reqno]{amsmath}
+\usepackage[centertags,intlimits,namelimits,sumlimits,reqno,?]{amsmath}
 
-%%%%%  Has to be specified after AMS packages, to avoid error messages
-%%%%%  of missing boldmath
+
+%%% Special math symbol font set (Math Times Font)
+%%% !! This has to be specified after AMS packages, to avoid error messages
+%%% !! of missing boldmath commands.
 \usepackage{mathptm}
 
-%%%%%%%  The graphicx/color style for picture inclusion and color support
+%%% The graphicx/color style for picture inclusion and color support
+%%% Used in conjunction with dvips.
 \usepackage[dvips]{graphicx,color}
-\usepackage{colortbl} %% colored tables
-% set path for figures
-% more directories can be added by using {dir/} for each
-\graphicspath{ {Figures/} }
+
+%%% Colored tables
+\usepackage{colortbl}
+
+%%% Set path for the figure files.
+%%% More directories can be added by using {dir/} for each one. 
+\graphicspath{  {../Figures/} {../Listings_Java/} }
 
 
-%%% Change floating table layout
-%%% can also be used for new floating objects or figures
+%%% Change floating table layout.
+%%% Can also be used for defining new floating objects or figures.
 \usepackage{float}
 
-%%% rotating   : Drehen von Bildern/Tabellen/Sonstigem
-%%%\usepackage{rotating} %% DONT USE IT ANYMORE: OLD and ERRORS !
-%% instead of rotating use lscape package (together with graphicx)
+%%% Instead of rotating package use lscape package (together with graphicx)
+%%% for rotating (landscpaing) figures. 
 \usepackage{lscape}
 
-%%% caption2   : Erweiterte Anpassungen der Captions
-%% use small captions and boldface caption labels
-%%%% enhanced captions: load late
+%%% Extensions to captions.
+%%% Here: use small captions and boldface caption labels
+%%% Has to be loaded late !
 \usepackage[small,bf]{caption2}
 
+%%% REMARK:
 %%% Use this package to correct the behaviour of the float
 %%% package together with the caption/caption2 package 
 %%% inparticular the sidewaystable environment
@@ -72,63 +111,90 @@
 %\usepackage[figuresright]{rotfloat}
 
 
+%%% Define the style floats are handled !
 %%% has to be done AFTER both: rotfloat and float have been loaded
 \floatstyle{ruled}
 \restylefloat{table}
 
-%%%%%% Small Styles :
+
+
+%%%%%% Small Styles/Packages used :
+%%%
+%%% Used:
+%%%
+%%% ifthen 	if clauses for newcommands
+%%% array     	extended table controls
+%%% exscale  	improved scaling of math symbols
+%%% natbib     	improved reference commands
+%%% subfigure 	multiple figures in one figure environment with individual captions
+%%% multicol   	extended handling of multiple columned text
+%%% verbatim	extended, multiple pages verbatim environments
+%%%
+%%% NOT used rigth now:
 %%% 
-%%%%%%%%%%% calc       : Rechnen mit TeX Groessen
-%%% hhline     : verbesserte Linien in Tabellen
-%%% array      : verbesserte Tabellenkontrolle
-%%% enumerate  : erweiterte enumerate Umgebung
-%%% fancybox   : erweiterte Boxen-Umgebungen
-%%% moreverb   : erweiterte Umgebungen fuer Listings
-%%% multicol   : verbesserte Spalten-Handling
-%%%%%%%%%%%%%% floatfig   : Bilder von Text umfliessen lassen (alt)
-%%% psfrag     : Text in PS Bildern, durch TeX Fonts ersetzen
-%%% exscale    : Skalierung von Mathe Symbolen besser
-%%% natbib     : verbessertes Referenzieren 
-%%% pifont     : spezielle Listen mit PS Symbolen 
-%%% subfigure  : Mehrere Bilder in einem figure mit eigenen Unterschriften
-%%%%%% picinpar   : Bilder in Text einbinden oder eben Anfangsbuchstaben
-%%%%%% !!! Probleme mit AMSTeX und Picinpar --> deshalb wrapfigure !
-%%% wrapfigure : Bilder in Text einbinden oder eben Anfangsbuchstaben
-%%% ifthen : If Clauses for newcommands
+%%% calc 	calculations with TeX variables
+%%% hhline    	optimized/extended lines in tables
+%%% enumerate	extended enumerate environment
+%%% fancybox 	extended box environments
+%%% moreverb  	extended environment for listings
+%%% floatfig 	OLD package for floating text around figures
+%%% psfrag 	substitute postscript text in ps pictures by TeX text
+%%% pifont  	extended list environment to use postscript symbols
+%%% picinpar	include pictures into floating text
+%%% !!! Attention: There are problems with AMSTeX and Picinpar 
+%%% --> so it is better to use wrapfigure package !
+%%% wrapfigure 	same as picinpar
 %%%
 \usepackage{array,exscale,natbib,subfigure,ifthen,multicol,verbatim}
 
-%%% The Listings package - include source code
+
+
+%%% To Include Source Code Listings we use:
+%%% The Listings package
 \usepackage{listings}
 
-%%% OLD package <0.19 : 
-%%%\selectlisting{java}
-%%%\selectlisting{matlab}
-% line numbers ? And what stepsize ?
-%%% \labelstyle[1]{\ttfamily}
-% use small font size for typesetting listings
-%%%\prelisting{\small\smallskip\hrule\smallskip}
-%%%\postlisting{\smallskip\hrule\smallskip}
-%% removed in 0.19
-%%        pre=\small\smallskip\hrule\smallskip,
-%%        post=\smallskip\hrule\smallskip,
-%% USE INSTEAD: frame=bltr or bt
 
-%% for compatability using 0.19 instead of 0.20
-\newcommand{\lstlistoflistings}{\listoflistings}
-%%
-%%% NEW package >= V0.20
+%%% OLD package <0.19 : (do not use anymore)
+%\selectlisting{java}
+%\selectlisting{matlab}
+%%% line numbers ? And what stepsize ?
+% \labelstyle[1]{\ttfamily}
+%%% use small font size for typesetting listings
+%\prelisting{\small\smallskip\hrule\smallskip}
+%\postlisting{\smallskip\hrule\smallskip}
+%%% this has been removed in 0.19
+%  pre=\small\smallskip\hrule\smallskip,
+%  post=\smallskip\hrule\smallskip,
+%%% USE INSTEAD: frame=bltr or bt
+%%% for compatability using 0.19 instead of 0.20
+%\newcommand{\lstlistoflistings}{\listoflistings}
+% this was necessary for V0.19
+%\newcommand{\inputlisting}[1]{\lstinputlisting{#1}}
+
+
+%%%
+%%% NEW listings package >= V0.20
+%%%
+%%% Languages to be formatted
 \lstloadlanguages{Java,Matlab,HTML,TeX}
-%\lstloadaspects{breaklines}
+
+%%% Settings for the style:
+%%% small font size, line numbering scheme, font style of numbers, frames
+%%% 
 \lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily, frame=bt}
+%%% OLD settings
 %        ,spread=0.2cm, extendedchars=true, breaklines=false}
 
-% Use extended theorem style
+
+
+%%% Use extended math theorem style
 \usepackage{theorem}
 
+
 %%% The Chapterbib package for Bibliographies per chapter
-% TeX usage:  Just insert \bibliography{...bib} where you want to have a bib
-%             The style can be given for each bib, but NOT in the main file !
+%
+% LaTeX usage:  Just insert \bibliography{...bib} where you want to have a bib
+%               The style can be given for each bib, but NOT in the main file !
 % Compile usage: latex mainfile
 %                bibtex chap1
 %                bibtex chap2     etc.  (for each chapter)
@@ -136,21 +202,12 @@
 \usepackage{chapterbib}
 
 
-%%%%%%%%%%
-%%%%%%%%%%  CHANGE this for printed versions %%%%%%%
-%%%%%%%%%%
-
-%%% SHOW ALL Labels 
-%\usepackage{showkeys}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%  END OF IMPORTANT STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%  AND SETTINGS            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Show ALL Labels for ``debugging'' the text
+\usepackage{showkeys}
 
 %%% Make fancy (our own) headings and footings
 \usepackage{fancyhdr}
+
 %%%%%%%%%% Umschalten auf eigene Kopfzeilen !! (fancyheadings Style) %%%%%%%%%
 \lhead[\fancyplain{}{\bfseries\thepage}]%
   {\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\rightmark}}
@@ -160,38 +217,52 @@
 \lfoot{}
 \rfoot{}
 \cfoot{}
-%% Damit das scharfe s auch richtig geschrieben wird und nicht 'SS'
-%% kommt von \uppercase\relax von oben ! 
+%%% This is needed if we have german umlauts in the headings/footings 
+%%% especially for the ``scharfes s'' !
+%%% responsible is the ``\uppercase\relax'' command from above ! 
 \edef\SS{\ss}
 
 
-%%% English Hyphenations and Titles : LOAD AFTER NATBIB
+%%% German and English Hyphenations and Titles : LOAD AFTER NATBIB
 \usepackage[german,english]{babel}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%  END OF IMPORTANT STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%  AND SETTINGS            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%% Definition des Layouts von \cite Befehlen !! (natbib Style) %%%%%%%
+
+%%% Definition of the Layout of the \cite commands for the natbib Style
 \bibpunct{[}{]}{;}{a}{,}{,}
 
-%%%%%%%% Am Ende des Kompilierens, alle benutzten Zusatzfiles ausgeben %%%
+%%% Display all used style files at the end of the compilation
 \listfiles
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%  Here we define our own commands and environements %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\bo}[1]{\mathbf{#1}}
-\newcommand{\lvec}[1]{\overrightarrow{#1}} 
-
-% Formelnummern: (chapter.section.equation)
+% NOT USED:
+% Different Formula Numbers: (chapter.section.equation)
 %\renewcommand{\theequation}{\thesection.\arabic{equation}}
 % equation fuer jeden Section zurueksetzen: 
 %\makeatletter
 % \@addtoreset{equation}{section}
 %\makeatother
-%% Mengensymbol C: complex numbers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Here we define our own commands and environements %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% boldface math symbols
+\newcommand{\bo}[1]{\mathbf{#1}}
+
+% vector symbol:
+\newcommand{\lvec}[1]{\overrightarrow{#1}} 
+
+% Set symbol for complex numbers
 \newcommand{\setC}{\ensuremath{\mathbb{C}}}
-% Symbol fuer relle Zahlen.
+
+% Set symbol for real numbers 
 \newcommand{\setR}{\ensuremath{\mathbb{R}}}
-%% Mittelwert Symbol
+
+% Mean Value Symbol
 \newcommand{\lr}[1]{\left\langle #1 \right\rangle}
 
 %%% Environement for exercises (uses theorem style)
@@ -199,6 +270,7 @@
   \theoremheaderfont{\bfseries\scshape}
   \theorembodyfont{\itshape}
 \newtheorem{Ex}{Exercise}[chapter] }
+
 %%% Environement for solutions 
 \newenvironment{Solution}[1]%
    { \begin{flushleft} \vspace{.5cm} %
@@ -206,30 +278,37 @@
      \end{flushleft} }%
    { \vspace{.3cm} }
 
-%% new verbatim environement
+%%% new verbatim environement
 \newenvironment{sverbatim}{\small\noindent\verbatim}%
                            {\endverbatim\normalsize}
 
-%% new listing environments
-\newcommand{\inputlisting}[1]{\lstinputlisting{#1}}
+%%% new listing environments
 \newcommand{\loadlisting}[2]{%
   \begin{flushleft}\textbf{Listing of #1}\end{flushleft} %
   \lstinputlisting{#2}}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
 %%% include HTML specials into DVI: HYPERREF PAKET
 %%%
 %%% Hyperref Package by Sebastian Rahtz
-
+%%%
+%%%
+%%% Depending on the final output format, we have to change/uncomment
+%%% some of the following lines
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\href}[2]{#2}
 
 %%% for pdflatex (still problems with links)
 %%% \usepackage[pdftex]{hyperref}
 
-%% for dvips / ps2pdf or dvips / Acrobat Distiller
-%%\usepackage[dvips]{hyperref}
+%%% for dvips / ps2pdf or dvips / Acrobat Distiller
+%%%\usepackage[dvips]{hyperref}
 
+%%% For final print version (PDF)
 %\usepackage[extension=pdf,hyperfigures,hyperindex,%
 %baseurl={http://phym1.physik.uni-freiburg.de/\string~frpe/},%
 %pdftitle={Manuscript for Stochastic Simulations in Physics using Java},%
@@ -238,53 +317,60 @@
 %pdfkeywords={Physics,Stochastics,Simulation,Computer},%
 %pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
 
-%%\usepackage{xr}
-%%\externaldocument{kap31.dvi}%
-%%%[http://phym1.physik.uni-freiburg.de/~hon/manuskript/kap31]
+
+%%% Experimental package for external references: NOT TESTED YET
+%\usepackage{xr}
+%\externaldocument{kap31.dvi}%
+%[http://phym1.physik.uni-freiburg.de/~hon/manuskript/kap31]
 
 %%%
 %%% After Texing, just dvips and then ps2pdf or Acrobat distiller !
 %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%   Which part should be compiled by TeX
-%\includeonly{IntroToJava,ObjectOriented,PlottingWithJava}%,%
-%  DataAnalyis,AppendixMainText}
-%%\includeonly{StochasticVariables,DataAnalysis,SamplingOfProbDists,%
-%% MarkovProcesses,SDE, Chap7,Chap8,Chap9}
 
-\includeonly{IntroToJava}
-
-%\includeonly{CD_ROM,Chap7,Chap8,Chap9,Listings,Solutions}
-
-%\includeonly{GNU_Docu_License,GNU_Software_License}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%   Define which parts should be compiled by TeX/LaTeX
+%%%
+\input compile_parts.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Over-full v-boxes on even pages are due to the \v{c} in author's name
+%%% Technical setting:
+%%% Over-full v-boxes on even pages are due to the \v{c} in author's name
 \vfuzz5pt % Don't report over-full v-boxes if over-edge is small
 \hfuzz5pt % Don't report over-full h-boxes if over-edge is small
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%%  START Document
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
-%%% Example for setting colors to greyscale
-%%% 1 ist weiss und 0 ist schwarz
-%%%\definecolor{yellow}{gray}{1.00}
-%%%\definecolor{red}{gray}{0.02}
+
+%%% COLOR or BLACK-WHITE PRINTER/VERSION
+%%% Setting colors to greyscale ! (1 is white and 0 is black)
+%\definecolor{yellow}{gray}{1.00}
+%\definecolor{red}{gray}{0.02}
+
+%%% Color definitions
 \definecolor{tabgray}{gray}{0.6} %% the gray for table rows
 
-%%%%%%%%%%%%%
-%%%%%%%%%%%%% Design our own Titlepage !!
-%%%%%%%%%%%%%
+%%%
+%%% Design our own Titlepage !! %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
 \begin{titlepage}
 
-%% Title 
+%%% Title 
 \begin{center}
 \huge 
 \textcolor{red}{
@@ -295,14 +381,22 @@ An Introduction
 \end{center}
 \vspace*{.5cm}
 
-%% Authors
+%%% Authors
 \begin{center}
 \LARGE
 \textcolor{blue}{
 \textsc{F. Petruccione and P. Biechele }}
 \end{center}
 \vfill
-\textsf{\LARGE Version 0.3}
+%%%
+%%% VERSION NUMBER !!!!!
+%%%
+\begin{center}
+\textsf{\LARGE Version 0.5}
+\end{center}
+%%%
+%%%
+%%% 
 \vfill
 %% Copyright 
 \begin{center}
@@ -312,24 +406,25 @@ An Introduction
       under the terms of the GNU Free Documentation License, Version 1.1
       or any later version published by the Free Software Foundation;
       with no Invariant Sections, with the
-      Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+      Front-Cover Texts being FRONT LIST, and with the Back-Cover Texts 
+      being BACK LIST.
       A copy of the license is included in the section entitled "GNU
       Free Documentation License".\\
       All programs contained herein are under the GNU GPL.
 \end{center}
 \vspace*{.5cm}
 
-%% Date
+%%% Date
 \begin{center}
 \large
 \textsf{Version of the \today}
 \end{center}
 
 \end{titlepage}
-%% End Of Titlepage
+%%% End Of Titlepage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Inhaltsverzeichnis !!!! -- Römische Seitennummerierung
+%%% Table Of Contents / Figures / Listings / Tables -- Roman Page Numbering
 \pagenumbering{Roman}
 \tableofcontents
 \clearpage
@@ -340,14 +435,19 @@ An Introduction
 \lstlistoflistings
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The Chapters !!!!  --  Arabic pagenumbering
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% include the Chapters  --  Arabic pagenumbering
+%%%
 \pagenumbering{arabic}
 
 %%% Chapter -0 -- CD ROM Explanations
 \include{CD_ROM}
 
+%%% Reset the page number
 \setcounter{chapter}{-1}
+
+%%% Set Java language style
 \lstset{language=java,basicstyle=\small,stringstyle=\ttfamily}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART I
@@ -373,22 +473,14 @@ An Introduction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART IV
 \part{Advanced Simulation Techniques}
 
-%%% Chapter 7 
 \include{MolecularDynamics}
-
-%%% Chapter 8 
 \include{MonteCarlo}
-
-%%% Chapter 9 
 \include{NonEquilibriumMC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART V
 \part{Applications}
 
-%%% Chapter 10
 \include{QuantumMechanics}
-
-%%% Chapter 11
 \include{RiskManagement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices
@@ -414,20 +506,16 @@ An Introduction
 
 %%%%%%%%%%%%%%%%%%%%%%% 
 
-% Bibliographien
-%% These commands are ignored by the chapterbib package
-%\bibliographystyle{peter}
-%\bibliography{V_98,simulit}
+%%%  Biliographies are in the chapters !
 
-%%\addtocontents{toc}{\protect\vspace{1.5ex}}
-%%\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
-%%\clearpage
+%%% Now insert the Index into the TOC
+%\addtocontents{toc}{\protect\vspace{1.5ex}}
+%\addcontentsline{toc}{chapter}{\protect\numberline{}Index}
 
-% Now insert the Index
-%%\addtocontents{toc}{\protect\vspace{1.5ex}}
-%%\addcontentsline{toc}{chapter}{\protect\numberline{}Index}
-
+%%% Print Index
 \printindex
 
+
+%%% End of Document
 \end{document}
 

@@ -1,3 +1,14 @@
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Nonequilibrium Monte-Carlo Methods}
 
 \section{The Description of Irreversible Processes}
@@ -435,7 +446,7 @@ and keep the processors busy.)
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics[width=\textwidth]{Figures/NetworkOverview.eps}
+    \includegraphics[width=\textwidth]{../Figures/NetworkOverview.eps}
     \caption{The different networking models and cables used to connect
         the CPUs in a ``Parallel Computer''. The years just represent the
         ``standard'' network used for most permanently connected systems.
@@ -574,7 +585,7 @@ on different platforms and use the fastest available for your problem.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics[width=\textwidth]{Figures/ParallelSoftware.eps}
+    \includegraphics[width=\textwidth]{../Figures/ParallelSoftware.eps}
     \caption{Possible software models to be used for parallel programming. 
       For a description of the used abbreviations see table \ref{tab:ParallelAbbrev}.
       Difficult/Easy programming refers to the time needed to implement
@@ -734,7 +745,7 @@ Where the speedup is defined as the ratio of the time to complete
 the serial program and the time needed by using $N$ processors simultaneously. 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[angle=-90,width=\textwidth]{Figures/Amdahl.eps}
+    \includegraphics[angle=-90,width=\textwidth]{../Figures/Amdahl.eps}
     \caption{Amdahls law with some examples for the value of the serial
       part $f$ of a program.}
     \label{fig:Amdahl}
@@ -757,7 +768,7 @@ Using Symphony is very easy in this case. The idea is to compute the same
 model (number of time steps) with different number of fleas on dog one. Then we
 can generate very easily the statistics for the Ehrenfest model discussed
 in section \ref{sec:EhrenfestModel}.
-\inputlisting{Listings_Java/DogFlea.java}
+\lstinputlisting{../Listings_Java/DogFlea.java}
 First you have to compile the java program and copy the class file to the directory,
 where a  browser can access it 
 (e.g. \verb|/home/user/public_html/Symphony/SymphonyTasks| for a unix machine).
@@ -816,7 +827,7 @@ in a directory
 \end{verbatim}
 The second step is to extract the results from the logfile, e.g. use the
 following program:
-\inputlisting{Listings_Java/ConvertSymphony.java}
+\lstinputlisting{../Listings_Java/ConvertSymphony.java}
 This produces a data file containing the variables (\verb|n0d Nd na nb|) 
 and can be plotted using Ptplot or by any plotting program e.g. gnuplot (after 
 starting gnuplot use for example \verb|gnuplot "gnu.out" using 1:3|).
@@ -866,7 +877,7 @@ implementations employ these green threads for Java threads.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/Threads.eps}
+    \includegraphics[width=\textwidth]{../Figures/Threads.eps}
     \caption{A multitasking operating system employing a Java Virtual Machine, which runs multiple threads.}
     \label{fig:Threads}
   \end{center}
@@ -968,11 +979,11 @@ it does start the threads sequentially and not in parallel.
 
 Now finally let us see how we can apply this to our problem. First we need
 the thread:
-\lstinputlisting{Listings_Java/DogFleaCalc.java}
+\lstinputlisting{../Listings_Java/DogFleaCalc.java}
 And second we need a ``server'', which starts the threads and collects
 the answers; this is very similar to the Symphony example and will be
 the same in the MPI problem:
-\lstinputlisting{Listings_Java/DogFleaThreads.java}
+\lstinputlisting{../Listings_Java/DogFleaThreads.java}
 The \verb|void join()| method returns only, if the thread is marked
 as no longer being alive and therefore being completed. The join method
 also accepts an argument, which is the timeout (a long variable) in milliseconds.
@@ -3312,8 +3323,8 @@ excellent over the whole range of wavenumbers.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3326,5 +3337,5 @@ excellent over the whole range of wavenumbers.
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "V_98"
+%%% TeX-master: "SimulationBook"
 %%% End: 

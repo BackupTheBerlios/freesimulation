@@ -1,3 +1,14 @@
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Molecular Dynamics}
 
 \section{Introduction}
@@ -676,7 +687,7 @@ canv.setCursor(Cursor.DEFAULT_CURSOR); // calculation is finished
 To use a ScrollPane you just instantiate one, use a Panel inside the
 ScrollPane if you want to put many components in it and at last
 add the ScrollPane to a Container (like a Frame). 
-\lstinputlisting{Listings_Java/ScrollPaneDemo.java} 
+\lstinputlisting{../Listings_Java/ScrollPaneDemo.java} 
 
 \subsection{Properties and Resources}
 Properties are like Xdefaults in a UNIX environment and deliver
@@ -805,7 +816,7 @@ pushing the mouse button on this decoration does not have any
 impact. Usually you want the frame to be closed and the program 
 to exit in that case. So we have to implement an interface for the
 pushing of a mouse button and register a listener with the frame:
-\lstinputlisting{Listings_Java/ClosableFrame.java}
+\lstinputlisting{../Listings_Java/ClosableFrame.java}
 
 In line 9-11 we instantiate a frame and set the size thereof. Then
 we display it on screen. In line 13-15 we add the listener
@@ -850,7 +861,7 @@ necessary to have a WindowListener and you can just override the
 methods you really need, like window closing above.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/JavaEvents.eps}
+    \includegraphics[width=\textwidth]{../Figures/JavaEvents.eps}
     \caption{The most important event classes in Java and their structure.
       In these classes you can find the events available in Java. There
       are many events also outside of the AWT, which are not
@@ -860,7 +871,7 @@ methods you really need, like window closing above.
 \end{figure}
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/EventListeners.eps}
+    \includegraphics[width=\textwidth]{../Figures/EventListeners.eps}
     \caption{The most important AWT listeners and their class structure.
       Look at the API documentation of the listeners to find all the
       available methods to be overriden, this shows you what kind
@@ -870,7 +881,7 @@ methods you really need, like window closing above.
 \end{figure}
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/EventAdapters.eps}
+    \includegraphics[width=\textwidth]{../Figures/EventAdapters.eps}
     \caption{The available adapter interfaces for the AWT listener.
       These classes ease the writing of listeners by only overriding
       the methods you need, you just implement the appropriate event 
@@ -902,7 +913,7 @@ At last a short summary or instruction of how to implement events in Java:
                 // here we could react to the pushed button 
             }});
   \end{verbatim}
-  \lstinputlisting{Listings_Java/ButtonListenerTest.java}
+  \lstinputlisting{../Listings_Java/ButtonListenerTest.java}
 \end{enumerate}
 You should always remember not to write time intensive code in
 listeners, because you interrupt the whole program and only one
@@ -1668,8 +1679,8 @@ Appendix: The GUI!!!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 
 
@@ -1679,5 +1690,5 @@ Appendix: The GUI!!!
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "V_98"
+%%% TeX-master: "SimulationBook"
 %%% End: 

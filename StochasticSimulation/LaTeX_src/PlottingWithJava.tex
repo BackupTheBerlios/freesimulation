@@ -1,6 +1,14 @@
-%%%%%%%
-%%%%%%% Chapter
-%%%%%%%
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Plotting with Java}
 Among the numerical techniques available to computational physics,
 stochastic methods, also called Monte Carlo methods, play a 
@@ -185,7 +193,7 @@ the radioactive decay.
 
 \subsection{The Simulation Code}
 The above algorithm written in Java is shown in the following listing.
-\inputlisting{Listings_Java/RadioactiveDecay.java}
+\lstinputlisting{../Listings_Java/RadioactiveDecay.java}
 
 The program is straightforward. In line 5 to 10 the relevant variables 
 are defined and initialized. The main time loop starts is line 35 and the loop
@@ -226,7 +234,7 @@ learn the foundations of the graphical tools of Java. The code we want to
 discuss is the \verb|PlotEasy| class which can be run as an applet or as
 an application.
 
-\inputlisting{Listings_Java/PlotEasy.java}
+\lstinputlisting{../Listings_Java/PlotEasy.java}
 
 As we can see the code starts by importing packages. We already met the first
 one, the \verb|java.applet.Applet| package in the applet version of the
@@ -255,7 +263,7 @@ To accomplish this, Java uses a so-called peer architecture, see Figure
   \begin{center}
     \leavevmode
     \setlength{\unitlength}{.8cm}
-    \input{Figures/PeerArchitecture.pic}
+    \input{../Figures/PeerArchitecture.pic}
     \caption{The peer architecture of the AWT in Java.}
     \label{fig:peer}
   \end{center}
@@ -268,7 +276,7 @@ which shows the inheritance hierarchies of the Applet class.
   \begin{center}
     \leavevmode
     \setlength{\unitlength}{.8cm}
-    \input{Figures/AppletHierarchy.pic}
+    \input{../Figures/AppletHierarchy.pic}
     \label{fig:hierarchyapplet}
     \caption{This figure shows the inheritance hierarchy of the Applet class.}
   \end{center}
@@ -303,7 +311,7 @@ components and layouts classes of the \verb|java.awt| package.
 \begin{figure}
   \begin{center}
     \setlength{\unitlength}{.65cm}
-    \input{Figures/FrameHierarchy.pic}
+    \input{../Figures/FrameHierarchy.pic}
   \end{center}
   \label{fig:awthierarchy}
   \caption{The hierarchy of the AWT package.}
@@ -351,7 +359,7 @@ a button or a label to the frame we have created, for example:
 The resulting window is shown in figure \ref{fig:ButtonDemo}.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[height=2cm]{Figures/ButtonDemo.eps}
+    \includegraphics[height=2cm]{../Figures/ButtonDemo.eps}
     \caption{The output of the most easy window with a button using the AWT.}
     \label{fig:ButtonDemo}
   \end{center}
@@ -533,7 +541,7 @@ scrolling in the browser window or, like here, resizing the window
 (see Figure \ref{fig:PaintMethod}.).
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/PaintMethod.eps}
+    \includegraphics[width=\textwidth]{../Figures/PaintMethod.eps}
     \caption{The default behaviour of the painting methods of components in the AWT package.}
     \label{fig:PaintMethod}
   \end{center}
@@ -542,13 +550,13 @@ scrolling in the browser window or, like here, resizing the window
 Having learned the basic graphical tools of the AWT with the help of
 the most easy plot program, we can now apply what we have just learned
 to the simulation of the radioactive decay.
-\inputlisting{Listings_Java/RadioactiveDecay_easyplot.java}
+\lstinputlisting{../Listings_Java/RadioactiveDecay_easyplot.java}
 Implementing the graphical facilities in the
 \verb|RadioactiveDecay.java| code is easy. The output of 
 the new program can be seen in figure \ref{fig:RDEasyPlot}.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[angle=-90,width=.75\textwidth]{Figures/RadioactiveDecayEasy.eps}
+    \includegraphics[angle=-90,width=.75\textwidth]{../Figures/RadioactiveDecayEasy.eps}
     \caption{The output of the easyplot version of the radioactive 
       decay program. The exact solution is a black line, the simulation a red line.}
     \label{fig:RDEasyPlot}
@@ -617,8 +625,8 @@ class hierarchy of Ptplot in Figure \ref{fig:PtplotHierarchy}.
   \begin{center}
     \leavevmode
     \setlength{\unitlength}{.8cm}
-    \input{Figures/PtplotHierarchy1.pic}\\[.3cm]
-    \input{Figures/PtplotHierarchy2.pic}
+    \input{../Figures/PtplotHierarchy1.pic}\\[.3cm]
+    \input{../Figures/PtplotHierarchy2.pic}
     \caption{The class hierarchy of the Ptplot package.}
     \label{fig:PtplotHierarchy}
   \end{center}
@@ -628,7 +636,7 @@ classes.
 
 Let us now look at a very simple program in order to demonstrate
 what we need to invoke the Ptplot methods.
-\inputlisting{Listings_Java/Ptplot_Demo1.java}
+\lstinputlisting{../Listings_Java/Ptplot_Demo1.java}
 
 First, we see that we have to import additionally the  Ptplot package
 by using 
@@ -648,7 +656,7 @@ initialize it and \verb|plot().setTitle| to give the plot a title.
 A second possibility of using Ptplot, which we prefer to use, is to extend
 the \verb|Applet| class instead of the \verb|PlotApplet| class and 
 change the lines 28 to 33 to:
-\lstinputlisting[first=28,last=33]{Listings_Java/Ptplot_Demo2.java}
+\lstinputlisting[first=28,last=33]{../Listings_Java/Ptplot_Demo2.java}
 The difference is that the \verb|PlotApplet| class realizes a kind
 of interface for an applet to start plot commands confirming to the
 pxgraph commands and executes them from parameters given in the HTML
@@ -662,12 +670,12 @@ Next we want to draw the results of the simulation of the radioactive
 decay process with the help of ptplot and learn at the same time how
 to exploit the features of ptplot. The corresponding code can be seen
 below.
-\inputlisting{Listings_Java/RadioactiveDecay_ptplot.java}
+\lstinputlisting{../Listings_Java/RadioactiveDecay_ptplot.java}
 The output of the code can be seen in Fig. (\ref{fig:ptplotOutput}). 
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics[angle=-90,width=\textwidth]{Figures/RadioactiveDecay_ptplot.eps}
+    \includegraphics[angle=-90,width=\textwidth]{../Figures/RadioactiveDecay_ptplot.eps}
     \caption{The output of the RadioactiveDecay\_ptplot.java program.}
     \label{fig:ptplotOutput}
   \end{center}
@@ -868,8 +876,8 @@ Some results of simulations are plotted in Fig. (\ref{FIG_DECAYA}) and
 \begin{figure}
 \label{FIG_DECAYA}
 \begin{center}
-\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_1.eps}\\
-\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_2.eps}
+\includegraphics[angle=-90,width=8cm]{../Figures/RadioactiveDecay_1.eps}\\
+\includegraphics[angle=-90,width=8cm]{../Figures/RadioactiveDecay_2.eps}
 \end{center}
 \caption{Two realizations of the stochastic process of the radioactive decay.
 The first one with linear y axis scaling and the second one uses a logarithmic
@@ -882,7 +890,7 @@ The parameters of the simulation were choosen to be $N_0 = 100;
 \begin{figure}
 \label{FIG_DECAYB}
 \begin{center}
-\includegraphics[angle=-90,width=11cm,clip]{Figures/RadioactiveDecay_3.eps}\\
+\includegraphics[angle=-90,width=11cm,clip]{../Figures/RadioactiveDecay_3.eps}\\
 \end{center}
 \caption{The same as figure \ref{FIG_DECAYA}, but with different parameters:
 $N_0 = 1000; \quad p = \lambda \Delta t = 0.03 s^{-1}; 
@@ -902,7 +910,7 @@ We introduce an additional input variable, the number of realizations
 realizations. This can be best seen in the listing of the 
 new program \verb|RadioactiveDecay_ptplot2.java|.
 \lstinputlisting[first=44,last=61]%
-          {Listings_Java/RadioactiveDecay_ptplot2.java}
+          {../Listings_Java/RadioactiveDecay_ptplot2.java}
 
 At the end of the realizations loop
 we perform the average. This is seen in lines 59 to 62.
@@ -972,7 +980,7 @@ Poisson distribution.
 
 
 \subsubsection{Listing of the full Program}
-\lstinputlisting{Listings_Java/RadioactiveDecay_ptplot2.java}
+\lstinputlisting{../Listings_Java/RadioactiveDecay_ptplot2.java}
 
 
 Run the program for the following two sets of parameters:
@@ -987,7 +995,7 @@ The result of  two simulations can be seen in Figs.
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[angle=-90,width=.8\textwidth]
-    {Figures/RadioactiveDecay_PDF1.eps}
+    {../Figures/RadioactiveDecay_PDF1.eps}
     \caption{The distribution of the number of decays using 
       100 realizations. The simulation was run for
       $N_0=100$ and $\lambda=0.001$.}
@@ -997,7 +1005,7 @@ The result of  two simulations can be seen in Figs.
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[angle=-90,width=.8\textwidth]
-    {Figures/RadioactiveDecay_PDF2.eps}
+    {../Figures/RadioactiveDecay_PDF2.eps}
     \caption{The distribution of the number of decays using
       1000 realizations. The simulation was run
       for $N_0=100$ and $\lambda = 0.001$.}
@@ -1043,7 +1051,7 @@ In Java printing is done basically in four steps:
 \end{enumerate}
 The program \verb|RadioactiveDecay_printing.java| demonstartes the use of
 the printing capabilities of Java. 
-\lstinputlisting[first=32,last=47]{Listings_Java/RadioactiveDecay_printing.java} 
+\lstinputlisting[first=32,last=47]{../Listings_Java/RadioactiveDecay_printing.java} 
 
 Of course there are some drawbacks to talk about. First of all with
 this code we always get the output in a size referring to our actual
@@ -1155,7 +1163,7 @@ Because it is the only (free) way of producing 3D graphs yet,
 an example in Figure \ref{fig:JSci3DGraph} introduces some of these features..
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[angle=90,width=.7\textwidth]{Figures/JSciGraph3D.eps}
+    \includegraphics[angle=90,width=.7\textwidth]{../Figures/JSciGraph3D.eps}
     \caption{An example of the 3D plotting capabilities of JSci.}
     \label{fig:JSci3DGraph}
   \end{center}
@@ -1164,7 +1172,7 @@ It is actually not what we expected, but it is a beginning.
 We can also use the mouse to rotate the 3D graph
 in the right half of the window. The graph on the left is a contour plot.
 The details are explained in the API documentation to the JSci package.
-\inputlisting{Listings_Java/JSci3DGraph.java}
+\lstinputlisting{../Listings_Java/JSci3DGraph.java}
 
 There is also a program called
 \index{SciVis} 
@@ -1219,13 +1227,13 @@ We can also read the standard output of the subprocess and use it in our
 Java program. To demonstarte how it actually works, we give two examples:
 \begin{enumerate}
 \item A Java program starts a Gnuplot program, which plots a sine curve.
-  \noindent\inputlisting{Listings_Java/Gnuplot.java}
+  \noindent\lstinputlisting{../Listings_Java/Gnuplot.java}
   We also need the Gnuplot program to be executed:
-  \noindent\inputlisting{Listings_Java/Gnuplot.gnu}
+  \noindent\lstinputlisting{../Listings_Java/Gnuplot.gnu}
 \item A Java program executes a ``ls -al'' command on a UNIX machine,
   which just gives the directory listing. For a Windows system we just
   use the ``dir'' command instead.
-  \noindent\inputlisting{Listings_Java/DirectoryListing.java}
+  \noindent\lstinputlisting{../Listings_Java/DirectoryListing.java}
   This time we also wait for the execution of the process to finish and 
   then read the standard output and display it on the screen.
 \end{enumerate}
@@ -1254,7 +1262,7 @@ We have assumed that there is no overlap between the cross-sections of
 the slab particles.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\linewidth]{Figures/Photoabsorption.eps}
+    \includegraphics[width=\linewidth]{../Figures/Photoabsorption.eps}
     \caption{The configuration of the system.}
     \label{fig:Photoabsorption}
   \end{center}
@@ -1339,10 +1347,10 @@ series for $e$ ($\sum_{i=0}^\infty 1/i! = e$)?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "V_98"
+%%% TeX-master: "SimulationBook"
 %%% End: 

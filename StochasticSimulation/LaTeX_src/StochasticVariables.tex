@@ -1,7 +1,14 @@
-%%%%%%
-%%%%%% Chapter
-%%%%%%
-
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Stochastic Variables}
 Since the notion of random variables will be essential
 for the understanding of stochastic methods this chapter will be 
@@ -86,7 +93,7 @@ look at the relative frequency $m(4)$ of the outcome of throwing a
 following program.
 
 {\bf Listing of the program relfreq.}
-\inputlisting{./Listings/relfreq.m}
+\lstinputlisting{./Listings/relfreq.m}
 
 The result of an experiment for up to 400 throws is shown in Fig. 
 (\ref{F_FRELFREQ}). Running the program again we observe 
@@ -855,7 +862,7 @@ In figure \ref{fig:FileIOClasses} you can see the main classes of the
 package, which are all subclasses of the \verb|java.lang.object| class.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/IOClasses.eps}
+    \includegraphics[width=\textwidth]{../Figures/IOClasses.eps}
     \caption{Overview of the \texttt{io} package in Java 1.1 and 
       related classes.}
     \label{fig:FileIOClasses}
@@ -893,7 +900,7 @@ second stream (see figure \ref{fig:ConnectingStreams}).
 \begin{figure}[htbp]
   \begin{center}
     \setlength{\unitlength}{.7cm} 
-    \input{Figures/StreamsConnect.pic}
+    \input{../Figures/StreamsConnect.pic}
     \caption{Connecting two streams together to get advanced functionality.}
     \label{fig:ConnectingStreams}
   \end{center}
@@ -920,7 +927,7 @@ files, directories and paths. We can use it to create a name
 for our file to be created. For file access, you have to use the
 \verb|Reader| and \verb|Writer| classes. So our small sample
 program would look like:
-\lstinputlisting{Listings_Java/FileWriteSimple.java}
+\lstinputlisting{../Listings_Java/FileWriteSimple.java}
 
 First of all you realize that instead of just using the \verb|FileWriter|
 class we ``pipe'' it to a \verb|BufferedWriter|, which buffers
@@ -947,7 +954,7 @@ in the \verb|Writer| class.
 Now we want to read the contents of the file back in. We use the
 classes \verb|FileReader| and \verb|BufferedReader| as you may have
 already guessed. The whole program looks like:
-\lstinputlisting{Listings_Java/FileReadSimple.java}
+\lstinputlisting{../Listings_Java/FileReadSimple.java}
 Again you can use the convenience class \verb|FileIn| from the
 simulation package, changing again the lines 17-18 (or 19) by:
 \begin{lstlisting}{}
@@ -993,7 +1000,7 @@ to write to a file in one string, you could use a \verb|StringBuffer|.
 Here is the same class as above for writing a double array to a file,
 but this time we use the \verb|StringBuffer| to create a string
 containing all the output and write this string to the file.
-\lstinputlisting{Listings_Java/StringBufferDemo.java}
+\lstinputlisting{../Listings_Java/StringBufferDemo.java}
 Now you have to take care of the length of the buffer yourself,
 but if there is not enough space left Java automatically
 enlarges the buffer itself, so you do not have to care.
@@ -1028,7 +1035,7 @@ the \verb|printf()| method.
 A simple example of these routines would be to save
 a double array, which is e.g. the x-coordinate of a particle, and 
 the corresponding time in a file.
-\lstinputlisting{Listings_Java/FileSaveFormatted.java}
+\lstinputlisting{../Listings_Java/FileSaveFormatted.java}
 
 \paragraph{Binary Files}
 We are now familiar with writing ASCII files, but sometimes it is
@@ -1060,7 +1067,7 @@ to character streams. Instead use the above discussed \verb|Writer|
 As an example we look at the same example as above and write 100 
 double variables to a file, so the file will be 800 bytes long
 (on all computers and operating systems).
-\lstinputlisting{Listings_Java/FileBinary.java} 
+\lstinputlisting{../Listings_Java/FileBinary.java} 
 Please note that we have used unbuffered I/O here and for your
 applications you should always use buffered I/O by inserting
 a \verb|BufferedInputStream| (\verb|BufferedOutputStream|) between
@@ -1087,7 +1094,7 @@ something suitable.
 As a short example we want to discuss how to check if
 a file with a certain filename is already available and 
 how to handle directories and files therein.
-\lstinputlisting{Listings_Java/FileCheck.java}
+\lstinputlisting{../Listings_Java/FileCheck.java}
 
 \paragraph{Direct File Access}
 Since Java 1.1 
@@ -1109,7 +1116,7 @@ done easily on UNIX systems, but still you have to do it manually.
 In Java you just use methods from the \verb|java.lang.System| class.
 For example to redirect the standard output and error to a file
 called \verb|Standard.out| of a program, use:
-\lstinputlisting{Listings_Java/RedirectStandard.java}
+\lstinputlisting{../Listings_Java/RedirectStandard.java}
 The similar method for the standard input is called
 \verb|System.setIn(InputStream)|.
 
@@ -1142,7 +1149,7 @@ explain only the GZIP interface.
 
 Let us discuss the problem of saving an array to a file again, but
 this time we want to store them compressed as a GZIP file.
-\lstinputlisting{Listings_Java/GZIPSaveArray.java}
+\lstinputlisting{../Listings_Java/GZIPSaveArray.java}
 The first part stores it as a binary GZIP file \verb|test.bin.gz|
 and you will see that it
 does not save a lot of memory, because we are storing an array with random
@@ -1338,7 +1345,7 @@ is called {\sf rwdt} and its listing can be seen below.
 
 \subsubsection{Listing of the program rwdt.m}
 
-\inputlisting{./Listings/rwdt.m}
+\lstinputlisting{./Listings/rwdt.m}
 
 In the program we have obviously to generate an integer valued random 
 variable which can assume with equal probability the values $+1$ 
@@ -1353,13 +1360,13 @@ Two realizations of the one--dimensional random walk can be seen
 in Figs. (\ref{F_RWDT_1}) and (\ref{F_RWDT_2}). 
 \begin{figure}
 \label{F_RWDT_1}
-\includegraphics[width=10cm]{./Figures/f_rwdt_1.eps}
+\includegraphics[width=10cm]{../Figures/f_rwdt_1.eps}
 \caption{One realization of a one--dimensional random walk.}
 \end{figure}
 
 \begin{figure}
 \label{F_RWDT_2}
-\includegraphics[width=10cm]{./Figures/f_rwdt_2.eps}
+\includegraphics[width=10cm]{../Figures/f_rwdt_2.eps}
 \caption{Another realization of a one--dimensional random walk.}
 \end{figure}
 
@@ -1372,7 +1379,7 @@ stochastic process.
 Its listing can be seen below.
 
 \subsubsection{Listing of the program rwdtn.m}
-\inputlisting{./Listings/rwdtn.m}
+\lstinputlisting{./Listings/rwdtn.m}
 We run the program for $nstep=100$ and $nreal=1000$. The estimated
 mean value of 0.274 and the estimated variance of 103.304 are in quite
 good agreement with the theoretical expected vales of 0 nd 100, respectively.
@@ -1380,7 +1387,7 @@ It is interesting to look also at the distribution of the end points of
 the random walk. This can be seen in Fig. (\ref{F_RWDTN}).
 \begin{figure}
 \label{F_RWDTN}
-\includegraphics[width=10cm]{./Figures/f_rwdtn.eps}
+\includegraphics[width=10cm]{../Figures/f_rwdtn.eps}
 \caption{The distribution of the end--points of the one--dimensional 
 random walk. the program {\sf rwdtn} was run for nstep=100 and 
 nreal=1000.}
@@ -1422,14 +1429,14 @@ that already for $N=12$ we get Gaussian distributed random numbers
 in a very good approximation.
 
 \subsubsection{Listing of the program cltgen.m}
-\inputlisting{./Listings/cltgen.m}
+\lstinputlisting{./Listings/cltgen.m}
 
 In Fig. (\ref{F_CLTGEN}) we see the distribution of the Gaussian 
 random numbers generated with the help of the program {\sf 
 cltgen}. The number of random numbers $Z$ was chosen to be 1000.
 \begin{figure}
 \label{F_CLTGEN}
-\includegraphics[width=10cm]{./Figures/f_cltgen.eps}
+\includegraphics[width=10cm]{../Figures/f_cltgen.eps}
 \caption{The distribution of the Gaussian random numbers generate
 with the help of the program {\sf cltgen}. The number of random numbers 
 drawn was chosen to be $n=1000$.}
@@ -1656,8 +1663,8 @@ Verteilungen (Poisson, Gauss, Binomial);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 %%% Local Variables: 
 %%% mode: latex

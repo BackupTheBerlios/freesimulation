@@ -1,5 +1,13 @@
 %%%
-%%% Chapter
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
 %%%
 \chapter{Data Analysis}
 \label{chap:DataAnalysis}
@@ -203,12 +211,12 @@ We begin by the standard method. The listing of an according
 program can be seen below.
 
 \subsubsection{Listing of the program mcpi.}
-\inputlisting{./Listings/mcpi.m}
+\lstinputlisting{./Listings/mcpi.m}
 
 We run the program for $n=10, 100, 1000, 10000$. The result of the 
 four simulations can be seen in Fig. xy.
 \begin{figure}
-\includegraphics[width=\textwidth]{Figures/plotmcpi.eps}
+\includegraphics[width=\textwidth]{../Figures/plotmcpi.eps}
 \caption{The estimation of pi for n=10,100,1000,10000. The 
 error bars correspond to the standard deviation of the mean of the 
 estimate.}
@@ -217,13 +225,13 @@ estimate.}
 Next we write a program for the scoring  method. 
 
 \subsubsection{Listing of the program mcpiscore.m}
-\inputlisting{./Listings/mcpiscore.m}
+\lstinputlisting{./Listings/mcpiscore.m}
 
 Again we run the simulation for n=10, 100, 1000, 10000.
 The result of a simulation can be seen in the next Figure.
 \begin{figure}
 \begin{center}
-\includegraphics[width=.7\textwidth]{Figures/fmcpiscore.eps}
+\includegraphics[width=.7\textwidth]{../Figures/fmcpiscore.eps}
 \end{center}
 \caption{The scoring method. The continuous line represents
 the function $\sqrt{(1-x^2)}$.}
@@ -333,5 +341,5 @@ series for $e$ ($\sum_{i=0}^\infty 1/i! = e$)?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}

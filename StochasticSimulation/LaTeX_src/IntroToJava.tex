@@ -1,7 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Introduction to Programming in Java}
 \label{chap:IntroJava}
 
@@ -714,7 +721,7 @@ an extension to the Java compiler, can even handle primitive complex types.
 Now let us start with the traditional ``Hello World'' program written
 in Java. Type the following code using your favourite text editor 
 and save the program in a file called \verb|HelloWorld_Application.java|.
-\inputlisting{../Listings_Java/HelloWorld_Application.java}
+\lstinputlisting{../Listings_Java/HelloWorld_Application.java}
 
 If we use the JDK 1.1 or 1.2 under Windows or Unix, we can execute
 the above example by typing on the command line:
@@ -806,7 +813,7 @@ applets.
 
 
 The ``Hello World'' example written as an applet takes the following form:
-\inputlisting{../Listings_Java/HelloWorld_Applet.java}
+\lstinputlisting{../Listings_Java/HelloWorld_Applet.java}
 
 Applets have to be derived from the applet class
 \verb|java.applet.Applet|, which include the principal facilities of
@@ -1512,7 +1519,7 @@ As an example demonstrating the use of
 \verb|for| loops we want to write a program to calculate the mean of
 a given number of random numbers. One possible implementation
 could look like this:
-\inputlisting{../Listings_Java/DataMean.java}
+\lstinputlisting{../Listings_Java/DataMean.java}
 
 Here we used the class \verb|java.util.Random| which allows for
 the creation of random numbers. If we don't supply a seed, as is the
@@ -1731,7 +1738,7 @@ the code following \verb|default:|, if there is one. Otherwise,
 An example of the use of the \verb|switch| statement is found in the
 simple program \verb|DiceGame.java| 
 
-\inputlisting{../Listings_Java/DiceGame.java}
+\lstinputlisting{../Listings_Java/DiceGame.java}
 
 Again we want to stress that only an integer, long, char or byte type
 is possible in the switch statement (no double or float). And the
@@ -1955,7 +1962,7 @@ In this case we supply two parameters, called \verb|NumberofPoints| and
 \verb|DisplayText| to the Java applet. The value is given in the string
 behind the keyword \verb|value|. The Java applet to this HTML file
 could look like this:
-\inputlisting{../Listings_Java/ParamApplet.java}
+\lstinputlisting{../Listings_Java/ParamApplet.java}
 
 In the \verb|init()| method we get the parameter \verb|NumberofPoints|
 and convert it to an integer using a wrapper method. The string 
@@ -1979,5 +1986,5 @@ appletviewer or in Netscape should look like this:
 
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "V_98"
+%%% TeX-master: "SimulationBook"
 %%% End: 

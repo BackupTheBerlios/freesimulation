@@ -1,6 +1,14 @@
-%%
-%% Chapter
-%%
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Markov Processes and Master Equations}
 
 This chapter is devoted
@@ -330,7 +338,7 @@ the differential Chapman--Komogorov equation for deterministic Markov
 processes, for jump processes and for diffusion processes.
 \begin{figure}
 \label{F_CHAP$_OVERVIEW}
-\includegraphics[width=10cm]{./Figures/f_chap4_overview.eps}
+\includegraphics[width=10cm]{../Figures/f_chap4_overview.eps}
 \caption{Overview of the theor of stochastic processes.}
 \end{figure}
 
@@ -763,7 +771,7 @@ The flow chart of the algorithm can be seen in Fig.
 (\ref{F_ONESTEP_ALGORITHM}).
 \begin{figure}
 \label{F_ONESTEP_ALGORITHM}
-\includegraphics[width=7cm]{./Figures/f_onestep_algorithm.eps}
+\includegraphics[width=7cm]{../Figures/f_onestep_algorithm.eps}
 \caption{Flow chart of a stochastic simulation of a 
     one--step process. The symbols used
      are explained in the text.}
@@ -777,7 +785,7 @@ processes. The specific form of the function \texttt{decaymaster}
 will be given there.
 
 \subsubsection{Listing of the program {\texttt{onestep.m}}}
-\inputlisting{./Listings/onestep.m}
+\lstinputlisting{./Listings/onestep.m}
 
 The program will be applied in the next subsections.
 
@@ -837,7 +845,7 @@ the program \texttt{onestep.m} we still have to specify
 the function \texttt{decaymaster.m}. The listing of this
 function can be seen below.
 \subsubsection{Listing of the function {\texttt{decaymaster.m}}}
-\inputlisting{./Listings/decaymaster.m}
+\lstinputlisting{./Listings/decaymaster.m}
 
 Now we are in the position to simulate the stochastic process of
 radioactive decay. We run the program for the following parameters
@@ -847,7 +855,7 @@ The result of the simulation can be seen in Fig. (\ref{F_OS_DECAY}).
 
 \begin{figure}
 \label{F_OS_DECAY}
-\includegraphics[width=10cm]{./Figures/f_os_decay.eps}
+\includegraphics[width=10cm]{../Figures/f_os_decay.eps}
 \caption{Stochastic simulation of radioactive decay. The initial
   number of decaying nuclei is {\texttt n0}$= 100$. {\texttt tend}
 is 30 and the ensemble average was taken over 10 realizations.
@@ -938,7 +946,7 @@ master equation (\ref{MASTER_POISSON}) whose listing can be
 seen below.
 
 \subsubsection{Listing of the function {\texttt{poissonmaster.m}}}
-\inputlisting{./Listings/poissonmaster.m}
+\lstinputlisting{./Listings/poissonmaster.m}
 
 To begin we generate one realization of the Poisson process. To 
 this end we run the program with the following parameters:
@@ -948,7 +956,7 @@ to be \texttt{q=1}. One realization of the Poisson process can be
 seen in Fig. (\ref{F_OS_POI_R}).
 \begin{figure}
 \label{F_OS_POI_R}
-\includegraphics[width=10cm]{./Figures/f_os_poi_r.eps}
+\includegraphics[width=10cm]{../Figures/f_os_poi_r.eps}
 \caption{Stochastic simulation of the Poisson process. The 
 one--sided random walk starts at \texttt{nstart=0}.  
 {\texttt tend} is 30 and \texttt{nreal=1}.
@@ -959,7 +967,7 @@ realizations of the Poisson process. The other parameters are
 unchanged.
 \begin{figure}
 \label{F_OS_POI_1}
-\includegraphics[width=10cm]{./Figures/f_os_poi_1.eps}
+\includegraphics[width=10cm]{../Figures/f_os_poi_1.eps}
 \caption{Stochastic simulation of the Poisson process. The 
 one--sided random walk starts at \texttt{nstart=0}.  
 {\texttt tend} is 30 and \texttt{nreal=20}.
@@ -1003,7 +1011,7 @@ we run the program \texttt{onestep} with the function
 simulation can be seen in Fig. (\ref{F_OS_POI_2}).
 \begin{figure}
 \label{F_OS_POI_2}
-\includegraphics[width=10cm]{./Figures/f_os_poi_2.eps}
+\includegraphics[width=10cm]{../Figures/f_os_poi_2.eps}
 \caption{Stochastic simulation of the Poisson process. The 
 one--sided random walk starts at \texttt{nstart=0}.  
 {\texttt tend} is 30 and \texttt{nreal=20}.
@@ -1062,7 +1070,7 @@ a new function \texttt{walkmaster.m} which implements the
 appropriate transition rates.
 
 \subsubsection{Listing of the function \texttt{walkmaster.m}}
-\inputlisting{./Listings/walkmaster.m}
+\lstinputlisting{./Listings/walkmaster.m}
 
 We run the program with the following parameters: 
 \texttt{nstart=0}, \texttt{nreal=10}, \texttt{tend=30}, and
@@ -1070,7 +1078,7 @@ We run the program with the following parameters:
 Fig. (\ref{F_CTRW}).
 \begin{figure}
 \label{F_CTRW}
-\includegraphics[width=10cm]{./Figures/f_ctrw.eps}
+\includegraphics[width=10cm]{../Figures/f_ctrw.eps}
 \caption{Stochastic simulation of the continuous time
 random walk. The 
 random walk starts at \texttt{nstart=0}.  
@@ -1403,11 +1411,11 @@ A flow diagram of the program \texttt{wiener.m} can be seen in
 Fig. (\ref{F_WIENER_ALGORITHM}). 
 \begin{figure}
 \label{F_WIENER_ALGORITHM}
-\includegraphics[width=6cm]{./Figures/f_wiener_algorithm.eps}
+\includegraphics[width=6cm]{../Figures/f_wiener_algorithm.eps}
 \caption{Flow diagram of the program \texttt{wiener.m}}
 \end{figure}
 \subsubsection{Listing of the function \texttt{wiener.m}}
-\inputlisting{./Listings/wiener.m}
+\lstinputlisting{./Listings/wiener.m}
 
 Let us run the program two times with the following parameters
 \texttt{xstart=0}, \texttt{tend=50}, \texttt{deltat=0.01}, 
@@ -1417,14 +1425,14 @@ on Figs. (\ref{F_WIENER_R1}) and (\ref{F_WIENER_R2}). The great
 variability of the realizations is evident. 
 \begin{figure}
 \label{F_WIENER_R1}
-\includegraphics[width=10cm]{./Figures/f_wiener_r1.eps}
+\includegraphics[width=10cm]{../Figures/f_wiener_r1.eps}
 \caption{One realization of the Wiener process.
 The parameters used in the simulation are \texttt{xstart=0},
 \texttt{tend=50}, \texttt{deltat=0.01}, and \texttt{nreal=1}.}
 \end{figure}
 \begin{figure}
 \label{F_WIENER_R2}
-\includegraphics[width=10cm]{./Figures/f_wiener_r2.eps}
+\includegraphics[width=10cm]{../Figures/f_wiener_r2.eps}
 \caption{One realization of the Wiener process.
 The parameters used in the simulation are \texttt{xstart=0},
 \texttt{tend=50}, \texttt{deltat=0.01}, and \texttt{nreal=1}.}
@@ -1433,7 +1441,7 @@ In Fig. (\ref{F_WIENER}) we show an ensemble average of the
 Wiener process over 1000 realizations.
 \begin{figure}
 \label{F_WIENER}
-\includegraphics[width=10cm]{./Figures/f_wiener.eps}
+\includegraphics[width=10cm]{../Figures/f_wiener.eps}
 \caption{One realization of the Wiener process.
 The parameters used in the simulation are \texttt{xstart=0},
 \texttt{tend=5}, \texttt{deltat=0.01}, and \texttt{nreal=1000}.}
@@ -1550,13 +1558,13 @@ realizations. The listing of the program can be seen below.
 \begin{figure}[htbp]
   \begin{center}
     \label{fig:FlowOrnstein}
-%%% ???   \includegraphics[height=\textheight]{Figures/FlowOrnstein.eps}
+%%% ???   \includegraphics[height=\textheight]{../Figures/FlowOrnstein.eps}
     \caption{The flow diagram of the simulation of the Ornstein-Uhlenbeck process.} 
   \end{center}
 \end{figure}
 
 \subsubsection{Listing of the program \texttt{ornstein.m}}
-\inputlisting{./Listings/ornstein.m}
+\lstinputlisting{./Listings/ornstein.m}
 
 One realization of the Ornstein--Uhlenbeck process generated with 
 help of the algorithm we have just constructed can be seen in Fig.
@@ -1564,7 +1572,7 @@ help of the algorithm we have just constructed can be seen in Fig.
 
 \begin{figure}
 \label{F_ORNSTEIN_R}
-\includegraphics[width=10cm]{./Figures/f_ornstein_r.eps}
+\includegraphics[width=10cm]{../Figures/f_ornstein_r.eps}
 \caption{One realization of the Ornstein--Uhlenbeck process. The
  parameters used in the simulation are \texttt{xstart=5},
 \texttt{tend=10}, \texttt{deltat=0.01}, \texttt{nreal=1},
@@ -1575,7 +1583,7 @@ The average over 10 realizations of the Ornstein--Uhlenbeck
 process can be seen in Fig. (\ref{F_ORNSTEIN}).
 \begin{figure}
 \label{F_ORNSTEIN}
-\includegraphics[width=10cm]{./Figures/f_ornstein.eps}
+\includegraphics[width=10cm]{../Figures/f_ornstein.eps}
 \caption{The average over 10 realizations of the Ornstein--Uhlenbeck 
 process. The
  parameters used in the simulation are \texttt{xstart=5},
@@ -1893,7 +1901,7 @@ half--width $\Delta t$.
 
 The above algorithm has been implemented in the listing
 \verb|CauchyProcess.java|, which can be seen below.
-\inputlisting{Listings_Java/CauchyProcess.java}
+\lstinputlisting{../Listings_Java/CauchyProcess.java}
 
 ??????
 In lines xx--yy we have coded the generation of the Cauchy distributed random
@@ -1903,8 +1911,8 @@ xx to yy, with the help of the Ptplot routines we already know.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=0.44\textwidth]{Figures/CauchyRealization1.eps}\hfil
-    \includegraphics[width=0.44\textwidth]{Figures/CauchyRealization2.eps}
+    \includegraphics[width=0.44\textwidth]{../Figures/CauchyRealization1.eps}\hfil
+    \includegraphics[width=0.44\textwidth]{../Figures/CauchyRealization2.eps}
     \caption{Two possible realizations of the Cauchy process.}
     \label{fig:CauchyRealizations}
   \end{center}
@@ -2196,7 +2204,7 @@ the variance $<x^2>$ is finite and the random walk is described by a Gaussian
 diffusion process).
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[angle=-90,width=\textwidth]{Figures/WeierstrassFunction.eps}
+    \includegraphics[angle=-90,width=\textwidth]{../Figures/WeierstrassFunction.eps}
     \caption{The Weierstrass function $G(k)$ for M=0,1,2,3,4,5 in different
       colors. The parameters are $a=2, b=3$.}
     \label{fig:Weierstrass}
@@ -2592,8 +2600,8 @@ the diffusion. Such systems are known as reaction-diffusion systems
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% Ende von Kap. 4 %%%%%%%%%%%%%%%%%%%%

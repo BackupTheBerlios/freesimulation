@@ -1,6 +1,14 @@
-%%
-%% Chapter
-%%
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter{Stochastic Differential Equations}
 
 In the previous section we have derived an exact simulation algorithm
@@ -871,8 +879,8 @@ realized in the program \texttt{SDE.java} with the help
 of the \verb|OrnsteinUhlenbeck.java| method in the 
 \verb|simulation.SDE| package.
 
-\inputlisting{Listings_Java/SDE.java}
-\inputlisting{Listings_Java/OrnsteinUhlenbeck.java}
+\lstinputlisting{../Listings_Java/SDE.java}
+\lstinputlisting{../Listings_Java/OrnsteinUhlenbeck.java}
 
 The algorithm is very similar to the algorithm for the generation 
 of exact trajectories of the Ornstein--Uhlenbeck process. 
@@ -914,7 +922,7 @@ $\Delta t$ & $<X^2>$ & $\sigma$ \\ \hline \hline
 The same data have been plotted in Fig. (\ref{F_SDEORN_50}).
 \begin{figure}
 \label{F_SDEORN_50}
-\includegraphics[width=10cm]{./Figures/f_sdeorn_50.eps}
+\includegraphics[width=10cm]{../Figures/f_sdeorn_50.eps}
 \caption{Results of the simulation of the Ornstein--Uhlenbeck 
 process with the stochastic Euler method for different values of 
 the time step. The parameters of the Ornstein-Uhlenbeck process
@@ -1027,7 +1035,7 @@ equation (\ref{SDENOISEIN}). This will be done with the help of
 the program \verb|SDE.java| and the function 
 \verb|simulation.SDE.NoiseInducedTransition.java|.
 
-\inputlisting{Listings_Java/NoiseInducedTransition.java}
+\lstinputlisting{../Listings_Java/NoiseInducedTransition.java}
 
 The program generates trajectories of the stochastic process with 
 the help of the Euler algorithm. At the end of the simulation we evaluate 
@@ -1043,7 +1051,7 @@ of the invariant density can be seen in Fig.
 
 \begin{figure}
 \label{F_SDENOISEIN_1}
-\includegraphics[width=10cm]{./Figures/f_sdenoisein_1.eps}
+\includegraphics[width=10cm]{../Figures/f_sdenoisein_1.eps}
 \caption{Histogram of the invariant density of the stochastic differential 
 equation with multiolicative noise. The simulation was run from
 \texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
@@ -1062,7 +1070,7 @@ The result of this second simulation can be seen in Fig.
 (\ref{F_SDENOISEIN_2}).
 \begin{figure}
 \label{F_SDENOISEIN_2}
-\includegraphics[width=10cm]{./Figures/f_sdenoisein_2.eps}
+\includegraphics[width=10cm]{../Figures/f_sdenoisein_2.eps}
 \caption{Histogram of the invariant density of the stochastic differential 
 equation with multiolicative noise. The simulation was run from
 \texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
@@ -1172,7 +1180,7 @@ U(x) = -a \frac{x^2}{2} + b \frac{x^4}{4}.
 \end{equation}
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[angle=-90,width=\textwidth]{Figures/BistablePotential.eps}
+    \includegraphics[angle=-90,width=\textwidth]{../Figures/BistablePotential.eps}
     \caption{The potential $U(x)=-a \frac{x^2}{2} + b \frac{x^4}{4}$ 
       for $a=1$ and $b=1$.}
     \label{fig:BistablePotential}
@@ -1353,7 +1361,7 @@ corresponding dimensionless quantities and $D$ denotes the dimensionless
 noise intensity. Recall, that in the units defined above $D$ has the dimension
 $a x_s^2$.
 
-%%%% ????????????? \inputlisting{StochasticResonance.java}
+%%%% ????????????? \lstinputlisting{StochasticResonance.java}
 
 Before running the program let us formulate the resonace condition in
 dimensionless units. It follows from Eq. (\ref{eq:ResonanceConditionD}) that
@@ -1445,8 +1453,8 @@ spectrum. The spectrum is the cosine transform of $C_I$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 
 %%% Local Variables: 

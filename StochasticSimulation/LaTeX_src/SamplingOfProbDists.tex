@@ -1,6 +1,14 @@
-%%%%%
-%%%%% Chapter
-%%%%%
+%%%
+%%%    Copyright (c)  2002  Peter Biechele, Francesco Petruccione
+%%%
+%%%    Permission is granted to copy, distribute and/or modify this document
+%%%    under the terms of the GNU Free Documentation License, Version 1.1
+%%%    or any later version published by the Free Software Foundation;
+%%%    with no Invariant Sections, with the Front-Cover Texts being 
+%%%    FRONT LIST, and with the Back-Cover Texts being BACK LIST.
+%%%    A copy of the license is included in the section entitled "GNU
+%%%    Free Documentation License".
+%%%
 \chapter[Sampling of Probability Distributions]%
 {Simple Sampling of Probability Distributions Using Random Numbers}
 
@@ -42,7 +50,7 @@ So let us write a class, which calculates random numbers uniformly
 distributed between 0 and 1. To this end we write a class
 \verb|RandomNumber|. It has three fields (variables), two of them are
 defined with the \verb|final| keyword.
-\inputlisting{Listings_Java/RandomNumber.java}
+\lstinputlisting{../Listings_Java/RandomNumber.java}
 In our example, we just set the seed in the constructor and as 
 you can see you have to supply the seed, when you instantiate the
 generator. Most of the constructors don't even need a parameter to 
@@ -66,7 +74,7 @@ in this book for details about how to generate random numbers.}.
 
 Now we have to write a program (class), which uses this class to 
 calculate the average of some random numbers.
-\inputlisting{Listings_Java/UseRandomNumber.java}
+\lstinputlisting{../Listings_Java/UseRandomNumber.java}
 The class is called \verb|UseRandomNumber| and just contains the
 main method. First we instantiate (create) an object of class
 \verb|RandomNumber|. Then we create an array and in a loop we
@@ -121,7 +129,7 @@ have the length 8. The generation of the random sequences will
 be achieved with the program {\sf trandom1}.
 
 \subsubsection{Listing of the program trandom1.m}
-\inputlisting{./Listings/trandom1.m}
+\lstinputlisting{./Listings/trandom1.m}
 
 Run with the above parameters the program generates the sequence
 \begin{equation*}
@@ -130,7 +138,7 @@ Run with the above parameters the program generates the sequence
 which has also been plotted in Fig. (\ref{F_TRANDOM1}).
 \begin{figure}
 \label{F_TRANDOM1}
-\includegraphics[width=10cm]{./Figures/f_trandom1.eps}
+\includegraphics[width=10cm]{f_trandom1.eps}
 \caption{Successive values in a series of random numbers generated
 for a=5, c=3, M=8. Note that the even numbers are always one less 
 then the odd ones!}
@@ -206,25 +214,25 @@ Figs. (\ref{F_TRANDOM2_1}), (\ref{F_TRANDOM2_2}),
 \subsubsection{Listing of the program trandom2.m}
 
 \subsubsection{Listing of the function {\sf random1}}
-\inputlisting{./Listings/random1.m}
+\lstinputlisting{./Listings/random1.m}
 
 \begin{figure}
 \label{F_TRANDOM2_1}
-\includegraphics[width=10cm]{./Figures/f_trandom2_1.eps}
+\includegraphics[width=10cm]{f_trandom2_1.eps}
 \caption{Successive values in a series of 3000 random numbers generated
 for $a=65539$, $c=0$, $M=2^{31}-1$.}
 \end{figure}
 
 \begin{figure}
 \label{F_TRANDOM2_2}
-\includegraphics[width=10cm]{./Figures/f_trandom2_2.eps}
+\includegraphics[width=10cm]{f_trandom2_2.eps}
 \caption{Histogram for a series of 3000 random numbers generated
 for $a=65539$, $c=0$, $M=2^{31}-1$.}
 \end{figure}
 
 \begin{figure}
 \label{F_TRANDOM2_3}
-\includegraphics[width=10cm]{./Figures/f_trandom2_3.eps}
+\includegraphics[width=10cm]{f_trandom2_3.eps}
 \caption{Correlation between successive values in a series of 3000 
 random numbers generated for $a=65539$, $c=0$, $M=2^{31}-1$.}
 \end{figure}
@@ -232,7 +240,7 @@ random numbers generated for $a=65539$, $c=0$, $M=2^{31}-1$.}
 
 \begin{figure}
 \label{F_TRANDOM2_4}
-\includegraphics[width=10cm]{./Figures/f_trandom2_4.eps}
+\includegraphics[width=10cm]{f_trandom2_4.eps}
 \caption{Correlation between successive values 
 $R(i),R(i+1), R(i+2)$ in a series of 3000 random numbers generated
 for $a=65539, c=0, M=2^{31}-1$.}
@@ -333,13 +341,13 @@ value and variance and compare them with the analytical expectation
 values.
 
 \subsubsection{Listing of the program expdistr.m}
-\inputlisting{./Listings/expdistr.m}
+\lstinputlisting{./Listings/expdistr.m}
 
 In Fig. (\ref{F_EXPDISTR}) we see the histogram of 1000 drawn exponentially 
 distributed random numbers.
 \begin{figure}
 \label{F_EXPDISTR}
-\includegraphics[width=10cm]{./Figures/f_expdistr.eps}
+\includegraphics[width=10cm]{f_expdistr.eps}
 \caption{Histogram of 1000 exponentially distributed random numbers with
 mean 1 generated according to the transformation method. The continuous
 line represents the expected exponential distribution.}
@@ -382,13 +390,13 @@ MATLAB. This is done in the program {\sf gaussdistr.m} which generates
 gaussian random numbers with mean value $mu$ and variance $sigma$.
 
 \subsubsection{Listing of the program gaussdistr.m}
-\inputlisting{./Listings/gaussdistr.m}
+\lstinputlisting{./Listings/gaussdistr.m}
 
 The corresponding histogram obtained by running the program for
 n=1000, mu=0, sigma=2 can be seen in Fig. (\ref{F_GAUSSDISTR}).
 \begin{figure}
 \label{F_GAUSSDISTR}
-\includegraphics[width=10cm]{./Figures/f_gaussdistr.eps}
+\includegraphics[width=10cm]{f_gaussdistr.eps}
 \caption{Histogram of 1000 Gaussian distributed random numbers with
 mean 0 and variance 2 generated according to the Box-Muller method. 
 The continuous line represents the expected Gaussian density.}
@@ -493,14 +501,14 @@ We choose $C=3$ and apply the von--Neumann algorithm. \\
 generated according to $p(x)$.
 
 \subsubsection{Listing of the program neumann.m}
-\inputlisting{./Listings/neumann.m}
+\lstinputlisting{./Listings/neumann.m}
 
 The above algorithm has been implemented in MATLAB in the program
 {\sf neumann.m}, which we run for $n=1000$ and $n=5000$. The 
 result of the latter run can be seen in Fig. (\ref{F_NEUMANN}).
 \begin{figure}
 \label{F_NEUMANN}
-\includegraphics[width=10cm]{./Figures/f_neumann.eps}
+\includegraphics[width=10cm]{f_neumann.eps}
 \caption{Histogram of 5000 random numbers distributed
 according to $p(x) = 3x^2$ generated with the von--Neumann
 acceptance--rejection technique.
@@ -591,7 +599,7 @@ The simulation was performed with the help of the program
 {\sf mciis.m} whose listing can be seen below.
 
 \subsubsection{Listing of the program mciis.m}
-\inputlisting{./Listings/mciis.m}
+\lstinputlisting{./Listings/mciis.m}
 
 The importance sampling function is chosen to be $p(x)=a\exp(-x)$,
 where the constant $a$ is chosen such that $p(x)$ is normalized
@@ -732,7 +740,7 @@ simulate a random walk on a two dimensional lattice.
 The listing can be seen below.
 
 \subsubsection{Listing of the program rw\_2d.m}
-\inputlisting{./Listings/rw2d.m}
+\lstinputlisting{./Listings/rw2d.m}
 
 A few comments to the listing seem appropriate. 
 The position of the random walker is stored in the matrix
@@ -764,7 +772,7 @@ of 1000 steps lengths. These realizations can be seen in Fig.
 (\ref{F_RW_2D}).
 \begin{figure}
 \label{F_RW_2D}
-\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\includegraphics[width=10cm]{f_rw_2d.eps}
 \caption{Ten realizations of a two--dimensional random walk on a square
 lattice.}
 \end{figure}
@@ -878,7 +886,7 @@ polymers of a given length as a function of the length of the
 polymers.
 \begin{figure}
 \label{F_RW_ATTRITION}
-\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\includegraphics[width=10cm]{f_rw_2d.eps}
 \caption{Attrition problem: The average number of trials necessary to 
 generate polmers of a given length increases exponetially with the
 lentgth of the polymers .}
@@ -886,7 +894,7 @@ lentgth of the polymers .}
 The figure was generated with the help of the program {\sf 
 RW\_2D\_sa.m}.
 \subsubsection{Listing of the program RW\_2D\_sa.m}
-\inputlisting{./Listings/rw2dsa.m}
+\lstinputlisting{./Listings/rw2dsa.m}
 
 \subsubsection{Importance sampling}
 To overcome the attrition problem it is necessary to exploit 
@@ -941,13 +949,13 @@ The flow diagram of the program can be seen in Fig.
 (\ref{F_RW2D_ALGORITHM}).
 \begin{figure}
 \label{F_RW2D_ALGORITHM}
-\includegraphics[width=10cm]{./Figures/f_rw2d_algorithm.eps}
+\includegraphics[width=10cm]{f_rw2d_algorithm.eps}
 \caption{The flow diagram of the program saw2.m.}
 \end{figure}
 
 
 \subsubsection{Listing of the program {\sf rw\_2d\_sa2.m}}
-\inputlisting{./Listings/rw2dsa2.m}
+\lstinputlisting{./Listings/rw2dsa2.m}
 
 Let us comment on the program. BLA BLA BLA !!!!!!!!!
 We run the program for the following set of parameters. We variate
@@ -974,7 +982,7 @@ $\nu=0.68$ (the expected result is 0.75).
 
 \begin{figure}
 \label{F_SAW1S}
-\includegraphics[width=10cm]{./Figures/f_saw1s.eps}
+\includegraphics[width=10cm]{f_saw1s.eps}
 \caption{Five realizations of a two--dimensional self--avoiding 
 random walk on a square lattice generated by the simple sampling 
 technique.}
@@ -982,7 +990,7 @@ technique.}
 
 \begin{figure}
 \label{F_SAW2S}
-\includegraphics[width=10cm]{./Figures/f_saw2s.eps}
+\includegraphics[width=10cm]{f_saw2s.eps}
 \caption{The mean square end--to--end distance of a 
 self--avoiding random walk generated by the simple sampling
 technique as a function of the polymer length.}
@@ -990,7 +998,7 @@ technique as a function of the polymer length.}
 
 \begin{figure}
 \label{F_SAW3S}
-\includegraphics[width=10cm]{./Figures/f_saw3s.eps}
+\includegraphics[width=10cm]{f_saw3s.eps}
 \caption{The CPU time for generating 10 realizations  of a 
 self--avoiding random walk  by the simple sampling
 technique as a function of the polymer length.}
@@ -1013,7 +1021,7 @@ Thus the estimate of the critical exponent is
 $\nu=0.702$ (the expected result is 0.75).
 \begin{figure}
 \label{F_SAW1}
-\includegraphics[width=10cm]{./Figures/f_saw1.eps}
+\includegraphics[width=10cm]{f_saw1.eps}
 \caption{Five realizations of a two--dimensional self--avoiding 
 random walk on a square lattice generated by the importance sampling 
 technique.}
@@ -1021,7 +1029,7 @@ technique.}
 
 \begin{figure}
 \label{F_SAW2}
-\includegraphics[width=10cm]{./Figures/f_saw2.eps}
+\includegraphics[width=10cm]{f_saw2.eps}
 \caption{The mean square end--to--end distance of a 
 self--avoiding random walk generated by the importance sampling
 technique as a function of the polymer length.}
@@ -1029,7 +1037,7 @@ technique as a function of the polymer length.}
 
 \begin{figure}
 \label{F_SAW3}
-\includegraphics[width=10cm]{./Figures/f_saw3.eps}
+\includegraphics[width=10cm]{f_saw3.eps}
 \caption{The CPU time for generating 10 realizations  of a 
 self--avoiding random walk  by the importance sampling
 technique as a function of the polymer length.}
@@ -1084,7 +1092,7 @@ $N$  & $<\vec{R}^2>$  \\ \hline
 The same data are depicted in Fig. (\ref{F_PLOTSAWLONG1}).
 \begin{figure}
 \label{F_PLOTSAWLONG1}
-\includegraphics[width=10cm]{./Figures/f_plotsawlong1.eps}
+\includegraphics[width=10cm]{f_plotsawlong1.eps}
 \caption{The mean square end--to--end distance of a 
 self--avoiding random walk estimated from a sample of 500
 realizations by the importance sampling
@@ -1098,7 +1106,7 @@ Fig. (\ref{F_PLOTSAWLONG2}) shows the corresponding CPU time
 consumption.
 \begin{figure}
 \label{F_PLOTSAWLONG2}
-\includegraphics[width=10cm]{./Figures/f_plotsawlong2.eps}
+\includegraphics[width=10cm]{f_plotsawlong2.eps}
 \caption{The CPU time for generating 500 realizations  of a 
 self--avoiding random walk  by the importance sampling
 technique as a function of the polymer length.}
@@ -1407,8 +1415,8 @@ we get a uniform distribution as an equilibrium distribution?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
