@@ -1141,8 +1141,43 @@ Change the program to simulate a asymmetric random walk in one
 dimension.
 \end{Ex}
 
-%\begin{Ex}
-%\end{Ex}
+\begin{Ex}
+\label{Standard_Deviation}
+\textbf{The Standard Deviation } \\
+Compare the four possibilities to calculate the standard deviation
+(or the variance):
+\begin{enumerate}
+\item using the definition: \\
+  $$\sigma^2 = \frac{1}{N-1} \sum_{i=1}^N \left( x_i-\overline{x} \right)^2,
+    \quad \overline{x} = < x > = \frac{1}{N} \sum_{i=1}^N x_i .$$
+\item using the moments: \\
+  $$ \sigma^2 = < x^2 > - < x >^2, \quad < x^2 > = \frac{1}{N} 
+     \sum_{i=1}^N x_i^2 .$$
+\item using the formula (\cite[]{scariano:91}):
+  $$ \sigma^2 = \frac{1}{N^2} \sum^N_{\substack{i=1 \\ i<j}} 
+      \left( x_i-x_j\right)^2.$$
+\item using the corrected two-pass formula \cite[]{recipes}:
+  $$ \sigma^2 = \frac{1}{N-1} \left\{\sum_{i=1}^N (x_i-\overline{x})^2
+     -\frac{1}{N} \left(\sum_{i=1}^N(x_i-\overline{x}) \right)^2 \right\}.$$
+\end{enumerate}
+The first and the second method require the computation of the first or
+the first and the second moments. The third moment doesn´t require any
+precomputed values at all and the last one uses again only the first moment.
+The last one corrects for the roundoff errors, encountered when using large
+sample sizes. The last one is analytically exact only if $\overline{x}$
+would be exact. 
+
+Write a program including all four methods and compare the results.
+Find out which method the Matlab function \texttt{std} uses.
+Check the calculation with a uniform, a normal and a Cauchy (Lorentz)
+distribution. Can you find an example where the two-pass algorithm
+is superior to the other ones?
+
+By the way, the variance is not the only value to estimate the
+spreading of a sample. Statisticians often use the estimate
+$$ \text{adev}\, = \frac{1}{N} \sum_{i=1}^N \left| x_i - \overline{x}\right|$$
+as a measure for the distribution width around the mean value.
+\end{Ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
