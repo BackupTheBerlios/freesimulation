@@ -1,11 +1,16 @@
 %%%%%%%
 %%%%%%% Chapter 1
 %%%%%%%
-\chapter{Introduction: Stochastic Simulation methods}
+\chapter{Stochastic Simulation methods}
 
 Among the numerical techniques available to computational physics,
+
+
+
+
+
 stochastic methods, also called Monte Carlo methods, play a 
-central role. (Why MC???) They are particularly appealing because of their 
+central role. They are particularly appealing because of their 
 immediacy, their power and the breadth of applications.
 
 Monte Carlo methods rely upon the use of random 
@@ -72,17 +77,8 @@ moment it is not important for us to know how random numbers can
 be generated. This will be the subject of one of the next 
 chapters. We only have to know that almost all programming
 languages have a random number generator in form of some function 
-in their mathematical library. In MATLAB this function is called
-{\sf rand}. It is used in the following way 
-\begin{displaymath}
->> R = {\sf rand}(n)
-\end{displaymath}
-where $R$ is a $n \times n$ matrix in which each element is set to
-an independent random value; correspondingly ${\sf rand}(n,m)$ generates
-a $n \times m$--matrix of random numbers. ${\sf rand}$ generates
-uniformly distributed random numbers in the interval $[0,1)$. The 
-distribution of the random numbers is uniform so that all values 
-in the interval have the same probability.
+in their mathematical library. Shortly we will see how this can be
+achieved in Java.
 
 
 Let us assume that the system is made of $N_0$ 
@@ -116,10 +112,64 @@ For t=0 to t with step dt
 end loop over time
 \end{verbatim}
 
-The above algorithm written in MATLAB is shown in the following listing.
-{\bf Listing xy} Program decay
-\subsubsection{Listing of the program decay.m}
-\inputlisting{./Listings/decay.m}
+Before wriing a progranm in Java to simulate the radioactive decay let
+us briefly discuss the geration of random numbers in Java.
+
+\subsection{Random numbers in Java}
+We have already met in the Introduction different possible ways to generate
+random numbers in Java. The first method  \verb|random()| we encountered 
+was contained in the \verb|java.lang.Math| class.
+The method \verb|random()| ccreates a single Random object the first time it
+is invoked and returns pseudorandom numbers for that object for each
+subsequent call. A better way to generate random numbers is provided by the
+\verb|java.util| package, which contains several standard utilities
+interfaces and classes. This second possibility is to be preferred since it
+offers more possibilities to control the generation of random numbers. With
+the help of 
+\begin{verbatim}
+public Random()
+\end{verbatim}
+we can creat a new Random object. As we will learn in the next Chapter
+the sequence of random numbers begins with the so--called seed.
+The class Random automatically chooses a seed according to the current time.
+If a specific seed is wished, this can be fixed
+with the help of \verb|public Random(long seed)|.  
+Furthermore, the method \verb|public synchronized void setSeed(long seed)|
+which can be invoked at any time resets the sequence of random numbers to
+start from the given seed.
+Having instanciated the
+Random object a pseudorandom number uniformly distributed between 0.0
+(inclusive) and 1.0 (exclusive) is returned by invoking 
+\begin{verbatim}
+public double nextDouble()
+\end{verbatim} 
+Similarly, the method \verb|nextFloat| may be invoked to generate uniformly
+distributed random numbers of the \verb|float| type.
+In later Chapters we will also need uniformly distributed integer valued 
+random numbers. Such pseudorandom numbers between \verb|Integer.MIN_VALU| 
+and \verb|Integer.MAX_VALUE| can be generated in Java with the
+help of
+\begin{verbatim}
+public long nextInt()
+\end{verbatim} 
+Alternatively it is possible to invoke also the method \verb|nextLong()|,
+which generates discrete random numbers uniformly distributed between 
+\verb|LONG.MIN_VALUE| and \verb|Long.MAX_VALUE|.
+
+For later purposes, let us mention that the package \verb|java.util| also
+contains a method
+\begin{verbatim}
+public synchronized double nextGaussian()
+\end{verbatim}
+which returns a pseudorandom Gaussian--distributed double value with mean 0.0
+and standard deviation 1.0.
+
+Now we are in the position to write a Java code for the simulation of
+the radioactive decay.
+
+\subsection{The Simulation code}
+The above algorithm written in Java is shown in the following listing.
+\inputlisting{./Listings_Java/RadioactiveDecay.java}{RaioactiveDecay.java}
 
 
 The program is straightforward. In line xy the relevant variables 
@@ -129,12 +179,223 @@ line xy. Finally, we plot the result of the simulation and the
 exact solution of the decay law in a linear and in a 
 semilogaritmic plot. 
 
+
+The class is part of the \verb|simulation| package. The class
+\verb|RadioactiveDecay| has been written in such a way that it can be
+run as an application as well as an applet. The trick is to extend the
+\verb|Applet| class and to define, as it is necessary for
+applications, a \verb|main| method. The actual algorithm is
+implemented in lines xx to yy. In lines xx to yy we compute the exact
+analytical solution. Finalyy we print out the results of the
+simulation in the loop beginning at lines xxx. The output of the 
+simulation is printed on the commando line.
+
 We are now in the position to perform a simulation. To this end we
 run the program with the following parameters
 \begin{eqnarray*}
-N_0 = 100; \quad p = 0.01 s^{-1}; \quad \Delta t = 1s;  \quad tend = 300s \\
-N_0 = 1000; \quad p= 0.03 s^{-1}; \quad \Delta t = 1s; \quad tend = 100s.
+N_0 = 1000; \quad \lambda= 0.02 s^{-1}; \quad \Delta t = 1s; \quad 
+ \verb|t_end| = 300s.
 \end{eqnarray*}
+
+
+Running the program it is evident that the screen outout is not particularly
+satisfactory to examine the reults of the simulation. Thus, we have reached
+the point where we feel the necessity to learn something about the graphical
+possibilities of Java.
+
+
+\subsection{A very easy plot}
+
+Before trying to plot the data generated with the program
+\verb|RadoactiveDecay| we want to discuss the most simple Java code which
+allows to plot some 2 dimensional data. With the help of this example we will
+learn the foundations of the graphical tools of Java. The code we want to
+discuss is the \verb|PlotEasy.java| class which can be run as an applet or as
+an application.
+
+\inputlisting{./Listings_Java/PlotEasy.java}
+
+As we can see the code begins by importing packages. we already met the first
+one, the \verb|java.applet.Applet| package in the applet version of the
+HelloWorld program. The \verb|java.applet| package is a small package. It
+simply contains the \verb|Applet| class, which is the superclass of all
+applets, i.e., in order to create your own applet you have to creat a subclass
+of this class and override some or all of its methods (see Chap. 0). The
+second package we have to import is the \verb|java.awt| package, where 
+\verb|awt| stands for the Abstarct Window Toolkit. An important class of this
+package is the \verb|java.awt.Graphics| class, which encapsulates most of the
+graphics functionality of the Java API. Instances of this class represent a
+"graphical context" in which we can perform graphical operations. 
+
+In order to understand the deep relation bewteen applets and the AWT it is
+instructive to look at the following figure which shows the inheritance
+hierarchies of the Applet class.
+
+\begin{figure}
+\label{hierarchyapplet}
+\caption{This figure shows the inheritance hierarchy of the Applet class.}
+\end{figure}
+
+Applets inherit the drawing and event handling methods from the AWT
+\verb|Components| class. \verb|Component| is the superclass of all GUI
+components in the \verb|java.awt| package. Components defines many methods.
+
+The \verb|java.awt.Container| class implements a component that contains other
+components. \verb|Container| can not be instantiated directly. You always have
+to use one of its subclasses, such as \verb|Panel|, \verb|Frame| or
+\verb|Dialog|. Once a \verb|Container| is created you can set its Layout
+Manager with \verb|setLayout()| or add componets to it with \verb|add()|.
+You can remove components with \verb|remove()|. 
+
+The \verb|java.awt.Panel| class is a Container that s itself contained in a
+Container. It does not create a separate window of its own. Applets are a
+subclass of \verb|Panel| that is contained within a Web browser or an applet
+viewer. The following figure shows the hierarchy relations of some (not all!)
+components and layout classes of the \verb|java.awt| package.
+
+\begin{figure}
+\label{awthierarchy}
+\caption{The hierarchy of the awt package.}
+\end{figure}
+
+Now we have the necessary background to understand what is going on in the
+\verb|PlotEasy.java| program. The class \verb|Ploteasy| extends the 
+\verb|Applet| class and has a main method. In the \verb<main< method we
+instantiate the \verb|Applet| \verb|PlotEasy|  and the \verb|Frame| \verb|f|.
+The hierarchy of the \verb|Frame| class is (see Fig. \ref{awthierarchy})
+Object $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Window
+$\rightarrow$ Frame. The \verb|Frame| class represents an optionally resizable
+application window with a title bar. Wit the help of the method \verb|add|,
+das ich nicht ganz verstehe wird dann ...... !!!!!!!!!!!
+
+With the help of the method \verb|setSize(int width, int height)| we fix the
+dimensions of the frame (in pixels). The \verb|show()| method displays the
+frame. As we already know \verb|a.init()| stars the applet.
+
+In principle the part of the code we just described is not necessary. we
+included it only to allow the plot to be resizable. Try to run the code
+without the lines !! to !!
+
+The actual plotting is performed by the \verb|paint()| method which is draws
+on the screen. Applets typically override some of the methods of the
+\verb|java.awt.Component|. The simplest way for a Component to draw itself is
+to put drwaing code in the \verb|paint()| method. In lines !! to !! we see a
+simple example of implementing the \verb|paint()| method. The \verb|Graphics|
+class defines methods for drawing different kinds of shapes. The method wich
+we use here is the
+\begin{verbatim}
+drawline(int x1, int y1, int x2, int y2)
+\end{verbatim} 
+method, which simply draws a line in the \verb|Graphics| object \verb|g|
+current color. Other typical methods are, e.g., 
+\verb|drawRect()| and \verb|fillRect()| to draw and fill with the current
+color rectangls, \verb|drawArc()| and \verb|fillArc| to draw and fill arcs,
+\verb|drawPolygon(int[] xPoints, int[] ypoints, int npoints| and 
+\verb|fillPolygon()| to draw polygons.
+
+The  method \verb|getsize().height| and \verb|getSize().width|, which we use
+in lines !! and !! return the height and the width of the Frame.
+Now that we understand the code let us run the program.
+
+
+\inputlisting{./Listings_Java/PlotEasy.java}
+
+Having learned the basic graphical tools of the AWT with the help of
+the easiest plot program, we can now apply what we have just learned
+to the simulation of the radioactive decay.
+
+\inputlisting{./Listings_Java/RadioactiveDecay_easyplot.java}
+
+To implement the graphical facilities in the
+\verb|RadioactiveDecay.java| code is easy. We immediatekly recognize
+inthe lines xx -- yy the \verb|paint()| method. The results of the
+simulation have to be scaled appropriately to fit in the Frame. The
+curve is plotted with the method \verb|drawLine()|. Since we want to
+plot also the exact analytical solution for the mean values in red we
+set
+\begin{verbatim}
+g.setcolr(Color.red)
+\end{verbatim}
+in line xy before drawing the corresponding curve.
+
+It is important to note that in the lines xx--yy we have added the
+code
+\begin{verbatim}
+frame.WindowListener()
+\end{verbatim}
+which allows to handle the request to close the window.
+
+\subsection{Ptplot}
+The quality of the plot of the simulation results are rather poor
+compared to high standards we are used to today. It is clear, that we
+could now go on refining the plot with the help of the Java
+AWT. Although this might be an intersting and instructive task, it is
+not our primary interest in this book. Fortunately, there are advanced
+``D graphics components wghich can be used in applets and
+applications. One of these package is Ptplot (you pronounce it
+pee--tee--plot). The Ptplot package is released under the liberal UC
+Berkley copyright. It has been developed by edward A. Lee, C. Hylands,
+and W. Wu. You are free to download it at
+http://ptolemy.eecs.berkely.edu/java/ptplot.html where you also find
+the documentation and many demos of Ptplot. The components of Ptplot
+have the following properties:
+\begin{itemize}
+\item it is embaddable in applets and applications
+\item you may use binary or ascii data
+\item the plots are auto--ranging
+\item you may label automatically or manually the axes
+\item logarithmic axes
+\item live, animated plots
+\item infinite zooming
+\item  various plot styles (coonnected lines, scatter plots, bars, ..)
+\item various point styles (none, dots, points, ....)
+\item multiple data sets and legends
+\item color or black and white plots
+\item error bars.
+\end{itemize}
+Before writing the the first code using Ptplot let us look at the
+class hierarchy of Ptplot:
+
+\begin{figure}
+\caption{The class hierarchy of Ptplot.}
+\end{figure}
+
+Let us now a very simple program in order to show what you need to
+invoke the Ptplot methods.
+
+\inputlisting{./Listings_Java/ptplot_demo.java}
+
+We se that we have to import additionally the  ptplot package. The
+class \verb|ptplot_Demo| extends the class \verb|PlotApplet|. Again we
+want to run the code as applet as well as an application so the class
+does have a main method. In lines xx --yy we instantiate the new Frame
+and activate the WindowListener as we did it in the
+\verb|RadioactiveDecay_ploteasy.java| code. The actual plot routines
+arein lines xx to yy. In the \verb|init()| method we invoke the method
+\verb|super.newPlot(9| to create a new plot, \verb|super.init()| to
+initialize it and \verb|plot().setTitle| to give the plot a title.
+
+The output of the code can be seen in Fig. (\ref{}). 
+
+Next we want to draw the results of the simulation of the radioactive
+decay process with the help of Ptplot and learn at the same time how
+to exploit the features of Ptplot. The corresponding code can be seen
+below.
+
+
+\inputlisting{./Listings_Java/RadioactiveDecay_ptplot.java}
+
+The actual plotting code starts in lines xx and ends in lines
+yy. There we use several methods of the \verb|ptplot.Plot|
+class. Allmethods are called \verb|setMethods| where \verb|Method| is
+selfexplaining. Several other methods are implemented in the
+\verb|Ptplot.Plot| class and  are summarized in the following table. 
+
+
+
+
+\subsection{The results of the simulation}
+
 The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and 
 (\ref{FIG_DECAYB}).
 \begin{figure}
@@ -422,7 +683,8 @@ for all $i$ it follows from the above equation that
 \end{equation}
 and finally we have the useful relation
 \begin{equation}
-\sigma_I = \frac{\sigma_f}{\sqrt{n}}.
+\
+sigma_I = \frac{\sigma_f}{\sqrt{n}}.
 \end{equation}
 The mean error of the mean scale with 1 over the square root of 
 the number of individual trials. The precision of the estimate 
