@@ -10,6 +10,12 @@ package simulation.BlackScholes;
  * @version 1.0
  */
 
+/**
+   The exact analytical solution interface for an option. </p>
+   You can implement this, if you know the exact solution for an option. </p>
+   The option class is an abstract class, which should be subclassed
+   instead of directly implementing this interface. 
+*/
 public interface ExactSolutionFctn  {
     
     /** returns the exact solution for the option */
