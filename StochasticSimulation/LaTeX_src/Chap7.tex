@@ -655,7 +655,7 @@ argon.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{Advanced AWT Features and GUIs}
 \label{sec:AWTAdvanced}
-As a short inlet, we want to discuss some advanced features of the Java
+Before going on, we want to discuss some advanced features of the Java
 AWT package, so that you are able to understand all the code
 of the upcoming simulations.
 
@@ -723,11 +723,196 @@ the \verb|java.util.Properties| package. For a complete description look
 at the API documentation or take a look at \cite[]{JavaAWTReference}. 
 
 
-\subsection{Events}
+\subsection{paint(), repaint() and update()}
+It is now time to sort out these three methods, often used and
+often confused with each other. To get a deeper understanding of 
+this topic and some of the other adavanced aspects of the AWT, you 
+actually need an understanding of threads, which will be discussed
+in great detail in section \ref{sec:JavaThreads}. For now it is
+enough to know that a thread is a ``separate'' program running
+beside yours. 
 
+In the molecular dynamics simulation we want to paint the trajectories
+of the individual particles in a display area (in Java this is called
+a Canvas). But if we change the positions of one particle (or more),
+we want the display to be refreshed, so that we can actually see
+the change on the display. Because this is not automatically done in
+Java if you change a component, you have to tell the JVM to update
+the component in question. 
+
+For example if you have a textfield, where you display the actual time
+of the simulation, it changes very often and of course you want
+the display to be updated all the time (do not forget that this is
+very time consuming). The first and easiest possibility is to call the 
+\verb|repaint()| method of a component (or a container). 
+The repaint method then in
+turn calls the \verb|update()| method of all components contained in the 
+component for which the repaint method has been called.
+Each of the repaint methods then calls the corresponding 
+\verb|paint()| method, which finally displays the change on the 
+screen.
+
+Here an example: you create a \verb|Panel|, which contains two labels.
+Now you start a simulation and change the second label. Now to 
+update the display you have to call the \verb|repaint()| method
+of the \verb|Panel| object, which then updates the two labels.
+
+The drawback (or advantage) of the \verb|repaint()| method is that
+it does not update the components at once, but waits for some time
+to do it. If you call it again before update() starts, it does
+not start it twice, but only once. So it kind of collects and
+directs all calls to the update methods. 
+
+In our example you might want to redisplay the labels at once, because
+your simulation calculation is going on and does not allow the
+repaint method to start. In this case you have to call the 
+\verb|repaint()| method of the label components yourself and it will 
+redisplay it at once. 
+
+A third possibility would be to call the \verb|paint()| methods of the
+components to be repainted, but this is mostly cumbersome and
+should be avoided.
+
+All this is very important for laying out a new program like the one
+we want to write now: a molecular dynamics program. 
+
+
+\subsection{Events}
+\label{sec:JavaEvents}
+Now we come to a very important part of writing GUIs: user interaction.
+A program which has graphical output is nice, but we still miss
+the possibility top input data or text using the graphical
+interface. In Java this is hidden in the \verb|java.awt.event| class.
+
+The event model we are discussing in a moment has been
+introduced into Java in version 1.1 and we are not going to 
+discuss the old event model of Java 1.0. 
+
+If a user presses a key or pushes a mouse button or moves the mouse
+an \emph{event} occurs. You can specify an object (e.g. a button), which should
+be notified if a special event, like e.g. a mouse button is pushed, occurs.
+There are many different \emph{events} (mouse button, key pressed, etc.)
+and you can \emph{register} an \emph{event listener} for a certain
+event to an object (called \emph{event source}, mostly components). 
+For example you could register a listener
+for a mouse button pushed on a button. For that you have to implement
+the appropiate interface in your program and register the event
+listener.
+
+As an example we have already met the case of a closable frame. By default
+the frame has a close button decoration on the rigth upper corner. But
+pushing the mouse button on this decoration does not have any
+impact. Usually you want the frame to be closed and the program 
+to exit in that case. So we have to implement an interface for the
+pushing of a mouse button and register a listener with the frame:
+\lstinputlisting{Listings_Java/ClosableFrame.java}
+
+In line 9-11 we instantiate a frame and set the size thereof. Then
+we display it on screen. In line 13-15 we add the listener
+(here a \verb|WindowListener|) to the frame and in the same lines
+implement the interface (here the \verb|WindowAdapter| with the
+\verb|windowClosing| event). This shortcut of using events is 
+called ``inner classes''. It is the most easy way, if you do not want
+to write a separate class in a separate file. A second possibility
+is to implement the listener and override the corresponding methods
+(here you would implement a WindowListener and override the 
+windowClosing() method). 
+
+Each event source (component) can have multiple event listeners
+registered on it. So you could specify a reaction for a mouse button
+on a label or a key pressed on the label. You could also register the
+same event listener on different event sources: a mouse button
+can be pressed on a button or on a canvas.
+
+The events are represented by objects, which gives information
+about the event and identifies the event source (remember there could
+be more event sources for a certain event). For example the \verb|Button|
+component has a method called \verb|addActionListener|, which you
+can use. If you have registered this listener and the user clicks
+the mouse button on the button, the program stops and the listener
+is notified by firing an action event. The listener then calls the
+\verb|actionPerformed(ActionEvent event)| method, 
+which is the only available one
+for this listener, and executes the code therein. The arguments
+of the call to this method is a only a single \verb|ActionEvent|.
+This object tells you exactly which kind of event has occured.
+
+To see what kind of
+events are possible for a particular event source (component) you can
+take a look at the API documentation. Look at the methods of the
+listener classes of the \verb|java.awt.event| package.
+Because for some of the listeners there are many different events
+possible (like the MouseListener) and you do not want to overwrite
+all the methods to implement the listener, you can use the socalled
+adapter classes. We have already met them above, where we have used
+the WindowAdapter. The WindowAdapter implements all 7 empty methods
+necessary to have a WindowListener and you can just override the
+methods you really need, like window closing above.
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/JavaEvents.eps}
+    \caption{The most important event classes in Java and their structure.
+      In these classes you can find the events available in Java. There
+      are many events also outside of the AWT, which are not
+      relevant for us.}
+    \label{fig:JavaEvents}
+  \end{center}
+\end{figure}
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/EventListeners.eps}
+    \caption{The most important AWT listeners and their class structure.
+      Look at the API documentation of the listeners to find all the
+      available methods to be overriden, this shows you what kind
+      of actions are possible to detect.}
+    \label{fig:EventListener}
+  \end{center}
+\end{figure}
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/EventAdapters.eps}
+    \caption{The available adapter interfaces for the AWT listener.
+      These classes ease the writing of listeners by only overriding
+      the methods you need, you just implement the appropriate event 
+      adapter interfaces.}
+    \label{fig:EventAdapters}
+  \end{center}
+\end{figure}
+
+At last a short summary or instruction of how to implement events in Java:
+\begin{enumerate}
+\item Choose a component (=event source), 
+  which you want to be responding to an event, e.g. a \verb|Button|.\\
+  \verb|Button but = new Button("Push Me");|
+\item Take a look at the API documentation of the component, here the
+  class \verb|java.awt.Button|. At the beginning of the description of
+  the class methods, you find all relevant listeners available. Here
+  only the \verb|addActionListener()| method is meaningful.
+\item Now you know what listener to take and can register the listener
+  with the component by using the above method. You only have to write
+  the code for the reaction to the event (=to implement the listener
+  interface). If there is only one method to be implemented or you
+  want to implement all possible methods of a listener, you just write
+  your own listener by either using the implement keyword for your
+  class and overriding the method names or you can user inner classes.\\
+  \begin{verbatim}
+    /** inner class version */
+    but.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // here we could react to the pushed button 
+            }});
+  \end{verbatim}
+  \lstinputlisting{Listings_Java/ButtonListenerTest.java}
+\end{enumerate}
+You should always remember not to write time intensive code in
+listeners, because you interrupt the whole program and only one
+listener method is awake at one time. So if you push the button again
+it will wait until the first listener method of the pushed button 
+is done. This makes programs not very responsive.
+  
 
 \subsection{A Complete GUI for the Molecular Dynamics Program}
-putting it all together !
+putting it all together !  ????
 
 \subsection{Features not discussed in this book}
 Not mentioned: Cut and Paste (Clipboard), Images, Sound 
