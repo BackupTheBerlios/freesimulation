@@ -1572,6 +1572,837 @@ process. The
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{L\'evy Processes}
+In this section we address again the problem of the random walk. As we already
+know the canonical application of the random walk is the theory of Brownian
+motion. The chaotic motion of the Brownian particles over the length scale
+$\Delta$  and time scale $\tau$  is modelled by a random walk on a lattice of
+spacing $\Delta$, while the steps take place at equal time intervals 
+$\tau$. It is the aim of this chapter to go "beyond Brownian motion"
+\cite{Klafter:PhysicsToday} and to look at fractal generalizations of
+Brownian motion which have proven to be a rich field in probability theory,
+statistical physics, chaotic dynamics, and, last not least, in economics.  
+
+\section{L\'evy or Stable distributions}
+We know already that from a mathematical point of view  
+the problem of the random walk is the problem of the addition of independent
+(usually identically distributed) random variables. For example, if the
+individual steps in a one--dimensional walk have displacement $\mu$ and
+variance $\sigma^2$, then a simple application of the Central Limit Theorem
+tells us that the asymptotic probability density function $P_n$  
+for the position $X_n$ after $n$ steps  is given by the Gaussian density with
+mean $n\mu$ and variance $n\sigma^2$:
+\begin{displaymath}
+  P_n(x) \approx \frac{1}{\sqrt{2 \pi n \sigma^2}} \exp 
+         \left\{ - \frac{(x- n\mu)^2}{2 n \sigma^2} \right\}.
+\end{displaymath}
+This is the basic idea of the random walk.  To put it differently, the Central
+Limit Theorem states, that if $X_1$, \ldots, $X_N$ are Gaussian distributed
+random variables with zero mean and variance $\sigma^2$, the new stochastic
+variable 
+\begin{displaymath}
+  X = \frac{1}{\sqrt{N}} \sum_{i=1}^N X_i
+\end{displaymath}
+has the same probability density function as the $X_i$.
+Now let us consider a slight generalization of the random walk. We consider
+an $N$--step random walk in one dimension , with each step of length $x$
+governed by the same probability density $p(x)$, with zero mean. Note, that we
+expressively do not make any assumption about the variance! The French
+mathematician Paul L\'evy \footnote{Paul L\'evy (186--1971)} posed the
+following question: When does the probability $P_N(X)$ for the sum of the
+steps
+\begin{displaymath}
+  X = X_1 + X_2 + \cdots + X_N
+\end{displaymath}
+in general have the same distribution $p(x)$ (up to a scale factor) 
+as the individual
+steps? As remarked in \cite{Klafter:PhysicsToday} this is the fundamental
+question of fractals: When does the whole look like its parts?
+
+Of course, we already know two answers to the above question. Of course, 
+as we just recalled in the introductury remarks 
+$p(x)$ may be  a
+Gaussian density. And we know already that $p(x)$ may be a Cauchy density
+\begin{displaymath}
+\frac{1}{\pi} \frac{c}{c^2 + (x-\gamma)^2}
+\end{displaymath}
+(recall that we have have demonstrated in Chap. ??, 
+that the sum of two Cauchy variables
+is again a Cauchy variable). 
+As L\'evy has proved there exist other solutions.
+The remarkable aspect of these other solutions is that, as it is the case for
+the Cauchy density, all involve random
+variables with infinite variance!
+
+The solutions that L\'evy found are called stable (or L\'evy) distributions.
+They play a constantly increasing role as a generalization of the normal
+distribution. In order to describe stable distributions and look at some of
+their properties we follow \cite{Feller2} and introduce the convenient
+notation 
+\begin{displaymath}
+  U {d \atop =} V
+\end{displaymath}
+to indicate that the random variables $U$ and $V$ have the same distribution.
+Throughout this section $X$, $X_1$, $X_2$, \ldots , $X_N$ denote mutually
+independent random variables with a common distribution, say $R$ and 
+$S_N = X_1 + \cdots + X_N$.
+
+A distribution $R$ is called stable if for each $N$ there exist constants
+$c_N >0$ and $\gamma_N$ such that
+\begin{equation}
+\label{eq:StableDef}
+  S_N {d \atop =} c_N  X + \gamma_N.
+\end{equation}
+The distribution $R$ is called stable in the strict sense if 
+(\ref{eq:StableDef}) holds with $\gamma_n =0$. 
+The above definition can also be formualted equivalently in the following
+form: $R$ is stable if to arbitrary constants $c_1$,  $c_2$  there exist
+constants $c$ and $\gamma$ such that
+\begin{displaymath}
+  c_1 X_1 + c_2 X_2 {d \atop =} c X + \gamma.
+\end{displaymath}
+
+Let us now look at some basic properties of stable distributions. 
+For a proof of the statements that follow we refer the reader to 
+\cite{Feller2}.
+The most
+important one is that the norming constants $c_N$ in Eq. (\ref{eq:StableDef})
+are of the form
+\begin{displaymath}
+  c_N = N^{1/\alpha},
+\end{displaymath}
+with  $0< \alpha \le 2$. The constant $\alpha$ is called the
+characteristic exponent of the stable distribution  $R$. Sometimes it is also
+named the stability index.
+
+An important property is that in practice the  centering constants
+$\gamma_N$ may be disregarded. The reason for this fact is that we are free to
+center the distribution $R$ in an arbitrary manner, that is, we can replace
+$R(x)$ by $R(x+b)$. In fact, if $R$ is stable with an exponent $\alpha \ne 1$
+the centering constant $b$ may be chosen so that $R(x+b)$ is strictly stable.
+To see why this is so we consider the random variable $S_{MN}$, which is a sum
+of $M$ independent variables each distributed according to $c_N X + \gamma_N$,
+i.e.,
+\begin{equation}
+  \label{eq:defSmn}
+  S_{MN} = \sum_{i_1}^{N} c_N X_i + \gamma_N.
+\end{equation}
+So we have
+\begin{equation}
+  \label{eq:Smn}
+  S_{MN} {d \atop =}  c_N S_M + M \gamma_N {d \atop =} c_N c_M X +
+                      c_N \gamma_M + M \gamma_N.
+\end{equation}
+Since $M$ and $N$ play the same role it follows from (\ref{eq:defSmn}) and 
+(\ref{eq:Smn}) that
+\begin{displaymath}
+  (c_N -N) \gamma_M = (c_M -M) \gamma_N.
+\end{displaymath}
+For $\alpha =1$ the above equation does not have a solution, but when $\alpha
+\ne 1$ it implies that
+\begin{displaymath}
+  \gamma_N = b(c_n -N) 
+\end{displaymath}
+for all $N$. It follows now from Eq. (\ref{eq:StableDef}) that the sum
+$S'_N$ of $N$ variables distibuted as $X'-b$ satisfies the condition
+\begin{displaymath}
+  S'_N {d \atop =} X',
+\end{displaymath}
+which completes our proof.
+
+
+
+Let us consider  $S_{M+N}$, i.e. the sum of the
+independent variables $S_M$ and $S_{M+N} - S_{N}$, which are distributed,
+respectively, as $c_M X$ and $c_N X$, i.e., we assume that $\gamma_n=0$. 
+For such a symmetric stable distribution 
+we have the important relation
+\begin{equation}
+  \label{eq:cMN}
+  c_{M+N} X {d \atop =} c_M X_1 + c_N X_2. 
+\end{equation}
+An important relation follows from Eq. (\ref{eq:cMN}), namely
+\begin{equation}
+\label{eq:Rst}
+  s^{1/\alpha} X_1 + t^{1/\alpha} X_2 {d \atop =} (s + t)^{1/\alpha} X,
+\end{equation}
+whenever the ratio $s/t$ is rational. Since every stable distribution $R$
+is easily shown to be continuous (see \cite{Feller2}) Eq. (\ref{eq:Rst}) 
+holds for all $s>0$ and $t>0$. The meaning of the above equation is clear. For
+the normal distrbution it simply restates the addition rule for the
+variances. In general, however, it implies that all linear combinations 
+$a_1 X_1 + a_2 X_2$ belong to the same type.
+
+The importance of the normal distribution stems from the Central Limit
+Theorem, which states that the normal distribution is the only stable
+distribution with variance! Remarkably similar limits may be formulated for
+distributions without variance. Only stable distributions occur as such limits.
+Consider for example a stable distribution with $\alpha <1$. The average
+$(X_1 + \cdots + X_N)/N$ has the same distribution as $X_1 N^{-1 + 1/\alpha}$,
+and the last factor tends to infinity. In other words the the average of $N$
+variables is likely to be larger than any of the components $X_k$. This is, of
+course, only possible if the maximal term $\max[X_1, \ldots, X_N]$ grows
+exceedingly large and receives a dominating influence on tzhe sum $S_N$.
+
+Thus, we are now able to answer the question raised by L\`evy, which we
+mentioned at the beginning of the section. If $X_i$, $i=1, \ldots, N$ are
+$N$ independent identically distributed L\`evy random variables, with the same
+stability index $\alpha$, then the renormalized sum
+\begin{displaymath}
+S_N = \frac{1}{N^{1/\alpha}} \sum_{i=1}^N X_i  
+\end{displaymath}
+has the same probability density function as the $X_i$. It is important to
+remark that the sum scales as $N^{1/\alpha}$ and not as $\sqrt{N}$, as it is
+the case for a diffusive random  walk.
+
+Let us conclude by mentioning that We already met two examples of 
+stable distributions, the normal distribution
+which corresponds to the case $\alpha = 2$
+and the Cauchy distribution, which corresponds to the case
+$\alpha =1$. For the case $\alpha =1/2$ there is also a stable distribution
+with density $p(x)=0$ for $x \le 0$ and 
+\begin{displaymath}
+p(x) = \exp\left(- \frac{b^2}{4x} \right) 
+           \left\{ \frac{b^2}{4 \pi x^3} \right\}^{1/2}
+\end{displaymath}
+for $x>0$ and with norming constants $c_N = N^2$. This probability density is
+called the Smirnov density.
+
+In the next section we are going to construct the
+most general form of all stable distributions, which is due to L\'evy..
+
+
+\section{The Cauchy process}
+\subsection{Bachelier's Chain Equation}
+Let us now consider a Markov process $X(t)$ and let its space of states by
+$R$. As we know the conditional transition probability $T(x,t|x',t')$
+satisfies the Chapman--Kolmogorov equation. In order to derive a differential
+form of the Chapman--Kolmogorov equation to describe Brownian motion
+we had to assume that the moments
+\begin{displaymath}
+  a_n = a_n(z,\Delta t) = \int (x-z)^n T(x,t+\Delta t|z,t) dx
+\end{displaymath}
+exist and are convergent. 
+
+Let us now look at the so--called Cauchy process. A Cauchy process is defined
+through the propagator
+\begin{displaymath}
+  T_C(x,t+\Delta t|z,t) = \frac{\Delta t}{\pi} \frac{1}{(x-z)^2 + \Delta t^2}.
+\end{displaymath}
+It is easy to check that $T_C$ satisfies the necessary conditions of a
+propagator, namely
+\begin{displaymath}
+  \int dx T_C (x,t+\Delta t|z,t) =1
+\end{displaymath}
+and
+\begin{displaymath}
+  \lim_{\Delta t \rightarrow 0} T_C (x,t+\Delta t|z,t) = \delta(x-z).
+\end{displaymath}
+The Cauchy process satisfies the Chapman--Kolmogorov equation and is 
+therefore a Markov process. However, the moments $a_n$ do not exist for the
+Cauchy process and hence it is not possible to derive a differential form of
+the Chapman--Kolmogorov equation, i.e., there is no master equation describing
+the dynamics of the Cauchy process.
+
+\subsection{The realizations of the Cauchy process}
+In order to generate trajectories of the Cauchy process we first have to be
+able to generate Cauchy distributed random numbers. We have already seen in
+Chapter 2 that Cauchy distributed random numbers can be generated as the ratio
+ of two gaussian distributed random numbers. Here we prefer to use a more
+ efficient method which is based upon the inversion generating method (see the
+ excercises for a comparison of the numerical performance of the two methods).
+
+We recall that the inversion generating method is based upon the following
+idea. Let $X$ be a real random variable with density function $P(x)$
+and distribution function $F(x)$. Then, if $r$ is a unit uniform random
+number, the random number $x$ obtained by solving the equation
+\begin{displaymath}
+  F(x) = r,
+\end{displaymath}
+i.e., the number
+\begin{displaymath}
+  x = F^{-1}(r)
+\end{displaymath}
+is a sample value of $X$. The Cauchy random variable $C(m,a)$, defined by the
+density function
+\begin{displaymath}
+  P(x) = \frac{1}{\pi} \frac{a}{(x-m)^2 + a^2},
+\end{displaymath}
+where $a$, $m$ are real numbers satisfying $0 < a< \infty$ and 
+$-\infty < m < \infty$. The variable $X$ which is
+Cauchy distributed around $m$ with half--width $a$ has the distribution
+function
+\begin{eqnarray*}
+  F(x) &=& \int_{- \infty}^x dx' \frac{a/\pi}{(x' - m)^2+ a^2}  \\
+       & = & \frac{1}{\pi} 
+    \left[ \arctan \left( \frac{x-m}{a}\right) 
+              + \frac{\pi}{2} \right].
+\end{eqnarray*}
+Setting this equal to a unit interval uniform random number $r$ and solving
+for $x$ we obtain the generating formula
+\begin{displaymath}
+  x = m + a \tan\left( (r -\frac{1}{2}) \pi \right).
+\end{displaymath}
+We are now in the position to generate numerically some realizations of the
+Cauchy process. As it was the case for the Wiener and the Ornstein--Uhlenbeck
+process we will construct an algorithm, which is exact. Again the method is
+based on the fact that we have an analytical expression for the conditional
+transition probability $T_C(x,t+\Delta t| z,t)$, which is itself a Cauchy
+density $C(z,\Delta t)$. Since the cauchy density satisfies the
+Chapman--Kolmogorov equation, paralling the construction of an exact algorithm
+for the Wiener process, we may use the fact that the increments of the Cauchy
+process
+\begin{displaymath}
+  \Delta C_i \equiv C(t_i) -  C(t_{i-1}
+\end{displaymath}
+are statistically independent and distributed according toa Cauchy density
+\begin{displaymath}
+  P(\Delta C, \Delta t) = \frac{\Delta t}{\pi }
+                          \frac{1}{(\Delta x)^2  + \Delta t^2.}
+\end{displaymath}
+Obviously, the exact algorithm is straightforward and reads:
+
+(i) Let $C(t)$ be given.
+
+(ii) Draw a Cauchy distributed random number $\Delta C$ around 0 with
+half--width $\Delta t$.
+
+(iii) Advance the stochasticprocess according to 
+\begin{displaymath}
+  C(t+\Delta t) = C(t) + \Delta C(t).
+\end{displaymath}
+
+(iv) Goto (i) until the desired final time is reached.
+
+The above algorithm has been implemented in the listing
+\verb|CauchyProcess.java|, which can be seen below.
+
+
+%\includelisting{CauchyProcess.java}
+
+In lines xx--yy we have coded the generation of the Cauchy distributed random
+variables according to the algorithm based on the inversion method. In line
+xx we advance the stochastic process. The realization is then plotted in lines
+xx to yy, with the help of the Ptplot routines we already know.
+
+A realization of the Cauchy process can be seen in Fig. ().
+\begin{figure}[htbp]
+  \begin{center}
+%  Hier kommt die FIGUR !!!!!    
+    \caption{A realization of the Cauchy process.}
+    \label{fig:CauchyRealization}
+  \end{center}
+\end{figure}
+
+The illustration of the sample paths of the Cauchy process seen in Fig. 
+(\ref{fig:CauchyRealization}) clearly indicates that the sample paths are
+discontinuous. Formally, this can be demonstrated by checking that the limit
+\begin{displaymath}
+  \lim_{\Delta t \rightarrow 0} \frac{1}{\Delta t} 
+         \int_{|x-z| >0} dx T(x,t+\Delta t| z,t) \neq 0
+\end{displaymath}
+for any $\epsilon >0$. For continous Markov processes the above limit can be
+shown to be zero with probability 1.
+
+
+
+
+
+\section{L\'evy processes}
+We have just seen that there exist Markov processes which can not be described
+by a master equation. Such processes are generally called L\'evy
+processes. We now want to characterize them in general \cite{Montroll}.
+
+To this end we consider a Markov process $X(t)$ in the phase space $R$ and
+assume that it is homogeneous in time and space. In other words, we assume
+that the propagator satisfies the following condition
+\begin{displaymath}
+T(x,t|x',t') = P(x-x',t-t').
+\end{displaymath}
+Hence the Chapman--Kolmogorov equation can be written as
+\begin{equation}
+\label{eq:ChapmanKolmogorovLevy}
+  P(x_2 -x_1,t) = \int dy P(x_2 -y,t_1) P(y-x_1,t-t_1).
+\end{equation}
+It turns out that the characterization of L\`evy process is best accomplished
+in Fourier space. To this end  we now look at the characteristic function
+\begin{displaymath}
+  G(k,t) = \int_{-\infty}^{\infty} dx \exp(ikx) P(x,t).
+\end{displaymath}
+From the Chapman--Kolmogorov equation (\ref{eq:ChapmanKolmogorovLevy}) 
+we can now derive a functional equation for the characteristic function
+\begin{equation}
+\label{eq:GkFunctional}
+  G(k,t) = G(k,t-t_1) G(k,t_1).
+\end{equation}
+The characterization of Markov processes which are homogeneous in space and
+time is based upon the characterization of the solutions of the above
+functional equation. To this end we must find those  solutions of 
+(\ref{eq:GkFunctional}) whose Fourier transformation is non--negative and 
+normalized.
+
+We already know two characteristic function satisfying Eq. 
+(\ref{eq:GkFunctional}), namely
+\begin{displaymath}
+  G(k,t) = \exp(-D k^2 t),
+\end{displaymath}
+which is the characteristic functionof the Wiener process, and
+\begin{displaymath}
+  G(k,t) = \exp(-a |k| t),
+\end{displaymath}
+which is the characteristic function of the Cauchy process.
+The general solutions of Eq. (\ref{eq:GkFunctional}) where invetigated by
+P. L\'evy.   He found the Fourier transform of all strictly stable 
+distributions which now bear his name. It is evident that the
+characteristic functions
+\begin{displaymath}
+  G(k,t) = \exp(-b |k|^\alpha t)
+\end{displaymath}
+for $0 < \alpha \le 2$ and $b>0$ are solutions of
+Eq. (\ref{eq:GkFunctional}). However we have to check that the corresponding
+$P(x,t)$ are probability densities. Formally we have
+\begin{equation}
+\label{eq:PLevyFormal}
+  P(x,t) = \frac{1}{2 \pi}  \int dk \exp(- b |k|^{\alpha} t -ikx).
+\end{equation}
+$P(x,t)$ is normalized because
+\begin{eqnarray*}
+  \int dx P(x,t) &=& \frac{1}{2 \pi} \int dx \int dk \
+              \exp(-b|k|^{\alpha} t - ikx)) \\
+                 & = & \int dk \delta(k) \exp(- b |k|^{\alpha} t) \\
+                 & = & 1.
+\end{eqnarray*}
+Futhermore, it follows  immediately from the formal expression 
+(\ref{eq:PLevyFormal}) that
+\begin{displaymath}
+  P(x,0) = \delta(x).
+\end{displaymath}
+In fact it can also be shown that the characteristic function defined in Eq. 
+(\ref{eq:GkFunctional}) leads to a positive density $P(x,t)$ for
+$0 < \alpha \le 2$.
+This has been demonstrated by Bochner. The proof is trivial for $0 < \alpha
+<1$ but rather involved for the case $1 < \alpha <2$. So that we refer the
+interested reader to the original literature for the latter case. 
+
+For the case $0 < \alpha <1$ the proof is as follows:
+\begin{eqnarray*}
+  P(x,t) & = & \frac{1}{2 \pi}  \int dk \exp(- b |k|^{\alpha}t - ikx) \\
+         & = & \frac{1}{\pi} \int_0^{\infty} dk 
+                   \cos(kx) \exp(
+                   - b |k|^{\alpha} t) \\
+         & = & \frac{tb \alpha}{\pi x} \int_0^{\infty} dk
+                    k^{\alpha -1} \exp(-b k^{\alpha}t ) \sin(kx). 
+\end{eqnarray*}
+By defining
+\begin{displaymath}
+  g(k) \equiv  k^{\alpha -1} \exp(-b k^{\alpha}t )
+\end{displaymath}
+we can write
+\begin{eqnarray*}
+  P(x,t) & = & \frac{tb\alpha}{\pi x} \int_0^{\infty} dk
+                    g(k)  \sin(kx) \\
+         & = & \frac{tb\alpha}{\pi x} \sum_{n=0}^{\infty}
+                     \int_{2n\pi / x}^{2(n+1) \pi/x} g(k) sin(kx) \\
+         & = &  \frac{tb\alpha}{\pi x^2} \sum_{n=0}^{\infty}
+                       \int_0^{2\pi} du g\left(\frac{u+2n\pi}{x} \right)
+                         \sin(u). 
+\end{eqnarray*}
+For $0<\alpha <1$ the function $g$ is monotonically decreasing. For each
+value of $\sin(u)$ in the $u$--interval $(0,\pi)$ there is a corresponding 
+negative value of $\sin(u)$ in the $u$--interval $(\pi, 2 \pi)$. Since $g$ is
+monotonically decreasing the positive contributions dominate over the negative
+ones. So we can conclude that $P(x,t) >0$ for $t>0$ and $x \ne 0$. The case
+$t=0$ and the case $x=0$ are trivially satisfied.
+
+
+The explicit calculation of
+the probability density $P(x,t)$ is only possible for the special cases
+$\alpha =1$ (the Cauchy process), $\alpha = 2$ (the Wiener process) and for
+the case $\alpha =1/2$ (the Smirnov density). 
+These are exactly the densities we have considered as
+examples of stable distributions!
+
+Let us conclude this section by remarking that the characteristic function 
+$G(k)$ may also be generalized by adding an imaginary part $bc$
+\begin{displaymath}
+  G(k,t) = \exp[-t b |k|^{\alpha} (1 + i c \mbox{sign}(k))].
+\end{displaymath}
+The factor $\mbox{sign}(k)$ is introduced, in order to satisfy the necessary 
+condition for characteristic functions
+\begin{displaymath}
+  G^{\ast}(k,t) = G(-k,t),
+\end{displaymath}
+which guarantees that the probability density is real.
+
+The requirement that the Fourier transform $G(k,t)$ be a non--negative 
+density function puts certain limit on $c$, which have been studied by
+Khintchine and L\`evy. Their results are: In order that a normalized,
+non--negative distribution function $P(x,yt)$ satisfy the Chapman-Kolmogorov 
+equation it is necessary and sufficient that its characteristic function be
+represented by the formula (for $t \le 0$)
+\begin{displaymath}
+  \log (G(k,t)) = -(vkt -bt |k|^{\alpha} 
+                 \{ 1 + ic\omega(k,\alpha) \mbox{sign}k + i \mu k\}),
+\end{displaymath}
+where $\alpha$, $c$, $v$, $b$ are constants. $v$ is any real number, 
+$-1 \le c \le 1$, $0 \le \alpha \le 2$, $b \ge 0$ and 
+\begin{displaymath}
+  \omega(k,\alpha) = \left \{
+               \begin{array}{ll}
+                \tan(\pi \alpha /2) & \mbox{if} \;\;\; \alpha \neq 1 \\
+                 (2/\pi) \log|k| &    \mbox{if} \;\;\; \alpha =1.
+                 \end{array}
+                     \right.
+\end{displaymath}
+L\`evy disributions with vanishing skewness parameter are called symmetric
+distributions. In the following we shall consider only symmetric distributions
+and we will denote them by $S_{\alpha}(\sigma,\mu)$, where $\sigma$ denotes
+the scale parameter  and $\mu$   the shift.       
+
+
+Let us conclude this section with two remarks. L\`evy distributions have in
+addition to their stability under convolutions two other interesting
+properties. Except for the gaussian ($\alpha = 2$) all $\alpha$--stable
+probability density functions have power--law tails with exponents 
+$1 + \alpha$. In other words, for large arguments ($x \gg 1$) the asymptotic
+approximations of a L\`evy stable distribution of index $\alpha$ is given by
+\begin{displaymath}
+  P_{\alpha}(x) \approx \frac{C_{LS}(\alpha)}{x^{(1 + \alpha)}},
+\end{displaymath}
+which evidently leads to an infinite variance and heavy tails. Thus stable
+distributions are characterized by a powert--law behavior on the far wings of
+the distribution. The index $\alpha$ does not only control the wings of the
+distribution, it also affects the value of the distzribution at the origin
+\begin{displaymath}
+  P_{\alpha}(0) \approx \frac{\Gamma(1 / \alpha)}{\pi \alpha} \;\;\; 
+(t \gamma =1!!!)
+\end{displaymath}
+
+The stability under convolution gives rise also to another interesting
+property of L\`evy distributions: the scale invariance of the process. If
+appropriately rescaled, the increment at scale $N \tau$ will have the same
+distribution as the increment at scale $\tau$
+\begin{displaymath}
+  P_{N\tau}(x) = \frac{1}{\lambda} P_{\tau} (x/\lambda); \;\;\; 
+  \lambda = N^{1/\alpha}.
+\end{displaymath}
+In other words the process $x(t)$ is self--similar witha self--similarity
+exponent which is the inverse of the stability index $\alpha$. This
+self--similarity structure of the L\`evy distribution is at the basis of many
+interesting applications.
+
+Several other interesting properties of the L\`evy distributions can be found
+in the literature \cite{MontrollBendler,BouchadGeorges}.
+
+\subsection{The numerical generation of Levy distributed random variables}
+In general the generation of stable random variables is quite an involved
+business. We will start our discussion by presenting an algorithm which allows
+the generation of random numbers distributed according to $S_{\alpha}(1,0)$.
+The algorithm requires one random number, say $\gamma$, uniformly distributed
+on the interval ($-\pi/2,\pi/2$) and of an exponentially distributed random
+number $W$ with mean 1. $\gamma$ and $W$ are assumed to be independent.
+The random number
+\begin{equation}
+\label{eq:LevyGeneration}
+  x= \frac{\sin(\alpha \gamma)}{(\cos(\gamma)^{1/\alpha})}
+       \left(\frac{\cos((1-\alpha)\gamma)}{W} \right)^{(1-\alpha)/2)}
+\end{equation}
+is distributed according to $S_{\alpha}(1,0)$. It is easy to check that for
+the special case $\alpha = 1$ Eq. (\ref{eq:LevyGeneration}) reduces to
+\begin{displaymath}
+  x = \tan(\gamma),
+\end{displaymath}
+whose distribution is Cauchy. In the case $\alpha =2$ 
+Eq. (\ref{eq:LevyGeneration}) reduces to
+\begin{displaymath}
+  W^{1/2} \sin(2\gamma) / \cos(\gamma) = 2 W^{1/2} \sin(\gamma),
+\end{displaymath}
+which corresponds to the Box-Muller method for the generation of  $N(0,2)$
+random variables. The proof that Eq. (\ref{eq:LevyGeneration}) indeed
+generates $S_{\alpha}(1,0)$ random variables
+can be found in \cite{Samorodnitsky}. 
+
+Knowing how to generate $S_{\alpha}(1,0)$ distributed symmetric random 
+variables it is clear that
+\begin{displaymath}
+  \sigma x + \mu \approx S_{\alpha}(\sigma,\mu).
+\end{displaymath}
+
+
+\cite{Mantegna}
+
+
+\section{Fractal space processes}
+\cite{ShlesingerEncyclopedia} \cite{Hughes}
+
+\subsection{Levy flights}
+As a first example of a random walk which does not belong to the  class of
+Brownian motion, we consider a random walk process for which the variance of
+the jump length is infinite. The absence of a finite variance implies the
+absence of a characteristic length scale for
+the process. This makes such L\`evy random walks, which are also called L\`evy
+flights, scale invariant fractals. A particular illustrative and pedagogical
+examle is the one--dimensional Weiertstrass random walk.
+
+\subsubsection{The Weierstrass random walk}
+The Weierstrass random walk is a discrete space one--dimensional L\`evy
+flight. It represents a very simple model for a random process which generates
+self--similar clusters.
+
+The Weierstrass random walk is generated by the transition probability density
+function $p(r)$ for jumps of length $r$
+\begin{equation}
+  \label{eq:transitionweierstrassrw}
+  p(r) = \frac{a-1}{2a} \sum_{m=0}^{\infty} a^{-m} 
+             \left[ \delta(r- \Delta b^m ) + \delta(r+ \Delta b^m )  \right],
+\end{equation}
+with $a>1$, $b$ is an integer ($b>1$). The random walk taes place on a lattice
+with spacing $\Delta$. In the following we will set for convenience this
+length scale equal to one. The above transition probability density allows
+jumps of length 1, $b$, $b^2$, $b^3$, \ldots. Howvever, when the length of the
+jump increases by an order of magnitude in base $b$ the probability for the
+occurrence of such a jump decreases by a factor $a$. Typically, we get a
+cluster of jumps of length 1 before a jump of length $b$ occurs. About $a$
+such clusters separated by lengths of order $b$ are found before one sees a
+jump of order $b^2$, and so on. In this scheme a step of length $b^m$ is $a$
+times more likely then a step of length $b^{m+1}$. In other words, we expect
+to see $a$ clusters of size $b^m$ per cluster of size $b^{m+1}$.
+
+Let us check that the variance of this random wak is indeed infinite. To this
+end we calculate the mean--square displacement per step. This quantity is
+given by
+\begin{displaymath}
+  <x^2> = \sum_{r=-\infty}^{\infty} r^2 p(r) =
+        \frac{a-1}{a} \sum_{m=0}^{\infty} \left( \frac{a}{b^2} \right)^{-m}.
+\end{displaymath}
+Thus, the mean--square displacement is infinite if $b^2/a >1$. In the
+following we will assume that this condition is satisfied (For $b^2/a <1$
+the variance $<x^2>$ is finite and the random walk is described by a Gaussian
+diffusion process).
+
+In order to investigate the qualitative behaviour of the Weiertstrass random
+walk  we look at the characteristic function of the process
+\begin{displaymath}
+  G(k) = \sum_{r=-\infty}^{+\infty} \exp(irk) p(r),
+\end{displaymath}
+and we find
+\begin{displaymath}
+  G(k) = \frac{a-1}{a} \sum_{m=0}^{\infty} a^{-m} \cos(b^m k).
+\end{displaymath}
+We recognize that $G(k)$ is given by the famous Weierstrass function. which is
+everywhere continuous, but nowhere differentiable, when $b>a$.  In Fig. 
+\ref{Fig:Weierstrass}
+we plot $\sum_{m=0}^{M} a^{-m} \cos(b^m k)$ for $M=0$ (top), 1, 2, 3, 4
+(bottom) with $a=2$ and $b=3$. As is seen the  adding higher order terms, the
+sum of the series fluctuates more wildly on smaller length scales.
+
+\begin{figure}
+\caption{The Weierstrass function.}
+\label{Fig:Weierstrass}
+\end{figure}
+
+It may be interesting prior to simulate the Weierstrass random walk to
+investigate the continuum limit of the Weierstrass random walk. to this end we
+must look at  the small $k$--behaviour of the characteristic function. The
+characteristic function satsfies the following functional equation
+\begin{equation}
+\label{eq:FunctionalWeierstrass}
+  G(K) = a^{-1} G(bk) + \frac{a-1}{a} \cos(k),
+\end{equation}
+which can be obtained by separating off the $m=0$ term and reindexing the
+terms in the remaining series. 
+
+it is easy to verify that if $b^{2m}/a \ne 1$ the solution of the above
+functional equation for  any positive integer $m$ reads
+\begin{displaymath}
+  G_h(k) = \frac{a-1}{a} \sum_{m=0}^{\infty} 
+           \frac{(-1)^m}{(2m)!} \frac{k^{2m}}{[1-b^{2m}/a]}.
+\end{displaymath}
+$G_h(k)$ is holomorphic in the neighbourhood of $k=0$. The general solution of 
+the functional equation (\ref{eq:FunctionalWeierstrass})
+reads \cite{Hughes} \begin{displaymath}
+  G(k) = G_h(k) + G_s(k),
+\end{displaymath}
+where $G_s(k)$ satisfies the homogeneous equation
+\begin{displaymath}
+ G_s(k) = a^{-1} G_s(bk). 
+\end{displaymath}
+Since the moments of the transition probability function are not all finite,
+the function $G(k)$ must be singular at $k=0$. This singularity must reside in
+$G_s(k)$, the singular part of the characteristic function.
+To this end we focus on the homogeneous part of the functional equation. 
+The solutions to this special equation have the form
+\begin{displaymath}
+  G_s(k) = \mbox{const} |k|^{\mu},
+\end{displaymath}
+where the exponent is given by
+\begin{displaymath}
+  \mu = \frac{\ln a}{\ln b}.
+\end{displaymath}
+When $\mu <2$ the small $k$--behaviour (large $r$) of $g(k)$ involves the
+exponent $\mu$, while for $\mu >2$ the moments $<x^2>$ is finite and a Taylor
+expansion of $G(k)$ does exist. Summarizing
+it can be shown that
+\begin{equation}
+G_h(k) = \left\{
+         \begin{array}{ll}
+          1 - \mbox{const} |k|^{\mu} + O(k^2) \approx \exp(-|k|^{\mu}), 
+               & \mbox{for} \;\;\; \mu <2 \\
+          1 - \frac{1}{2} <r^2> k^2 \approx \exp(-|k|^2), & 
+                  \mbox{for} \;\;\; \mu >2.)
+         \end{array}
+         \right.
+\end{equation}
+The characteristic function may now be used to calculate $P_n(s)$, the
+probabiity that the walker arrives at $s$  after the $n$--th step.
+
+The probability $P_n(s)$ satisfies the following obvious recurrence formula,
+which is characteristic for all dicrete time random walks,
+\begin{equation}
+\label{eq:DiscreteRwRecurrence}
+  P_{n+1}(s) = \sum_{s'} p(s-s') P_n(s').
+\end{equation}
+It is easy to check that the necessary condition
+\begin{displaymath}
+  \sum_{s} P_n(s) =1
+\end{displaymath}
+is satisfied. In the above sum the summation extends over all lattice points.
+It follows from Eq. (\ref{eq:DiscreteRwRecurrence}) in the limit of lattice
+spacing $\Delta$ (which is now nolonger assumed to be unity) and the time step
+$\tau$ going to zero 
+\begin{displaymath}
+  \lim_{\Delta, \tau \rightarrow 0} \frac{1}{\tau} 
+           \left[ P_{n+1}(s) - P_n(s) \right] =
+          \frac{\partial}{\partial t} P(x,t)
+\end{displaymath}
+and
+\begin{displaymath}
+\lim_{\Delta, \tau \rightarrow 0} \sum_{s'}
+      \left[ p(s-s') - \delta_{s,s'}  \right] P_n(s') =
+     \int_{-\infty}^{\infty} dx'P(x',t) \lim_{\Delta, \tau \rightarrow 0}
+         \left[ p(x-x') - \delta(x-x') \right].   
+\end{displaymath}
+Introducing
+\begin{displaymath}
+  P(k,t) = \int_{-\infty}^{\infty} dy P(y,t) \exp(iky),
+\end{displaymath}
+the equation of motion reads
+\begin{displaymath}
+  \frac{\partial}{\partial t} P(k,t) = \lim_{\Delta, \tau \rightarrow 0} 
+       \left[ \frac{G(k) -1 }{\tau}\right] P(k,t).
+\end{displaymath}
+Hughes et al. \cite{} have demonstraed that for $\beta <2$ the joint limits
+\begin{eqnarray*}
+  a & = & 1 + \alpha \Delta + O(\Delta) \\
+  b & = & 1 + \beta \Delta + O(\Delta)
+\end{eqnarray*}
+and
+\begin{displaymath}
+  \lim_{\Delta, \tau \rightarrow 0} \frac{\Delta^{\mu}}{\tau} = D 
+      = \mbox{const} \;\;\; 0 < \alpha  < 2 \beta
+\end{displaymath}
+yield
+\begin{equation}
+\label{eq:WeierstrassMasterF}
+  \frac{\partial}{\partial t} P(k,t) = - D |k|^{\alpha/\beta} P(k,t).
+\end{equation}
+The solution of the above equation is clearly a L\`evy characteristic function
+\begin{displaymath}
+  P(k,t) = \exp(-D |k|^{\mu}), \;\;\; 0 \le \mu <2.
+\end{displaymath}
+Let us finally remark that the inverse Fourier transform of Eq. 
+(\ref{eq:WeierstrassMasterF}) yields the following integrodifferential
+equation
+\begin{displaymath}
+ \frac{\partial}{\partial t} P(x,t) = \frac{D}{\pi} \sin(\pi \mu/2) 
+         \Gamma(\mu +1) \int_{-\infty}^{\infty} dy
+           \frac{P(y,t)}{|x-y|^{\mu +1}} 
+\end{displaymath}
+as the evolution equation for the probability densiyt of a L\`evy process.
+Remakably, the L\`evy process appears to be nonlocal in the state space of the
+system and therefore no finite number of derivatives can be used to represent
+the kernel in the above equation. In fact the same equation can be associated
+to so--called fractional derivatives \cite{Zaslavski}. Their consideration
+however is beyond the scope of the present book.
+
+L\`evy flights  are realised in several physical systems. Th applications
+arise in different contexts ranging from the diffusion in micelles,
+to laser cooling. Last not least L\`evy statistics finds application 
+in finance.  For a recent survey of the applications of L\`evy statistics to
+physical systems see Ref. \cite{MoreLevyBook}. This refernce contains also
+an article by Mandelbrot on L\'evy.
+
+\section{The continuous time random walk}
+Hier fehlt ein ganzes Stueck!!!!!!!!!
+\subsection{L\'evy alks}
+Because of the  infinite moments L\'evy flights have been ignored in the
+physical literature. It has been shown however that rather then focusing on
+this characteristic feature of Levy flights one shoul concentrate on their
+scaling properties. The divergence of the moments can be tamed by associating
+a velocity to each L\'evy flight trajectory segment. The reasonable question
+one has to pose is then: How far has a L\'evy walker wandered from its
+starting point in time $t$?  The answer to this question is a well--behaved
+time dependent moment of the corresponding probability density. In fact, as we
+will see shortly, a L\`evy random walker moving with a velocity $v$, but with
+an infinite  mean displacemet per jump can have a mean square displacement
+from the orogin that varies as $v^2 t^2$. To see this we make use of the
+continuous time random walk formalism.
+
+Let $\Psi(r,t)$ be the probability density to make a jump of displacement $r$
+in a time $t$. We write
+\begin{displaymath}
+  \Psi(r,t) = \psi(t|r) p(r) =
+             =  p(r|t) \psi(t)
+\end{displaymath}
+where $p(r)$ is the probability desnity of a single jump and $\psi(t)$
+has the same meaning as before and $\psi(r|t)$ and $p(r|t)$ are conditional
+probabilities for a jump takinga time $t$ given it is of distance $r$ and
+respectively for a jump being of distance $r$ given it took at time $t$. For
+simplicity we assume
+\begin{displaymath}
+  \psi(r|t) = \delta(t - \frac{r}{v(r)}),
+\end{displaymath}
+which ensures that $r=vt$. It is important to remark, that random walks with
+explicit velocities visit all points of the jump on the path between 0 and
+$r$. Such random walks are called L\'evy walks in order distinguish them from
+the L\'evy flights, which visit only the end points of the jump. Note that the
+velocitiy need not be constant, it may as weel be a function of $r$.
+
+In 1926 Richardson formulated the law of turbulent diffusion 
+which bears his name. The mean square separation $r$ between two particles in
+a turbulent flow grows like $t^3$. This is of course in contrast with the
+canonical result $<r^2(t)> = Dt$ which we know from the theory of Brownian 
+motion. In the study of turbulent diffusion Kolmogorov assumed a scaling
+behaviour implying
+\begin{displaymath}
+  v(r) \approx r^{1/3}.
+\end{displaymath}
+If we fiurthermore assume
+\begin{displaymath}
+  p(r) \approx |r|^{1+\beta},
+\end{displaymath}
+which for small enough $\beta$ produces a L\'evy flight with $<r^2> = \infty$,
+we find
+\begin{displaymath}
+  <r^2(t)> = \left\{
+              \begin{array}{ll}
+                 t^3, & \mbox{for} \;\;\; \beta \le 1/3 \\
+                 t^{2 + 3(1-\beta)/2}, & \mbox{for} \;\;\; 
+                           1/3 \le \beta \le 5/3 \\
+                 t & \mbox{for} \;\;\, \beta \ge 5/3.
+               \end{array}
+             \right.
+\end{displaymath}
+Thus we see that for $\beta \le 1/3$ Richardson's law may of turbulent
+diffusion may  be reproduced. It corresponds to L\'evy walk with Kolmogorov
+scaling for $v(r)$ combined with such a $\beta$ that the mean time spent by a
+segment of the trajectory is infinite.
+
+The L\'evy walk approach to turbulent diffusion provides a method for
+simulating trajectories of turbulent particles.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
 
