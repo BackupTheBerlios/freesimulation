@@ -1,0 +1,1382 @@
+%%%%%
+%%%%% Chapter
+%%%%%
+\chapter[Sampling of Probability Distributions]%
+{Simple Sampling of Probability Distributions Using Random Numbers}
+
+This Chapter is devoted to the following question: How can we 
+generate sequences of random numbers which are distributed 
+according to some given distribution?
+
+A simple answer to this question would be to exploit some 
+intrinsically random physical process. For example, one could 
+record a sequence of the decay times of some radioactive substance 
+and use this truly random sequence of numbers in a Monte--Carlo
+simulation. Although tables of millions of such true random 
+numbers exist in practice this approach turns out to be very
+impractical. Monte--Carlo simulations need very long sequences of 
+random numbers, so that we have to find more efficient ways to 
+generate them. This requirement is satisfied 
+by so--called pseudo--random numbers.
+Pseudo--random numbers are generated numerically with the help of 
+some simple algorithm on some computer. Consequently, they are
+reproducible. This is, however, not a drawback. In fact, the 
+reproducibility may be very useful if we want to check our 
+simulation algorithms. 
+
+Pseudo--random numbers are, the name already underlines it, not 
+truly random. However, their statistical properties are very 
+similar to the statistical properties of truly random numbers. So, 
+for all practical purposes pseudo--random numbers appear to be 
+random. Let us now see how such pseudo--random numbers can be 
+generated.
+
+\section{The Generation of Uniformly Distributed Random Numbers}
+We will begin with the generation of uniformly distributed random 
+numbers on the interval $[0,1)$. In the following we will often 
+omit the prefix pseudo. 
+
+The best known algorithm for the generation of uniformly 
+distributed random numbers is the linear congruential method, 
+which given an initial integer "seed" value $I_1$ produces random 
+integers recursively using the formula
+\begin{equation*}
+I_{n+1} = (aI_n +c) \mod M,
+\end{equation*}
+where $a$, $c$, and $M$ are integer constants which have to be 
+chosen appropriately. 
+The randomness of the above algorithm results from the fact that 
+after some multiplications with $a$ the result exceeds $M$ and is 
+consequently truncated. Since the integers $I_n$ lie between 1 and 
+$M$ a random number $R$ uniformly distributed 
+between 0 and 1 is obtained as
+\begin{equation*}
+R = \frac{I_n}{M}.
+\end{equation*}
+Unfortunately, MATLAB does not have integer arithmetic so the above algorithm 
+has to be implemented using the {\sf rem} (remainder) function 
+instead of the modulo function. A corresponding code could be
+\begin{verbatim}
+I(n+1) = floor( rem(a*I(n) + c,M) ).
+\end{verbatim}
+The MATLAB function {\sf floor} rounds towards minus infinity.
+In order to get familiar with this algorithm we want to generate a 
+sequence of pseudo--random numbers for the following parameters:
+we choose the multiplier to be $a=5$, the increment $c=3$, and the 
+modulo $M=8$. Obviously the longest period of random numbers will
+have the length 8. The generation of the random sequences will
+be achieved with the program {\sf trandom1}.
+
+\subsubsection{Listing of the program trandom1.m}
+\inputlisting{./Listings/trandom1.m}
+
+Run with the above parameters the program generates the sequence
+\begin{equation*}
+1, 0, 3, 2, 5, 4, 7, 6, 1, 0, 3, 2 \ldots
+\end{equation*}
+which has also been plotted in Fig. (\ref{F_TRANDOM1}).
+\begin{figure}
+\label{F_TRANDOM1}
+\includegraphics[width=10cm]{./Figures/f_trandom1.eps}
+\caption{Successive values in a series of random numbers generated
+for a=5, c=3, M=8. Note that the even numbers are always one less 
+then the odd ones!}
+\end{figure}
+It might be instructive to run the program keeping the multiplier $a$ 
+and the modulo $M$ fixed while changing the increment $c$. The result of 
+these runs are summarized in Table \ref{T_LCG}.
+
+\begin{table}
+\label{T_LCG}
+\caption{Series of random numbers for the linear congruential 
+generator of the form $I_{n+1} = (5I_n +c) \mod 8$}
+\begin{center}
+\begin{tabular}{ccc} \hline\hline
+c &  $I_n$ & Period  \\ \hline
+1 & 1,6,7,4,5,2,3,0 & 8 \\
+2 & 1,7,5,3,1,7,5,3 & 4 \\
+  & 4,6,0,2,4,6,0,2 & 4 \\
+3 & 1,0,3,2,5,4,7,6 & 8 \\
+4 & 1,1,1,1,1,1,1,1 & 1 \\
+  & 2,6,2,6,2,6,2,6 & 2 \\
+  & 3,3,3,3,3,3,3,3 & 1 \\
+  & 4,0,4,0,4,0,4,0 & 2 \\
+  & 5,5,5,5,5,5,5,5 & 1 \\
+  & 7,7,7,7,7,7,7,7 & 1 \\
+5 & 1,2,7,0,5,6,3,4 & 1 \\
+6 & 1,3,5,7,1,3,5,7 & 4 \\
+  & 2,0,6,4,2,0,6,4 & 4 \\
+7 & 1,4,3,6,5,0,7,2 & 8 \\ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+It is evident that a wrong  choice of the constants leads to a 
+very poor random sequence.
+
+It can be shown \cite{Knuth}  that in the case $c=0$ the full 
+period, 1 to $M-1$ can be achieved by choosing $M$ as a prime 
+number and for $a$, a primitive element modulo $m$, i.e., for all 
+prime divisors, $p$, of $(M-1)$, 
+\begin{equation*}
+a^{(M-1)/p} \quad {\rm mod} \quad M \ne 1.
+\end{equation*}
+For the case of $c\ne 0$ the full period is obtained if the 
+following three conditions are satisfied:
+
+(i) $c$ and $M$ are relatively prime,
+
+(ii) $a \quad {\rm mod} \quad p = 1$ for each prime factor $p$ of $M$,
+
+(iii) $a \quad {\rm mod} \quad 4 = 1$ if 4 divides $M$.
+
+It is evident that the greater the modulus the longer the period.
+For example the MATLAB random number generating function uses
+\begin{equation*}
+a= 16807; c=0; M=2^{31}-1.
+\end{equation*}
+to generate equally distributed random numbers in the interval
+$[0,1]$
+This chioce has been suggested by Park and Miller \cite{PRESS}.
+The period of the generator is $2^{31}-2 \approx 2.1 \times 10^9$.
+Another popular random number generator uses
+\begin{equation*}
+a= 65539; M=2^{31}-1; c=0,
+\end{equation*}
+and will be used in the following program {\sf trandom2.m}. There 
+we will draw 3000 random numbers using the linear 
+congruential method. In the program we will check the quality of 
+the generator by plotting the 1D, 2D, and 3D distribution of the 
+pseudo--random numbers. The results of the test can be seen in 
+Figs. (\ref{F_TRANDOM2_1}), (\ref{F_TRANDOM2_2}), 
+(\ref{F_TRANDOM2_3}), and (\ref{F_TRANDOM2_4}).
+
+\subsubsection{Listing of the program trandom2.m}
+
+\subsubsection{Listing of the function {\sf random1}}
+\inputlisting{./Listings/random1.m}
+
+\begin{figure}
+\label{F_TRANDOM2_1}
+\includegraphics[width=10cm]{./Figures/f_trandom2_1.eps}
+\caption{Successive values in a series of 3000 random numbers generated
+for $a=65539$, $c=0$, $M=2^{31}-1$.}
+\end{figure}
+
+\begin{figure}
+\label{F_TRANDOM2_2}
+\includegraphics[width=10cm]{./Figures/f_trandom2_2.eps}
+\caption{Histogram for a series of 3000 random numbers generated
+for $a=65539$, $c=0$, $M=2^{31}-1$.}
+\end{figure}
+
+\begin{figure}
+\label{F_TRANDOM2_3}
+\includegraphics[width=10cm]{./Figures/f_trandom2_3.eps}
+\caption{Correlation between successive values in a series of 3000 
+random numbers generated for $a=65539$, $c=0$, $M=2^{31}-1$.}
+\end{figure}
+
+
+\begin{figure}
+\label{F_TRANDOM2_4}
+\includegraphics[width=10cm]{./Figures/f_trandom2_4.eps}
+\caption{Correlation between successive values 
+$R(i),R(i+1), R(i+2)$ in a series of 3000 random numbers generated
+for $a=65539, c=0, M=2^{31}-1$.}
+\end{figure}
+
+The figures clearly reveal that the generator is not perfect.
+In the exercise we will learn that choosing $a=16807$, the minimal
+standard generator, 
+significantly improves the performance. The performance of 
+this minimal standard generator can be increased by shuffling
+the output to remove low--order serial correlations (EXERCISE!!!!)
+({\sf ran1} of Numerical Recipes).
+
+In the book by Press et al. other "Quick and Dirty" linear 
+congruential generators
+are presented. Furthemore, it is important to remark 
+that serial correlations can be broken up by 
+combining two linear congruential generators.
+
+There are also other algorithms for the generation of random 
+numbers: Shift--register generators (Lit: Kirkpatrick and Stoll), 
+Fibonacci generators (lit: Knuth, James) or quasi--random numbers 
+and we refer the reader to the original literature. Special random
+number generators for parallel computers has been developed.
+
+\section{The Transfomation Method: Invertible Distributions}
+In the previous section we have learned how to generate random 
+numbers with a uniform probability distribution, so that the 
+probability $p(x)dx$ to generate a random number between $x$ and $x+dx$
+is given by
+\begin{equation*}
+p(x)dx = \left\{ \begin{array}{ll}
+                   dx & 0<x<1 \\
+                   0   & {\rm otherwise}.
+                  \end{array}
+         \right.
+\end{equation*}
+With the help of the random variable transformation theorem it is easy
+to transform uniform deviates into random numbers which are 
+distributed according to invertible, one--to--one, distributions.
+We know from Chap. 2 that if we take a uniform deviate $x$ and then 
+transform it to a new variable $y(x)$ the probability distribution
+of $y$ is given by
+\begin{equation}
+p(y) = p(x) \left| \frac{dx}{dy}\right|.
+\end{equation}
+We want to derive a transformation which generates random numbers 
+which are distributed according to a given
+$p(y)$. Since $x$ is uniformly distributed the 
+above equation reduces to
+\begin{equation}
+\label{INVERTIBLE}
+\frac{dx}{dy} = p(y),
+\end{equation}
+which can be easily integrated
+\begin{equation*}
+x(y) = P(y) = \int^y p(y')dy'.
+\end{equation*}
+Hence, the transformation we are looking for is given by the 
+inverse of $P(y)$. Thus, a random variable $Y$ with density $p(y)$
+can be generated by uniform deviates through
+\begin{equation*}
+Y = Y(X) = P^{-1}(X).
+\end{equation*}
+In the following we will apply this method to generate 
+exponentially and Gaussian distributed random numbers.
+
+\subsection{Exponential Distribution}
+Let $p(y)= w\exp(-wy)$ for positive $y$. It follows from Eq. (\ref{INVERTIBLE})
+that
+\begin{equation*}
+\frac{dx}{dy} = w \exp(-wy).
+\end{equation*}
+Therefore we get immediately
+\begin{equation*}
+x(y) = \int_0^{\infty} dy'w\exp(-wy') = 1-\exp(-wy).
+\end{equation*}
+The above expression is easily inverted
+\begin{equation*}
+y=-\frac{1}{w}\ln(1-x),
+\end{equation*}
+and since $x$ is equally distributed in $[0,1]$ we can generate 
+exponentially distributed random numbers with the help of the 
+formula
+\begin{equation}
+y = - \frac{1}{w} \ln(x).
+\end{equation}
+It is clear that in MATLAB such an exponentially distributed 
+random number $Y$ can be generated with the help of the following 
+line of code
+\begin{verbatim}
+y = - log( rand(1) )/w
+\end{verbatim}
+With the help of the simple program {\sf expdistr} we want to 
+generate 1000 exponentially distributed random numbers and compare
+them with the prescribed distribution. We check also the mean 
+value and variance and compare them with the analytical expectation 
+values.
+
+\subsubsection{Listing of the program expdistr.m}
+\inputlisting{./Listings/expdistr.m}
+
+In Fig. (\ref{F_EXPDISTR}) we see the histogram of 1000 drawn exponentially 
+distributed random numbers.
+\begin{figure}
+\label{F_EXPDISTR}
+\includegraphics[width=10cm]{./Figures/f_expdistr.eps}
+\caption{Histogram of 1000 exponentially distributed random numbers with
+mean 1 generated according to the transformation method. The continuous
+line represents the expected exponential distribution.}
+\end{figure}
+
+\subsection{Gaussian Distributed Random Numbers}
+Gaussian distributed random numbers can be obtained with the help 
+of the multidimensional random variable transformation theorem.
+Let us consider the transformation
+\begin{eqnarray}
+\label{GAUSS-GEN1}
+y_1 & = & \sqrt{-2\log(x_1)} \cos(2 \pi x_2) \\
+\label{GAUSS-GEN2}
+y_2 & = & \sqrt{-2\log(x_1)} \sin(2 \pi x_2),
+\end{eqnarray}
+where $X_1$ and $X_2$ are uniformly distributed random numbers on 
+the interval $[0,1]$. Equivalently we can write
+\begin{eqnarray*}
+x_1 & = & \exp[-\frac{1}{2}(y_1^2+y_2^2)] \\
+x_2 & = & \frac{1}{2 \pi} \arctan\left( \frac{y_1}{y_2}\right).
+\end{eqnarray*}
+it is now straightforward  to show that the Jacobian determinant
+reads
+\begin{equation*}
+\frac{\partial(x_1,x_2)}{\partial(y_1,y_2)} = 
+   - \left[ \frac{1}{\sqrt{2 \pi}} \exp(-y_1^2/2)\right]
+   \left[ \frac{1}{\sqrt{2 \pi}} \exp(-y_2^2/2)\right].
+\end{equation*}
+The right hand side of the above equation corresponds to the 
+product of two independent Gaussian distributions. Thus it follows
+from the multidimensional version of the random variable 
+transformation  theorem for invertible distributions that the
+two random number generated according to Eqs. (\ref{GAUSS-GEN1}) 
+and (\ref{GAUSS-GEN2}) are Gaussian distributed. This algorithm 
+which allows the generation of two Gaussian random numbers from 
+two uniformly distributed ones is called the Box--Muller method.
+
+It is easy to implement the above algorithm in 
+MATLAB. This is done in the program {\sf gaussdistr.m} which generates
+gaussian random numbers with mean value $mu$ and variance $sigma$.
+
+\subsubsection{Listing of the program gaussdistr.m}
+\inputlisting{./Listings/gaussdistr.m}
+
+The corresponding histogram obtained by running the program for
+n=1000, mu=0, sigma=2 can be seen in Fig. (\ref{F_GAUSSDISTR}).
+\begin{figure}
+\label{F_GAUSSDISTR}
+\includegraphics[width=10cm]{./Figures/f_gaussdistr.eps}
+\caption{Histogram of 1000 Gaussian distributed random numbers with
+mean 0 and variance 2 generated according to the Box-Muller method. 
+The continuous line represents the expected Gaussian density.}
+\end{figure}
+
+Let us end this subsection by mentioning that normal distributed
+random numbers can be generated in MATLAB with the help of 
+the function {\sf randn}.
+
+\section{The Acceptance--Rejection Technique}
+The acceptance--rejection technique is a method of wide 
+applicability. In its original formulation it is due to 
+von--Neumann. The basic idea is to sample a random number
+from some known and appropriate probability distribution and to 
+perform a test to determine whether or not it is acceptable for 
+use or not. We follow the approach by Rubinstein 
+\cite{RUBINSTEIN} but consider for simplicity only
+the one--dimensional case.
+
+Let us assume that the stochastic variable $X$ is defined on the 
+interval $a \le x \le b$ and is distributed according to the
+probability density $p(x)$. We write this probability distribution 
+as
+\begin{equation*}
+p(x) = C d(x) q(x),
+\end{equation*}
+where $C$ is a normalization constant $C \ge 1$, $q(x)$ is also a 
+probability distribution and $0 \le d(x) \le 1$. The probability 
+distribution $q(x)$ is the importance function, and  we are 
+supposed to know how to generate random variates distributed 
+according to it.
+
+The acceptance--rejection method works as follows. We generate two
+random variates: $\xi$ is uniformly distributed on the interval
+$[0,1)$ and $Y$ is distributed according to $q(y)$. Then we test
+whether or nor the equality
+\begin{equation*}
+\xi \le d(y)
+\end{equation*}
+holds or not. If  the condition $\xi \le d(y)$ is satisfied, 
+then $y$ is accepted as 
+a random variate distributed according to $p(x)$.  If
+the condition is not satisfied, the pair $(\xi,y)$ is rejected, 
+and we have to try again.
+
+It is easy to demonstrate that the above method works. Let us apply
+Bayes'formula to the conditional probability $p(x|\xi \le d(y))$:
+\begin{equation}
+\label{A-R-BAYES}
+p_y(x|\xi \le d(y)) = \frac{{\rm Prob}(\xi \le d(y)|Y=x)q(x)}
+                  {{\rm Prob}(\xi \le d(y))}.
+\end{equation}
+It is straightforward to compute
+\begin{eqnarray*}
+{\rm Prob}(\xi \le d(y)|Y=x) &=& {\rm Prob}(\xi \le d(x)) = 
+          d(x) \\
+{\rm Prob}(\xi \le d(y)) & = & \int {\rm Prob}(\xi \le d(Y|Y=x)) q(x) dx \\
+               &= & \int q(x) d(x)dx = \int dx \frac{p(x)}{C} = 
+                   \frac{1}{C}.
+\end{eqnarray*}
+Inserting into (\ref{A-R-BAYES}) we obtain finally
+\begin{equation*}
+p_y(x|\xi \le d(y)) = Cd(x)q(x)=p(x),
+\end{equation*}
+which completes the proof.
+
+The above discussion also makes evident the role of the constant
+$C$. The efficiency of the method depends on the inequality $\xi \le 
+d(y)$, for independent trials the probability of success is given 
+by $1/C$. $C$ represents the average number of passes which must 
+be made with the algorithm in order to select a variate. It is 
+clear, that in order for the method to be efficient it must be 
+easy to generate random numbers according to $q(x)$ and the 
+efficiency should be large, i.e., $C$ should be close to one.
+
+In the original formulation by von--Neumann the comparison 
+function was simply chosen to be the uniform distribution. If
+$M$ is the maximum of $p(x)$ then we choose
+\begin{eqnarray*}
+q(x) & = & \frac{1}{b-a} \\
+d(x) & = & \frac{p(x)}{M} \\
+C & = & M(b-a).
+\end{eqnarray*}
+The von--Neumann algorithm then simply reads \\
+1. Generate $\chi_1$ and $\chi_2$ uniformly distributed in 
+    $[0,1)$. \\
+2. Evaluate $Y=a+\chi_2(b-a)$. \\
+3. If $\chi_1 \le p(y)/M$ then $Y$ is a variate distributed 
+    according to $p(x)$. \\
+4. Go to 1.
+
+As a simple example we want to generate random numbers on $[0,1)$    
+distributed according to
+\begin{equation*}
+p(x) = 3x^2; \;\;\; 0 \le x <1.
+\end{equation*}
+We choose $C=3$ and apply the von--Neumann algorithm. \\
+1. Generate $\chi_1$ and $\chi_2$ uniformly distributed in 
+    $[0,1)$. \\
+2. Test the inequality $\chi_1 \le \chi_2^2.$     \\
+3. If the equality holds we accept $\chi_2$ as a random number 
+generated according to $p(x)$.
+
+\subsubsection{Listing of the program neumann.m}
+\inputlisting{./Listings/neumann.m}
+
+The above algorithm has been implemented in MATLAB in the program
+{\sf neumann.m}, which we run for $n=1000$ and $n=5000$. The 
+result of the latter run can be seen in Fig. (\ref{F_NEUMANN}).
+\begin{figure}
+\label{F_NEUMANN}
+\includegraphics[width=10cm]{./Figures/f_neumann.eps}
+\caption{Histogram of 5000 random numbers distributed
+according to $p(x) = 3x^2$ generated with the von--Neumann
+acceptance--rejection technique.
+The continuous line represents the exact density $p(x)$.}
+\end{figure}
+In the program we count the number of successful trials. The ratio
+of successful trials to the total number of drawn random pairs for 
+the run shown
+is 0.3328, which is in good agreement with the expected theoretical
+value of $1/C=1/3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variance Reduction: Importance Sampling}
+In this section we will see how the Monte--Carlo integration
+algorithms can considerably be improved. The importance sampling 
+technique will be our first encounter with a so--called variance 
+reduction technique. We already know that the estimation of 
+integrals by the Monte--Carlo method is affected with errors. The
+basic idea of variance reduction techniques is to use known 
+information about the problem in order to improve the efficiency 
+of the simulation. Obviously, if nothing is known about the 
+problem no variance reduction can be achieved. On the other 
+extreme, if we have full knowledge the variance will be reduced to 
+zero, and there will be no need for a simulation. It is always 
+important to be aware of what is known about the system.
+
+We consider again the problem of estimating the integral
+\begin{equation}
+\label{INT_VARRED}
+I = \int dx f(x).
+\end{equation}
+The central idea of importance sampling is to select random 
+variates from regions in proportion to the importance these 
+regions have to the integral we want to evaluate, instead of 
+spreading them evenly. To this end we rewrite the integral 
+(\ref{INT_VARRED}) in the form
+\begin{equation*}
+I = \int \frac{f(x)}{p(x)} p(x) dx = \left\langle 
+\frac{f(x)}{p(x)}\right\rangle,
+\end{equation*}
+where $X$ is a random variable with probability density $p(x)$.
+$P(x)$ is called the importance sampling distribution.  Since the
+integral is obviously the expectation value of the function $f(x)/p(x)$
+it can be estimated using $N$ random numbers $X_i$ distributed 
+according to $p(x)$
+\begin{equation*}
+\hat{I}_N = \frac{1}{N} \sum_{i=1}^N \frac{f(x_i)}{p(x_i)}.
+\end{equation*}
+The function $p(x)$ has to be chosen in such a way that the 
+variance of $f(x)/p(x)$ 
+\begin{equation*}
+{\rm Var} = \left\langle (\frac{f(x)}{p(x)}-I)^2\right\rangle
+   = \int_a^b \frac{f^2(x)}{p(x)}dx - I^2
+\end{equation*}
+is minimal. If $f(x)>0$ it follows from the above equation that
+${\rm Var}=0$ if we choose $p(x)$ as $p(x) = f(x)/I$. 
+Unfortunately, this choice implies that we know already 
+the integral we want to solve. In general, the variance can 
+essentially be reduced if $p(x)$ is chosen to resemble $f(x)$.
+
+As an example we consider the integral
+\begin{equation}
+\label{I_MCI_IS}
+I= \int_0^1 dx \exp(-x^2).
+\end{equation}
+In the first two columns of table (\ref{T_MCI_IS}) we show
+the results of two estimates of the above integral with the 
+help of the standard Monte--Carlo integration. In the third column 
+we show the results of the importance sampling integration.
+
+\begin{table}\label{T_MCI_IS}
+\caption{Monte--Carlo estimates of the integral (\ref{I_MCI_IS})
+using the standard method $p(x)=1$ and the importance sampling method
+$p(x)=a\exp(-x)$}
+\begin{center}
+\begin{tabular}{llll}\hline \hline
+ ~             & $p(x) =1$ & $p(x) =1$ & $p(x)=a\exp(-x)$ \\ \hline
+$N$            & 1000      & 16384      & 1000           \\
+$\hat{I}$            & 0.736087  & 0.74504    & 0.748340        \\
+$\sigma_{\hat{I}_N}$     & 0.00131   & 0.000317   & $9.65 \times 10^{-5}$ \\
+CPU time/trial (s) & 0.000660  & 0.003837   & 0.000860  \\
+total CPU time (s) & 0.66      & 62.86      & 0.86  \\ 
+    \hline  \hline
+\end{tabular}
+\end{center}
+\end{table}
+The simulation was performed with the help of the program
+{\sf mciis.m} whose listing can be seen below.
+
+\subsubsection{Listing of the program mciis.m}
+\inputlisting{./Listings/mciis.m}
+
+The importance sampling function is chosen to be $p(x)=a\exp(-x)$,
+where the constant $a$ is chosen such that $p(x)$ is normalized
+on the  unit interval. Accordingly the $N$ random numbers $X_i$
+distributed according to $p(x)$ are generated with the help of the
+inversion method. Since
+\begin{equation*}
+P(x) = \int_0^x dx' p(x') = a[1-\exp(-1)]
+\end{equation*}
+the exponentially distributed random numbers on the interval $[0,1)$
+are generated according to
+\begin{equation*}
+X = - \log(1- \chi/a),
+\end{equation*}
+where the $\chi$ are uniformly distributed random numbers on the 
+interval $[0,1)$. The generation of these random numbers is 
+performed in lines x to y.
+
+It is important to remark that although the computation time per
+trial is larger in the importance sampling technique, the total CPU 
+time is smaller compared to the standard Monte Carlo algorithm,
+because a much smaller number of realizations is required in order
+to achieve a desired accuracy (variance).
+
+\section{Sampling of Polymer Configurations}
+In this section we want to apply the importance sampling technique
+to one simple problem of polymer physics. 
+\subsection{Ideal Chains}
+One of the simplest idealizations of a flexible polymer chain 
+consists in replacing it by a random walk on a lattice 
+\cite{DE_GENNES,DOI_AND_EDWARDS}. The walk 
+is a succession of steps starting from one end and reaching an 
+arbitrary end point. The analogy between the random walk and the
+polymer stems from the fact that one regards the realizations of 
+the random walk as a possible configuration of the polymer chain.
+We will start by generalizing the one--dimensional random walk
+discussed in the previous chapter.
+
+For simplicity, we consider cubic lattices in $d$ dimensions,
+i.e. a square lattice for $d=2$ and a cubic lattice for $d=3$.
+The stepping probability $p$ from a given site to one of its $q=2d$
+neighbors  is assumed to equal $p=1/q$. The number $q$ is called
+the coordination number of the lattice. The length of one step
+will be $l$. The analogy between random walks and polymer chains 
+is very helpful since it allows to investigate global properties 
+of the polymer.
+
+Let us assume that the random walk begins at $\vec{R}_0$ and that 
+it ends after $N$ steps at $\vec{R}_N$. A typical global property
+of interest in polymer physics is the end--to--end vector,
+which is given by
+\begin{equation*}
+\vec{R} = \vec{R}_N -\vec{R}_0.
+\end{equation*}
+Of course, the end--to--end vector is the sum of the statistically 
+independent increment vectors
+\begin{equation*}
+\vec{r}_i = \vec{R}_i - \vec{R}_{i-1} \;\;\; {\rm for} \;\;\; 
+       i=1, \ldots, N,
+\end{equation*}
+i.e.,
+\begin{equation*}
+\vec{R} = \sum_{i=1}^N \vec{r}_i.
+\end{equation*}
+It is easy to generalize the results obtained previously for the 
+one--dimensional random walk to $d$ dimensions. It is clear, that 
+the projections of the $d$ dimensional $N$ step random walk onto 
+the Cartesian axes are again one--dimensional random walks of, on 
+average, $N/d$ steps. These walks are statistically independent, 
+so that the probability density $p(\vec{R})$ for the displacement
+of the $d$--dimensional random walk of $N$ steps is simply 
+obtained as the product of $d$ one--dimensional random walks of $N/d$
+steps each
+\begin{equation*}
+P(\vec{R},N) = P(R_1,N/d) P(R_2,N/d) \cdots P(R_d,N/d),
+\end{equation*}
+which inserting the Gaussian density for $P(R_1,N/d)$ from Chap. 2 Eq. 
+(\ref{MULTI_GAUSS}) is immediately found to be a $d$--dimensional Gaussian 
+probability density
+\begin{equation*}
+P(\vec{R},N) = \left(3/2 \pi Nl^2 \right)^{(3/2)} 
+              \exp\left( - \frac{3\vec{R}^2}{2Nl^2}\right).
+\end{equation*}
+Obviously, the mean of the end--to--end distance is zero. The mean
+squared end--to--end distance, i.e. the variance of $\vec{R}$, 
+is (see Chap. 2) 
+\begin{equation}
+\label{RW_R2}
+\langle \vec{R}^2 \rangle = N l^2,
+\end{equation}
+which is again linear in $N$.
+
+It is also instructive to look at the fluctuations of $\vec{R}^2$,
+\begin{equation*}
+\Delta_R = \frac{\sqrt{\langle \vec{R}^4 \rangle - 
+                   \langle \vec{R}^2\rangle^2}}
+             {\langle \vec{R}^2\rangle}
+             = \sqrt{\frac{2}{3}}.
+\end{equation*}
+We immediately recognize that the variance $\Delta_R$ does not 
+decrease with increasing system size. Usually, in statistical physics
+fluctuations decrease with increasing number of degrees of freedom.
+Accordingly, the difference between expectation values and the 
+true ensemble average
+scales with $1/\sqrt{N}$. Such a property is called
+self--averaging. It follows from the above discussion that  
+random walks do not have the self--averaging property.
+
+At this stage it might be appropriate to introduce the concept of 
+universality, which allows the classification of the critical 
+behaviour of a large variety of systems in classes with the same 
+universality. The simple properties of the random walk allow the 
+introduction of the Gaussian universality class. Denoting by
+$R = \sqrt{\langle \vec{R}^2\rangle}$ the size of the polymer, we 
+can write  Eq. (\ref{RW_R2}) in the form
+\begin{equation*}
+R = N^{\nu}l,
+\end{equation*}
+where for the simple random walk $\nu = 1/2$ and $R$ is independent of 
+the dimensionality of the lattice. As we will see soon, for other 
+random walks the critical exponent $\nu$ strongly depends on the 
+dimension of the lattice.
+
+Since we want to sample with the help of the following program
+configurations of ideal polymers it is important to consider the 
+number of possible configurations. To this end we compute the 
+number $Z_N$ of distinct random walks. Since each lattice site 
+has $q$ neighbors,
+the number of distinct possibilities at each step is $q$ and the 
+total number of configurations is
+\begin{equation}
+\label{Z_NRW}
+Z_N = q^N.
+\end{equation}
+
+In order to demonstrate the above theoretical results we want to 
+simulate a random walk on a two dimensional lattice.
+The listing can be seen below.
+
+\subsubsection{Listing of the program rw\_2d.m}
+\inputlisting{./Listings/rw2d.m}
+
+A few comments to the listing seem appropriate. 
+The position of the random walker is stored in the matrix
+{\sf pos(1:realizations,1:N,1:2)}, where {\sf realizations} denotes
+the number of realizations, {\sf N} is the number of steps, and 
+the last argument records the position along the x and the y axis.
+In order to generate a realization (lines 31 to 58) we draw at 
+once N random numbers which are equally distributed between the 
+four discrete values 1,2,3, and 4, which number the four
+possible neighbors of the lattice point on which the walker is 
+resting. Then within a for loop over all steps 
+we select at random the new position of the walker
+with the help of the if-elseif-end construction in lines
+42 to 57. These procedure is repeated {\sf realizations} times.
+Finally, we plot the paths of the walker. Since we want to plot 
+all paths in the same square plot (in MATLAB this can be done
+with the help of the command {\sf axis square} it is necessary to find out
+the maximal distance reached by the walker in the 10 realizations.
+This is done in line 68 and the length of the axis is fixed in 
+line 69 with the command
+\begin{verbatim}
+axis([-maximum maximum -maximum maximum]);
+\end{verbatim}. 
+With the help of the {\sf hold on} {\sf hold off} construction we 
+plot  ten realizations on the same figure.
+
+We run the program and generate 10 realizations of a random walk
+of 1000 steps lengths. These realizations can be seen in Fig. 
+(\ref{F_RW_2D}).
+\begin{figure}
+\label{F_RW_2D}
+\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\caption{Ten realizations of a two--dimensional random walk on a square
+lattice.}
+\end{figure}
+It is now left to the exercises to
+investigate the end--to--distance of the
+ideal polymer chain in order to check whether the simulation is in 
+agreement with the Gaussian polymer theory.
+
+
+\subsection{Real Chains}
+In Fig. (\ref{F_RW_2D}) we see that the realizations of the random walk, i.e. 
+the polymer chains intersect themselves. This is of course an 
+unphysical behaviour since real polymer chains do not intersect.
+In order to simulate real chains on a lattice we still can 
+represent  the polymer as a random walk, but now the walk can not 
+intersect itself. Such random walks are called self--avoiding 
+random walks (SAW). In other words the SAW has the constraint that 
+the walker cannot return to sites he already visited. As a natural 
+consequence SAWs are more extended then the usual random walks. Of 
+course, also the universal properties of the SAW are different 
+from those of the Gaussian random walk. In particular the exponent
+$\nu$ strongly depends on the dimension of the lattice. It is 
+clear that in $d=1$ a SAW is simply a rigid rod and we have 
+$\nu=1$. For increasing dimension of the lattice $\nu$ 
+decreases as the self--avoiding constraint becomes less important. 
+For large dimensions the difference between random walk and SAW 
+vanishes. In fact for the critical dimension $d_c =4$ (and for higher
+dimensions) random walk 
+and SAW have the same universal properties \cite{DE_GENNES,RAPOSO}. 
+
+In general it is not 
+possible to evaluate the critical exponent $\nu$ analytically for the 
+SAW. This is possible only for $d=1,d=2$ and $d \ge4$. However, a 
+simple mean field theory, the Flory theory, makes the following 
+predictions
+\begin{equation*}
+\nu = \left\{ \begin{array}{cl}
+               3/(2+d) & \;\;\; {\rm for} \;\;\; 1 \le d \le 4, \\
+               1/2     & \;\;\; {\rm for} \;\;\; d\ge 4.
+\end{array}
+       \right.
+\end{equation*}
+As we will see this theoretical predictions agree well with the 
+stochastic simulations (!!!!!).
+
+The total number of self--avoiding random walks of $N$  steps has 
+(for large $N$) the following asymptotic form
+\begin{equation*}
+Z_N = {\rm constant} \times \quad N^{\gamma-1} q_{\rm eff}^N.
+\end{equation*}
+The second factor in the above scaling law reminds us of the expression
+(\ref{Z_NRW})  which holds for ideal random walks. The effective 
+coordination number is smaller then the coordination number $q$, 
+e.g. in 3 dimensions on a cubic lattice 
+we have $q=6$ and $q_{\rm eff}=4.68$ and in two dimensions on a squared
+lattice we have $q=4$ and $q_{\rm eff}=2.63$ 
+\cite{KREMER_AND_BINDER}. The first factor
+$N^{\gamma -1}$  is called the enhancement factor. The universal
+exponent $\gamma$ depends on the dimension of the lattice
+\begin{equation*}
+\gamma \approx \left\{ \begin{array}{cl}
+                        7/6 & {\rm for} \;\;\; d=3 \\
+                        4/3 & {\rm for} \;\;\; d=2.
+                       \end{array}
+               \right.
+\end{equation*}
+Note that for $d=1$ we have $Z_N = 2$, independently of $N$. 
+Hence, $q_{\rm eff} = 1$ and $\gamma =1$.
+
+As an application of the sampling techniques we have learned in 
+this chapter we address the problem of generating 
+configurations of real polymer chains on a lattice, or in other 
+words we want to generate realizations of SAW on the computer.
+
+DISKUSSION VON E(R2) SAW !!!!!!!!!!!!!
+
+\subsubsection{Simple sampling}
+The simplest algorithm to generate chains of  length $N$ is the 
+following one. We start at the origin. The first step is, of 
+course,  taken randomly from the $q$ adjacent sites. The following 
+steps are taken from the remaining $q_0=q-1$ possible directions, 
+because a direct backfolding is forbidden. Of course, the SAW 
+condition is also violated whenever the chosen lattice site is 
+already taken. In fact, the self--avoiding walk has an infinite
+memory. In such cases the attempted walk is terminated and 
+discarded and we have to start with a new chain. In this way we 
+automatically fulfill the condition that all walks  of equal 
+length have the same probability. All sampled configurations are 
+statistically independent and hence the standard error analysis 
+is possible. It is instructive to estimate that the success rate
+$s_N$, i.e., the fraction of walks that will continue successfully 
+for $N$ steps, is of the order
+\begin{equation*}
+s_N = \frac{Z_N}{q(q-1)^{N-1}} \approx
+      \frac{N^{\gamma -1} q_{\rm eff}^N}{q(q-1)^{N-1}}
+       = \left( \frac{q_{\rm eff}}{q-1}\right)^N 
+         \left( \frac{q-1}{q} \right) N^{\gamma -1},
+\end{equation*}
+which for large $N$ decreases exponentially as
+\begin{equation*}
+s_N \approx \exp(-N \mu),
+\end{equation*}
+with $\mu=\ln[(q-1)/q_{\rm eff}]$. 
+On a two--dimensional square lattice $\mu = 0.128$, on a 3d cubic lattice
+$\mu = 0.065$ \cite{KREMER_AND_BINDER}. Because of this exponential 
+decrease it is very  difficult to generate very long chains with 
+the simple sampling algorithm. This problem is called the 
+"attrition problem". In Fig. (\ref{F_RW_ATTRITION}) we have 
+plotted the average number of trials necessary to generate 
+polymers of a given length as a function of the length of the
+polymers.
+\begin{figure}
+\label{F_RW_ATTRITION}
+\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\caption{Attrition problem: The average number of trials necessary to 
+generate polmers of a given length increases exponetially with the
+lentgth of the polymers .}
+\end{figure}
+The figure was generated with the help of the program {\sf 
+RW\_2D\_sa.m}.
+\subsubsection{Listing of the program RW\_2D\_sa.m}
+\inputlisting{./Listings/rw2dsa.m}
+
+\subsubsection{Importance sampling}
+To overcome the attrition problem it is necessary to exploit 
+biased sampling techniques. One such technique is the "inversely
+restricted sampling" of Rosenbluth and Rosenbluth \cite{ROSENBLUTH}. 
+The idea is to
+associate each SAW of $N$ steps with appropriately chosen weighting 
+factors. 
+
+We consider a SAW of $i$ steps on a lattice with the coordination 
+number $q$. In order to sample the next step we have to check  
+which of the $q_0 = q-1$ neighboring sites is empty. Essentially,
+we have two possibilities:
+
+1. If $k$ ($q_0 \ge k >0$) sites are empty we choose the possible 
+steps with equal probability $1/k$.
+
+2. If there is no empty site ($k=0$) we terminate the walk and 
+start from the beginning.
+
+It is clear that each $N$ step walk has the probability
+\begin{equation*}
+P_N(\{ \vec{r}_i \}) = \prod_{i=1}^N (k_i)^{-1}
+\end{equation*}
+and hence dense configurations are more probable. Thus this 
+obvious procedure of choosing only among those  sites that do not 
+violate the SAW condition does not give equal statistical weights
+to the generated configurations. But since we have seen that these 
+weight can be calculated we can compensate this bias by weighting 
+each chain in the sample by the factor
+\begin{equation*}
+W_N(\{ \vec{r}_i \}) =  \prod_{i=1}^N \frac{k_i}{q_0}.
+\end{equation*}
+Note, that we have $W_N P_N = q_0^{-N}$. The importance 
+sampling procedure samples 
+exactly the same configuration space as simple sampling.
+
+The correct way to estimate $\langle \vec{R}^2 \rangle$ is
+\begin{equation*}
+\langle \vec{R}^2 \rangle = \frac{\sum_{l=1}^M W_{N,l} R^2_{N,l}}
+                               {\sum_{l=1}^M W_{N,l}},
+\end{equation*}
+where the sum is over all realizations.
+
+In order to compare the two sampling techniques we have written a 
+program {\sf RW\_2D\_sa2.m} (VORSCHLAG: SAW2 !!!!!!) 
+which by specifying an input parameter
+draws configurations of real chains on a two--dimensional squared lattice 
+with the simple sampling 
+technique or with the biased (importance) sampling technique.
+The flow diagram of the program can be seen in Fig. 
+(\ref{F_RW2D_ALGORITHM}).
+\begin{figure}
+\label{F_RW2D_ALGORITHM}
+\includegraphics[width=10cm]{./Figures/f_rw2d_algorithm.eps}
+\caption{The flow diagram of the program saw2.m.}
+\end{figure}
+
+
+\subsubsection{Listing of the program {\sf rw\_2d\_sa2.m}}
+\inputlisting{./Listings/rw2dsa2.m}
+
+Let us comment on the program. BLA BLA BLA !!!!!!!!!
+We run the program for the following set of parameters. We variate
+the length of the SAW from N=5 to N=55 in steps of 10. For each
+SAW length we generate 10 realizations first with the simple
+sampling technique and second with the importance sampling 
+technique. 
+
+First we run the program for the simple sampling algorithm.
+In Fig. (\ref{F_SAW1S}) we see 5 realizations of the self--avoiding 
+random walk for N=55 generated by the importance sampling technique. 
+In Fig. (\ref{F_SAW2S}) we show the mean square end--to--end 
+distance as a function of N in a double logarithmic plot. The 
+continuous line indicates the theoretically expected behaviour
+whereas the dotted line is the result of the least square fit to a 
+straight line from which we derived the scaling exponent. In 
+Fig. (\ref{F_SAW3S}) we plot the CPU time necessary to generate
+10 realizations of a polymer of a specific length as a function of 
+N. One easily recognizes that the CPU time increases 
+exponentially. The critical exponent determined by the least 
+square fit $R^2 \approx aN^s$ where a=0.81 and s=1.36.
+Thus the estimate of the critical exponent is 
+$\nu=0.68$ (the expected result is 0.75).
+
+\begin{figure}
+\label{F_SAW1S}
+\includegraphics[width=10cm]{./Figures/f_saw1s.eps}
+\caption{Five realizations of a two--dimensional self--avoiding 
+random walk on a square lattice generated by the simple sampling 
+technique.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW2S}
+\includegraphics[width=10cm]{./Figures/f_saw2s.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk generated by the simple sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW3S}
+\includegraphics[width=10cm]{./Figures/f_saw3s.eps}
+\caption{The CPU time for generating 10 realizations  of a 
+self--avoiding random walk  by the simple sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+Let us now discuss the importance sampling approach.
+In Fig. (\ref{F_SAW1}) we see 5 realizations of the self--avoiding 
+random walk for N=55 generated by the importance sampling technique. 
+In Fig. (\ref{F_SAW2}) we show the mean square end--to--end 
+distance as a function of N in a double logarithmic plot. The 
+continuous line indicates the theoretically expected behaviour
+whereas the dotted line is the result of the least square fit to a 
+straight line from which we derived the scaling exponent. In 
+Fig. (\ref{F_SAW3}) we plot the CPU time necessary to generate
+10 realizations of a polymer of a specific length as a function of 
+N. One easily recognizes that the CPU time increases 
+exponentially. The critical exponent determined by the least 
+square fit $R^2 \approx aN^s$ where a=0.424 and s=1.404.
+Thus the estimate of the critical exponent is 
+$\nu=0.702$ (the expected result is 0.75).
+\begin{figure}
+\label{F_SAW1}
+\includegraphics[width=10cm]{./Figures/f_saw1.eps}
+\caption{Five realizations of a two--dimensional self--avoiding 
+random walk on a square lattice generated by the importance sampling 
+technique.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW2}
+\includegraphics[width=10cm]{./Figures/f_saw2.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk generated by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW3}
+\includegraphics[width=10cm]{./Figures/f_saw3.eps}
+\caption{The CPU time for generating 10 realizations  of a 
+self--avoiding random walk  by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+
+In table (\ref{T_SAW}) we sum up the results of the simulations.
+\begin{table}
+\label{T_SAW}
+\caption{Values of $<\vec{R}^2>$ as functions of $N$, 
+for two--dimensional random walks generated by the simple sampling 
+(ss)
+and by the importance sampling (is) technique.}
+\begin{center}
+\begin{tabular}{rrr} \hline \hline
+$N$ & $<\vec{R}^2>(ss) $  &  $<\vec{R}^2>(is) $    \\ \hline
+5   &  7.0       &  4.3   \\
+15  &  41.6       &  14.02  \\
+25  &  51.2       &  44.20     \\
+35  &  86.6       &  100.13 \\
+55  &  193.8       &  72.51    \\ 
+65  &  179.2       &  103.79   \\ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+In the next table  (\ref{T_SAW_LONG}) we show the result of another 
+run of the program
+{\sf rw2dsa2} which was run for 500 realizations.
+\begin{table}
+\label{T_SAW_LONG}
+\caption{Mean square end--to--end distance estimated by importance
+sampling from a sample of 500 realizations.}
+\begin{center}
+\begin{tabular}{ll}\hline \hline
+$N$  & $<\vec{R}^2>$  \\ \hline
+10   & 13.709    \\
+30   & 45.651  \\
+50   & 53.559 \\
+70   & 153.023  \\
+90   & 234.747 \\
+110  & 220.095 \\
+130  & 350.079 \\
+150  & 566.384 \\
+170  & 711.81 \\
+190  & 744.514  \\
+\hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+The same data are depicted in Fig. (\ref{F_PLOTSAWLONG1}).
+\begin{figure}
+\label{F_PLOTSAWLONG1}
+\includegraphics[width=10cm]{./Figures/f_plotsawlong1.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk estimated from a sample of 500
+realizations by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+The scaling behaviour estimated from the above data is found to be
+$R^2=aN^s$, where a=0.38614 and s= 1.41248. Thus the critical 
+exponent is found to $\nu = 0.706$.
+
+Fig. (\ref{F_PLOTSAWLONG2}) shows the corresponding CPU time 
+consumption.
+\begin{figure}
+\label{F_PLOTSAWLONG2}
+\includegraphics[width=10cm]{./Figures/f_plotsawlong2.eps}
+\caption{The CPU time for generating 500 realizations  of a 
+self--avoiding random walk  by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+
+IRGENDEIN VERGLEICH ZWISCHEN SIMPLE UND IMPORTANCE SAMPLING !!!!!
+
+
+FIGUREN: FEHLER!!!!
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+
+\begin{Ex}
+\label{Random-Number_Generator}
+\textbf{Random-Number Generator \cite[Chapter 7]{recipes}} \\
+Now that we have already used random numbers for many simulations, we
+would like to know, how to generate random numbers on a computer.
+Therefore write a
+program, which produces random numbers using the linear congruential
+method. That means, succesive random numbers are generated by
+$$ I_{n+1} = (aI_n +c) \mod M ,$$
+where $I_1$ is the initial seed.
+
+Use the following parameters:
+\begin{enumerate}
+\item $a= 16807; c=0; M=2^{31}-1$ (the Matlab parameters for rand, the
+  ran0 routine from Numerical Recipes book)
+\item $a= 65539; c=0; M=2^{31}-1$
+\end{enumerate}
+
+Compare the sequences of the two generators by looking at the
+produced distribution, calculating the moments (use Assignment 2),
+looking at vectors of random numbers with length 2 and 3 using the
+plotting facilities of Matlab.
+
+Maybe you have another idea to check the random number generators??
+(Don´t forget to tell us \ldots)
+\end{Ex}
+
+\begin{Ex}
+\label{Poisson_Distribution}
+\textbf{Poisson Distribution \cite[Chapter 3.7.2]{rubinstein:81}} \\
+Write a program to produce Poisson distributed random numbers.
+$$ P_\lambda (n) = \frac{\lambda^n e^{-\lambda}}{n!}, \quad n\in\mathbb{N},
+\lambda >0  \qquad \text{Poisson Distribution}$$
+
+The first way would be to use the rejection method as described in
+\cite[Chapter 7.3]{recipes}. We want to use a different method,
+based on the generation of the exponential distribution (and therefore
+the transformation method).
+
+If the time intervals between some events are from an
+exponential distribution, then the number of events occurring in an
+unit interval of time is from the Poisson distribution $P_\lambda(n)$.
+Which means (use $T_i = -(1/\lambda) \ln U_i$, $U_i$ in (0,1))
+$$ \sum_{i=0}^x T_i \leq 1 \leq \sum_{i=0}^{x+1} T_i \Leftrightarrow
+ \prod_{i=0}^x U_i \geq e^{-\lambda} \geq \prod_{i=0}^{x+1} U_i$$
+where $T_i$ ($i=0,1,\ldots ,x+1$) are drawn from $\exp(1/\lambda T_i)$.
+Then  the corresponding algorithm reads like: ($A$ is a real variable,
+$k$ is an integer variable)
+\begin{enumerate}
+\item Set $A=1$ and $k=0$
+\item \label{return} Generate a random number $U_k$ from U(0,1)
+  (uniform distribution, but not U[0,1] !)
+\item Set $A$ to $A \times U_k$
+\item if $A < e^{-\lambda}$ then use $k$ as random number and finish!
+\item set $k$ to $k+1$ (increment $k$) and return to step \ref{return}
+\end{enumerate}
+
+Again check the generated sequences of random numbers like in the
+previous exercises.
+\end{Ex}
+
+\begin{Ex}
+\label{Acceptance-Rejection-Method}
+\textbf{Acceptance-Rejection-Method \cite[Chapter 3.4.2]{rubinstein:81}} \\
+Calculate the volume of a $n$-dimensional hypersphere, or in other words:
+generate a random vector uniformly distributed inside an $n$-dimensional
+unit sphere using the Acceptance-Rejection-Method.
+
+The idea is to produce a vector inside the n-dimensional hypercube and
+accept all random vectors lying inside the hypersphere. Remember that you
+have to produce numbers in $[-1,1]$, so you have to transform the
+numbers generated by \texttt{rand()} to be in the desired interval.
+
+What is the exact result? Compare it with the estimated values and plot
+the error versus the dimension $n$.
+
+What has to be changed, if you want to calculate the surface of the
+unit-sphere?
+
+Is the algorithm efficient for large $n$ and why/why not?   
+\end{Ex}
+
+\begin{Ex}
+\label{Importance_Sampling}
+\textbf{Importance Sampling \cite[page 122]{rubinstein:81}} \\
+First calculate the integral (Maxwell-Boltzmann-distribution for the
+modulus of the velocity)
+$$ \int_0^\infty v e^{-v^2} dv = \left. -\frac{1}{2} e^{-v^2}\right|_0^\infty =
+      \frac{1}{2} , $$
+using the standard Monte-Carlo-Integration with simple sampling.
+Use a reasonable cut-off value $c$ to get rid of the infinite integration
+interval. What is the systematic error involved using a cut-off of $c$?
+e.g. use a $c$ to reduce the systematic error to be lower than $10^{-10}$!
+($-\frac{1}{2} e^{-c^2} < \epsilon =10^{-10} \Rightarrow c > 4.73,$ so $c=10$ would be
+a very good choice.)
+
+Now write a program for calculating the same integral, but using
+the importance sampling method. Therefore we choose the
+importance function (distribution) to be
+$$ p(v) = e^{-v^2}.$$
+So the integral to be calculated for this $p(v)$ is
+$$ I_c=\int_0^c \frac{v e^{-v^2}}{e^{-v^2}} \times e^{-v^2} =
+ \int_0^c v \times p(v) dv.$$
+You have to generate random numbers distributed with $p(v)$ (normally
+distributed random numbers can be generated in Matlab using the \texttt{randn()}
+function.) and evaluate the integral $\int_0^c v dp(v).$ If you use
+\texttt{randn()}, you have to correct for the normalization factor of
+the normal distribution.
+
+The formula for the standard MCI:
+$$ I_c = \frac{1}{N} \sum_{i=0}^N c \, \xi ,$$
+where $\xi$ is a normally distributed random number.
+
+Compare both methods using a plot of accuracy versus CPU-time.
+\end{Ex}
+
+\begin{Ex}
+\label{First_Passage_Times}
+\textbf{Symmetric 2D Random Walk - First Passage Times} \\
+Write a program for a 2D random walk (not self avoiding) on a square
+lattice with constant step size.
+
+Use a sample of walkers to calculate an estimate of the time (number of steps)
+it needs, to cross a given circle around the origin with Radius $R$.
+This is called the {\em first passage time}.
+
+\begin{center}
+  \includegraphics[width=6cm]{RW_2D_Lattice.eps} \\
+A square lattice in 2D with a symmetric random walker (probability for each
+direction is $p$) starting at the origin and crossing the circle with
+radius $R$ after three equidistant steps with size $a$.
+\end{center}
+\end{Ex}
+
+\begin{Ex}
+\label{Scaling_Random_Walk}
+\textbf{Scaling Behavior of Random Walk in 2D and 3D} \\
+Write a program for a 2D random walk on a square lattice (symmetric and
+asymmetric). Use this program to calculate the scaling behavior of the
+end-to-end distance $< R^2 >$ for different lengths $N$ of the walk.
+
+After viewing some nice walks, plot the end-to-end distance versus the
+length $N$ of the random walk. If you have enough data, do a least square
+fit using the \texttt{polyfit} function of Matlab using a   
+fit function: $$ < R^2 > = a N^b ,$$ to get $a$ and $b.$
+
+Then extend the program to a 3D random walk on a cubic lattice and 
+again analyze the scaling behavior of the end-to-end distance.
+
+Now compare your results $(b)$ with the experiments done in the lecture
+about the self-avoiding random walk!
+
+Remark: A least square fit is a method, where you fit a analytically
+known function with (observed) data. The function is given using
+certain parameters (here the function is $y=R^2=a N^b$) and the 
+parameters have to be calculated. This is done by minimizing the
+euclidean distance (``mean square'') between the function and the data.
+\end{Ex}
+
+\begin{Ex}
+\label{Percolation}
+\textbf{Percolation in 2D and Cluster Algorithms %
+        \cite[Chapter 4.2]{mackeown:97}} \\
+Assume we have a 2D plane divided into cells of equal size. We start by
+sweeping the whole plane from the upper left corner to the 
+lower right corner. With probability $p$ we set each cell to one 
+(with probability $1-p$ to zero). Then we are left with an array of
+ones and zeros. 
+
+Now we analyze this pattern by looking for clusters of ones in the whole
+plane. A cluster is an area of ones where  the ones are connected to 
+each other in the nearest neighbor sense (no diagonal bonds possible).
+If we have a cluster connecting the left side with the right side or the
+upper and the lower side, we call
+it a {\em spanning cluster}. Otherwise it is just a finite cluster of
+a certain size.
+
+Now, one is interested in the critical probability $p_c$, where such 
+spanning clusters occur or do not occur. Of course using a simulation
+with finite size, we get a broad interval (instead of a sharp one) 
+in which the transition of the two behaviors takes place. We will  
+neglect such finite size effects and concentrate on the transition
+probability.
+
+{\small
+Now you can watch the configurations and decide if there is a spanning
+cluster or not. That is very tedious. Therefore we give a very easy algorithm
+for clustering the given configuration ({\em The Hoshen-Kopelman algorithm}): 
+We need two arrays, one stores the indices (say $N(m)$, a 1D array) 
+and the other
+one stores the labels assigned to each site (say $L(i,j)$, a $N\times N$-array,
+where $N$ is the number of cells in one direction).
+
+You scan all the \underline{occupied sites} 
+starting with the upper left corner assigning a 
+label to each site using the following rules (unoccupied sites are labeled
+with zero):
+\begin{itemize}
+\item if neither of the site above and to the left of the cell are occupied,
+  you assign a new integer value $m$ to the site and set 
+  $N(m)=m$. 
+\item if the left and/or the upper site are occupied and have the same
+  label assigned to them, you give the site the same label.
+\item if the labels of the left and upper site are different, you assign
+  the smaller (say $k$) of the two labels to the new site. And you set the index
+  of the larger one also equal to this value ($N(\text{larger})=k$).
+\end{itemize}
+After you have swept over all sites, you have to remove redundant labels
+from  the array $N$. An index is redundant, 
+if the index $h$ is not equivalent to the label stored in $N(h)$. 
+and change the corresponding labels in the 2D array $L(i,j)$. 
+Now you are done: Just look for the labels on opposite faces, if there
+are same labels on them, you have a spanning cluster.
+} %end small
+
+Write a program for a percolation in 2D and try to estimate the 
+critical probability. Increase the size of the grid and compare.
+To that end plot the probability distribution of having a spanning
+cluster versus the probability $p$ used for creating the configuration.
+For 2D $p_c$ can be calculated analytically: $p_c=0.5.$
+\end{Ex}
+
+\begin{Ex}
+\label{Einstein_Solid}
+\textbf{The Einstein Solid and the Boltzmann Distribution %
+              \cite[Chapter 5]{ruhla:92} } \\
+The probability for an oscillator in a solid to be in a state with energy 
+$\epsilon$ is given by the Boltzmann distribution (canonical distribution)
+$$ P(\epsilon_i) = 
+      \frac{1}{Z}\exp \left( - \frac{\epsilon_i}{k T} \right) \quad ,$$
+where $Z$ is the partition function ($Z=\sum_i \exp(-\epsilon_i/kT)$).
+This distribution plays a very important role in physics and 
+especially in statistical
+mechanics. To get a first impression of the distribution and to
+have a very simple model producing a Boltzmann distribution, we study
+a very simple model for a solid, named after Einstein. 
+
+We study a 2D plane and divide
+the plane into cells of equal sizes, like quantum mechanics through
+the Heisenberg uncertainty principle prescribes. Each cell represents
+an atom and each atom can vibrate around its equilibrium position in the
+middle of the cell. The strength of the vibration is quantized and
+given in multiples of a fundamental mode with energy $\hbar \omega$. 
+Because we have an isolated
+system, no energy gets dissipated or absorbed. The only way of changing
+the configuration is by hopping of a quanta from one cell to another
+(which is just a transfer of an energy quantum $\hbar \omega.)$
+
+The algorithm (sometimes called temperature game) reads as follows:
+\begin{itemize}
+\item Initialize all cells with 1 quanta
+\item Choose a source cell and a destination cell at random (drawn
+  from a uniform distribution)
+\item If there is NO quanta in the source cell, draw new random numbers.
+\item If there is a quanta in the source cell to jump and the destination
+  cell is not equivalent to the source cell, do a jump of one quanta from
+  source cell to destination cell.
+\item Having done enough jumps, we reach the equilibrium situation. Now we can
+  count the number of cells $\nu$ having zero, one, two, etc. quanta in it (call
+  these $m(\nu)=m(\epsilon_\nu)$).
+  By plotting the corresponding histogram, we get the Boltzmann distribution.
+\end{itemize}
+The energy of a cell at the end is just the number of quantas $\nu$ times
+the energy per quanta plus $1/2\hbar\omega$ (assuming harmonic oscillations).
+From now on, we neglect the zero temperatur energy of the harmonic oscillator
+to make life easier (it is just a shift of energy anyway.).
+
+The Boltzmann distribution for the histogram is 
+$$ m(\epsilon_\nu) = m(0) \exp
+        \left(-\frac{\nu\hbar \omega}{kT}\right)\quad .$$
+So to find the ``temperature'' of the solid, we have to use a fit of the
+Boltzmann distribution to the data and extract the value $\nu_{1/2}$, where
+the distribution has come down to half of the initial value $m(0)$. 
+Then we can use
+$$ \frac{\hbar\omega}{kT} = \frac{\ln 2}{\nu_{1/2}} \quad ,$$ 
+and can calculate the temperature for the given system. The temperature
+depends only on the size of the simulation and therefore the total number of 
+quantas present.
+
+Write a program to implement the above algorithm in Matlab. Watch the
+configuration evolving in time (especially at the first steps). Compare
+the calculated distribution with a Boltzmann distribution using a least square
+fit in a semilogarithmic (y-axes) plot (use \texttt{polyfit}). Why don´t
+we get a uniform distribution as an equilibrium distribution? 
+\end{Ex}
+
+
+%\begin{Ex}
+%\label{Percolation}
+%\end{Ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{peter}
+\bibliography{V_98,simulit}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
