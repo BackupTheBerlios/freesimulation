@@ -548,6 +548,24 @@ the Internet Explorer\footnote{Seems to run Java 1.1 programs since
 version 4, but does not conform to the Java standards.}(Don't),
 HotJava or the appletviewer\footnote{included with the JDK.}.
 
+In the case of an applet, you have a browser loading a HTML 
+(Hyper Text Markup Language) file. This HTML file contains
+markups, which tell the browser what applet to load and
+where to find the applet (see figure \ref{fig:HTMLOverview}). 
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/HTMLOverview.eps}
+    \caption{An HTML file gets loaded into the browser. The browser itself formats the text and if it finds an applet mark, it starts the applet.}
+    \label{fig:HTMLOverview}
+  \end{center}
+\end{figure}
+You should note that HTML is not a programming language, but
+it is a mark-up language to produce a text with additional
+``commands'' for the meaning of the text parts. It does also
+not give any details about the formatting or layout of the
+text. To start an applet HTML has some special marks, which we
+will see in a moment.  
+
 The big difference between an applet and an application is that
 applets are not allowed to do certain things. For example applets
 do not have access to local file systems, so it is not possible
@@ -616,6 +634,7 @@ the appletviewer, in different ``servers'' it might work or not. In the
 future this will be extended to a more extensive set of rules for the
 allowed methods of an applet.
 
+\paragraph{Documenting Java Programs -- javadoc}
 A last remark concerns the documentation for the programs. We have
 learned, that we can include documentation comments using 
 \verb|/** .... */|. These comments are processed by using the
@@ -691,7 +710,8 @@ of the HTML directoryc called \verb|images| .
 Then it looks like the figure on the left.
 
 The javadoc command of the JDK 1.2 produces much nicer pages which
-look like in figure \ref{fig:Java2HTMLDoc}. There are no pictures
+look like in figure \ref{fig:Java2HTMLDoc}. There are no separate 
+gif pictures
 needed anymore and the structure of the classes is represented
 much better.
 \begin{figure}[htbp]
@@ -826,7 +846,7 @@ it is much more complex and should be avoided.
 A common problem is to convert from strings to primitive types and
 vice versa. Because strings are objects and not primitive types, we
 need a method for the conversion. For that reason Java has so called
-wrapper classes, subclasses of the \verb|Java.lang.Number| class 
+wrapper classes, subclasses of the \verb|java.lang.Number| class 
 for all primitive datatypes. 
 These classes provide all the necessary methods for all types of
 conversion. 
@@ -992,7 +1012,7 @@ will be explained later.
 There is one class, which is always imported without any import statement:
 the \verb|java.lang.*| classes. This is the fundamental class of Java and it is
 implicitly imported for all Java programs, so you do not have to specify
-it. For example the System class is in \verb|Java.lang|, that is why
+it. For example the System class is in \verb|java.lang|, that is why
 we did not have to use an import statement in the ``Hello World''
 application.  
 
@@ -1014,7 +1034,7 @@ the whole project, but only the files which have changed\footnote{Notice
 that there is no dependance of classes on others classes in the
 sense of recompilation. Java does dynamical run-time linking and no static 
 linking at the end of the compilation process as in all other languages.}
-should be recopmpiled, you issue the
+should be recompiled, you issue the
 command \verb|javac -depend -d base_directory main.java|. Then
 the Java compiler takes care of all ``dependencies''.   
 
@@ -1142,8 +1162,9 @@ You can check this by running the application more than once and comparing
 the means -- they should not be the same. 
 
 The \verb|next.Double()| method returns a new random number of type
-double (for a float use rand.Float()). You can also create normally 
-distributed random numbers with the \verb|Random.nextGaussian()| method.
+double (for a float use \verb|rand.nextFloat()|). You can also create normally 
+distributed random numbers with the \verb|nextGaussian()| method of
+the \verb|Random| class.
 The remaining parts of the program should be self explaining. You can of
 course use any expression (e.g. \verb|d=d*u+2|) 
 in the last part of the for statement, not only
@@ -1153,6 +1174,7 @@ the \verb|++| operator, which is obviously used most often.
 Using the \verb|DataMean()| program, we want to show the bytecode
 produced by the Java compiler. In the first line you can see the
 command to use (\verb|javap|) and below the output:
+\begin{scriptsize}
 \begin{verbatim}
 Command_Line>>> javap -c DataMean
 
@@ -1215,7 +1237,7 @@ Method DataMean()
    1 invokespecial #11 <Method java.lang.Object()>
    4 return
 \end{verbatim}
-
+\end{scriptsize}
 
 \paragraph{while and do--while}
 Java offers also the possibility to use other loop constructs, the
@@ -1291,7 +1313,7 @@ The meaning of the different expressions in the above stement should
 be obvious.
 
 
-\paragraph{goto}
+\paragraph{(labelled) break and continue -- goto}
 We already remarked that Java does not have a \verb|goto| instruction
 to transfer control to an arbitrary statement in a method. To handle
 with situations where other languages have a \verb|goto| Java provides
@@ -1322,9 +1344,6 @@ it should be avoided. First because of the clarity of the code
 and second it has low performance and larger memory consumption. 
 Therefore we do not see any reason to show an example, just
 avoid using recursive algorithms.
-
-
-An dieser stelle sollten einige beispiele kommen!!!!!
 
 \paragraph{switch/case}
 
@@ -1360,65 +1379,6 @@ case expressions have to be integral values and not any boolean
 expressions like \verb|i>2|. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Parameters from the Command Line or a HTML File}
-\label{sec:Parameter}
-
-\subsubsection{Parameters from the command line}
-The access of parameters given on the command line is as easy as it
-is in C and C++. The parameters are stored as strings in Java and
-are given as the parameters to the main() method of the application.
-That is the reason for the Syntax:
-\begin{quotation}
-  \verb|public void main(String[] args) |
-\end{quotation}
-It means that the array \verb|args| (see section \ref{sec:Arrays}
-for an explanation of arrays) contains the parameters. Each parameter
-is separated with a space in the command line. Here is an example of a 
-program using command line parameters:
-\inputlisting{Listings_Java/ParamCommandLine.java}
-So if you run the program as \verb|java ParamCommandLine 12 34 abcd t5|
-the output on the screen will be
-\begin{verbatim}
- Parameter No. 0 : 12
- Parameter No. 1 : 34
- Parameter No. 2 : abcd
- Parameter No. 3 : t5
-\end{verbatim}
-and if you don't supply parameters it will be
-\begin{verbatim}
- NO parameters specified !
-\end{verbatim}
-We also see the concatenation of strings in the output statement.
-And because you can only supply one argument to the  \verb|println()|
-method, you have to concatenate all outputs to one long string.
-
-\subsubsection{Parameters from a HTML file}
-In applets there is no commando line. So, in order to transmit 
-parameters from the calling HTML file to the Java applet we have to
-proceed in a different way.
-In the HTML file you can
-specify \verb|<PARAM>| attributes like here:
-\inputlisting{Listings_Java/ParamApplet.html}
-
-In this case we supply two parameters, called \verb|NumberofPoints| and
-\verb|DisplayText| to the Java applet. The value is given in the string
-behind the keyword \verb|value|. The Java applet to this HTML file
-could look like this:
-\inputlisting{Listings_Java/ParamApplet.java}
-
-In the \verb|init()| method we get the parameter \verb|NumberofPoints|
-and convert it to an integer using a wrapper method. The string 
-of the parameter \verb|DisplayText| doesn't have
-to be converted. Then in the \verb|paint()| method we display
-the transmitted parameters on the screen. The output in the 
-appletviewer or in Netscape should look like this:
-\begin{verbatim}
-  Parameter NumberofPoints is 10000
-
-  Parameter DisplayText is "This_is_a_test_parameter!"
-\end{verbatim}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Arrays and Matrices}
 \label{sec:Arrays}
@@ -1514,7 +1474,7 @@ Now let's look at an example using arrays. We have rewritten the program
 \verb|DataMean| above to calculate the average of random 
 numbers by using arrays.
 
-\inputlisting{Listings_Java/DataMean_Array.java}
+\loadlisting{DataMeanArray.java}{Listings_Java/DataMeanArray.java}
 
 Here we first declare a double array called \verb|RandomNumber| and
 create it in Line 13. Then we store the random numbers in the array
@@ -1524,7 +1484,7 @@ You can not just write
 \begin{verbatim}
         int[] array1 = {1,2,3,4,5};
         int[] array2;
-        array2 = array1;                // WRONG ! - ERROR ! 
+        array2 = array1;          // WRONG ! - ERROR ! 
 \end{verbatim}
 This would only copy the reference of the array1 object to the array2
 object, not the values, the memory address is the same. 
@@ -1535,8 +1495,7 @@ So to copy an array in the above example, you have to write:
         System.arraycopy(array1,0,array2,0,array1.length);
 \end{verbatim}
 This copies all elements of array1 to array2 staring from element 0. 
-The remaining parts 
-of array2 is not created!
+The remaining parts of array2 are not created!
 
 \subsection{Arrays in Java 2}
 A new class \verb|Arrays| in the \verb|java.util| package has been
@@ -1578,6 +1537,66 @@ array element equal to 2.5 you can use the code:
   ....
   Arrays.sort(array);
   int index = Arrays.binarysearch( array, 2.5 );
+\end{verbatim}
+
+\subsection{Parameters from the Command Line or a HTML File}
+\label{sec:Parameter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Parameters from the command line}
+The access of parameters given on the command line is as easy as it
+is in C and C++. The parameters are stored as strings in Java and
+are given as the parameters to the main() method of the application.
+That is the reason for the Syntax:
+\begin{quotation}
+  \verb|public void main(String[] args) |
+\end{quotation}
+It means that the array \verb|args| contains the parameters. Each parameter
+is separated with a space in the command line. Here is an example of a 
+program using command line parameters:
+\loadlisting{ParamCommandLine.java}{Listings_Java/ParamCommandLine.java}
+So if you run the program as \verb|java ParamCommandLine 12 34 abcd t5|
+the output on the screen will be
+\begin{verbatim}
+ Parameter No. 0 : 12
+ Parameter No. 1 : 34
+ Parameter No. 2 : abcd
+ Parameter No. 3 : t5
+\end{verbatim}
+and if you don't supply parameters it will be
+\begin{verbatim}
+ NO parameters specified !
+\end{verbatim}
+We also see the concatenation of strings in the output statement.
+And because you can only supply one argument to the  \verb|println()|
+method, you have to concatenate all outputs to one long string.
+
+\subsubsection{Parameters from a HTML file}
+In applets there is no command line to supply parameters. 
+So, in order to transmit 
+parameters from the calling HTML file to the Java applet we have to
+proceed in a different way.
+In the HTML file you can
+specify \verb|<PARAM>| attributes.
+\loadlisting{ParamApplet.html}{Listings_Java/ParamApplet.html}
+
+In this case we supply two parameters, called \verb|NumberofPoints| and
+\verb|DisplayText| to the Java applet. The value is given in the string
+behind the keyword \verb|value|. The Java applet to this HTML file
+could look like this:
+\inputlisting{Listings_Java/ParamApplet.java}
+
+In the \verb|init()| method we get the parameter \verb|NumberofPoints|
+and convert it to an integer using a wrapper method. The string 
+of the parameter \verb|DisplayText| doesn't have
+to be converted. Then in the \verb|paint()| method we display
+the transmitted parameters on the screen. The output in the 
+appletviewer or in Netscape should look like this:
+\begin{verbatim}
+  Parameter NumberofPoints is 10000
+
+  Parameter DisplayText is "This_is_a_test_parameter!"
 \end{verbatim}
 
 
@@ -1639,10 +1658,9 @@ x \le l \sin \phi
 \end{equation}
 is satisfied.
 
-
 \begin{figure}
 \label{buffondefinition}
-\includegraphics{Figures/buffondefinition.eps}
+\includegraphics[width=.7\textwidth]{Figures/buffondefinition.eps}
 \caption{The Buffon needle problem. Definition of the variables $x$
   and $\phi$.}
 \end{figure}
@@ -1663,7 +1681,7 @@ P = \frac{2 l}{\pi d}.
 
 \begin{figure}
 \label{buffonplane}
-\includegraphics{Figures/buffonplane.eps}
+\includegraphics[width=.8\textwidth]{Figures/buffonplane.eps}
 \caption{The buffon needle problem. The $x$--$\phi$ plane (schematically).}
 \end{figure}
 
@@ -1695,15 +1713,25 @@ Now, let us try to write a Java code for the simulation of the Buffon
 needle problem.
 
 \subsection{The Traditional (Procedural) Approach}
+The traditional approach is straightforward. You just
+draw \verb|N| needles and check each needle if it crosses a
+line or not. So there are two subroutine. One creates a new
+needle with all four coordinates. And the second one is a 
+routine, which just compares the lines with the needle coordinates,
+whether it crosses the lines or not. You then count the number
+of crossings and you get the final estimate of Pi.
+\loadlisting{BuffonProcedural.java}{Listings_Java/BuffonProcedural.java}
 
-EINFUEGEN: Buffon needle procedural !!!!
-
-
+First of all we have made use of the \verb|Math.random()| method, which
+draws a random number (a double) between 0 and 1. We also used arrays
+to store the coordinates and even used arrays as parameters to
+subroutines (methods). The remianing of the program should be
+selfexplaining.
 
 \subsection{The Object Oriented Approach - Classes and Objects}
 \label{sec:Classes_and_Objects}
-Before we begin to write the code we have to introduce some formal
-aspects of the Java language.
+Before we begin to write the object oriented code 
+we have to introduce some formal aspects of the Java language.
 
 \subsubsection{Definition of Objects}
 We have already met a lot of object oriented features 
@@ -1737,14 +1765,17 @@ To calculate the mean of an array of doubles, you can
 either write a method which takes the array as an argument (like you would
 in Fortran or C) or you can use the object
 oriented feature:
-\begin{minipage}{.45\textwidth}
+
+\begin{small}
+\begin{minipage}{.47\textwidth}
 \textbf{Functions}
 \begin{verbatim}
   double[] array = new double[100]; 
-  meanvalue = mean(array[]); 
+
+  result = mean(array[]); 
 \end{verbatim}
 \end{minipage}
-\begin{minipage}{.45\textwidth}
+\begin{minipage}{.47\textwidth}
 \textbf{Object Oriented}
 \begin{verbatim}
   double[] array = new double[100]; 
@@ -1752,6 +1783,8 @@ oriented feature:
   result = dat.mean();
 \end{verbatim}
 \end{minipage}
+\end{small}
+
 Look at the third example in this chapter, which demonstrates these two
 possibilities in detail.
 
@@ -1843,7 +1876,7 @@ A graphical representation of the access control of variables and
 objects is in figure \ref{fig:ModifiersGraphics}.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/ModifiersGraphics.eps}
+    \includegraphics[width=.7\textwidth]{Figures/ModifiersGraphics.eps}
     \caption{A graphical overview of the access control of variables and objects/classes in Java.}
     \label{fig:ModifiersGraphics}
   \end{center}
@@ -1874,8 +1907,8 @@ construtor of the super class also calls the constructor of its super
 class again, this is called ``Constructor Chaining''.
 
 In our example a needle is initialized in the following way. We draw
-at random the four coordinates \verb|NeedleX1|, \verb|NeedleX2|,
-\verb|NeedleY1|, and \verb|NeedleY2| which determine the position of
+at random the four coordinates \verb|needleX1|, \verb|needleX2|,
+\verb|needleY1|, and \verb|needleY2| which determine the position of
 the first needle. Note, that we have made use of the keyword
 \verb|this|.
 This keyword is always required when the argument of a method
@@ -1883,45 +1916,45 @@ or a local variable in a method have the same name as one of the fields
 in the class. If the method is simple, as it is the case here, it is
 not necessary to be that careful.
 
-Here in our example, the constructor just sets the four coordinates. 
-As you can see we have to supply the coordinates, when instantiating the
-needle. However, it is important to remark, that most 
-constructors don't even need a parameter to instantiate the object. 
-
+Here in our example, the constructor just sets the four coordinates
+and does not need any parameters to instantiate the needle.
 
 \subsubsection{Class methods}
 Having initialized the class we now want to define some methods in our
-\verb|Needle| class. The first  method is called \verb|NextNeedle()| and
-simply returns a new needle.
+\verb|Needle| class. There is only one method in our class, which
+is the \verb|crossinspection()| method.
 The return type of methods always has to be specified, if
 there is no return value you have to use the \verb|void| statement
 (as in C). The value to be returned is specified by the return keyword.
 
-Now we want to define a method which explicitly operates on an object.
-This second method is called \verb|crossInspection| and checks whether
+The method \verb|crossInspection| checks whether
 a needle crosses a line or not. The \verb|crossInspection| method
-returns the number of hits. Note that the variable \verb|cross| has
-been defined as a class variable with the help of the modifier \verb|static|.
+returns a boolean telling you, if the needle crosses a line or not.
+Note that the variable \verb|cross| has
+been defined as a class variable with the help of the modifier \verb|static|
+and gets incremented every time you check a needle, which crosses a line.
 With this method our \verb|Needle| class is complete.
 
 Next we need to look at the class \verb|Buffon.java| which contains the
 \verb|main| method and demonstrates how to use the \verb|Needle| class.
-\lstinputlisting{Listings_Java/Buffon.java}
+\loadlisting{Buffon.java}{Listings_Java/Buffon.java}
 
 By defining the \verb|Needle| class in Java, we have created a new
 data type. Variables of this type can be declared by
 \begin{verbatim}
-Needle firstNeedle;
+Needle draw;
 \end{verbatim}
-\verb|firstNeedle| is simply a name that refers to a \verb|Needle|
-object. We now have to create dynamically the object. This
+\verb|draw| is simply a name that refers to a \verb|Needle|
+object (references the object). 
+Creating dynamically an object
 is done with the help of the \verb|new| keyword
 \begin{verbatim}
-Needle firstNeedle = new Needle();
+draw = new Needle();
 \end{verbatim}
 Next, in a \verb|for| loop we draw \verb|N|  needles and with the help
 of the \verb|crossInspection| method we check whether the needles
-cross the lines or not. Finally, the result, i.e. the estimated value
+cross the lines or not and the class variable \verb|cross| is set
+accordingly. Finally, the result, i.e. the estimated value
 for $\pi$ is printed.
 
 
@@ -1933,7 +1966,7 @@ So let us write a class, which calculates random numbers uniformly
 distributed bewtween 0 and 1. To this end we write a class
 \verb|RandomNumber|. It has three fields (variables), two of them are
 defined with the \verb|final| keyword.
-\lstinputlisting{Listings_Java/RandomNumber.java}
+\loadlisting{RandomNumber.java}{Listings_Java/RandomNumber.java}
 In our example, we just set the seed in the constructor and as 
 you can see you have to supply the seed, when you instantiate the
 generator. Most of the constructors don't even need a parameter to 
@@ -1952,6 +1985,10 @@ main method. First we instantiate (create) an object of class
 create \verb|N| random numbers using the \verb|nextRand()| method
 of our class applied to the object we just created. The remaining
 part has already been explained.
+
+Remember that we have to put both programs in one directory called
+\verb|simu|, because we have used the \verb|package| command. Here it
+was just to get you acquainted with these terms.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Calculating Moments}
@@ -2061,14 +2098,16 @@ the usual \verb|println()| commands. In table \ref{tab:JavaLangObject}
 all methods defined in \verb|java.lang.Object| are displayed.
 \begin{table}[htbp]
   \begin{center}
-\begin{lstlisting}{}
+\begin{small}
+\begin{verbatim}
 public boolean equals (Object obj);
 protected Object clone() throws 
                CloneNotSupportedException, OutOfMemoryError;
 public String toString ();
 public int hashCode(); 
 protected void finalize() throws Throwable;
-\end{lstlisting}
+\end{verbatim}
+\end{small}
     \caption{All methods belonging to the (abstract) 
                \texttt{java.lang.Object} class.}
     \label{tab:JavaLangObject}
@@ -2345,8 +2384,7 @@ Here a short example:
 \end{verbatim}
 
 \paragraph{Usage}
-
-\lstinputlisting{Listings_Java/TestPassingFunctions.java}
+\loadlisting{TestPassingFunctions.java}{Listings_Java/TestPassingFunctions.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Structure and Overview of Java}
@@ -2612,7 +2650,7 @@ to have the programs runs as applet as well as a standalone application:
 \label{sec:Standard_Math}
 
 The standard mathematical functions of Java are declared in the 
-Java.lang.Math class, which consists of static constants and methods
+java.lang.Math class, which consists of static constants and methods
 for common mathematical manipulations. 
 It contains sine, cosine, logarithm, exponential,
 square root and much more. Do not confuse this class with the
@@ -2814,20 +2852,137 @@ An overview of the most important methods is given in table
 \end{table}
 
 
-\subsection{The JSci Package}
-????
-FFT,
-ODEs,
-Physics,
-Plots,
+\subsection{The JSci/JavaSci Package}
+The JavaSci package has been developed at the
+\emph{Imperial College of Science, Technology and Medicine} in the UK.
+It is a freely available scientific package and its objective is:
+\begin{quote}
+``JavaSci aims to encapsulate scientific principles and ideas in a way 
+that is representative of their underlying structure and usage.''
+\end{quote}
 
+The package consists of basically two types of classes: representation 
+classes and library classes. The representation classes are instaniateable
+and represent some physical or mathematical structure, whereas the
+library classes are not to be instantiated and are used to manipulate
+the representation classes.
+
+The \verb|JSci| package is split into a 
+\verb|chemistry|, a \verb|physics| and a \verb|maths| subclass.
+Then there are many convenience classes and some interesting other classes.
+The best way to learn the package is to study the API documentation. 
+In table \ref{tab:JSciClasses} we give a short overview of interesting 
+classes and methods in the JavaSci package used throughout the book.
+\begin{sidewaystable}[htbp]
+  \begin{center} \small
+    \begin{tabular}{ll}
+      \verb|JSci.chemistry.Atom| & Used to construct and store an atom 
+                                   with all the data necessary.\\
+      \verb|JSci.chemistry.Element| & Used to construct and store an element 
+                                   with all the data necessary.\\
+      \verb|JSci.chemistry.Molecule| & Used to construct and store a molecule 
+                                   with all the data necessary.\\
+      \verb|JSci.chemistry.periodictable.TransitionMetal| & The full periodic
+         table with all data\\\hline
+      \verb|JSci.maths.Mapping| & An interface to define 1D complex or real
+                functions.\\
+      \verb|JSci.maths.NMapping| & An interface to define N dimensional 
+                complex or real functions.\\\hline
+      \verb|JSci.maths.ArrayMath| & All kinds of array methods to make
+                  life easier. Many more as in the Java 2 array class. \\
+\verb|JSci.maths.ArrayMath.correlation()| & 
+              Compute the (linear) correlation between two arrays. \\
+\verb|JSci.maths.ArrayMath.norm()| & 
+       Compute the L2 norm of an array (Euclidean norm or length). \\
+\verb|JSci.maths.ArrayMath.normalize()| & 
+   Normalize the array so that its L2 norm is 1 (up to computational errors).\\
+\verb|JSci.maths.ArrayMath.print()| & Print a 1D or 2D array to the screen\\
+ \verb|JSci.maths.ArrayMath.sumSquares()| & 
+   Sum the squares of all components; also called the energy of the array. \\
+ \verb|JSci.maths.ArrayMath.toString()| & 
+  Returns a comma delimited string representing the value of the array. \\\hline
+\verb|JSci.maths.FourierMath| & Methods for 1D real or complex FFTs.\\
+\verb|JSci.maths.FourierMath.transform()| & A 1D complex or double fast 
+        Fourier transformation.\\\hline
+\verb|JSci.maths.LinearMath| & Eigenvalues, eigenvectors, linear least squares
+           and solving linear systems.\\\hline
+\verb|JSci.maths.NumericalMath| &  Numerical differentitation, integration, 
+        ODEs, Metropolis algorithm \\
+\verb|JSci.maths.NumericalMath.rungeKutta()| & Uses the Runge-Kutta 
+              method to solve an ODE.\\\hline
+\verb|JSci.maths.WaveletMath| & All kinds of methods for wavelets.\\\hline
+\verb|JSci.maths.statistics| & A class with many important complicated 
+              distributions (Beta, Gamma, T, ChiSquared, etc.)\\\hline
+\verb|JSci.physics.PhysicalConstants| & All physical constants you 
+                               can think of.\\\hline
+\verb|JSci.physics.quantum.KetVector| & Creating vectors for wuantum 
+             mechanics.\\
+\verb|JSci.physics.quantum.DensityMatrix| & Calculate the density matrix.\\\hline
+\verb|JSci.util.MatrixToolkit| & Methods to create random matrices 
+                 and some conversions.\\\hline
+\verb|JSci.io| & Reading/Writing text files and writing MathML (XML) files.\\\hline
+\verb|JSci.awt| & Graphical routines like plotting for the AWT.\\
+\verb|JSci.awt.BarGraph()| & A bar graph AWT component. \\
+\verb|JSci.awt.ContourPlot()| & A contour plot AWT component. \\
+\verb|JSci.awt.LineGraph()| & A 2D line graph AWT component. \\
+\verb|JSci.awt.LineGraph3D()| & A 3D line graph AWT component. \\
+\verb|JSci.awt.PieChart()| & A pie chart AWT component. \\
+\verb|JSci.awt.ScatterGraph()| & A scatterGraph AWT component. \\\hline
+\verb|JSci.swing| & The same for the swing package.\\
+     \end{tabular}
+    \caption{Some of the interesting classes and methods in 
+      the JSci/JavaSci package.}
+    \label{tab:JSciClasses}
+  \end{center}
+\end{sidewaystable}
+The \verb|JSci.maths.ArrayMath| class also contains methods for
+calculating the mean, variance, standard deviation, etc. like
+the JNL. The \verb|JSci.maths| package  
+contains many methods and classes for handling matrices
+either integer, double, complex or sparse, diagonal and more. It has methods
+for handling vectors in all flavours. And it even provides functionallity
+for discrete sets and the construction of the Karhunen-Loeve expansion. 
+There are complex numbers, special functions like hyperbolic ones
+and in the \verb|SpecialMath| math class there are even more like
+the Bessel functions, Airy functions, incomplete Gamma and Beta functions, etc.
+Another class can handle symmetry groups, one handles chaotic maps and
+almost everything you wish about wavelets in many different classes.
+
+In the \verb|JSci.physics| class you get methods and classes to use
+particles. There is a whole class just defining all kinds of particles
+known to physicists today. Then you can use the \verb|JSci.physics.quantum|
+class to do quantum mechanics caluclations easily or you could use
+the \verb|JSci.physics.relativity| class to do relativistic calculations.
+
+Because it is the only (free) way of producing 3D graphs yet, we have 
+given an example in figure \ref{fig:JSci3DGraph}. 
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[angle=90,width=\textwidth]{Figures/JSciGraph3D.eps}
+    \caption{An example of the 3D plotting capabilities of JSci.}
+    \label{fig:JSci3DGraph}
+  \end{center}
+\end{figure}
+You see it is actually not what you expected, but it is a beginning.
+You can also use the mouse to rotate the 3D graph 
+in the right half of the window. The graph on the left is a contour plot.
+\loadlisting{JSci3DGraph.java}{Listings_Java/JSci3DGraph.java}
+
+Since version 0.82 there is the IBM MathML package included to write 
+XML/MathML files from Java. That is the reason why now there is a
+limitation in the use of the whole package. So go ahead and read the license
+agreement in the online documentation.
+
+In our opinion, you should use the JNL and ptplot if possible. Only for
+methods not contained in these two packages you should use the
+JSci package like FFT or solving ODEs for example. JSci is still in
+the development phase and it takes some more time to be really
+the package of choice for most of the tasks.   
 
 \subsection{JNT, Lapack for Java - JamPack and Jama}
 ????
 \subsubsection{JNT}
 \subsubsection{Lapack}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
