@@ -13,9 +13,33 @@ package simulation.MasterEq;
 import simulation.MasterEq.*;
 import java.util.*;
 
+/**
+ * <p>
+ * This class simulates one realization of a one step process
+ * defined by a given process. The parameters for the constructor are:
+ * <p>
+ * <li> the process of type OneStepMaster
+ * <li> number of "particles" at t=0
+ * <li> start time of simulation
+ * <li> end time
+ * <li> time interval for sampling of data for statistics
+ * <p>
+ * After calling the constructor the computed realization
+ * is stored in the private field "array". Use the getArray() 
+ * method to access the resulting realization.
+ * <p>
+ * You can use the class RealizationsInt to get the desired statistics
+ * for the realizations.
+ * <p>
+ * You can use your own random number generator by changing
+ * the public field "rand". It needs a method "nextDouble()",
+ * which returns a double random number each time called.
+ * <p>
+ */
 public class OneStepSimu  {
     
-    // Random Numbers for all realizations
+    /** Random Numbers for all realizations of an object. 
+     It is public, so you can use your own. */
     public static Random rand = new Random();
 
     // parameters
@@ -95,7 +119,8 @@ public class OneStepSimu  {
 	return array;
     }
 
-    /** A test main function  */
+    /** A main function to test the class. It generates one
+     realization. */
     public static void main(String[] args) {
 	System.out.println(" Producing one realization:");
 	OneStepSimu process = new OneStepSimu();
