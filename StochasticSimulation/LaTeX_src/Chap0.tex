@@ -79,27 +79,34 @@ of the corresponding programs are listed in the appendix.
     \begin{tabular}{llp{3cm}|c|c}
       Language & OS & Software & Machine & CPU time \\\hline\hline  
    Fortran & Linux & Nag f90 Compiler & ? & \\\hline
-   C       & Linux & GCC & ? & \\\hline
-   C++     & Linux & G++ & ? & \\\hline
-      Java & Linux & JDK 1.1.5 & Pentium II 333 & 6 sec. \\\hline
+   C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\\hline
+   C       & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
+   C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\\hline
+   C++     & Linux & egcs-1.0.3 with -O3 & Pentium 133 & 1.8 sec. \\\hline
+      Java & Linux & JDK 1.1.6v4 & Pentium II 333 & 6 sec. \\\hline
+           & Linux & using JIT TYA (V1.0) & Pentium II 333 & 3 sec.\\\hline
+           & Linux &           & Pentium 133 & 16 sec. \\\hline
+           & Linux & using JIT TYA (V1.0) & Pentium 133 & 10 sec.\\\hline
            & Linux &           & Pentium 200 MMX & 9 sec. \\\hline
-           & Linux &           & Pentium 133 & 17 sec. \\\hline
-           & Linux & using JIT TYA & Pentium II 333 & 3 sec.\\\hline
-           & Win95 & JDK 1.1.7 using Symantec JIT & Pentium 166 & 7 sec. \\\hline
-           & Win95 & JDK 1.1.7 without JIT & Pentium 166 & 17 sec. \\\hline
+           & Win95 & JDK 1.1.7 using Symantec JIT & Pentium 133 & 9 sec. \\\hline
+           & Win95 & JDK 1.1.7 without JIT & Pentium 133 & 19 sec. \\\hline
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\\hline
            & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\\hline 
+           & Linux & Matlab 5.2 & Pentium 133 &  224 sec.\\\hline
    Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
 Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
-Mathematica& Win95 & Compiler         & Pentium 133 & 26 Min. \\ \hline
+           & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
     \end{tabular}
-    \caption{Performance comparison for different languages, operating
-   systems (OS), and platforms.
+    \caption[Performance Table.]%
+    {Performance comparison for different languages, operating
+      systems (OS), and platforms.
       The test program is a one-step stochastic process. We create 100
       realizations, $g(n)=0.4n, r(n)=0.5n$. On Windows 95 the JIT from
       Symantec is included and automatically used, when executing programs
       with the java command in the JDK. The TYA JIT for Linux is freely
-      available and easy to install.}
+      available and easy to install. Usage: with the java virtual machine of
+      the JDK use \texttt{-Djava.compiler=tya} or 
+      set the environement variable \texttt{JAVA\_COMPILER=tya}.}
     \label{tab:performance}
   \end{center}
 \end{table}
@@ -350,6 +357,13 @@ And an applet is not allowed to do time consuming tasks like
 long computations. This has to be kept in mind, when writing
 applets.
 
+You can actually have applets accessing the local file system by using
+``signed applets''. These are applets having a signature coming
+with them (in the JDK you use \verb|javakey| for that purpose), 
+which is checked by the server before the execution. So
+if you have signed your own applet and tell your browser to accept 
+all applets signed with your signature, you can use file commands
+inside your applets (see \cite[page 142]{javanutshell}).
 
 The ``Hello World'' example written as an applet has the following form:
 \inputlisting{Listings_Java/HelloWorld_Applet.java}
@@ -568,17 +582,18 @@ to the corresponding wrapper class of a primitive type, e.g.
 \begin{verbatim}
         double a;
         String text;
-        a=doubleValue(text.valueOf());
+        a=(text.valueOf()).doubleValue();
 \end{verbatim}
 The third line converts the string to the \verb|Double| class and then
-the \verb|doubleValue()| method converts to a double primitive type.
+the \verb|doubleValue()| method converts the Double wrapper class 
+to a double primitive type.
 For the other types you just have to substitute float or int 
 for double, i.e., \verb|floatValue()|, \verb|intValue()|.
  
 Another method, later used in the \verb|ParamApplet.java| program is, e.g.,
 the \verb|Integer.parseInt()| method, which gives back a primitive
 type integer instead of the wrapper class like \verb|valueOf()|.
-For other conversions y<ou can use the \verb|Long.parseLong()| or the
+For other conversions you can use the \verb|Long.parseLong()| or the
 \verb|Long.parseByte()| method.
 These methods  simplify the conversion a little bit. For the example, see
 \verb|ParamApplet.java| in line 11. But this method is only 
@@ -641,6 +656,14 @@ package. This means you can put your programs in the current directory.
 This is not recommended for medium to complex programs, but for
 test purposes and very small programs this is very convenient.
 
+If you have written a lot of small classes, which all work together, you
+can put them all inside a ``jar'' file and give the jar file
+to friends instead of the whole bunch of small class files.
+A jar file is just an archive created by the \verb|jar| program 
+coming with the JDK. It works like the well-known UNIX \verb|tar|
+command. This is actually a very nice method for packaging
+applets on the internet, because the jar command also compresses
+its contents.  
 
 \subsubsection{Import statement}
 Before learning more about the syntax of Java, we have to explain another
@@ -710,6 +733,12 @@ alone, but in some complex expressions this might make a difference.
 The postfix (prefix) version of the operator ++ evaluates  the value
 of the operand before (after) the increment operation.
 
+There is no operator for calculating powers, instead you have to use
+(like in C) the \verb|Math.pow()| method of the \verb|Math| class.
+The \verb|^| operator, used sometimes for the power, is the exclusive
+or (XOR) operation in Java (either in the logical or the boolean sense). 
+So do not confuse this. 
+
 Java supports also a standard set of relational and logical operators,
 which all yield boolean values. They are listed below
 
@@ -766,8 +795,9 @@ for (init_expressions; boolean_expr; incr_expressions) {
 where \verb|init_expressions| denotes the initial value of the iterated
 variable, \verb|incr_expressions| denotes the increment of the iterated
 variable. For both you can specify more than one expression separated
-by commas ( as in C). This is the only place, where you can use these comma
-separated lists.
+by commas (as in C). This is the only place, where you can use these comma
+separated lists. The variables used in the for statement can be 
+integer (long) or float (double) values. 
 
 At the beginning of the \verb|for| loop the boolean expression
 \verb|boolean_expr| is evaluated. If its value is found to be 
@@ -791,7 +821,10 @@ the means -- they should not be the same.
 The \verb|next.Double()| method returns a new random number of type
 double (for a float use rand.Float()). You can also create normally 
 distributed random numbers with the \verb|Random.nextGaussian()| method.
-The remaining parts of the program should be self explaining.
+The remaining parts of the program should be self explaining. You can of
+course use any expression (e.g. \verb|d=d*u+2|) 
+in the last part of the for statement, not only
+the \verb|++| operator, which is obviously used most often. 
 
 \paragraph{Byte-Code of a class file}
 Using the \verb|DataMean()| program, we want to show the bytecode
@@ -990,6 +1023,11 @@ An example of the use of the \verb|switch| statement is found in the
 simple program \verb|DiceGame.java| 
 
 \inputlisting{Listings_Java/DiceGame.java}
+
+Again we want to stress that only an integer, long, char or byte type
+is possible in the switch statement (no double or float). And the
+case expressions have to be integral values and not any boolean
+expressions like \verb|i>2|. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parameters from the command line or from a html file}
@@ -1329,6 +1367,15 @@ The first line only declares a string object called text and does not
 allocate (instantiate) the memory for the value of the object, just
 the reference to the value.
 
+An interface is a just a class, which does not implement all the
+methods defined in the class. Therefore you can just define methods
+which should be implemented (maybe system dependent) somewhere else.
+Most of the GUI classes of the AWT introduced later on are
+actually interfaces and not classes.
+
+Abstract classes are also special classes, which can not be instantiated,
+but they are not relevant for us, so we skip the explanation.
+
 As an example for the most important issues about objects, we want to
 write a Java code which allows the simulation of the Buffon needle
 problem. It is clear that in the problem at hand ``needles'' will play
@@ -1397,7 +1444,16 @@ of the constructor.
 \subsubsection{The constructor}
 An important part of any class is the constructor of the class. This is
 the method (function), which is called when an object of this
-class is instantiated. 
+class is instantiated. It always has the same name as the class itself.
+The constructor can have zero or more arguments and you can even
+have different constructors depending on the parameters provided by
+the calling syntax.
+
+The constructor of a class ALWAYS calls the constructor of its
+superclass, so it is good practice to write \verb|super();| at the
+beginning of a constructor to indicate this feature. Because the 
+construtor of the super class also calls the constructor of its super
+class again, this is called ``Constructor Chaining''.
 
 In our example a needle is initialized in the following way. We draw
 at random the four coordinates \verb|NeedleX1|, \verb|NeedleX2|,
@@ -1499,15 +1555,25 @@ or an object oriented approach (two examples):
 \inputlisting{Listings_Java/MomentsData2.java}
 
 
-\subsubsection{Extending (Inheritance) and Overloading Classes}
+\subsubsection{Extending (Inheritance) and Overloading (Overriding) Classes}
 Often you want to define subclasses, which should inherit all
 the methods and fields from another class. This is easily done
-in Java by extending a given class. 
+in Java by extending a given class. The meaning of subclassing is the
+notion of data hiding or encapsulation. For example you can write
+a subclass, which can not access all the variables of the super class,
+therefore hiding some details. 
 
 You can reference the super (parent) class by applying the
 \verb|super| modifier in front of a method or variable of
 the parent class. And the \verb|this| modifier always refers to
 the actual class. 
+
+You can also have equal names for a variable in the super class and the
+child class, which means you have to reference the variables explicitly
+by using the \verb|super| or \verb|this| keywords. If you want to refer
+to a variabel two classes up from the actual class, you have to use
+the notion of ``shadowing'' \cite[]{javanutshell}, which is a kind of
+casting with classes. 
 
 If you define a class to be final, it can not be extended.
 For example the java.lang.System class is a final class.
@@ -1692,7 +1758,7 @@ There are also other classes, which extend the standard Java language
 for matrix computations (BLAS) and much more (e.g. the JNT). If we need
 them in the course of the book, we will introduce you to them there.
 
-\subsection{Names conventions in Java}
+\subsection{Name conventions in Java}
 In order to make the Java codes more readable it is customary to stick
 to the followinh nam conventions.
 
