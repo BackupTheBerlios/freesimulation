@@ -840,13 +840,13 @@ disk for later usage, maybe also in a Java program. Later on in
 program to solve a problem in parallel.
 
 A short comment upfront: to use file I/O in Java you have to use
-eception handling, but we still have not discussed it. Because it is
+exception handling, but we still have not discussed it. Because it is
 still possible to understand I/O operations, we start with this. 
 In the next section we will tell you how to handle and
 understand exceptions.
  
 \subsection{File Input/Output in Java}
-\label{FileIO}
+\label{sec:FileIO}
 The Java I/O package is one of the largest and for the beginner
 one of the most difficult core package at a first glance. But after a while
 you feel comfortable and it will be easy to use.
@@ -866,11 +866,11 @@ already introduced in Java 1.0. In Java 1.1 the two additional
 classes just mentioned were added, because the \verb|InputStream|
 and \verb|OutputStream| classes are using 8 bit characters and
 the new classes use 16 bit unicode characters for international
-languages support. In Java 2 only small changes have taken place
+language support. In Java 2 only small changes have taken place
 and therefore you can still stick to the Java 1.1 standard, but
 should avoid using Java 1.0 I/O syntax if possible. 
-This is also because the Java 1.1 Reader and Writer classes are
-faster than the old ones.
+This is also because the Java 1.1 \verb|Reader| and \verb|Writer|
+classes are faster than the old ones.
 Because File I/O almost always means handling strings, we have to
 discuss this also in more detail. 
 
@@ -878,12 +878,12 @@ discuss this also in more detail.
 The basic concept of input and output in Java is the \emph{stream}.
 A stream is a collection of data in a certain order, which has to be
 transported from a source to a sink. For example you want to
-read data froma file, then you need a stream from the file, which
+read data from a file, then you need a stream from the file, which
 is the source, to a sink, which could be an array. This array can
-of course be printed on screen to be read by the user. Thnis can also
+of course be printed on screen to be read by the user. This can also
 be seen as a stream using the array as a source and the screen as the
-sink. And really the \verb|System.out| method already familiar with
-is derived froma stream (the \verb|PrintStream| class).
+sink. And really the \verb|System.out| method, which we are already 
+familiar with, is derived from a stream (the \verb|PrintStream| class).
 
 For any data communication from one ``point'' to another you
 always have to use a stream in Java (like in C++). A nice feature
@@ -917,7 +917,7 @@ to open a file for writing, write the array in it and close the file.
 You probably would tend to look at the \verb|File| class for reading and 
 writing files, but this class is only responsible for managing
 files, directories and paths. We can use it to create a name
-for our fiole to be created. For file access, you have to use the
+for our file to be created. For file access, you have to use the
 \verb|Reader| and \verb|Writer| classes. So our small sample
 program would look like:
 \lstinputlisting{Listings_Java/FileWriteSimple.java}
@@ -935,9 +935,14 @@ see program \verb|FileWriteConvenience.java|.):
     FileOut out = new FileOut( filename ); // open a buffered File stream
 \end{lstlisting}
 You can use a second argument to this constructor, which is a boolean
-variable and indicates if ythe data should be appended to
+variable and indicates if the data should be appended to
 the already existing file or not. The full syntax of the method
 is therefore \verb|FileOut(String filename, boolean append)|.
+
+In line 23 the double gets converted to a string before it is
+written to the file. The actual writing of the data to the file 
+is done in line 24 with the help of the \verb|write(String s)| method
+in the \verb|Writer| class.
 
 Now we want to read the contents of the file back in. We use the
 classes \verb|FileReader| and \verb|BufferedReader| as you may have
@@ -948,6 +953,9 @@ simulation package, changing again the lines 17-18 (or 19) by:
 \begin{lstlisting}{}
     FileIn in = new FileIn ( filename ); // open a File stream
 \end{lstlisting}
+To read data we call the \verb|readLine()| method of the \verb|Reader|
+class in line 18. We have used a shortcut notation here to have
+an assignment and a if clause in one line.
 
 Important remark:
 \begin{quote}
@@ -969,7 +977,7 @@ Often you are in the need of constructing a string from scratch, by
 putting lots of small pieces (strings) together. Actually the same
 problem as concatenating strings for (formatted) output. You could
 always use the Lava Rocks methods, here especially the \verb|sprintf()| 
-method explained in the next apragraph and in section \ref{sec:Symphony}.
+method explained in the next paragraph and in section \ref{sec:Symphony}.
 But here we want to discuss how this can be implemented in  core Java.
 
 The basic feature enabling string concatenation is the concept of a 
@@ -991,7 +999,7 @@ but if there is not enough space left Java automatically
 enlarges the buffer itself, so you do not have to care.
 
 Using a \verb|StringBuffer| is much faster and much less memory
-extensive than just the concatenation operator, if you are
+expensive than just the concatenation operator, if you are
 interested in the final string. If you just use it for output
 it does not matter.
 
@@ -1013,8 +1021,9 @@ Lava Rocks package (see section \ref{sec:LavaRocks}). But instead
 of using \verb|printf()| you have to use \verb|fprintf()| this time.
 
 If you are a (former) C programmer, you might miss the third
-output version of the formatting methods: in Lava Rocks it is also called
-\verb|sprintf()|. 
+output version of the formatting methods \verb|sprintf()|: 
+in Lava Rocks it is also called \verb|sprintf()| and works like
+the \verb|printf()| method.
 
 A simple example of these routines would be to save
 a double array, which is e.g. the x-coordinate of a particle, and 
@@ -1038,14 +1047,15 @@ All of the basic I/O classes implement writing bytes to a stream,
 so you could actually use them. But there are two classes, which 
 already implement the conversion of the different data types to 
 a series of bytes and write these bytes to the desired stream.
-The first one is \verb|DataInputStream| and the second one is
+The first one is the \verb|DataInputStream| class and the second one is
 the \verb|DataOutputStream| class. They implement methods like
 \verb|writeDouble()| (\verb|readDouble|), \verb|writeBoolean()|
 (\verb|readBoolean()|), etc. There are also methods for
-writimg strings (\verb|readLine()|) in these two classes, but
+writing/reading strings (\verb|write()|/\verb|readLine()|) 
+in these two classes, but
 avoid them, because they do not convert the byte stream correctly
-to character streams. Instead use the above discussed writer and reader
-classes. 
+to character streams. Instead use the above discussed \verb|Writer|
+ and \verb|Reader| classes. 
 
 As an example we look at the same example as above and write 100 
 double variables to a file, so the file will be 800 bytes long
@@ -1056,8 +1066,8 @@ applications you should always use buffered I/O by inserting
 a \verb|BufferedInputStream| (\verb|BufferedOutputStream|) between
 the two streams used in the listing.
 
-This paragraph was the way to write files introduced in Java 1.0,
-the Reader and Writer classes were first introduced in Java 1.1.
+This paragraph was the procedure of writing files introduced in Java 1.0,
+the \verb|Reader| and \verb|Writer| classes have been introduced in Java 1.1.
 There are also classes to convert the old streams to the new reader/writer
 streams (classes). The \verb|InputStreamReader| class converts
 an \verb|InputStream| 
@@ -1074,7 +1084,7 @@ the \verb|java.io| package. Take a look at the extensive list
 of methods available in this API and you will certainly find
 something suitable. 
 
-As a short example we want to discuss how show how to check if
+As a short example we want to discuss how to check if
 a file with a certain filename is already available and 
 how to handle directories and files therein.
 \lstinputlisting{Listings_Java/FileCheck.java}
@@ -1117,7 +1127,7 @@ already made available in the standard Java API \verb|java.util.zip|.
 As the name suggests not only the zlib compression algorithm used
 in the famous GZIP program -- mostly used on UNIX systems using the
 \verb|.gz| ending -- but also the algorithm of the famous zip
-program -- mostyl used on Windows based systems and has the ending
+program -- mostly used on Windows based systems and has the ending
 \verb|.zip| -- is available in Java directly.
 
 The only drawback is that it is implemented on top of the old
@@ -1130,7 +1140,7 @@ compression in one file, but it is more cumbersume to use. Because
 most of the time you have to compress a single stream of data, we
 explain only the GZIP interface.
 
-Let us discuss the probelm ofg saving an array to a file again, but
+Let us discuss the problem of saving an array to a file again, but
 this time we want to store them compressed as a GZIP file.
 \lstinputlisting{Listings_Java/GZIPSaveArray.java}
 The first part stores it as a binary GZIP file \verb|test.bin.gz|
@@ -1160,6 +1170,8 @@ to tell the applet explicitly that it is allowed to do file I/O. This
 can be accomplished by signing an applet, prepared in a jar file. Then
 the browser can check the signature and if the browser setup allows
 file I/O for this signature it works.
+
+Property files ?????
 
 A second way would be to use the network features of Java and
 access a file from a FTP server, probably the same computer
@@ -1196,13 +1208,14 @@ The exception handling is located in the \verb|java.lang.Throwable| class.
 Exceptions are objects and there are two types: Errors and Exceptions.
 Errors are usually not recoverable and the program has to exit with
 an error message. From exceptions you can recover, e.g. 
-``Array out of Bounds'', or ``IO Exception'', etc. The exceptions,
+``Array out of Bounds'', ``IO Exception'', etc. The exceptions,
 which are automatically caught are the \verb|RuntimeExceptions|.
 
 The way of handling exceptions is easily seen in the above examples
 about file I/O. You put the code, which can throw an exception in a
 \verb|try { }| clause and use the \verb|catch() {}| clause afterwards
 to define what has to be done, if an exception occurs in the try block.
+You can have many catch blocks, each for one special exception.
 \begin{verbatim}
 try {
    // Code which throws exceptions.
@@ -1218,7 +1231,7 @@ The \verb|java.lang.Throwable| keyword in the catch clause has to be
 exchanged by one of the exceptions in table \ref{tab:Exceptions}. 
 \begin{table}[htbp]
   \begin{center}
-    \begin{tabular}{lcp{.6\textwidth}}
+    \begin{tabular}{lcp{.5\textwidth}}
       Exception name & RTE & Ocurrence/Reason \\\hline
       IOException & N & Some IO problem (has lots of subclasses). \\
       ArrayIndexOutOfBoundsException & Y & array is out of bounds \\
@@ -1245,7 +1258,7 @@ If you ask how do you know what exceptions to catch (if some of the
 code is not written by you or is very complex), there are only
 two possibilities: read the whole code and look for exeptions, which
 can be thrown by it or wait for the exceptions to occur on the
-standard output. 
+standard output, when running the code. 
 
 You can even use your own exceptions very easily by using the keyword
 \verb|throw| and your own name of an exception. That is an easy way
@@ -1267,9 +1280,16 @@ turns zero or step size/accuracy gets too large, e.g.
   }
 \end{verbatim}
 
+Although this seems to be a nice way to catch many special occurences 
+in a Java program, it should be restricted to exceptional conditions
+and not used as a progrsmming tool. This is because exception throwing
+is a time consuming task and i not suitable for algorithmic designs.
 
 %%%%%%%%%%%%
 \subsection{The Discrete--Time Random Walk}
+Now we come back to the discussion of stochastic variables and take
+a look at a historical example.
+
 A drunkard leaves a pub. His house is at the end of a straight
 street. Each time  he moves he walks one
 step to the direction of his home  or one step in the opposite direction
