@@ -84,6 +84,7 @@ erstem mal vorkommt schon in Kap, 2 gemacht?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The Ehrenfest dog--flea model}
+\label{sec:EhrenfestModel}
 The fundamental problem of statistical mechanics is to describe 
 how a system reaches
 equilibrium in an irreversible way. In this this process the irreversible
@@ -420,8 +421,8 @@ concurrent programs:
 \end{itemize}
 Unfortunately there is still no possible way of avoiding to ask
 these questions before writing your code (at least you have to
-keep them in mind before you hit return and pollute the network
-and keep the processors busy.)
+keep them in mind before you start parallel programs and ``pollute the network
+and keep the processors busy''.)
 
 \begin{figure}[htbp]
   \begin{center}
@@ -481,7 +482,12 @@ CPU the computer looks exactly the same, therefore the name SMP
 (Symmetric Multi Processor).
 
 The NUMA architecture refers to a special kind of shared memory architecture.
-For example the SGI Origin 2000 is an example thereof. In this model
+For example the SGI Origin 2000\footnote{Until 1999 the crossbar technology was 
+bascially not available for Intel platforms, but now COMPAQ even proposes
+servers with up to eight Intel Xeon processors using crossbar technology. This
+again will lead to a decrease in hardware prices for the high performance
+shared memory (NUMA) architectures.} 
+is an example thereof. In this model
 you take SMP boards (you can take single CPU boards too) each with
 a certain amount of onboard main memory and 
 put them together in a rack. The boards get connected by special
@@ -500,10 +506,231 @@ implemented in hardware and therefore hidden from the user.
 
 %%%%%%%%%%%%%%
 \subsection{The Software}
+Now that we have decided or know about the hardware we want to use
+for the problem we want to solve, we have to decide what software
+model to use to get all CPUs working for us.  
 
 
+First of all you have to think about an algorithm for the parallel
+implementation of the problem to be solved. This is actually a 
+difficult and time consuming part and you probably have many different
+strategies/algorithms for one single problem. 
+You also do not know beforehand, how
+each of the algorithms will compare to each other and 
+how they will perform on different hardware.
 
+If you have an idea, how to use many CPUs for your problem, then you can
+start thinking about the software model to be used for your available hardware
+(see figure \ref{fig:ParallelSoftware}).
+This decision is the most difficult one, because it is not very easy
+to go back and use a different model. Writing the code 
+for a given software model might be very easy and fast or you might have to
+spend a few months to get an efficient code. Then you can run your program
+on different platforms and use the fastest platform for your problem.
 
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=\textwidth]{Figures/ParallelSoftware.eps}
+    \caption{Possible software models to be used for parallel programming. 
+      For a description of the used abbreviations see table \ref{tab:ParallelAbbrev}.
+      Difficult/Easy programming refers to the time needed to implement
+      parallel algorithms using a certain model.}
+    \label{fig:ParallelSoftware}
+  \end{center}
+\end{figure}
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{ll}
+      DSM & Distributed Shared Memory \\
+      HPF & High Performance Fortran \\
+      MPI & Message Passing Interface \\
+      PVM & Parallel Virtual Machine \\
+      RMI & Remote Method Invocation \\
+      OpenMP & Open Multiple Processes \\
+    \end{tabular}
+    \caption{Abbreviations used for the models in parallel programming.}
+    \label{tab:ParallelAbbrev}
+  \end{center}
+\end{table}
+
+But what are the differences between the software models?
+\subsubsection{OpenMP}
+If you want to spend
+less time for coding, you should use OpenMP, a directives based approach;
+You just have to insert comments (FORTRAN) or pragmas (C/C++) before the 
+code you want to be executed in parallel.
+The DoAccross directives and other directives based models were the
+forerunners of OpenMP and should not be used anymore. The advantage of OpenMP is,
+that you do not have to change your serial program, you just add comments
+(or pragmas in C/C++) and most of the work is done by an appropiate compiler.
+The drawbacks are the restriction to shared memory machines\footnote{There are
+meanwhile software packages available, which convert OpenMP programs into 
+usual Fortran/C/C++ code using MPI calls and therefore running on
+distributed memory machines, e.g. OdinMP, etc.}
+and the worse performance compared to good MPI programs.
+
+\subsubsection{Symphony}
+An alternative to OpenMP would be to use a kind of server, which distributes
+small pieces (jobs) of your problem to many machines available and collects
+the results to be processed later on, therefore exploiting a kind of distributed memory
+model, but with no communication between the different jobs.
+An example of this philosophy
+realized in Java is a project developed at the University of Freiburg called
+Symphony (see later on). 
+
+\subsubsection{HPF}
+If you want to spend more time thinking about how the data and the 
+work can be distributed to the avialable processors, then you can go with 
+HPF. HPF employs a data distributed model and 
+is of course only available to Fortran 77/90/95 programmers and
+have not found a very widespread use. But still it is a viable tool for
+many problems and it is available on almost any computer architecture.
+An interesting solution is the (free) ADAPTOR software, which converts HPF programs
+to Fortran 90 with MPI calls or you can convert to OpenMP directives. 
+
+\subsubsection{MPI / PVM}
+Even more work and time has to be spent to write a MPI/PVM program. PVM was
+the first available message passing interface, but has meanwhile been
+abandoned by most people in favour of MPI, which is today the standard to use
+for writing message passing programs. 
+
+In this model you have to 
+take care of everything yourself. You have to tell the computer, when, what and 
+with who you want to exchange messages (data). This works by writing a single
+program, which consists of several calls to MPI functions\footnote{You just have
+to add a library to your compiler commands and you have to use a special program
+to run the parallel MPI program (mpirun).}. There are functions for
+sending messages from one CPU to another or you can send data from one CPU to
+all other CPUs working on the same problem (a so called communicator).
+The compiler (or to be  exact the library) just translates the MPI commands
+to a lower level of networking commands, depending on the available library and
+network hardware used. 
+
+For example if you have a ethernet network with
+several PCs running Linux/Windows, you can install a free version of MPI
+(e.g. MPICH or LAM) and compile the MPI programs. The code will then be run on all
+requested CPUs using the ethernet protocol to communicate and exchange data.
+On a shared memory machine (including SMP machines) 
+you can also use MPI, but this time the communication could
+be done directly, so using MPI for an SMP machine is usually a big overhead
+and should be avoided. The biggest advantage of MPI is, that it is available
+for all platforms and hardware architectures, so it is completly portable.
+
+\subsubsection{(Java) Threads}
+The last alternative for writing parallel programs is using threads. Threads are small
+parts of a single program, which are to be executed by the same CPU using
+time sharing or by a separate CPU. 
+So it is kind of using MPI calls, but this time you have to use functions,
+which are implemented on the level of the underlying operating system.
+This means your program is very fast in starting a job on a different CPU
+and it is very easy to have global variables, but you are confined to
+shared memory machines and to a certain operating system. So this is usually
+not the model of choice for a scientific problem. 
+
+But with Java this is
+not (always) correct anymore. In Java it is very easy to use threads and
+because Java is portable across all platforms, almost all of 
+the restrictions just mentioned no longer apply. 
+But of course you still have to work a bit more to get a threaded
+program running correctly compared to an MPI or OpenMP program. But it 
+definitly has become an interesting alternative, if Java is becoming much
+faster in the next few years (and we are sure it will).
+
+\subsubsection{Amdahl's Law}
+At last we want to mention an important point, which has already been made 
+by G. Amdahl in 1967: If you denote the part of a program to be run
+sequentially by $f$, then the ``speedup'' $S_N$ can be calculated as
+$$ S_N =\frac{T_1}{T_N} = \frac{N}{1+f(N-1)} .$$
+Where the speedup is defined as the ratio of the time to complete 
+the serial program and the time needed by using $N$ processors simultaneously. 
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[angle=-90,width=\textwidth]{Figures/Amdahl.eps}
+    \caption{Amdahls law with some examples for the value of the serial
+      part $f$ of a program.}
+    \label{fig:Amdahl}
+  \end{center}
+\end{figure}
+This dramatically restricts the performance gained by using many CPUs.
+So the sequential parts of a parallel program should be kept as small
+as possible. Fortunately the speedup depends on the problem size and
+will increase for bigger problems. 
+
+%%%%%%%%%%%%%
+\subsection{The Ehrenfest Model using a Parallel Program}
+
+Here we want to demonstrate, how to write and use a parallel program
+employing the Ehrenfest model as an example problem. 
+
+\subsubsection{Symphony}
+Using Symphony is very easy in this case. The idea is to compute the same
+model (number of time steps) with different number of fleas on dog one. Then we
+can generate very easily the statistics for the Ehrenfest model discussed
+in section \ref{sec:EhrenfestModel}.
+\inputlisting{Listings_Java/DogFlea.java}
+First you have to compile the java program and copy the class file to the directory,
+where a  browser can access it 
+(e.g. \verb|/home/user/public_html/Symphony/SymphonyTasks| for a unix machine).
+Then on the Symphony server machine, which has to have a WWW server 
+running\footnote{For example the Apache web server. Apache is freely 
+available for all unixes and even for Win32 since a few months ago, 
+although the performance is much better on unix.}
+you have to edit the file \verb|../Symphony/SymphonyServer/tasks.sym| to
+contain the parameters you want to compute, e.g. it could look like this:
+\begin{verbatim}
+process=DogFlea;
+entryPoint=run;
+param(n0d),min=10,max=1000,incr=10;
+param(Nd),const=1000;
+return (na,nb) as {EVENT @DogFlea @run0};
+timeout=1;
+\end{verbatim}
+Now you start the Symphony server with 
+\begin{verbatim}
+  .../Symphony/SymphonyServer/start_server
+\end{verbatim}
+and on the clients 
+(the computers you want to have to participate on the computation)
+you start the appletviewer with 
+\begin{verbatim}
+ appletviewer http://SymphonyServer/~user/Symphony/applet.html ,
+\end{verbatim}
+where you
+have to substitute your Symphony server WWW address and the name of the
+user. This assumes you have a unix system, for a Windows system just
+change the path accordingly. 
+
+The clients are only computing, if the appletviewer window is visible, so
+the user calling the page to start the Symphony applet can decide if she/he
+wants to participate or not. On the clients you get the messages:
+\begin{verbatim}
+ {DogFlea.59} 
+...got to process DogFlea.59
+ Results of run; 
+ class: DogFlea; 
+ entry point: run;  
+ Input Field: n0d=810.0;  Input Field: Nd=1000.0; 
+ Output Field: na=479;  Output Field: nb=521; 
+ Time to process: 3.0 seconds;  
+** End of Symphony run **   
+\end{verbatim}
+This shows one job, which was run using $810$ fleas initially on dog 1 and
+$1000$ fleas alltogether. The results get saved in a file called \verb|event.log|
+in a directory 
+\begin{verbatim}
+ .../Symphony/SymphonyServer/data/DogFlea/run0/ 
+\end{verbatim}
+The second step is to extract the results from the logfile, e.g. use the
+follwowing program:
+\inputlisting{Listings_Java/ConvertSymphony.java}
+This produces a data file containing the variables (\verb|n0d Nd na nb|) 
+and can be plotted using Ptplot or by any plotting program e.g. gnuplot (after 
+starting gnuplot use for example \verb|gnuplot "gnu.out" using 1:3|).
+
+\subsubsection{Java Threads}
+
+\subsubsection{MPI and Java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
