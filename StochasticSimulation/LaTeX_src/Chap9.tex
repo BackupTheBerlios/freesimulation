@@ -312,12 +312,12 @@ on many computers at the same time.
 In the first section we will discuss general issues connected to
 concurrent (parallel) programming, which not only applies to Java, but
 also to FORTRAN and other programming languages. In the second section
-we will then apply our gained knowledge to writing concurrent programs
-in Java.
+we take a closer a look at the harware used for parallel computing and
+the third section will be about the software being applied to
+parallel algortihms. The fourth section will then finally show you an
+example of parallel programming in Java using the Ehrenfest model.
 
-Definition, HW, SW, Java Parallel
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What is parallel/concurrent programming?  \\
             Why do we have to do it?}
 
@@ -678,6 +678,7 @@ available for all unixes and even for Win32 since a few months ago,
 although the performance is much better on unix.}
 you have to edit the file \verb|../Symphony/SymphonyServer/tasks.sym| to
 contain the parameters you want to compute, e.g. it could look like this:
+{\small
 \begin{verbatim}
 process=DogFlea;
 entryPoint=run;
@@ -685,7 +686,7 @@ param(n0d),min=10,max=1000,incr=10;
 param(Nd),const=1000;
 return (na,nb) as {EVENT @DogFlea @run0};
 timeout=1;
-\end{verbatim}
+\end{verbatim} }
 Now you start the Symphony server with 
 \begin{verbatim}
   .../Symphony/SymphonyServer/start_server
@@ -704,6 +705,7 @@ change the path accordingly.
 The clients are only computing, if the appletviewer window is visible, so
 the user calling the page to start the Symphony applet can decide if she/he
 wants to participate or not. On the clients you get the messages:
+{\small
 \begin{verbatim}
  {DogFlea.59} 
 ...got to process DogFlea.59
@@ -714,7 +716,7 @@ wants to participate or not. On the clients you get the messages:
  Output Field: na=479;  Output Field: nb=521; 
  Time to process: 3.0 seconds;  
 ** End of Symphony run **   
-\end{verbatim}
+\end{verbatim} }
 This shows one job, which was run using $810$ fleas initially on dog 1 and
 $1000$ fleas alltogether. The results get saved in a file called \verb|event.log|
 in a directory 
@@ -728,9 +730,297 @@ This produces a data file containing the variables (\verb|n0d Nd na nb|)
 and can be plotted using Ptplot or by any plotting program e.g. gnuplot (after 
 starting gnuplot use for example \verb|gnuplot "gnu.out" using 1:3|).
 
-\subsubsection{Java Threads}
+%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Java Threads}
+Now we take a look at Java Threads, the details can be found in
+\cite[]{JavaThreads}. 
+
+A \emph{thread} is a shorthand for ``thread of control'' and stands for a
+section of code executed independendly of other threads in a single program.
+You are actually already familiar with this concept, because every operating
+system today uses multitasking to run multiple programs at the same time sharing
+one CPU. If you view these ``tasks'' as single threads, we only have to
+extend to multiple threads in a singl program. In Java the JVM is responsible
+of starting multiple threads in your code. That is also where the restrictions
+come in: most of the JVMs did not support multiple threads running in
+parallel on SMP machines, meaning that you do not have real parallel 
+programs working with all available CPUs. Nevertheless is the concept
+of threads useful for single processor machines. For example we have 
+already met this case in the last chapters, where we did extensive
+calculations, while still the user had the opportunity to interrupt the 
+calculation by hitting a mouse button or moving the mouse. This is only
+possible, if during the simulation a thread is always asking for user 
+intervention. The JVM thread implementation of multiple threads, but only one thread
+being active at a time, is called \emph{green threads}\footnote{These
+threads are user-level threads. It means that the first thread started by the
+operating system starts multiple threads itself and the operating system
+does not interfere. These are also called lightweight processes, because
+the kernel of the operating system does not have to do much work for
+switching from one user-level thread to another}. All JDK 
+implementations employ these green threads for Java threads.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/Threads.eps}
+    \caption{A multitasking operating system employing a Java Virtual Machine, which runs multiple threads.}
+    \label{fig:Threads}
+  \end{center}
+\end{figure}
+
+Here we want to concentrate on running different threads on several CPUs.
+To that end we need a JVM, which supports ``real'' threads or so-called
+native threads\footnote{These are so-called kernel-level threads. This time the
+kernel of the operating system has to do some context switching and
+therefore there is a little overhead compared to user-level threads.}. 
+If your JVM supports native threads should be stated in the documentation
+somewhere. For the JDK, all the 1.2 versions on all platforms support and
+use native threads without further notification. For JDK 1.1.7 running
+Linux/Solaris you can get an additional package, which supports native
+threads. To call the native threads version you have to use
+\verb|java -native Program|.
+
+Native threads are only useful for threads, which do some heavy calculations.
+For the case where you only want to have user interaction and calculation
+running in ``parallel'', like in the molecular dynamics simulation or the
+Ising model, we are better off with the green threads. 
+
+Applets also employ threading, but here we also have to check if we
+``only'' have green threads or even have native threads available.
+Actually I do not know of any JVM implemented in a web browser capable
+of using native threads yet. But the need for threads in applets is even
+more important, because if you have an applet on top of a web page and
+the applet has to do some time consuming initializations, it will stop
+showing the rest of the page until the applet finishes. If the browser
+itself uses a seperate thread for the applet, this is not a concern, but
+still you should use threads for time consuming operations in an applet.
+
+Now let us take a look at our example and how we can use Java threads to
+speed up our calculation of the Ehrenfest model. The Thread class in Java
+is located in the \verb|java.lang| package. We basically have two 
+ways of defining a thread before we can use it. 
+\begin{itemize}
+\item Extending the thread class in a separate file. Example:
+First the thread:
+\begin{small}
+\begin{verbatim}
+   public class OurOwnThread extemds Thread {       
+       public void run() {
+            // here we can do computations
+       }
+   }
+\end{verbatim}
+\end{small}
+and second the calling class:
+\begin{small}
+\begin{verbatim}
+   public class OurOwnThread1 {
+      public static void main(String[] args) {
+         // main method of application
+         OurOwnThread own = new OurOwnThread();
+         own.start();  // this calls the run() method of the thread
+      }
+   }       
+\end{verbatim} 
+\end{small}
+\item Implementing a runnable interface. Implementing an interface means
+  to supply all necessary methods needed for an interface (here the thread)
+  to be build up. For a thread you only have to supply the \verb|run()| method,
+  nothing else. Example:
+\begin{small}
+\begin{verbatim}
+   public class OurOwnThread2 implements Runnable {
+      public static void main(String[] args) {
+         // main method of application
+         OurOwnThread2 own = new OurOwnThread2();
+         Thread th = new Thread();
+         th.start();  // this calls the run() method of the thread
+      }
+      public void run() {
+         // the computation method of the thread
+      }
+   }       
+\end{verbatim}
+\end{small}
+\end{itemize}
+Which way you use does not matter and there is no preferred way, it just
+depends on your personal preference.
+
+Now there might be a little confusion about the \verb|start()| method.
+There is a \verb|start()| method in the Applet class and one in the Thread
+class. The same applies to the \verb|stop()| method. So you have to be a little 
+bit careful to which method you refer, but it will always be clear from
+the context. And a second remark is about the \verb|run()| method. 
+You should never call directly, but always call the  \verb|start()| method
+of the thread, which in turn starts the thread and calls the \verb|run()| method.
+This is a common mistake, because the program starts and works correct, but
+it does start the threads sequentially and not in parallel. 
+
+Now finally let us see how we can apply this to our problem. First we need
+the thread:
+\lstinputlisting{Listings_Java/DogFleaCalc.java}
+And second we need a ``server'', which starts the threads and collects
+the answers; this is very similar to the Symphony example and will be
+the same in the MPI problem:
+\lstinputlisting{Listings_Java/DogFleaThreads.java}
+The \verb|void join()| method returns only, if the thread is marked
+as no longer being alive and therefore being completed. The join method
+also accepts an argument, which is the timeout (a long variable) in milliseconds.
+ If you give
+a timeout, join returns at the latest after the timeout time.
+
+If you compile both classes and start the \verb|DogFleaThreads.java| class
+you will see the threads starting and stopping, here we always start two
+threads at a time and wait for both to finish. 
+
+Try the two different executions:
+\begin{itemize}
+\item \verb|java -green DogFleaThreads|
+\item \verb|java -native DogFleaThreads|
+\end{itemize}
+On UNIX you can use the \verb|time| command to check the execution times.
+Here we run both commands (\verb|-green| on the left and \verb|-native| on the right)
+on a Linux machine using the JDK1.2 on a single
+and a two processor machine.
+
+On a single processor machine you get:
+\begin{multicols}{2}
+\begin{small}
+\begin{verbatim}
+ Waiting !
+at time s=0:  0
+at time s=100000:  499
+at time s=0:  333
+at time s=100000:  496
+ Ready !
+ Waiting !
+at time s=0:  666
+at time s=100000:  475
+at time s=0:  999
+at time s=100000:  530
+ Ready !
+ 
+real    4m32.880s
+user    4m1.290s   <-----------
+sys     0m4.750s   <-----------
+at time s=0:  0
+at time s=0:  333
+ Waiting !
+at time s=100000:  515
+at time s=100000:  512
+ Ready !
+at time s=0:  666
+ Waiting !
+at time s=0:  999
+at time s=100000:  476
+at time s=100000:  489
+ Ready !
+ 
+real    4m25.449s
+user    4m2.110s    <----------
+sys     0m6.300s    <----------
+\end{verbatim} 
+\end{small}
+\end{multicols}
+And on a 2 processor machine you will get:
+\begin{multicols}{2}
+\begin{small}
+\begin{verbatim}
+ Waiting !
+at time s=0:  0
+at time s=100000:  491
+at time s=0:  333
+at time s=100000:  496
+ Ready !
+ Waiting !
+at time s=0:  666
+at time s=100000:  473
+at time s=0:  999
+at time s=100000:  478
+ Ready !
+
+real    0m14.397s      <-----------
+user    0m12.610s
+sys     0m0.180s
+at time s=0:  0
+at time s=0:  333
+ Waiting !
+at time s=100000:  481
+at time s=100000:  518
+ Ready !
+at time s=0:  666
+ Waiting !
+at time s=0:  999
+at time s=100000:  503
+at time s=100000:  472
+ Ready !
+
+real    0m8.216s         <------------
+user    0m12.970s
+sys     0m0.170s
+\end{verbatim} 
+\end{small}
+\end{multicols}
+Neglect the absolute times given, because we used two totally different 
+machines for the tests. But look at the relative timings comparing
+the native and the green threads on single and multiple processor machines.
+
+By using a 2 processor machine we almost get a speedup of 2 for this problem
+(look at the real time),
+and on the single processor machine the performance gets worse by using
+native threads (look at the user and system time), which is due 
+to the nature of kernel-level threads and
+user-level threads. The use of JDK1.2 is just due to the fact that a JIT is 
+already supplied with the 1.2 version and we wanted to speed up the program.
+You could also use another JIT with JDK1.1.
+
+You should also note that the messages appear randomly and do not in
+any order. So if you use output in threads you should always remember,
+that there is no given order for the output to be send to the screen. This
+will be also true for MPI programs.
+
+The reason for the randomness is the way of the JVM to execute the threads.
+This is called the ``Scheduling of threads''. Like the operating
+system has to tell, which processes are to be executed at what time
+and how long the JVM has to use a scheduling algorithm to tell each
+thread, when it has to go on and when it has to wait. Because this
+is a difficult isu, we do not go into details. The scheduling used
+in the JDK is not written in detail in the JVM specifications and therefore their
+are certain differences on different platforms. It states only that it
+has to be an pre-emptive, priority based scheduler, where the priority
+(greater equal to zero) is a natural number and the highest number
+refers to higher priority. Threads of equal priority are the case, which
+makes most of the problems. For a more detailed discussion and examples
+of e.g. a Round-Robin Scheduler written in Java,
+you should take a look at a book about threading (like \cite[]{JavaThreads}).
+ 
+Just to complete this section, we want to mention some more methods of
+the Thread class. 
+\begin{description}
+\item[static void sleep(long t)] This method stops the execution of a 
+  thread for \verb|t| milliseconds.
+\item[boolean isAlive()] Another useful method is the \verb|isAlive()| method, which 
+returns true, if the thread is still ``running''. Do not confuse this
+with  the \verb|boolean isActive()| method of the Applet class, which
+returns true, if the applet is somewhere still executing (executing
+code between the \verb|start()| and the \verb|stop()| method.).
+\item[static Thread currentThread()] This returns the thread object of the current
+  thread
+\item[static int activeCount()] Returns how many thread are running.
+\end{description}
+There are many other methods, but many of them are depreciated as of
+Java 2 (e.g. \verb|suspend(), stop(), resume(),| etc.), 
+because they introduce serious problems.
+
+There is one last remark you should keep in mind: Never restart a thread!! 
+The reason for this is a bit involved and the interested reader should
+refer to \cite[]{JavaThreads}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \subsubsection{MPI and Java}
+
+??????????? which interface ???
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
