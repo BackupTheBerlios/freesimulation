@@ -712,8 +712,7 @@ dilemma can be found in \cite{VAN_KAMPEN}.
 
 
 \section{The numerical integration of stochastic differential 
-equations}
-\subsection{The Euler--Maruyama method}
+equations: The Euler--Maruyama method}
 Essentially, we have already met the easiest method for the 
 numerical integration of stochastic differential equation while 
 motivating them at the beginning of this chapter.
@@ -806,6 +805,7 @@ Under suitable smoothness conditions for the functions $g$ the
 Euler scheme can be shown to have order of weak convergence 
 $\nu=1$.
 
+\subsection{The Ornstein-Uhlenbeck process}
 As a first example of the application of the Euler algorithm
 we consider again the Ornstein--Uhlenbeck process.
 The implementation of the stochastic Euler algorithm has been 
@@ -868,7 +868,180 @@ leads to the eximate $<X^2>|_{t=4}=0.497182$, which is in very
 good agreement with the expected exact result. The simulation took
 1729 sec on the laptop.
 
-The extra value of 
+\subsection{Noise induced transitions}
+In this second example of the application of the stochastic Euler 
+method we want to simulate a stochastic differential equation with
+multiplicative noise and consider noise induced transitions.
+
+Let us begin by looking at the following deterministic dynamical 
+system
+\begin{equation*}
+\frac{d}{dt} x(t) = \frac{1}{2} - x(t),
+\end{equation*}
+for $x \in [0,1]$. Obviously, this dynamical system has one 
+fix point at $x_0=1/2$. This fix point can be shown to be 
+asymptotically stable. 
+
+We now want to perturb this system by adding a multiplicative 
+noise term on the right hand of the above equation of motion.
+To be precise we want to replace the deterministic equation of 
+motion by the Ito stochastic differential equation
+\begin{equation}
+label{SDENOISEIN}
+dX(t) = (\frac{1}{2} - X(t))X(t)dt + \epsilon X(t) (1-X(t)) dW(t),
+\end{equation}
+where $\epsilon <0$
+
+In order to understand the results of the simulation  we want to 
+look at the stationary solution of the corresponding 
+Fokker--Planck equation. The latter reads
+\begin{equation*}
+\frac{\partial}{\partial t} = - \frac{\partial}{\partial x} [a(X(t)) P(X,t) ]
+      + \frac{1}{2} \frac{\partial^2}{\partial 
+      x^2}[b(X(t))P(X,t)],
+\end{equation*}
+where we have used
+\begin{equation*}
+a(X(t)) = (\frac{1}{2} - X(t))X(t)
+\end{equation*}
+and
+\begin{equation*}
+b(X(t)) = [\epsilon x(t) (1-X(t))]^2.
+\end{equation*}
+Of course, the stationary solution has to satisfy
+\begin{equation*}
+\lim_{t \rightarrow \infty} \frac{\partial}{\partial t} P(X,t) =0
+\end{equation*}
+and hence
+\begin{equation*}
+\frac{d}{dx} [a(X(t)) P(X,t) ] - \frac{1}{2} \frac{\partial^2}{\partial 
+      x^2}[b(X(t))P(X,t)] =0.
+\end{equation*}
+The above equation can be written as
+\begin{equation}
+\label{DDXJ}
+\frac{d}{dx} J(x) =0,
+\end{equation}
+with 
+\begin{equation*}
+J(x) = a(X(t)) P(X,t)  - \frac{1}{2} \frac{\partial}{\partial 
+      x}[b(X(t))P(X,t)].
+\end{equation*}
+In order to satisfy Eq. (\ref{DDXJ}) $J$ must be constant. If we 
+assume that the stationary density $P_S(x) \longrightarrow 0$ for 
+$|x| \longrightarrow \infty$ then the constant in question must be 
+zero and we can conclude that
+\begin{equation*}
+\frac{d}{dx} [b(x) P_S(x)] = 2 a(X)P_S(x).
+\end{equation*}
+Dividing both sides by $b(x)P_S(x)$ we get
+\begin{equation*}
+\frac{d [b(x) P_S(x)]}{b(x) P_S(x)} = \frac{2a(x)}{b(x)}.
+\end{equation*}
+Integrating the above expression gives
+\begin{equation*}
+\ln [b(x) P_S(x)] = \int_c^x dx' \frac{2a(x')}{b(x')}
+\end{equation*}
+or
+\begin{equation*}
+P_S(x) = \frac{N}{b(x)} \exp{-\phi (x)},
+\end{equation*}
+where
+\begin{equation*}
+\phi(x) = - \int_c^x dx' \frac{2a(x')}{b(x')}.
+\end{equation*}
+The factor $N$ is a normalization constant to be chosen such that
+\begin{equation*}
+\int_a^b P_S(x) dx =1.
+\end{equation*}
+
+Transposing the above sketched general theory to the stochastic 
+differential equation of interest  we get the stationary density,
+which sometimes also called the invariant density,
+\begin{equation*}
+P_S(x) = \frac{N}{x(1-x)} \exp\left( - \frac{1}
+           {\epsilon^2 x(1-x)}\right)
+\end{equation*}
+
+Now we are in the position to simulate the stochastic differential
+equation (\ref{SDENOISEIN}). This will be done with the help of 
+the program \texttt{sdenosein.m}.
+
+\subsubsection{Listing of the program \texttt{sdenoisein.m}}
+\inputlisting{./Listings/sdenoisein.m}
+The program generates trajectories of the stochastic process with 
+the help of the Euler algorithm. At the end of the simulation we evaluate 
+numerically the stationary distribution with the help
+of the MATLAB plotting function \texttt{hist}.
+
+In a first run we perform a simulation of 5000 trajectories for 
+the following parameters \texttt{xstart=0.5}, \texttt{epsilon=1},
+\texttt{tend=4}, and \texttt{deltat=0.01}. The initial condition
+was always chosen to be \texttt{xstart=0.5}. The resulting histogram
+of the invariant density can be seen in Fig. 
+(\ref{F_SDENOISEIN_1}).
+
+\begin{figure}
+\label{F_SDENOISEIN_1}
+\includegraphics[width=10cm]{./Figures/f_sdenoisein_1.eps}
+\caption{Histogram of the invariant density of the stochastic differential 
+equation with multiolicative noise. The simulation was run from
+\texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
+The initial condition was chosen to be \texttt{xstart=0.5}.
+The timestep used was \texttt{deltat=0.01} and the multiplicative noise 
+constant was \texttt{epsilon=1}.} 
+\end{figure}
+
+It is clear from the histogram that the most probable value of $X$ 
+lies around 0.5 and is therefore identical with the fixed point of 
+the corresponding deterministic process.
+
+Now we run the program with the same parameters as above but 
+choose the multiplicative noise constant to be \texttt{epsilon=3}.
+The result of this second simulation can be seen in Fig. 
+(\ref{F_SDENOISEIN_2}).
+\begin{figure}
+\label{F_SDENOISEIN_2}
+\includegraphics[width=10cm]{./Figures/f_sdenoisein_2.eps}
+\caption{Histogram of the invariant density of the stochastic differential 
+equation with multiolicative noise. The simulation was run from
+\texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
+The initial condition was chosen to be \texttt{xstart=0.5}.
+The timestep used was \texttt{deltat=0.01} and the multiplicative noise 
+constant was \texttt{epsilon=3}.} 
+\end{figure}
+It is evident from this figure that the invariant density changes 
+its character. Now there is no longer one value of $X$ which is 
+more probable. The histogram shows a minimum for $X=0.5$ and two 
+equally high maxima at around 0.1 and 0.9. As a consequence of 
+the larger noise the system undergoes a "stochastic bifurcation" 
+which changes the number of the maxima of the invariant density. 
+Such a phenomenon is called a {\em noise induced transition}.
+
+Let us now try do see whether this observation is in agreement 
+with the stationary density we have derived at the beginning of 
+this subsection. The maxima of the stationary distribution are 
+easily evaluated from the equation
+\begin{equation*}
+0 = \frac{d}{dx}P_S(x_m)
+\end{equation*}
+which explicitly reads
+\begin{equation*}
+0= (1-2x_m) [1- \epsilon^2 x_m (1-x_m) ].
+\end{equation*}
+For $0 < \epsilon <2$ the invariant density has an extremum, 
+namley a maximum at $x_m =x_0= 1/2$, which is the fixed point of the 
+deterministic equation of motion. For $\epsilon > 2$ the invariant
+density posses a minimum at $x_0 =1/2$ and two maxima of equal 
+height at $x_{m1,m2}$
+\begin{equation*}
+x_{m1,m2} = \frac{1}{2} \left(1 \pm  \sqrt{1 - (4/\epsilon^2)} 
+\right).
+\end{equation*}
+Thus for the value of \texttt{epsilon=3} chosen in the second 
+simulation the maxima are expected  to be at 0.8727 and 0.1273 
+respectively. The histogram reproduced in Fig. (\ref{F_SDENOISEIN_2})
+is in agreement with this theoretical prediction.
 
 
 
