@@ -299,7 +299,7 @@ components and layout classes of the \verb|java.awt| package.
 
 Now we have the necessary background to understand what is going on in the
 \verb|PlotEasy.java| program. The class \verb|PlotEasy| extends the 
-\verb|Applet| class and has a main method. In the \verb<main< method we
+\verb|Applet| class and has a main method. In the \verb|main| method we
 instantiate the \verb|Applet| \verb|PlotEasy|  and the \verb|Frame| \verb|f|.
 The hierarchy of the \verb|Frame| class is (see Fig. \ref{awthierarchy})
 Object $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Window
@@ -512,14 +512,14 @@ The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and
 (\ref{FIG_DECAYB}).
 \begin{figure}
 \label{FIG_DECAYA}
-\includegraphics[width=10cm]{f_decaya.eps}
+\includegraphics[width=10cm]{Figures/f_decaya.eps}
 \caption{A realization of the stochastic process of radioactive decay.
 The parameters of the simulation were $N_0 = 100; 
 \quad p = 0.01 s^{-1}; \quad \Delta t = 1s;  \quad tend = 300s$}
 \end{figure}
 \begin{figure}
 \label{FIG_DECAYB}
-\includegraphics[width=10cm]{f_decayb.eps}
+\includegraphics[width=10cm]{Figures/f_decayb.eps}
 \caption{A realization of the stochastic process of radioactive decay.
 The parameters of the simulation were $N_0 = 1000; 
 \quad p = 0.03 s^{-1}; \quad \Delta t = 1s;  \quad tend = 100s$}
@@ -608,14 +608,14 @@ with nreal = 100 and nreal = 1000.
 
 The result of  two simulations can be seen in figs. x and y.
 \begin{figure}
-\includegraphics[width=\textwidth]{f_decay1.eps}
+\includegraphics[width=\textwidth]{Figures/f_decay1.eps}
 \caption{The distribution of the number of decays computed with 
 the program decayr. 100 realizations. The simulation was run for
 N0=100 and lambda=0.001.}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{f_decay2.eps}
+\includegraphics[width=\textwidth]{Figures/f_decay2.eps}
 \caption{The distribution of the number of decays computed with 
 the program decayr. 1000 realizations. The simulation was run
 for N0=100 and lambda = 0.001.}
@@ -818,7 +818,7 @@ program can be seen below.
 We run the program for $n=10, 100, 1000, 10000$. The result of the 
 four simulations can be seen in Fig. xy.
 \begin{figure}
-\includegraphics[width=\textwidth]{plotmcpi.eps}
+\includegraphics[width=\textwidth]{Figures/plotmcpi.eps}
 \caption{The estimation of pi for n=10,100,1000,10000. The 
 error bars correspond to the standard deviation of the mean of the 
 estimate.}
@@ -833,7 +833,7 @@ Again we run the simulation for n=10, 100, 1000, 10000.
 The result of a simulation can be seen in the next Figure.
 \begin{figure}
 \begin{center}
-\includegraphics[width=.7\textwidth]{fmcpiscore.eps}
+\includegraphics[width=.7\textwidth]{Figures/fmcpiscore.eps}
 \end{center}
 \caption{The scoring method. The continuous line represents
 the function $\sqrt{(1-x^2)}$.}
