@@ -195,7 +195,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{Chap0,Chap1,Chap2,JavaSummary}
+%\includeonly{Chap0,Chap1,Chap2,JavaSummary}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,JavaSummary}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,6 +234,9 @@
 \setcounter{chapter}{-1}
 \lstset{language=java}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART I
+\part{Introduction}
+
 %%% Chapter 0 -- Java Intro
 \include{Chap0}
 
@@ -248,14 +251,20 @@
 %%% Chapter 3 
 \include{Chap3}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART II
+\part{Stochastic Processes}
+
 %%% Chapter 4 
 \include{Chap4}
 
 %%% Chapter 5 
 \include{Chap5}
 
-%%% Chapter 6 
-\include{Chap6}
+%%% Chapter 6 - included in Chap4
+%%\include{Chap6}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART III
+\part{Advanced Simulation Techniques}
 
 %%% Chapter 7 
 \include{Chap7}
@@ -266,8 +275,16 @@
 %%% Chapter 9 
 \include{Chap9}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART IV
+\part{Applications}
 
-%%% Appendices
+%%% Chapter 10
+\include{Chap10}
+
+%%% Chapter 11
+\include{Chap11}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices
 \appendix
 
 % Listings of programs
@@ -294,6 +311,8 @@
 %%\printindex
 
 \end{document}
+
+
 
 
 
