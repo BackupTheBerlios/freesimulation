@@ -250,7 +250,1456 @@ around $\langle k \rangle =0$ with variance $\langle k^2 \rangle = N/2$,
 \subsection{The simulation}
 Schr\"odinger erwaehnen;
 \subsection{Discussion of the results}
-Loschmitt; Zermelo.
+\subsubsection{The "Umkehreinwand" of Loschmidt}
+The "Umkehreinwand" has been formulated in 1876 by Loschmidt as an argument
+against Boltzmann's kinetic theory, which is based upon the Boltzmann
+equation. The starting point of the "Umkehreinwand" is that fact, that
+in classical mechanics, which is at the basis of Boltzmann's theory, all
+processes are reversible, whereas the Boltzmann equation describes
+irreversible processes. In particular, the $H$--theorem (as we will see in the
+next section) selcts a particular direction of time, and hence breaks the
+reversibility.
+
+In fact, it can be shown for the Ehrenfest model, that the following 
+conditional probailities are equal
+\begin{displaymath}
+  \textrm{Prob} \{n_A(s-1)=n|n_A(s)=m \} = 
+  \textrm{Prob} \{n_A(s+1)=n | n_A(s)=m \}, 
+\end{displaymath}
+so that in a certain sense  the model is reversible. This means, that the
+reversibility and the tendency of the $\Delta_s$--curve to decrease are
+compatible.
+
+\subsubsection{The "Wiederkehreinwand" of Zermelo}
+The "Wiederkehreinwand" has been formulated in 1896 by Zermelo. It is an
+argument against Boltzmann's derivation  of the $H$--theorem from classical
+mechanics. The staring point of the Widerkehreinwand is the Wiederkehr Theorem
+of Poincar\`e, which states that each mechanical system composed of a finite
+number of particles returns arbitrarily near to its initial condition after a
+finite time, the Poincar\`e Widerkehrzeit. Obviously, this  behavoiur is in
+contrast to monontonous increase of the entropy which is preticted by the
+$H$--theorem. 
+
+Let us denote by $P(n_0| \bar{n}_0 \ldots \bar{n}_0 n_0)$ the probability that
+after $s$ draws the system is agian in the initial state $n_0$, where it is
+intended that all the $s-1$ $\bar{n}_0$ are different from $n_0$. The mean
+Wiederkehrzeit" $\bar{T}$ is found to be
+\begin{eqnarray*}
+  \bar{T} &=& \sum_{s=1}^{\infty} s P(n_0| \bar{n}_0 \ldots \bar{n}_0 n_0) \\
+          & = & \frac{1}{W(n_0)} \\
+          & = & \frac{2^N n_0! (2N-n_0)! }{(2N)!}.
+\end{eqnarray*}
+As soon as $"N$ is large and $n_0$ is wesentlich diferent from $N$m $\bar{T}$
+is a very large number!
+
+
+\section{Master equations, entropy, asnd the $H$--theorem}
+In this section we are going to discuss in more detail the connections between
+the master equation and the entropy. In particular we want to derive the
+$H$--theorem, which we have already mentioned in the previous section. 
+The starting point of our discussion will be a master equation of the general
+form
+\begin{equation}
+\label{eq:MasterH}
+  \frac{\partial}{\partial t} P(x,t) = \sum_{x'} 
+   [w(x|x') P(x',t) - w(x'|x) P(x,t)]
+\end{equation}
+and we want to discuss separately two cases: (i) the transition matrix is
+symmetric, i.e.,
+\begin{displaymath}
+  w(x|x') = w(x'|x);
+\end{displaymath}
+(ii) the condition of detailed balance is satisfied
+\begin{equation}
+\label{eq:MasterDetBal}
+  w(x|x') P_{\textrm{eq}}(x',t) = w(x'|x) P_{\textrm{eq}}(x,t).
+\end{equation}
+
+\subsection{Case (i): The symmetric transition matrix}
+It is evident that for these case the master equation (\ref{eq:MasterH}) can
+be written in the simplified form
+\begin{equation}
+\label{eq:MasterHSym}
+  \frac{\partial}{\partial t} P(x,t) = \sum_{x'} 
+   w(x|x') [P(x',t) - P(x,t)].
+\end{equation}
+Thus, at equilibrium we have
+\begin{displaymath}
+  \frac{d}{dt}P = 0,
+\end{displaymath}
+since $w(x|x') \ge 0$. Hence,
+\begin{equation}
+\label{eq:MasterHEqSym}
+  P_{\textrm{eq}} (x,t) = \textrm{const} = \frac{1}{\Omega},
+\end{equation}
+where 
+\begin{displaymath}
+  \Omega = \sum_x 1.
+\end{displaymath}
+
+In order to demonstrate that equilibrium is approached in a unique way we
+choose the following $H$--function
+\begin{displaymath}
+  H(t) = \sum_x P(x,t) \ln P(x,t).
+\end{displaymath}
+We now calculate explicitely the time derivative of the above defined
+function. For notational ease we replace the sum by an integral. We find
+\begin{displaymath}
+  \frac{d}{dt} H(t)  = \int dx 
+\left[ \left( \frac{\partial}{\partial t} P(x,t) \right) \ln P(x,t) +
+         \frac{\partial}{\partial t} \ln P(x,t) 
+     \right].
+\end{displaymath}
+Because of the conservation of the norm of the probability density
+\begin{displaymath}
+  \int dx P(x,t) = 1,
+\end{displaymath}
+the time derivative of the $H$--function is
+\begin{displaymath}
+  \frac{d}{dt} H(t)  =  \int dx  
+         \left( \frac{\partial}{\partial t} P(x,t) \right) \ln P(x,t).
+\end{displaymath}
+Now, we insert the master equation (\ref{eq:MasterHSym}) into the above
+expression and obtain
+\begin{eqnarray*}
+ \frac{d}{dt} H(t) & = & \int dx \int dx' w(x|x') 
+                            \left( P(x',t) - P(x,t) \right) 
+                                \ln P(x,t), \\
+                   & = & \int dx \int dx' w(x'|x) 
+                            \left( P(x,t) - P(x',t) \right) 
+                                \ln P(x',t).
+\end{eqnarray*}
+The second line in the above expression has been obatined by changing the
+names of the integration variables. Exploiting the symmetry of the transition
+matrix,  the time derivative of the $H$--function 
+can be written in the symmetrized  form
+\begin{displaymath}
+  \frac{d}{dt} H(t) = \frac{1}{2}  \int dx \int dx' w(x'|x) 
+             \left( P(x',t) - P(x,t) \right) 
+             \left( \ln P(x,t) -  \ln P(x',t) \right).  
+\end{displaymath}
+Recalling that
+\begin{displaymath}
+  (a -b) (\ln a  \ln b) \ge 0 
+\end{displaymath}
+for $a$, $b >0$ it follows for the time derivative of the $H$--function that
+\begin{displaymath}
+   \frac{d}{dt} H(t) \le 0.
+\end{displaymath}
+The $H$--function decreases monotonically as a function of time during the
+time evolution of the Matkov process. The $H$--function gets stationary when
+the condition
+\begin{displaymath}
+  P(x,t) \rightarrow P_{\textrm{eq}} (x); \;\;\; 
+           P_{\textrm{eq}}(x) =P_{\textrm{eq}}(x') 
+\end{displaymath}
+is satisfied for each pair of states $x$ and $x'$, which are connected by
+nonvanishing transition matrix elements. If the set of the states $x$ does not
+decay into two or more independent subsets, the equilibrium is uniquely
+characterized by the form (\ref{eq:MasterHEqSym}).
+
+\subsubsection{Case (ii): Detailed balance}
+Case (ii) is of course more general than case (i). In order to
+investigate this second case we choose the following $H$--function
+\begin{equation}
+\label{eq:MasterHDetBal}
+  H(t) = \int dx p(x,t) \ln \frac{P(x,t)}{P_{\textrm{eq}}(x)}
+\end{equation}
+and show that again the $H$--theorem holds, i.e.,
+\begin{displaymath}
+  \frac{d}{dt} H(t) \le 0.
+\end{displaymath}
+To this end we define a new matrix, say
+\begin{equation}
+\label{eq:MasterWbar}
+  \bar{w}(x|x') = w(x|x') P_{\textrm{eq}}(x'),
+\end{equation}
+which becasue of the property of detailed balance (\ref{eq:MasterDetBal}) 
+is symmetric.  With the help of the definition (\ref{eq:MasterWbar}) we can
+write the master equation in the form 
+\begin{displaymath}
+  \frac{\partial}{\partial t} P(x,t) = \int dx'  \bar{w}(x'|x)
+   \left[ \frac{P(x',t)}{P_{\textrm{eq}}(x')} -
+          \frac{P(x,t)}{P_{\textrm{eq}}(x)}         \right].
+\end{displaymath}
+Inserting this form of the master equation in the definition of the
+$H$--function (\ref{eq:MasterHDetBal}) we can show in a form analgous to the
+previous subsection
+\begin{eqnarray*}
+  \frac{d}{dt} H(t) & = & \frac{1}{2} \int dx \int dx' 
+                   \bar{w}(x'|x) \left[ \frac{P(x',t)}{P_{\textrm{eq}}(x')} -
+          \frac{P(x,t)}{P_{\textrm{eq}}(x)}         \right]
+            \left( \ln \frac{P(x,t)}{P_{\textrm{eq}}(x)} 
+               - \ln \frac{P(x',t)}{P_{\textrm{eq}}(x')}  \right), \\
+    & \le & 0.
+\end{eqnarray*}
+If the system is ergodic, after some time it reaches the equlibrium
+\begin{displaymath}
+  P(x,t) \longrightarrow P_{\textrm{eq}}(x) 
+\end{displaymath}
+and the $H$--function assumes its minimal value. the $H$--function 
+(\ref{eq:MasterHDetBal}) has two important properties. 
+The special form of
+the $H$--function allows the proof of a $H$--theorem also for the Boltzmann
+equation. The interesting point is taht the Boltzmann equation itself being a
+nonlinear equation for the distribution in a 6 dimensional one--partice
+phase space is not a master equation. However, the linareised Boltzmann
+equation is a master equation.
+
+The function $H$ is an addtitive quantity. Consider two independent systems
+with states $x$ and $y$ and probability densities $p(x)$ and $q(y)$. We regard
+the two systems as a combined system with states $(x,y)$ and probability
+density $p(x)q(y)$. Then the $H$--functional of the combined system is the sum
+of the $H$--functionals of the two subsystems
+\begin{displaymath}
+  \int dx \int dy P(x) Q(y) \ln \frac{P(x) Q(y)}
+                                     {P_{\textrm{eq}}(x) Q_{\textrm{eq}}(x)}=
+\int dx P(x)  \ln \frac{P(x)}{P_{\textrm{eq}}(x)}  +
+\int dx Q(x)  \ln \frac{Q(x)}{Q_{\textrm{eq}}(x)}.
+\end{displaymath}
+Thus, $H$ is an exstensive quantity.
+ 
+Because of these two important properties one could like  to  identify $H$
+with the entropy
+of the second Hauptsatz of thermodynamics. However, it is important to keep in
+mind, that the $H$--functional we introduced is a functional of a
+nonequilibrium distribution, whereas the the thermodynamic entropy is defined
+for a  system at equilibrium. The nonequilibrium $H$ functional allows 
+therefore a  generalization of the thermodynamic entropy
+\begin{displaymath}
+  S = -k H + S^{\textrm{eq}},
+\end{displaymath}
+where $k$ is Boltzmann's constant and $S^{\textrm{eq}}$ is a constant term,
+which is independent of $p(x)$. At equilibrium $H=0$, so that 
+$S^{\textrm{eq}}$ is the thermodynamic entropy.
+
+
+\section{Nonequilbrium thermodynamics}
+\subsection{balance equations of fluid dynamics}
+In classical theoretical physics the dynamics of fluids is described with the
+help of the balance equations of nonequlibrium thermodynamics for the mass,
+the momentum, and the energy. These balance equations are derived under the
+assumption, that in a small volume element of the bulk of the fluid mass,
+momentum, and energy are in a local thermal equilibrium. Evidently, if one
+considers the molecular structure of a fluid, one has to regard the mass, the
+momentum, and the energy density as mean value of stongly fluctuating
+microscopic quantities. These fluctuations are neglected in the purely
+macroscopic classical description. 
+
+However, as we have seen in the preceeding sections, fluctuations play a
+fundamental role in systems out or approaching equilibrium. Typical situations
+in which fluctuations are of central importance in the description of fluids
+occur near equilibrium in the form of small Gaussian fluctuations in the
+macroscopic variables, these are the so--called hydrodynamic fluctuations,
+and the large non--Gaussian fluctuations in the velocity filed of turbulent 
+fluids.
+
+For these reasons it seems natural to look for a  stochastic, mesoscopic
+formulation of fluid dynamics. On this macroscopic level we will have the same
+numbero f variables as in the macroscopic level of description. The dynamics
+of theses variables will no longer be deterministic but stochastic. The
+mesocopic approach should satisfy four conditions:
+
+(i) In the limit of vanishing fluctuations the equation of motion for the 
+mean values of the stochastic variables
+should be identical with the balance equations of fluid dynamics.
+
+(ii) In a linear noise approximation we should obtain from the master equation
+defining the stochastic process the linear Langevin equation of fluctuating
+hydrodynamics. In this way nonequlibrium thermodynmics should be contained in
+the approach. 
+
+(iii) In the continuum limit the characteristci function of the stochastic
+process should generate the complete hierarchy of coupled equations for the
+moments of the velocity fileds, which are known from the theory of
+turbulence. In this way the master equation should describe correctly the the
+turbulent, non--Gaussian fluctuations. 
+
+(iv) The mesoscopic formulation should lead to simple and efficient numerical
+alghorithms, which should be vectrorizable and parlalleizable.
+
+In the  following we are going to investigate such a formulation for a very
+simple balance equation, the one dimensional Burgers equation, which is the
+equation of motion for a one--dimensinal velocity field $v(x,t)$,
+
+The Burgers equation is a one--dimensional version of the navier--Stokes
+equation. It is often used in gas dynamics since it shows shock wave
+solutions, and as a simple model of turbulence.
+
+\subsection{The definition of the phas space}
+In this subsection we define the space of
+states of the fluid. Once the accessible states of the fluid
+are known it
+is possible to construct a master equation governing the
+probabilistic
+time evolution of the system. 
+
+The first step of the construction of an appropriate phase space
+consists
+in the division of physical space into a number of cells
+centered at the points $x_{\lambda}$ which we
+label by an integer--valued index $\lambda \in {\bf{Z}}$.
+For the purpose of
+general (three dimensional)
+considerations it suffices to use cubic cells of size $\delta l^{3}$;
+in practice, shape and size of the cells can be adapted to
+the confining geometry of the flow. Here the
+cells are
+just one--dimensional intervals of length $\delta l$ since we are
+considering
+one space dimensional examples only. Depending on the physical
+situation under study the number of cells may be finite or
+infinite. In
+the stochastic simulation this number is, of course, always finite
+and
+fluids of (practically) infinite size have to be modelled by
+imposing suitable
+boundary conditions.
+
+we now
+interpret the
+velocity field $u(x,t)$ appearing in the Navier--Stokes equation
+as an expectation value of a discrete stochastic process
+$N_u^{\lambda}(t) \in {\bf{Z}}$, i.~e. we define
+\begin{equation}
+\label{EXPEC}
+u(x_{\lambda},t) =
+\delta u \;\; \langle N_u^{\lambda}(t) \rangle \;\;\; .
+\end{equation}
+The above equation provides the connection between the macroscopic
+and the stochastic description of fluid motion. Within
+the stochastic
+description the velocity is a time--dependent random variable
+$N_u^{\lambda}$,
+i.~e. a stochastic process governed by a master equation to be
+defined below.
+On the other hand, the velocity on a macroscopic scale,
+that is on the scale
+accessible to standard experimental observation, is given by an
+expectation
+value, and therefore obeys the deterministic Navier--Stokes
+equation.
+The velocity unit $\delta u$ has been introduced in order to obtain
+a discrete stochastic process $N_u^{\lambda}$. Thus it represents
+the size
+of the smallest possible changes of the state of the fluid
+in the discretized
+phase space. This means that within our description a positive value
+$\delta u \cdot N_u^{\lambda}$ of
+the random velocity in the cell ${\lambda}$ can be intepreted as
+the presence
+of $N_u^{\lambda}$ velocity particles each carrying the velocity
+$\delta u$.
+Correspondingly, a negative value $\delta u \cdot N_u^{\lambda}$
+is to be
+interpreted as the presence of $\mid N_u^{\lambda} \mid $
+antiparticles of
+velocity. Defining the positive and negative part of
+$N_u^{\lambda}$ as
+\begin{equation}
+N_{u+}^{\lambda} := \left\{ \begin{array}{lll}
+       N_u^{\lambda} \;\; &,&  \;\;\; N_u^{\lambda} \geq 0 \\
+                            0 \;\; &,& \;\;\; N_u^{\lambda} < 0
+                            \end{array}
+                            \right. \;\;\; , \;\;\;
+N_{u-}^{\lambda} := \left\{ \begin{array}{lll}
+               0 \;\; &,&  \;\;\; N_u^{\lambda} \geq 0 \\
+               N_u^{\lambda} \;\; &,& \;\;\; N_u^{\lambda} < 0
+                            \end{array}
+                            \right. \;\;\; ,
+\end{equation}
+we write:
+\begin{equation}
+N_u^{\lambda} = N_{u+}^{\lambda} + N_{u-}^{\lambda} \;\;\; .
+\end{equation}
+Thus we see that within our description the mesoscopic
+state of the fluid may be viewed as a many velocity particle state
+and is completely fixed by specifying
+the number $N_u^{\lambda}$ of velocity particles in each cell
+$\lambda$.
+Formally, the resulting phase space may be written as
+\begin{equation}
+\label{PHASESPACE}
+\Gamma = \left\{ \left( N_u^{\lambda} \right)_{\lambda \in {\bf{Z}}}
+         \mid N_u^{\lambda} \in {\bf{Z}}
+\right\} \;\;\; .
+\end{equation}
+
+\subsection{The construction of the master equation}
+
+In order to obtain the master equation for the Burgers model  we proceed
+as follows: We show explicitly how stochastic processes can be
+constructed whose expectation values obey the corresponding
+terms in the Burgers equation equation. These stochastic processes
+are defined by a master equation which is a time evolution equation
+for the joint probability distribution $P=P(N_u^{\lambda};t)$ in the
+phase space $\Gamma$. From this probability distribution the
+expectation
+value for an arbitrary observable ${\cal{O}}$ may be evaluated
+according to
+\begin{equation}
+\langle {\cal{O}} \rangle = \sum_{\left\{ N_u^{\lambda} \right\}}
+{\cal{O}} \, P \left( \{ N_u^{\lambda} \} ;t \right) \;\;\; .
+\end{equation}
+
+\subsubsection{Viscosity as a many--particle random walk}
+In this section we are going to describe viscous fluids within
+our stochastic
+approach. In the simplest cases, the Navier--Stokes equation
+containing only
+viscous forces reads
+\begin{equation}
+\label{NVSDIFF}
+\frac{\partial u}{\partial t} =
+   \frac{1}{R} \frac{\partial^2 u}{\partial x^2} \;\;\; .
+\end{equation}
+As in the preceeding section we want to define a stochastic process
+$N_u^{\lambda}(t)$
+in such a way that its expectation value
+\begin{equation}            \label{EXP2}
+u(x_{\lambda},t) = \delta u \; \langle N_u^{\lambda}(t) \rangle
+\end{equation}
+obeys the diffusion--like equation (\ref{NVSDIFF}).
+
+It is well--known that the probability distribution
+$\phi_{\lambda}(t)$, $\lambda \in {\bf{Z}}$,
+of a one particle
+random walk fulfills in the continuous limit a
+diffusion equation. More precisely, let us consider a continuous
+time
+random walk in one dimension. The probability distribution
+$\phi_{\lambda}(t)$ obeys the following master equation
+\begin{equation}
+\label{RDMWALK}
+\frac{\partial \phi_{\lambda}}{\partial t} =
+  d \cdot \left(
+\phi_{\lambda+1} -2 \phi_{\lambda} + \phi_{\lambda-1}
+ \right) \;\;\; , \;\;\; d=\mbox{const.} \;\;\; .
+\end{equation}
+It is easy to see from the above equation that in the limit
+of infinitesimal
+small random steps,
+\begin{equation}
+\phi_{\lambda}(t) \longrightarrow \phi(x=\delta l \cdot \lambda,t)
+\;\;\; ,
+\end{equation}
+the probability distribution $\phi(x,t)$ is a solution of the
+diffusion
+equation
+\begin{equation}
+\label{DIFF1}
+\frac{\partial \phi}{\partial t} = D
+\frac{\partial^{2} \phi}{\partial x^{2}} \;\;\; , \;\;\; 
+D:= {\lim}_{\delta l \rightarrow 0} \left( \delta l^2 \; d \right)
+\;\;\; .
+\end{equation}
+
+The formal analogy of the diffusion equation (\ref{DIFF1}) with
+the one
+dimensional Navier--Stokes equation (\ref{NVSDIFF}) is obvious.
+However, there is a fundamental difference between these two
+equations.
+The diffusion equation (\ref{DIFF1}) describes the time
+evolution of a
+{\em probability distribution} which is normalized and positive
+definite.
+In contrast, the one dimensional Navier--Stokes equation
+(\ref{NVSDIFF})
+is an equation for an {\em expectation value} which might be
+negative and not
+normalizable. Thus, the stochastic process
+underlying (\ref{NVSDIFF}) can {\em not} be described by a
+{\em one particle}
+random walk.
+Therefore, one has to leave the one particle picture. To this end,
+we consider
+a collection of independent velocity particles each of which is
+governed by
+Eq. (\ref{RDMWALK}). The state of the resulting collective system
+\cite{KAMPEN} is characterized by the set of numbers $N_u^{\lambda}$
+of velocity particles in all cells $\lambda$.
+Thus, in this many--particle picture one disregards the identity of
+the
+individual particles and is merely interested in the occupation
+numbers
+$N_u^{\lambda}$ of particles in each cell.
+(Note, that in the one--particle
+picture the state of the system is completely specified by giving
+the
+location $\lambda$ of the particle.)
+
+In the framework of the many particle picture the one--particle
+density
+$\phi_{\lambda}(t)$ is replaced by the many particle probability
+distribution $P(N_u^{\lambda};t)$. The master equation defining the
+time evolution of $P(N_u^{\lambda};t)$ can be obtained from the
+one--particle master equation by multiplying the one--particle
+transition rates
+with the occupation number $N_u^{\lambda}$ of cell $\lambda$,
+\begin{eqnarray*}
+\frac{\partial P}{\partial t} & = &    \frac{1}{R \, \delta l^2}
+                                    \sum_{\lambda} \left(
+          (N_{\lambda} +1) P(\ldots,N_{\lambda-1}-1, N_{\lambda}+1, \ldots) 
+        + (N_{\lambda} +1) P(\ldots, N_{\lambda}+1, N_{\lambda+1} -1, \ldots) 
+                                      \right. \\
+                            && - \left. \right).
+\end{eqnarray*}
+Introducing the shift--operators ${\bf E}_{\lambda}$ which operate on an
+arbitrary function $F$ of the random varoables as 
+\begin{eqnarray}
+{\bf{E}}_{\lambda} F(\ldots, N_u^{\lambda}, \ldots)  & = &
+ F(\ldots, N_u^{\lambda} + 1, \ldots)                   \nonumber \\
+{\bf{E}}_{\lambda}^{-1} F(\ldots, N_u^{\lambda}, \ldots) & = &
+ F(\ldots, N_u^{\lambda} - 1, \ldots)  \;\;\; ,
+\end{eqnarray}
+we can write the master equation as
+\begin{equation}
+\label{DIFFME}
+\frac{\partial P}{\partial t} =    \frac{1}{R \, \delta l^2}
+\sum_{\lambda} \left[ \left( {\bf{E}}_{\lambda -1}^{-1}
+     {\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_u^{\lambda}
+     + \left( {\bf{E}}_{\lambda +1}^{-1} {\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_u^{\lambda} \right] P  \;\;\; ,
+\end{equation}
+where $\delta l$ denotes the cell size.
+Since the expectation value of $N_u^{\lambda}$ is a statistical
+guess of the
+one--particle density at the point $\lambda$
+the velocity field (\ref{EXP2})
+obeys the diffusion equation (\ref{NVSDIFF}) as required.
+Until now we implicitly restricted our attention to the collective
+random walk of positive velocity particles. Obviously, to be
+consistent
+with our general picture of particles and antiparticles of velocity
+we have to generalize the master equation describing viscous fluids
+in order
+to allow for the correct treatment of antiparticles of velocity.
+Since a one--particle jump to the right is equivalent to a
+one--antiparticle
+jump to the left and vice versa, the master equation (\ref{DIFFME})
+has to
+be modified in the following way: In order to describe the
+diffusion of
+antiparticles the numbers $N_u^{\lambda} = N_{u-}^{\lambda}$
+are replaced
+by their absolute values $\mid N_u^{\lambda} \mid =
+- N_{u-}^{\lambda}$
+and the shift operators 
+${\bf{E}}_{\lambda \pm 1}^{-1} {\bf{E}}_{\lambda}$ by
+${\bf{E}}_{\lambda \pm 1} {\bf{E}}_{\lambda}^{-1}$.
+Consequently, if both particles and antiparticles of velocity
+are present
+the master equation can be written:
+
+\begin{eqnarray}
+\label{DIFFOP}
+\frac{\partial P}{\partial t} &=&  \frac{1}{R \, \delta l^2}
+\sum_{\lambda} \left[ \left( {\bf{E}}_{\lambda -1}^{-1}
+{\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_{u+}^{\lambda}
+     + \left( {\bf{E}}_{\lambda +1}^{-1} {\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_{u+}^{\lambda} \right] P  \nonumber \\
+ && - \frac{1}{R \, \delta l^2}
+ \sum_{\lambda} \left[
+      \left( {\bf{E}}_{\lambda -1} {\bf{E}}_{\lambda}^{-1}
+     - {\bf{1}} \right)  N_{u-}^{\lambda} 
+     + \left( {\bf{E}}_{\lambda +1} {\bf{E}}_{\lambda}^{-1}
+     - {\bf{1}} \right) N_{u-}^{\lambda} \right] P  \nonumber \\
+&=:&  {\cal{A}}_d \, P \;\;\; ,
+\end{eqnarray}
+where we introduced the ``diffusion operator'' ${\cal{A}}_d$.
+
+Having presented the master equation defining the time evolution
+of the stochastic process $\left\{ N_{\lambda} \right\}$ we now
+demonstrate that
+our requirement explained in subsection x is satisfied, i.e.,
+we show that
+the expectation value of the stochastic process
+$\delta u \langle N_{\lambda} \rangle$ indeed
+obeys a discrete form of the Burgesr equation containg only viscous forces.. 
+
+More generally, let us first derive an appropriate form for the time
+evolution equation of the expectation value of an arbitrary function
+${\cal{F}} \left( \{ N_{\lambda} \} \right)$ of the stochastic
+variables.
+To this end, we consider an expression of the form
+$\langle {\bf{E}}_{\lambda + 1}^{-1}
+{\bf{E}}_{\lambda} {\cal{F}} \rangle$.
+Recalling that the expectation
+value involves a multiple sum over all integers
+$N_{\lambda}$ it is easy
+to show with the help of the definition of the operators
+${\bf{E}}^{\pm}_{\lambda}$, Eq.~(\ref{SHIFT}), and by shifting
+the summation indices appropriately that the following equation
+holds
+\begin{equation}         \label{PROP1}
+\langle {\bf{E}}_{\lambda +1}^{-1} {\bf{E}}_{\lambda}
+{\cal{F}} \rangle
+= \langle {\cal{F}} \rangle \;\;\; .
+\end{equation}
+This equation is true, of course, for any other product of
+shift operators
+appearing in our master equation (\ref{MASTEREQ}).
+Thus, these products of shift operators when
+acting on a function of the stochastic variables have no influence
+on its expectation value and can, within the angular brackets,
+always be replaced by the identity. Since the time evolution
+operator
+${\cal{A}}$ contains the above products of shift operators
+only in the
+form $({\bf{E}} {\bf{E}} - {\bf{1}})$, Eq.~(\ref{PROP1})
+implies that
+\begin{equation}
+\label{AFEXPEC}
+\langle {\cal{A}} \; {\cal{F}} \rangle =
+\sum_{\left\{N_{\lambda} \right\}}
+{\cal{A}}\; {\cal{F}} P = 0
+\;\;\; .
+\end{equation}
+Introducing the commutator (the function ${\cal{F}}$ being
+regarded as a
+multiplication operator)
+\begin{equation}
+\left[ {\cal{F}}, {\cal{A}} \right] := {\cal{F A}} - {\cal{A \; F}}
+\end{equation}
+and exploiting relation~(\ref{AFEXPEC}) equation~(\ref{TIMEEV})
+takes the form
+\begin{equation}     \label{HGLN}
+\frac{\partial}{\partial t} \langle {\cal{F}} \rangle = \left\langle
+\left[ {\cal{F}} , {\cal{A}} \right] \right\rangle
+\;\;\; .
+\end{equation}
+Thus, the time derivative of the expectation value of a function
+${\cal{F}}$ of the stochastic variables is equal to the expectation
+value of the commutator $\left[{\cal{F}},{\cal{A}}\right]$.
+For the special case of the first moments of the stochastic process
+$\delta u N_{\lambda}$ we have
+\begin{equation}
+\label{MOMENT2}
+\delta u \frac{\partial}{\partial t} \langle N_{\lambda} \rangle
+= \delta u \; \left\langle \left[ N_{\lambda} , {\cal{A}} \right]
+\right\rangle
+\;\;\; .
+\end{equation}
+In order to determine the commutator $[N_{\lambda}, {\cal{A}}]$ we
+proceed by evaluating some useful the commutators.
+Let us begin with the calculation of the commutator $[N_s, {\bf E}_{s'}]$ by
+looking at how it operators on an arbitrary function of the stochastic
+variables. Let us consider first the case that $s=s'$. We have
+\begin{eqnarray*}
+  [N_s,{\bf E}_s] F(\ldots, N_{s}, \ldots) & = & 
+         N_s {\bf E}_s F(\ldots, N_{s}, \ldots) -
+    {\bf E}_s  N_s F(\ldots, N_{\lambda}, \ldots) \\
+                    & = & N_s  F(\ldots, N_{s} +1 , \ldots)
+                         - (N_s +1) F(\ldots, N_{s} +1 , \ldots) \\
+                    & = & - {\bf E}_s  F(\ldots, N_{s}, \ldots).
+\end{eqnarray*}
+For the case that $s \ne s'$ the calculation is similar
+\begin{eqnarray*}
+   [N_s,{\bf E}_{s'}] F(\ldots, N_{s}, \ldots) & = & 
+      N_s {\bf E}_{s'} F(\ldots, N_{s}, \ldots)
+             -
+    {\bf E}_{s'}  N_s F(\ldots, N_{\lambda}, \ldots) \\
+   &&    N_s F(\ldots, N_{s}, N_{s'}+1, \ldots) - 
+            N_s F(\ldots, N_{s}, N_{s'}+1, \ldots) \\
+      & = & 0.    
+\end{eqnarray*}
+Summarizing, we can write
+\begin{displaymath}
+  [N_s,{\bf E}_{s'}] = - {\bf E}_s \delta_{s,s'}.  
+\end{displaymath}
+Similarly, we can show that
+\begin{displaymath}
+   [N_s,{\bf E}_{s'}^{-1}] = {\bf E}_s^{-1} \delta_{s,s'}. 
+\end{displaymath}
+Another useful commutator is
+\begin{eqnarray*}
+  [N_s, {\bf E}^{-1}_{s' \pm 1} {\bf E}_{s'}] & = &
+        [N_s, {\bf E}^{-1}_{s' \pm 1}] {\bf E}_{s'}
+         +{\bf E}^{-1}_{s' \pm 1} [N_s, {\bf E}_{s'}] \\
+     & = & {\bf E}^{-1}_{s' \pm 1} {\bf E}_{s'} \delta_{s' \pm 1,s} 
+             - {\bf E}^{-1}_{s' \pm 1} {\bf E}_{s'}  \delta_{s',s} \\
+     & = & {\bf E}^{-1}_{s' \pm 1} {\bf E}_{s'} 
+                      (\delta_{s' \pm 1,s} -\delta_{s',s} ). 
+\end{eqnarray*}
+In order to determine the equation of motion for the expecation value of 
+random velocity variable we thus have to compute first the commutator
+$[N_{\lambda},{\cal{A}}_d]$. We obtain 
+\begin{eqnarray*}
+[N_{\lambda},{\cal{A}}_d] &=&  \frac{1}{R \delta l^2} \sum_{s'}
+                  \left[ [N_s,{\bf E}^{-1}_{s' - 1}{\bf E}_{s'}]
+                              (N_{s'}^+ - N_{s'-1}^-)    \right. \\
+               && + \left. [N_s,{\bf E}^{-1}_{s' + 1}{\bf E}_{s'}]
+                        (N_{s'}^+ - N_{s'+1}^-)   \right]  \\
+              & = &   \frac{1}{R \delta l^2} \sum_{s'}
+                \left[ {\bf E}^{-1}_{s' + 1}{\bf E}_{s'} 
+                        (\delta_{s'-1,s} - \delta_{s',s})  
+                        (N_{s'}^+ -  N_{s'-1}^-)
+                        \right. \\
+                   && + \left. {\bf E}^{-1}_{s' + 1}{\bf E}_{s'}
+                          (\delta_{s'+1,s} - \delta_{s',s})  
+                         (N_{s'}^+ - N_{s'+1}^-)    \right]  \\
+             & = & \frac{1}{R \delta l^2} 
+                   \left\{  {\bf E}^{-1}_{s}{\bf E}_{s+1}
+                           (N_{s+1}^+ -  N_{s}^-) 
+                           - {\bf E}^{-1}_{s-1}{\bf E}_{s}
+                           (N_{s}^+ -  N_{s-1}^-) 
+                                \right. \\
+            && +   \left.  {\bf E}^{-1}_{s}{\bf E}_{s-1}
+                           (N_{s-1}^+ -  N_{s}^-)  
+                        - {\bf E}^{-1}_{s+1}{\bf E}_{s}
+                           (N_{s}^+ -  N_{s+1}^-)       \right\}.
+\end{eqnarray*}
+Before taking the expecation value of the above expression we have to notice
+that wheneever in the sum $\sum_{\{ N_{ \lambda \} }}$ the shift operators appear
+on the extreme left they can be replaced by 1. This is easy to show with the
+help of the definition of the shift operators and by shifting  appropriately
+the summation indices.
+With the help of this trick it is evident that we have
+\begin{equation}
+\label{MOMENT3}
+\delta u \; \frac{\partial}{\partial t}
+\langle N_{\lambda} \rangle  = 
+\nu \frac{\delta u}{ \delta l^2}
+  \langle N_{\lambda +1}^+ - 2 N_{\lambda}^+ + N_{\lambda -1}^+ +
+          N_{\lambda +1}^- - 2 N_{\lambda}^- + N_{\lambda -1}^-
+          \rangle .
+\end{equation}
+Recalling that $N_{\lambda} = N_{\lambda}^+ + N_{\lambda}^-$ the
+time evolution equation of the first moment of the stochastic
+process
+$N_{\lambda}$ can be written as
+\begin{equation}
+\label{MOMENT4}
+\delta u \; \frac{\partial}{\partial t} \langle N_{\lambda}
+\rangle =
+\nu \frac{\delta u}{\delta l^2}
+  \langle N_{\lambda +1} - 2 N_{\lambda} + N_{\lambda -1} \rangle
+   \;\;\; .
+\end{equation}
+Since, the equation is linear in $N_{\lambda}$ we have, of course,
+$v_{\lambda} = \delta u \langle N_{\lambda} \rangle$ and hence
+we immediately obtain a discretized version of the Burgers equation without
+convective terms. 
+\begin{equation}
+\label{DISCRETEBURGERS}
+\frac{\partial}{\partial t} v_{\lambda}(t) =
+\nu \frac{v_{\lambda +1} -2 v_{\lambda} +
+v_{\lambda -1}}{\delta l^2}
+- \frac{1}{2} \frac{v_{\lambda+1}^2 -
+v_{\lambda -1}^2}{2 \; \delta l }
+\;\;\; ,
+\end{equation}
+which, in turn, leads to Burgers' equation~(\ref{BURGERS}) in the
+continuum limit $\delta l \longrightarrow 0$.
+
+\subsubsection{The nonlinear convection term}
+Up to now, we have shown how to deal with  viscous diffusion. 
+However, it is of great importance
+to include
+within the stochastic theory nonlinear interactions which, for
+example, enter
+the Navier--Stokes equation through the nonlinear inertial term
+$(\vec{u} \cdot \vec{\nabla}) \vec{u}$. It is a remarkable fact
+that interpreting
+the inertial term as a nonlinear convection term a
+stochastic interpretation
+in terms of one--particle jumps can be found. As will be shown
+here, again,
+the many--particle picture is absolutely necessary.
+
+As before we are looking for the stochastic process
+$N_u^{\lambda}(t)$
+the expectation value of which obeys Burgers' equation. Obviously,
+the
+stochastic process underlying the
+nonlinear convection term is fundamentally different from the
+previously
+introduced stochastic processes: It is not a random walk of
+a collection
+of independent particles.
+The construction of the Hydrostochastic form of the
+convection term will now be given heuristically
+within the many particle picture.
+ 
+
+Let us consider what happens in a specific cell $\lambda$ occupied
+by
+$N_u^{\lambda} \geq 0$ velocity particles. Within the stochastic
+approach
+convection may be modelled as a jump process from cell
+$\lambda$ to cell $(\lambda + 1)$.
+Thus, the stochastic process is
+completely specified by giving the transition rates for
+these elementary jumps. The probability for the jump of a
+{\em{specific}} particle situated in cell $\lambda$ is proportional
+to the velocity at $\lambda$ and, hence, proportional to the
+number of velocity particles in cell $\lambda$.
+Consequently, the
+{\em total} transition rate is proportional to the number of pairs
+of velocity particles in the cell $\lambda$, i.~e. to
+$N_u^{\lambda} \cdot
+(N_u^{\lambda} - 1) / 2$. On dimensional grounds the
+proportionality factor
+is found to be $\delta u / \delta l$ (note that transition rates
+have
+the dimension of an inverse time) and we obtain the following master
+equation for the convection of velocity particles:
+\begin{equation}
+\frac{\partial P}{\partial t}  = 
+\frac{\delta u}{\delta l} \sum_{\lambda}
+     \left( {\bf E}_{\lambda +1}^{-1} {\bf E}_{\lambda} - {\bf 1}
+    \right) \frac{1}{2} N_u^{\lambda} (N_u^{\lambda}-1) P
+\;\;\; .
+\end{equation}
+ 
+
+It can be shown that the above form of the master equation
+for the convection term
+leads to a discretization of the differential operator
+$u\partial /\partial x$ which is of order $\delta l$. In order to
+obtain a discretization of this differential operator which is of
+order $\delta l^{2}$ the following symmetrized
+form of the master equation will be used:
+\begin{eqnarray}
+\label{TRANSPORT1}
+\frac{\partial P}{\partial t} & = & \frac{1}{2}
+\frac{\delta u}{\delta l} \left\{
+                          \sum_{\lambda}
+     \left( {\bf E}_{\lambda +1}^{-1} {\bf E}_{\lambda} - {\bf 1}
+    \right) \frac{1}{2} N_u^{\lambda} (N_u^{\lambda}-1) P \right.
+               \nonumber \\
+& &  + \left.  \sum_{\lambda}
+       \left( {\bf E}_{\lambda}^{-1} {\bf E}_{\lambda -1} - {\bf 1}
+    \right) \frac{1}{2} N_u^{\lambda} (N_u^{\lambda}-1) P \right\}
+               \nonumber \\
+&=:&  {\cal{A}}_c \, P          \;\;\; ,
+\end{eqnarray}
+where we abbreviated the effect of the
+right hand side by defining the ``convection operator''
+${\cal{A}}_c$.
+
+Constructing Eq.~(\ref{TRANSPORT1}) we assumed that
+$N_u^{\lambda} \geq 0$.
+The general master equation describing both the presence
+of velocity particles
+and antiparticles can now easily be derived.
+Let us assume, that cell $\lambda$ contains
+$\mid N_u^{\lambda}\mid = - N_{u-}^{\lambda}$
+antiparticles of velocity. The elementary jumps of the antiparticles
+can be obtained from those of the particles of velocity by simply
+reversing
+the directions of the jumps, i.~e. all antiparticles jump to
+the left.
+However, since the process of an antiparticle jumping to the left is
+identical to the process of a particle jumping to the right, the
+above master
+equation describes the combined convection of particles and
+antiparticles
+of velocity if $N_u^{\lambda}$ is replaced by
+$\mid N_u^{\lambda} \mid$.
+
+Summarizing the master equation of the Burgers model reads
+\begin{eqnarray}
+\label{BURGERSMEQ}
+\frac{\partial P}{\partial t} &=&
+\left\{ {\cal{A}}_d + {\cal{A}}_c \right\} P
+                \nonumber \\
+& =  &  \frac{1}{R \, \delta l^2}
+\sum_{\lambda} \left[ \left( {\bf{E}}_{\lambda -1}^{-1}
+{\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_{u+}^{\lambda}
+     + \left( {\bf{E}}_{\lambda +1}^{-1} {\bf{E}}_{\lambda}
+     - {\bf{1}} \right) N_{u+}^{\lambda} \right] P  \nonumber \\
+ &&  - \frac{1}{R \, \delta l^2}
+ \sum_{\lambda} \left[
+      \left( {\bf{E}}_{\lambda -1} {\bf{E}}_{\lambda}^{-1}
+     - {\bf{1}} \right)  N_{u-}^{\lambda} 
+     + \left( {\bf{E}}_{\lambda +1} {\bf{E}}_{\lambda}^{-1}
+     - {\bf{1}} \right)  N_{u-}^{\lambda}  \right] P  \nonumber \\
+&  & + \frac{1}{2}
+\frac{\delta u}{\delta l} \left\{
+                          \sum_{\lambda}
+    \left( {\bf E}_{\lambda +1}^{-1} {\bf E}_{\lambda} - {\bf 1}
+          \right) \frac{1}{2} \mid N_u^{\lambda}\mid
+          (\mid N_u^{\lambda} \mid -1) P \right.
+               \nonumber \\
+& & + \left.  \sum_{\lambda}
+       \left( {\bf E}_{\lambda}^{-1} {\bf E}_{\lambda -1} - {\bf 1}
+          \right) \frac{1}{2} \mid N_u^{\lambda}\mid
+           (\mid N_u^{\lambda}\mid -1) P \right\}
+           \;\;\; .
+\end{eqnarray}
+Let us now demonstrate how the macroscopic equation may be derived from the
+above equation. To this end we have only to compute the commutator 
+$[N_{\lambda},{\cal{A}}_c]$ with the help of (??)
+\begin{eqnarray*}
+  [N_s, {\cal{A}}_c] & = & \frac{\delta u}{4 \delta l} \sum_{s'}
+                        [N_s, {\bf E}_{s'+1}^{-1} {\bf E}_{s'}]
+                          (N_{s'}^2 + N_{s' +1}^2) \\
+                     & = & \frac{\delta u}{4 \delta l} \sum_{s'}
+                     {\bf E}_{s'+1}^{-1} {\bf E}_{s'}
+                       (\delta_{s'+1,s} - \delta{s',s}) 
+                       (N_{s'}^2 + N_{s'+1}^2) \\
+                    & = &  \frac{\delta u}{4 \delta l} \left\{
+                      {\bf E}_{s}^{-1} {\bf E}_{s-1}
+                       (N_{s-1}^2 + N_{s}^2)
+               +      {\bf E}_{s+1}^{-1} {\bf E}_{s}
+                           (N_{s}^2 + N_{s+1}^2)   \right\}.
+\end{eqnarray*}
+for sufficiently small $\delta u $ the number of velocity
+particles $N_u^{\lambda}$ becomes large one expects that
+fluctuations are
+small and, therefore, that the approximation
+\begin{equation}
+\langle \left( N_u^{\lambda} \right)^2 \rangle \approx
+\langle N_u^{\lambda} \rangle^2
+\end{equation}
+holds to a sufficient degree of accuracy.
+Eq.~(\ref{COMMUT}) may then be
+written as an equation for $u_{\lambda}$,
+\begin{equation}
+\frac{\partial u_{\lambda}}{\partial t} +
+\frac{1}{2} \frac{u_{\lambda +1}^2 -
+u_{\lambda -1}^2}{2\delta l} =
+\frac{1}{R} \frac{u_{\lambda +1} -2u_{\lambda}
++ u_{\lambda -1}}{\delta l^2} \;\;\; .
+\end{equation}
+Obviously, this equation is nothing but the discretized
+version of the
+Burgers equation~(\ref{BURGERS}) which emerges in the continuum
+limit
+$\delta l \longrightarrow 0$.
+In deriving the above macroscopic equation for the expectation value
+$u_{\lambda}$ we neglected, of course, all higher moments of
+the stochastic
+process $N_u^{\lambda}$. As is well--known the above master
+equation,
+defining a nonlinear stochastic process, leads to an infinite
+dimensional
+system of coupled differential equations for the moments. Thus,
+in order to
+derive more rigorously from our master equation
+the macroscopic equation and to investigate the
+dynamics and influence of fluctuations one has to
+employ a more systematic
+method. Such a method is provided by the well--known
+$\Omega$--expansion~\cite{KAMPEN}. Applying this
+expansion to the master
+equations of Hydrostochastics reveals that, in fact,
+the macroscopic
+equations are equivalent to the equations of fluid dynamics.
+Furthermore,
+it can be shown that within the linear noise approximation the
+fluctuations
+superimposed on the macroscopic dynamics can be identified with
+those
+fluctuations derived from the theory of fluctuating
+hydrodynamics~\cite{LANDAU}.
+Thus, the stochastic dynamics implied by our master equation
+formulation
+can, indeed, be given a clear physical interpretation as we will see in one of
+the next setions.
+
+\subsection{The stochastic simulation algorithm}
+It is the aim of this section to show that the master equation formulation
+of the Burgers equation naturally leads to very transparent numerical
+simulation algorithms.
+Basically, the stochastic simulation method generates an ensemble of
+realizations of the stochastic process $\{ N_{\lambda} \}$.
+From this ensemble
+the physical quantities of interest, e.~g. the mean velocity field
+and correlation functions,
+can then be evaluated as ensemble averages.
+The stochastic simulation algorithm consists of 3 basic steps:
+
+{\bf{1.}} Let us assume that at time $t$ the state of the system is given
+by $\{ N_{\lambda}(t) \}$. In the first step, the time $t+\tau$ of the
+next transition is determined. Our algorithm uses a stochastic time step
+$\tau$ to be evaluated as follows.
+Obviously, the total transition rate
+$W(\left\{ N_{\lambda}(t) \right\}) $ is  given by
+\begin{equation}
+W(\left\{ N_{\lambda} \right\}) =
+\sum_{\lambda =0}^{M} w_{\lambda} =
+\sum_{\lambda =0}^M \left(
+\frac{2 \nu}{\delta l^2}
+\mid N_{\lambda} \mid
++ \frac{1}{2} \frac{\delta u}{\delta l} 
+N_{\lambda}^2  \right) \;\;\; ,
+\end{equation}
+where $w_{\lambda}$ denotes the rate for those transitions in which
+$N_{\lambda}$ is changed.
+Consequently, the probability 
+for the next transition to occur somewhere in the system
+within the infinitesimal time step $d\tau$ is
+$W(\left\{ N_{\lambda}(t) \right\}) d\tau$.
+The total transition rate $W$ determines the waiting time distribution,
+i.~e. the probability distribution of the time $\tau$ the system remains in the
+state $\left\{N_{\lambda}(t)\right\}$. In the stochastic simulation
+the random number $\tau$ which determines the time for the
+next transition to occur can be obtained by the inversion method
+with the help of the following formula
+\begin{equation}
+\tau = - \frac{1}{W(N^{\lambda}(t))} \ln \eta \;\;\; ,
+\end{equation}
+where $\eta$ is a uniformly distributed random number on the interval
+$[0,1]$.
+
+{\bf{2.}} Having determined the transition time we have to perform a specific
+transition, i.e. we have to determine the new state
+$\{ N_{\lambda}(t+\tau ) \}$ of the system. To this end, one chooses
+according to the relative probabilities
+$w_{\lambda}/W$ a certain cell.
+Once a definite cell $\lambda$, say, has been chosen the new state of the
+system is to be selected from the following possibilities:  \\
+1. Diffusive transitions:
+\begin{displaymath}
+\left. \begin{array}{lcl}
+       N_{\lambda} & \rightarrow & N_{\lambda} - s \\
+       N_{\lambda + 1} & \rightarrow & N_{\lambda + 1} + s
+       \end{array} \right\}
+\mbox{probability} = \frac{\nu}{\delta l^2}
+            \frac{\mid N_{\lambda} \mid}{w_{\lambda}}
+\end{displaymath}
+\begin{displaymath}
+\left. \begin{array}{lcl}
+       N_{\lambda} & \rightarrow & N_{\lambda} - s \\
+       N_{\lambda - 1} & \rightarrow & N_{\lambda - 1} + s
+       \end{array} \right\}
+\mbox{probability} = \frac{\nu}{\delta l^2}
+    \frac{\mid N_{\lambda} \mid}{w_{\lambda}}
+\end{displaymath}
+where
+\begin{displaymath}
+s = \left\{ \begin{array}{rcll}
+           +1 & \hspace{1cm}, & \mbox{for} & N_{\lambda} \ge 0 \\
+           -1 & \hspace{1cm}, & \mbox{for} & N_{\lambda} < 0
+           \end{array}
+           \right. \;\;\; .
+\end{displaymath}
+
+2. Convective transition:
+\begin{displaymath}
+\left. \begin{array}{lcl}
+       N_{\lambda} & \rightarrow & N_{\lambda} - 1 \\
+       N_{\lambda + 1} & \rightarrow & N_{\lambda + 1} + 1 
+       \end{array} \right\}
+    \mbox{probability} = \frac{\delta u}{4\delta l}
+    \frac{N_{\lambda}^2 + N_{\lambda+1}^2}{w_{\lambda}}
+\end{displaymath}
+Note that each of these transitions corresponds to one of the 5
+terms in our master equation~(\ref{MASTEREQ}) and that the 
+transition probabilities given above add up to 1.
+Performing one of these transitions yields the new state
+$\left\{ N_{\lambda}(t+\tau) \right\}$.
+
+{\bf{3.}} The complete trajectory of the stochastic process can
+be determined by repeating the above scheme until a desired final time
+is reached. Finally, by generating a large number $S$
+of realizations of the stochastic process $\left\{ N_{\lambda}(t) \right\}^j$,
+$j=1, \ldots , S,$ one can evaluate the interesting quantities as
+ensemble averages.
+
+{\bf{3.}} The complete trajectory of the stochastic process can
+be determined by repeating the above scheme until a desired final time
+is reached. Finally, by generating a large number $S$
+of realizations of the stochastic process $\left\{ N_{\lambda}(t) \right\}^j$,
+$j=1, \ldots , S,$ one can evaluate the interesting quantities as
+ensemble averages.
+
+The simplicity of the above scheme makes clear that the numerical 
+simulation of a stochastic process defined by our multivariate master equation
+is straightforward. In the following we shall exemplify this by showing
+some stochastic simulations of shock wave solutions of Burgers equation.
+
+Originally Burgers proposed the equation (\ref{BURGERS})
+as a simple one--dimensional model of homogeneous turbulence. The
+main
+features of the Navier--Stokes equations are retained in the above
+equation.
+The nonlinearity has the same structure as in the Navier--Stokes
+equation,
+and the dissipative term is also of the same type.  Only the
+pressure term
+is missing, so that one has to expect a relaxation of turbulence
+with time.
+The model also lacks an equation of continuity, so that it
+describes in
+practice a one--dimensional compressible flow. The Burgers equation
+is
+particularly appealing because the analytical solutions of the
+initial value
+problem is known \cite{WHITHAM}. These solutions represent,
+for example, nonlinear wave solutions like shock waves and ``humps''.
+Thus, Burgers' equation is interesting as it makes possible the study
+of
+the interplay of nonlinear propagation and viscous diffusion.
+\subsubsection{Shock waves}
+The first example we are going to treat is the shock wave
+solution of Burgers'
+equation. The shock wave solution is obtained for the following
+initial
+condition 
+\begin{equation}                                             \label{INITSH}
+u(x,0) = u_0(x) = \left\{ \begin{array}{rcl}
+                        1 & , \;\;\; x < 0 \\
+                        0 & , \;\;\; x > 0
+                        \end{array} \right. \;\;\; .
+\end{equation}
+The diffusion and the convection of this initial step are described
+by the following time--dependent solution
+\begin{equation}
+\label{SHOCK}
+u(x,t) =
+\frac{1}{1+h(x,t) \exp \left[ R \left( x-t/2 \right) /2 \right] }
+\;\;\; ,
+\end{equation}
+where the function $h(x,t)$ is defined by
+\begin{equation}
+h(x,t) = \frac{ \mbox{erfc} \left( -\sqrt{R/4t} \: x \right)}
+   {\mbox{erfc} \left( \sqrt{R/4t} \: \left( x-t \right) \right)}
+              \;\;\; .
+\end{equation}
+The function $\mbox{erfc}(x)$ is known as the conjugated error
+function, and
+is given by
+\begin{equation}
+\mbox{erfc}(x) = \frac{2}{\sqrt{\pi}} \int_x^{\infty} dy \;
+                   \exp \left(-y^2 \right) \;\;\; .
+\end{equation}
+
+
+As a first example, we depict in Fig.~1 a stochastic simulation of a shock
+wave for the Reynolds number $R \equiv \nu^{-1}=100$
+which develops from the step function initial condition
+\begin{equation}
+\label{INIT}
+v(x,0) = \left\{ \begin{array}{cc}
+                 1 \;\;\;, & x<0  \\
+                 0 \;\;\;, & x>0
+                 \end{array} \right. \;\;\; .
+\end{equation}
+This initial condition corresponds to the initial configuration
+of the stochastic variables $\left\{N_{\lambda}\right\}$ given by
+\begin{equation}
+\label{INIT2}
+N_{\lambda}(0) = \left\{ \begin{array}{rc}
+                 \mbox{int}(1/\delta u) \;\;\;, & \lambda < 0  \\
+                 0 \;\;\;, & \lambda>0
+                 \end{array} \right. \;\;\; .
+\end{equation}
+In Fig.~1 the exact analytical solution of Burgers' equation is represented
+by the lines, whereas the symbols mark the results of the simulation.
+Fig.~2 shows a simulation obtained for the same initial condition and the same
+numerical parameters; however, the Reynolds number was set equal to
+infinity, i.~e. $\nu = 0$. This figure clearly demonstrates the great stability
+of the stochastic simulation algorithm. 
+
+As a final example we depict in Fig.~3 the simulation of the
+confluence of two shocks propagating with different velocities to the right
+($R=100$). Again the analytical solution for this problem \cite{WHITHAM}
+is indicated by the lines.
+
+\section{Hydrodynamic fluctuations}
+In section 2 we proposed a master equation for the stochastic
+description of Burgers' equation. This master equation
+has been constructed in such a way that the
+expectation value of the stochastic process  (\ref{EXPEC}) obeys
+in the limit $\delta u \longrightarrow 0$, i.~e. in the limit of
+large numbers $N_{\lambda}$, a discretized version of Burgers' equation.
+By some stochastic simulations we demonstrated in Section 3 that
+this yields a simple numerical approach to fluid dynamical
+computations. Of course, the stochastic description by a master equation
+implies fluctuations around the macroscopic value of the
+velocity field governed by Burgers' equation.
+
+In this section we present a systematic analysis of the stochastic
+process $N_{\lambda}$. This analysis proves that, in fact, the macroscopic
+equation pertaining to $N_{\lambda}$ is nothing but Burgers' equation.
+Furthermore, it is shown that the fluctuations around the macroscopic
+velocity which are predicted by our master equation,
+are those expected from the theory of hydrodynamic fluctuations.
+The basic tool of the following analysis will be the
+well--known van Kampen's $\Omega$--expansion \cite{KAMPEN}. Basically, this
+method is a consistent expansion of the master equation in powers of
+a small quantity $\Omega^{-1}$ which has to be identified from the
+physical parameters of the model under study.
+The first step in our analysis is, thus, to identify the appropriate small
+quantity in our master equation which allows for an $\Omega$--expansion.
+Recall that the construction of the master equation was based on the equation
+\begin{equation}
+v(x_{\lambda},t) = \delta u \langle N_{\lambda} \rangle \;\;\; .
+\end{equation}
+This equation connects the stochastic process $N_{\lambda}$ to the mean
+velocity $v(x_{\lambda},t)$ which obeys Burgers' equation.
+It follows from this equation that $\delta u^{-1}$ is approximately proportional
+to $N_{\lambda}$. Since in the limit
+of infinitely large numbers $N_{\lambda}$ one expects a well--defined macroscopic
+law to emerge from the mesoscopic formulation
+the quantity $\delta u$ turns out to be an appropriate
+small parameter for the $\Omega$--expansion, i.e., in the following
+we study the limit
+\begin{equation}                                  \label{LIMIT}
+\Omega^{-1} = \delta u \longrightarrow 0 \;\;\;   .
+\end{equation}
+Assuming that the fluctuations of $N_{\lambda}$ are small
+it is natural to split the stochastic process $\delta u N_{\lambda}$ into two
+parts: the first part is a macroscopic variable $v_{\lambda}$ which satisfies
+a deterministic evolution equation, whereas the second part
+$w_{\lambda}=\delta u^{1/2} \eta_{\lambda}$ describes the small stochastic
+deviations from this deterministic time evolution:
+\begin{equation}
+\label{ANS}
+\delta u N_{\lambda} = v_{\lambda} + \delta u^{1/2} \eta_{\lambda}
+\equiv v_{\lambda} + w_{\lambda}
+\;\;\; .
+\end{equation}
+In this equation $v_{\lambda}$ is introduced as an intensive quantity which
+is independent of $\delta u$. Also, the new stochastic variable
+$\eta_{\lambda}$ is assumed to be independent of
+$\delta u$ to leading order. This means that equation~(\ref{ANS})
+expresses the expectation that the fluctuations $w_{\lambda}$
+around the macroscopic values
+are proportional to $\delta u^{1/2}$.
+
+We are now in the position to perform the $\Omega$-expansion along
+the lines given by van Kampen. Since the new stochastic variables are
+$\eta_{\lambda}$ we first introduce the transformed
+probability distribution $\Pi$
+\begin{equation}                                     \label{PI}
+P\left( \left\{N_{\lambda} \right\};t \right) =
+ \delta u^{-(M+1)/2}
+   \Pi \left( \left\{ \eta_{\lambda} \right\};t \right)
+\end{equation}
+for which we have
+\begin{equation}
+\frac{\partial P}{\partial t} = \frac{\partial \Pi}{\partial t}
+          +\sum_{\lambda} \frac{\partial \Pi}{\partial {\eta}_{\lambda}}
+                          \frac{d {\eta}_{\lambda}}{dt} 
+= \frac{\partial \Pi}{\partial t} -\delta u^{-1/2}
+          \sum_{\lambda} \frac{\partial \Pi}{\partial {\eta}_{\lambda}}
+                          \frac{\partial {v}_{\lambda}}{\partial t} 
+\;\;\; .
+\end{equation}
+We also expand the shift operators in powers of $\delta u$:
+\begin{equation}
+{\bf{E}}_{\lambda}
+      = {\bf{1}} + \delta u^{1/2} \frac{\partial}{\partial {\eta}_{\lambda}}
+              +\frac{1}{2} \delta u \frac{{\partial}^2}
+          {\partial {\eta}^2_{\lambda}} + \cdots \;\;\; .
+\end{equation}
+Inserting these expressions into the master equation for $\Pi$ and collecting
+terms of the same order in $\delta u$ we finally obtain (including terms of 
+order $\delta u^0$):
+\begin{eqnarray}
+\label{OMEGAEX}
+\frac{\partial \Pi}{\partial t} &=&
+\sqrt{\frac{1}{\delta u}} \sum_{\lambda}
+\left\{ \frac{\partial v_{\lambda}}{\partial t} + \frac{1}{2}
+        \frac{v_{\lambda +1}^{2} - v_{\lambda -1}^{2}}{2\delta l} -
+        \nu \frac{v_{\lambda +1} +
+        v_{\lambda -1} - 2v_{\lambda}}{\delta l^{2}}
+               \right\}
+        \frac{\partial \Pi}{\partial \eta_{\lambda}}
+  \nonumber \\
+&+& \sum_{\lambda}  -\frac{\partial}{\partial \eta_{\lambda}}
+   \left\{
+\nu
+\frac{\eta_{\lambda +1} + \eta_{\lambda -1} -2 \eta_{\lambda}}{\delta l^2}
+- \frac{v_{\lambda +1} \eta_{\lambda +1} - v_{\lambda -1} \eta_{\lambda -1}}
+{2 \delta l}  \right\} \Pi  \nonumber \\
+&+& \frac{1}{2} \sum_{\lambda \mu} \left\{
+D_{\lambda \mu} \frac{\partial^{2}}{\partial\eta_{\lambda}\partial \eta_{\mu}}
+\right\} \Pi       \;\;\; .
+\end{eqnarray}
+Let us explain the meaning of the various terms in this equation.
+The first sum is of order $\delta u^{-1/2}$
+and, therefore, diverges in the limit $\delta u \longrightarrow 0$ unless
+one imposes the condition that the expressions within the curly brackets of
+the first sum vanishes for each $\lambda$. In fact, until now the dynamics
+of the macroscopic variables $v_{\lambda}$ has not been
+specified.
+Thus, in order to obtain a well--defined $\Omega$--expansion we now require
+that the curly brackets of the first sum vanishes identically. This
+condition is easily seen to be equivalent to the requirement that $v_{\lambda}$
+obeys the (discretized) Burgers equation (\ref{BURGD}).
+
+The remaining terms of the
+master equation for $\Pi$ constitute a linear Fokker--Planck equation
+which has
+an obvious physical interpretation. The drift term of this Fokker--Planck
+equation is
+obtained by linearizing Burgers' equation around the
+macroscopic solution $v_{\lambda}$. Thus, the drift term governs
+the time evolution of small perturbations of the macroscopic variable.
+
+The last term of equation~(\ref{OMEGAEX}) describes a multivariate
+diffusion process with diffusion matrix
+\begin{equation}     \label{DIFFMAT}
+D_{\lambda \mu} :=\left( d_{\lambda} + d_{\lambda -1}  \right)
+\delta_{\lambda
+\mu} - d_{\lambda} \delta_{\lambda +1, \mu} - d_{\mu} \delta_{\lambda , \mu +1}
+\;\;\; ,
+\end{equation}
+where
+\begin{equation}
+d_{\lambda} := \nu \frac{{\tilde{v}}_{\lambda} +
+{\tilde{v}}_{\lambda + 1}}{\delta l^2}
+ + \frac{{\tilde{v}}_{\lambda}^2 + {\tilde{v}}_{\lambda + 1}^2}{4 \delta l}
+\;\;\; , \;\;\;\; {\tilde{v}}_{\lambda}:= \delta u
+      \langle \mid N_{\lambda} \mid \rangle \;\;\; .
+\end{equation}
+Since the above Fokker--Planck equation is linear its general solution
+represents a nonstationary multivariate
+Gaussian process which is completely characterized
+by its mean values and variances.
+The latter are defined by
+\begin{eqnarray}
+\langle \eta_{\lambda}(t) \eta_{\mu}(t) \rangle \; &=& \int {\cal{D}} \eta \;
+\eta_{\lambda} \eta_{\mu} \;
+\Pi \left( \left\{ \eta_{\lambda} \right\};t \right)
+        \;\;\; ,
+\end{eqnarray}
+where
+\begin{equation}
+{\cal{D}}\eta := d\eta_0 \, d\eta_1 \, d\eta_2 \ldots d\eta_M
+\;\;\; .
+\end{equation}
+It is now straightforward to write down the
+dynamic equations for the correlation function
+$\langle \eta_{\lambda} \eta_{\mu} \rangle $.
+This will be done for the stochastic variables
+$w_{\lambda} = \delta u^{1/2}\eta_{\lambda}$
+which represent the random velocity fluctuations. Since the equations
+of fluctuating hydrodynamics are usually formulated in a continuous
+notation we write in the continuum limit
+$\delta l \longrightarrow 0$:
+\begin{equation}
+\langle w_{\lambda}(t) w_{\mu}(t) \rangle \longrightarrow
+\langle w(y,t) w(x,t) \rangle   \;\;\; .
+\end{equation}
+We then obtain from the Fokker--Planck equation (\ref{OMEGAEX})
+\begin{eqnarray}
+\frac{\partial}{\partial t} \langle w(y,t)w(x,t) \rangle & = &
+ \left( \nu \frac{\partial^2}{\partial y^2}
+       - \frac{\partial}{\partial y} v(y,t) \right) \langle w(y,t)w(x,t) \rangle
+       \nonumber \\
+& + & \left( \nu \frac{\partial^2}{\partial x^2}
+       - \frac{\partial}{\partial x} v(x,t) \right) \langle w(y,t)w(x,t) \rangle
+       \nonumber \\
+& + & \delta u \, D_{yx}     \label{wwcorr} \;\;\; ,
+\end{eqnarray}
+where we introduced the continuum limit of the diffusion matrix
+$D_{\lambda \mu}$ as
+\begin{equation}
+\label{DIFFUSION}
+D_{yx} :=  -2 \nu  \frac{\partial}{\partial x} {\tilde{v}}
+         \frac{\partial}{\partial x} 
+         \delta l \; \delta(y-x)     \;\;\; .
+\end{equation}
+It should be noted
+that the $\Omega$--expansion as presented above is based on the assumption
+that the stochastic process $\delta u N_{\lambda}$ 
+can be decomposed into a macroscopic part of order
+$1$ and a fluctuating part of order $\delta u^{1/2}$. This implies, of course,
+that we assume that the solutions of the macroscopic equation are stable.
+This condition guarantees that the fluctuations around the macroscopic
+variables are bounded~\cite{KAMPEN}.
+
+Let us make an important remark. Our master equation (\ref{MASTEREQ})
+describes both the viscous friction and the nonlinear inertial term
+of Burgers' equation by stochastic processes. Thus, our stochastic
+formulation treats the nonlinear convection term and the dissipative viscosity
+term on an equal footing. How\-ever, it is important to note that in the continuum
+limit the nonlinear term does not contribute to the fluctuations.
+This fact can be clearly seen from the continuum limit (\ref{DIFFUSION})
+of the diffusion matrix (\ref{DIFFMAT}).
+
+he above equation for the correlation function $\langle ww \rangle$
+now allows to identify the physical meaning of the mesoscopic velocity
+and length scales $\delta u$ and $\delta l$ which have been introduced
+within our stochastic description. Let us consider the stationary and
+spatially homogeneous
+velocity fluctuations around a state with constant macroscopic
+velocity $v$ and mass density $\rho$.
+With these assumptions we obtain  the following stationary
+solution (neglecting boundary effects):
+\begin{equation}     \label{corrstat}
+\langle w(y,t) w(x,t) \rangle_{s} = {\tilde{v}} \delta u \; \delta l \delta (y-x)
+\;\;\; . 
+\end{equation}
+This explicit expression for the velocity
+fluctuations enables us to relate the mesoscopic quantities $\delta u$ and
+$\delta l$ to thermodynamic state variables. Recall, that the stochastic
+process $\delta u N_{\lambda}(t)$ represents, from a microscopic viewpoint,
+the average velocity of the real fluid particles of mass $m$ in cell $\lambda$.
+We now assume the fluid particles in each cell to be in a local
+thermodynamic equilibrium state.
+It is then natural to identify the magnitude of the variance of the
+random velocity $w$ with the thermodynamic fluctuations $(\Delta u)^2$ of this
+average velocity.
+
+From the Maxwell distribution at temperature $T$ we obtain
+\begin{equation}
+(\Delta u)^{2} = \frac{kT}{\rho \delta l} \;\;\; ,  \label{KT}
+\end{equation}
+where $k$ denotes Boltzmann's constant. Thus we have
+\begin{equation}
+\tilde{v} \delta u = \frac{kT}{\rho \delta l}  \;\;\; . \label{FDT}
+\end{equation}
+Equation~(\ref{FDT}) represents a type of fluctuation--dissipation relation
+of our mesoscopic theory.
+Note that both mesoscopic parameters, $\delta u$ and $\delta l$, enter
+the equation~(\ref{FDT}). Thus, $\delta u$ is fixed once a length scale
+$\delta l$ has been chosen. Of course, the magnitude of $\delta l$ is
+determined by the very assumptions of local thermodynamic equilibrium which
+usually enter non--equilibrium thermodynamics: On the one hand, $\delta l$
+has to be chosen in such a way that the number  of fluid particles
+contained in a cell is large enough to allow for a reasonable thermodynamic
+description. On the other hand, the size of $\delta l$ is limited by the
+requirement that the variation of the various quantities over the
+cells is small compared to the magnitude of these quantities.
+
+We have seen that the dynamics of the velocity
+fluctuations is governed by a linear Fokker--Planck equation.
+Of course, the dynamics of the fluctuations can be described as well by
+an equivalent Langevin equation.
+Invoking our fluctuation--dissipation relation (\ref{FDT})
+the Langevin equation for the
+stochastic variable $w(x,t)$ reads
+\begin{equation}
+\label{FH}
+\frac{\partial}{\partial t} w(x,t) =
+ \left( \nu \frac{\partial^2}{\partial x^2} -
+         v \frac{\partial}{\partial x} \right) w(x,t) -
+         \frac{\partial}{\partial x} \xi(x,t)
+\;\;\; .
+\end{equation}
+Interpreting $\xi (x,t)$ as the random momentum flux density,
+equation~(\ref{FH}) is precisely of the form
+of the corresponding equation in fluctuating hydrodynamics (see, for
+example,~\cite{GRABERT,FOX}).
+The correlation function of the
+random momentum flux  can be determined from the diffusion
+matrix and our fluctuation--dissipation relation. One finds
+\begin{equation}                                 \label{CORRF}
+\langle \xi (y,t) \xi (x,t') \rangle = \frac{2kT \nu}{\rho}
+              \delta (y-x) \delta (t-t')
+\;\;\; .
+\end{equation}
+
+Let us sum up what has been achieved in this section. By means of
+the simple example of Burgers' equation we have established the connection
+of our multivariate master equation description of fluid dynamics to
+the theory of fluctuations in fluids. In other words,
+the master equation describes both the macroscopic dynamics and the
+dynamics of the fluctuations.
+
+\subsection{Couette Flow and Poiseuille Flow}
+\subsection{Homogeneous turbulence: The Burgers equation}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -262,11 +1711,6 @@ Loschmitt; Zermelo.
 
 
 
-\section{Master equations and entropy}
 
 
-\section{Nonequilbrium thermodynamics}
-\subsection{Chemical Reactions}
-\subsection{Couette Flow and Poiseuille Flow}
-\subsection{Homogeneous turbulence: The Burgers equation}
 
