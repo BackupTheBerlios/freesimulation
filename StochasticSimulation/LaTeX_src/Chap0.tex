@@ -1,5 +1,8 @@
+\chapter{Short Introduction to Programming in Java}
+\selectlisting{java}
 
-\section{Programming}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Programming in Java}
 \label{sec:Programming}
 
 
@@ -8,7 +11,7 @@
 \label{sec:General_considerations}
 
 
-\subsection{Programming languages}
+\subsection{Programming languages -- Why Java ?}
 \label{sec:Programming_languages}
 
 Fortran, C, C++, MATLAB, Matrhematica, Java
@@ -18,60 +21,87 @@ Performance Test.
 
 \subsection{Java}
 \label{sec:Java}
+Pointers, Garbage collection, NO Goto, packed files possible (ZIP),
+JDK freely available
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Basic elements of Java}
 \label{sec:Basic_elements_of_Java}
-
+Using and getting JDK,
+Unicode, Editor, Kommentare, Continuation Lines
 
 \subsection{The "HelloWorld" Program}
 \label{sec:HelloWorld}
 
 
 \subsubsection{Application}
-
+\inputlisting{Listings_Java/HelloWorld_Application.java}
 
 \subsubsection{Applet}
+\inputlisting{Listings_Java/HelloWorld_Applet.java}
+\inputlisting{Listings_Java/HelloWorld_Applet.html}
 
 Appletviewer, netscape
 
 
 \subsection{Variables}
 \label{sec:Variables}
+Primitive types, Strings, Objects (see later)
 
+\subsubsection{Parameters from the command line, from the calling html page}
 
-\subsection{Arithmetics}
-\label{sec:Arithmetics}
+\subsection{Loops, Conditional Statements and simple Arithmetics}
+\label{sec:Loops}
+package, import, Operators +=,-=,++,\%, \&\&, ||, break,
+do while, while, switch, for
 
+Example: Mean of Random numbers
 
 \subsection{Arrays}
 \label{sec:Arrays}
+allokieren, instanzieren, multidimensional arrays
 
-
-\subsection{Loops and Conditionals}
-\label{sec:Loops_and_Conditionals}
-
-
-\subsection{Input/Output}
-\label{sec:Input/Output}
-
-
-\subsection{Standard Mathematical Functions}
-\label{sec:Standard_Mathematical_Functions}
-
-
+Example: Mean using arrays
 
 \subsection{Classes and Objects}
 \label{sec:Classes_and_Objects}
+Examples: Random Number, Moment Calculation
 
+\inputlisting{Listings_Java/RandomNumber.java}
+\inputlisting{Listings_Java/UseRandomNumber.java}
+
+\subsubsection{Standard Mathematical Functions and mathematical libraries}
+\label{sec:Standard_Math}
+Math, JNL, JNT  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{More Advanced Features}
+
+\subsection{Input/Output}
+\label{sec:Input/Output}
+Exception Handling, Gnuplot
 
 \subsection{Graphics and Visualization}
 \label{sec:Graphics_and_Visualization}
+AWT, Graphics
 
+Example: Random Points
+
+Plotting using: Graph2D, Scivis,
+
+
+\subsection{More Features}
+\label{sec:features}
+Beans, EPS Output,
 
 \subsection{Online References}
 \label{sec:Online_Refernces}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+radioactive decay, Pi Calc, e calc.
 
 
+\selectlisting{matlab}
