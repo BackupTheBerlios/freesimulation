@@ -101,7 +101,7 @@ APPENDIX_SHORTCUTS=appendix
 ###
 
 .PHONY: ps postscript viewdvi dviview Appendix clean html realclean tth book dvi \
-	help Help HELP pdf PDF PS\
+	help Help HELP pdf PDF PS info save \
 	Chap0 Chap1 Chap2 Chap3 Chap4 Chap5 Chap6 Chap7 Chap8 Chap9 Chap10 Chap11 Chap12\
 	$(CHAP0) $(CHAP1) $(CHAP2) $(CHAP3) $(CHAP4) $(CHAP5) $(CHAP6) $(CHAP7) \
 	$(CHAP8) $(CHAP9) $(CHAP10) $(CHAP11) $(CHAP12) \
@@ -137,6 +137,34 @@ preface: $(patsubst %,%.tex,$(PREFACE))
 	$(LATEX) $(MAIN_TEX_FILE).tex
 
 
+info:
+	@echo "Information about the make process:"
+	@echo ""
+	@echo "The filenames of the Chapters are called:"
+	@echo "$(PREFACE)"
+	@echo "$(ALL_CHAPTERS)"
+	@echo "$(APPENDIX)"
+	@echo ""
+	@echo "Filename of main TeX File:"
+	@echo "$(MAIN_TEX_FILE)"
+	@echo ""
+	@echo "Suffixes for Cleanup and real Cleanup:"
+	@echo "$(CLEANUP_SUFFIXES)"
+	@echo "$(REAL_CLEANUP_SUFFIXES)"
+	@echo ""
+	@echo "Suffixes for Chapter Cleanups:"
+	@echo "$(CLEANUP_SUFFIXES_FILES)"
+	@echo ""
+	@echo "Name of intermediate/temporary includeonly{} filename::"
+	@echo "$(INCLUDE_ONLY_FILENAME)"
+	@echo ""
+	@echo "Parts of the book and the chapters contained therein:"
+	@echo "Part I  : $(addsuffix .tex  ,$(PART1))"
+	@echo "Part II : $(addsuffix .tex  ,$(PART2))"
+	@echo "Part III: $(addsuffix .tex  ,$(PART3))"
+	@echo "Part IV : $(addsuffix .tex  ,$(PART4))"
+	@echo "Part V  : $(addsuffix .tex  ,$(PART5))"
+
 ###
 ### All Chapters individually !
 ###
@@ -154,7 +182,10 @@ Appendix $(APPENDIX_SHORTCUTS): $(patsubst %,%.tex,$(APPENDIX))
 
 
 ### Chapter 0
-Chap0 $(CHAP0_SHORTCUTS) $(CHAP0): $(CHAP0).tex $(MAIN_TEX_FILE).tex
+Chap0 $(CHAP0_SHORTCUTS) $(CHAP0): $(CHAP0).aux
+	@echo ""
+
+$(CHAP0).aux : $(CHAP0).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 0, $(CHAP0) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP0)}" >$(INCLUDE_ONLY_FILENAME)
@@ -164,7 +195,10 @@ Chap0 $(CHAP0_SHORTCUTS) $(CHAP0): $(CHAP0).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 1
-Chap1 $(CHAP1_SHORTCUTS) $(CHAP1): $(CHAP1).tex $(MAIN_TEX_FILE).tex
+Chap1 $(CHAP1_SHORTCUTS) $(CHAP1): $(CHAP1).aux
+	@echo ""
+
+$(CHAP1).aux : $(CHAP1).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 1, $(CHAP1) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP1)}" >$(INCLUDE_ONLY_FILENAME)
@@ -174,7 +208,10 @@ Chap1 $(CHAP1_SHORTCUTS) $(CHAP1): $(CHAP1).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 2
-Chap2 $(CHAP2_SHORTCUTS) $(CHAP2): $(CHAP2).tex $(MAIN_TEX_FILE).tex
+Chap2 $(CHAP2_SHORTCUTS) $(CHAP2): $(CHAP2).aux
+	@echo ""
+
+$(CHAP2).aux : $(CHAP2).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 2, $(CHAP2) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP2)}" >$(INCLUDE_ONLY_FILENAME)
@@ -184,7 +221,10 @@ Chap2 $(CHAP2_SHORTCUTS) $(CHAP2): $(CHAP2).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 3
-Chap3 $(CHAP3_SHORTCUTS) $(CHAP3): $(CHAP3).tex $(MAIN_TEX_FILE).tex
+Chap3 $(CHAP3_SHORTCUTS) $(CHAP3): $(CHAP3).aux
+	@echo ""
+
+$(CHAP3).aux :$(CHAP3).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 3, $(CHAP3) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP3)}" >$(INCLUDE_ONLY_FILENAME)
@@ -194,7 +234,10 @@ Chap3 $(CHAP3_SHORTCUTS) $(CHAP3): $(CHAP3).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 4
-Chap4 $(CHAP4_SHORTCUTS) $(CHAP4): $(CHAP4).tex $(MAIN_TEX_FILE).tex
+Chap4 $(CHAP4_SHORTCUTS) $(CHAP4): $(CHAP4).aux
+	@echo ""
+
+$(CHAP4).aux :$(CHAP4).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 4, $(CHAP4) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP4)}" >$(INCLUDE_ONLY_FILENAME)
@@ -204,7 +247,10 @@ Chap4 $(CHAP4_SHORTCUTS) $(CHAP4): $(CHAP4).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 5
-Chap5 $(CHAP5_SHORTCUTS) $(CHAP5) $(MAIN_TEX_FILE).dvi: $(CHAP5).tex $(MAIN_TEX_FILE).tex
+Chap5 $(CHAP5_SHORTCUTS) $(CHAP5): $(CHAP5).aux
+	@echo ""
+
+$(CHAP5).aux :$(CHAP5).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 5, $(CHAP5) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP5)}" >$(INCLUDE_ONLY_FILENAME)
@@ -214,7 +260,10 @@ Chap5 $(CHAP5_SHORTCUTS) $(CHAP5) $(MAIN_TEX_FILE).dvi: $(CHAP5).tex $(MAIN_TEX_
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 6
-Chap6 $(CHAP6_SHORTCUTS) $(CHAP6): $(CHAP6).tex $(MAIN_TEX_FILE).tex
+Chap6 $(CHAP6_SHORTCUTS) $(CHAP6): $(CHAP6).aux
+	@echo ""
+
+$(CHAP6).aux :$(CHAP6).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 6, $(CHAP6) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP6)}" >$(INCLUDE_ONLY_FILENAME)
@@ -224,7 +273,10 @@ Chap6 $(CHAP6_SHORTCUTS) $(CHAP6): $(CHAP6).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 7
-Chap7 $(CHAP7_SHORTCUTS) $(CHAP7): $(CHAP7).tex $(MAIN_TEX_FILE).tex
+Chap7 $(CHAP7_SHORTCUTS) $(CHAP7): $(CHAP7).aux
+	@echo ""
+
+$(CHAP7).aux :$(CHAP7).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 7, $(CHAP7) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP7)}" >$(INCLUDE_ONLY_FILENAME)
@@ -234,7 +286,10 @@ Chap7 $(CHAP7_SHORTCUTS) $(CHAP7): $(CHAP7).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 8
-Chap8 $(CHAP8_SHORTCUTS) $(CHAP8): $(CHAP8).tex $(MAIN_TEX_FILE).tex
+Chap8 $(CHAP8_SHORTCUTS) $(CHAP8): $(CHAP8).aux
+	@echo ""
+
+$(CHAP8).aux :$(CHAP8).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 8, $(CHAP8) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP8)}" >$(INCLUDE_ONLY_FILENAME)
@@ -244,7 +299,10 @@ Chap8 $(CHAP8_SHORTCUTS) $(CHAP8): $(CHAP8).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 9
-Chap9 $(CHAP9_SHORTCUTS) $(CHAP9): $(CHAP9).tex $(MAIN_TEX_FILE).tex
+Chap9 $(CHAP9_SHORTCUTS) $(CHAP9): $(CHAP9).aux
+	@echo ""
+
+$(CHAP9).aux :$(CHAP9).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 9, $(CHAP9) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP9)}" >$(INCLUDE_ONLY_FILENAME)
@@ -254,7 +312,10 @@ Chap9 $(CHAP9_SHORTCUTS) $(CHAP9): $(CHAP9).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 10
-Chap10 $(CHAP10_SHORTCUTS) $(CHAP10): $(CHAP10).tex $(MAIN_TEX_FILE).tex
+Chap10 $(CHAP10_SHORTCUTS) $(CHAP10): $(CHAP10).aux
+	@echo ""
+
+$(CHAP10).aux :$(CHAP10).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 10, $(CHAP10) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP10)}" >$(INCLUDE_ONLY_FILENAME)
@@ -264,7 +325,10 @@ Chap10 $(CHAP10_SHORTCUTS) $(CHAP10): $(CHAP10).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 11
-Chap11 $(CHAP11_SHORTCUTS) $(CHAP11): $(CHAP11).tex $(MAIN_TEX_FILE).tex
+Chap11 $(CHAP11_SHORTCUTS) $(CHAP11): $(CHAP11).aux
+	@echo ""
+
+$(CHAP11).aux :$(CHAP11).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 11, $(CHAP11) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP11)}" >$(INCLUDE_ONLY_FILENAME)
@@ -274,7 +338,10 @@ Chap11 $(CHAP11_SHORTCUTS) $(CHAP11): $(CHAP11).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
 ### Chapter 12
-Chap12 $(CHAP12_SHORTCUTS) $(CHAP12): $(CHAP12).tex $(MAIN_TEX_FILE).tex
+Chap12 $(CHAP12_SHORTCUTS) $(CHAP12): $(CHAP12).aux
+	@echo ""
+
+$(CHAP12).aux :$(CHAP12).tex $(MAIN_TEX_FILE).tex
 	@echo " Using just Chapter 12, $(CHAP12) ..."
 # Generating inclusion file
 	@echo "\includeonly{$(CHAP12)}" >$(INCLUDE_ONLY_FILENAME)
@@ -389,6 +456,7 @@ html: $(MAIN_TEX_FILE).tex
 ### tth (HTML)
 tth: $(MAIN_TEX_FILE).tex
 	$(TTH) $(MAIN_TEX_FILE) -a -e1
+
 
 
 
