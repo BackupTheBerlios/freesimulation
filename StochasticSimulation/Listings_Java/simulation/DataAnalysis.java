@@ -5,10 +5,22 @@ import java.util.Random;
 
 public final class DataAnalysis {
 
-  /** Calculate a integer random number between 0 and N 
-      (including 0 and N) -- use Random class */
-  public static int nextInteger(Random rand, int N) {
-    return (int)Math.round(N*rand.nextDouble());
+  /** Calculate the factorial of an integer. 
+    Possible up to factorial of 170, then it returns zero. */
+  public static double factorial(int fact) {
+    if (fact>170) {
+      return 0;
+    }
+    if (fact>=0) {
+      double prod=1;
+      for (int i=2; i<=fact; i++) {
+        prod*=i;
+      }
+      return prod;
+    }
+    else {
+      return 0;
+    }
   }
 
   /** Calculate a histogram from data sets.
