@@ -100,20 +100,34 @@ public class Distribution {
 	return x1/x2;
    }
   /** Generate Poisson distributed random numbers using
+      transformation method. lambda is the parameter.
    */
-  public static double nextPoisson(Random rand) {
-    return 0;    
+  public static int nextPoisson(Random rand,int lambda) {
+    double A=0;
+    int k=0;
+    double dummy;
+    for(;;) {
+      dummy=0;
+      while (dummy<=0 || dummy>=1) dummy=rand.nextDouble();
+      A*=dummy;
+      if (A<Math.exp(-lambda)) return k;
+      k++;
+    }
   }
 
   /** Generate exponential distributed random numbers using
+      transformation method. w is the parameter.
    */
-  public static double nextExponential(Random rand) {
-    return 0;    
+  public static double nextExponential(Random rand, double w) {
+    double dummy=0;
+    while (dummy<=0) dummy=rand.nextDouble();
+    return -Math.log(dummy)/w;
   }
 
   /** Generate binomial distributed random numbers using
+      rejection method. Parameters: n and p
    */
-  public static double nextBinomial(Random rand) {
+  public static double nextBinomial(Random rand, int n, int q) {
     return 0;
   }
 }
