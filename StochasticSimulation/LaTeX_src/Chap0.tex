@@ -1040,13 +1040,15 @@ Before learning more about the syntax of Java, we have to explain another
 statement appearing in the part of any Java program before the actual
 definition of the class: the \verb|import|-statement. With \verb|import|
 you can make classes available, so you don't have to use the fully
-qualified name to the class. If you would like to
+qualified name to the class, which would be very long sometimes. 
+
+If you would like to
 use the HelloWorld class from above in your programs, you have to change
 the \verb|main()| method to let us say \verb|hello()|. 
 \loadlisting{HelloWorld.java}{Listings_Java/HelloWorld.java}
 Now you could either
-type \verb|de.freiburg.simulation.HelloWorld.hello()| in your program
-or you can use
+type \verb|de.freiburg.simulation.HelloWorld.hello()| (the fully qualified 
+name) in your program or you can use
 \begin{sverbatim}
 import de.freiburg.simulation.*;
 ....
@@ -1390,7 +1392,7 @@ The \verb|continue| statement is used only within loops. It skips to
 the end of the loops body and evaluates the boolean expression that
 controls the loop. The \verb|return| statement terminates execution of
 a method and returns to the invoker. If a method returns no value you
-have to use
+can use (you can also just omit it)
 \begin{verbatim}
 return;
 \end{verbatim}
