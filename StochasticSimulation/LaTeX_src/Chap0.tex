@@ -276,7 +276,7 @@ You can use either the /* \ldots */ syntax (borrowed from C) for
 multi-line comments or the // syntax (borrowed from C++) for single
 line comments. Additionally you can use /** \ldots */ for comments
 to automatically generate a HTML documentation file for the class
-defined in the file. We will see later on how zhis can be achieved.
+defined in the file. We will see later on how this can be achieved.
  
 \subsection{The ``HelloWorld'' Program}
 \label{sec:HelloWorld}
@@ -320,7 +320,7 @@ is invoked. This method simply prints a string and terminates with a
 new--line  command.
 
 You have just written and executed your first application in
-Java. Please, do not worry if you do not undestand everything. You are
+Java. Please, do not worry if you do not understand everything. You are
 not expected to understand everything at this stage.
 
 
@@ -356,7 +356,7 @@ The ``Hello World'' example written as an applet has the following form:
 Applets have to be derived from the applet class
 \verb|java.applet.Applet|, which include the principal facilities of
 the Abstract Window toolkit (AWT) and the interface with X/Motif on
-Unix, Windows on PC, and MacOS on Macintosh platforms.
+Unix, Windows on PC, and Mac-OS on Macintosh platforms.
 As you can see there is no main method in an applet. Instead if an applet
 is started by a server, the init() method is executed first. There is also
 a start() (stop()) method, which is executed if the applet becomes
@@ -387,8 +387,18 @@ The question arising now, when to use an application and when to use
 an applet, is difficult to answer. In the following chapters we will 
 decide for each program
 separately, which way to go. Time consuming calculations should
-definitly be written as an application, small programs can be
+definitely be written as an application, small programs can be
 written as an applet of course.
+
+In Java 1.1 a new package (see later) was introduced, which allows
+so called ``trusted applets''. These are specially signed libraries,
+which are signed with a key by a person you trust. Only if the
+signature is valid and you trust that person, the ``trusted applet''
+has access to the local files system -- it basically can do everything
+an application could do on your machine. This is already implemented with
+the appletviewer, in different ``servers'' it might work or not. In the
+future this will be extended to a more extensive set of rules for the
+allowed methods of an applet.
 
 A last remark concerns the documentation for the programs. We have
 learned, that we can include documentation comments using 
@@ -405,19 +415,30 @@ package structure (not used here). The most important file is the
 AllNames.html, which is an index of all written programs in this package
 (for an introduction to packages see later).
 
-If you load AllNames.html into a browser, you get:
-\begin{center}
+If you load AllNames.html into a browser, you get the HTML file shown
+in figure \ref{fig:javadoc1}.
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
  \includegraphics[width=8cm]{Listings_Java/AllNames.eps} 
-\end{center}
-Now you can klick on the link HelloWorld\_Applet and you get the
+    \caption{The output of the \texttt{javadoc} command from the JDK.}
+    \label{fig:javadoc1}
+  \end{center}
+\end{figure}
+Now you can click on the link HelloWorld\_Applet and you get the
 documentation for that class and analogous for the HelloWorld\_Application
-class:
-\begin{center}
+class (see figure \ref{fig:javadoc2}).
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
   \includegraphics[width=6cm]{Listings_Java/HelloWorld_Applet.eps}
   \includegraphics[width=6cm]{Listings_Java/HelloWorld_Application.eps}
-\end{center}
-The missing graphics on the right figure are available in the Java 
-documentation of the
+    \caption{The output of the \texttt{javadoc} command from the JDK.}
+    \label{fig:javadoc2}
+  \end{center}
+\end{figure}
+The missing graphics on the right of figure \ref{fig:javadoc2} 
+are available in the Java documentation of the
 JDK and just has to be copied into a subdirectory called \verb|images| 
 of the HTML directory. Then it looks like the figure on the left.
 
@@ -571,7 +592,10 @@ method, which is available for all primitive data types.
 Because Java was designed to be able to load code distributed
 over the whole internet, you have to avoid name conflicts
 between the programs (classes). The solution in Java is to put
-every class in a \emph{package}. The name of the package is given
+every class in a \emph{package}. A package  is a group of related
+and possibly cooperating classes.
+
+The name of the package is given
 at the beginning of a file before the actual program (class)
 definition starts. So for example if we put the statement
 \begin{quotation}
@@ -733,13 +757,13 @@ separated lists.
 
 At the beginning of the \verb|for| loop the boolean expression
 \verb|boolean_expr| is evaluated. If its value is found to be 
-\verb|true| the statement is executed repeatidly with increment
+\verb|true| the statement is executed repeatedly with increment
 \verb|incr_expr| until the value of the boolean expression is found to
 be \verb|false|.
 
 As an example demonstrating the use of
 \verb|for| loops we want to write a program to calculate the mean of
-a given number of random numbers. One posible implementation
+a given number of random numbers. One possible implementation
 could look like this:
 \inputlisting{Listings_Java/DataMean.java}
 
@@ -770,7 +794,7 @@ do
 while (boolean_expression)
 \end{verbatim}
 It is important to observe that in the first construct the boolean
-expression is evaluated \textit{before} the statement is exectuted, while in
+expression is evaluated \textit{before} the statement is executed, while in
 the second construct the boolean expression is evaluated \textit{after} the
 statement has been performed!
 
@@ -814,16 +838,16 @@ We already remarked that Java does not have a \verb|goto| instruction
 to transfer control to an arbitrary statement in a method. To handle
 with situations where other languages have a \verb|goto| Java provides
 the labelled \verb|break| and \verb|continue| statements. Labels are
-typically used in blocks and loops and preced statements
+typically used in blocks and loops and precede statements
 \begin{verbatim}
 label: statement
 \end{verbatim}
 The \verb|break| statement is used to exit from a block, e.g. to break
-out of a loop. E.g., an unlabeld \verb|break| terminates the innermost
+out of a loop. E.g., an unlabeled \verb|break| terminates the innermost
 \verb|for|, \verb|while| or \verb|do|.
 
 The \verb|continue| statement is used only within loops. It skips to
-the end of the loop's body and evaluates the boolean expression that
+the end of the loops body and evaluates the boolean expression that
 controls the loop. The \verb|return| statement terminates execution of
 a method and returns to the invoker. If a method returns no value you
 have to use
@@ -831,7 +855,7 @@ have to use
 return;
 \end{verbatim}
 if the method has a return type, the \verb|return| must include an
-expression for a retuned type.
+expression for a returned type.
 
 An dieser stelle sollten einige beispiele kommen!!!!!
 
@@ -852,7 +876,7 @@ switch(expression) {
 \end{verbatim}
 After evaluating the expression, the switch statement executes
 certain code within the block depending on the integral value of the
-expression. This information is indicated by the integer label follwing
+expression. This information is indicated by the integer label following
 the \verb|case:| statement. If there is no \verb|case:| label that
 matches the value of the expression, the \verb|swich| command executes
 the code following \verb|default:|, if there is one. Otherwise,
@@ -861,10 +885,8 @@ the code following \verb|default:|, if there is one. Otherwise,
 An example of the use of the \verb|switch| statement is found in the
 simple program \verb|DiceGame.java| 
 
-%\inputlisting{Listings_Java/DiceGame.java}
+\inputlisting{Listings_Java/DiceGame.java}
 
-Ich habe leider das .class Programm auf Diskette! Brine ich morgen mit.
- 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parameters from the command line or from a html file}
 \label{sec:Parameter}
@@ -946,7 +968,7 @@ array with 10 elements you use:
 This also sets all the elements to zero. But this is only true for 
 primitive types. Arrays of reference types (objects) are created the
 same way, but the elements consist of references to the elements. The
-elements themselve are NOT initialized and have to be created too.
+elements themselves are NOT initialized and have to be created too.
 An example for this is a two dimensional array as we will see soon.
 
 Indices of arrays in Java start with zero as in C and not with 1
@@ -994,7 +1016,7 @@ create a triangular matrix by submitting:
                 matrix[i] = new double[i+1];
         } 
 \end{verbatim}
-To access multidimenisonal arrays you can also use one dimensional
+To access multidimensional arrays you can also use one dimensional
 array syntax (as in C). If you have a two dimensional array 
 you can access the element [i,j] by accessing the element [i+j*columns]. 
 
@@ -1007,7 +1029,6 @@ numbers by using arrays.
 Here we first declare a double array called \verb|RandomNumber| and
 create it in Line 13. Then we store the random numbers in the array
 and afterwards calculate the mean.
-
 The last important point to note is the copying of arrays. 
 You can not just write
 \begin{verbatim}
@@ -1063,7 +1084,7 @@ elements of the array.
 So what is the difference to the standard function approach here?
 Instead of using function arguments you supply the argument by 
 putting them in front of the method separated by a point. 
-For example to calulate the mean of an array of doubles, you can
+For example to calculate the mean of an array of doubles, you can
 either write a method which takes the array as an argument (like you would
 in Fortran or C): \verb|mean(array[])| or you can use the object
 oriented feature: 
@@ -1184,7 +1205,7 @@ overload operators like +, -, etc., which is not possible (in Java 1.1) yet.
 A simple example is given by the
 HelloWorld\_Applet.java program in section \ref{sec:Applet}.
 There we have extended the Applet class of the Java.applet package
-and therefore making our programm a subclass of the Applet class.
+and therefore making our program a subclass of the Applet class.
 So we inherited all the methods and fields of that class. Then we
 overloaded the \verb|paint()| method to display our message. 
 In the words of object oriented programming, writing an applet is
@@ -1205,7 +1226,7 @@ are written in small caps.
 \item[java.awt.peer] rarely used interfaces for the AWT
 \item[java.beans] interfaces and classes for beans programmer
 \item[\textsc{java.io}] all the input/output classes (very big)
-\item[\textsc{java.lang}]  central Java labguage classes (largest package)
+\item[\textsc{java.lang}]  central Java language classes (largest package)
 \item[java.lang.reflect] part of the Java Reflection API (small)
 \item[\textsc{java.math}] arbitrary precision arithmetic (small)
 \item[java.net] networking package
@@ -1286,7 +1307,7 @@ Here is a table of the methods:
       exp() / log() & exponential and natural logarithm \\
       ceil()/floor()/round()/rint()&rounding of values (see test program)\\
       pow() & power\\
-      min( , ) / max( , ) & minimum or amximum of two values \\
+      min( , ) / max( , ) & minimum or maximum of two values \\
       sqrt() & square root of a double \\
       random() & random numbers (use java.util.Random class)\\
       IEEEremainder() & special remainder function \\
@@ -1300,7 +1321,7 @@ These are all class methods, so they can be called from anywhere.
 Here are some examples:
 \begin{verbatim}
  a=Math.exp(2.1);        // e to the 2.1
- distance = Math.sqrt(Math.pow(x,2)+pow(y,2));  // euclidean dist.
+ distance = Math.sqrt(Math.pow(x,2)+pow(y,2));  // Euclidean dist.
 \end{verbatim} 
 By the way, there is no easy import statement to avoid the Math in front
 of the methods, you always should use it, although it seems 
@@ -1312,7 +1333,7 @@ And the output is:
 \input{Listings_Java/Test_Roundings.output}
 
 
-Unfortunatley these easy and important methods are not part of the
+Unfortunately these easy and important methods are not part of the
 standard Java language. But Visual Numerics, a software company,
 has proposed a standard class for statistical functions, which are
 essential for all statistical problems. They also supplied a new class
