@@ -460,7 +460,9 @@ Next we write a program for the scoring  method.
 Again we run the simulation for n=10, 100, 1000, 10000.
 The result of a simulation can be seen in the next Figure.
 \begin{figure}
-\includegraphics[width=\textwidth]{fmcpiscore.eps}
+\begin{center}
+\includegraphics[width=.7\textwidth]{fmcpiscore.eps}
+\end{center}
 \caption{The scoring method. The continuous line represents
 the function $\sqrt{(1-x^2)}$.}
 \end{figure}
@@ -472,20 +474,103 @@ the function $\sqrt{(1-x^2)}$.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
-{\bf Exercise 1.} Write a program to simulate photoabsorption.
-    Lit. Whitney
 
-{\bf Exercise 2.} Write a program for the Monte Carlo estimation of
-the following integral
-\begin{equation}
-\int_0^1\frac{dx}{1+x^2} = \frac{\pi}{4}
-\end{equation}
+Use the  Matlab function \texttt{rand()}
+to solve the following problems (donÅ¥t care about the quality and
+the algorithm of the random number genrator, for now):
 
-{\bf Exercise 3.} Write a program to evaluate the number $e$ by a
-stochastic method.
-Lit: Pirooz Mohazzabi, Monte Carlo estimation of $e$,
-Am. J. Phys. {\bf 66} (1998) 138--140.
+\begin{Ex}
+\label{Photoabsorption}
+\textbf{Photoabsorption \cite[]{reif:67}} \\
+Consider the absorption of photons passing through a gas in two dimensions.
+We model the gas by introducing slabs of width $dx$ and density $n$ (in
+particles per area), which absorb the incident photons. The slab
+particles have a cross-sectional area of $\sigma$.
+
+So the probability of a photon to be absorbed in the slab will be
+($M$ is the number of particles in the slab of the heigth $dy$)
+$$ P(\text{Photon absorbed}) = \frac{M\sigma}{dy} =
+      \frac{\sigma n dx dy}{dy} = \sigma n dx  \quad .$$
+We have assumed that there is no overlap between the cross-sections of
+the slab particles.
+
+Write a program to simulate this process on the computer. Take $N$
+incident photons and watch the number of particles left over
+against the slabs passed in a diagram. Do this simulation several
+times and calculate the ensemble-average. What process you know
+is similar to this behaviour and what takes the place of the spatial
+dimension in that case?
+
+%If we now have N identical slabs in a row, the probability of passing
+%through all the slabs would be $(1-p)^N$, if the transmissions
+%are statistically independent of each other.
+%Then for a slab of finite thickness $X=N dx$ with $N\to\infty$, we
+%get the Transmission probability
+%$$ P(\text{transmitted through $N$ slabs}) =
+%       \left(1-\frac{n\sigmaX}{N}\right)^N \quad .$$
+
+%Now simulate the following systems:
+%identical photons are absorbed in one slab ($N$ slabs)
+\end{Ex}
+
+\begin{Ex}
+\label{Monte-Carlo_Integration}
+\textbf{Monte-Carlo Integration -- Speed and Accuracy} \\
+Write a program for the calculation of the following integral:
+$$ \int_0^1 \frac{1}{1+x^2} dx\quad .$$
+\begin{enumerate}
+\item using the hit and miss method
+\item using the standard method
+\end{enumerate}
+For both algorithms, calculate the mean and the standard deviation
+as discussed in the lecture. Also use the analytical result of the
+integral to calculate $\pi$. Compare the accuracy of both algorithms
+using the approximations of $\pi$. Compare the speed of the two
+programs by using the \texttt{cputime} function in Matlab.
+(e.g. type the following to time the random number generator:
+\texttt{t=cputime;x=rand(1000);cputime-t})
+
+To that end, create a table and a plot with the two parameters
+($n$: the number of intervals and $N$: the number of realizations)
+against
+the accuracy (use at least 5 values). To save time, you can first
+check for a good $n$  and then do the plots only against $N$.
+For the speed, plot the cputime against the achieved accuracy for
+many different $N$.
+\end{Ex}
+
+\begin{Ex}
+\label{Euler_Constant}
+\textbf{EulerÅ¥s Constant using Monte-Carlo Algorithm %
+          \cite[]{mohazzabi:98}} \\
+Suppose throwing $N$ darts randomly at a dart board, which has been
+divided into $R$ equal size regions. The probability of hitting one region
+is $p=1/R$. Then the probability of hitting an empty region
+(not already occupied by a dart) is $(1-p)^N$. Using the binomial
+distribution, you can get the probability for hitting a region with
+$m$ darts. If you choose
+the number of regions equal to the number of darts
+thrown on the board, we have $p=1/N$ and therefore
+$$ P(\text{hitting an empty region}) = \left( 1-\frac{1}{N} \right)^N\quad .$$
+
+Because the above series converges to $e$ for $N\to\infty$, we can use
+the following method to get an approximation of the Euler constant:
+\begin{enumerate}
+\item[(i)] Throw randomly a large number of darts (say $N$) on a board, which has
+  been divided into $N$ equal size regions.
+\item[(ii)] Count the number of empty regions (call it $N_0$).
+\item[(iii)] The fraction $N/N_0$ is a good estimate of the Euler constant $e$.
+\end{enumerate}
+
+Write a program for that algorithm and check the results. You can even
+use $N/N_1$, if $N_1$ is the number of regions with the occupancy of
+one dart. Check this, too. What $N$ do you need to
+get the same accuracy using the formula? And how many terms of the
+series for $e$ ($\sum_{i=0}^\infty 1/i! = e$)?
+\end{Ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \bibliographystyle{peter}
-\bibliography{V_98}
+\bibliography{V_98,simulit}
