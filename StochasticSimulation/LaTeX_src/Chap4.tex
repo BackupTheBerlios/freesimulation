@@ -647,9 +647,9 @@ statistical quantities can be evaluated as ensemble averages.
 In fact the numerical performance of the direct approach gets 
 worse compared to the stochastic simulation with increasing 
 dimension of the system considered. We already met a similar 
-situation when we considered numerical algorithms for the 
+situation, when we considered numerical algorithms for the 
 computation of integrals. There the direct integration of 
-multidimensional integrals turned out to be less efficient then 
+multidimensional integrals turned out to be less efficient than 
 the Monte--Carlo integration.
 
 In order to formulate a stochastic simulation algorithm we 
@@ -714,9 +714,9 @@ q= \lambda \exp(-\lambda t) dt = f(t) dt.
 \end{equation*}
 The waiting time distribution for the time of the next jump is an
 exponential distribution.
-It is now clear what we have to do in order to determine in the
-stochastic simulation the time 
-of the next jump.  We simply have to draw random times $\tau$ 
+It is now clear what we have to do in order to determine the time 
+of the next jump in the stochastic simulation.  
+We simply have to draw random times $\tau$, 
 which are distributed according to the density $f(t)$. Since $f(t)$
 is an exponential distribution, these random times can easily be 
 drawn with the help of the inversion method
@@ -759,7 +759,7 @@ The flow chart of the algorithm can be seen in Fig.
 (\ref{F_ONESTEP_ALGORITHM}).
 \begin{figure}
 \label{F_ONESTEP_ALGORITHM}
-\includegraphics[width=8cm]{./Figures/f_onestep_algorithm.eps}
+\includegraphics[width=7cm]{./Figures/f_onestep_algorithm.eps}
 \caption{Flow chart of a stochastic simulation of a 
     one--step process. The symbols used
      are explained in the text.}
@@ -780,7 +780,7 @@ The program will be applied in the next subsections.
 
 \subsection{Radioactive decay}
 As a first example we consider the master equation 
-description of radioactive decay. To this end let
+description of the radioactive decay. To this end let
 $P(n,t)$ be the probability density to find $n$ radioactive nuclei
 at time $t$. The probability for a nucleus to decay in unit time will
 be denoted by $\gamma$. The radioactive decay is a typical example
@@ -789,7 +789,7 @@ the transition rates
 $g(n) \equiv 0$ and $r(n)= \gamma n$, where $\gamma$ is the decay constant.
 Substitution of the above $g(n)$ and $r(n)$ into the master equation
 for the one--step process
-(\ref{MASTER_ONE_STEP}) yields the master equation of radioactive 
+(\ref{MASTER_ONE_STEP}) yields the master equation of the radioactive 
 decay
 \begin{equation}
 \frac{\partial}{\partial t} P(n,t) = 
@@ -820,7 +820,7 @@ variable $N(t)$
 \begin{equation}
 \frac{d}{dt} \langle N(t) \rangle = - \gamma \langle N(t) \rangle.
 \end{equation}
-Note thate the mean value of the stochastic process obeys the 
+Note that the mean value of the stochastic process obeys the 
 differential equation for the concentration. It is clear that the 
 above equation has the following solution for the initial value
 $\langle N(0)\rangle = n_0$
@@ -837,7 +837,7 @@ function can be seen below.
 
 Now we are in the position to simulate the stochastic process of
 radioactive decay. We run the program for the following parameters
-{\texttt n0}$=500$, {\texttt tend}$=30$, and {\texttt nreal}$=10$.
+\texttt{n0=500}, \texttt{tend=30}, and \texttt{nreal=10}.
 The decay rate is $\gamma=0.1$.
 The result of the simulation can be seen in Fig. (\ref{F_OS_DECAY}).
 
@@ -851,7 +851,7 @@ The decay rate is $\gamma=0.1$.}
 \end{figure}  
 
 \subsection{The Poisson process}
-A further important one--step process is the Poisson process, whic 
+A further important one--step process is the Poisson process, which
 is defined by
 \begin{equation}
 r(n) = 0; \;\;\; g(n) = q = \text{const}.
@@ -967,7 +967,7 @@ Poisson process. Let us denote the distance travelled by
 x=nl.
 \end{equation*}
 As a function of the new stochastic variable $x$ the 
-characteristic function $\tilde{G}$is
+characteristic function $\tilde{G}$ is
 \begin{equation*}
 \tilde{G}(s,t) = \langle \exp(isx) \rangle = 
      \exp\{tq[\exp(ils)-1] \}.
@@ -976,7 +976,8 @@ We perform the limit $l \longrightarrow 0$ keeping
 \begin{equation*}
 ql=v=\text{const}
 \end{equation*}
-and obtain
+and obtain keeping only the terms linear in $l$ in the Taylor
+expansion of $\exp(ils)$
 \begin{equation*}
 \lim_{l\rightarrow 0}\tilde{G}(s,t) = \exp(itvs).
 \end{equation*}
@@ -1029,9 +1030,9 @@ reads
 \begin{eqnarray*}
 \frac{\partial}{\partial t} P(n,t|n',t') &=& 
        q \left\{ P(n+1,t|n',t') + P(n-1,t|n',t')\right. \\
-       && \left.   2 P(n,t|n',t')  \right\}.
+       && \left.  - 2 P(n,t|n',t')  \right\}.
 \end{eqnarray*}
-Also the above master equation is easily solved with the help of 
+Again the above master equation is easily solved with the help of 
 the characteristic function $G(s,t)$. It is easy to check that the
 characteristic function satisfies the equation
 \begin{equation*}
@@ -1075,10 +1076,10 @@ The jump rate is \texttt{q=1}.}
 It is of particular interest to look at the continuous space limit
 of the continuous time random walk. Again we write for the 
 distance travelled by the walker $x=nl$. The characteristic
-function as afunction of $x$ reads
+function as a function of $x$ reads
 \begin{eqnarray*}
-\tilde{G}(s,t) &=& G(sl,t) = \exp(ixs) \\
-                &=& \exp\{[\exp(ils)-\exp(ils)-2]tq \}.
+\tilde{G}(s,t) &=& G(sl,t) = \langle \exp(ixs) \rangle \\
+                &=& \exp\{[\exp(ils) + \exp(ils)-2]tq \}.
 \end{eqnarray*}
 The limit of infinitesimally small steps $l \longrightarrow 0$ 
 leads to
@@ -1091,10 +1092,10 @@ where
 D=\lim_{l\rightarrow 0} (l^2q).
 \end{equation*}
 The quantity $D$ can be interpreted as the mean square distance 
-traveled  per unit time.  The characteristic function (\ref{CHAR_WALK_X})
+travelled  per unit time.  The characteristic function (\ref{CHAR_WALK_X})
 is the characteristic function of a Gaussian process of the form
 \begin{equation*}
-P(x,^t|0,0) = \frac{1}{(4\pi Dt)^{-1/2}} \exp\left( -x^2/4Dt 
+P(x,t|0,0) = \frac{1}{(4\pi Dt)^{1/2}} \exp\left( -x^2/4Dt 
 \right).
 \end{equation*}
 This is the transition probability of a so--called {\em Wiener process},
@@ -1105,7 +1106,7 @@ Wiener process in more detail in the next section.
 The following remark may serve as an introduction to the next 
 section. Of course, we can also expand directly the master equation
 (\ref{MASTER_WALK}) as a function of $x$ up to second order terms 
-in $l$. We get
+in $l$ and get
 \begin{equation*}
 \frac{\partial}{\partial t} P(x,t|0,0) =
      (l^2q) \frac{\partial^2}{\partial x^2} P(x,t|0,0),
@@ -1201,7 +1202,7 @@ obtained by keeping only terms up to the second order in $\nu$
       \left\{ a_2(y) P(y,t) \right\}.
 \end{equation}
 The above equation is called the {\em Fokker--Planck equation}.
-The first term on the right--hand side is usally called the drift
+The first term on the right--hand side is usually called the drift
 term since it is essentially Liouvillian. The second term
 on the right--hand side is the diffusion term. In a later section
 we will learn how to deal with this equation.
@@ -1229,7 +1230,7 @@ characteristic function
 \begin{equation*}
 G(s,t) = \int dw P(w,t|w_0,t_0) \exp(isw),
 \end{equation*}
-where we hve assumed that the initial condition on the transition 
+where we have assumed that the initial condition on the transition 
 probability is
 \begin{equation*}
 P(w,t_0|w_0,t_0) = \delta(w-w_0).
@@ -1238,7 +1239,7 @@ The characteristic function satisfies the equation
 \begin{equation*}
 \frac{\partial}{\partial t}G(s,t) = - \frac{1}{2} s^2 G(s,t),
 \end{equation*}
-whose solution given the initial condition $G(s,t_0)=\exp(isw_0)$ is
+whose solution is, given the initial condition $G(s,t_0)=\exp(isw_0)$, 
 \begin{equation*}
 G(s,t) = \exp\left[isw_0 -s^2(t-t_0)/2\right].
 \end{equation*}
@@ -1246,7 +1247,7 @@ Performing the inverse Fourier transformation of the above
 expression we find the transition probability
 \begin{equation}
 \label{TRANS_WIENER}
-P(w,t|w_0,t_0)= \frac{1}{[2 \pi (t-t_0)]^{-1/2}}
+P(w,t|w_0,t_0)= \frac{1}{[2 \pi (t-t_0)]^{1/2}}
      \exp\left[ -(w-w_0)^2/2(t-t_0)\right].
 \end{equation}
 Thus, the transition probability density is a Gaussian with
@@ -1271,7 +1272,7 @@ The Wiener process plays a central role in the description of
 diffusion processes by means of stochastic differential equations.
 The reason is that the increments of the Wiener process
 \begin{equation*}
-\Delta W_i \equiv W(t_i) - W(t_i-1)
+\Delta W_i \equiv W(t_i) - W(t_i-1) 
 \end{equation*}
 are statistically independent. This can be seen in the following 
 way. Let us consider the joint probability density
@@ -1285,7 +1286,7 @@ cast in the following form
 \begin{eqnarray*}
 \lefteqn{P(w_n,t_n; w_{n-1},t_{n-1}; \ldots ; w_0,t_0) =} \\
 & & \prod_{i=0}^{n-1} 
-\left\{ \frac{1}{[2 \pi (t_{i+1}-t_i)]^{-1/2}}
+\left\{ \frac{1}{[2 \pi (t_{i+1}-t_i)]^{1/2}}
 \exp[-(w_{i+1}-w_i)^2/2(t_{i+1}-t_i)]
 \right\}
 P(w_0,t_0).
@@ -1296,7 +1297,7 @@ equation reads
 \lefteqn{
 P(\Delta w_n,\Delta t_n; \Delta w_{n-1},\Delta t_{n-1}; \ldots ; w_0,t_0) =} \\
 & &\prod_{i=0}^{n-1} 
-\left\{ \frac{1}{[2 \pi \Delta t_i)]^{-1/2}}
+\left\{ \frac{1}{[2 \pi \Delta t_i)]^{1/2}}
 \exp[-\Delta w_i^2/2 \Delta t_i]
 \right\}
 P(w_0,t_0),
@@ -1312,6 +1313,56 @@ P(\delta w,\Delta t) = \frac{1}{[2 \pi \Delta t)]^{-1/2}}
 \exp[-\Delta w^2/2 \Delta t].
 \end{equation*}
 
+At this point it is convenient to introduce a short hand notation 
+for Gaussian distributed random numbers. The Gaussian random 
+variable $X$ with mean $m$ and variance $\sigma^2$ will be denoted
+by
+\begin{equation*}
+X \equiv {\bf N}(m,\sigma^2).
+\end{equation*}
+In particular we will name the random variable $\eta$
+\begin{equation*}
+\eta \equiv {\bf N}(0,1)
+\end{equation*}
+the unit normal random variable. In this notation we can write
+for the Wiener $W(t)$ process
+\begin{equation*}
+W(t) = {\bf N} ( W_0, (t-t_0) )
+\end{equation*}
+and for the increment $\Delta W$
+\begin{equation*}
+\Delta W(t) = {\bf N} (0, 
+     \Delta t ).
+\end{equation*}
+
+For later convenience we give two rules concerning the 
+transformation of Gaussian random variables. First, let $a$ and $b$
+be two numbers, then we have
+\begin{equation*}
+a +b {\bf N}(m,\sigma^2) = {\bf N} ( a+bm, b^2\sigma^2).
+\end{equation*}
+In particular we have for a unit normal random variable
+\begin{equation*}
+a+b\eta = {\bf N}(a,b^2).
+\end{equation*}
+Second, if ${\bf N}(m_1,\sigma_1^2)$ and ${\bf N}(m_2,\sigma_2^2)$ 
+are statistically independent, then
+\begin{equation*}
+{\bf N}(m_1,\sigma_1^2) + {\bf N}(m_2,\sigma_2^2) =
+   {\bf N}(m_1+m_2,\sigma_1^2+\sigma_2^2).
+\end{equation*}
+The above rule expresses the fact that, as we know, that Gaussian 
+random variables remain Gaussian distributed under addition.
+The rules just given can be demonstrated with the help of the 
+random variable transformation theorem.
+
+With the help of the first above rule it is clear that the 
+increment $\Delta W$ can be expressed as
+\begin{equation*}
+\Delta W = \sqrt{\Delta t} \eta,
+\end{equation*}
+where $\eta$ is the unit normal random variable.
+
 Let us now generate numerically some realizations of the Wiener 
 process. To this end we need a way of calculating for a given 
 value of the Wiener process $W(t)$ at time $t$ the value of the
@@ -1320,7 +1371,7 @@ is exact for any positive value of $\Delta t$ (\cite{GILLESPIE}).
 
 The algorithm exploits the fact that we know analytically the
 conditional transition probability density. $T(w,t|w',t')$ is a 
-Gaussian  with with mean $w'$ and variance $\sigma^2=2(t-t')$.
+Gaussian  with  mean $w'$ and variance $\sigma^2=2(t-t')$.
 Accordingly, given $W(t)$ the increment $\delta W(t)$
 \begin{equation}
 \label{ADVANCE_WIENER}
@@ -1340,13 +1391,13 @@ with zero mean and variance $\sigma^2=2\Delta t$).
 (iii) Advance the stochastic process according to the formula
 (\ref{ADVANCE_WIENER}).
 
-(iv) Goto to (i) until the desired final time is reached.
+(iv) Goto (i) until the desired final time is reached.
 
 A flow diagram of the program \texttt{wiener.m} can be seen in 
 Fig. (\ref{F_WIENER_ALGORITHM}). 
 \begin{figure}
 \label{F_WIENER_ALGORITHM}
-\includegraphics[width=8cm]{./Figures/f_wiener_algorithm.eps}
+\includegraphics[width=6cm]{./Figures/f_wiener_algorithm.eps}
 \caption{Flow diagram of the program \texttt{wiener.m}}
 \end{figure}
 \subsubsection{Listing of the function \texttt{wiener.m}}
@@ -1383,7 +1434,7 @@ The parameters used in the simulation are \texttt{xstart=0},
 \end{figure}
 
 \subsection{The Ornstein--Uhlenbeck Process}
-Up to know we have considered only Fokker--Planck equations 
+Up to now we have considered only Fokker--Planck equations 
 without drift. 
 As a simple example of a Fokker--Planck equation with an 
 additional linear drift we consider
@@ -1399,7 +1450,7 @@ process.
 Again, we can look at the equation of motion for the characteristic
 function of the Ornstein--Uhlenbeck process
 \begin{equation*}
-G(s,t) = \int_{-\infty}{\infty} \exp(isx) T(x,t|x',t').
+G(s,t) = \int_{-\infty}^{\infty} \exp(isx) T(x,t|x',t').
 \end{equation*}
 The equation reads
 \begin{equation*}
@@ -1429,9 +1480,16 @@ and variance
 \label{VAR_ORNSTEIN}
 \text{Var} \{ X(t) \} = \frac{D}{2q} [1- \exp(-2qt)].
 \end{equation}
+Since the Ornstein--Uhlenbeck process is a Gaussian process we can write
+\begin{equation*}
+X(t) = {\bf N}(X_0\exp(-2q(t-t_0)), 
+     \frac{D}{2q} (1-\exp(-2q(t-t_0)) ).
+\end{equation*}
 In contrast to the Wiener process the Ornstein--Uhlenbeck process
 has a stationary distribution in the limit $t\longrightarrow \infty$
 which is a Gaussian with zero mean and variance $D/2q$.
+
+
 
 We now turn to the numerical simulation of realizations of the 
 Ornstein--Uhlenbeck process. The problem is to find a way of
@@ -1511,256 +1569,6 @@ process. The
 \texttt{q=1}, and \texttt{D=1}.}
 \end{figure}
 
-\section{Stochastic differential equations}
-In the previous section we have derived an exact simulation algorithm
-for the generation of trajectories of the Ornstein--Uhlenbeck process.
-The ``exact'' update formula was
-\begin{equation*}
-X{t+\Delta t} = X(t) \exp(-q \Delta t) +
-  \left[ \frac{D}{2q}(1-\exp(-2q\Delta t)) \right]^{1/2} \eta(t),
-\end{equation*}
-where we have now written $\eta(t)$ to stress the fact that at each
-time step $t$ we hace to draw another Gaussian distributed random 
-number. The update formula is exact in the sense that it holds for
-arbitrary values of $\Delta t$.
-
-However, it will turn oput to be convenient to have an update formula
-which works for small valkues of $\Delta t$. To this end we expand the
-exact update formula to first order in $\Delta t$ and obtain
-\begin{eqnarray}
-X(t+\Delta t)& =& X(t) (1- q \Delta t) + 
-   \left[ \frac{D}{2q} (2q \Delta t) \right]^{1/2} \eta(t) \nonumber
-   \\
-\label{SDE_APPROX} 
-  & = & X(t) - qX(t) \Delta t + \sqrt{D} \sqrt{\Delta t} \eta(t).
-\end{eqnarray}
-In the limit $Delta t \rightarrow 0$ this approximate uodate formula
-turns exact.  We recognize immediately that the stochastic increnet in
-this discretized version of the Ornstein--Uhlenbeck process scales
-with the square root of the time increment $\Delta t$.
-
-It is now very important to realize that the 
-approximation (\ref{SDE_APPROX}) can be regarded as the discretization
-of a differential equation of the form
-\begin{equation*}
-\dot{X}(t) = -q X(t) + \sqrt{D} \eta(t).
-\end{equation*}
-Due to the presence of a stochastic term, the Gaussain stochastic
-process $\eta(t)$ the above equation is a typical example of a 
-so--caled {\em stochastic differential equation} (SDE). It is the aim
-of this section to introduce into some  peculiarities of stochastic
-differential equations. In particular we will also show the
-equivalence of stochastic process defined in terms of stochastic differential
-equations and in terms of Fokker--Planck equations.
-
-The above expression is a special case of the  {\em standard form} of
-a stochastic differential equation (some times stochastic
-differential equations are also called {\em Langevin} equations):
-\begin{equation}
-\label{SDE_LANGEVIN_DISCR}
-X(t+dt) = X(t) + A(X(t),t)dt + D^{1/2} \eta(t) dt^{1/2},
-\end{equation}
-where we have replaced $\Delta t$  by $dt$ to stress the infinitesimal
-character of the above equation. The term proportional to $dt$ is
-called the {\em drift term}, wheras the term proportional to
-$\sqrt{dt}$ is called the diffusion term. 
-
-The above definition of the stochastic process $X(t)$
-in terms of a stochastic differential equation  cleary shows that
-the stochastic process $X(t)$ is continuous, but, in general, not 
-differentiable. This can be seen by writing
-Eq. (\ref{SDE_LANGEVIN_DISCR}) as
-\begin{equation*}
-\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \eta(t)}
-                                              {\sqrt{dt}}.
-\end{equation*}
-Obviuosly, the limit $dt \rightarrow 0$ of the above equation does not
-exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
-is everywhere continuous but nowhere differntiable. Nevertheless it is
-custumary to ``pretend'' \cite{GILLESPIE} that $dx/dt$ exists even for
-nonvanishing $D$. In fact we know that we can write
-\begin{equation*}
-\frac{\eta(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
-{\bf N}(0,1/dt).
-\end{equation*}
-So, we may define a gaussian {\em white noise process} as
-\begin{equation*}
-\xi(t) \equiv \lim_{dt \rightarrow 0}  {\bf N}(0,1/dt).
-\end{equation*}
-With the help of the above definition, we can now formally write
-\begin{equation*}
-\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D}(X(t),t) \xi(t).
-\end{equation*}
-This equation is called the white noise form of the Langevin equation.
-The white noise process introduced above does have the following
-averaged properties:
-\begin{eqnarray*}
-\langle \xi(t) \rangle &=& 0 \\
-\langle \xi(t) \xi(t´) \rangle &=& \delta(t-t´). 
-\end{eqnarray*}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{The Langevin equation and Brownian motion}
-In 1908 Langevin considered the problem of the dynamical 
-description of Brownian motion. He suggested that the equation of 
-motion of a Brownian particle with mass $m=1$ be described by the
-following differential equation for the velocity $V$
-\begin{equation}
-\label{LANGEVIN}
-\frac{d}{dt} V = -\gamma V + L(t),
-\end{equation}
-where the terms on the right hand--side of the above equation 
-model the forces which the surrounding molecules excerpt on the 
-Brownian particle. Since these forces are unknown in detail the 
-following assumptions were postulated. The Brownian particle 
-moving in the fluid of surrounding particles feels
-a friction which is proportional to its velocity, $\gamma$  being 
-the friction coefficient. Furthermore, the Brownian particle hits
-the surrounding particles. These collisions cause irregular 
-changes in the velocity of the Brownian particle. Thus, the external force
-$L(t)$ is modeled as a stochastic process. The first two moments of the
-stochastic process $L(t)$ are assumed to 
-have the following properties
-\begin{eqnarray*}
-\langle L(t) \rangle &=& 0 \\
-\langle L(t) L(t') \rangle &=& \Gamma \delta(t-t').
-\end{eqnarray*}
-
-The Langevin equation is the prototype of a stochastic 
-differential equation, i.e. of a differential equation whose
-coefficients are random functions of the time with some given
-statistical properties. The stochastic process $V(t)$ is 
-completely defined once an initial condition $V(0)=V_0$ is specified.
-Its formal solution reads
-\begin{equation*}
-V(t) = V_0 \exp(-\gamma t) + \exp(-\gamma t) 
-    \int_0^t dt \exp(\gamma t') L(t').
-\end{equation*}
-Taking the average over an ensemble of Brownian particles all
-having the same initial condition we find for the mean value of 
-the velocity
-\begin{equation*}
-\langle V(t) \rangle = V_0 \exp(-\gamma t),
-\end{equation*}
-where we made use of the statistical properties of the Langevin 
-force $L(t)$. Accordingly, the second moment of the velocity field
-is found to be
-\begin{eqnarray*}
-\langle V^2(t) \rangle &=& V_0^2 \exp(-2\gamma t)
-          + \exp(-2 \gamma t) \int_0^t dt \int_0^t dt'
-             \exp(\gamma (t' + t'')) \langle L(t') L(t'') \rangle 
-             \\
-          &=& V_0^2 \exp(-2\gamma t) + \frac{\Gamma}{2 \gamma}
-             [1-\exp(-2 \gamma t)].
-\end{eqnarray*}
-Up to now the constant $\Gamma$ was left unspecified. From 
-equilibrium statistical physics we  expect that for long times 
-\begin{equation*}
-\langle V^2(t\rightarrow \infty) \rangle = kT.
-\end{equation*}
-Hence we have
-\begin{equation}
-\label{FDT}
-\Gamma = 2 \gamma kT
-\end{equation}
-and we have established a relation between the attrition 
-coefficient $\gamma$ and the random fluctuations.
-Eq. (\ref{FDT}) is a simple version of the so--called
-fluctuation--dissipation theorem.
-
-\subsection{The Ito formula}
-
-
-
-
-\subsection{The equivalence of stochastic differential equations 
-and of the Fokker--Planck equation}
-
-\section{The numerical integration of stochastic differential 
-equations}
-\subsection{The Ornstein--Uhlenbeck process}
-
-
-
-
-
-
-\subsection{Brownian motion}
-As an example of the application of the Fokker--Planck
-equation we consider Brownian motion. A heavy particle is immersed 
-in a fluid of light particles. The large particle and the small 
-molecules collide in a random fashion. These 
-collisions induce sudden variations of the velocity of the 
-Brownian particle. As a consequence the position $X$ of the Brownian 
-motion may be described by a Markov 
-process, if observed on a time scale which is larger then the 
-autocorrelation time of the velocity, i.e. many collisions have 
-occurred between two observations. If we regard, for simplicity a 
-one--dimensional 
-situation, the Brownian particle makes random jumps back and forth 
-along the $x$--axis. The jumps may have any length, but the
-probability for large jumps falls off rapidly. 
-It is reasonable to assume that these probabilities are 
-symmetrical and independent of the starting point.
-
-Hence we have
-\begin{equation*}
-a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
-\end{equation*}
-and
-\begin{equation}
-a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
-\end{equation}
-The Fokker--Planck equation of Brownian motion thus reads
-\begin{equation}
-\label{BROWNIAN}
-\frac{\partial}{\partial t} P(X,t) = \frac{a_2}{2} 
-    \frac{\partial^2}{\partial x^2} P(x,t).
-\end{equation}
-The above equation is a diffusion equation and we immediately
-identify the diffusion constant to be
-\begin{equation}
-D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
-\end{equation}
-The above relation is known as the Einstein relation. It relates 
-the diffusion constant with the microscopic jumps of the Brownian 
-particle.
-
-Let us now consider an ensemble of Brownian particles, which are
-concentrated in $X=0$ at time $t=0$. Their position at time $t$ is 
-a stochastic process $X(t)$, whose transition probability is given 
-by (\ref{BROWNIAN}). This process, as we know, is a Wiener 
-process. The probability density of the Brownian particles  with 
-initial condition $P(x,0) = \delta(x)$ at time $t>0$ is easily 
-found to be
-\begin{equation}
-P(x,t) = \frac{1}{\sqrt{4 \pi D t}} \exp(-x^2/4Dt).
-\end{equation}
-This is a gaussian with maximum at $x=0$ and whose standard variation grows
-as
-\begin{equation}
-\langle X^2(t) \rangle = 2 D t.
-\end{equation}
-Hence, the width of the distribution increases with the square 
-root of the time. A behaviour which we already know from our 
-discussion of random walks.
-
 
 
 \bibliographystyle{peter}
@@ -1771,18 +1579,3 @@ discussion of random walks.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Monte Carlo Methoden in der statistischen Mechanik}
-Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
-Simulated annealing; travelling salesman;
-
-\chapter{Non-equilibrium MC}
-Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
-
-\chapter{Brownsche Dynamik Simulationen}
-Omega-entwicklung; SDE;
-
-
-\chapter{Rest}
-stochastische Resonanzen; Muster Erkennung; random Walks;
-
-\chapter{Stochastische Wellenfunktionsmethoden}
