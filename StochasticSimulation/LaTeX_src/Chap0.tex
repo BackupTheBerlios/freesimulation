@@ -368,7 +368,7 @@ The paint() method appearing in the ``Hello World'' applet is
 responsible for the visual part of the applet. It uses a canvas
 (drawing area) with a size defined by the calling HTML file. In our case
 this HTML file could look like:
-\inputlisting{./Listings_Java/call_HelloWorld_Applet.html}
+\inputlisting{Listings_Java/call_HelloWorld_Applet.html}
 The code parameter given in the HTML file defines the name of the applet
 to be run. Because there is no init() and no start() method in our
 example, the paint() method gets executed by the browser (or appletviewer).
@@ -407,19 +407,19 @@ AllNames.html, which is an index of all written programs in this package
 
 If you load AllNames.html into a browser, you get:
 \begin{center}
- \includegraphics[width=5cm]{Listings_Java/AllNames.eps} 
+ \includegraphics[width=8cm]{Listings_Java/AllNames.eps} 
 \end{center}
 Now you can klick on the link HelloWorld\_Applet and you get the
-documentation for that class:
+documentation for that class and analogous for the HelloWorld\_Application
+class:
 \begin{center}
-  \includegraphics[width=5cm]{Listings_Java/HelloWorld_Applet.eps}
+  \includegraphics[width=6cm]{Listings_Java/HelloWorld_Applet.eps}
+  \includegraphics[width=6cm]{Listings_Java/HelloWorld_Application.eps}
 \end{center}
-and for the HelloWorld\_Application you get:
-\begin{center}
-  \includegraphics[width=5cm]{Listings_Java/HelloWorld_Application.eps}
-\end{center}
-The missing graphics is available in the Java documentation of the
-JDK and just has to be copied into the HTML directory.
+The missing graphics on the right figure are available in the Java 
+documentation of the
+JDK and just has to be copied into a subdirectory called \verb|images| 
+of the HTML directory. Then it looks like the figure on the left.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Variables}
@@ -439,7 +439,7 @@ characters and boolean variables are listed in table
 \begin{table}[htbp]
 \label{table:primitivedata}
 \begin{center}
-\begin{tabular}{l|l|l|l|l|l}
+\begin{tabular}{l|l|l|l|l}
 Type & Contains & Default & Size & Min \\
      &          &         &      & Max \\ \hline \hline
 byte  & signed integer & 0 & 8bits & -128  \\
@@ -867,7 +867,7 @@ Ich habe leider das .class Programm auf Diskette! Brine ich morgen mit.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parameters from the command line or from a html file}
-\label{sec:Parameters}
+\label{sec:Parameter}
 
 The access of parameters given on the command line is as easy as it
 is in C and C++. The parameters are stored as strings in Java and
@@ -1027,6 +1027,9 @@ The remaining parts
 of array2 is not created!
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Object Oriented Programming - Classes}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classes and Objects}
@@ -1190,7 +1193,27 @@ the methods of the Applet class as necessary.
 
 \subsubsection{Overview of all packages in Java 1.1}
 
-????
+Here we list all the standard packages included in the Java 1.1
+language standard. The important packages (in our point of view)
+are written in small caps.
+\begin{description}
+\item[\textsc{java.applet}] includes the superclass of all Java applets (small package)
+\item[\textsc{java.awt}] the Abstract Windowing Toolkit (large package)
+\item[java.awt.datatransfer] provides data exchange between programs
+\item[\textsc{java.awt.event}] event handling for the AWT (Mouse, etc.)
+\item[java.awt.image] rarely used classes for image processing (use AWT) 
+\item[java.awt.peer] rarely used interfaces for the AWT
+\item[java.beans] interfaces and classes for beans programmer
+\item[\textsc{java.io}] all the input/output classes (very big)
+\item[\textsc{java.lang}]  central Java labguage classes (largest package)
+\item[java.lang.reflect] part of the Java Reflection API (small)
+\item[\textsc{java.math}] arbitrary precision arithmetic (small)
+\item[java.net] networking package
+\item[java.text] for writing internationalized programs (date, time, etc.)
+\item[\textsc{java.util}] useful classes, often used, e.g. millisecond time,
+  calendar, random numbers, vectors, etc.
+\item[java.util.zip] data compression and decompression classes
+\end{description}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The System class: Screen-Output and Keyboard-Input}
@@ -1261,12 +1284,11 @@ Here is a table of the methods:
       acos()/asin()/atan() & arcus cosine/sine/tangent \\
       sin()/cos()/tan() & sine/cosine/tangent\\
       exp() / log() & exponential and natural logarithm \\
-      ceil() / floor() / round() & rounding of values ???? \\
+      ceil()/floor()/round()/rint()&rounding of values (see test program)\\
       pow() & power\\
       min( , ) / max( , ) & minimum or amximum of two values \\
       sqrt() & square root of a double \\
-      random() & ???\\
-      rint() & ???\\
+      random() & random numbers (use java.util.Random class)\\
       IEEEremainder() & special remainder function \\
     \end{tabular}
     \caption{Overview of the mathematical methods available in Java 1.1 in the java.lang.Math class.}
@@ -1283,6 +1305,12 @@ Here are some examples:
 By the way, there is no easy import statement to avoid the Math in front
 of the methods, you always should use it, although it seems 
 tedious.
+
+Here is a test program for the three rounding methods available:
+\inputlisting{Listings_Java/Test_Roundings.java}
+And the output is:
+\input{Listings_Java/Test_Roundings.output}
+
 
 Unfortunatley these easy and important methods are not part of the
 standard Java language. But Visual Numerics, a software company,
@@ -1329,7 +1357,11 @@ Beans, EPS Output,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
-radioactive decay, Pi Calc, e calc.
+Pi Calculation:
+\inputlisting{Listings_Java/Pi_Calc.java}
+
+
+radioactive decay, e calc.
 Moment calulation
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
