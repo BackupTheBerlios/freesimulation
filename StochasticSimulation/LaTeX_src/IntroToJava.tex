@@ -62,7 +62,7 @@ Because of our background of convinced Fortran users we considered the
 following alternatives: our beloved Fortran, MATLAB, a language which 
 is popular in 
 the engineering and applied mathematics communities, and Java, the 
-"Wunderkind" of software developers and of the Internet community. We have 
+``Wunderkind'' of software developers and of the Internet community. We have 
 not considered C, C++ for the simple reason that we never felt the necessity 
 to learn them.
 
@@ -75,8 +75,8 @@ We checked the power (the efficiency) of the languages considered by the
 following benchmark, which represent the prototype of a stochastic simulation. 
 We generated 100 trajectories of a typical one-step stochastic process
 and compared the CPU times obtained by different languages. The result
-of the benchmarks are summarized in the following table. The listings
-of the corresponding programs are listed in the appendix.
+of the benchmarks are summarized in Table \ref{tab:Performance}. The listings
+of the corresponding programs are presented in the appendix.
 
 \begin{table}[htbp]
   \begin{center}
@@ -87,25 +87,25 @@ of the corresponding programs are listed in the appendix.
            & Linux & Nag f90 Compiler V2.2(260) with -O3 & Pentium 133 & 2.4 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) & Pentium 133 & 2.3 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) with -O4& Pentium 133 & 2.3 sec.\\
-           & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
+\rowcolor[gray]{0.85} & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
            & Linux & Pallas f95 Compiler V3.0-3 with -O4& Pentium 133 & 1.4 sec.\\\hline
    C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\
-           & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
+\rowcolor[gray]{0.85} & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
    C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\
            & Linux & egcs-1.0.3 with -O3 & Pentium 133 & 1.8 sec. \\\hline
       Java & Linux & JDK 1.1.7, no JIT & Pentium 133 & 16 sec. \\
-           & Linux & JDK 1.1.7, with JIT TYA (V1.3) & Pentium 133 & 10 sec.\\
+\rowcolor[gray]{0.85} & Linux & JDK 1.1.7, with JIT TYA (V1.3) & Pentium 133 & 10 sec.\\
            & Linux & JDK 1.1.7, no JIT & DEC Alpha 21164 600 & 6 sec. \\
            & Win95 & JDK 1.1.7, with Symantec JIT & Pentium 133 & 9 sec. \\
            & Win95 & JDK 1.1.7, no JIT & Pentium 133 & 19 sec. \\
-           & Win95 & JDK 1.2, with Symantec JIT & Pentium 133 & 8 sec. \\
+\rowcolor[gray]{0.85}  & Win95 & JDK 1.2, with Symantec JIT & Pentium 133 & 8 sec. \\
            & Win95 & JDK 1.2, no JIT & Pentium 133 & 22 sec. \\\hline
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\
-           & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\
+\rowcolor[gray]{0.85}  & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\
            & Linux & Matlab 5.2 & Pentium 133 &  224 sec.\\\hline
-   Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
+   Maple   & Linux & Maple V Rel. 4 & ??? & \\\hline
 Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
-           & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
+\rowcolor[gray]{0.85} & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
     \end{tabular}
     \caption[Performance Table.]%
     {Performance comparison for different languages, operating
@@ -121,7 +121,7 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
       for all other platforms set the environment variable 
       \texttt{JAVA\_COMPILER=none}.
       }
-    \label{tab:performance}
+    \label{tab:Performance}
   \end{center}
 \end{table}
 
@@ -132,21 +132,24 @@ very slow. Even the compiled version of MATLAB is slower by a factor of
 about 100 
 compared to the Fortran code. This is a good reason to disregard MATLAB!
 
-There is also a compiler called High Performance Java by IBM. It generates
-much faster code on an workstations. For a comparison with this
-compiler see \cite{HPJ}.
-
-Now we have to decide between Java and Fortran. The argument in favour of 
+Now we have to decide between Java and Fortran. As can be read off from
+the Table \ref{tab:Performance} the criteria of numerical efficiency
+clearly speaks for Fortran. The argument in favour of 
 Java which compensates the slightly slower performance (today!, in future 
 this might be different) is its portability and the free availability of the
 compiler and of the visualization tools. Java runs on every platform and 
 it is available at no cost. 
 
+There is also a compiler called High Performance Java by IBM. It generates
+much faster code on an workstation. For a comparison with this
+compiler see \cite[]{HPJ}.
+
 Last not least, we want to mention another advantage of Java. It seems
 \cite[]{bigbucks} that there is  a great need for Java programmers in 
 different branches of industry today. This need will be even greater in future 
-years. So learning Java, might be a kind of "life insurance" for students of 
-physics. It will put them in the position to find a good (programming) job.
+years. So learning Java, might be a kind of ``life insurance'' for students of 
+physics. It will put them in the position to find a good  job in the
+software industry.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -169,7 +172,8 @@ Java is simple in the sense that the number of language constructs has been
 kept as small as necessary. For ease of migration from other languages some
 basic language elements resemble C or C++. However, some features of these 
 languages which were rarely used and which have been considered to be unsafe 
-have been omitted. For example, in Java there is no goto statement; instead 
+have been omitted. For example, in Java there is no \verb|goto|
+ statement; instead 
 it has labelled break and continue statements. The preprocessor of C has been 
 eliminated; the program you write is the program that the compiler sees. In 
 Java there are no  operator overloading and no multiple inheritance 
@@ -202,7 +206,7 @@ Java is robust. Java contains features, called
 exception handling, which simplify the
 tasks of error handling and recovery.
 
-Java is secure. Since Java has been designed for distributed applications, 
+Java is secure. Since Java has been designed for distributed applications
 high security standards have been implemented. For example, direct access to
 memory is not allowed. Java contains four different levels of security 
 checks and enforcements to prevent the introduction of viruses. 
@@ -238,9 +242,11 @@ That makes it very easy to write and read compressed data.
 
 
 \subsection{Brief History of Java}
-Java started off in 1991 as a project by James Gosling at that time called
-Oaks. Its purpose was focussed on the use as OS software for consumer
-electronic devices. A small group decided to adapt Oak to a web
+Java started off in 1991 as a project by James Gosling, which at that 
+time was called
+Oaks. Its purpose was focussed on the use as operating  
+software (OS) for consumer
+electronic devices. A small group decided to adapt Oak to web
 technology and released the first version of Hotjava (a web browser, at that
 time still called WebRunner)
 in late 1994. After a presentation given by James Gosling about the 
@@ -291,11 +297,10 @@ available in the network. The whole system is based on Java code and
 the RMI protocol supplied by Java.
 
 
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Tools for Writing and Using Java}
 
-\subsection{Tools for Writing and Using Java}
-
-\begin{description}
-\item[] \textbf{Programs:} 
+\subsection{Programs:} 
 \begin{description}
 \item[JDK] The Java Development Kit, distributed freely by SUN.\\
         This kit is available for almost all platforms, e.g. Windows,
@@ -312,7 +317,8 @@ the RMI protocol supplied by Java.
   in MacOS 8.5 and the new version MRJ 2.1.2 from \href{http://developer.apple.com/java/}%
   {http://developer.apple.com/java/}) and the SDK for Macintosh in version
   2.1 as of the time of writing also available from the address above. These are
-  versions supporting Java 1.1.7 and Swing/JFC. 
+  versions supporting Java 1.1.7 and Swing/JFC. The new version MRJ 2.2
+        is just getting available.
 \item[Emacs/XEmacs] This is an editor available for most platforms.\\
         We basically use this very powerful but sometimes confusing
         editor to do all our programming, text editing and more. It is
@@ -329,15 +335,17 @@ the RMI protocol supplied by Java.
 \item[Netscape Navigator/Communicator] A web browser like the Internet 
         Explorer, but written by Netscape inc. and the source code is
         freely available and fully conforming to the Java standard. \\
-        We used Netscape as a reference to check, if software is running
-        in a browser, additional to using the appletviewer from the JDK.
-        Be aware that not everything is supported by the browsers and
-        sometimes you get strange results compared to using the
-        appletviewer.       
-\item[Java Workshop] A commercial IDE\footnote{Integrated 
-    Development Environment} 
+        We used Netscape and the appletviewer of the JDK to test all
+        the applets in this book.
+        Be aware that not everything is supported by all browsers and
+        sometimes you get strange results or the browser crashes,
+        although the program did run with the appletviewer.
+\item[Java Workshop] A commercial Integrated 
+    Development Environment (IDE)        
   for Java by SUN. Free trial versions
-  for universities and educational institutions are available.\\  
+  for universities and educational institutions are available.
+        Unfortunately it produces not very readable code for later
+        editing.  
 \item[Freebuilder] A freely available IDE for Java. \\
   Already in a usable state, although it is officially in alpha stage.
 \item[Netbeans] A commercial IDE for Java written in Java \\
@@ -345,11 +353,12 @@ the RMI protocol supplied by Java.
   personal use, but not for commercial use.
 \item[Simplicity] A commercial IDE for Java written in  Java\\
   A very nice and easy to use IDE for Java. It is very easy to get started
-  with it and it even can write event handling code for your GUIs.
+  with it and it even can write event handling code for your 
+  graphical user interfaces (GUI).
 \item[TOBA] A Java to C Compiler for Linux\\
   It converts Java source code to C and compiles the C code to get better
   performance. It runs on Linux, Solaris and IRIX and supports Java 1.1.
-  It seems to be no longer being developed (April 99).
+  It seems to be no longer developed (April 99).
 \item[Fortran to Java] A Fortran 77 to Java Compiler. \\
   You can convert very easily Fortran 77 programs to Java. This is a part of the
   ``Java Access to Numerical Libraries'' project at the University of 
@@ -357,13 +366,13 @@ the RMI protocol supplied by Java.
   Lapack routines to Java.
 \end{description}
 
-\item[] \textbf{Java Packages:}
+\subsection{Java Packages:}
 \begin{description}
 \item[simulation] This is the package developed during the writing
         of this book. It provides only some very basic features, which
-        might be of interest or can ease writing code. We have also
-        included some freely available source codes, which also
-        try to ease writing Java code.
+        might be of interest or can ease writing code. Some source
+        code of freely available software have been included for
+        convenience, adhering to the softwae licenses of course. 
 \item[Ptolemy (Ptplot)] A package to produce 2D plots from data. \\
         Ptolemy (version 1.0 from January 1999, which includes version
         2.0 of Ptplot.)
@@ -389,9 +398,7 @@ the RMI protocol supplied by Java.
    It includes methods for fast Fourier transformations, ordinary differential 
    equations, complex numbers and much more. We prefer to use the JNL
    implementation of the complex number classes, because they will
-   more probable become the standard.
-\end{description}
-
+   more probably become the standard.
 \end{description}
 
 
@@ -408,7 +415,7 @@ machine (interpreter, called JVM) to execute the byte-code.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics{Figures/Java_Overview.eps}
+    \includegraphics[width=\textwidth]{Figures/Java_Overview.eps}
     \caption{Overview of the Java language execution model.}
     \label{fig:Java_Overview}
   \end{center}
@@ -457,12 +464,12 @@ This is a complete environment to write Java programs comfortably,
 which is the first under the GNU license. It is still in alpha
 development stage, but it already comprises a lot of features. Of
 course, there are many commercial ones available, like SUN's Java Workshop
-or Simplicity for Java (WWW ???).
+or \href{http://www.datarepresentations.com/}{Simplicity for Java}.
 
 
 Opposing to other languages, which use the ASCII character set, Java
-uses the Unicode character set \href{http://unicode.org}{(Unicode WWW
-Homepage)}. 
+uses the Unicode character set \href{http://unicode.org}{(to the 
+Unicode WWW Homepage)}. 
 Unicode consists of characters represented
 by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
 use 256 different characters (ASCII) but you can use all the 38885 different
@@ -636,12 +643,17 @@ To run the applet you can either type
         e.g. \verb|/home/user/java/call_HelloWorld_Applet.html|
 \end{itemize}
 
-The question arising now, when to use an application and when to use
-an applet, is difficult to answer. In the following chapters we will 
-decide for each program
-separately, which way to go. Time consuming calculations should
+The question, when to use an application and when to use
+an applet, is difficult to answer. We have decided to write most
+of the programs as applications and applets in one program. So you
+can decide if you run it as an application or start it as an applet.
+Some features are of course not available from an applet and
+you are missing some functionality of some programs, if you run them
+as an applet.
+Time consuming calculations should
 definitely be written as an application, small programs can be
-written as an applet of course.
+written as an applet. Although this is not mandatory it should
+be obeyed by a good Java programmer.
 
 In Java 1.1 a new package (see later) was introduced, which allows
 so called ``trusted applets''. These are specially signed libraries,
@@ -758,7 +770,7 @@ definite type and that each type has identical size and behaviour on
 all Java implementations.  Java has built in primitive data types
 to support integer, floating--point, boolean, and character values.
 The primitive data types of Java for integers, floating--points,
-characters and boolean variables are listed in table
+characters and boolean variables are listed in Table
 \ref{table:primitivedata}.
 \begin{table}[htbp]
 \label{table:primitivedata}
@@ -792,22 +804,38 @@ char  & Unicode character & $\backslash$u0000 & 16 bits & $\backslash$u0000 \\
 The following comments have to be made. In a Java program every
 variable must have a type that precedes its name when the variable is
 declared. For example the integer i may be declared as
-\begin{verbatim}
+\begin{sverbatim}
 int i;
-\end{verbatim}
-and integer/long values can be expressed as
-\begin{verbatim}
-int i = 123;    long l = 1234567889L;   long l2 = 123456789l;
-\end{verbatim}
+\end{sverbatim}
+and integer or long values can be expressed as
+\begin{sverbatim}
+int i = 123; 
+long l = 1234567889L;     long l2 = 123456789l;
+\end{sverbatim}
 
-Char values represent characters. They appear in Java between single
-quotes, e.g.
-\begin{verbatim}
+Characters are represented by two different data types in Java.
+One can store only one character and is called char. The other
+one stores many characters like a word or even a sentence. This
+second datatype is not a primitive datatype but an object and is
+called string. It will be discussed later on.
+
+Char values are defined in Java between single quotes, e.g.
+\begin{sverbatim}
 char c = 'C';
-\end{verbatim}
-A Unicode character is represented by the Unicode escape sequence
-$\backslash$uxxxx, where xxxx is a sequence of four hexadecimal digits.
+\end{sverbatim}
+Usually characters on a computer are represented internally by a number.
+This number is between 0 and 255 and the coding of the characters
+to the numbers is called ASCII\footnote{American Standard Code 
+for Information Interchange} code. Because not all characters used
+for all the different languages in the world are representable by
+256 different codes, the codespace has been extended to 65535
+numbers and is now called Unicode character set. With this set of
+numbers corresponding to characters you can code every language
+of the european countries. There are other Unicode sets to represent
+more complicated languages like Japanese or Chinese.
 
+A Unicode character in Java is represented by the Unicode escape sequence
+$\backslash$uxxxx, where xxxx is a sequence of four hexadecimal digits.
 
 Float and double types have special values that may be the result of
 certain floating-point operations. For example in the java.lang.Float
@@ -817,9 +845,9 @@ and java.lang.Double classes the special values
 defined.
 
 Floating point numbers are expressed as e.g.
-\begin{verbatim}
+\begin{sverbatim}
 13.       1.3e1        .13E2 
-\end{verbatim}
+\end{sverbatim}
 and are considered to be constants of type \verb|double| 
 unless they are specified with \verb|f| or \verb|F|, which makes them
 then \verb|float| constants.
@@ -925,7 +953,8 @@ Java 2 specification.
 In the Java 1.1 case you have to use the \verb|valueOf(String s)| and
 \verb|doubleValue(String s)|, \verb|floatValue(String s)| methods.
 
-To convert a double value to a string you have to use the \verb|toString(dobule d)|
+To convert a double value to a string you have to use the 
+\verb|toString(double d)|
 method, which is available for all primitive data types.
 For example, two ways of doing it are:
 \begin{lstlisting}{}
@@ -937,8 +966,8 @@ For example, two ways of doing it are:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Packages and Import Statements}
-\subsubsection{Packages}
+\section{Packages and Import Statements}
+\subsection{Packages}
 Because Java was designed to be able to load code distributed
 over the whole internet dynamically, you have to avoid name conflicts
 between the programs (classes). The Java solution 
@@ -987,7 +1016,7 @@ package. This means you can put your programs in the current directory.
 This is not recommended for medium to complex programs, but for
 test purposes and very small programs this is very convenient.
 
-\subsubsection{The jar Tool}
+\subsection{The jar Tool}
 If you have written a lot of small classes, which all work together
 (called a project), you
 can put them all inside a ``jar'' file and give the jar file
@@ -999,7 +1028,9 @@ applets on the internet, because the jar command also compresses
 its contents. 
 
 For example to view the contents of a jar file you can issue the command
-\verb|jar tvf lava.jar| (the Lava Rocks jar file). Some of the
+\verb|jar tvf lava.jar|. The file \verb|lava.jar| is a file on the
+CD ROM of the Lava Rocks package. You can use any other \verb|.jar| file
+you have or can find anywhere. Some of the
 available options used with jar are given in table \ref{tab:JarOptions}.
 \begin{table}[htbp]
   \begin{center}
@@ -1020,13 +1051,13 @@ available options used with jar are given in table \ref{tab:JarOptions}.
 Jar files are portable from one platform to the other, but as you can 
 see jar is not as powerful as the tar command in UNIX.
 
-\subsubsection{Basic Java Organization}
+\subsection{Basic Java Organization}
 Java is basically defined in two ways: the first one is the basic
 set of instructions, like all variables, all arithmetics and conditional
 statements and loops (see in the next few sections). This is the
 fundamental part of the language. 
 
-The second one are the APIs\footnote{Application Programmers Interfaces}.
+The second one are the Application Programmers Interfaces (API).
 They are just packages, which consist of many functions and variables
 to provide a certain functionality. For example the applet API (package)
 provides all the necessary functions to build and handle applets
@@ -1040,7 +1071,7 @@ different libraries (packages) for the same functionality, but
 using different calling schemes and therefore making programs
 non portable. 
 
-\subsubsection{Import statement}
+\subsection{Import statement}
 Before learning more about the syntax of Java, we have to explain another
 statement appearing in the part of any Java program before the actual
 definition of the class: the \verb|import|-statement. With \verb|import|
@@ -1083,7 +1114,7 @@ it. For example the System class is in \verb|java.lang|, that is why
 we did not have to use an import statement in the ``Hello World''
 application.  
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Compiling Projects}
 If you write a program consisting of many classes and files, you
 may think that this is a lot of work to compile all of them. Or if
@@ -1096,20 +1127,25 @@ takes care of these problems.
 
 You have to arrange your code in the different classes according to 
 certain rules (packages). So the directory structure is already a
-nice tree structure of your project. If you then want to compile
+nice tree structure of your project. 
+
+If you then want to compile
 the whole project, but only the files which have changed\footnote{Notice
-that there is no dependence of classes on others classes in the
+that there is no dependence of classes on other classes in the
 sense of re-compilation. Java does dynamical run-time linking and no static 
 linking at the end of the compilation process as in all other languages.}
 should be recompiled, you issue the
-command \verb|javac -depend -d base_directory main.java|. Then
-the Java compiler takes care of all ``dependencies''.   
+command 
+\begin{sverbatim}
+javac -depend -d base_directory main.java
+\end{sverbatim}
+then the Java compiler takes care of all ``dependencies''.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simple Arithmetics, Conditional Statements and Loops}
+\section{Simple Arithmetics, Conditional Statements and Loops}
 \label{sec:Loops}
 
-\subsubsection{Simple arithmetics}
+\subsection{Simple arithmetics}
 As we already mentioned Java  supports almost all of the standard
 C operators. The arithmetic operators that operate on numerical types
 are 
@@ -1124,10 +1160,6 @@ $/$ & division \\
 \end{center}
 The $+$ operator can also be used to concatenate strings, as we will
 see later in an example in section \ref{sec:Parameter}.
-There is no power operator like \verb|**| in FORTRAN or \verb|^| like in many
-different programs like TeX/LaTeX. In Java like in C/C++ you have to use
-a special mathematical function/method 
-(\verb|Math.pow()|, see in a later section).
 
 It is important to remark, that in Java integer division truncates
 toward zero (7/2=3, -7/2=-3 and -7/-2=3).
@@ -1143,11 +1175,12 @@ of the operand before (after) the increment operation.
 For example \verb|i = j++| means setting i to j and then increment j by one.
 But \verb|i = ++j| means setting i to j+1.
 
-There is no operator for calculating powers, instead you have to use
+There is no power operator like \verb|**| in FORTRAN or \verb|^| like in many
+different programs like TeX/LaTeX. In Java like in C/C++ you have to use
 (like in C) the \verb|Math.pow()| method of the \verb|Math| class.
 The \verb|^| operator, used sometimes for the power, is the exclusive
 or (XOR) operation in Java (either in the logical or the boolean sense). 
-So do not confuse this. 
+We should not confuse this. 
 
 Java supports also a standard set of relational and logical operators,
 which all yield boolean values. They are listed below
@@ -1176,23 +1209,39 @@ operate on  boolean expressions only.
 Java has also bitwise operators which operate on integers and on
 boolean types. They allow to perform bit manipulation on data.
 \begin{center}
-\begin{tabular}{ll}
+\begin{tabular}{lp{0.8\textwidth}}
 \& & and \\
 $\mid$ & or \\
 $\tilde{}$ & not \\
 $<<$ &  shifts bits left filling with zero bits on the right \\
 $>>$ & shifts bits right filling with the highest sign bit on the
-           left--hand side \\
-$ >>>$ & shifts bits right filling with zero bits on the left--hand side 
+           left--hand side (like a division by 2)\\
+$ >>>$ & shifts bits right filling with zero bits on the left--hand side, treating
+    the argument as a bitfield
 \end{tabular}
 \end{center}
+Some examples are in place
+\begin{sverbatim}
+ 1 & 0   // is zero
+ 1 | 0   // is one
+ ~10     // is -11, do it by hand to check
+ 2 << 1   // is 4, because bitwise is 2=0010 and 4=0100
+ 2 >> 1   // is 1, because bitwise is 2=0010 and 1=0001
+ 2 >>> 1  // is also 1, like above
+ 2 >> 3   // is 0, because bitwise is 2=0010 and 1=0000
+\end{sverbatim}
+You can use these operators for doing fast divisions by powers by $2$, 
+because it is much
+faster to do a bitshift than a division. For example, instead of
+writing \verb|16/2| use \verb|16 >> 1| or instead of using \verb|8/4|
+we can write \verb|8 >> 2|. 
 
 Last not least we have to mention the fundamental assignment operator
 $=$. It may be used in combination with other operators, e.g., $+=$
 means is incremented by.
 
 
-\subsubsection{Loops}
+\subsection{Loops}
 \paragraph{for Loops}
 For our forthcoming applications the most important control statement
 is the \verb|for| statement. It is used to loop over a range of values
@@ -1309,16 +1358,16 @@ Method DataMean()
 \paragraph{while and do--while}
 Java offers also the possibility to use other loop constructs, the
 \verb|while| and the \verb|do-while| loop. There syntax is
-\begin{verbatim}
+\begin{sverbatim}
 while (boolean_expression)
  statement
-\end{verbatim}
+\end{sverbatim}
 and
-\begin{verbatim}
+\begin{sverbatim}
 do
   statement
 while (boolean_expression)
-\end{verbatim}
+\end{sverbatim}
 It is important to observe that in the first construct the boolean
 expression is evaluated \textit{before} the statement is executed, while in
 the second construct the boolean expression is evaluated \textit{after} the
@@ -1328,20 +1377,20 @@ In order to give an example we write down an equivalent code using
 the
 \verb|while| statement of the \verb|for| loop of the
 \verb|DataMean.java| program. Lines 13 to 15 have to be replaced by
-\begin{verbatim}
+\begin{sverbatim}
 int i;
 while(i<N){
   mean += rand.nextDouble();
   i++;
 }
-\end{verbatim}
+\end{sverbatim}
 
-\subsubsection{Conditional Statements}
+\subsection{Conditional Statements}
 \paragraph{if-else}
 The \verb|if| statement is the fundamental form of conditional control
 of flow. It allows to choose, whether the statements that follow it are
 executed or not. Its syntax in Java is
-\begin{verbatim}
+\begin{sverbatim}
 if (boolean_expression) {
    statement1
 }
@@ -1351,7 +1400,7 @@ else if (boolean_expression) {
 else {
    statement3
 }
-\end{verbatim}
+\end{sverbatim}
 First, the boolean expression is executed. If the value is \verb|true|
 then \verb|statement1| is performed, otherwise if there is the
 optional \verb|else| statement \verb|statement2| is executed. Of
@@ -1365,17 +1414,17 @@ a boolean expression. To demonstrate its use we write down an
 \verb|if/else| Java code first and translate it into an equivalent  ? 
 construction. The \verb|if/else| code reads
 
-\begin{verbatim}
+\begin{sverbatim}
 if (a<b) 
   x=1.0;
 else
   x=2.0;
-\end{verbatim}
+\end{sverbatim}
 The equivalent construction with the conditional operator ? is more
 compact
-\begin{verbatim}
+\begin{sverbatim}
 x= (a<b ? 1.0 : 2.0);
-\end{verbatim}
+\end{sverbatim}
 The meaning of the different expressions in the above statement should
 be obvious.
 
@@ -1386,9 +1435,9 @@ to transfer control to an arbitrary statement in a method. To handle
 with situations where other languages have a \verb|goto| Java provides
 the labelled \verb|break| and \verb|continue| statements. Labels are
 typically used in blocks and loops and precede statements
-\begin{verbatim}
+\begin{sverbatim}
 label: statement
-\end{verbatim}
+\end{sverbatim}
 The \verb|break| statement is used to exit from a block, e.g. to break
 out of a loop. E.g., an unlabeled \verb|break| terminates the innermost
 \verb|for|, \verb|while| or \verb|do|.
@@ -1398,9 +1447,9 @@ the end of the loops body and evaluates the boolean expression that
 controls the loop. The \verb|return| statement terminates execution of
 a method and returns to the invoker. If a method returns no value you
 can use (you can also just omit it)
-\begin{verbatim}
+\begin{sverbatim}
 return;
-\end{verbatim}
+\end{sverbatim}
 if the method has a return type, the \verb|return| must include an
 expression for a returned type. You can use as many return statements 
 as you like, but only one is executed each time the method gets called.
@@ -1422,11 +1471,11 @@ statements that determine what is the output for each number. The
 \verb|switch| statement works only if the value being tested is a
 primitive integral type and when the value is tested against constant
 values. the basic syntax of the \verb|switch| statement is
-\begin{verbatim}
+\begin{sverbatim}
 switch(expression) {
     statements
 }
-\end{verbatim}
+\end{sverbatim}
 After evaluating the expression, the switch statement executes
 certain code within the block depending on the integral value of the
 expression. This information is indicated by the integer label following
@@ -1447,12 +1496,12 @@ expressions like \verb|i>2|.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Arrays, Matrices and Strings}
+\section{Arrays, Matrices and Strings}
 \label{sec:Arrays}
 
 Before discussing the notion of classes and objects, we want to introduce
 another reference type: the array. Arrays are actually objects
-(see \ref{sec:objectoriented}), but
+(see Chapter \ref{sec:objectoriented}), but
 Java provides many special commands for arrays, which makes them a 
 little bit special.
 
@@ -1467,7 +1516,7 @@ have to destroy (free) the allocated memory.
       F77 & F90 & C & C++ & \textbf{Java} \\\hline
       -- & allocate & malloc & new & new \\
       -- & deallocate & free & dispose & -- \\
-      -- & Pointer & \multicolumn{2}{c}{Pointer} & References + Garbage Collector \\
+      -- & Pointer & \multicolumn{2}{c|}{Pointer} & References + Garbage Collector \\
       -- & -- & \multicolumn{2}{c|}{Pointer arithmetic possible}& there is no 
                                                     reference arithmetic \\
     \end{tabular}
@@ -1478,9 +1527,9 @@ have to destroy (free) the allocated memory.
 To create an array you have to use the \verb|new| keyword used for
 creating (instantiating) objects. So to create a one dimensional
 array, called \verb|intarray|, with 10 elements you use:
-\begin{verbatim}
+\begin{sverbatim}
         int intarray[] = new int[10];
-\end{verbatim}
+\end{sverbatim}
 This also sets all the elements to zero. But this is only true for 
 primitive types. Arrays of reference types (objects) are created the
 same way, but the elements consist of references to the elements. The
@@ -1488,7 +1537,9 @@ elements themselves are NOT initialized and have to be created too.
 An example for this is a two dimensional array as we will see soon.
 
 Indices of arrays in Java start with zero as in C and not with 1
-as in Fortran. No negative indices are allowed in Java. The length
+as in Fortran. No negative indices are allowed in Java. This is the 
+reason for numbering the chapters in this book starting from $0$.
+The length
 of an array (meaning the number of elements) is always given
 by the \verb|.length| field. For the array above you get the number
 of elements by using \verb|intarray.length|. We have already met
@@ -1496,43 +1547,43 @@ this notation when we discussed the command line parameters.
 
 You can also create the array and initialize it right away by using
 (also in Java 1.0):
-\begin{verbatim}
+\begin{sverbatim}
   int intarray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   int[] intarray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-\end{verbatim}
+\end{sverbatim}
 or one step further, create an array of objects (here strings) and
 create the elements in the same step:
-\begin{verbatim}
+\begin{sverbatim}
   String stringarray[] = {"a","b","c","d","e","f","g"};
-\end{verbatim}
+\end{sverbatim}
 In Java you can even put the brackets behind the type instead of the
 variable name (not possible in C). So it does not matter if you
 write \verb|int intarray[];| or \verb|int[] intarray;|.
 
 In Java 1.1 you can also use \emph{anonymous arrays}:
-\begin{verbatim}
+\begin{sverbatim}
   String[] texts;
   texts = new String[] {"a","b","c","d","e","f","g"};
   System.out.println(new char[] {'h','e','l','l','o'});
-\end{verbatim}
+\end{sverbatim}
 So you can create and initialize arrays without even using a variable.
 
 Multidimensional arrays are also supported. Just like in C they are
 arrays of arrays. For example
-\begin{verbatim}
+\begin{sverbatim}
   double matrix[][] = new double[10][10]; 
-\end{verbatim}
+\end{sverbatim}
 creates a 10 by 10 matrix, called \verb|matrix|, 
 meaning that you have created 10 arrays
 of type \verb|double[10]|. An important point to make is that you
 do not have to specify all dimensions at once. You can for example
 create a triangular matrix by submitting:
-\begin{verbatim}
+\begin{sverbatim}
   double matrix[][] = new double[10][];
   for (int i=0; i<10; i++) {
          matrix[i] = new double[i+1];
   } 
-\end{verbatim}
+\end{sverbatim}
 To access multidimensional arrays you can also use one dimensional
 array syntax (as in C). If you have a two dimensional array 
 you can access the element [i,j] by accessing the element [i+j*columns]. 
@@ -1548,19 +1599,19 @@ create it in Line 13. Then we store the random numbers in the array
 and afterwards calculate the mean.
 The last important point to address is the copying of arrays. 
 You can not just write
-\begin{verbatim}
+\begin{sverbatim}
   int[] array1 = {1,2,3,4,5};
   int[] array2;
   array2 = array1;          // WRONG ! - ERROR ! 
-\end{verbatim}
+\end{sverbatim}
 This would only copy the reference of the array1 object to the array2
 object, not the values, the memory address is the same. 
 To copy the values of arrays you have to use the 
 \verb|arraycopy()| method of the java.lang.System class. 
 So to copy an array in the above example, you have to write:
-\begin{verbatim}
+\begin{sverbatim}
   System.arraycopy(array1,0,array2,0,array1.length);
-\end{verbatim}
+\end{sverbatim}
 This copies all elements of array1 to array2 staring from element 0. 
 The remaining parts of array2 are not created!
 
@@ -1568,10 +1619,11 @@ The remaining parts of array2 are not created!
 A new class \verb|Arrays| in the \verb|java.util| package has been
 introduced in Java 2, which is of great interest not only to scientific
 programmers. It includes methods for sorting arrays of arbitrary
-type using a modified version of the Quick-sort\footnote{This is
+type using an improved version of the Quick-sort\footnote{This is
 a sorting algorithm, which is very versatile and efficient for
-most of the problems.} algorithm. So to sort a whole array 
-of double values, you just have to use
+most datasets. For details see \cite[]{bentley:93}} 
+algorithm. So to sort a whole array  
+of double values into ascending numerical order, you just have to use
 \begin{sverbatim}
   /* JAVA 2 */
   import java.util.*;
@@ -1579,7 +1631,11 @@ of double values, you just have to use
   ....
   Arrays.sort(array,0,1000); // to sort the whole array
 \end{sverbatim}
-You can even sort an array of strings or arbitrary objects.
+You can even sort an array of strings or arbitrary objects,
+although the algorithm used for the object sorting is allowed to 
+vary from one
+implementation of the virtual machine to another.
+
 
 Another new functionality is the \verb|fill()| method. Often you
 want to assign a value to a whole array of doubles for example.
@@ -1593,7 +1649,10 @@ In Java 2 you can do this using
 which sets the whole array to 1.
 
 Furthermore there is a comparison method for arrays called
-\verb|Arrays.equals(double[], double[])| for all data types and
+\begin{sverbatim}
+Arrays.equals(double[], double[])
+\end{sverbatim}
+for all data types and
 last but not least there is a binary search algorithm to
 find a value in an (sorted) array. So for example to find the index of the
 array element equal to 2.5 you can use the code:
@@ -1606,12 +1665,12 @@ array element equal to 2.5 you can use the code:
   int index = Arrays.binarysearch( array, 2.5 );
 \end{sverbatim}
 
-\subsection{Parameters from the Command Line or a HTML File}
+\section{Parameters from the Command Line or a HTML File}
 \label{sec:Parameter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Parameters from the command line}
+\subsection{Parameters from the command line}
 The access of parameters given on the command line is as easy as it
 is in C and C++. The parameters are stored as strings in Java and
 are given as the parameters to the main() method of the application.
@@ -1639,7 +1698,7 @@ We also see the concatenation of strings in the output statement.
 And because you can only supply one argument to the  \verb|println()|
 method, you have to concatenate all outputs to one long string.
 
-\subsubsection{Parameters from a HTML file}
+\subsection{Parameters from a HTML file}
 In applets there is no command line to supply parameters. 
 So, in order to transmit 
 parameters from the calling HTML file to the Java applet we have to

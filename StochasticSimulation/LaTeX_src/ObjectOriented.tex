@@ -5,16 +5,16 @@ The biggest step you have to take in mastering Java if you are
 coming from the Fortran or C community, is to switch to the object
 oriented paradigm. Although C++ programmers are used to objects, there
 are quite a number of differences to C++ in Java. That is why Java
-is closer to C than to C++. Since the notions of classes, objects, and
+xis closer to C than to C++. Since the notions of classes, objects, and
 methods are quite abstract we want to introduce them with the help of
 a few examples. First we discuss a classical example from probability theory,
-the Buffon needle problem. Then we write a random number 
-generator, and last we write a class for calculating 
-statistical properties of an double array.  
+the Buffon needle problem using a procedural program and an object oriented version.
+A second example will be a class for calculating 
+statistical properties of a set of data points stored in a double array.  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{A Classical Example: The Buffon Needle}
+\section{A Classical Example: The Buffon Needle}
 
 It seems that the earliest documented application of stochastic simulation
 methods to the solution of an integral has been advanced by Comte de
@@ -31,9 +31,9 @@ needle problem has been formulated in 1733 but published only in 1777. It is
 supposed
 to be the first experiment, a kind of analogue simulation, in the
 context of geometric probabilities. The problem can be stated in the
-following way: A needle of length $L$ ($L=2l$) is drawn at random onto a
+following way: A needle of length $2l$ is drawn at random onto a
 horizontal plane ruled with straight parallel lines. The distance
-between the lines is $D$ ($D \ge L$; $D=2d$). 
+between the lines is $2d (d>l)$. 
 What is the probability $P$ that the
 needle will intersect one of these lines?
 
@@ -45,27 +45,27 @@ shortly.
 For convenience we denote by $x$ the distance of the middle point of
 the needle to the nearest line and by $\phi$ ($0 \le \phi \le \pi$) the
 angle between the needle and this line (see
-Fig. (\ref{buffondefinition})). The quantities $x$ and $\phi$
+Fig. (\ref{fig:buffondefinition})). The quantities $x$ and $\phi$
 completely determine the position of the needle. It is evident from
-Fig. (\ref{buffondefinition}) that the needle crosses the line only if
+Fig. (\ref{fig:buffondefinition}) that the needle crosses the line only if
 the condition
 \begin{equation}
-\label{buffoncondition}
+\label{fig:buffoncondition}
 x \le l \sin \phi
 \end{equation}
 is satisfied.
 
 \begin{figure}
-\label{buffondefinition}
+\label{fig:buffondefinition}
 \includegraphics[width=.7\textwidth]{Figures/buffondefinition.eps}
 \caption{The Buffon needle problem. Definition of the variables $x$
   and $\phi$.}
 \end{figure}
 
 Let us look at the possible positions of the needle in the $x$--$\phi$
-plane (see Fig. (\ref{buffonplane})). All positions lying below the
+plane (see Fig. (\ref{fig:buffonplane})). All positions lying below the
 $l\sin \phi$ curve between the abscissa 0 and $\pi$ satisfy the
-condition (\ref{buffoncondition}). The surface of this region is
+condition (\ref{fig:buffoncondition}). The surface of this region is
 immediately found by integration, $F=2l$. The surface $F$ is a measure
 for the set of all positions of the needle which cross one line. On
 the other side it is clear that $\pi d$ is am measure for the surface
@@ -77,12 +77,12 @@ P = \frac{2 l}{\pi d}.
 \end{equation}
 
 \begin{figure}
-\label{buffonplane}
+\label{fig:buffonplane}
 \includegraphics[width=.8\textwidth]{Figures/buffonplane.eps}
 \caption{The Buffon needle problem. The $x$--$\phi$ plane (schematically).}
 \end{figure}
 
-Some years later (??) Laplace 
+Some years later (???) Laplace 
 \footnote{Pierre Simon Marquis de Laplace, $\ast$ Beaumont--en--Auge
   28.3.1749 \dag 5.3.1827 Paris. Laplace was one of the leading french
   mathematicians of his time. Before being a member in the Acad\'emie
@@ -109,28 +109,37 @@ and hence we have with Eq. (\ref{buffonprobability})
 Now, let us try to write a Java code for the simulation of the Buffon
 needle problem.
 
-\subsection{The Traditional (Procedural) Approach}
+\section{The Traditional (Procedural) Approach}
 The traditional approach is straightforward. You just
-draw \verb|N| needles and check each needle if it crosses a
+draw \verb|N| needles and check for each one if it crosses a
 line or not. So there are two subroutines. One creates a new
 needle with all four coordinates. And the second one is a 
 routine, which just compares the lines with the needle coordinates,
 whether it crosses the lines or not. You then count the number
-of crossings and you get the final estimate of Pi.
-\loadlisting{BuffonProcedural.java}{Listings_Java/BuffonProcedural.java}
+of crossings and you get the final estimate of $\pi$.
+\inputlisting{Listings_Java/BuffonProcedural.java}
 
 First of all we have made use of the \verb|Math.random()| method, which
 draws a random number (a double) between 0 and 1. We also used arrays
 to store the coordinates and even used arrays as parameters to
-subroutines (methods). The remaining of the program should be
-self-explaining.
+subroutines (methods). The program basically consists of one loop,
+which first creates a needle and then checks if the needle crosses
+one of the lines in the plane. The first part is done in the method
+\verb|drawNeedle()| and creates at random the positions of the start 
+and endpoint of the needle. These four coordinates are returned and
+stored in the array \verb|needlePos|. The method \verb|checkNeedle()|
+uses the positions as arguments and checks if one of the lines is
+crossed by the needle, defined by the supplied coordinates.
+The variable \verb|cross| counts the number of crossings, which
+have occured so far. After the loop has finished we print the
+results on the screen.
 
-\subsection{The Object Oriented Approach - Classes and Objects}
+\section{The Object Oriented Approach - Classes and Objects}
 \label{sec:Classes_and_Objects}
 Before we begin to write the object oriented code 
 we have to introduce some formal aspects of the Java language.
 
-\subsubsection{Definition of Objects}
+\subsection{Definition of Objects}
 We have already met a lot of object oriented features 
 without discussing them in detail.  For example, we already noticed
 that the fundamental unit of programming in Java is the {\em class}. A
@@ -164,43 +173,55 @@ in Fortran or C) or you can use the object
 oriented feature:
 \begin{small}
 \begin{verbatim}
+        import VisualNumerics.math.*;
+
         double[] array = new double[100]; 
+        for (int i=0; i<100; i++) { // create a random array
+            array[i]=Math.random(); }
+        double result;
 \end{verbatim}
 
-\begin{minipage}{.47\textwidth}
+\noindent \begin{minipage}{.53\textwidth}
 \textbf{Functions}
-\begin{verbatim}
-
-  result = mean(array); 
-\end{verbatim}
+\begin{sverbatim}
+  
+ result=Statistics.average(array); 
+\end{sverbatim}
 \end{minipage}
-\begin{minipage}{.47\textwidth}
+\begin{minipage}{.41\textwidth}
 \textbf{Object Oriented}
-\begin{verbatim}
-  Data dat = new Data(array); 
-  result = dat.mean();
-\end{verbatim}
+\begin{sverbatim}
+ Data dat = new Data(array); 
+ result = dat.average();
+\end{sverbatim}
 \end{minipage}
 \end{small}
 \vspace{.2cm}
 
-\noindent Look at the third example in this chapter, which demonstrates these two
-possibilities in detail.
+The program for the the functional approach is contained in the JNL
+package and can be used directly. But the second approach needs a 
+new class to be defined by ourself. So here is the code to get the 
+second example working. Store this in a seperate file in the same 
+directory and compile it before compiling the code above.
+\inputlisting{Listings_Java/Data.java}
 
-It is up to you, which version you prefer. But because all programs are
-actually classes in Java you have to understand at least the 
-most fundamental things about object oriented programming. For a detailed
-discussion and introduction, see \cite{javanutshell}.
+Which version you prefer seems to be a matter of taste. 
+But because all programs in Java are
+actually classes we have to understand at least the 
+fundamentals of object oriented programming. 
+Later on we will have learned the beauty and clarity of the object
+oriented approach and the question will turn into: Why do we need
+the procedural approach?
 
 Just to remind you again, strings are objects and not primitive 
 types. To use strings you first have to declare and instantiate a string
 object. Here are three possible ways of doing it:
-\begin{verbatim}
+\begin{sverbatim}
         String text;
         text = "Test String";
         text = new String();
         text = new String("Test String");
-\end{verbatim}
+\end{sverbatim}
 The first line only declares a string object called text and does not
 allocate (instantiate) the memory for the value of the object, just
 the reference to the value. The second line instantiates and 
@@ -226,7 +247,7 @@ you can use the \verb|toLowerCase()| method, e.g.
 \end{sverbatim}
 
 
-\subsubsection{The Code of the Object Oriented Approach}
+\subsection{The Code of the Object Oriented Approach}
 Now we want to
 write a Java code which allows the simulation of the Buffon needle
 problem. It is clear that in the problem at hand ``needles'' will play
@@ -239,33 +260,78 @@ have also generic properties which justify to define needles as a class!
 The listing of the \verb|Needle| class can be seen below. We are going
 to explain basic concepts while discussing this example.
 \lstinputlisting{Listings_Java/Needle.java}
+The main structure is as follows: The first lines define the 
+variables and constants, which a needle should have, like the
+length and the position of the needle. These are both properties of
+each individual needle contrary to the table dimensions. These are 
+still properties of the problem, but they belong to a whole set of 
+needles, not only to one. This is visible in the \verb|static| modifier
+used in front of the variable definition. So we could actually define
+more than one table each consisting of many needles and having different
+table dimensions, let us call them planes.
 
-\subsubsection{Class variables, Constants and Modifiers}
+The next part is the constuctor of the class. The constructor is
+the code, which gets called if a new object of this class is created with
+the \verb|new| keyword. Here you call the constructor by using
+\verb|Needle draw = new Needle();| and the constructor just creates
+a new needle for this collection of needles belonging to this plane. 
+
+The third part is a method, which returns a boolean variable,
+telling us if the needle we are just using is crossing a line of the plane
+or not. The difference to the procedural approach enters here: 
+How does the method know, which needle to check? This is coded into
+the calling program, which takes an object of the needle class
+and let the method \verb|crossInspection()| operate on this object. Because
+the object consists of all the information necessary for the method,
+all the data necessary is already supplied.
+
+Now we are going to talk about these topics in greater detail and try 
+to structure all the ideas we have just encountered.
+
+
+\subsection{Class variables, Constants and Modifiers}
+\index{class variables}
+\index{constants}
+\index{modifiers}
 The needle class has four fields which correspond to the four
 coordinates which specify the position of the needle. 
 The term fields is used in Java as a synonym for variables.
+These are the variables different for each needle.
+
 Furthermore, we
 need some specification for the geometry involved in the problem.
-Some of the fields  are
-defined with the \verb|final| keyword. This is the equivalent to the
-const keyword in C. A final field can not be changed anymore.
-
-There is a nice feature to be used with the final keyword. You can
-define a final variable, actually computed in an arbitrary method. 
-The method is then executed before any other code of the program,
-even before the main method. An example would be:
-\lstinputlisting[first=12]{Listings_Java/TestFinal.java}
- 
-The variable \verb|cross| is declared to be \verb|static|.  This
-modifier 
+They are of course not specific to the individual needle, but for
+all the needles of a given setup or table. To tell Java that these
+variables are for all needles in this setup, you supply the
+\verb|static| keyword. The \verb|static| modifier 
 defines a field (variable), which is belonging
 to the class and not to the object. So every object of that class 
-has the same value for a \verb|static| field. The \verb|public| modifier
+has the same value for a \verb|static| field. 
+
+\index{public modifier}
+The \verb|public| modifier
 on the other hand defines a field or method, which is special to 
 an object not to the class -- this is also called an instance field or
 method, the \verb|static| version is called a class variable or
 method.
 
+\index{final keyword}
+Some of the fields are
+defined with the \verb|final| keyword. This is the equivalent to the
+const keyword in C. Here the variables with the final keyword are
+not allowed to change anymore, e.g. the table dimensions. 
+
+\begin{small}
+There is a nice feature to be used with the final keyword. You can
+define a final variable, actually computed in an arbitrary method. 
+The method is then executed before any other code of the program,
+even before the main method. An example would be:
+ \end{small}
+\lstinputlisting[first=12,basicstyle=\footnotesize]{Listings_Java/TestFinal.java}
+
+
+\index{modifiers}
+\index{variable modifiers}
 In Table \ref{tab:modifiers} we give an overview of some available modifiers.
 \begin{table}[htbp]
   \begin{center}
@@ -283,18 +349,19 @@ In Table \ref{tab:modifiers} we give an overview of some available modifiers.
                  within subclasses\\\hline
      (none) & accessible only in its package\\
     \end{tabular}
-    \caption{Overview of some available modifiers in Java, see also figure
-      \ref{fig:ModifiersGraphics}For a complete
+    \caption{Overview of some available modifiers in Java, see also Figure
+      \ref{fig:ModifiersGraphics}. For a complete
       overview take a look at page 230-234 in \cite{javanutshell}.}
     \label{tab:modifiers}
   \end{center}
 \end{table}
 A graphical representation of the access control of variables and
-objects is in figure \ref{fig:ModifiersGraphics}.
+objects is in Figure \ref{fig:ModifiersGraphics}.
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=.7\textwidth]{Figures/ModifiersGraphics.eps}
-    \caption{A graphical overview of the access control of variables and objects/classes in Java.}
+    \caption{A graphical overview of the access 
+      control of variables and objects/classes in Java.}
     \label{fig:ModifiersGraphics}
   \end{center}
 \end{figure}
@@ -309,7 +376,7 @@ Having fixed also some constants, e.g. $\pi$ and the distance between
 parallel lines, we have to initialize the class. This is done by means
 of the constructor.
 
-\subsubsection{The Constructor}
+\subsection{The Constructor}
 An important part of any class is the constructor of the class. This is
 the method (function), which is called when an object of this
 class is instantiated. It always has the same name as the class itself.
@@ -336,7 +403,7 @@ not necessary to be that careful.
 Here in our example, the constructor just sets the four coordinates
 and does not need any parameters to instantiate the needle.
 
-\subsubsection{Methods and Class Methods}
+\subsection{Methods and Class Methods}
 Having initialized the class we now want to define some methods in our
 \verb|Needle| class. There is only one method in our class, which
 is the \verb|crossinspection()| method.
@@ -353,8 +420,9 @@ and gets incremented every time you check a needle, which crosses a line.
 With this method our \verb|Needle| class is complete.
 
 Next we need to look at the class \verb|Buffon.java| which contains the
-\verb|main| method and demonstrates how to use the \verb|Needle| class.
-\loadlisting{Buffon.java}{Listings_Java/Buffon.java}
+\verb|main| method and demonstrates how to use the \verb|Needle| class,
+which is our first example of object oriented coding.
+\inputlisting{Listings_Java/Buffon.java}
 
 By defining the \verb|Needle| class in Java, we have created a new
 data type. Variables of this type can be declared by
@@ -375,73 +443,74 @@ accordingly. Finally, the result, i.e. the estimated value
 for $\pi$ is printed.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{A Random Number Generator}
-Since the concepts we just introduced are quite abstract it may be
-useful to see them in action with the help of a second example.
-So let us write a class, which calculates random numbers uniformly
-distributed between 0 and 1. To this end we write a class
-\verb|RandomNumber|. It has three fields (variables), two of them are
-defined with the \verb|final| keyword.
-\inputlisting{Listings_Java/RandomNumber.java}
-In our example, we just set the seed in the constructor and as 
-you can see you have to supply the seed, when you instantiate the
-generator. Most of the constructors don't even need a parameter to 
-instantiate the object. 
-
-In the program we have made use of the \verb|Math.pow()| method, 
-which is defined in the \verb|Math| class of the standard
-Java API \verb|java.lang| and it computes the power of the first
-argument to the second one (see section \ref{sec:Standard_Math}).
-
-Additionally we have included some routines to show how
-private variables can be handled. Because there is no
-way for programs to access the fields of the class from
-the outside of this class, you have to supply methods to read
-or write the fields. This is actually the way you have to write
-Java beans discussed shortly in section \ref{sec:Beans}.
-
-Then the method \verb|nextRand()| is defined and returns the next
-random number calculated using a congruential method\footnote{See later 
-in this book for details about how to generate random numbers.}. 
-
-Now we have to write a program (class), which uses this class to 
-calculate the average of some random numbers.
-\inputlisting{Listings_Java/UseRandomNumber.java}
-The class is called \verb|UseRandomNumber| and just contains the
-main method. First we instantiate (create) an object of class
-\verb|RandomNumber|. Then we create an array and in a loop we
-create \verb|N| random numbers using the \verb|nextRand()| method
-of our class applied to the object we just created. The remaining
-part has already been explained.
-
-Remember that we have to put both programs in one directory called
-\verb|simu|, because we have used the \verb|package| command. Here it
-was just to get you acquainted with these terms.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Calculating Moments}
-A third example demonstrates how to create a class for calculating
-some statistical measures for data sets. Here we show the
+\section{Another Example: Calculating the Mean}
+Another example demonstrates how to create a class for calculating
+the mean of a data set. The mean of a data set $x_i, i=1,\ldots,N$ 
+is of course defined as
+$$ \text{mean}\quad  <x> \equiv \bar{x} := \frac{1}{N}\sum_{i=1}^{N} x_i.$$ 
+The mean is also called the first moment as we will see later and
+there are higher moments. They are defined analogously
+as
+$$ \text{n-th moment}\quad <x^n> :=  \frac{1}{N}\sum_{i=1}^{N} x_i^n.$$  
+ 
+We want to show the
 different approaches of programming models in Java. 
-You have basically three choices:
-\begin{enumerate}
-\item You can use the ``program in one file'' approach: 
+You have basically three choices, which are now presented.
+
+\subsection{``Program in One File'' Approach}
+First we define variables to set the moments we want to compute.
+Then we instantiate and create the data array as an array of
+random numbers between zero and one. Then after setting all the moments
+to zero, wecompute the moments in a nested loop. The last step
+is dividing through $N$ and printing the final result on screen.
 \lstinputlisting{Listings_Java/Moments_all.java}
-\item You can use the ``traditional procedural'' approach:
-\lstinputlisting[first=23,last=28]{Listings_Java/Moments_procedural.java}
-\lstinputlisting[first=35,last=42]{Listings_Java/Moments_procedural.java}
-\item You can use an object oriented approach, the first class is
-  the main program using our own class and the second one is the
-  code for the data class itself. We have written two different 
-  versions to show the difference between a class method and 
-  an object method.
-  \lstinputlisting{Listings_Java/MomentsData.java}
-  \lstinputlisting{Listings_Java/Moments_object.java}
-\end{enumerate}
+
+\subsection{``Traditional Procedural'' Approach}
+Now we take the computation of the moments and put it into
+a method. Then we call the method from our main program. 
+Because there is not much difference between the program before
+and this one, we just present the differences.
+\lstinputlisting[first=20,last=25]{Listings_Java/Moments_procedural.java}
+\lstinputlisting[first=32,last=39]{Listings_Java/Moments_procedural.java}
+
+
+\subsection{Object Oriented Approach}
+There are two programs: The first class is
+the main program using our own class. This has to be called.
+The second one is the
+code for the data class itself and have to be compiled only. You can
+not start this class. 
+
+We have written two different 
+versions to express the difference between a class method and 
+an object method.
+\lstinputlisting{Listings_Java/MomentsData.java}
+The class \verb|MomentsData| includes some new code. First
+we use two constructors, whic have different arguments and can
+therefore be distinguished by Java. Depending on the calling
+syntax using the \verb|new| keyword, you call the first or the second
+constructor. 
+
+Then there are two methods defined. Like with the constructor, they
+have the same name, but can be distinguished by its argument list.
+This is called method overloading in Java. So again depending on
+the calling syntax, you call the first or the second method.
+
+Now we take a look at the main program, which uses the above classes.
+\lstinputlisting{Listings_Java/Moments_object.java}
+Up to line 21 there is nothing new, we just instantiate and create
+the data array. Then from line 22 to line 38 the first version using
+instance methods is used. The second version from line 40 to line 50
+is using a class method. But both versions do exactly the same.
+The only difference is line 24 together with line 30 compared to 
+line 44 in the second version.
+ 
+
 
 %%%%%%%%%%%%%%%%%
-\subsection{Interfaces and Abstract Classes}
+\section{Interfaces and Abstract Classes}
 Abstract classes/methods 
 are also special classes, which can not be instantiated
 and contain no code for the (abstract) methods. If you define
@@ -452,13 +521,13 @@ to override all abstract methods, but then the subclass is abstract
 too.
 
 An even more important concept in Java is the interface.
-An interface is basically a(n abstract) class, which does not implement 
+An interface is basically a (abstract) class, which does not implement 
 all the
 methods defined in the class. All methods have automatically the public
 modifier and are abstract.
 Therefore you can create classes defining abstract methods,
-which should be implemented (maybe system dependent, e.g. if you use
-the native modifier) somewhere else. Interfaces can be subclassed
+which should be implemented somewhere else, maybe system dependent, e.g. if you use
+the native modifier. Interfaces can be subclassed
 to create new interfaces.
 
 Most of the GUI classes of the AWT introduced later are
@@ -468,7 +537,7 @@ other methods (see section \ref{sec:PassingArguments}).
 
 
 %%%%%%%%%%%%%%%%%%
-\subsection{Extending (Inheritance) and Overloading (Overriding) Classes}
+\section{Extending (Inheritance) and Overloading (Overriding) Classes}
 Often you want to define subclasses, which should inherit all
 the methods and fields from another class. This is easily done
 in Java by extending a given class. The meaning of sub-classing is the
@@ -519,7 +588,11 @@ There are only a few methods defined in this (abstract) class,
 which you can always override. For example the \verb|toString()| 
 method is in \verb|java.lang.Object|. If you override this method,
 you can define your own objects, which can then be printed by
-the usual \verb|println()| commands. In table \ref{tab:JavaLangObject}
+the usual \verb|println()| commands. 
+
+As an example let us write a simple class, which 
+
+In Table \ref{tab:JavaLangObject}
 all methods defined in \verb|java.lang.Object| are displayed.
 \begin{table}[htbp]
   \begin{center}
@@ -549,7 +622,7 @@ with all methods and fields.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The System Class: Screen-Output and Keyboard-Input}
+\section{The System Class: Screen-Output and Keyboard-Input}
 
 Now we are in a place to discuss the \verb|System.out.println()| statement
 already used in the ``HelloWorld'' program. This is calling the
@@ -562,18 +635,19 @@ There are also two more variables called \verb|err| and
 The java.lang.System class in general provides an platform-independent 
 interface to some system functions.
 
-Here an example, which demonstrates a few things already learned and
-explains how to get input from the keyboard:
-\inputlisting{Listings_Java/System_Class.java}
+Here an example demonstrating some of the material we have learned and
+explains how to get any kind of input from the keyboard.
 It waits for an user input and just echoes the typed characters
-until you type the word ``Java''. Let us analyze the program:
+until you type the word ``Java''. 
+\inputlisting{Listings_Java/System_Class.java}
 
+Let us analyze the program:
 First look at line 19, where we have used the \verb|print()| method
 of the System class. It does the same as \verb|println()|, but does not
 jump to the next line after the output.
 
-Then take a look at line 23, where we compare two strings. As you see
-you have to use the \verb|equals()| method of the String class to
+Then take a look at line 23, where we compare two strings. 
+We have to use the \verb|equals()| method of the String class to
 compare the value of two strings and not the references. 
 In line 25 we use the string concatenation operator $+$ for the output.
 
@@ -602,14 +676,17 @@ can use similar to C the \verb|\n|, \verb|\t| or \verb|\\| codes
 to get a newline, a tab or a backslash in the output. You should 
 also note that, if you use e.g. \verb|System.out.println(5+7)| you
 get \verb|12| as output, so if you want to see \verb|5 7| you have
-to use \verb|System.out.print(5+" "+7)|.
+to use 
+\begin{sverbatim}
+|System.out.print(5+" "+7)
+\end{sverbatim}
 
-Although this looks very complicated, if you don't want to go into
-details, just copy this part to your own program and your are done.
-But after you got used to object oriented programming you won't have
+Although this looks very complicated, if we do not want to go into
+details, just copy this part to a program and reuse the code.
+But after we get used to object oriented programming we will not have
 any problems understanding the code above anymore.
 
-\subsubsection{Easy Input and Lava Rocks printf()}
+\subsection{Easy Input and Lava Rocks printf()}
 \label{sec:LavaRocks}
 Another easy solution is to use the \verb|EasyIn| and the
 \verb|Printf()| methods, supplied by our \verb|simulation| class
@@ -653,7 +730,7 @@ The output will look like
 \end{verbatim}
 If you are familiar with the C routines, then you can find all
 the modifiers used for formatting the different types of variables
-in table \ref{tab:PrintfModifiers}.
+in Table \ref{tab:PrintfModifiers}.
 \begin{table}[htbp]
   \begin{center}
     \begin{tabular}{cl}
@@ -703,7 +780,7 @@ and only use the variable every time, like:
 Now you can use \verb|fmt| instead of the string in all printf commands
 and it will be much faster.
 
-There is also an ''easier'' way of using printf without creating
+There is also an ``easier'' way of using printf without creating
 an object array, which is much more inefficient and should be avoided.
 
 And there is a platform neutral code for newlines: Use \verb|%\n| instead
@@ -722,7 +799,7 @@ But it has much less functionality and so we decided to use
 the Lava Rocks implementation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Passing Arguments to Methods}
+\section{Passing Arguments to Methods}
 \label{sec:PassingArguments}
 We want to review all the aspects concerning the passing of
 arguments to methods or -- for former FORTRAN programmers --
@@ -745,7 +822,7 @@ the method. The dummy variables used in the method
 can be viewed as local variables.
 
 \paragraph{Reference Data Types}
-But the reference data types (e.g. arrays, objects, etc.)
+The reference data types (e.g. arrays, objects, etc.)
 are passed by reference and therefore only the memory
 address is passed to the method. That is again the reason that
 by using the standard assignment or comparison operators,
@@ -847,14 +924,15 @@ Here a short example:
   }
 \end{verbatim}
 
-\paragraph{Usage}
-\loadlisting{TestPassingFunctions.java}{Listings_Java/TestPassingFunctions.java}
+\paragraph{Usage} 
+This is the program, which uses the two classes/interfaces above.
+\inputlisting{Listings_Java/TestPassingFunctions.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Structure and Overview of Java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Keywords and APIs in Java 1.1 and Java 2}
+\subsection{Packages in Java 1.1 and Java 2}
 
 Here we list all the standard packages (APIs) included in the Java 1.1
 language standard. The important packages (for our purposes) are
@@ -907,11 +985,17 @@ OpenType fonts, and TrueType fonts.
 \item[\textsc{javax.swing}] Provides a set of "lightweight" (all-Java language) components that, to the maximum degree possible, work the same on all
 platforms. 
 \item[java.swingx.*] There are 15 more packages in the Swing package, which we are not describing here in detail. Take a look at the Swing tutorial or documentation.
-\item[org.omg.COBRA] Provides the mapping of the OMG CORBA APIs to the JavaTM programming language, including the class ORB, which is implemented so that a programmer can use it as a fully-functional Object Request Broker (ORB).
-\item[org.omg.*] 6 more packages are provided for using COBRA with Java. See the API documentation.
+\item[org.omg.CORBA] Provides the mapping of the 
+  Object Management Group (OMG) CORBA\footnote{Common Object
+    Request Broker Architecture} APIs to the Java programming language, 
+  including the class Object Request Broker (ORB), 
+  which is implemented so that a programmer can use it as a 
+  fully-functional Object Request Broker.
+\item[org.omg.*] 6 more packages are provided for using CORBA with Java. 
+  See the API documentation.
 \end{description}
 
-\subsubsection{Reserved words in Java}
+\subsection{Reserved words in Java}
 The following words are reserved for Java and can not be used for names
 of classes, variables or methods:
 \begin{sverbatim}
@@ -927,15 +1011,15 @@ void, volatile, while, widefp
 
 %%%%%%
 
-\subsection{Name Conventions in Java}
+\section{Name Conventions in Java}
 In order to make the Java codes more readable it is customary to stick
-to the followinh nam conventions.
+to the followinh name conventions.
 
 \paragraph{Classes and Interfaces.} The names of classes and interfaces
-  should consist of one or more words which are joponed together. They
+  should consist of one or more words which are concatenated. They
   should describe appropriately the class and the interface. 
-The first lette of the name is an uppercas letter. If the
-  class name consists of more then one word each word after the first
+  The first letter of the name is an uppercase letter. If the
+  class name consists of more than one word, each word after the first
   one begins with an uppercase letter, e.g., \verb|Needle|,
   \verb|Reader|, \verb|StringToken|.
 
@@ -992,27 +1076,32 @@ programs and use them as beans later on with almost no changes
 
 
 
-\subsection{Java Documentation}
+\section{Java Documentation}
 As the time of writing the JDK (1.1 or 2) is distributed in
-two parts. The first one is the Java Runtime Environement called JRE
-(the Java virtual machine and the plugin for the internet explorer
-and netscape to run Java applets) and the complete package,
-which includes the JRE and additionally has all the necessary
-development tools.
+a twofold way: The first one is the Java Runtime Environement called JRE,
+which includes the Java virtual machine, the Java plugin for 
+the Internet Explorer
+and Netscape to run Java applets. 
+\index{JDK!documentation}
+\index{JDK}
+
+The second one is the complete package -- 
+the JRE and additionally all development tools to write Java programs.
 The API documentation is included in the full package, but not
-in the JRE. The documentation is also available seperately.
+in the JRE. The documentation for the APIs is also available seperately.
 
 In the directory \verb|JAVA_HOME|, on UNIX this could be 
 \verb|/usr/local/jdk1.2|, \verb|/usr/local/lib/jdk1.2| or 
 \verb|/usr/lib/jdk1.2| and on Windows this might be \verb|c:\jdk1.2|, 
 you can find all the documentation in the subdirectory
-\verb|docs|. It is of course best viewed using a web browser
+\verb|docs|. It is best viewed using a web browser
 starting with the page \verb|jdk1.2/docs/index.html| 
-(see also figure \ref{fig:JDKFiles}).
+(see also Figure \ref{fig:JDKFiles}).
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=.6\textwidth]{Figures/JDKDocumentation.eps}
-    \caption{The file structure of the JDK distribution, both the binary and the documentation package.}
+    \caption{The file structure of the JDK distribution, 
+      both the binary and the documentation package.}
     \label{fig:JDKFiles}
   \end{center}
 \end{figure}
@@ -1038,14 +1127,16 @@ features in an application.
 
 \subsection{Applet}
 An applet is a Java class, which can be loaded into a virtual machine
-and can then be executed their. For example a web browser could load
+and can then be executed by it. 
+For example a web browser could load
 the applet, check if it is an applet allowed to be started on the
 machine the browser is running on and then ``starts the applet''.
 
 This is basically the most confusing part of an applet: What are the
 instructions, which get executed when the browser ``starts the applet''?
 To that purpose go ahead and write a simple program 
-(see e.g. \verb|ShowTrace.java|), which only 
+(see the program \verb|ShowTrace.java| in the appendix \ref{sec:ShowTracePrg}),
+ which only 
 prints out the place where the execution just takes place and ``start''
 the Java class on the command line as an application, in the appletviewer
 as an applet and in a browser as an applet. What you will get is shown
@@ -1055,7 +1146,7 @@ in figure \ref{fig:LineOfExecution}.
     \leavevmode
     \includegraphics[width=\textwidth]{Figures/LineOfExecution.eps}
     \caption{The line of execution in an application and an applet in
-        the appletviewer or the Netscape Navigator V4.08. For the application
+        the appletviewer or the Netscape Navigator 4.08. For the application
         only the part above the first line and below the second line are
         actually the parts, which can not be avoided. The remaining
         part is just provided to show you how to write an application,
@@ -1069,9 +1160,10 @@ So for the applets you have to write (implement) at least the
 not supply an  \verb|init()| method when we wrote our first 
 HelloWorld applet? The answer is we did, but we did not write it explicitly,
 because we left it empty. The trick was that for an applet there is
-always another thread (see \ref{sec:ParallelJava} for an introduction to threads)
+always another thread (see 
+Chapter \ref{sec:ParallelJava} for an introduction to threads)
 running, which takes care of (re)painting the windows (panels) used by the applet.
-This thread is a method of the AWT package (see \ref{sec:AWTIntro}) and
+This thread is a method of the AWT package (see Chapter \ref{sec:AWTIntro}) and
 the method is the \verb|paint()| method. And in the    HelloWorld applet
 we have overriden the \verb|paint()| method to display our message.
 
@@ -1084,7 +1176,7 @@ to do so. This sounds very complicated in the first place, but
 it will be resolved later on.
 
 There is another issue to be addressed here in the context of applets.
-So far we have always written a seperate HTML file to use with the
+So far we have always written a separate HTML file to use with the
 appletviewer, which then in turn calls the applet itself. The burden
 of having two files for one applet can be avoided by putting the
 HTML Code at the beginning of the Java class file in a comment. Then
@@ -1109,12 +1201,19 @@ you see the short message.
 
 
 \subsection{Programs as Applets and Applications}
+
+??? GUIs ....
+
 To write a class to be run as an applet and an application
-you can use figure \ref{fig:LineOfExecution} to get the correct order
-of the methods, which get called in either case. As an example, 
-we have used the following philosophy in later chapters for the 
+you can see in Figure \ref{fig:LineOfExecution} the correct order
+of the methods, which get called in both cases. As an example, 
+we have used the following template for the 
 bigger programs
-to have them run as an applet as well as a standalone application:
+to have them run as an applet as well as a standalone application.
+We have to add code to the \verb|run()| and the \verb|Setup()| methods
+to get a useful program. The  \verb|Setup()| method should contain all
+screen setup or preliminary work. In the  \verb|run()| method goes
+the computational intensive part of the program.
 \inputlisting{Listings_Java/TestAppletApplication.java}
 
 
@@ -1127,7 +1226,7 @@ to have them run as an applet as well as a standalone application:
 The standard mathematical functions of Java are declared in the 
 java.lang.Math class, which consists of static constants and methods
 for common mathematical manipulations. 
-It contains sine, cosine, logarithm, exponential,
+It contains the functions sine, cosine, logarithm, exponential,
 square root and much more. Do not confuse this class with the
 java.Math class, which was introduced to Java 1.1 for arbitrary
 precision arithmetic -- we are not discussing this, read the
@@ -1145,17 +1244,19 @@ Fdlibm is available online from
 \href{http://www.hensa.ac.uk/ftp/mirrors/netlib/}%
            {http://www.hensa.ac.uk/ftp/mirrors/netlib/}}.
 \verb|fdlibm| is a C library for machines supporting the IEEE 754 floating
-point artihmetic initially developed by SUN.
+point artihmetic initially developed by SUN. Meanwhile Visual Numerics has developed
+a package implementing the full \verb|fdlibm| library in pure Java. Therefore
+Java need no longer depend on a local implemntation of the 
+\verb|fdlibm| library. This makes it much easier to implement Java for 
+more exotic computers or machines. 
 
 Some useful constant in the \verb|Math| class  are \verb|Math.Pi|
 ($\pi$) and \verb|Math.E| ($e$).
-In table \ref{tab:math_table} 
+In Table \ref{tab:math_table} 
 we have summarized some of the most useful methods in the \verb|Math| class. 
 Note, that all angles are in radians and all parameters and
-return values are double (unless otherwise stated). 
+return values are of type double unless otherwise stated. 
 \begin{table}[htbp]
-\caption{Some useful mathenatical fuinctions defined in the
-  java.lang.Math class.}
   \begin{center}
     \leavevmode
     \begin{tabular}{ll}
@@ -1180,7 +1281,8 @@ return values are double (unless otherwise stated).
       toRadians(angle) & converts degrees to radians\\
       toDegrees(rad) & converts radians to degrees \
     \end{tabular}
-    \caption{Overview of the mathematical methods available in Java 1.1 in the java.lang.Math class.}
+    \caption{Overview of the mathematical 
+      methods available in Java 1.1 in the java.lang.Math class.}
     \label{tab:math_table}
   \end{center}
 \end{table}
@@ -1189,46 +1291,47 @@ These are all class methods, so they can be called from anywhere.
 Here are some examples:
 \begin{sverbatim}
  a=Math.exp(2.1);        // e to the 2.1
- distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));  // Euclidean distance
+ distance = Math.sqrt(
+            Math.pow(x,2)+Math.pow(y,2));  // Euclidean distance
 \end{sverbatim} 
-By the way, there is no easy import statement to avoid the Math in front
-of the methods, you always have to use it, although it seems 
+There is no import statement to avoid the Math in front
+of the methods, we always have to use it, although it seems 
 tedious.
 
 Here is a test program for the three rounding methods available:
-\inputlisting{Listings_Java/Test_Roundings.java}
-And the output is:
-\input{Listings_Java/Test_Roundings.output}
+\lstinputlisting[basicstyle=\scriptsize]{Listings_Java/Test_Roundings.java}
+and the output of this program is:
+\lstinputlisting[basicstyle=\footnotesize]{Listings_Java/Test_Roundings.output}
 
 For most of our simulations, we will need routines (methods) to
 calculate the mean, variance or other statistical measures of
 a times series for example. Unfortunately
-these (easy and) important methods are not part of the
-standard Java language. But Visual Numerics, a well known software company,
-has proposed a standard class for statistical functions, which are
-essential for all statistical problems. They also supplied a new class
-for complex numbers. This library is called the Java Numerical Library
-(JNL) and is free. It is also proposed to become a standard in the
-next Java language specification.
+these easy and important methods are not part of the
+standard Java language. Solutions to overcome this problem 
+are presented in the next sections.
 
-There are also other classes, which extend the standard Java language
-for matrix computations (BLAS) and much more (e.g. the JNT). Some of 
-them will be discussed in greater detail now.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical Libraries - The JNL}
+\index{JNL}
 The JNL (Java Numerical Library) was designed and implemented by 
-Visual Numerics. It is a free library to supply additional 
+Visual Numerics\footnote{A well known software company, selling the IMSL
+math library, PVWave a sophisticated plotting program and much more. 
+\href{http://www.vni.com/}{Visual Numerics Homepage}}.
+It is a free library, which supplies additional 
 mathematical functions, complex numbers, statistical operations 
 and some basic vector and matrix operations for scientists (no
 sparse matrix support), which
 are missing in the Java standard. They have proposed it as a
 standard for the next version of Java.
 
-The algorithms used are taken from the LinPack library, which
+The algorithms used for the JNL are based on the LinPack library\footnote{See for
+example at the \href{http://www.netlib.org/}{NetLib repository}.}, which
 are a collection of programs for linear algebra in C and Fortran.
+
 A short list of some of the functions included in the JNL is
-given in table \ref{tab:JNL}.
+given in Table \ref{tab:JNL}.
+\index{JNL!list of functions}
 \begin{sidewaystable}[htbp]
     \begin{tabular}{>{\large}c||>{\scriptsize}l|l}
       \textbf{Class}  & \normalsize\textbf{example methods} & \textbf{purpose} \\\hline\hline
@@ -1248,7 +1351,10 @@ given in table \ref{tab:JNL}.
       DoubleMatrix &  & using matrix operations on 2D arrays of type double\\
       ComplexMatrix & & the same for complex matrices \\\hline 
     \end{tabular}
-    \caption{A (very) short list of JNL classes supplied with JNL 1.0 revision f for the new JDK 1.2. There are two 1.0f versions around, one which works with both Java 1.1 and Java 2 and one which has some trouble with Java 2.}
+    \caption{A short list of JNL classes supplied with JNL 1.0 revision f %
+      for the new JDK 1.2. There are two 1.0f versions around, one which %
+      works with both Java 1.1 and Java 2 and one which has some trouble %
+      with Java 2.}
     \label{tab:JNL}
 \end{sidewaystable}
 Eight more classes (four for double and four for complex) for
@@ -1260,6 +1366,8 @@ For a complete list of supplied functions, please consult the online
 documentation coming with the JNL package.
 
 \paragraph{Complex numbers}
+\index{JNL!complex numbers}
+\index{complex numbers}
 This part of the JNL deserves a seperate discussion. We will not need
 complex numbers in most parts of the book, but for example when
 we discuss quantum mechanical problems, we have to come back to
@@ -1303,7 +1411,7 @@ easily by using
   System.out.println(" Imaginary part: "+c1.im);
 \end{sverbatim}
 
-An overview of the most important methods is given in table 
+An overview of the most important methods is given in Table 
 \ref{tab:JNLComplex}.
 \begin{table}[htbp]
   \begin{center}
@@ -1345,7 +1453,7 @@ The \verb|JSci| package is split into a
 \verb|chemistry|, a \verb|physics| and a \verb|maths| subclass.
 Then there are many convenience classes and some interesting other classes.
 The best way to learn the package is to study the API documentation. 
-In table \ref{tab:JSciClasses} we give a short overview of interesting 
+In Table \ref{tab:JSciClasses} we give a short overview of interesting 
 classes and methods in the JavaSci package used throughout the book.
 \begin{sidewaystable}[htbp]
   \begin{center} \small
@@ -1404,7 +1512,7 @@ classes and methods in the JavaSci package used throughout the book.
 \verb|JSci.awt.ScatterGraph()| & A scatterGraph AWT component. \\\hline
 \verb|JSci.swing| & The same for the swing package.\\
      \end{tabular}
-    \caption{Some of the interesting classes and methods in 
+    \caption{Some of the interesting classes and methods in %
       the JSci/JavaSci package.}
     \label{tab:JSciClasses}
   \end{center}
@@ -1428,29 +1536,18 @@ known to physicists today. Then you can use the \verb|JSci.physics.quantum|
 class to do quantum mechanics caluclations easily or you could use
 the \verb|JSci.physics.relativity| class to do relativistic calculations.
 
-Because it is the only (free) way of producing 3D graphs yet, we have 
-given an example in figure \ref{fig:JSci3DGraph}. 
-\begin{figure}[htbp]
-  \begin{center}
-    \includegraphics[angle=90,width=\textwidth]{Figures/JSciGraph3D.eps}
-    \caption{An example of the 3D plotting capabilities of JSci.}
-    \label{fig:JSci3DGraph}
-  \end{center}
-\end{figure}
-You see it is actually not what you expected, but it is a beginning.
-You can also use the mouse to rotate the 3D graph 
-in the right half of the window. The graph on the left is a contour plot.
-\loadlisting{JSci3DGraph.java}{Listings_Java/JSci3DGraph.java}
-
 Since version 0.82 there is the IBM MathML package included to write 
 XML/MathML files from Java. That is the reason why now there is a
 limitation in the use of the whole package. So go ahead and read the license
-agreement in the online documentation.
+agreement in the online documentation or at 
+\href{http://http://fourier.dur.ac.uk:8000/~dma3mjh/jsci/index.html}%
+{the homepage ofJSci}.
 
-In our opinion, you should use the JNL and ptplot if possible. Only for
-methods not contained in these two packages you should use the
-JSci package like FFT or solving ODEs for example. JSci is still in
-the development phase and it takes some more time to be really
+In our opinion, using the JNL is preferred. Only for
+methods not contained in this package use the
+JSci package like for FFTs or for solving ODEs for example. 
+JSci is still in
+the development stage and it takes some more time to be 
 the package of choice for most of the tasks.   
 
 \subsection{JNT, Lapack for Java - JamPack and Jama}
@@ -1461,12 +1558,24 @@ the package of choice for most of the tasks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Debugging in Java}
+\index{debugging}
 ????
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Advanced Java Features}
+In this chapter we shortly discuss and present some advanced
+features, which are of interest to some scientists, but are not
+essential for finishing this book. But nevertheless some
+topics deserve to be mentioned for self study.
+Still we are missing Java features such as graphical interfaces,
+plotting, parallel execution, file reading and writing and more. 
+These are the contents of the rest of the book and are always
+contained in the context of a new simulation technique. 
 
-\subsection{Including Native Code (C and C++)}
+\subsubsection{Including Native Code (C and C++)}
+\index{native code in Java}
+\index{C in Java|see{native code in Jav}}
+\index{C++ in Java|see{native code in Jav}}
 To include native code into a Java program, there is the so-called
 JNI (Java Native Interface). This allows for inclusion of native
 C or C++ codes. To refer to such a method, you just use
@@ -1481,29 +1590,33 @@ Fortran. If you want to include Fortran code you have to use
 a C wrapper code and then use the JNI with that C wrapper code
 for inclusion to Java.
 
-\subsection{Vectors}
+\subsubsection{Vectors}
 For a scientists there is a confusing class called \verb|java.util.Vectors|, 
 which has nothing to do with mathematical vectors. This class realizes
 an array of objects, which can have a variable length. For example
 you can store names of persons in an vector and add or delete them as
-you like without taking care of the number and the access. For details
+you like without taking care of the number and the access. 
+
+An interesting usage for this class is an array, which does not have
+a fixed size. Using the Vector class you can easily build a class
+handling a flexible size array. For details of the class please
 refer to the API documentation.
 
-\subsection{Stack}
+\subsubsection{Stack}
 There is also a class \verb|java.util.Stack|, which utilizes as the
 name suggests a stack. A stack is a kind of pile, where you can put
 things on it and take them away, but only the last one put in. It is
 for example used for many operating system tasks on a lower level.
 Again take a look at the API documentation for details.
 
-\subsection{Hashtable}
+\subsubsection{Hashtable}
 Another often occuring class of the \verb|java.util| package is the
 hashtable class. It realizes a table with associations between so-called
 keys and values, which has to be a one-to-one correspondence. So for
 example you can store the name of a person and its age in a hashtable.
 
 
-\subsection{Serialization}
+\subsubsection{Serialization}
 One problem of objects is how to ``save'' objects to disk for example.
 Or sometimes you want to submit an object to another applet or
 application using RMI accross networks, or you might want to
@@ -1522,7 +1635,7 @@ class) to be serializable you have to implement the serializable interface.
 We do not need this in the context of this book, but it is
 important to know what is behind this.  
 
-\subsection{Beans}
+\subsubsection{Beans}
 \label{sec:Beans}
 Beans are classes, which conform to certain naming rules
 for the methods contained in a class. A bean gets a graphical
@@ -1560,12 +1673,34 @@ Java from SUN. A good starting point. \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
-Pi Calculation:
-\lstinputlisting{Listings_Java/Pi_Calc_plain.java}
-\lstinputlisting{Listings_Java/Pi_Calc.java}
 
-radioactive decay, e calc.
-Moment calulation
+\begin{Ex}
+\label{PiCalculation}
+\textbf{Computation of Pi using Hit and Miss Algorithm}
+
+Write a Java program to estimate the number $\pi=3.1415\ldots$ using
+the following algorithm:
+\begin{itemize}
+\item Choose two random numbers $r_1$ and $r_2$ between $0$ and $1$.
+  The two random numbers define a point in a 2D square of length $1$.
+\item Check if the distance of the random point is inside a circle
+  of radius $1$. e.g. check if $r_1^2+r_2^2 < 1$. Count these points
+  in a variable called for example $inside$.
+\item Repeat this until you have created and checkd $N$ points.
+\item Compute $4*inside/N$, which is an approximation of $\pi$.
+\end{itemize}
+This is the algorithm for the ``Hit and Miss'' algorithm, which we will
+discuss in a later chapter in detail.
+
+Run this program with several different values of $N$ and plot the
+accuracy, the absolute difference between the exact $\pi$ and
+the estimation, versus the number of random points used.
+\end{Ex}
+
+\begin{Ex}
+\label{ECalculation}
+\textbf{Compute Euler Constant e using a Darts Board}
+\end{Ex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
