@@ -9,20 +9,6 @@
 \section{Programming in Java}
 \label{sec:Programming}
 
-
-\subsection{General Considerations}
-\label{sec:General_considerations}
-This book is about stochastic simulation methods and their applications to
-physical systems. The material is presented at an introductory level. We do 
-not assume any prior knowledge on probability theory or on the theory of 
-stochastic processes. We assume only the material known from the introductory 
-courses in theoretical physics. The style of the presentation will be as 
-informal as possible and as precise as necessary.
-
-
-
-\subsection{Programming Languages -- Why Java ?}
-\label{sec:Programming_languages}
 It is clear that it is not possible to teach simulation methods without 
 performing some numerical experiments in the classroom and that it is 
 impossible for the students to learn stochastic simulation methods without 
@@ -30,23 +16,78 @@ implementing the algorithms. Therefore, the theory and the corresponding
 algorithms will be presented in a highly interconnected, and, we 
 hope, organic way.
 
+
+
+\subsection{Reasons for Choosing Java ?}
+\label{sec:Programming_languages}
+
 In order to stick to this idea it was necessary to choose a programming 
-language. The obvious criteria for taking such a decision are
+language or a tool, which makes realizing a simulation algorithm
+easy. The obvious criteria for taking such a decision are
 \cite[]{GARCIA}
-\begin{enumerate}
-\item Efficiency,
-\item Understandability,
-\item Good graphics,
-\item Standard/Portable,
-\item Cost,
-\item Parallelizability.
-\end{enumerate}
-The first criterion is of course very important because already simple 
-stochastic algorithms require a considerable amount of CPU time.
-A secondary aim of the course is to make the student acquainted with a 
+\begin{description}
+\item[Efficiency] How much work has to be done to realize a given
+        simulation algorithm on a computer and gather results, maybe
+        visualize them ? \newline 
+        What tools are available to aid in this process ? \newline
+        What has to be done to use standard mathematical capabilities
+        like 
+\begin{itemize}
+\item Statistics (mean, std. deviation, probability distributions, etc.)
+\item Transformations like FFTs, Filters, etc.
+\item Approxmiations (nonlinear equations, etc.)
+\item Parameter Estimations like least square method, etc.
+\item Interpolation and Integration of functions
+\item Solving ODEs and PDEs
+\item using matrices and arrays
+\item random number generation for different PDFs
+\item computing with complex numbers
+\end{itemize}
+\item[Understandability] Structured or object oriented language ? \newline
+        Bad programming style possible or not ? \newline
+        Documentation freely available ? \newline
+        Is it possible to generate documentation directly from the
+        source code ?
+\item[Graphical Capabilities] How to visualize data (Plots, 2D, 3D, 
+        line graphs, log-log plots, bar graphs, surface plots, vector 
+        plots, etc.) \newline
+        How difficult is it to realize GUIs ? (needed to watch reactions
+        of the system by changing environmental conditions / parameters.)
+        \newline
+        Is it possible to produce EPS graphics output for later use
+        in documentations, papers, etc. ?
+\item[Standard / Portability] Does the produced computer simulation scale
+        from a small computer, maybe a PC, up to large high performance
+        massivley parallel computers ? \newline
+        Independence of the underlying operating system, computer hardware
+        and even the physical place of the computer. 
+\item[Cost / License] What has to be paid to get a development environment
+        for a student ? \newline
+        Is the software / tools under the GNU license ? \newline
+        Is the produced code / simulation reusable (e.g. a clean 
+        object oriented aproach is usually better reusable than a structured
+        approach.) ?
+\item[Performance / Parallelizability] How long does the simulation run
+        on a given computer ? \newline
+        How large (=resources) 
+        does the computer have to be to get reliable results ?
+\item[Reproducability] Is the language / tool usable for everybody to
+        reproduce / confirm the results ? \newline
+        Are all tools / programs open source, so that everybody can
+        take a look inside and confirm the correctness of the 
+        computations ? \newline
+        Tests must be applied and results are verified.
+\end{description}
+
+An aim of the course is to make the student acquainted with a 
 programming language ``in action'' so they should learn something 
 about a ``good 
-programming style'' for real-life problems. Visualization of the results 
+programming style'' for real-life problems. Writing clean software 
+efficiently is important for a physicist to 
+concentrate on physically relevant topics and to produce reproducable 
+results, which can be verified later by anyone in the world.
+
+Visualization of the results 
 obtained allows to understand more easily what is going on physically. So 
 the interface between program and visualization tool/graphical output should
 be comfortable. Last but not least the availability of the program should be
@@ -56,28 +97,77 @@ should be portable on PCs with Windows or Linux operating systems, on Macintosh
 and on workstations from the UNIX world (IBM AIX, Solaris, SGI Irix, ...).
 Since almost all universities do have a high--performance parallel computer 
 the language should also allow to demonstrate high--performance parallel 
-algorithms.
+algorithms and designs.
 
 Because of our background of convinced Fortran users we considered the 
-following alternatives: our beloved Fortran, MATLAB, a language which 
-is popular in 
-the engineering and applied mathematics communities, and Java, the 
-``Wunderkind'' of software developers and of the Internet community. We have 
-not considered C, C++ for the simple reason that we never felt the necessity 
-to learn them.
+following alternatives: 
+\begin{itemize}
+\item programming languages 
+ \begin{itemize}
+  \item Fortran
+  \item C
+  \item C++
+  \item Java
+ \end{itemize}
+\item modern script languages
+ \begin{itemize}
+   \item Python
+ \end{itemize}
+\item higher level mathematical tools
+ \begin{itemize}
+   \item Matlab
+   \item Octave
+ \end{itemize}
+\item symbolic mathematical packages
+ \begin{itemize}
+   \item Maple
+   \item Mathematica
+ \end{itemize}
+\end{itemize}
 
 All the languages considered  in some sense satisfy the above criteria. All
 are more  or less portable on different platforms (at different expenses), all
 allow the use of good visualization tools (at different prices), and, of 
-course, all are clean. But not all are equally powerful. 
+course, all are mostly clean. But not all are equally powerful. 
 
-We checked the power (the efficiency) of the languages considered by the 
+To get a better impression on how the different possibilities fit into 
+our requirements, we have put together a table, which shows the
+ratings for the different requirements for each of the considered 
+solutions.
+
+\begin{landscape}
+\begin{table}[htbp]
+\begin{tabular}{|c|p{1cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+Language / Tool & Avg. Points &
+Efficiency & Under\-standa\-bility & Graphical Capabilities &
+Standard / Portability & Cost / License & Performance / Parallelizability &
+Reproducability \\\hline
+C          & 4.9 & 6 & 3 & 3 & 4 & 7 & 9 & 2 \\\hline
+C++        & 5.6 & 7 & 5 & 3 & 5 & 7 & 7 & 5 \\\hline
+Fortran 95 & 5 & 6 & 4 & 1 & 7 & 3 & 9 & 5 \\\hline\hline
+Java       & 8.0 & 8 & 8 & 7 & 8 & 9 & 7 & 9 \\\hline
+Python 2.2 & 7.7 & 8 & 7 & 6 & 8 & 9 & 8 & 8 \\\hline\hline
+Matlab 5.2          & 5.1 & 8 & 7 & 9 & 3 & 1 & 4 & 4 \\\hline
+Octave 2.0.16       & 5.7 & 8 & 7 & 5 & 3 & 9 & 4 & 4 \\\hline\hline
+Maple / Mathematica & 3.6 & 5 & 3 & 8 & 3 & 1 & 2 & 3 \\\hline
+\end{tabular}
+
+\caption{On a scale from 1 to 10, where 10 is perfect and 1 is very bad.
+The results are due to the underlying question: How does the tool / language
+perform for realizing a stochastic simulation algorithm on a computer.}
+\end{table}
+\end{landscape}
+
+Because some of the later introduced simulations are very time consuming,
+we also checked the performance of the solutions considered by the 
 following benchmark, which represent the prototype of a stochastic simulation. 
 We generated 100 trajectories of a typical one-step stochastic process
-(see Chapter \ref{sec:OneStepProcesses}
+(see Chapter \ref{sec:OneStepProcesses})
 and compared the CPU times obtained by different languages. The result
-of the benchmarks are summarized in Table \ref{tab:Performance}. The listings
-of the corresponding programs are presented in the appendix.
+of the benchmarks are summarized in the following table \ref{tab:Performance}. 
+The listings
+of the corresponding programs are listed in the appendix.
 
 \begin{table}[htbp]
   \begin{center}
@@ -129,24 +219,29 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
 \end{table}
 
 
-Of course, in the above test we have not optimized the algorithm to the 
-different platforms. Nevertheless, the table clearly shows that MATLAB is 
-very slow. Even the compiled version of MATLAB is by a factor of 
-about 100 slower
-compared to the Fortran code. This is a good reason to disregard MATLAB!
+Of course, in the above test we have neither optimized the algorithm nor
+the implementation to the 
+different platforms. Nevertheless, the table clearly shows that 
+symbolic Math packages and higher level math languages are 
+very slow. Even the compiled version of MATLAB is slower by a factor of 
+about 100 
+compared to the Fortran code. This is a good reason to disregard 
+these solutions for our purposes.
 
-Now we have to decide between Java and Fortran. As can be read off from
-the Table \ref{tab:Performance} the criteria of numerical efficiency
-clearly speaks for Fortran. The argument in favour of 
-Java which compensates the slightly slower performance -- Today!, in future 
-this might be different. -- is its portability and the free availability of the
-compiler and of the visualization tools. Java runs on every platform and 
-it is available at no cost. We do not even have to change any line
+Now we have to decide between the programming languages and the scripting 
+languages. The argument in favour of 
+Java which compensates the slightly slower performance (today!, in future 
+this might be different) is its portability and the free availability of the
+compiler, the GUI capabilites coming with the standard language package
+and of the visualization tools. Java runs on every platform and 
+it is available at no cost. 
+
+With Java, we do not even have to change any line
 of code to get a faster performance, because we just have to get a faster
-Just in Time compiler or the new HotSpot technology, which improve
+Just in Time compiler or a JIT with the HotSpot technology, which improves
 performance by factors of 2 to 10 or even more. This will free the
 programmer from time consuming and difficult optimizaions. 
-There is for example a compiler called High Performance Java by IBM. It generates
+There is also for example a compiler called High Performance Java by IBM. It generates
 much faster code on IBM workstation compared to the JDK from SUN and the 
 speed is already comparable to C/C++. 
 For a comparison with this compiler see \cite[]{HPJ}.
@@ -192,7 +287,7 @@ features known from C++. But you can use interfaces to simulate
 multiple inheritance and argument overloading is also possible.
 One major simplification is that Java does not have pointers!
 In Java memory is taken care of automatically, so the programmer is not responsible 
-for the management  of memory space. In particular, Java implements an 
+for the memory management. In particular, Java implements an 
 automatic  garbage collector.
 
 Java is an object--oriented language and you do not have to think in a 
@@ -309,6 +404,34 @@ use a JVM supplied by a different device (e.g. a computer or browser)
 available in the network. The whole system is based on Java code and
 the RMI protocol supplied by Java.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SUNs Java Naming Scheme}
+\label{sec:NamingScheme}
+SUN introduced a new naming scheme for the Java versions in 1999. So there is a 
+version number referencing the language version and a version number
+referencing the API kit coming with the JDKs released by SUN.
+They call all the Java Language specifications refering to the JDK versions
+1.x.x as Java1 and the JDK versions 1.2.x up to 1.4.x are called Java2.
+But sometimes people refer to the JDK version directly instead of
+refering the Java language version, which sometimes makes it difficult to
+follow. So we adopt the SUN language and will explicitly state, if we
+refer to the JDK version or the Java Language version 1 or 2
+(see also table \ref{tab:JavaNamingScheme}).
+\begin{table}[htbp]
+  \begin{center}
+    \leavevmode
+    \begin{tabular}{llp{3cm}|c|c}
+      Java Language Version & SUN JDK Version & Approx. Release Dates \\\hline  \hline
+	Java 1 & JDK 1.0 & ??? \\\hline 
+	       & JDK 1.1 & ??? \\\hline 
+	       & JDK 1.1.8 & ??? \\\hline 
+	Java 2 & JDK 1.2.2 & ??? \\\hline 
+	       & JDK 1.3.1 & ??? \\\hline 
+	       & JDK 1.4 & February 2002 \\\hline 
+    \end{tabular}
+  \label{tab:JavaNamingScheme}
+  \end{center}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Tools for Writing and Using Java}
@@ -341,9 +464,6 @@ Internet Explorer.
   2.1 as of the time of writing also available from the address above. These are
   versions supporting Java 1.1.7 and Swing/JFC. The new version MRJ 2.2
         is just getting available.
-\item[GuavaC] \index{GuavaC} OLD WWW ADDRESS !!
-  \href{http://www.cs.berkeley.edu/~engberg/guavac/}{Guavac} 
-  is a free Java compiler written in C++. 
 \item[Jikes] \index{Jikes} 
   Jikes is a Java compiler developed at IBM fully conforming
   to the Java specifications. It is free and much faster than most
@@ -355,7 +475,8 @@ Internet Explorer.
   already almost fully Java 1.1 compatible and it includes some of the
   Java 2 features. It runs under Windows and Unix systems. There is also
   a commercial version of Kaffe sold by 
-  \href{http://www.transvirtual.com}{transvirtual}.
+  \href{http://www.transvirtual.com}{transvirtual}. This project unfortunately
+  has not seen significant progress in the last year.
 \item[GCJ] \index{GCJ} This is the 
   \href{http://sourceware.cygnus.com/java/gcj.html}{GNU compiler for Java}. 
   It can compile java
@@ -364,6 +485,8 @@ Internet Explorer.
   files on the platform running GCJ. GCJ is actually a front end
   to the free famous GCC/EGCS compiler suite. To compile class files
   to object code you also need the libgcj runtime library.
+ ??? Version 3.0 ???
+
 \item[CJ/GJ] \index{CJ} \index{GJ}
   \href{http://wwwipd.ira.uka.de/~pizza/gj/}{GJ}
   is an extension to the Java language that supports
@@ -373,6 +496,9 @@ Internet Explorer.
   The idea is to translate the Java source code including
   the generic types like the primitive complex type to pure Java 1.1
   or Java 1.2 code and then compile it with any Java compiler available.
+  This approach is considered by SUN to become a standard approach
+  for handling generic data types like complex numbers 
+  in the JDK versions 1.4.x or 1.5.
 \item[Jolt] The \href{http://www.redhat.com/}
   {JOLT - Java Open Language Toolkit} - Project. Tries to
   compose a full freely available Java developement kit. Should
@@ -388,11 +514,12 @@ Internet Explorer.
 \item[mpEdit] \index{mpEdit} A freely available editor written completely in Java and
   therefore available on all platforms.\\ 
   It has all necessary features to write Java/C or C++ programs.
-\item[JDE] \index{JDE} JDE (Java Development Environment) is an Emacs/Xemacs 
-  extension
+\item[JDEE] \index{JDE} JDEE (Java Development Environment Extension) 
+  is an Emacs/Xemacs extension
   written in Elisp. \\
   It enables you to write Java code in a shorter time, if you are
-  using the emacs or xemacs editor. 
+  using the emacs or xemacs editor. It is almost a complete environment for
+  developing Java programs with emacs.
 \item[Netscape Navigator/Communicator] \index{Netscape}
   A web browser like the Internet 
   Explorer, but written by Netscape inc. and the source code is
@@ -402,32 +529,29 @@ Internet Explorer.
   Be aware that not everything is supported by all browsers and
   sometimes you get different results or the browser crashes,
   although the program did run with the appletviewer.
-\item[Java Workshop] \index{Java Workshop}A commercial Integrated 
-    Development Environment (IDE)        
-  for Java by SUN. Free trial versions
-  for universities and educational institutions are available.
-        Unfortunately it produces not very readable code for later
-        editing.  
-\item[Freebuilder] \index{Freebuilder}A freely available IDE for Java. \\
-  Already in a usable state, although it is officially in alpha stage.
 \item[Netbeans]\index{Netbeans} A commercial IDE for Java written in Java \\
   This is an object oriented IDE for Java. It is free for academic and 
-  personal use, but not for commercial use.
+  personal use, but not for commercial use. It has been bought by SUN
+  in 2000.
 \item[Simplicity for Java] \index{Simplicity for Java}
   A commercial IDE for Java written in  Java\\
   A very nice and easy to use IDE for Java. It is very easy to get started
   with it. It can even write event handling code for your 
   graphical user interfaces (GUI). Free trial versions are available
   from the \href{http://www.datarepresentations.com/}{homepage for Simplicity}.
-\item[TOBA] \index{TOBA} A Java to C Compiler for Linux\\
-  It converts Java source code to C and compiles the C code to get better
-  performance. It runs on Linux, Solaris and IRIX and supports Java 1.1.
-  It seems to be no longer developed (August 99).
-\item[Fortran to Java] \index{Fortran to Java} A Fortran 77 to Java Compiler. \\
+\item[Fortran to Java / Harissa] \index{Fortran to Java} A Fortran 77 to Java Compiler. \\
   You can convert very easily Fortran 77 programs to Java. This is a part of the
   ``Java Access to Numerical Libraries'' project at the University of 
   Tennesee in the US. F2j was already capable of translating the
   Lapack routines to Java.
+\item[Ant (Jakrata Project)] Ant is a replacement for make for Java programs.
+  It is much easier to use and to set up for Java programs than make.
+  It is used for the ``make'' process of the project you develop, because many
+  projects not only consist of one or two files, but you have to take care
+  of many files and directories.
+\item[Lava Rocks] This is a ``free'' tool to resemble the behaviour of the
+  well known C/C++ printf/scanf functions in Java. Sometimes it can be handy
+  to use it.
 \end{description}
 
 \subsection{Java Packages:}
@@ -453,8 +577,9 @@ presented in this book, you have to install these packages.
         use it extensively for all plotting in 2D. It has a nice
         zoom feature and it allows for the most important plot styles
         needed.
+ 	Sinsce 3.1, now 5.1 ????
 \item[JNL] \index{JNL} \index{Java Numerical Library}
-  The Java Numerical Library is written by Visual Numerics and
+  The Java Numerical Library V1.0 is written by Visual Numerics and
         distributed freely\footnote{But please consult the License Agreement
         coming with the software.}. It is also submitted to the standardizing
         committee for proof to include it in the next release of the
@@ -466,6 +591,8 @@ presented in this book, you have to install these packages.
         variance, linear least square fit, etc.). It also provides some
         basic functionality for linear algebra, like matrix decomposition,
         determinant, trace, solving linear systems, etc.
+        It is actually also part of the large IMSL Library for Java,
+	called JMSL.
 \item[JSci] \index{JSci} A freely available package, which contains many 
   physics constants, mathematical operations, etc. \\
   It includes methods for fast Fourier transformations, ordinary differential 
@@ -476,10 +603,6 @@ presented in this book, you have to install these packages.
   Swing is the replacement for the AWT. It is included in the
   Java 2 standard and therefore the JDK 1.2. For Java 1.1 you can get
   a seperate package, which works with the JDK 1.1. 
-\item[Biss-AWT] \index{Biss-AWT} 
-  This package is meant to be a replacement for the AWT and
-  can be considered the free alternative to the Swing library. We are not 
-  using it in this book.
 \end{description}
 
 
@@ -496,7 +619,7 @@ machine (interpreter, called JVM) to execute the byte-code.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics[width=\textwidth]{Figures/Java_Overview.eps}
+    \includegraphics[width=\textwidth]{../Figures/Java_Overview.eps}
     \caption{Overview of the Java language execution model.}
     \label{fig:Java_Overview}
   \end{center}
@@ -591,7 +714,7 @@ an extension to the Java compiler, can even handle primitive complex types.
 Now let us start with the traditional ``Hello World'' program written
 in Java. Type the following code using your favourite text editor 
 and save the program in a file called \verb|HelloWorld_Application.java|.
-\inputlisting{Listings_Java/HelloWorld_Application.java}
+\inputlisting{../Listings_Java/HelloWorld_Application.java}
 
 If we use the JDK 1.1 or 1.2 under Windows or Unix, we can execute
 the above example by typing on the command line:
@@ -659,7 +782,7 @@ mark-ups, which tell the browser what applet to load and
 where to find the applet (see figure \ref{fig:HTMLOverview}). 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/HTMLOverview.eps}
+    \includegraphics[width=\textwidth]{../Figures/HTMLOverview.eps}
     \caption{An HTML file gets loaded into the browser. The browser itself formats the text and if it finds an applet mark, it starts the applet.}
     \label{fig:HTMLOverview}
   \end{center}
@@ -683,7 +806,7 @@ applets.
 
 
 The ``Hello World'' example written as an applet takes the following form:
-\inputlisting{Listings_Java/HelloWorld_Applet.java}
+\inputlisting{../Listings_Java/HelloWorld_Applet.java}
 
 Applets have to be derived from the applet class
 \verb|java.applet.Applet|, which include the principal facilities of
@@ -701,8 +824,8 @@ responsible for the visual part of the applet. It uses a canvas
 (drawing area) with a size defined by the calling HTML file. In our case
 this HTML file could look like:
 %% Listings V0.20 ERROR ?????
-%%\lstinputlisting[language=HTML]{Listings_Java/call_HelloWorld_Applet.html}
-\lstinputlisting{Listings_Java/call_HelloWorld_Applet.html}
+%%\lstinputlisting[language=HTML]{../Listings_Java/call_HelloWorld_Applet.html}
+\lstinputlisting{../Listings_Java/call_HelloWorld_Applet.html}
 The code parameter given in the HTML file defines the name of the applet
 to be executed. Because there is no init() and no start() method in our
 example, the paint() method is called by the browser or appletviewer.
@@ -794,7 +917,7 @@ in figure \ref{fig:javadoc1}.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
- \includegraphics[width=8cm]{Figures/AllNames.eps} 
+ \includegraphics[width=8cm]{../Figures/AllNames.eps} 
     \caption{The output of the \texttt{javadoc} command from the JDK 1.1.}
     \label{fig:javadoc1}
   \end{center}
@@ -805,8 +928,8 @@ class (see figure \ref{fig:javadoc2}).
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-  \includegraphics[width=6cm]{Figures/HelloWorld_Applet.eps}
-  \includegraphics[width=6cm]{Figures/HelloWorld_Application.eps}
+  \includegraphics[width=6cm]{../Figures/HelloWorld_Applet.eps}
+  \includegraphics[width=6cm]{../Figures/HelloWorld_Application.eps}
     \caption{The output of the \texttt{javadoc} command from the JDK 1.1.}
     \label{fig:javadoc2}
   \end{center}
@@ -824,11 +947,11 @@ needed anymore and the structure of the classes is represented
 much better.
 \begin{figure}[htbp]
   \begin{center}
-    \subfigure{\includegraphics[width=.3\textwidth]{Figures/HelloWorldApplet1.eps}}
-\quad \subfigure{\includegraphics[width=.3\textwidth]{Figures/HelloWorldApplet2.eps}}
-\quad \subfigure{\includegraphics[width=.3\textwidth]{Figures/HelloWorldApplet3.eps}}
-    \subfigure{\includegraphics[width=.45\textwidth]{Figures/HelloWorldApplication1.eps}}
-\quad \subfigure{\includegraphics[width=.45\textwidth]{Figures/HelloWorldApplication2.eps}}
+    \subfigure{\includegraphics[width=.3\textwidth]{../Figures/HelloWorldApplet1.eps}}
+\quad \subfigure{\includegraphics[width=.3\textwidth]{../Figures/HelloWorldApplet2.eps}}
+\quad \subfigure{\includegraphics[width=.3\textwidth]{../Figures/HelloWorldApplet3.eps}}
+    \subfigure{\includegraphics[width=.45\textwidth]{../Figures/HelloWorldApplication1.eps}}
+\quad \subfigure{\includegraphics[width=.45\textwidth]{../Figures/HelloWorldApplication2.eps}}
     \caption{The output of the \texttt{javadoc} command from the JDK 1.2.}
     \label{fig:Java2HTMLDoc}
   \end{center}
@@ -1202,7 +1325,7 @@ qualified name to the class, which would be very long sometimes.
 If you would like to
 use the HelloWorld class from above in your programs, you have to change
 the \verb|main()| method to let us say \verb|hello()|. 
-\loadlisting{HelloWorld.java}{Listings_Java/HelloWorld.java}
+\loadlisting{HelloWorld.java}{../Listings_Java/HelloWorld.java}
 Now you could either
 type \verb|de.freiburg.simulation.HelloWorld.hello()| (the fully qualified 
 name) in your program or you can use
@@ -1389,7 +1512,7 @@ As an example demonstrating the use of
 \verb|for| loops we want to write a program to calculate the mean of
 a given number of random numbers. One possible implementation
 could look like this:
-\inputlisting{Listings_Java/DataMean.java}
+\inputlisting{../Listings_Java/DataMean.java}
 
 Here we used the class \verb|java.util.Random| which allows for
 the creation of random numbers. If we don't supply a seed, as is the
@@ -1608,7 +1731,7 @@ the code following \verb|default:|, if there is one. Otherwise,
 An example of the use of the \verb|switch| statement is found in the
 simple program \verb|DiceGame.java| 
 
-\inputlisting{Listings_Java/DiceGame.java}
+\inputlisting{../Listings_Java/DiceGame.java}
 
 Again we want to stress that only an integer, long, char or byte type
 is possible in the switch statement (no double or float). And the
@@ -1713,7 +1836,7 @@ Now let's look at an example using arrays. We have rewritten the program
 \verb|DataMean| above to calculate the average of random 
 numbers by using arrays.
 
-\loadlisting{DataMeanArray.java}{Listings_Java/DataMeanArray.java}
+\loadlisting{DataMeanArray.java}{../Listings_Java/DataMeanArray.java}
 
 Here we first declare a double array called \verb|RandomNumber| and
 create it in Line 13. Then we store the random numbers in the array
@@ -1802,7 +1925,7 @@ That is the reason for the Syntax:
 It means that the array \verb|args| contains the parameters. Each parameter
 is separated with a space in the command line. Here is an example of a 
 program using command line parameters:
-\loadlisting{ParamCommandLine.java}{Listings_Java/ParamCommandLine.java}
+\loadlisting{ParamCommandLine.java}{../Listings_Java/ParamCommandLine.java}
 So if you run the program as \verb|java ParamCommandLine 12 34 abcd t5|
 the output on the screen will be
 \begin{sverbatim}
@@ -1826,13 +1949,13 @@ parameters from the calling HTML file to the Java applet we have to
 proceed in a different way.
 In the HTML file you can
 specify \verb|<PARAM>| attributes.
-\loadlisting{ParamApplet.html}{Listings_Java/ParamApplet.html}
+\loadlisting{ParamApplet.html}{../Listings_Java/ParamApplet.html}
 
 In this case we supply two parameters, called \verb|NumberofPoints| and
 \verb|DisplayText| to the Java applet. The value is given in the string
 behind the keyword \verb|value|. The Java applet to this HTML file
 could look like this:
-\inputlisting{Listings_Java/ParamApplet.java}
+\inputlisting{../Listings_Java/ParamApplet.java}
 
 In the \verb|init()| method we get the parameter \verb|NumberofPoints|
 and convert it to an integer using a wrapper method. The string 
@@ -1850,8 +1973,8 @@ appletviewer or in Netscape should look like this:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{Bibliographies\SimulationBook}
-\bibliography{Bibliographies\V_98,Bibliographies\simulit}
+\bibliographystyle{../Bibliographies/SimulationBook}
+\bibliography{../Bibliographies/SimulationBook,../Bibliographies/simulit}
 
 
 %%% Local Variables: 
