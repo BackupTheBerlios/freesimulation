@@ -7,16 +7,16 @@ import java.util.Random;
 public class Distribution {
   private static int count;    // nextNormal(Random)
   private static double V1,V2; // nextNormal(Random)
-  private int count2;     // nextNormal()
-  private double V21,V22; // nextNormal() 
+  private static int count2;     // nextNormal()
+  private static double V21,V22; // nextNormal() 
   // GGL uniform deviates:
   private static final long c=0, a=16807;            // nextUniform()
   private static final long M=(int)Math.pow(2,31)-1; // nextUniform()
-  long seed=1;  // for each Distribution object we have one
+  static long seed=1;  // for each Distribution object we have one
   // VERY BAD uniform deviates:
   private static final long cBad=0, aBad=65535;       // nextUniformBad()
   private static final long MBad=(int)Math.pow(2,31)-1; // nextUniformBad()
-  long seedBad=1;  // for each Distribution object we have one
+  static long seedBad=1;  // for each Distribution object we have one
     
   /** Constructor: create our own seed, if necessary.
     initialize all seeds, so that the different generators can be
@@ -34,13 +34,13 @@ public class Distribution {
 
     /** Generate uniformly distributed random numbers using
 	congruential method (the so-called GGL of IBM) */
-    public double nextUniform() {
+    public static double nextUniform() {
 	seed = (seed*a+c) % M;
 	return (double)seed/(double)M;
     }
     /** Generate uniformly distributed random numbers using
 	congruential method (with a very bad choice of parameters) */
-    public double nextUniformBad() {
+    public static double nextUniformBad() {
 	seedBad = (seedBad*aBad+cBad) % MBad;
 	return (double)seedBad/(double)MBad;
     }
@@ -66,7 +66,7 @@ public class Distribution {
 	the transformation method and USING one of our own
 	generators. To select one you can choose an integer as:
 	0 = nextUniform(), 99 = nextUniformBad(). */
-    public double nextNormal(int generator) {
+    public static double nextNormal(int generator) {
 	double U1,U2;
 	if (count2 == 0) {
 	    count2=1;
@@ -135,20 +135,20 @@ public class Distribution {
       return hits;
   }
 
-    /** Generate Levy distrubuted randm numbers.
-        Parameter: alpha */
-    public static double nextLevy(Random rand, double alpha){
-      double gamma;
-      double w;
-      double dummy1;
-      double dummy2;
-      gamma= (rand.nextDouble()-0.5)*Math.PI/2.;
-      w = -Math.log(rand.nextDouble());;
-      dummy1= Math.sin(alpha*gamma)/Math.pow(Math.cos(gamma),1./alpha);
-      dummy2= Math.cos((1.-alpha)*gamma)/w;
-      dummy2= Math.pow(dummy2,(1-alpha)/alpha);
-      return dummy1*dummy2;
-  }
+//      /** Generate Levy distrubuted randm numbers.
+//          Parameter: alpha */
+//      public static double nextLevy(Random rand, double alpha){
+//        double gamma;
+//        double w;
+//        double dummy1;
+//        double dummy2;
+//        gamma= (rand.nextDouble()-0.5)*Math.PI/2.;
+//        w = -Math.log(rand.nextDouble());;
+//        dummy1= Math.sin(alpha*gamma)/Math.pow(Math.cos(gamma),1./alpha);
+//        dummy2= Math.cos((1.-alpha)*gamma)/w;
+//        dummy2= Math.pow(dummy2,(1-alpha)/alpha);
+//        return dummy1*dummy2;
+//    }
 
     /** Generate symmetric Levy distributed random numbers using
         transformation method with stability index alpha.
@@ -158,7 +158,7 @@ public class Distribution {
         double uniform,expo;
         
         uniform=rand.nextDouble()*Math.PI-Math.PI/2;
-        expo=nextExponential(rand); // mean 1
+        expo=nextExponential(rand,1); // mean 1
         return Math.sin(alpha*uniform)/Math.pow(Math.cos(uniform),1/alpha)*
             Math.pow(Math.cos((1-alpha)*uniform)/expo,(1-alpha)/alpha);
     }
