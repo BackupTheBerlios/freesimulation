@@ -1,0 +1,272 @@
+\chapter{Nonequilibrium Monte-Carlo Methods}
+
+\section{The Description of Irreversible Processes}
+The statistical mechanics of irreversible processes is concerned with the
+understanding of the following two observed facts \cite{vanKampenFund}:
+Consider a collection of similar particles, e.g. atoms or molecules.
+
+(i) On a microscopic level the equations of motion of all individual particles
+are determined are determined completely by the familiar equations of motions
+of classical mechanics (Newton's equations) or o quantum mechanics
+(Schr\"odinger's equation). These equations are symmetric with respect to past
+and future.
+
+(ii) In avery rough and incomplete way the collection of particles may be
+described by a small numer of macroscopic variables. These variables obey in a
+selfconsistent way 
+deterministic phenomenological differential equations (the balance equations) 
+which are distinguish between past and future.
+
+The problems is that there seems not to be a rigorous derivation of the
+macroscopic irreversible equations form the reversible microscopic ones.
+The task of statistical mechanics of irreversible processes  is to build an
+approximate bridge beteween the microscopic description and the macroscopic
+one. In particular, the most interesting question is: Where does the
+irreversibility get in the description?
+
+It seems to be appropriate to introduce an intermediate level of description
+bewteen the microscopic and the macroscopic equations. The formal setting for
+this description is the master equation, which as we already know has the
+general form
+\begin{displaymath}
+  \frac{d}{dt} P(J) = \sum_{J'} [ W(J|J') P(J') - W(J'|J)P(J)],
+\end{displaymath}
+where $J$ is an index characterizing the different states of the system,
+$P(J)$ is the probability to find the system in state $J$ at time $t$, and
+$W(J|J')$ is the conditional probability density per time unit for a
+transition from state $J'$ to state $J$ to take place. The master equation is
+an equation for the  probability density of the different states. This implies
+that the evoultion of the physical system is decribed in terms of a Markovian 
+stochastic process. The master equation is
+a good candidate for the description of irreversible processes 
+because of some of its properties. It is evident that the
+master equation is \textit{not} invariant under time reversal. As we will see
+in the next section  the solutions of the master equation tend toward a
+(fixed) equilibrium  distribution.
+
+With the help of the above introduced \textit{mesoscopic} level of description
+the transition beweeen the microscopic and the macroscipc level can be
+performed in two steps:
+
+Step 1: The mesoscopic master equation can be derived from the macroscopic
+deterministic equations of motions for the contsituents f the many--particle
+system. This is the difficult step since the irreversibility is introduced
+here. 
+
+Step 2: From the master equation for the stochastic process derive the
+deterministic macroscopic phenomenolgical equations. In a schematic way we
+have the situation depicted in Fig. (\ref{fig:MasterSchema}).
+
+\begin{figure}[htbp]
+ \label{fig:MasterSchema} 
+ \begin{center}
+    
+    \caption{The three levels of description: macroscopic, mesoscopic, 
+and microscopic.}
+    
+  \end{center}
+\end{figure}
+
+Of course, step 1 is the most difficult one and we will not discuss it further
+here. There are several excellents books introducing the subject of the
+derivation of master equations from the reversible microscopic equations of
+motion and we refer the interested reader to them
+\cite{Prigogine,Kreuzer,McLennan}. 
+Here we will only be
+concerned with the description of irreversible processes with the 
+help of master equations and in particular with the simulation of 
+master equations describing
+irreversible thermodynamic phenomena. 
+
+Frage: Habe ich die Bemerkung zum Papier in dem das Wort master Gleichung zum
+erstem mal vorkommt schon in Kap, 2 gemacht?
+
+
+\section{The Ehrenfest dog--flea model}
+The fundamental problem of statistical mechanics is to describe 
+how a system reaches
+equilibrium in an irreversible way. In this this process the irreversible
+macroscipc dynamics has to be compatible with the reversible microscopic one.
+
+In 1907 Paul and Tatiana Ehrenfest have suggested a stochastic model
+\cite{Ehrenfest}. This so--called "dog--flea" model (sometimes it is also
+called the "urn model") is an excelent example for the application of Markov
+processes to the investigation of problems in statistical mechanics. The model
+has been formulated originally to discuss the meaning of the $H$--theorem in
+thermodynamics. Here, we follow the discussion in \cite{Jancel,KacLogan}.
+
+\subsection{The model}
+We consider $2N$ balls (fleas) numbered from 1 to $2N$. The balls are
+distributed in two urns (dogs), say $A$ and $B$. At random we choose an
+integer between 1 and $2N$ and move the ball whose number has been drawn from 
+the urn it is in to the other one. The procedure is repeated for an arbitrary
+number of times $s$. If initially there are more balls in urn $A$, we expect
+an approach to a naive  equilibrium, in which there are $N$ balls in each urn.
+Of course, the situation ismore involved because there are fluctuations, i.e.,
+deviations from the naive equilibrium. These leads to two problems, which can
+be discussed in this model. Namely, find the equilibrium distribution of the
+probem (static problem) and describe the decay of the fluctuations to the
+naive equilibrium (dynamic equilibrium).  
+
+
+For notational ease we denote by $n_A(s)$ ($n_B(s)$ the 
+number of balls in urn $A$ ($B$) after $s$ drawings. Of course we have
+\begin{displaymath}
+  2N = n_A(s) + n_B(s)
+\end{displaymath}
+and further we introduce
+\begin{displaymath}
+  2 k = n_A(s) - n_B(s)
+\end{displaymath}
+so that
+\begin{eqnarray*}
+  n_A & = & N+k, \\
+  n_B & = & N-k.
+\end{eqnarray*}
+Furthermore, it turns out to be useful to introduce $\Delta_s$ as the  
+absolute value of the difference of $n_a$ and $n_B$
+\begin{displaymath}
+  \Delta_s = |n_A(s) - n_B(s) | = 2 |k|.
+\end{displaymath}
+
+We now deriv the master equation for this model.
+To this end let us assume that after $s$ drawings (steps) there are 
+$n_A(s) = m$  balls in urn $A$. Afte a further drawing there are only two
+possibilities. Either $n_A(s+1) = m+1$ or $n_A(s+1) = m-1$. Since $m=N+k$ and
+according to the nature of the draws we
+can write for the transition probabilities
+\begin{equation}
+\label{eq:NonWEhren1}
+  W(m+1|m) = \frac{2N-m}{2N} = \frac{N-k}{2N},
+\end{equation}
+and correspondingly
+\begin{equation}
+\label{eq:NonWEhren2}
+   W(m-1|m) = \frac{m}{2N} = \frac{N+k}{2N}.
+\end{equation}
+In order to make the meaning of the above transitions explicit we consider the
+the special initial condition $n_A(0) = 2N$. The frst draw implies a decrease
+of the quantitiy $\Delta_0=2N$ of 2. With the second draw the probability of a
+further decrease is $1-1/2N$, whereas the probability of an increase is only
+$1/2N$.  For $N \approx 10^{23}$ the probability for a decrease of $\Delta_s$
+is very large as long as $\delta_s$ is not very small. In this case the
+irreversible decrease of $\Delta_s$ is very probable. 
+
+As we have formulated it the model is a special case of a Markov chain. We
+introduce the conditional transition probability $T(m,s|n)$ to find $n_A(s)=m$
+after $s$ draws under the condition that for $s=0$ we had $n_A(0)=n$.
+$T(m,s|n)$ satisfies the Chapman--Kolmogorov equation
+\begin{displaymath}
+  T(m,s|n) = \sum_l W(m|l) T(l,s-1|n),
+\end{displaymath}
+where it follows from (\ref{eq:NonWEhren1}) and (\ref{eq:NonWEhren2}) that
+\begin{displaymath}
+  W(m|l) = \frac{l}{2N} \delta(l-1,m) + \frac{2N-l}{2N} \delta(l+1,m).
+\end{displaymath}
+Explicitly the discrete master equation for the conditional 
+transition probability reads
+\begin{displaymath}
+   T(m,s|n) = \frac{m+1}{2N} T(m+1,s+1|n) + \frac{2N-m+1}{2N} T(m-1,s-1|n).
+\end{displaymath}
+Accordingly, the discrete equation for the probability density 
+for the special initial condition $P(m,0) = \delta(n,m)$ is
+\begin{displaymath}
+   P(k,s) = \frac{N+k+1}{2N} P(k+1,s-1) + \frac{N-k+1}{2N} P(k-1,s-1).
+\end{displaymath}
+The above equation completely specifies the urn model.
+
+It is now easy to show that the mean number of balls in urn $A$ decreases
+exponentially towards its equilibrium value. To this end we calculate
+\begin{eqnarray*}
+  \langle k(s) \rangle & = & \sum_k k P(k,s) \\
+                       & = & \sum_k  k \left\{
+            \frac{N+k+1}{2N} P(k+1,s-1) + \frac{N-k+1}{2N} P(k-1,s-1)
+                       \right\}   \\
+                       & = & \sum_k (k+1) P(k+1,s-1) 
+                           \left( \frac{1}{2} + \frac{k+1}{2N} \right) \\
+                       && +  \sum_k (k-1) P(k-1,s-1) 
+                           \left( \frac{1}{2} - \frac{k-1}{2N} \right) \\ 
+                        && - \sum_k  P(k+1,s-1)
+                                \left( \frac{1}{2} + \frac{k+1}{2N} \right) \\
+                        && +\sum_k  P(k-1,s-1)
+                                \left( \frac{1}{2} + \frac{k-1}{2N} \right) .
+\end{eqnarray*}
+By renaming the summation variables the terms in the above exession 
+can be written in the more concise form
+\begin{displaymath}
+ \langle k(s) \rangle = \langle k(s-1) \rangle - 
+    \frac{1}{N} \langle k(s-1) \rangle = 
+    \left( 1 - \frac{1}{N} \right) \langle k(s-1) \rangle.  
+\end{displaymath}
+With the initial condition $k(0) = n$ the solution to the above discrete
+equation reads
+\begin{displaymath}
+ \langle k(s) \rangle =  n \left( 1 - \frac{1}{N} \right)^s.
+\end{displaymath}
+In the limit $N \rightarrow \infty$, $\tau \rightarrow 0$, $1/N-\tau
+\rightarrow \gamma$, with $s \tau= t$ this above expression becomes
+\begin{displaymath}
+  \langle k(t) \rangle = n \exp(-\gamma t),
+\end{displaymath}
+which is just the monotonic exponential approach to equilbrium.
+In the mean $\langle k(s) \rangle $ starts from $n$ and approaches 0.
+Accordingly, it can easily be calculated that
+\begin{displaymath}
+  \langle k^2(s) \rangle = n^2 \left( 1 - \frac{2}{N} \right)^s
+                        + \frac{N}{2} \left[
+                                       1 - \left(1- \frac{2}{N} \right) 
+                                        \right],
+\end{displaymath}
+which in the limit $s \rightarrow \infty$ tends to
+\begin{displaymath}
+  \langle k^2(s\rightarrow \infty ) \rangle = \frac{N}{2}.
+\end{displaymath}
+
+As we mentioned an important problem consists in studying the limit
+probability $\lim_{s \rightarrow \infty} P(m,s|n)$. In general it is expected
+that this probability is independent of $n$, so that we could name it $W(m)$.
+However this is not the case for the ehrenfest model. A stationary
+distribution can be obtained provided that the value of $n=n_0$ of $n_A(0)$ is
+not fixed initially and that a distribution $W(n_0)$ of all possible values is
+taken, with $\sum_{n_0=0}^{2N} W(n_0) = 1$. In practice we replace the system
+of two urns by an ensemble of such systems with initial conditions
+distributedaccording to $W(n_0)$. The stationary probability distribution 
+satisfies
+\begin{displaymath}
+  W(m) = \sum_{n_0 = 0}^{2N} W(m|n_0) W(n_0),
+\end{displaymath}
+with $m \ge 0$. One can verify that
+\begin{displaymath}
+  W(m) = \left( \frac{1}{2} \right)^{2N} \frac{(2N)!}{m! (2N -m)!},
+\end{displaymath}
+which is simply a binomial distribution. If $2N$ is sufficiently large the
+binomial distribution can be approximated by a gaussian distribution paked
+around $\langle k \rangle =0$ with variance $\langle k^2 \rangle = N/2$,
+\begin{displaymath}
+  W(k) = \left( \frac{1}{\pi N} \right)^{1/2} \exp(-k^2/(2N)). 
+\end{displaymath}
+
+
+\subsection{The simulation}
+Schr\"odinger erwaehnen;
+\subsection{Discussion of the results}
+Loschmitt; Zermelo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{peter}
+\bibliography{V_98,simulit}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\section{Master equations and entropy}
+
+
+\section{Nonequilbrium thermodynamics}
+\subsection{Chemical Reactions}
+\subsection{Couette Flow and Poiseuille Flow}
+\subsection{Homogeneous turbulence: The Burgers equation}
+
