@@ -74,7 +74,7 @@ of the benchmark are summarized in the following table.
   \begin{center}
     \leavevmode
     \begin{tabular}{llp{3cm}|c|c}
-      Language & OS & Software & Machine & Execution time \\\hline\hline  
+      Language & OS & Software & Machine & CPU time \\\hline\hline  
       Java & Linux & JDK 1.1.5 & Pentium II 333 & 6 sec. \\\hline
            &       &           & Pentium 200 MMX & 9 sec. \\\hline
            &       &           & Pentium 133 & 17 sec. \\\hline
@@ -178,7 +178,7 @@ Java is architecture neutral and portable. The byte-code format is always the
 same regardless of the platform on which the Java compiler runs. Furthermore,
 there are no "implementation defined" behaviours in Java. For example, Java
 specifies the size of each primitive data type. For instance, the integer 
-types byte, short, int, long as 8, 16, 32 or 64--bit long, respectively.
+types byte, short, int, long are 8, 16, 32 or 64--bit long, respectively.
 
 Java is high--performance. Usually implementations of Java are used running 
 Java programs interpretatively. It is however possible to run Java with a 
@@ -242,10 +242,11 @@ also freely available and have nice Java editing modes.
 FreeBuilder ?????
 
 Opposing to other languages, which use the ASCII character set, Java
-uses the Unicode character set. Unicode consists of characters represented
+uses the Unicode character set (\verb!URL:http://unicode.org!). 
+Unicode consists of characters represented
 by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
-use 256 different characters (ASCII) you can use all the 65535 different
-characters available in the Unicode set for writing a Java program.
+use 256 different characters (ASCII) you can use all the 38885 different
+characters available in the Unicode set (Version 2) for writing a Java program.
 This means you can name your variables using for example Japanese or Greek
 characters. Right from the beginning, Java is an international language.
 
@@ -266,14 +267,14 @@ in Java.
 
 \inputlisting{Listings_Java/HelloWorld_Application.java}
 You have to save the program in a file called 
-\verb|HelloWorld.java|.
+\verb|HelloWorld_Application.java|.
 To execute the above example you have to proceed as follows:
 \begin{itemize}
 \item \marginpar[Compiler]{Compiler}
-        \verb/javac HelloWorld.java/  $\Longrightarrow$ produces
+        \verb/javac HelloWorld_Application.java/  $\Longrightarrow$ produces
         HelloWorld.class in the same directory.
 \item \marginpar[JVM]{JVM}
-        \verb/java HelloWorld/
+        \verb/java HelloWorld_Application/
 \item Output on screen: \verb<Hello World !<
 \end{itemize}
 Let us now try to understand the above code. The program consists of
@@ -303,21 +304,33 @@ You have just written and executed your first application written in Java.
 \subsubsection{Applet}
 
 Java offers another possibility to execute code, so called Applets.
-These are (small) Java programs, which are started by a server program,
+In contrast to the stand--alone Java application which starts at
+\verb!main! and runs until it is completed the applet is a kind of
+sub--program which runs under the control of some other program.
+Usually, applets are (small) Java programs, which are started by a 
+server program,
 e.g. a WWW browser like Netscape Navigator\footnote{You need at least 
 version 4.06 or patches for earlier versions to use all features of Java 1.1}, 
 the Internet Explorer\footnote{Seems to run Java 1.1 programs since
 version 4.}(Don't),
 HotJava or the appletviewer\footnote{included with the JDK.}.
 
+
+
 The ``Hello World'' example written as an applet has the following form:
 \inputlisting{Listings_Java/HelloWorld_Applet.java}
+
+Applets have to be derived from the applet class
+\verb|java.applet.Applet|, which include the principal facilities of
+the Abstarct Window toolkit (AWT) and the interface with X/Motif on
+Unix, Windows on PC, and MacOS on Macintosh platforms.
 As you can see there is no main method in an applet. Instead if an applet
 is started by a server, the init() method is executed first. There is also
 a start() (stop()) method, which is executed if the applet becomes
 visible (disappears) in the server window (e.g. by scrolling in the
 Netscape Navigator window).
 
+Many methods are available to set up display in an assigned applet area.
 The paint() method appearing in the ``Hello World'' applet is
 responsible for the visual part of the applet. It uses a canvas
 (drawing area) with a size defined by the calling HTML file. In our case
@@ -363,7 +376,7 @@ long & signed integer & 0 & 64 bits &       &        \\ \hline
 float & floating--point & 0.0 & 32 bits &     &          \\ \hline
 double & floating--point & 0.0 & 64 bits &    &        \\ \hline
 boolean & true or false      &  false & 1 bit&       &  \\ \hline
-char  & Unicode character & \u000 & 16 bits &      &   \\ \hline
+char  & Unicode character & $\backslash$u000 & 16 bits &      &   \\ \hline
 \end{tabular}
 \end{center}
 \caption{Primitive data types in Java.}
@@ -374,23 +387,34 @@ The following comments have to be done. In a Java program every
 variable must have a type that precedes its name when the variable is
 declared. For example the integer i may be declared as
 
-\begin{quote}
+\begin{verbatim}
 int i
-\end{quote}
+\end{verbatim}
 
 
 Char values represent characters. They appear in Java between single
 quotes, e.g.
-\begin{quote}
+\begin{verbatim}
 char c = 'C`
-\end{quote}
+\end{verbatim}
+A Unicode character is represented by the Unicode escape sequence
+$\backslash$uxxxx, where xxxx is a sequence of four hexadecimal digits.
+
 
 Float and double types have special values that may be the result of
 certain floating-point operations. For example in the java.lang.Float
 and java.lang.Double classes the special values
-\texttt{POSITIVE INFINITY}, $\texttt{NEGATIVE INFINITY}$, and 
-\texttt{NaN} (not-a-number) are
+\verb|POSITIVE_INFINITY|, \verb|NEGATIVE INFINITY|, and 
+\verb|NaN| (not-a-number) are
 defined.
+
+Floatijg point numbers are expressed as e.g.
+\begin{verbatim}
+13. \hspace{1cm} 1.3e1 \hspace{1cm} .13E2 
+\end{verbatim}
+and are considered to be constants of type \verb|double| 
+unless they are specified with \verb|f| or \verb|F|, which makes them
+then \verb|float| constants.
 
 In Java strings are not a primitive type. Java provides a String
 object type to deal with sequences of character data. The java string
@@ -404,6 +428,407 @@ called also ``reference types'' because they are handled by
 reference. For example you may pass the address of an object, which is
 stored in a variable, to a method. In contrast, primitive types are
 always passed by value.
+
+
+\subsection{Casting, Wrapper Classes}
+
+Java uses a clear strategy to convert the primitive data types to 
+other primitive ones. In a calculation Java always converts (casts)
+the less precise type to a more precise one. So if you multiply an
+integer and a float value, it converts automatically the integer to
+a float and then multiplies both values. If you want to convert
+a value explicitly you can use the cast operators (like in C and C++).
+Just write the primitive type in round brackets in front of the value to
+be converted, e.g. \verb|result=(double)a*b| casts \verb|a| to 
+a double value and
+then multiplies it with \verb|b|, assigning the result to \verb|result|.
+
+A common problem is to convert from strings to primitive types and
+vice versa. Because strings are objects and not primitive types, we
+need a method for the conversion. For that reason Java has so called
+wrapper classes in \verb|Java.lang| for all the primitive types. 
+These classes provide all the necessary methods for all types of
+conversion. The \verb|valueOf()| method always converts a string
+to the corresponding wrapper class of a primitive type, e.g. 
+\begin{verbatim}
+        double a;
+        String text;
+        a=doubleValue(text.valueOf());
+\end{verbatim}
+The third line converts the string to the \verb|Double| class and then
+the \verb|doubleValue()| method converts to a double primitive type.
+For the other types you just have to substitute float or int 
+for double.
+ 
+To convert a double value to a string you have to use the \verb|toString()|
+method, which is available for all primitive data types. 
+
+
+
+
+
+
+\subsection{Simple arthmetics, Conditional Statements and Loops}
+\label{sec:Loops}
+Because Java was designed to be able to load code distributed
+over the whole internet, you have to avoid name conflicts
+between the programs (classes). The solution in Java is to put
+every class in a \emph{package}. The name of the package is given
+at the beginning of a file before the actual program (class)
+definition starts. So for example if we put a
+\begin{quotation}
+  \verb/ package de.freiburg.simulation; / 
+\end{quotation}
+at the beginning of the ``Hello World'' application, we can compile
+the application with \verb/javac HelloWorld.java / like before.
+But to run the application we have to use
+\begin{quotation}
+  \verb/ java de.freiburg.simulation.HelloWorld / . 
+\end{quotation}
+You are wondering why the program doesn't start? It can't, because
+there is one more thing to know. Java is looking for programs (classes)
+in the directory structure given by the class name. So
+for the example above you have to put the \verb/HelloWorld.class / file
+in the directory \verb|de/freiburg/simulation/| and issue the command
+in the directory, where the directory tree starts.
+
+You could also use an environment variable called \verb|CLASSPATH|. It
+describes the directories to search for the class files. So if the
+\verb|CLASSPATH|-variable includes \verb|/home/user/java| you can
+start the above example in this directory, if the class is in the 
+subdirectory  \verb|de/freiburg/simulation/|.
+
+All the standard commands (classes) of Java are stored in a central jar
+file, which is additionally packed to save disk space. These classes
+are always searched, no matter the \verb|CLASSPATH|-variable is set to.
+
+
+Before learning more about the syntax of Java, we have to explain another
+statement appearing in the part of any Java program before the actual
+definition of the class: the \verb|import|-statement. With \verb|import|
+you can make classes available, so you don't have to use the fully
+qualified name to the class. So if you would like to
+use the HelloWorld class from above in your programs, you could either
+type \verb|de.freiburg.simulation.HelloWorld()| in your program
+or you can use
+\begin{verbatim}
+import de.freiburg.simulation.*;
+....
+   HelloWorld();
+\end{verbatim}
+to import all classes in the \verb|de.freiburg.simulation| class.
+You can also use:
+\begin{verbatim}
+import de.freiburg.simulation.HelloWorld;
+....
+   HelloWorld();
+\end{verbatim}
+if you just want to import one special class.
+
+We have already made use of the \verb|import|-statement in the ``Hello World'' 
+applet. There we have imported the \verb|java.applet|-class, which
+defines applets and their behaviour, and the \verb|java.awt|-class, which
+will be explained later.
+ 
+
+
+
+As we already mentioned Java  supports almost all of the the standard
+C operators. The arithmetic operators that operate on numerical types
+are 
+\begin{center}
+\begin{tabular}{ll}
+$+$ & addition \\
+$-$ & subtraction                 \\
+$*$ & multiplication \\
+$/$ & division \\
+\% & remainder
+\end{tabular}
+\end{center}
+
+It is important to remark, that in Java integer division truncates
+toward zero (7/2=3).
+
+Java has to special operators for increment $++$ and decrement $--$. The 
+expression \verb|i++| is equivalent to \verb|i=i+1| except that
+\verb|i| is evaluated only once.
+
+Java supports also a standard set of relational and logical operators,
+which all yield boolean values. They are listed below
+
+\begin{center}
+\begin{tabular}{ll}
+$>$  & greater then \\
+$>=$ & greater then or equal to \\
+$<$  & less then \\
+$<=$ & less than or equal to \\
+$==$ & equal to \\
+$!=$ & not equal to
+\end{tabular}
+\end{center}
+
+
+The conditional operators
+\begin{center}
+\begin{tabular}{ll}
+\& \& & conditional AND      \\
+$||$    & conditional OR
+\end{tabular}
+\end{center}
+operate on  boolean expressions only.
+
+Java has also bitwise operators which operate on integers and on
+boolean types
+\begin{center}
+\begin{tabular}{ll}
+\& & and \\
+$|$ & or \\
+$\tilde{}$ & not \\
+$<<$ &  shifts bits left filling with zero bits on the right \\
+$>>$ & shifts bits right filling with the highest sign bit on the
+           left--hand side \\
+$ >>>$ & shifts bits right filling with zero bits on the left--hand side 
+\end{tabular}
+\end{center}
+
+Last not least we have to mention the fundamental assignment operator
+$=$. It may be used in combination with other operators, e.g., $+=$
+means is incremented by.
+
+\paragraph{if-else}
+The \verb|if| statement is the fundamental form of conditional control
+of flow. It allows to choose, whether the statements that follow it are
+executed or not. Its syntax in Java is
+\begin{verbatim}
+if (boolean_expression)
+   statement1
+else
+   statement2
+\end{verbatim}
+First, the boolean expression is executed. If the value is \verb|true|
+then \verb|statement1| is performed, otherwise if there is the
+optional \verb|else| statement \verb|statement2| is executed. Of
+course, \verb|if-else| constructions can be nested, i.e., an
+\verb|if-else| conditional control flow, can be placed within another
+\verb|if-else| statement.
+
+\paragraph{for Loops}
+For our forthcomig applications the most important control statement
+is the \verb|for| statement. It is used to loop over a range of values
+from the beginning to the end. Its syntax is
+\begin{verbatim}
+for (init_expr; boolean_expr; incr_expr)
+    statement
+\end{verbatim}
+where \verb|init_expr| denotes the initial value of the iterated
+variable, \verb|incr_expr| denotes the increment of the iterated
+variable.
+At the beginning of the \verb|for| loop the boolean expression
+\verb|boolean_expr| is evaluated. If its value is found to be 
+\verb|true| the statement is executed repeatildy with increment
+\verb|incr_expr| until the value of the boolean expression is found to
+be \verb|false|.
+
+As an example demonstrating the use of the \verb|if| statements and of
+the \verb|for| loops we want to write a program to calculate the mean of
+a given number of random numbers. One posible implementation
+could look like:
+\inputlisting{Listings_Java/DataMean.java}
+
+Here we used the class \verb|java.util.Random| which allows for
+the creation of random numbers. If we don't supply a seed, as is the
+case here, it just uses the time to initialize the generator. The
+initialization takes place in line 10, where a new generator is created.
+You can check this by running the application more than once and comparing
+the means -- they should not be the same. 
+
+The \verb|next.Double()| method returns a new random number of type
+double (for a float use rand.Float()). You can also create normally 
+distributed random numbers with the \verb|Random.Gauss()| method.
+The rest of the program should be self explaining.
+
+
+\paragraph{while and do--while}
+Java offers also the possibility to use other loop constructs, the
+\verb|while| and the \verb|do-while| loop. There syntax is
+\begin{verbatim}
+while (boolean_expression)
+ statement
+\end{verbatim}
+and
+\begin{verbatim}
+do
+  statement
+while (boolean_expression)
+\end{verbatim}
+It is important to observe that in the first construct the boolean
+expression is evaluated \textit{before} the statement is exectuted, while in
+the second construct the boolean expression is evaluated \textit{after} the
+statement has been performed!
+
+\paragraph{goto}
+We already remarked that Java does not have a \verb|goto| instruction
+to transfer control to an arbitrary statement in a method. To handle
+with situations where other languages have a \verb|goto| Java provides
+the labelled \verb|break| and \verb|continue| statements. Labels are
+typically used in blocks and loops and preced statements
+\begin{verbatim}
+label: statement
+\end{verbatim}
+The \verb|break| statement is used to exit from a block, e.g. to break
+out of a loop. E.g., an unlabeld \verb|break| terminates the innermost
+\verb|for|, \verb|while| or \verb|do|.
+
+The \verb|continue| statement is used only within loops. It skips to
+the end of the loop's body and evaluates the boolean expression that
+controls the loop. The \verb|reurn| statement terminates execution of
+a method and returns to the invoker. If a method returns no value you
+have to use
+\begin{verbatim}
+return;
+\end{verbatim}
+if the method has a return type, the \verb|return| must include an
+expression for a retuned type.
+
+An dieser stelle sollten einige beispiele kommen!!!!!
+
+\paragraph{switch/case}
+
+Another central flow structure is the \\verb|switch| statement. It
+evaluates an integer expression whose value is used to find an
+appropriate \verb|case| label among those listed inside the following
+block. The \verb|switch| statement may be used to replace nested \verb|if-else|
+statements that determine what is the output for each number. The
+\verb|switch| statement works only if the value being tested is a
+primitive integral type and when the value is tested against constant
+values. the basic syntax of the \verb|switch| statement is
+\begin{verbatim}
+switch(expression) {
+    statements
+}
+\end{verbatim}
+After evaluating the expression, the switch statement executes
+ncertain code within the block depending on the integral value of the
+expression. This information is indicated by the integer labe follwing
+the \verb|case:| statement. If there is no \verb|case:| label that
+matches the value of the expression, the \verb|swich| command executes
+the code following \verb|default:|, if there is one. Otherwise,
+\verb|switch| does nothing.
+
+Auch an dieser stelle ein Beispiel !!!
+ 
+
+
+Operators +=,-=,++,\%, \&\&, ||, break,
+do while, while, switch, for
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Arrays}
+\label{sec:Arrays}
+
+Before discussing the notion of classes and objects, we want to introduce
+another reference type: the array. They are actually objects, but
+Java provides many special commands for arrays, which makes them a 
+little bit special.
+
+The first question is how to create arrays and how to destroy them.
+The destruction is easy to explain: it is done automatically
+by the garbage collector (like all objects). This is different to
+other languages like C, C++ and Fortran 90, where you explicitly
+have to destroy (free) the allocated memory. 
+
+To create an array you have to use the \verb|new| keyword used for
+creating (instantiating) objects. So to create an one dimensional
+array with 10 elements you use:
+\begin{verbatim}
+        int intarray[] = new int[10];
+\end{verbatim}
+This also sets all the elements to zero. But this is only true for 
+primitive types. Arrays of reference types (objects) are created the
+same way, but the elements consist of references to the elements. The
+elements themselve are NOT initialized and have to be created too.
+An example for this is a two dimensional array as we will see soon.
+
+Indices of arrays in Java start with zero as in C and not with 1
+as in Fortran. No negative indices are allowed in Java. The length
+of an array (meaning the number of elements) is always given
+by the \verb|.length| field. For the array above you get the number
+of elements by using \verb|intarray.length|. We have already met
+this notation when we discussed the command line parameters.
+
+You can also create the array and initialize it right away by using
+(also in Java 1.0):
+\begin{verbatim}
+        int intarray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] intarray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+\end{verbatim}
+or one step further, create an array of objects (here strings) and
+create the elements in the same step:
+\begin{verbatim}
+        String stringarray[] = {"a","b","c","d","e","f","g"};
+\end{verbatim}
+In Java 1.1 you can also use \emph{anonymous arrays}:
+\begin{verbatim}
+        String[] texts;
+        texts = new String[] = {"a","b","c","d","e","f","g"};
+        System.out.println(new char[] {'h','e','l','l','o'});
+\end{verbatim}
+So you can create and initialize arrays without even using a variable.
+
+Multidimensional arrays are also supported. Just like in C they are
+arrays of arrays. For example
+\begin{verbatim}
+        double matrix[][] = new double[10][10]; 
+\end{verbatim}
+creates a 10 by 10 matrix, meaning that you have created 10 arrays
+of type \verb|double[10]|. An important point to make is that you
+do not have to specify all dimensions at once. You can for example
+create a triangular matrix by submitting:
+\begin{verbatim}
+        double matrix[][] = new double[10][];
+        for (int i=0; i<10; i++) {
+                matrix[i] = new double[i+1];
+        } 
+\end{verbatim}
+To access multidimenisonal arrays you can also use one dimensional
+array syntax (as in C). If you have an two dimensional array 
+you can access the element [i,j] by accessing the element [i+j*columns]. 
+
+In Java you can even put the brackets behind the type instead of the
+variable name (not possible in C). So it does not matter if you
+write \verb|int intarray[];| or \verb|int[] intarray;|.
+
+Now let's look at an example using arrays. We have rewritten the program
+above to calculate the average of random numbers by using arrays.
+
+
+
+allokieren, instanzieren, multidimensional arrays
+
+\inputlisting{Listings_Java/DataMean_Array.java}
+
+Here we first declare a double array called \verb|RandomNumber| and
+create it in Line 13. Then we store the random numbers in the array
+and afterwards calculate the mean.
+
+The last important point to note is the copying of arrays. 
+You can not just write
+\begin{verbatim}
+        int[] array1 = new int[] = {1,2,3,4,5};
+        int[] array2 = new int[10];
+        array2 = array1;                // WRONG ! - ERROR ! 
+\end{verbatim}
+This would only copy the reference of the array1 object to the array2
+object, not the values. To copy arrays you have to use the 
+\verb|arraycopy()| method of the java.lang.System class. 
+So to copy an array in the above example, you have to write:
+\begin{verbatim}
+        System.arraycopy(array1,0,array2,0,array1.length);
+\end{verbatim}
+This copies all elements of array1 to array2. The rest of the array2
+is not created!
 
 
 \subsubsection{Parameters from the command line or from a html file}
@@ -456,175 +881,210 @@ appletviewer or in Netscape should look like:
   Parameter DisplayText is ``This_is_a_test_parameter!"
 \end{verbatim}
 
-
-\subsection{Loops, Conditional Statements and simple Arithmetics}
-\label{sec:Loops}
-Because Java was designed to be able to load code distributed
-over the whole internet, you have to avoid name conflicts
-between the programs (classes). The solution in Java is to put
-every class in a \emph{package}. The name of the package is given
-at the beginning of a file before the actual program (class)
-definition starts. So for example if we put a
-\begin{quotation}
-  \verb/ package de.freiburg.simulation; / 
-\end{quotation}
-at the beginning of the ``Hello World'' application, we can compile
-the application with \verb/javac HelloWorld.java / like before.
-But to run the application we have to use
-\begin{quotation}
-  \verb/ java de.freiburg.simulation.HelloWorld / . 
-\end{quotation}
-You are wondering why the program doesn´t start? It can't, because
-there is one more thing to know. Java is looking for programs (classes)
-in the directory structure given by the class name. So
-for the example above you have to put the \verb/HelloWorld.class / file
-in the directory \verb|de/freiburg/simulation/| and issue the command
-in the directory, where the directory tree starts.
-
-You could also use an environment variable called \verb|CLASSPATH|. It
-describes the directories to search for the class files. So if the
-\verb|CLASSPATH|-variable includes \verb|/home/user/java| you can
-start the above example in this directory, if the class is in the 
-subdirectory  \verb|de/freiburg/simulation/|.
-
-All the standard commands (classes) of Java are stored in a central jar
-file, which is additionally packed to save disk space. These classes
-are always searched, no matter the \verb|CLASSPATH|-variable is set to.
-
-
-Before learning more about the syntax of Java, we have to explain another
-statement appearing in the part of any Java program before the actual
-definition of the class: the \verb|import|-statement. With \verb|import|
-you can make classes available, so you don't have to use the fully
-qualified name to the class. So if you would like to
-use the HelloWorld class from above in your programs, you could either
-type \verb|de.freiburg.simulation.HelloWorld()| in your program
-or you can use
-\begin{verbatim}
-import de.freiburg.simulation.*;
-....
-   HelloWorld();
-\end{verbatim}
-to import all classes in the \verb|de.freiburg.simulation| class.
-You can also use:
-\begin{verbatim}
-import de.freiburg.simulation.HelloWorld;
-....
-   HelloWorld();
-\end{verbatim}
-if you just want to import one special class.
-
-We have already made of the \verb|import|-statement in the ``Hello World'' 
-applet. There we have imported the \verb|java.applet|-class, which
-defines applets and their behaviour, and the \verb|java.awt|-class, which
-will be explained later.
- 
-
-
-
-As we already mentioned Java  supports almost all of the the standard
-C operators. The arithmetic operators that operate on numerical types
-are 
-\begin{center}
-\begin{tabular}{ll}
-$+$ & addition \\
-$-$ & subtraction                 \\
-$*$ & multiplication \\
-$/$ & division \\
-\% & remainder
-\end{tabular}
-\end{center}
-
-It is important to remark, that in Java integer division truncates
-toward zero (7/2=3).
-
-Java has to special operators for increment $++$ and decrement $--$. The 
-expression \verb|i++| is equivalent to \verb|i=i+1| except that
-\verb|i| is evaluated only once.
-
-Java supports also a standard set of relational and logical operators,
-which all yield boolean values. They are listed below
-
-\begin{center}
-\begin{tabular}{ll}
-$>$  & greater then \\
-$>=$ & greater then or equal to \\
-$<$  & less then \\
-$<=$ & less than or equal to \\
-$==$ & equal to \\
-$!=$ & not equal to
-\end{tabular}
-\end{center}
-
-
-The conditional operators
-\begin{center}
-\begin{tabular}{ll}
-\& \& & conditional AND      \\
-||    & conditional OR
-\end{tabular}
-\end{center}
-operate on  boolean expressions only.
-
-Java has also bitwise operators which operate on integers and on
-boolean types
-\begin{center}
-\begin{tabular}{ll}
-\& & and \\
-| & or \\
-$\tilde{}$ & not \\
-$<<$ & left shift \\
-$>>$ & right shift \\
-$ >>>$ unsigned right shift 
-\end{tabular}
-\end{center}
-
-Last not least we have to mention the fundamental assignment operator
-$=$. It may be used in combination with other operators, e.g., $+=$
-means is incremented by.
-
-As an example we want to write a program to calculate the mean of
-a given number of random numbers. One posible implemntation
-could look like:
-\inputlisting{Listings_Java/DataMean.java}
-
-Here we used the class \verb|java.util.Random| which allows for
-the creation of random numbers. If we don't supply a seed, as is the
-case here, it just uses the time to initialize the generator. The
-initialization takes place in line 10, where a new generator is created.
-You can check this by running the application more than once and comparing
-the means -- they should not be the same. 
-
-The \verb|next.Double()| method returns a new random number of type
-double (for a float use rand.Float()). You can also create normally 
-distributed random numbers with the \verb|Random.Gauss()| method.
-The rest of the program should be self explaining.
-
-
-Operators +=,-=,++,\%, \&\&, ||, break,
-do while, while, switch, for
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Arrays}
-\label{sec:Arrays}
-allokieren, instanzieren, multidimensional arrays
-
-\inputlisting{Listings_Java/DataMean_Array.java}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classes and Objects}
 \label{sec:Classes_and_Objects}
+
+The biggest step you have to take in mastering Java if you are
+coming from the Fortran or C community, is to switch to the object
+oriented paradigm. Although C++ programmers are used to objects, there
+are quite a number of differences to C++ in Java. That is why Java
+is closer to C than to C++.
+
+We have already met a lot of object oriented features 
+without discussing them in detail. 
+\begin{quote}
+A class is a collection of data and methods that operate on that data. In
+Fortran or C we called the methods procedures ore functions. An object
+is an instance of the class, meaning it is a thing to work with. The class
+defines the data necessary for the object and the functions which can be
+operated on them.   
+\end{quote}
+For example you can have a class ``Car'', which describes all the 
+eigenschaften of a car, e.g. type, age, weight, etc. Then you have a
+``real'' car, let's say a Ford, 10 years old, 1000 kg, etc. So this
+is an object of the class ``Car''. A method would be the calculation
+of the monthly cost for the car. 
+
+An example already familiar to us, is an array. If you have an array 
+object you can call the method \verb|length| to get the number of
+elements of the array. 
+
+So what is the difference to the standard function approach here ?
+Instead of using function arguments you supply the argument by 
+putting them in front of the method separated by a point. 
+For example to calulate the mean of an array of doubles, you can
+either write a method which takes the array as an argument (like you would
+in Fortran or C): \verb|mean(array[])| or you can use the object
+orinted feature: 
+\begin{verbatim}
+        Data dat = new Data(); 
+        result = dat.mean();
+\end{verbatim}
+It is up to you, which version you prefer. But because all programs are
+actually classes in Java you have to understand at least the 
+most fundamental things about object oriented programming. For a detailed
+discussion and intrioduction, see \cite{javanutshell}.
+
+Just to remind you again, strings are objects and not primitive 
+types. To use strings you first have to declare and instantiate a string
+object. Here are three possible ways of doing it:
+\begin{verbatim}
+        String text;
+        text = "Test String";
+        text = new String();
+        text = new String("Test String");
+\end{verbatim}
+The first line only declares a string object called text and does not
+allocate (instantiate) the memory for the value of the object, just
+the reference to the value.
+
+As an example for the most important issues about onjects, we want to
+write a class, which calculates random numbers by different methods and
+for different distributions. To that end we write a class 
+\verb|RandomNumber|. It has three fields (variables), two of them are
+defined with the \verb|final| keyword. This is the equivalent to the
+const keyword in C. A final field can not be changed anymore.
+The \verb|static| modifier defines a field (variable), which is belonging
+to the class and not to the object. So every object of that class 
+has the same value for a \verb|static| field. The \verb|public| modifier
+on the other hand defines a field or method, which is special to 
+an object not to the class -- this is also called a instance field or
+method, the \verb|static| version is called a class variable or method.
+
+
 Examples: Random Number, Moment Calculation
 
 \inputlisting{Listings_Java/RandomNumber.java}
-\inputlisting{Listings_Java/UseRandomNumber.java}
+Class variables and methods are the closest relatives to global 
+variables in all the other languages. They are accessible from all
+classes, but still are belonging to a class. So you could have two
+class methods with the same name, but for different classes.
 
-\subsubsection{Standard Mathematical Functions and mathematical libraries}
+An important part of any class is the constructor of the class. This is
+the method (function), which is called when an object of this
+class is instantiated. Here in our example, we just set the seed. As 
+you can see you have to supply the seed, when instantiating the
+generator. Most of the constructors don't even need a parameter to 
+instantiate the object. 
+
+Then the method \verb|nextRand()| is defined and returns the next
+random calculated using a congruential method (see later in this
+book). The return type of methods always has to be specified, if
+there is no return value you have to use the \verb|void| statement
+(as in C). The value to be returned is specified by the return keyword.
+
+Now we have to write a program (class), which uses this class to 
+calculate the average of some random numbers.
+\inputlisting{Listings_Java/UseRandomNumber.java}
+The class is called \verb|UseRandomNumber| and just contains the
+main method. First we instantiate (create) an object of class
+\verb|RandomNumber|. Then we create an array and in a loop we
+create \verb|N| random numbers using the \verb|nextRand()| method
+of our class applied to the object we just created. The remaining
+part has already been explained.
+
+A second example demonstrates how to create a class for calculating
+some statistical measures for data sets. 
+
+   listing!!!
+
+
+%%%%%%%%% Listing !!!!!!!!!!!! to be written
+
+The last explanation concerns the \verb|System.out.println()| statement
+already used in the ``HelloWorld'' program. This is calling the
+\verb|println()| method of the \verb|PrintStream| class of the java.io 
+package. And the \verb|out| is a variable from the java.lang.System 
+class, referencing the \verb|PrintStream| class. 
+There are also two more variables called \verb|err| and
+\verb|in| for error output and data input. 
+The java.lang.System class provides an platform-independent 
+interface to some system functions.
+
+%%%% Listing for keyboard input !!! ???????????
+
+\subsubsection{Extending and Overloading Classes}
+Often you want to define subcalsses, which should inherit all
+the methods and fields from another class. This is easily done
+in Java by extending a given class. 
+%%% Example ???
+  
+Example ????
+
+
+You can reference the super (parent) class by applying the
+\verb|super.| modifier in front of a method or variable of
+the parent class. And the \verb|this| modifier always refers to
+the actual class. 
+
+If you define a class to be final, it can not be extended.
+For example the java.lang.System class is a final class.
+
+If you write a subclass you can overwrite methods already defined
+in the super class. This is called overloading of methods,
+analogous to the C++ overloading. But in C++ you can even
+overload operators like +, -, etc., which is not possible (in Java 1.1) yet.
+
+
+
+
+\subsection{Standard Mathematical Functions and mathematical libraries}
 \label{sec:Standard_Math}
+
+Unfortunatley these easy and important methods are not part of the
+standard Java language. But Visual Numerics, a software company,
+has proposed a standard class for statistical functions, which are
+essential for all statistical problems. They also supplied a new class
+for complex numbers. This library is called the Java Numerical Library
+(JNL) and is free. 
+
+The standard mathematical functions of Java are declared in the 
+Java.lang.Math class and contains sine, cosine, logarithm, exponential,
+square root and much more. Do not confuse this class with the
+java.Math class, which was introduced to Java 1.1 for arbitrary
+precision arithmetic -- we are not discussing this.
+Here is a table of the methods:
+\begin{tabular}{cl}
+abs() & absolute value \\
+acos()/asin()/atan() & arcus cosine/sine/tangent \\
+sin()/cos()/tan() & sine/cosine/tangent\\
+exp() / log() & exponential and natural logarithm \\
+ceil() / floor() / round() & rounding of values ???? \\
+pow() & power\\
+min( , ) / max( , ) & minimum or amximum of two values \\
+sqrt() & square root of a double \\
+random() & ???\\
+rint() & ???\\
+IEEEremainder() & special remainder function \\
+\end{tabular}
+
+These are all class methods, so they can be called from anywhere.
+Here are some examples:
+\begin{verbatim}
+        a=Math.exp(2.1);        // e to the 2.1
+        distance = Math.sqrt(Math.pow(x,2)+pow(y,2));  // euclidean distance
+\end{verbatim} 
+By the way, there is no easy import statement to avoid the Math in front
+of the methods, you always should use it, although it seems 
+???? umstaendlich.
+
+There are also other classes, which extend the standard Java language
+for matrix computations (BLAS) and much more (e.g. the JNT). If we need
+them in the course of the book, we will introduce you to them there.
+
+
 Math, JNL, JNT  
 
+\subsubsection{Summary and Overview}
+General structure of a program:
+1) package
+2) import
+3) Classes
+4) Interfaces
+
+%%%%%
+PS Output in Java:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{More Advanced Features}
 
@@ -655,6 +1115,8 @@ radioactive decay, Pi Calc, e calc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cite{FLANAGAN-EXAMPLES}
+\cite{GOSLING}
 
 \bibliographystyle{peter}
 \bibliography{V_98,simulit}
