@@ -301,21 +301,23 @@ is a very large number!
 
 At this point it certainly makes sense to stop for a second with the 
 discussion of physics and enter an exciting and meanwhile important 
-part of program development: writing concurrent programs. The necessity
+part of program development: writing parallel programs. The necessity
 for this section will be clear, when we do the simulations of the 
-nonequilibrium systems considered in the following sections and of 
+nonequilibrium systems considered in the following sections, where
+the time for a simulation on one processor is too long. Of 
 course it is much easier to study new things on a simple (toy) model,
 like the Ehrenfest model just discussed. So our aim will be to write
-a concurrent version of the Ehrenfest model and to execute it in parallel
+a parallel version of the Ehrenfest model and to execute it in parallel
 on many computers at the same time.
 
 In the first section we will discuss general issues connected to
-concurrent (parallel) programming, which not only applies to Java, but
+parallel programming, which not only applies to Java, but
 also to FORTRAN and other programming languages. In the second section
 we take a closer a look at the harware used for parallel computing and
 the third section will be about the software being applied to
-parallel algortihms. The fourth section will then finally show you an
-example of parallel programming in Java using the Ehrenfest model.
+parallel algorithms. The fourth section will then finally show you an
+example of parallel programming in Java using the Ehrenfest model as an
+example problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What is parallel/concurrent programming?  \\
@@ -327,27 +329,27 @@ Before we want to explain the terms in detail, let us look
 at the hardware development in the last 10 years to get an impression,
 why there is so much hype about parallel programming. 
 
-The CPUs get cheaper and cheaper almost every month and additionally
+Almost every month the CPUs get cheaper and cheaper and additionally
 the CPUs get faster too. To be honest, todays CPUs in usual PCs
 are much too powerful to be used as simple terminals for word 
 processing and some internet surfing. So the situation is that
-there are many many ``powerful'' CPUs connected mostly by some kind
+there are many ``powerful'' CPUs connected mostly by some kind
 of networking cable to the internet\footnote{The name for the network of
 all computers in the world connected together.} 
 or the intranet\footnote{The computers connected e.g. in a company 
 (not necessarily connected to the outer world), the internet.}.
 
-On the high performance computer market the CPUs were getting more and more 
-expensive compared to the performance gained by using these formula one
-processors instead of off the shelf PC processors, most notably the
+In contrary on the high performance computer market the CPUs were getting more
+expensive compared to the performance gained by using these high-speed
+processors instead of mass market consumer PC processors, most notably the
 Intel processors. So starting around 1990 the supercomputer companies
 started to use off the shelf processors, which are much cheaper and
 put them together with special (expensive) hardware, which connect
 these creating a very high performance connection between
 the CPUs. Although there are still companies producing specialized expensive
-processors e.g. for vector computing the NEC machines, most of
+processors e.g. for vector computing machines, most of
 the modern supercomputers are made out of ``standard'' processors,
-also found in small Workstations and PCs\footnote{Actually Workstations 
+also found in small Workstations and PCs.\footnote{Actually Workstations 
 just refer to the machines used for some way of high performance
 in graphics, number crunching or somewhere else. The difference to
 the standard PC has almost vanished and so just a price
@@ -355,12 +357,18 @@ difference refering to the more  expensive parts used for
 assembling the Workstations remained.} 
 Examples are the Cray T3E, which uses standard DEC Alpha Chips 
 (21164 or 21264), the IBM SP2, which uses Power PC processors, the 
-SGI Origin, which uses the MIPS R10000 and will switch to the 
-Intel Merced in  the next few years, anf of course one of the fastest
-computers in the world: the ``ASCII Red'', about 8000 Intel Pentium Pro
+SGI Origin, which uses the MIPS R10000 and now also uses the 
+IA64/IA32 architecture also ``codenamed Merced''\footnote{see %
+\href{http://www.sgi.com/vision/tech.html}%
+{http://www.sgi.com/vision/tech.html} }
+like HP\footnote{see %
+\href{http://www.businessservers.hp.com/toolbar/5_10/csy_ia64support_index.html}%
+{http://www.businessservers.hp.com/toolbar/5\_10/csy\_ia64support\_index.html}}, 
+and of course one of the fastest
+computers in the world: the ``ASCII Red'', with about 8000 Intel Pentium Pro
 processors connected together.
 All these processors are
-also available in single machines, e.g. COMPAQ PCs uses DEC Alpha
+also available in single machines, e.g. COMPAQ PCs use DEC Alpha
 chips, Apple and IBM sell Power PC computers and of course you
 will get the Intel Merced in a PC in the near future. 
 
@@ -374,7 +382,8 @@ or run idle. Second the supercomputers of the late 90s are ``just''
 a collection of single standard processors connected via a high
 performance network, which costs most of the money. 
 
-On the other side there are many difficult problems, which can
+Then in the scientific and industrial areas
+there are many difficult problems, which can
 only be solved using very fast computers. This just means that
 the time to do the calculation on one processor takes months or
 even years and more. A natural step 
@@ -388,8 +397,8 @@ problem. So it is like inviting some friends to help moving
 from one appartment to another. Without your friends it would 
 take much longer, but now you have to manage for example ten people running
 around and have to tell them what to do, otherwise it would end up
-in a chaos. This already leads us to the problem of how to write
-concurrent programs?
+in a complete mess. This already leads us to the problem of how to write
+parallel programs?
 
 Before diving into the details, let us define, what we mean by parallel
 and concurrent:
@@ -407,22 +416,21 @@ interchangeably.
 Basically there are certain problems to be aware of, when writing
 concurrent programs: 
 \begin{itemize}
-\item There is still a lot of different hardware available, which
-        you might want to use as a parallel machine.
-        (the hardware question)
-\item How are the machines connected?
-        (the network question)
+\item What kind of the many different hardwares available, do you want 
+     to use as a parallel machine?  \emph{the hardware question}
+\item How are the machines connected? 
+        \emph{the network question}
 \item Is your problem at hand capable of being run in parallel, or
         differently stated: is it possible to get an algorithm
         for solving your problem in parallel?
-        (the algortihm question)
+        \emph{the algortihm question}
 \item How to tell the processors, how to cooperate with each other?
-        (the software question)
+        \emph{the software question}
 \end{itemize}
 Unfortunately there is still no possible way of avoiding to ask
 these questions before writing your code (at least you have to
-keep them in mind before you start parallel programs and ``pollute the network
-and keep the processors busy''.)
+keep them in mind before you start parallel programs and pollute the network
+and keep the processors busy.)
 
 \begin{figure}[htbp]
   \begin{center}
@@ -438,11 +446,25 @@ and keep the processors busy''.)
     \label{fig:NetworkOverview}
   \end{center}
 \end{figure}
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{ll}
+      Mbps & Million Bits Per Second \\
+      ATM & Asynchronous Transfer Mode \\
+      SCI & Scalable Coherent Interface \\
+      PPP & Point to Point Protocol \\
+      SLIP & Serial Line Internet Protocol \\
+      ADSL & Asymmetric Digital Subscriber Line  \\      
+    \end{tabular}
+    \caption{Abbreviations used in the area of networking models.}
+    \label{tab:NetworkingAbbrevs}
+  \end{center}
+\end{table}
 The first two questions above are mostly interconnected with the
-second one for a computer at hand, 
-with the second one often more difficult to answer than the first one. A 
-small (and incomplete) overview about possible network  
-technologies are given in figure \ref{fig:NetworkOverview}.
+third question about the capability of the problem to be parallelized.
+The network question being often more difficult to answer than the hardware
+question. A small (and incomplete) overview about possible network  
+technologies is given in figure \ref{fig:NetworkOverview}.
 
 A very important issue for writing concurrent programs and using
 a parallel machine is addressed by the memory model of the 
@@ -451,12 +473,30 @@ by the hardware: the shared memory model (SM) and the distributed
 memory model (DM). These refer to the access of the CPU to the
 memory available (not the disk space, this is a different concern).
 
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{ll}
+      CPU & Central Processing Unit \\
+      PC & Personal Computer \\
+      RAM & Random Access Memory \\
+      SMP & Symmetric Multi Processor \\
+      MPP & Massivley Parallel Processing \\
+      NUMA & Non Uniform Memory Access \\ 
+      SM & Shared Memory \\
+      DM & Distributed Memory\\
+      DSM & Distributed Shared Memory \\      
+    \end{tabular}
+    \caption{Abbreviations used for describing computer hardware.}
+    \label{tab:HarwareAbbrevs}
+  \end{center}
+\end{table}
 Lets look at two examples:  
 \begin{itemize}
-\item SM: a 2 processor SMP PC machine.\\
+\item SM: a 2 processor (SMP) PC machine.\\
 If you have one machine (say a PC), which has two CPUs, each one a
 Intel Pentium II with 350 MHz and a main memory of 128 MB RAM, then
-this is a shared memory machine having two processors. Both machines
+this is a shared memory machine having two processors. This of course
+is all put on one board (the motherboard). Both machines
 can access the memory at the same speed and they have equal priority.
 Of course if one of the processors wants to write or read the same
 address they have to be careful and probably have to wait for the other
@@ -468,7 +508,7 @@ network card (PCI or other) and a cable (e.g. twisted pair copper cable)
 connecting them. Each of the machines have 32 MB RAM, so altogether
 there are five times 32 MB RAM, which adds up to 160 MB RAM. But this
 memory is of course no longer available to all the processors at the
-same speed. If processor one wants to read/write a value from/to an address
+same speed. If one processor wants to read/write a value from/to an address
 in one of the other machines, it has to communicate using the network.
 So in this case we have a distributed memory.
 \end{itemize}
@@ -482,12 +522,16 @@ CPU the computer looks exactly the same, therefore the name SMP
 (Symmetric Multi Processor).
 
 The NUMA architecture refers to a special kind of shared memory architecture.
-For example the SGI Origin 2000\footnote{Until 1999 the crossbar technology was 
-bascially not available for Intel platforms, but now COMPAQ even proposes
-servers with up to eight Intel Xeon processors using crossbar technology. This
-again will lead to a decrease in hardware prices for the high performance
+For example the SGI Origin 2000 is an example 
+thereof.\footnote{Until 1999 the crossbar technology was 
+basically not available for Intel platforms, but now COMPAQ even proposes
+servers with up to eight Intel Xeon processors using crossbar technology
+called ``Profusion Eight-Way Architecture''
+(see \href{http://www.compaq.com/products/servers/technology/eightway-pd.html}%
+{http://www.compaq.com/products/servers/technology/eightway-pd.html}). 
+This again will lead to a decrease in hardware prices for the high performance
 shared memory (NUMA) architectures.} 
-is an example thereof. In this model
+In this model
 you take SMP boards (you can take single CPU boards too) each with
 a certain amount of onboard main memory and 
 put them together in a rack. The boards get connected by special
@@ -506,7 +550,7 @@ implemented in hardware and therefore hidden from the user.
 
 %%%%%%%%%%%%%%
 \subsection{The Software}
-Now that we have decided or know about the hardware we want to use
+Now that we have decided or know about the hardware to use
 for the problem we want to solve, we have to decide what software
 model to use to get all CPUs working for us.  
 
@@ -515,8 +559,8 @@ implementation of the problem to be solved. This is actually a
 difficult and time consuming part and you probably have many different
 strategies/algorithms for one single problem. 
 You also do not know beforehand, how
-each of the algorithms will compare to each other and 
-how they will perform on different hardware.
+each of the algorithms will compare to each other on the
+same platform and  how they will perform on different hardware.
 
 If you have an idea, how to use many CPUs for your problem, then you can
 start thinking about the software model to be used for your available hardware
@@ -525,7 +569,7 @@ This decision is the most difficult one, because it is not very easy
 to go back and use a different model. Writing the code 
 for a given software model might be very easy and fast or you might have to
 spend a few months to get an efficient code. Then you can run your program
-on different platforms and use the fastest platform for your problem.
+on different platforms and use the fastest available for your problem.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -554,7 +598,7 @@ on different platforms and use the fastest platform for your problem.
   \end{center}
 \end{table}
 
-But what are the differences between the software models?
+But what are the different software models?
 \subsubsection{RMI and COBRA}
 COBRA and RMI are basically an open standard for a service
 provided by many computers to distribute objects (in the sense of objects
@@ -593,11 +637,14 @@ JDK 1.2 API documentation.
 
 \subsubsection{OpenMP}
 If you want to spend
-less time for coding, you should use OpenMP, a directives based approach;
+less time for coding, you should use OpenMP, an approach based on
+directives.
 You just have to insert comments (FORTRAN) or pragmas (C/C++) before the 
 code you want to be executed in parallel.
 The DoAccross directives and other directives based models were the
-forerunners of OpenMP and should not be used anymore. The advantage of OpenMP is,
+forerunners of OpenMP and should not be used anymore, because
+all companises have already or are going to switch to the OpenMP
+standard sooner or later. The advantage of OpenMP is,
 that you do not have to change your serial program, you just add comments
 (or pragmas in C/C++) and most of the work is done by an appropiate compiler.
 The drawbacks are the restriction to shared memory machines\footnote{There are
@@ -620,13 +667,14 @@ If you want to spend more time thinking about how the data and the
 work can be distributed to the avialable processors, then you can go with 
 HPF. HPF employs a data distributed model and 
 is of course only available to Fortran 77/90/95 programmers and
-have not found a very widespread use. But still it is a viable tool for
+has not found a very widespread use. But still it is a viable tool for
 many problems and it is available on almost any computer architecture.
 An interesting solution is the (free) ADAPTOR software, which converts HPF programs
-to Fortran 90 with MPI calls or you can convert to OpenMP directives. 
+to Fortran 90 with MPI calls or OpenMP directives. 
 
 \subsubsection{MPI / PVM}
-Even more work and time has to be spent to write a MPI/PVM program. PVM was
+Even more work and time has to be spent to write a MPI/PVM (see table
+\ref{tab:ParallelAbbrev} program. PVM was
 the first available message passing interface, but has meanwhile been
 abandoned by most people in favour of MPI, which is today the standard to use
 for writing message passing programs. 
@@ -643,7 +691,7 @@ The compiler (or to be  exact the library) just translates the MPI commands
 to a lower level of networking commands, depending on the available library and
 network hardware used. 
 
-For example if you have a ethernet network with
+For example if you have an ethernet network with
 several PCs running Linux/Windows, you can install a free version of MPI
 (e.g. MPICH or LAM) and compile the MPI programs. The code will then be run on all
 requested CPUs using the ethernet protocol to communicate and exchange data.
@@ -657,8 +705,9 @@ for all platforms and hardware architectures, so it is completly portable.
 The last alternative for writing parallel programs is using threads. Threads are small
 parts of a single program, which are to be executed by the same CPU using
 time sharing or by a separate CPU. 
-So it is kind of using MPI calls, but this time you have to use functions,
-which are implemented on the level of the underlying operating system.
+So it is kind of using MPI calls, but this time you are not calling
+high level library functions, but low-level functions.
+These are implemented on the level of the underlying operating system.
 This means your program is very fast in starting a job on a different CPU
 and it is very easy to have global variables, but you are confined to
 shared memory machines and to a certain operating system. So this is usually
@@ -673,7 +722,8 @@ program running correctly compared to an MPI or OpenMP program. But it
 definitly has become an interesting alternative, if Java is becoming much
 faster in the next few years (and we are sure it will).
 
-\subsubsection{Amdahl's Law}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Amdahl's Law}
 At last we want to mention an important point, which has already been made 
 by G. Amdahl in 1967: If you denote the part of a program to be run
 sequentially by $f$, then the ``speedup'' $S_N$ can be calculated as
@@ -762,7 +812,7 @@ in a directory
  .../Symphony/SymphonyServer/data/DogFlea/run0/ 
 \end{verbatim}
 The second step is to extract the results from the logfile, e.g. use the
-follwowing program:
+following program:
 \inputlisting{Listings_Java/ConvertSymphony.java}
 This produces a data file containing the variables (\verb|n0d Nd na nb|) 
 and can be plotted using Ptplot or by any plotting program e.g. gnuplot (after 
@@ -775,21 +825,26 @@ Now we take a look at Java Threads, the details can be found in
 \cite[]{JavaThreads}. 
 
 A \emph{thread} is a shorthand for ``thread of control'' and stands for a
-section of code executed independendly of other threads in a single program.
+section of code executed independendly of other portions of the code
+ in a single program.
 You are actually already familiar with this concept, because every operating
 system today uses multitasking to run multiple programs at the same time sharing
 one CPU. If you view these ``tasks'' as single threads, we only have to
-extend to multiple threads in a singl program. In Java the JVM is responsible
+extend to multiple threads in a single program. 
+
+In Java the JVM is responsible
 of starting multiple threads in your code. That is also where the restrictions
 come in: most of the JVMs did not support multiple threads running in
-parallel on SMP machines, meaning that you do not have real parallel 
-programs working with all available CPUs. Nevertheless is the concept
-of threads useful for single processor machines. For example we have 
+parallel on SMP machines so far, meaning that you do not have real parallel 
+programs working with all available CPUs. Nevertheless the concept
+of threads is useful for single processor machines. For example we have 
 already met this case in the last chapters, where we did extensive
 calculations, while still the user had the opportunity to interrupt the 
 calculation by hitting a mouse button or moving the mouse. This is only
 possible, if during the simulation a thread is always asking for user 
-intervention. The JVM thread implementation of multiple threads, but only one thread
+intervention. 
+
+The JVM thread implementation of multiple threads, with only one thread
 being active at a time, is called \emph{green threads}\footnote{These
 threads are user-level threads. It means that the first thread started by the
 operating system starts multiple threads itself and the operating system
@@ -811,8 +866,9 @@ To that end we need a JVM, which supports ``real'' threads or so-called
 native threads\footnote{These are so-called kernel-level threads. This time the
 kernel of the operating system has to do some context switching and
 therefore there is a little overhead compared to user-level threads.}. 
-If your JVM supports native threads should be stated in the documentation
-somewhere. For the JDK, all the 1.2 versions on all platforms support and
+If the JVM you are using supports native threads, should be stated in 
+the JVM documentation. 
+For the JDK, all the 1.2 versions on all platforms support and
 use native threads without further notification. For JDK 1.1.7 running
 Linux/Solaris you can get an additional package, which supports native
 threads. To call the native threads version you have to use
@@ -823,15 +879,20 @@ For the case where you only want to have user interaction and calculation
 running in ``parallel'', like in the molecular dynamics simulation or the
 Ising model, we are better off with the green threads. 
 
-Applets also employ threading, but here we also have to check if we
-``only'' have green threads or even have native threads available.
+Applets also employ threading, but here we also have to check if the
+browser or appletviewer running the applet 
+``only'' have green threads or even support native threads.
 Actually I do not know of any JVM implemented in a web browser capable
-of using native threads yet. But the need for threads in applets is even
-more important, because if you have an applet on top of a web page and
+of using native threads yet. But the need for threads (green threads)
+in applets is even
+more important than for applications, 
+because if you have an applet on top of a web page and
 the applet has to do some time consuming initializations, it will stop
 showing the rest of the page until the applet finishes. If the browser
-itself uses a seperate thread for the applet, this is not a concern, but
-still you should use threads for time consuming operations in an applet.
+itself (not the Java applet) uses a seperate thread for the applet, 
+this is not a concern, but
+still you should use your own Java threads 
+for time consuming operations in an applet.
 
 Now let us take a look at our example and how we can use Java threads to
 speed up our calculation of the Ehrenfest model. The Thread class in Java
@@ -1012,23 +1073,25 @@ user-level threads. The use of JDK1.2 is just due to the fact that a JIT is
 already supplied with the 1.2 version and we wanted to speed up the program.
 You could also use another JIT with JDK1.1.
 
-You should also note that the messages appear randomly and do not in
+You should also note that the messages appear randomly and not in
 any order. So if you use output in threads you should always remember,
 that there is no given order for the output to be send to the screen. This
 will be also true for MPI programs.
 
-The reason for the randomness is the way of the JVM to execute the threads.
-This is called the ``Scheduling of threads''. Like the operating
-system has to tell, which processes are to be executed at what time
-and how long the JVM has to use a scheduling algorithm to tell each
+The reason for the randomness is the way the JVM executes the threads.
+This is called the ``scheduling of threads''. Like the operating
+system has to tell, at what time
+and how long the processes are to be executed ,
+the JVM has to use a scheduling algorithm to tell each
 thread, when it has to go on and when it has to wait. Because this
-is a difficult isu, we do not go into details. The scheduling used
-in the JDK is not written in detail in the JVM specifications and therefore their
-are certain differences on different platforms. It states only that it
-has to be an pre-emptive, priority based scheduler, where the priority
+is a difficult issue, we do not go into details. The scheduling used
+in the JDK is not written in detail in the JVM specifications and therefore 
+there
+are differences on different platforms. It only states that it
+has to be a pre-emptive, priority based scheduler, where the priority
 (greater equal to zero) is a natural number and the highest number
-refers to higher priority. Threads of equal priority are the case, which
-makes most of the problems. For a more detailed discussion and examples
+refers to higher priority. The case of threads with equal priority
+creates most of the problems. For a more detailed discussion and examples
 of e.g. a Round-Robin Scheduler written in Java,
 you should take a look at a book about threading (like \cite[]{JavaThreads}).
  
@@ -1040,7 +1103,7 @@ are certain constructions to be used, like the \verb|synchronized| keyword.
 Because this is a rather complex topic, you should consult a 
 comprehensive discussion, e.g. in \cite[]{JavaThreads}.   
 
-Just to complete this section, we want to mention some more methods of
+Just to complete this section, we want to mention additional methods of
 the Thread class. 
 \begin{description}
 \item[static void sleep(long t)] This method stops the execution of a 
@@ -1051,12 +1114,14 @@ with  the \verb|boolean isActive()| method of the Applet class, which
 returns true, if the applet is somewhere still executing (executing
 code between the \verb|start()| and the \verb|stop()| method.).
 \item[static Thread currentThread()] This returns the thread object of the current
-  thread
-\item[static int activeCount()] Returns how many thread are running.
+  thread.
+\item[static int activeCount()] Returns how many threads are running.
 \end{description}
-There are many other methods, but many of them are depreciated as of
-Java 2 (e.g. \verb|suspend(), stop(), resume(),| etc.), 
-because they introduce serious problems.
+There are many other methods, but some of them are already depreciated as of
+Java 2 (e.g. \verb|suspend()|, \verb|stop(), resume(),| etc.), 
+because they introduce serious problems. Depreciated means, you should avoid 
+using these functions, because they might not be available in a new Java 
+version anymore.
 
 There is one last remark you should keep in mind: Never restart a thread!! 
 The reason for this is a bit involved and the interested reader should
