@@ -120,11 +120,12 @@ public class Histogram  {
     }    
 
     /** Plot the result of the histogram estimate in a table on
-        the screen. */
+        the screen. Use the formatting of Fmt class. */
     public void print() {
         for (int i=0; i<bins; i++) {
-            System.out.println(" ["+points[i]+","+points[i+1]+"] : "+
-                               histogram[i]);
+            System.out.println(" [ "+Fmt.fmt(points[i],6,3)+","+
+                               Fmt.fmt(points[i+1],6,3)+"] : "+
+                               Fmt.fmt(histogram[i],8));
         }
     }
 
@@ -213,6 +214,23 @@ public class Histogram  {
         double method for histograms. */
     public static int[] histogram(int[] data, double[] points, int number) {
         return Histogram.histogram(data,points,number,points.length-1);
+    }
+
+
+    /** A test main program. */
+    public static void main(String[] args) {
+        int N=1000;
+        double[] array=new double[N];
+
+        // Create random data
+        for (int i=0; i<N; i++) {
+            array[i]=Math.random(); }
+        
+        // call histogram
+        Histogram histo = new Histogram(array);
+        histo.estimate();
+        histo.plot();
+        histo.print();
     }
 
 } // Histogram
