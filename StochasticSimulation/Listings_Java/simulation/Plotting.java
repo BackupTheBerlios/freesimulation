@@ -1,7 +1,7 @@
 package simulation;
 
 import java.applet.Applet;
-import ptplot.*;
+import ptolemy.plot.*;
 
 public final class Plotting {
 
@@ -17,6 +17,23 @@ public final class Plotting {
       lowY=y[i]-yerr[i];
       highY=y[i]+yerr[i];
       PlotObject.plot().addPointWithErrorBars(plotNumber,
+                                              x[i],y[i],lowY,highY,connect);
+      if (connect==false) connect=true;
+    }    
+  }
+
+  /** Plot a graph using errorbars.
+      yerr contains the positive, symmetric error in the data points. */
+  public static void errorBar(Plot PlotObject, int plotNumber,
+                              double[] x, double[] y, double[] yerr,
+                              int number) {
+    double lowY,highY;    
+    boolean connect=false;
+    for (int i=0; i<number; i++) {
+      // Calculate the error bars
+      lowY=y[i]-yerr[i];
+      highY=y[i]+yerr[i];
+      PlotObject.addPointWithErrorBars(plotNumber,
                                               x[i],y[i],lowY,highY,connect);
       if (connect==false) connect=true;
     }    
@@ -42,6 +59,25 @@ public final class Plotting {
       PlotObject.plot().addPoint(plotNumber,midpoints[i],histogram[i],connect);
     }
   }
+
+  public static void barGraph(Plot PlotObject, int plotNumber,
+                              double[] points, int[] histogram, int bins,
+                              double barWidth) {
+    PlotObject.setBars(barWidth,0);
+    // Calc midpoints
+    double[] midpoints=new double[bins];
+    for (int i=1; i<bins-1; i++) {
+      midpoints[i]=points[i-1]+(double)(points[i]-points[i-1])/2;
+    }
+    midpoints[0]=points[0]-(double)(points[1]-points[0])/2;
+    midpoints[bins-1]=points[bins-2]+(double)(points[bins-2]-points[bins-3])/2;
+
+    boolean connect=false;
+    for (int i=0; i<bins; i++) {
+      PlotObject.addPoint(plotNumber,midpoints[i],histogram[i],connect);
+    }
+  }
+
 
   /** plot a graph connecting all points, 
       except the first with the last one.
