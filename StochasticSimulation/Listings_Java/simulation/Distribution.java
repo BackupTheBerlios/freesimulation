@@ -124,14 +124,43 @@ public class Distribution {
     return -Math.log(dummy)/w;
   }
 
-  /** Generate binomial distributed random numbers using
-      direct method (for small n). Parameters: n and p
-   */
-  public static int nextBinomial(Random rand, int n, double p) {
+    /** Generate binomial distributed random numbers using
+        direct method (for small n). Parameters: n and p
+    */
+    public static int nextBinomial(Random rand, int n, double p) {
       int hits=0;
       for (int i=0; i<n; i++) {
 	  if (rand.nextDouble() < p) hits++;
       }
       return hits;
   }
+
+    /** Generate Levy distrubuted randm numbers.
+        Parameter: alpha */
+    public static double nextLevy(Random rand, double alpha){
+      double gamma;
+      double w;
+      double dummy1;
+      double dummy2;
+      gamma= (rand.nextDouble()-0.5)*Math.PI/2.;
+      w = -Math.log(rand.nextDouble());;
+      dummy1= Math.sin(alpha*gamma)/Math.pow(Math.cos(gamma),1./alpha);
+      dummy2= Math.cos((1.-alpha)*gamma)/w;
+      dummy2= Math.pow(dummy2,(1-alpha)/alpha);
+      return dummy1*dummy2;
+  }
+
+    /** Generate symmetric Levy distributed random numbers using
+        transformation method with stability index alpha.
+        (after Chambers, Mallows, Stuck, 1976)
+    */
+    public static double nextLevy(Random rand,double alpha) {
+        double uniform,expo;
+        
+        uniform=rand.nextDouble()*Math.PI-Math.PI/2;
+        expo=nextExponential(rand); // mean 1
+        return Math.sin(alpha*uniform)/Math.pow(Math.cos(uniform),1/alpha)*
+            Math.pow(Math.cos((1-alpha)*uniform)/expo,(1-alpha)/alpha);
+    }
+
 }
