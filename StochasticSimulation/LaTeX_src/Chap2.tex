@@ -1089,9 +1089,62 @@ In general we have...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
-{\bf Exercise 1} Test of the random number generator. Write a 
-program which estimates the first 10 moments of rand and compare 
-the result of the simulation with the expected analytical value.
+
+\begin{Ex}
+\label{Random-Number_Generator_Check}
+\textbf{Random-Number Generator Check \cite[]{knuth2:81}} \\
+To test the random number generator of Matlab, we calculate the first
+10 moments of the distribution generated from \texttt{rand()}.
+Compare these with the exact results for a uniform distribution.
+
+Plot a histogram to check for a uniform distribution.
+
+Use the Poker-Test for testing \texttt{rand}: Create many series of 5
+random numbers between 1 and 13. Then count the fractions of hands
+with two, three and four identical (numbers) cards. Compare the
+result with the predictions:
+\begin{center}
+  \begin{tabular}{lrr}
+hand & number of ways& probability\\\hline
+all different (no pair) & 1,302,540 & 0.50117739\\
+two of a kind & 1,098,240 & 0.42256903\\
+three of a kind & 54,912 & 0.021128451\\
+four of a kind & 624 & 0.000240096 \\\hline
+Total number of possibilities & 2,598,960 & 1
+\end{tabular}
+\end{center}
+For a rigorous check you have to use the chi-squared test for
+your results. If you are interested, take a look at the book of D. Knuth.   
+\end{Ex}
+
+\begin{Ex}
+\label{Galton_Board}
+\textbf{Galton Board and Pascal Triangle \cite[]{whitney:90}} \\
+Write a program to simulate a Galton Board on the computer.
+
+\begin{center}
+\includegraphics[height=4cm]{Galton_Board.eps}
+\end{center}
+
+That is a device where you introduce a ball at the top. The ball
+falls down towards the bottom, bouncing off the pins to the right
+or left at each level. The only random effect is the bouncing at
+the pins at each level. The probability of bouncing to the right or
+left is always $0.5$. Therefore it is a simple model for a symmetric
+random walk in one dimension.
+
+How can you extract the number of ways to get to one particular
+box at the end of the board out of the estimated probabilities above?
+What is the connection to the Pascal Triangle?
+
+Change the program to simulate a asymmetric random walk in one
+dimension.
+\end{Ex}
+
+%\begin{Ex}
+%\end{Ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {\bf Exercise 2} Random variable transformation theorem: (a) Consider 
 the linear transorm of X: Y=bX+c. (b) the log--normal 
@@ -1104,4 +1157,4 @@ Verteilungen (Poisson, Gauss, Binomial);
 
 
 \bibliographystyle{peter}
-\bibliography{V_98}
+\bibliography{V_98,simulit}
