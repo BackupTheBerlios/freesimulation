@@ -1,0 +1,271 @@
+\chapter{Stochastic differential equations}
+In the previous section we have derived an exact simulation algorithm
+for the generation of trajectories of the Ornstein--Uhlenbeck process.
+The ``exact'' update formula was
+\begin{equation*}
+X{t+\Delta t} = X(t) \exp(-q \Delta t) +
+  \left[ \frac{D}{2q}(1-\exp(-2q\Delta t)) \right]^{1/2} \eta(t),
+\end{equation*}
+where we have now written $\eta(t)$ to stress the fact that at each
+time step $t$ we hace to draw another Gaussian distributed random 
+number. The update formula is exact in the sense that it holds for
+arbitrary values of $\Delta t$.
+
+However, it will turn oput to be convenient to have an update formula
+which works for small valkues of $\Delta t$. To this end we expand the
+exact update formula to first order in $\Delta t$ and obtain
+\begin{eqnarray}
+X(t+\Delta t)& =& X(t) (1- q \Delta t) + 
+   \left[ \frac{D}{2q} (2q \Delta t) \right]^{1/2} \eta(t) \nonumber
+   \\
+\label{SDE_APPROX} 
+  & = & X(t) - qX(t) \Delta t + \sqrt{D} \sqrt{\Delta t} \eta(t).
+\end{eqnarray}
+In the limit $Delta t \rightarrow 0$ this approximate uodate formula
+turns exact.  We recognize immediately that the stochastic increnet in
+this discretized version of the Ornstein--Uhlenbeck process scales
+with the square root of the time increment $\Delta t$.
+
+It is now very important to realize that the 
+approximation (\ref{SDE_APPROX}) can be regarded as the discretization
+of a differential equation of the form
+\begin{equation*}
+\dot{X}(t) = -q X(t) + \sqrt{D} \eta(t).
+\end{equation*}
+Due to the presence of a stochastic term, the Gaussain stochastic
+process $\eta(t)$ the above equation is a typical example of a 
+so--caled {\em stochastic differential equation} (SDE). It is the aim
+of this section to introduce into some  peculiarities of stochastic
+differential equations. In particular we will also show the
+equivalence of stochastic process defined in terms of stochastic differential
+equations and in terms of Fokker--Planck equations.
+
+The above expression is a special case of the  {\em standard form} of
+a stochastic differential equation (some times stochastic
+differential equations are also called {\em Langevin} equations):
+\begin{equation}
+\label{SDE_LANGEVIN_DISCR}
+X(t+dt) = X(t) + A(X(t),t)dt + D^{1/2} \eta(t) dt^{1/2},
+\end{equation}
+where we have replaced $\Delta t$  by $dt$ to stress the infinitesimal
+character of the above equation. The term proportional to $dt$ is
+called the {\em drift term}, wheras the term proportional to
+$\sqrt{dt}$ is called the diffusion term. 
+
+The above definition of the stochastic process $X(t)$
+in terms of a stochastic differential equation  cleary shows that
+the stochastic process $X(t)$ is continuous, but, in general, not 
+differentiable. This can be seen by writing
+Eq. (\ref{SDE_LANGEVIN_DISCR}) as
+\begin{equation*}
+\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \eta(t)}
+                                              {\sqrt{dt}}.
+\end{equation*}
+Obviuosly, the limit $dt \rightarrow 0$ of the above equation does not
+exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
+is everywhere continuous but nowhere differntiable. Nevertheless it is
+custumary to ``pretend'' \cite{GILLESPIE} that $dx/dt$ exists even for
+nonvanishing $D$. In fact we know that we can write
+\begin{equation*}
+\frac{\eta(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
+{\bf N}(0,1/dt).
+\end{equation*}
+So, we may define a gaussian {\em white noise process} as
+\begin{equation*}
+\xi(t) \equiv \lim_{dt \rightarrow 0}  {\bf N}(0,1/dt).
+\end{equation*}
+With the help of the above definition, we can now formally write
+\begin{equation*}
+\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D}(X(t),t) \xi(t).
+\end{equation*}
+This equation is called the white noise form of the Langevin equation.
+The white noise process introduced above does have the following
+averaged properties:
+\begin{eqnarray*}
+\langle \xi(t) \rangle &=& 0 \\
+\langle \xi(t) \xi(t´) \rangle &=& \delta(t-t´). 
+\end{eqnarray*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{The Langevin equation and Brownian motion}
+In 1908 Langevin considered the problem of the dynamical 
+description of Brownian motion. He suggested that the equation of 
+motion of a Brownian particle with mass $m=1$ be described by the
+following differential equation for the velocity $V$
+\begin{equation}
+\label{LANGEVIN}
+\frac{d}{dt} V = -\gamma V + L(t),
+\end{equation}
+where the terms on the right hand--side of the above equation 
+model the forces which the surrounding molecules excerpt on the 
+Brownian particle. Since these forces are unknown in detail the 
+following assumptions were postulated. The Brownian particle 
+moving in the fluid of surrounding particles feels
+a friction which is proportional to its velocity, $\gamma$  being 
+the friction coefficient. Furthermore, the Brownian particle hits
+the surrounding particles. These collisions cause irregular 
+changes in the velocity of the Brownian particle. Thus, the external force
+$L(t)$ is modeled as a stochastic process. The first two moments of the
+stochastic process $L(t)$ are assumed to 
+have the following properties
+\begin{eqnarray*}
+\langle L(t) \rangle &=& 0 \\
+\langle L(t) L(t') \rangle &=& \Gamma \delta(t-t').
+\end{eqnarray*}
+
+The Langevin equation is the prototype of a stochastic 
+differential equation, i.e. of a differential equation whose
+coefficients are random functions of the time with some given
+statistical properties. The stochastic process $V(t)$ is 
+completely defined once an initial condition $V(0)=V_0$ is specified.
+Its formal solution reads
+\begin{equation*}
+V(t) = V_0 \exp(-\gamma t) + \exp(-\gamma t) 
+    \int_0^t dt \exp(\gamma t') L(t').
+\end{equation*}
+Taking the average over an ensemble of Brownian particles all
+having the same initial condition we find for the mean value of 
+the velocity
+\begin{equation*}
+\langle V(t) \rangle = V_0 \exp(-\gamma t),
+\end{equation*}
+where we made use of the statistical properties of the Langevin 
+force $L(t)$. Accordingly, the second moment of the velocity field
+is found to be
+\begin{eqnarray*}
+\langle V^2(t) \rangle &=& V_0^2 \exp(-2\gamma t)
+          + \exp(-2 \gamma t) \int_0^t dt'' \int_0^t dt'
+             \exp(\gamma (t' + t'')) \langle L(t') L(t'') \rangle 
+             \\
+          &=& V_0^2 \exp(-2\gamma t) + \frac{\Gamma}{2 \gamma}
+             [1-\exp(-2 \gamma t)].
+\end{eqnarray*}
+Up to now the constant $\Gamma$ was left unspecified. From 
+equilibrium statistical physics we  expect that for long times 
+\begin{equation*}
+\langle V^2(t\rightarrow \infty) \rangle = kT.
+\end{equation*}
+Hence we have
+\begin{equation}
+\label{FDT}
+\Gamma = 2 \gamma kT
+\end{equation}
+and we have established a relation between the attrition 
+coefficient $\gamma$ and the random fluctuations.
+Eq. (\ref{FDT}) is a simple version of the so--called
+fluctuation--dissipation theorem.
+
+\subsection{The Ito formula}
+
+
+
+
+\subsection{The equivalence of stochastic differential equations 
+and of the Fokker--Planck equation}
+
+\section{The numerical integration of stochastic differential 
+equations}
+\subsection{The Ornstein--Uhlenbeck process}
+
+
+
+
+
+
+\subsection{Brownian motion}
+As an example of the application of the Fokker--Planck
+equation we consider Brownian motion. A heavy particle is immersed 
+in a fluid of light particles. The large particle and the small 
+molecules collide in a random fashion. These 
+collisions induce sudden variations of the velocity of the 
+Brownian particle. As a consequence the position $X$ of the Brownian 
+motion may be described by a Markov 
+process, if observed on a time scale which is larger then the 
+autocorrelation time of the velocity, i.e. many collisions have 
+occurred between two observations. If we regard, for simplicity a 
+one--dimensional 
+situation, the Brownian particle makes random jumps back and forth 
+along the $x$--axis. The jumps may have any length, but the
+probability for large jumps falls off rapidly. 
+It is reasonable to assume that these probabilities are 
+symmetrical and independent of the starting point.
+
+Hence we have
+\begin{equation*}
+a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
+\end{equation*}
+and
+\begin{equation}
+a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
+\end{equation}
+The Fokker--Planck equation of Brownian motion thus reads
+\begin{equation}
+\label{BROWNIAN}
+\frac{\partial}{\partial t} P(X,t) = \frac{a_2}{2} 
+    \frac{\partial^2}{\partial x^2} P(x,t).
+\end{equation}
+The above equation is a diffusion equation and we immediately
+identify the diffusion constant to be
+\begin{equation}
+D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
+\end{equation}
+The above relation is known as the Einstein relation. It relates 
+the diffusion constant with the microscopic jumps of the Brownian 
+particle.
+
+Let us now consider an ensemble of Brownian particles, which are
+concentrated in $X=0$ at time $t=0$. Their position at time $t$ is 
+a stochastic process $X(t)$, whose transition probability is given 
+by (\ref{BROWNIAN}). This process, as we know, is a Wiener 
+process. The probability density of the Brownian particles  with 
+initial condition $P(x,0) = \delta(x)$ at time $t>0$ is easily 
+found to be
+\begin{equation}
+P(x,t) = \frac{1}{\sqrt{4 \pi D t}} \exp(-x^2/4Dt).
+\end{equation}
+This is a gaussian with maximum at $x=0$ and whose standard variation grows
+as
+\begin{equation}
+\langle X^2(t) \rangle = 2 D t.
+\end{equation}
+Hence, the width of the distribution increases with the square 
+root of the time. A behaviour which we already know from our 
+discussion of random walks.
+
+
+
+\bibliographystyle{peter}
+\bibliography{V_98}
+
+
+\chapter{Monte Carlo Methoden in der statistischen Mechanik}
+Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
+Simulated annealing; travelling salesman;
+
+\chapter{Non-equilibrium MC}
+Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
+
+\chapter{Brownsche Dynamik Simulationen}
+Omega-entwicklung; SDE;
+
+
+\chapter{Rest}
+stochastische Resonanzen; Muster Erkennung; random Walks;
+
+\chapter{Stochastische Wellenfunktionsmethoden}
