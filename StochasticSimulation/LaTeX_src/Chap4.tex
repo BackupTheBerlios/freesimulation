@@ -1,4 +1,5 @@
 \chapter{Markov Processes and Master Equations}
+
 This chapter is devoted
 to the introduction of some mathematical concepts, which allow the
 correct treatment of time--dependent probabilistic phenomena. 
@@ -1082,7 +1083,7 @@ function as a function of $x$ reads
 \tilde{G}(s,t) &=& G(sl,t) = \langle \exp(ixs) \rangle \\
                 &=& \exp\{[\exp(ils) + \exp(-ils)-2]tq \}.
 \end{eqnarray*}
-The limit of infinitesimally small steps $l \longrightarrow 0$ 
+The limit of infinitesimally small steps $l \longrightarrow 0 (ql=\text{const.})$ 
 leads to
 \begin{equation}
 \label{CHAR_WALK_X}
@@ -1209,6 +1210,7 @@ on the right--hand side is the diffusion term. In a later section
 we will learn how to deal with this equation.
 
 \subsection{The Wiener Process}
+\label{sec:WienerProcess}
 Let us consider the important special case 
 of vanishing drift, i.e. $a_1=0$, and diffusion coefficient
 equal to one, i.e. $a_2=1$. The generator takes the form 
@@ -1484,8 +1486,8 @@ and variance
 \end{equation}
 Since the Ornstein--Uhlenbeck process is a Gaussian process we can write
 \begin{equation*}
-X(t) = {\bf N}(X_0\exp(-2q(t-t_0)), 
-     \frac{D}{2q} (1-\exp(-2q(t-t_0)) ).
+X(t) = {\bf N}\left(X_0\exp(-2q(t-t_0)), 
+     \frac{D}{2q} (1-\exp(-2q(t-t_0)) ) \right).
 \end{equation*}
 In contrast to the Wiener process the Ornstein--Uhlenbeck process
 has a stationary distribution in the limit $t\longrightarrow \infty$
@@ -1498,7 +1500,7 @@ Ornstein--Uhlenbeck process. The problem is to find a way of
 determining  from the value of the process $X$ at time $t$
 its value at a later time $t+\Delta t$. As for the generation of 
 trajectories of the Wiener process it is possible to construct
-an update formula for the Ornstein--Uhlenbeck process which is 
+an update formula for the Ornstein--Uhlenbeck process, which is 
 exact for any positive value of the time increment $\Delta t$
 (\cite{GILLESPIE96}). In order to derive an update formula we
 replace in Eqs. (\ref{MEAN_ORNSTEIN}) and (\ref{VAR_ORNSTEIN})
@@ -1539,9 +1541,16 @@ update the process replacing $X$ by $\mu X + \sigma \xi$.
 
 (vi) Goto (iv).
 
-In Fig. (??) we show the flow diagram of the program 
+In figure \ref{fig:FlowOrnstein} we show the flow diagram of the program 
 \texttt{ornstein.m} which will be used to generate the 
 realizations. The listing of the program can be seen below.
+\begin{figure}[htbp]
+  \begin{center}
+    \label{fig:FlowOrnstein}
+%%% ???   \includegraphics[height=\textheight]{Figures/FlowOrnstein.eps}
+    \caption{The flow diagram of the simulation of the Ornstein-Uhlenbeck process.} 
+  \end{center}
+\end{figure}
 
 \subsubsection{Listing of the program \texttt{ornstein.m}}
 \inputlisting{./Listings/ornstein.m}
@@ -1605,7 +1614,7 @@ variable
 \end{displaymath}
 has the same probability density function as the $X_i$.
 Now let us consider a slight generalization of the random walk. We consider
-an $N$--step random walk in one dimension , with each step of length $x$
+an $N$--step random walk in one dimension, with each step of length $x$
 governed by the same probability density $p(x)$, with zero mean. Note, that we
 expressively do not make any assumption about the variance! The French
 mathematician Paul L\'evy \footnote{Paul L\'evy (186--1971)} posed the
@@ -1619,8 +1628,9 @@ as the individual
 steps? As remarked in \cite{Klafter:PhysicsToday} this is the fundamental
 question of fractals: When does the whole look like its parts?
 
-Of course, we already know two answers to the above question. Of course, 
-as we just recalled in the introductury remarks 
+??? Abschnitt unverstaendlich !!!
+Of course, we already know two answers to the above question.  
+As we just recalled in the introductory remarks 
 $p(x)$ may be  a
 Gaussian density. And we know already that $p(x)$ may be a Cauchy density
 \begin{displaymath}
@@ -1654,8 +1664,8 @@ $c_N >0$ and $\gamma_N$ such that
   S_N {d \atop =} c_N  X + \gamma_N.
 \end{equation}
 The distribution $R$ is called stable in the strict sense if 
-(\ref{eq:StableDef}) holds with $\gamma_n =0$. 
-The above definition can also be formualted equivalently in the following
+(\ref{eq:StableDef}) holds with $\gamma_N =0$. 
+The above definition can also be formulated equivalently in the following
 form: $R$ is stable if to arbitrary constants $c_1$,  $c_2$  there exist
 constants $c$ and $\gamma$ such that
 \begin{displaymath}
@@ -1739,10 +1749,10 @@ distribution with variance! Remarkably similar limits may be formulated for
 distributions without variance. Only stable distributions occur as such limits.
 Consider for example a stable distribution with $\alpha <1$. The average
 $(X_1 + \cdots + X_N)/N$ has the same distribution as $X_1 N^{-1 + 1/\alpha}$,
-and the last factor tends to infinity. In other words the the average of $N$
+and the last factor tends to infinity. In other words the average of $N$
 variables is likely to be larger than any of the components $X_k$. This is, of
 course, only possible if the maximal term $\max[X_1, \ldots, X_N]$ grows
-exceedingly large and receives a dominating influence on tzhe sum $S_N$.
+exceedingly large and receives a dominating influence on the sum $S_N$.
 
 Thus, we are now able to answer the question raised by L\`evy, which we
 mentioned at the beginning of the section. If $X_i$, $i=1, \ldots, N$ are
@@ -1755,26 +1765,30 @@ has the same probability density function as the $X_i$. It is important to
 remark that the sum scales as $N^{1/\alpha}$ and not as $\sqrt{N}$, as it is
 the case for a diffusive random  walk.
 
-Let us conclude by mentioning that We already met two examples of 
+Let us conclude by mentioning that we already met two examples of 
 stable distributions, the normal distribution
 which corresponds to the case $\alpha = 2$
 and the Cauchy distribution, which corresponds to the case
 $\alpha =1$. For the case $\alpha =1/2$ there is also a stable distribution
-with density $p(x)=0$ for $x \le 0$ and 
+with density  
 \begin{displaymath}
-p(x) = \exp\left(- \frac{b^2}{4x} \right) 
-           \left\{ \frac{b^2}{4 \pi x^3} \right\}^{1/2}
+  p(x) = 
+  \begin{cases}
+    0 & \text{for}\, x\le0 \\
+    \exp\left(- \frac{b^2}{4x} \right) 
+    \left\{ \frac{b^2}{4 \pi x^3} \right\}^{1/2} & \text{for}\, x>0 
+  \end{cases}
 \end{displaymath}
-for $x>0$ and with norming constants $c_N = N^2$. This probability density is
+and with norming constants $c_N = N^2$. This probability density is
 called the Smirnov density.
 
 In the next section we are going to construct the
-most general form of all stable distributions, which is due to L\'evy..
+most general form of all stable distributions, which is due to L\'evy.
 
 
 \subsection{The Cauchy Process}
 \subsubsection{Bachelier's Chain Equation}
-Let us now consider a Markov process $X(t)$ and let its space of states by
+Let us now consider a Markov process $X(t)$ and let its space of states be
 $R$. As we know the conditional transition probability $T(x,t|x',t')$
 satisfies the Chapman--Kolmogorov equation. In order to derive a differential
 form of the Chapman--Kolmogorov equation to describe Brownian motion
@@ -1853,9 +1867,9 @@ Chapman--Kolmogorov equation, paralling the construction of an exact algorithm
 for the Wiener process, we may use the fact that the increments of the Cauchy
 process
 \begin{displaymath}
-  \Delta C_i \equiv C(t_i) -  C(t_{i-1}
+  \Delta C_i \equiv C(t_i) -  C(t_{i-1})
 \end{displaymath}
-are statistically independent and distributed according toa Cauchy density
+are statistically independent and distributed according to a Cauchy density
 \begin{displaymath}
   P(\Delta C, \Delta t) = \frac{\Delta t}{\pi }
                           \frac{1}{(\Delta x)^2  + \Delta t^2.}
@@ -1867,7 +1881,7 @@ Obviously, the exact algorithm is straightforward and reads:
 (ii) Draw a Cauchy distributed random number $\Delta C$ around 0 with
 half--width $\Delta t$.
 
-(iii) Advance the stochasticprocess according to 
+(iii) Advance the stochastic process according to 
 \begin{displaymath}
   C(t+\Delta t) = C(t) + \Delta C(t).
 \end{displaymath}
@@ -1876,26 +1890,25 @@ half--width $\Delta t$.
 
 The above algorithm has been implemented in the listing
 \verb|CauchyProcess.java|, which can be seen below.
+\inputlisting{Listings_Java/CauchyProcess.java}
 
-
-%\includelisting{CauchyProcess.java}
-
+??????
 In lines xx--yy we have coded the generation of the Cauchy distributed random
 variables according to the algorithm based on the inversion method. In line
 xx we advance the stochastic process. The realization is then plotted in lines
 xx to yy, with the help of the Ptplot routines we already know.
 
-A realization of the Cauchy process can be seen in Fig. ().
 \begin{figure}[htbp]
   \begin{center}
-%  Hier kommt die FIGUR !!!!!    
-    \caption{A realization of the Cauchy process.}
-    \label{fig:CauchyRealization}
+    \includegraphics[width=0.44\textwidth]{Figures/CauchyRealization1.eps}\hfil
+    \includegraphics[width=0.44\textwidth]{Figures/CauchyRealization2.eps}
+    \caption{Two possible realizations of the Cauchy process.}
+    \label{fig:CauchyRealizations}
   \end{center}
 \end{figure}
 
 The illustration of the sample paths of the Cauchy process seen in Fig. 
-(\ref{fig:CauchyRealization}) clearly indicates that the sample paths are
+(\ref{fig:CauchyRealizations}) clearly indicates that the sample paths are
 discontinuous. Formally, this can be demonstrated by checking that the limit
 \begin{displaymath}
   \lim_{\Delta t \rightarrow 0} \frac{1}{\Delta t} 
@@ -2119,7 +2132,7 @@ Eq. (\ref{eq:LevyGeneration}) reduces to
 which corresponds to the Box-Muller method for the generation of  $N(0,2)$
 random variables. The proof that Eq. (\ref{eq:LevyGeneration}) indeed
 generates $S_{\alpha}(1,0)$ random variables
-can be found in \cite{Samorodnitsky}. 
+can be found in \cite[]{Samorodnitsky}. 
 
 Knowing how to generate $S_{\alpha}(1,0)$ distributed symmetric random 
 variables it is clear that
@@ -2128,7 +2141,7 @@ variables it is clear that
 \end{displaymath}
 
 
-\cite{Mantegna}
+\cite[]{Mantegna}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fractal Space Processes}
@@ -2167,7 +2180,7 @@ jump of order $b^2$, and so on. In this scheme a step of length $b^m$ is $a$
 times more likely then a step of length $b^{m+1}$. In other words, we expect
 to see $a$ clusters of size $b^m$ per cluster of size $b^{m+1}$.
 
-Let us check that the variance of this random wak is indeed infinite. To this
+Let us check that the variance of this random walk is indeed infinite. To this
 end we calculate the mean--square displacement per step. This quantity is
 given by
 \begin{displaymath}
@@ -2178,6 +2191,14 @@ Thus, the mean--square displacement is infinite if $b^2/a >1$. In the
 following we will assume that this condition is satisfied (For $b^2/a <1$
 the variance $<x^2>$ is finite and the random walk is described by a Gaussian
 diffusion process).
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[angle=-90,width=\textwidth]{Figures/WeierstrassFunction.eps}
+    \caption{The Weierstrass function $G(k)$ for M=0,1,2,3,4,5 in different
+      colors. The parameters are $a=2, b=3$.}
+    \label{fig:Weierstrass}
+  \end{center}
+\end{figure}
 
 In order to investigate the qualitative behaviour of the Weiertstrass random
 walk  we look at the characteristic function of the process
@@ -2189,18 +2210,13 @@ and we find
   G(k) = \frac{a-1}{a} \sum_{m=0}^{\infty} a^{-m} \cos(b^m k).
 \end{displaymath}
 We recognize that $G(k)$ is given by the famous Weierstrass function. which is
-everywhere continuous, but nowhere differentiable, when $b>a$.  In Fig. 
-\ref{Fig:Weierstrass}
-we plot $\sum_{m=0}^{M} a^{-m} \cos(b^m k)$ for $M=0$ (top), 1, 2, 3, 4
-(bottom) with $a=2$ and $b=3$. As is seen the  adding higher order terms, the
+everywhere continuous, but nowhere differentiable, when $b>a$.  In figure 
+\ref{fig:Weierstrass}
+we plot $\sum_{m=0}^{M} a^{-m} \cos(b^m k)$ for $M=0$ (bottom), 1, 2, 3, 4
+(top) with $a=2$ and $b=3$. As is seen the  adding higher order terms, the
 sum of the series fluctuates more wildly on smaller length scales.
 
-\begin{figure}
-\caption{The Weierstrass function.}
-\label{Fig:Weierstrass}
-\end{figure}
-
-It may be interesting prior to simulate the Weierstrass random walk to
+It may be of interest prior to simulating the Weierstrass random walk to
 investigate the continuum limit of the Weierstrass random walk. to this end we
 must look at  the small $k$--behaviour of the characteristic function. The
 characteristic function satsfies the following functional equation
@@ -2318,7 +2334,7 @@ equation
            \frac{P(y,t)}{|x-y|^{\mu +1}} 
 \end{displaymath}
 as the evolution equation for the probability densiyt of a L\`evy process.
-Remakably, the L\`evy process appears to be nonlocal in the state space of the
+Remarkably, the L\`evy process appears to be nonlocal in the state space of the
 system and therefore no finite number of derivatives can be used to represent
 the kernel in the above equation. In fact the same equation can be associated
 to so--called fractional derivatives \cite{Zaslavski}. Their consideration
@@ -2336,8 +2352,8 @@ an article by Mandelbrot on L\'evy.
 
 \subsection{L\'evy Walks}
 Because of the  infinite moments L\'evy flights have been ignored in the
-physical literature. It has been shown however that rather then focusing on
-this characteristic feature of Levy flights one shoul concentrate on their
+physical literature. It has been shown however that rather than focusing on
+this characteristic feature of Levy flights one should concentrate on their
 scaling properties. The divergence of the moments can be tamed by associating
 a velocity to each L\'evy flight trajectory segment. The reasonable question
 one has to pose is then: How far has a L\'evy walker wandered from its
@@ -2356,7 +2372,7 @@ in a time $t$. We write
 \end{displaymath}
 where $p(r)$ is the probability desnity of a single jump and $\psi(t)$
 has the same meaning as before and $\psi(r|t)$ and $p(r|t)$ are conditional
-probabilities for a jump takinga time $t$ given it is of distance $r$ and
+probabilities for a jump taking a time $t$ given it is of distance $r$ and
 respectively for a jump being of distance $r$ given it took at time $t$. For
 simplicity we assume
 \begin{displaymath}
@@ -2377,7 +2393,7 @@ behaviour implying
 \begin{displaymath}
   v(r) \approx r^{1/3}.
 \end{displaymath}
-If we fiurthermore assume
+If we furthermore assume
 \begin{displaymath}
   p(r) \approx |r|^{1+\beta},
 \end{displaymath}
