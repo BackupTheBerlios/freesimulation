@@ -119,8 +119,8 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
       available and easy to install. Usage: with the java virtual machine of
       the JDK use \texttt{-Djava.compiler=tya} or 
       set the environement variable \texttt{JAVA\_COMPILER=tya}. To avoid
-      using the JIT use option \textt{-nojit} up to JDK1.1.7 on Windows or
-      for all other platforms set \texttt{JAVA\_COMPILER=none}
+      using the JIT use option \texttt{-nojit} up to JDK1.1.7 on Windows or
+      for all other platforms set \texttt{JAVA\_COMPILER=none}.
       }
     \label{tab:performance}
   \end{center}
@@ -243,17 +243,25 @@ byte codes used by Oak in 1995, the new language JAVA was officially
 announced in April 1995 (Java 1.0), 
 including the first official release of Hotjava.
 The announcement was the source of a hype, because Java is ideally
-suited for the heterogenous world of networked computers seen today.
+suited for the heterogenous world of networked computers seen today and
+the Java philosophy allows for ``Write Once, Run Everywhere'' including
+graphical capabilities.
 
 Then in January 1996 the first version of the Java Development Kit (JDK) 
 was released by SUN. Soon the language was licensed by many companies,
-especially Netscape which included a Java Virtual Machine (JVM) into
-their widley used browser Netscape Navigator. Then in early 1997
+most notably Netscape, which included a Java Virtual Machine (JVM) into
+their widely used browser Netscape Navigator. Then in early 1997
 SUN released the second version of Java: the new language specification 
-Java 1.1 and the development kit for it JDK 1.1.
+Java 1.1 and the development kit for it, JDK 1.1.
 
 Meanwhile most of the browsers adapted the new Java 1.1 language specification.
-Also many new APIs (Application Progammers Interfaces) have appeared, some
+Also many new APIs (Application Progammers Interfaces) like Java 3D or 
+most important the JFC\footnote{The Java Foundation Classes, which
+consist of the Swing API and many more components like (almost complete set of)  
+the Internet Foundation Classes (IFC). You can either use Java 1.1 together
+with the JFC 1.1 for Swing 1.1 or Java 2, which already includes JFC 1.1 for
+Swing 1.1 and also Java 2D and some more APIs.}
+have appeared, some
 of them have been officially included in the Java 1.2 (now called Java 2)
 specifications. Together with the JDK 1.2, Java 2 appeared in January 1999.
 But no browser supports this standard right now, although most
@@ -262,26 +270,35 @@ already adapted to the new standard. Another change occurred to the
 licensing of the JDK: it is now almost Open Source Software, which
 means you can have the source code and change it, you only have to make
 sure it still conforms to the Java standard.
-At the same time SUN announced a new project called JINI, which is
+
+At the same time SUN released a new project called JINI, which is
 a ``small set of instructions and interfaces'' based on Java to
-be used to drive and use arbitrary electronic devices --
-the actual aim of the project started in 1991. 
-  
+be used to drive and use arbitrary electronic devices in a local network--
+the actual aim of the Oaks/Java project started in 1991. The idea is that every 
+JINI device reports to a ``naming service'' and tells it, what services
+it provides to the network. The server can then tell, what services are at
+all available to somebody at some place. The device therefore can be 
+taken to any place in the world and used in any JINI network to which
+it gets connected. You do not even need a JVM in the device, you can 
+use a JVM supplied by a different device (e.g. a computer or browser) 
+available in the network. The whole system is based on Java code and
+the RMI protocol supplied by Java.
 
 
-\subsection{Useful Java tools (most of them 
-        used for the programs in this book)}
+
+\subsection{Java tools necessary or useful for writing Java programs}
 \begin{description}
-\item[Programs]
+\item[] \textbf{Programs:} 
 \begin{description}
 \item[JDK] The Java Development Kit, distributed freely by SUN.\\
         This kit is available for almost all platforms, e.g. Windows,
-        Solaris, Macintosh, Linux, etc. This is the first package to get
-        for a Java compiler, virtual machine and a debugger. There
+        Solaris, Macintosh, Linux, etc. This is the first package to get,
+        to use Java. It consists of a Java compiler, a virtual machine 
+        and a debugger. There
         are of course many other compilers, JVMs and debuggers
         available, but this is the place to start with. A disadvantage
         of the JDK for Windows user is, that you have to use the
-        command line to use it. There are no icons coming with the
+        command line to use it. There are no graphical interfaces  coming with the
         package to start, compile or debug Java programs.
 \item[Emacs/XEmacs] This is an editor available for most platforms.\\
         We bascially use this very powerful but sometimes confusing
@@ -291,21 +308,26 @@ the actual aim of the project started in 1991.
         to you. 
 \item[JDE] JDE (Java Development Environement) is an Emacs/Xemacs extension
         written in Elisp. \\
-        It enables you to write your Java code much faster, if you are
-        using the emacs or xemacs editors. 
+        It enables you to write Java code in a shorter time, if you are
+        using the emacs or xemacs editor. 
+\item[mpEdit] A freely available editor written completely in Java and
+  therefore available on all platforms.\\ 
+  It has all necessary features to write Java/C or C++ programs.
 \item[Netscape Navigator/Communicator] A web browser like the Internet 
         Explorer, but written by Netscape inc. and the source code is
-        freely available. \\
-        We used Natscape as a reference to check, if software is running
-        in a browser additional to using the appletviewer from the JDK.
+        freely available and fully conforming to the Java standard. \\
+        We used Netscape as a reference to check, if software is running
+        in a browser, additional to using the appletviewer from the JDK.
         Be aware that not everything is supported by the browsers and
         sometimes you get strange results compared to using the
         appletviewer.       
-\item[Java Workshop] ????????
-\item[Freebuilder] ?????????
+\item[Java Workshop] A commercial IDE for Java by SUN. Free trial versions
+  for universities and educational institutions are available.\\  
+\item[Freebuilder] A freely available IDE\footnote{Integrated Development
+    Environment} for Java. \\
 \end{description}
 
-\item[Java Packages]
+\item[] \textbf{Java Packages:}
 \begin{description}
 \item[simulation] This is the package developed during the writing
         of the book. It provides only some very basic features, which
@@ -316,23 +338,26 @@ the actual aim of the project started in 1991.
         Ptolmey (version 1.0 from January 1999, which includes version
         2.0 of PtPlot.)
         is actually a whole set of useful packages, but so far only the
-        plot package, called Ptplot is currently fully funtional. We will
+        plot package, called Ptplot is currently fully functional. We will
         use it extensivley for all plotting in 2D. It has a nice
         zoom feature and it allows for the most important plot styles
         needed.
 \item[JNL] The Java Numerical Library written by Visual Numerics and
-        distributed freely\foornote{But please consult the License Agreement
+        distributed freely\footnote{But please consult the License Agreement
         coming with the software.}. It is also submitted to the standardizing
         commitee for proof to include it in the next release of the
         Java language specification to become a standard. \\
         The JNL includes the basics for using complex numbers, it
-        provides some more important standard functions (hyperbolic
+        provides some important standard functions (hyperbolic
         functions, Gamma function, etc.) and it provides 
         the basic operations for statistical data analysis (e.g. mean,
         variance, linear least square fit, etc.). It also provides some
         basic functionallity for linear algebra, like matrix decomposition,
         determinant, trace, solving linear systems, etc.
-\item[JavaSci] ???????????
+\item[JavaSci] A freely available package with support for many 
+  physics constants, mathematical operations, etc. \\
+   It includes methods for fast Fourier transformations, ordinary differential 
+   equations, complex numbers and much more.
 \end{description}
 
 \end{description}
@@ -361,7 +386,16 @@ So for every platform, where a virtual machine is available,
 you can execute the byte-code without any compatibility problems.
 But the ``look and feel'' can be different, for example Java buttons
 in Windows look different from buttons in X11/Motif using a UNIX
-operating system. The main reason for the wide availability of Java
+operating system. But if you use the new Swing components supplied
+with the Java 2 standard or extend the Java 1.1 standard with the Swing
+components, you can choose the appearance of the graphical look, which then
+is the same across all platforms. So if you are using the new Java 2 standard
+(JDK1.2), you should definitely use the new Swing components, if you
+still use the AWT components (like we do here in this book), you should
+keep in mind that the look (not the functionality) 
+of the program can be different on different platforms. 
+
+The main reason for the wide availability of Java
 is that SUN Microsystems distributes the Java Development Kit (JDK)
 freely for a number of important platforms (Windows, Solaris/Linux,
 other Unix systems). The JDK consists of a compiler (javac), a
@@ -372,10 +406,11 @@ class files belonging together - see later on.}.
 
 The JDK can be downloaded from the internet from the 
 \href{http://www.javasoft.com}{JDK Javasoft link page}.
-The newest version (as of the time of writing) is 1.1.7. 
-There is already a beta version for the JDK
-of the new Java 1.2 language specification. Throughout the book,
-we will use the Java 1.1 language version and the JDK 1.1.7.
+The newest version (as of the time of writing) is 1.2. 
+Throughout the book,
+we will use the Java 1.1 language version and the JDK 1.1.7,
+because the Java 2 standard is not yet implemented in any JVM of the
+web browsers available.
 
 The only additional thing necessary to have a Java programming
 environment is an text-editor to write the Java programs. For that
@@ -869,7 +904,7 @@ $/$ & division \\
 \end{center}
 The $+$ operator can also be used to concatenate strings, as we will
 see later in an example in section \ref{sec:Parameter}.
-There is no power operator like $**$ in FORTRAN or $^$ like in many
+There is no power operator like \verb|**| in FORTRAN or \verb|^| like in many
 different programs like TeX/LaTeX. In Java like in C/C++ you have to use
 a special mathematical function/method 
 (\verb|Math.pow()|, see in a later section).
@@ -1984,13 +2019,13 @@ The general structure of a Java program is:
 \section{Applications and Applets revisited}
 
 After learning many things about object oriented programming,
-we want to recapitualte the basic differences and features of
+we want to recapitulate the basic differences and features of
 the two possible ways of writing and starting Java programs.
 
 \subsection{Application}
 A Java application is in the traditional language a ``normal'' program.
 In Java slang it is a class, which only has to have a \verb|main|
-method, which has to be static and public. This is also of course the
+method, which has to be \verb|static| and \verb|public|. This is also of course the
 entrance point, if you start the Java application. Then the program
 executes sequentially the code given in the main method (of course it
 goes parallel, if you use threads somewhere in the application - see
@@ -2006,15 +2041,16 @@ machine the browser is running on and then ``starts the applet''.
 
 This is basically the most confusing part of an applet: What are the
 instructions, which get executed when the browser ``starts the applet''?
-To that purpose go ahead and write a simple program, which only 
+To that purpose go ahead and write a simple program 
+(see e.g. \verb|ShowTrace.java|), which only 
 prints out the place where the execution just takes place and ``start''
 the Java class on the command line as an application, in the appletviewer
-as an applet and in a brwoser as an applet. What you will get is the
-following:
+as an applet and in a browser as an applet. What you will get is shown
+in figure \ref{fig:LineOfExecution}.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-    \includegraphics{Figures/LineOfExecution.eps}
+    \includegraphics[width=\textwidth]{Figures/LineOfExecution.eps}
     \caption{The line of execution in an application and an applet in
         the appletviewer or the Netscape Navigator V4.08. For the application
         only the part above the first line and below the second line are
@@ -2029,10 +2065,10 @@ So for the applets you have to write (implement) at least the
 \verb|init()| method to get things going. But now you will ask, why did we
 not supply an  \verb|init()| method when we wrote our first 
 HelloWorld applet? The answer is we did, but we did not write it explicitly,
-because we left it empty. The trick was that there is for an applet 
-always another thread (see \ref{ParallelJava} for an introduction to threads)
-running, which takes care of (re)painting the windows used by the applet.
-This thread is a method from the AWT package (see \ref{AWTIntro}) and
+because we left it empty. The trick was that for an applet there is
+always another thread (see \ref{sec:ParallelJava} for an introduction to threads)
+running, which takes care of (re)painting the windows (panels) used by the applet.
+This thread is a method of the AWT package (see \ref{sec:AWTIntro}) and
 the method is the \verb|paint()| method. And in the    HelloWorld applet
 we have overriden the \verb|paint()| method to display our message.
 
@@ -2040,7 +2076,7 @@ Actually the threads and methods used for painting and repainting
 the windows or panels is a little bit more tricky and involved, so we
 have to postpone the discussion to a later chapter. Here only the basics:
 There is a method \verb|repaint()|, which calls the \verb|update()|
-method and that again calls the \verb|paint()| method, when there is the time
+method and that in turn calls the \verb|paint()| method, when there is time
 to do so. This sounds very complicated in the first place, but 
 it will be resolved later on.
 
@@ -2050,7 +2086,7 @@ appletviewer, which then in turn calls the applet itself. The burden
 of having two files for one applet can be avoided by putting the
 HTML Code at the beginning of the Java class file in a comment. Then
 if you call the appletviewer with the Java class file 
-(\verb|appletviewer applet.java|) it executes the HTML code supplied
+it executes the HTML code supplied
 in the Java class file and starts the applet. It even starts in
 the Netscape Navigator, although it probably makes no sense for
 large programs embedded in a set of HTML pages kept uptodate in a
@@ -2059,29 +2095,23 @@ writing small applets and getting not confused by too many files on
 your disks. 
 
 Here a small example showing the described feature:
-\begin{verbatim}
-/**
- * test_Applet.java
- */
-
-/*
-<HTML> 
-   <APPLET code="test_Applet.class" width=500 height=800> </applet>
-</HTML>
-*/
-  
-import java.applet.*;
-public class test_Applet extends Applet {
-  public void init() {
-    System.out.println(" !!!!!!! I am alive !!");
-  }
-} // test_Applet
-\end{verbatim}
-You can start it (first compile it) 
+\inputlisting{Listings_Java/test_Applet.java}
+You can start it (first you have to compile it) 
 by typing \verb|appletviewer test_applet.java| or 
-in the Netscape Naviagtor type \verb|file:/home/user/test_Applet.java|.
+in the Netscape Navigator type 
+\verb|file:/home/user/test_Applet.java|\footnote{You have to substitue the path 
+  by an appropiate one for your system and configuration.}.
 Then on the command line or the terminal with which you started the browser  
 you see the short message.
+
+
+\subsection{Programs as Applets and Applications}
+To write a class tobe run as an applet and an application
+you can use figure \ref{fig:LineOfExecution} to get the correct order
+of the methods, which get called in either case. As an example, we have used
+in later chapters for the bigger programs the following philosophy
+to have the programs runs as applet as well as a standalone application:
+\inputlisting{Listings_Java/TestAppletApplication.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2092,7 +2122,7 @@ you see the short message.
 %Plotting using: Graph2D, Scivis,
 %\inputlisting{Listings_Java/PlotEasy.java}
 
-\subsection{Online References}
+\section{Online References}
 \label{sec:Online_Refernces}
 
 
