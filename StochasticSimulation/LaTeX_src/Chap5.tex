@@ -16,10 +16,10 @@ which works for small values of $\Delta t$. To this end we expand the
 exact update formula to first order in $\Delta t$ and obtain
 \begin{eqnarray}
 X(t+\Delta t)& =& X(t) (1- q \Delta t) + 
-   \left[ \frac{D}{2q} (2q \Delta t) \right]^{1/2} \eta(t) \nonumber
+   \left[ \frac{D}{2q} (2q \Delta t) \right]^{1/2} \xi(t) \nonumber
    \\
 \label{SDE_APPROX} 
-  & = & X(t) - qX(t) \Delta t + \sqrt{D} \sqrt{\Delta t} \eta(t).
+  & = & X(t) - qX(t) \Delta t + \sqrt{D} \sqrt{\Delta t} \xi(t).
 \end{eqnarray}
 In the limit $\Delta t \rightarrow 0$ this approximate update formula
 turns exact.  We recognize immediately that the stochastic increment in
@@ -30,8 +30,8 @@ Note that in deriving the above discretized update formula we have
 intentionally omitted the terms linear in $\Delta t$ stemming from 
 the expansion of the factor in front of the stochastic term. In 
 doing so we have achieved that the update formula has an important
-property. Namely, it is selfconsistent in the following sense.
-Let us apply the above formula twice, starting from,
+property. Namely, it is selfconsistent in the following sense
+(\cite{GILLESPIE}). Let us apply the above formula twice, starting from,
 \begin{equation*}
 X(t+2\Delta t) = X(t+\Delta t) 
  - qX(t+ \Delta t) \Delta t + \sqrt{D} \sqrt{\Delta t} \xi(t+\Delta t).
@@ -60,7 +60,7 @@ the Chapman--Kolmogorov equation.
 
 
 Due to the presence of a stochastic term, the Gaussain stochastic
-process $\xi(t)$ the above equation is a discretized version of a 
+process $\xi(t)$, the above equation is a discretized version of a 
 so--called {\em stochastic differential equation} (SDE). It is the aim
 of this section to introduce into some  peculiarities of stochastic
 differential equations. In particular we will also show the
@@ -88,12 +88,12 @@ Eq. (\ref{SDE_LANGEVIN_DISCR}) as
 \frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \xi(t)}
                                               {\sqrt{dt}}.
 \end{equation*}
-Obviuosly, the limit $dt \rightarrow 0$ of the above equation does not
+Obviously, the limit $dt \rightarrow 0$ of the above equation does not
 exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
 is everywhere continuous but nowhere differentiable. Nevertheless it is
-custumary in the physical literature to ``pretend'' (\cite{GILLESPIE})
+customary in the physical literature to ``pretend'' (\cite{GILLESPIE})
 that $dx/dt$ exists even for
-nonvanishing $D$. In fact we know that we can write
+non vanishing $D$. In fact we know that we can write
 \begin{equation*}
 \frac{\xi(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
 {\bf N}(0,1/dt).
@@ -104,7 +104,7 @@ So, we may define a Gaussian {\em white noise process} as
 \end{equation*}
 With the help of the above definition, we can now formally write
 \begin{equation*}
-\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D}(X(t),t) \eta(t).
+\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D(X(t),t)} \eta(t).
 \end{equation*}
 This equation is called the white noise form of the Langevin equation.
 The white noise process introduced above does have the following
@@ -121,7 +121,8 @@ constant. This is the reason for calling $\eta$ a white noise
 process.
 
 It is important to establish precisely the relationship
-between the white noise process and the Wiener process.
+between the white noise process and the Wiener process
+(\cite{GILLESPIE}).
 We know already that the special Wiener process $dW(dt)$
 is a normal random variable with mean zero and variance $dt$
 \begin{equation*}
@@ -153,7 +154,8 @@ physics, namely the one describing Brownian motion.
 
 \section{The Langevin equation and Brownian motion}
 In 1908 Langevin considered the problem of the dynamical 
-description of Brownian motion. He suggested that the equation of 
+description of Brownian motion (\cite{VAN_KAMPEN}). 
+He suggested that the equation of 
 motion of a Brownian particle with mass $m=1$ be described by the
 following differential equation for the velocity $V$
 \begin{equation}
@@ -263,17 +265,20 @@ interpreted as a solution
 of the corresponding integral equation, which will be written
 in the short--hand notation
 \begin{equation*}
-dX(t) =   a(X(s),s) dt + b(x(s),s) dW(t).
+dX(t) =   a(X(t),t) dt + b(x(t),t) dW(t).
 \end{equation*}
 
 Of course, the second integral in Eq. (\ref{SDE_INTEGRAL}) is not 
 an ordinary integral.  It is an integral with respect to the 
 Wiener process $W(t)$. Such integrals are called {\em stochastic 
-integrals} and we will define and discuss them now.
+integrals} and we will define and discuss them now. For a precise
+mathematical definition of stochastic integrals see \cite{GARD, 
+POTTER,KLOEDEN_AN,OETTINGER}. We will follow here the more
+{\em physical} line of reasoning of \cite{GARDINER}.
 
 \subsection{Definition of the stochastic Ito integral}
-The stating point for the definition of the Ito integral is the
-following reasoning. For $b(X(t),t)=b=\text{const}$ the stochastic 
+The starting point for the definition of the Ito integral is the
+following reasoning. For $b(X(t),t)=b=\text{const}$, the stochastic 
 integral
 \begin{equation*}
 I = \int_{t_0}^t bdW(s)
@@ -282,13 +287,13 @@ is expected to be defined and to be equal to
 \begin{equation*}
 I = b \{ W(t) - W(t_0) \}.
 \end{equation*}
-In general it seems to be safe to treat the the stochastic 
+In general it seems to be safe to treat the stochastic 
 integral 
 \begin{equation*}
 I(f) = \int_{t_0}^t f(X(s),s) dW(s)
 \end{equation*}
 as a kind of Riemann--Stieltjes integral, i.e., as a limit of 
-partial sums. To do so we devide the interval $[t_0,t]$ into $n$
+partial sums. To do so we divide the interval $[t_0,t]$ into $n$
 subintervals
 \begin{equation*}
 t_0 \le t_1 \le t_2 \le \cdots \le t_{n-1} \le t
@@ -300,7 +305,7 @@ t_{i-1} \le \tau_i \le t_i.
 The stochastic integral $I(f)$ is then defined as the limit
 of the partial sums
 \begin{equation*}
-S_n = \sum_{i=1}^n f(\tau_i) \left[  W(t_i) - W(t_{i-1} \right].
+S_n = \sum_{i=1}^n f(\tau_i) \left[  W(t_i) - W(t_{i-1}) \right].
 \end{equation*}
 In general it turns out that the definition of the stochastic 
 integral depends on the particular choice of the intermediate 
@@ -326,21 +331,21 @@ The above limit is usually written as
 \begin{equation*}
 \text{ms-} \lim_{n \rightarrow \infty} S_n = S.
 \end{equation*}
-In this sense the Ito stochastic integral of the function $g(t)$ is
+In this sense the Ito stochastic integral of the function $f(t)$ is
 defined as
 \begin{equation*}
-\int_{t_0}^t f(t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
-   \left\{ \sum_{i=1}^{\infty} f(t_{i-1}) [W(t_i) - W(t_{i-1})]   \right\}.
+\int_{t_0}^t f(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
+   \left\{ \sum_{i=1}^{n} f(t_{i-1}) [W(t_i) - W(t_{i-1})]   \right\}.
 \end{equation*}
 
 \subsection{The Stratonovich stochastic integral}
 \label{STRATONOVICHSUB}
-An alterantive definition of a stochastic  integral has been given by
+An alternative definition of a stochastic  integral has been given by
 Stratonovich. He suggested the following definition
 \begin{equation}
 \label{STRATONOVICHDEFI}
-S\int_{t_0}^t g(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
-   \left\{ \sum_{i=1}^{\infty} f( \frac{x(t_{i})+ x(t_{i-1})}{2}) 
+S\int_{t_0}^t f(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
+   \left\{ \sum_{i=1}^{n} f( \frac{x(t_{i})+ x(t_{i-1})}{2}, t_{i-1}) 
 [W(t_i) - W(t_{i-1})]   \right\}.
 \end{equation}
 Note, that in this definition the integrand is evaluated in an
@@ -368,9 +373,9 @@ and that
 dW(t)^{2+N} =0 
 \end{equation*}
 for $N \ge 1$. These formulas will allow for a comfortable 
-handling of stochastic diferentials.
+handling of stochastic differentials.
 
-We begin by proving that
+We begin by proofing that
 \begin{equation}
 \label{PROOFDW2DT}
 \int_{t_0}^t \left[ dW(t') \right]^2 g(t') = \int_{t_0}^t dt' 
@@ -464,7 +469,7 @@ d[W(t)]^n = n W(t)^{n-1}dW(t) +
 \end{equation*}
 so that
 \begin{equation*}
-\int_{t_0}^t W(t')dW(t') = \frac{1}{n+1}  [W(t)^{n+1} - W(t_0)^{n+1}]
+\int_{t_0}^t W(t')^n dW(t') = \frac{1}{n+1}  [W(t)^{n+1} - W(t_0)^{n+1}]
    -\frac{n}{2} \int_{t_0}^t W(t')^{n-1} dt.
 \end{equation*}
 
@@ -472,13 +477,15 @@ so that
 
 \section{Ito stochastic differential equations}
 Having defined stochastic integrals the proper definition of a
-stochastic differential equation can be given. The stochastic variable
+stochastic differential equation can be given (Again we follow 
+\cite{GARDINER}. The mathematically interested reader should
+consult \cite{GARD,KLOEDEN_AN,POTTER}). The stochastic variable
 $X(t)$ obeys the Ito stochastic differential equation
 \begin{equation}
 \label{ITOSDE}
 dX(t) = a(X(t),t) dt + b(X(t),t) dW(t)
 \end{equation}
-if for all $t$ and $t_0$ the follwing integral equation holds
+if for all $t$ and $t_0$ the following integral equation holds
 \begin{equation}
 X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s) 
      + \int_{t_0}^t dW(s) b(X(s),s).
@@ -486,7 +493,7 @@ X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s)
 
 \subsection{Ito's formula}
 In this subsection we want to consider a function
-$f$ of the stchastic variable $X(t)$ and derive a Ito stochastic
+$f$ of the stochastic variable $X(t)$ and derive an Ito stochastic
 differential equation for $f$. We begin by expanding the differential 
 $df(x(t))$ to second order in $dW(t)$
 \begin{eqnarray*}
@@ -494,41 +501,43 @@ df(X(t)) & = & f(X(t)+dX(t)) - f(X(t)) \\
          & = & f'(X(t)) dX(t) + \frac{1}{2} f''(X(t)) dX(t)^2 + \ldots.
 \end{eqnarray*}
 Inserting the Ito stochastic differential equation (\ref{ITOSDE})
-for $DX(t)$ we get
-\begin{equation*}
-df(X(t)) =  f'(X(t)) \{a(X(t),t)dt + b(X(t),t) dW(t) \}
-      + \frac{1}{2} f''(X(t)) b(X(t),t)^2 [dW(t)]^2 + \ldots ,
-\end{equation*}
+for $dX(t)$ we get
+\begin{eqnarray*}
+df(X(t)) &=&  f'(X(t)) \{a(X(t),t)dt + b(X(t),t) dW(t) \} \\
+      & & + \frac{1}{2} f''(X(t)) b(X(t),t)^2 [dW(t)]^2 + \ldots ,
+\end{eqnarray*}
 where we have discarded all other terms of higher order. Using
 finally $[dW(t)]^2 =dt$ we get
-\begin{equation}
+\begin{eqnarray}
 \label{ITOFORMULA}
-df(X(t)) = \{a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2
-\} dt 
-    + b(X(t),t)f'(X(t)) dW(t).
-\end{equation}
+df(X(t)) &=& \{a(X(t),t) f'(X(t)) +  \frac{1}{2} f''(X(t)) b(X(t),t)^2
+\} dt  \nonumber \\
+    & & + b(X(t),t)f'(X(t)) dW(t).
+\end{eqnarray}
 The above equation is Ito's formula and expresses the fact that 
-for stochastic differential equations in
-general the change of variables is not given by the rules of 
+in general for stochastic differential equations
+the change of variables is not given by the rules of 
 ordinary calculus.
 
 
 \subsection{The equivalence of stochastic differential equations 
 and of the Fokker--Planck equation}
-Let us now look at the time development of an arbitrary function
+Let us now look at the time development of the expectation value 
+of an arbitrary function
 $f(X(t))$.
 Using Ito's formula we immediately have
 \begin{eqnarray*}
-\frac{<f(X(t))>}{dt} & = & <\frac{df(X(t))}{dt}> = 
+\frac{<df(X(t))>}{dt} & = & \left< \frac{df(X(t))}{dt} \right> = 
                \frac{d}{dt} <f(X(t)) > \\
-       & = & < a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2   >.
+       & = & < a(X(t),t) f'(X(t)) +   \frac{1}{2} f''(X(t)) b(X(t),t)^2   >.
 \end{eqnarray*} 
 Since, $X(t)$ is a Markov process it does have a conditional
 probability density $T(x,t|x_0,t_0)$ and accordingly we can write
 \begin{eqnarray*}
-\frac{d}{dt} <f(X(t)) > &=& \int dx f(x) T(x,t|x_0,t_0) \\
+\frac{d}{dt} <f(X(t)) > &=& \int dx f(x) \frac{\partial}{\partial t} 
+         T(x,t|x_0,t_0) \\
           & = & \int dx 
-       [a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2] T(x,t|x_0,t_0).
+       [a(X(t),t) f'(X(t)) +   \frac{1}{2} f''(X(t)) b(X(t),t)^2] T(x,t|x_0,t_0).
 \end{eqnarray*}
 The above equation can now be integrated by parts. Disregarding
 surface terms we obtain
@@ -541,12 +550,12 @@ Since, by construction $f$ is an arbitrary function of $x$ we can
 conclude that
 \begin{equation*}
  \frac{\partial}{\partial t} T(x,t|x_0,t_0) =
-   \{ - \frac{\partial}{\partial x}[a(x,t)T(x,t|x_0,t_0)] + \frac{1}{2} 
-        \frac{\partial^2}{\partial x^2}[b(x,t)^2 T(x,t|x_0,t_0)] \}.
+    - \frac{\partial}{\partial x}[a(x,t)T(x,t|x_0,t_0)] + \frac{1}{2} 
+        \frac{\partial^2}{\partial x^2}[b(x,t)^2 T(x,t|x_0,t_0)].
 \end{equation*}
 We immediately recognize that the above equation is a Fokker--Planck
 equation. Hence we have shown the equivalence of a diffusion
-process defined in terls of stochastic differential equation with
+process defined in terms of a stochastic differential equation with
 drift coefficient $a(x(t),t)$ and a diffusion coefficient
 $b(X(t),t)^2$ and the above Fokker--Planck equation.
 
@@ -554,7 +563,7 @@ $b(X(t),t)^2$ and the above Fokker--Planck equation.
 In subsection \ref{STRATONOVICHSUB} we have seen that it is 
 possible to give other definitions of the stochastic integral.
 One such definition is the Stratonovich stochastic integral defined 
-in Eq. (\ref{STRATONOVICHI}). It is clear that is then possible 
+in Eq. (\ref{STRATONOVICHI}). It is clear that it is then possible 
 to define stochastic differential equations using the 
 Stratonovich integral, i.e.,
 \begin{equation}
@@ -589,7 +598,7 @@ we have
 \begin{equation}
 \label{STRATOIAPP}
 \int_{t_0}^t  \beta(x(s),s) \circ dW(s) \approx
- \sum_i \beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right)
+ \sum_i \beta \left( \frac{x(t_i) + x(t_{i-1})}{2},t_{i-1} \right)
   [W(t_i) -W(t_{i-1})].
 \end{equation}
 Using
@@ -598,8 +607,8 @@ x(t_i) = x(t_{i-1}) + dx(t_{i-1})
 \end{equation*}
 the argument of the $\beta$ function can be written as
 \begin{equation*}
-\beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right) =
- \beta \left( x(t_{i-1} + \frac{1}{2} dx(t_{i-1}) ,t_{i-1}\right).
+\beta \left( \frac{x(t_i) + x(t_{i-1})}{2},t_{i-1} \right) =
+ \beta \left( x(t_{i-1}) + \frac{1}{2} dx(t_{i-1}) ,t_{i-1}\right).
 \end{equation*}
 Then, with the help of the Ito stochastic differential equation 
 (\ref{ITOSDEINS}) in the form
@@ -610,7 +619,7 @@ dx(t_i) = a(x(t_{i-1}),t_{i-1}) (t_i -t_{i-1}) +
 and of Ito's formula we get
 we get
 \begin{eqnarray*}
-\beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right) & = &
+\beta \left( \frac{x(t_i) + x(t_{i-1})}{2},t_{i-1} \right) & = &
  \beta(t_{i-1}) + \left[ a(t_{i-1}) \frac{\partial}{\partial x} 
  \beta(t_{i-1}) + \frac{1}{4} b^2(t_{i-1})
                   \right] \frac{1}{2}(t_{i} - t_{i-1}) \\
@@ -619,10 +628,10 @@ we get
 \end{eqnarray*}
 The above expression can now be inserted back into the Eq. 
 (\ref{STRATOIAPP}). Exploiting the fact that Ito calculus allows us to set 
-we find
+$dW^2=dt$ and to drop the terms $dt^2$ and $dtdW$ we find
 \begin{eqnarray*}
 \int_{t_0}^t  \beta(x(s),s) \circ dW(s) & \approx &
-\sum_i \beta(x(t_{i-1},t_{i-1}) [W(t_i) - W(t_{i-1})] \\
+\sum_i \beta(x(t_{i-1}),t_{i-1}) [W(t_i) - W(t_{i-1})] \\
  &  + & \frac{1}{2} \sum_i b(x(t_{i-1}),t_{i-1}) 
  \frac{\partial}{\partial x} \beta(x(t_{i-1}),t_{i-1}) (t_i - 
  t_{i-1}).
@@ -640,7 +649,7 @@ The above formula gives us the relation between the Ito and the
 Stratonovich integral of a function $\beta(x(t),t)$ in which $x(t)$
 is the solution of the Ito stochastic differential equation
 (\ref{ITOSDEINS}). The relation between the Ito and the 
-Staronovich form of stochastic differential equations can be seen 
+Stratonovich form of stochastic differential equations can be seen 
 by setting
 \begin{eqnarray*}
 \alpha(x(t),t) & = & a(x(t),t) - \frac{1}{2} b(x(t),t) 
@@ -655,7 +664,7 @@ dx = a dt + b dW(t)
 \end{equation}
 is equivalent to the Stratonovich stochastic differential equation
 \begin{equation}
-dx = [a- \frac{1}{2} b \frac{partial}{\partial x}] dt + b \circ 
+dx = [a- \frac{1}{2} b \frac{\partial}{\partial x}b] dt + b \circ 
 dW(t).
 \end{equation}
 Conversely, the Stratonovich stochastic differential equation
@@ -664,25 +673,25 @@ dx = \alpha dt + \beta \circ dW(t)
 \end{equation*}
 is equivalent to the Ito stochastic differential equation
 \begin{equation*}
-dx = [\alpha + \frac{1}{2} \beta \frac{\partial}{\partial x 
-\beta}]dt + \beta \circ dW(t).
+dx = [\alpha + \frac{1}{2} \beta \frac{\partial}{\partial x} 
+\beta]dt + \beta \circ dW(t).
 \end{equation*}
 
 \subsection{Ito or Stratonovich?}
 We have just seen the following. A given stochastic differential 
 equation can be interpreted in two ways: in the sense of Ito and 
-in the senso of Stratonovich. Each of the two interpretions can be converted
-equivalently in the respectively other version of the stochastic differential 
-equation. Thus, the question arises: When modelling a physical 
-system which interpretion should we use? 
+in the sense of Stratonovich. Each of the two interpretations can be converted
+equivalently in the other version of the stochastic differential 
+equation. Thus, the question arises: When modeling a physical 
+system which interpretation should we use? 
 
 At the basis of the problem is the fact that 
 in the {\em more physical} Langevin equations we are confronted
-with $\delta$ correlated white noise process.
+with a $\delta$ correlated white noise process.
 Hence, the proper 
 mathematical analysis of stochastic differential equations was based 
 on the {\em mathematically safe} Wiener process and we were led
-automathematically to the ambiguities of defining Riemann sums for 
+automatically to the ambiguities of defining Riemann sums for 
 stochastic integrals.
 
 All these difficulties can be circumvented by the following 
@@ -691,9 +700,9 @@ times. Their spectrum might be flat, but not up to infinite
 frequencies. Such a noise term is called colored  noise and could 
 have zero mean and the following correlation function
 \begin{equation*}
-< \eta(t) \eta(t+\tau) > = \frac{\sigma^2}{2m} \exp(- m |\tau|)
+< \eta(t) \eta(t+\tau) > = \frac{\sigma^2}{2m} \exp(- m |\tau|).
 \end{equation*}
-and the corresponding colored noise Langevin equation would read
+The corresponding colored noise Langevin equation would read
 \begin{equation}
 \dot{X}(t) = a(X(t),t) + b(X(t),t) \eta(t).
 \end{equation}
@@ -713,10 +722,48 @@ dilemma can be found in \cite{VAN_KAMPEN}.
 
 \section{The numerical integration of stochastic differential 
 equations: The Euler--Maruyama method}
+Let us begin this section by review some basic facts of numerical 
+methods for the simulation of {\em deterministic} ordinary 
+differential equations (\cite{GARCIA,PRESS}). 
+To this end we consider the initial value 
+problem
+\begin{eqnarray*}
+\frac{dx}{dt} &=& a(t,x), \\
+   x(t_0) & = & x_0.
+\end{eqnarray*}
+The most widely used numerical algorithms for the solution of the 
+above problem are \index{finite differences} techniques. The simplest such 
+method is the \index{Euler method}. The basic idea of the Euler 
+method is to approximate the derivative on the right hand of the 
+differential equation by the first order approximation
+\begin{equation*}
+\frac{dx}{dt} = \frac{x(t+\Delta t) - x(t)}{\Delta t} + O(\Delta 
+t).
+\end{equation*}
+An approximate solution of the initial value problem can then be 
+constructed by iterating the following recursion relation
+\begin{equation*}
+x(t+\Delta t) = x(t) + a(t,x)\Delta t.
+\end{equation*}
+Alternatively, introducing the time discretization
+$t_0 < t_1 < \ldots t_n$ with equal increments $\Delta t$
+the Euler algorithm can be formulated as
+\begin{equation}
+\label{EULERODE}
+x_{n+1} = x_{n} + a(t_n,x_n) \Delta t,
+\end{equation}
+where it is intended that $x_n = x(t_n)$. Once, the initial value 
+$x_0$ has been specified the approximation $x_1, x_2, \ldots, x_n$ 
+can be determined by applying Eq. (\ref{EULERODE}) recursively.
+
+
+Let us now turn our attention to the easiest finite difference 
+method for the integration of stochastic differential equations
+\cite{HONERKAMP,KLOEDEN_NUM,OETTINGER}.
 Essentially, we have already met the easiest method for the 
 numerical integration of stochastic differential equation while 
 motivating them at the beginning of this chapter.
-Assume that we are intersted in the solution of the following
+Assume that we are interested in the solution of the following
 initial value problem for an Ito stochastic differential equation
 \begin{eqnarray*}
 dX(t) &=& a(X(t),t) dt + b(X(t),t) dW(t), \\
@@ -757,7 +804,7 @@ concept of strong convergence. We say that a discrete
 approximation $\tilde{X}$ with maximum time step $\Delta t$
 converges strongly to $X$ at time $t_{end}$ if
 \begin{equation*}
-\lim_{\Delta t \rightarrow 0} <|X(t_{end} - \tilde{X}(t_{end})|> 
+\lim_{\Delta t \rightarrow 0} <|X(t_{end}) - \tilde{X}(t_{end})|> 
 =0.
 \end{equation*}
 The order of convergence $\nu$ determines the numerical efficiency
@@ -765,7 +812,7 @@ of a given numerical approximation scheme. If there exists a
 positive constant $c$, which is independent of $\Delta t$ such 
 that for sufficiently small $\delta t$ we have
 \begin{equation*}
-<|X(t_{end} - \tilde{X}(t_{end})|^2>^{1/2} \le c (\Delta t)^{\nu},
+<|X(t_{end}) - \tilde{X}(t_{end})|^2>^{1/2} \le c (\Delta t)^{\nu},
 \end{equation*}
 then we say that the approximation scheme converges strongly with
 order $\nu$. 
@@ -787,7 +834,7 @@ convergence of the stochastic Euler scheme is quite poor.
 Fortunately, quite often one is not interested in constructing the 
 individual realizations of the stochastic process but only in some 
 averaged quantities, e.g., in some moments of the stochastic 
-process. This is always the case, when the stochastic differential 
+process. This is always the case, if the stochastic differential 
 equation is regarded as an efficient numerical tool for the
 solution of a given Fokker--Planck equation. Namely, the latter 
 contains only information about the moments of the stochastic 
@@ -824,9 +871,9 @@ $<X^2(t=4)>$ is expected to be
 <X^2(t=4)> = \frac{1}{2}(1-\exp(-8)) = 0.4998.
 \end{equation*}
 Since we know from the general discussion of the Euler algorithm
-that the expecation values converge to the exact result linearly 
+that the expectation values converge to the exact result linearly 
 with the time step we have included in the program a \texttt{for}
-loop over \texttt{istep} time steps \texttt{deltat} to see explicitely this
+loop over \texttt{istep} time steps \texttt{deltat} to see explicitly this
 dependence. At the end of the simulation we perform a linear fit
 of the results with the help of the function \texttt{polyfit} in 
 order to be able to extrapolate the results to $\Delta t =0$.
@@ -864,7 +911,7 @@ The timesteps used are \texttt{deltat=0.2, 0.1, 0.05, 0.025}.}
 \end{figure}
 The figure clearly shows the expected linear convergence of the 
 estimate to the expected exact result. The linear extrapolation 
-leads to the eximate $<X^2>|_{t=4}=0.497182$, which is in very 
+leads to the estimate $<X^2>|_{t=4}=0.497182$, which is in very 
 good agreement with the expected exact result. The simulation took
 1729 sec on the laptop.
 
@@ -887,7 +934,7 @@ noise term on the right hand of the above equation of motion.
 To be precise we want to replace the deterministic equation of 
 motion by the Ito stochastic differential equation
 \begin{equation}
-label{SDENOISEIN}
+\label{SDENOISEIN}
 dX(t) = (\frac{1}{2} - X(t))X(t)dt + \epsilon X(t) (1-X(t)) dW(t),
 \end{equation}
 where $\epsilon <0$
@@ -1002,7 +1049,7 @@ The result of this second simulation can be seen in Fig.
 (\ref{F_SDENOISEIN_2}).
 \begin{figure}
 \label{F_SDENOISEIN_2}
-\includegraphics[width=10cm]{./Figures/f_sdenoisein_2.eps}
+\includegraphics[width=10cm]{./Figures/f_sdenoisein_1.eps}
 \caption{Histogram of the invariant density of the stochastic differential 
 equation with multiolicative noise. The simulation was run from
 \texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
