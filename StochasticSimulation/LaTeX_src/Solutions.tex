@@ -88,8 +88,20 @@
 \textbf{EulerÅ¥s Constant using Monte-Carlo Algorithm -- \texttt{darts.m}} \\
 \end{Solution}
 
+\begin{Solution}{Standard_Deviation}
+\textbf{The Standard Deviation - \texttt{variance.m} } \\
+As you may soon recognize, the second and the third formula
+produce by far the biggest errors, even for small samples using
+very harmless distributions. But the first and the fourth method
+seem to perform equally well.
+
+For a good and extensive discussion of this problem see the good
+paper by \cite[]{golub:83}. They discuss also some other algorithms
+for calculating the variance. 
+\end{Solution}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 2}
+\section{Solutions for Chapter 2}
 
 \begin{Solution}{Random-Number_Generator_Check}
 \textbf{Random-Number Generator Check - \texttt{momentsrand.m, pokertest.m}} \\
@@ -156,7 +168,7 @@
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 3}
+\section{Solutions for Chapter 3}
 
 \begin{Solution}{Random-Number_Generator}
 \textbf{Random-Number Generator - \texttt{linear\_con.m} } \\
@@ -438,25 +450,500 @@
   \end{center}
 \end{Solution}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 4}
+\begin{Solution}{Scaling_Random_Walk}
+\textbf{Scaling Behavior of Random Walk in 2D and 3D - %
+                 \texttt{rw\_scaling.m}} \\
+The function to be fitted is:
+$$ <R^2> = a N^b \quad .$$
 
-\begin{Solution}{}
+For the plots below we used 100 realizations for each length $N.$
+We started with length $50$ and the last length calculated was $2000 .$
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_rw2dscaling.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_rw3dscaling.eps}
+  \end{center} 
+  Results of the 2D and 3D calculations:
+  \begin{itemize}
+  \item 2D scaling: $ a=1.1051$ and $b=0.9833 .$
+  \item 3D scaling: $ a=0.9829$ and $b=1.0018 .$
+  \end{itemize}
+
+A second run was made, using 500 realizations for each length of
+the random walk. We started with length $10$ and went up to length
+$10,000$ (using 50 (in 3D) and 30 (in 2D) intermediate lengths). 
+It took a total of $20,900$
+seconds to calculate on a Pentium 200MMX processor (Matlab 5.0).
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_rw3dscaling2.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_rw2dscaling2.eps}
+  \end{center} 
+  For the long runs, the results are:
+  \begin{itemize}
+  \item 2D scaling: $ a= 0.996679$ and $b= 1.001098 .$
+  \item 3D scaling: $ a= 1.005113$ and $b= 0.999942 .$
+  \end{itemize}
 \end{Solution}
 
-\begin{Solution}{}
+\begin{Solution}{Percolation}
+\textbf{Percolation in 2D and Cluster Algorithms  - %
+                      \texttt{percolation.m}}\\
+
+The first two figures show $20\times 20$ configurations with and 
+without a spanning
+cluster. For the left figure we used $p=0.5$ and for the right figure
+$p=0.55.$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_percolation_3.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_percolation_4.eps}
+  \end{center} 
+
+The following two figures are created using:
+\begin{enumerate}
+\item figure on the left: \\
+  $N=20, p$ from $0.3$ to $0.9$ with stepsize $0.02$ and $20$ 
+  realizations each.
+\item figure on the right: \\
+  $N=30, p$ from $0.3$ to $0.9$ with stepsize $0.02$ and $20$ 
+  realizations each.
+\end{enumerate}
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_percolation_1.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_percolation_2.eps}
+  \end{center} 
+
+To estimate the critical probability $p_c$, you have to extract $p_c$
+from the figures above. There are many ways of doing it. One would be
+to fit a sigmoidal function 
+$$p(x,a)=\left( \frac{1}{1+e^{-a(x-0.5)}}+1 \right) /2 ,$$ 
+or a tangent hyperbolicus
+$$ p(x,a)=(\tanh(a (x/2-0.5))+1)/2 = \left( 1+\frac{1-e^{-a(x-0.5)}}%
+  {1+e^{-a(x-0.5)}} \right) /2 .$$
+$a$ is the parameter to fit.
+\end{Solution}
+
+\begin{Solution}{Einstein_Solid}
+\textbf{The Einstein Solid and the Boltzmann Distribution - %
+                 \texttt{einstein\_solid.m}} \\
+
+A typical 20x20 plane of the Einstein solid after 10000 jumps.
+  \begin{center} 
+   \begin{verbatim}
+ 1 2 0 0 0 3 5 2 0 1 1 1 0 0 1 1 2 0 1 0
+ 2 0 2 1 4 1 1 0 1 0 2 2 0 1 0 4 0 0 1 0
+ 3 1 3 0 1 0 1 0 0 0 0 0 0 1 1 1 0 1 0 1
+ 0 1 0 0 0 0 1 2 1 1 0 0 1 1 1 2 0 0 0 1
+ 0 0 6 1 0 4 0 0 1 1 1 0 0 0 0 0 0 0 0 2
+ 0 0 2 1 9 3 0 1 2 1 0 0 3 0 6 1 2 0 0 0
+ 0 2 2 1 0 2 0 0 0 0 0 2 4 0 0 0 0 0 1 1
+ 0 0 0 6 1 0 0 6 1 1 0 0 0 0 0 0 3 0 1 0
+ 2 0 1 0 0 2 0 1 0 2 0 0 0 1 3 0 0 1 0 3
+ 0 1 1 0 2 0 0 0 0 1 0 2 1 2 2 1 0 2 2 1
+ 1 0 2 0 1 1 2 0 0 0 4 1 1 3 0 0 2 0 4 1
+ 1 0 0 0 1 0 3 2 0 0 0 0 0 0 0 0 1 0 1 1
+ 0 2 2 0 1 3 0 2 1 2 1 0 0 1 2 0 0 2 2 3
+ 0 2 0 0 0 3 2 0 1 3 0 0 0 2 0 0 0 1 1 4
+ 2 0 0 0 0 5 0 3 0 0 0 1 0 0 0 2 2 2 1 2
+ 0 4 1 0 5 0 0 0 1 0 0 0 1 4 0 5 2 0 0 0
+ 1 0 1 2 0 0 0 0 2 0 0 5 0 1 2 1 0 2 0 0
+ 0 0 0 1 0 1 0 0 1 5 0 4 0 0 0 4 1 0 4 1
+ 0 1 0 3 4 0 1 2 1 5 0 3 9 0 0 1 0 3 0 2
+ 1 3 1 0 7 0 0 2 0 0 1 0 0 2 0 3 0 1 0 2
+   \end{verbatim}
+  \end{center}
+
+On the next 9 figures you can see the time development of a 20x20
+grid after 10, 20, 30, 40, 50, 60, 70, 150 and 20000 steps (or jumps).
+Although it is a contour plot and not the whole cell is filled with
+the same color (which would make it easier to view), you can still
+see the pile up of quantas in individual cells. On the other side
+more and more cells are unoccupied and after reaching equilibrium
+we are left with most of the cells unoccupied.  
+
+The last figure in this sequence is a semilogarithmic plot of the 
+distribution of number of quantas in the cells (red curve). The blue
+one is a least square fit to the Boltzmann distribution, which is in
+excellent agreement. 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid1.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid2.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid3.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid4.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid5.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid6.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid7.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid15.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid20.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid40.eps}
+  \end{center} 
+
+As an example we have also done a caluclation with a 40x40 plane.
+On the left is the filled contour plot and on the right is the same
+configuration using a simple contour plot.
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid41.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_einsteinsolid42.eps}
+  \end{center} 
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 5}
+\section{Solutions for Chapter 4}
+
+\begin{Solution}{Linear_One_Step}
+\textbf{ Linear one-step process - quantized harmonic oscillator in a %
+    radiation field  - \texttt{onestepfast.m, qmharmoscimaster.m}}\\
+
+{\small 
+First of all we want to summarize some of the results for the one-step
+processes (also called birth-and-death processes). They are goverend by the
+following Master-equation (the phase space is discrete)
+$$ \frac{\partial}{\partial t} P(n,t) = r(n)P(n-1,t)+g(n)P(n+1,t)
+        -(r(n)+g(n))P(n,t) .$$
+The solutions are continous in time, in contrast to the random walks 
+discussed in the first few chapters. We can rewrite the Master-equation,
+using the transition matrix 
+$$\mathbb{W}_{nn'} := g_{n'}\delta_{n,n'-1} + r_{n'}\delta_{n,n'+1} \quad
+   \text{for}\quad n\neq n' , \text{and} $$
+$$\mathbb{W}_{nn} := -(r_n+g_n) \quad ,$$ 
+as 
+$$ \frac{\partial}{\partial t} P(n,t) = \mathbb{W}_{n,n'} P(n',t) .$$
+There are three classes of one-step processes, depending on the interval
+of $n$:
+\begin{enumerate}
+\item $(-\infty,+\infty)$, no limits on $n$.
+\item $[0,+\infty)$, one sided open interval.
+\item $(0,N)$, finite interval.
+\end{enumerate}
+We can take these boundary conditions into account by supplying
+the correct equations for the boundaries, or in most cases it is
+sufficient to just set e.g. $r(0)=0$ and $g(-1)=0$ or e.g. $r(N+1)=g(N)=0$.
+
+The exact equation for the first moment is:
+$$ \frac{\text{d}}{\text{d}t} <n> = -<r(n)> + <g(n)> , %
+                     \quad \text{\textsc{first moment}} $$
+and for the second moment
+$$ \frac{\text{d}}{\text{d}t} <n^2> = 2<n(g(n)-r(n))> + <r(n)+g(n)> %
+                     \quad \text{\textsc{second moment}}.$$
+With these two solutions we can easily calculate the equation for the variance.
+
+There are some interesting special cases, depending on the form of the
+gain ($g(n)$) and the loss ($r(n)$) probability:
+(RW stands for Random Walk)
+
+\begin{center}
+\begin{tabular}{c|c|c}
+$g(n)$ & $r(n)$ & name \\\hline\hline
+const.   &  $0$   & Poisson Process \\
+$q=$const. &  $q=$const. & symmetric RW (diffusion) \\
+$q_1=$const. & $q_2=$const. & asymmetric RW (diffusion with external force) \\
+$0$        & $\gamma n$ & radioactive decay \\
+$q=$const. & $k n$ & monomolecular chemical reaction \\
+$\alpha n$ &  $\beta n$  & general linear (e.g. QM harm. osci., payroll) \\
+higher orders in $n$ & higher orders in $n$ & nonlinear (e.g. competitive growth)\\
+\end{tabular}
+\end{center}
+Remark: sometimes one refers to the nonlinearity of $g(n)$ and $r(n)$ by calling
+it a nonlinear Master-equation, but do not forget that the Master-equation 
+is always linear in $P(n,t)$! For the linear case, one must have at least one 
+boundary, otherwise the transition probabilities $g(n)$ or $r(n)$ become negative. But
+most of the physical systems have a {\em natural boundary}, like the radioactive decay
+at $n=0$.
+
+The stationary solution ($t\to\infty$) is given by:
+$$ P_{\text{stat}}(n)= \frac{\prod\limits_{i=0}^{n-1}g(i)}{\prod\limits_{i=1}^{n}r(i)} P_{\text{stat}}(0)
+      \quad \text{for}\quad n\geq 0 ,$$
+and
+$$ P_{\text{stat}}(n)=\frac{\prod\limits_{i=0}^{n+1}r(i)}{\prod\limits_{i=1}^{n}g(i)} P_{\text{stat}}(0)
+      \quad \text{for}\quad n<0 .$$
+The first solution is for the class 2 and 3 above and the second solution
+is only for the class 1. $P_{\text{stat}}(0)$ is given by the normalization
+condition, e.g. for class 2
+$$ \sum_{i=0}^\infty P_{\text{stat}}(i) = 1 .$$
+
+If we take the Fokker-Planck limit for the Random Walk (both transition rates
+constant) we get a diffusion equation. The same limit for the Poisson process
+(no loss transition) does not exist!  
+}% End small
+
+For the quantized harmonic oscillator we have for the first moment 
+(The initial condition will be always $n(0)=N_0.)$
+$$ \frac{\text{d}}{\text{d}t} <n> = (\beta-\alpha) <n> \quad \Rightarrow %
+   \quad  <n(t)>= N_0 e^{ (\beta-\alpha) t} \quad\text{and}$$
+$$ \frac{\text{d}}{\text{d}t} <n^2> = 2(\beta-\alpha)<n^2>+(\alpha+\beta)<n>,$$
+which has the solution 
+$$ <n^2(t)> = \frac{\alpha+\beta}{\alpha-\beta}N_0 e^{ (\beta-\alpha) t} %
+  \left(1-e^{ (\beta-\alpha) t}\right)+N_0^2 e^{2(\beta-\alpha) t} .$$
+(Remark: As you can see, we have a closed hierachy of moment equations.)
+
+The stationary solution is
+$$  P_{\text{stat}}(n)= \text{const.} \,\cdot \left(\frac{\beta}{\alpha}\right)^n .$$
+
+\hrule
+Here are some results of the simulation:
+\begin{itemize}
+\item \mathversion{bold}$\alpha=\beta=0.5,$ \mathversion{normal}%
+           $N_0=50, t_{\text{END}}=500, 1$ realization$, \Delta t=1$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_1.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_2.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=\beta=0.5,$ \mathversion{normal}%
+           $N_0=50, t_{\text{END}}=100, 100$ realizations$, \Delta t=2$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_3.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_4.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_5.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=0.52, \beta=0.48,$ \mathversion{normal}%
+           $N_0=500, t_{\text{END}}=150, 1$ realization$, \Delta t=1$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_6.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_7.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=0.51, \beta=0.49,$ \mathversion{normal}%
+           $N_0=50, t_{\text{END}}=100, 100$ realizations$, \Delta t=2$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_8.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_9.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_10.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=0.53, \beta=0.47,$ \mathversion{normal}%
+           $N_0=50, t_{\text{END}}=50, 300$ realizations$, \Delta t=1$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_11.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_12.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_13.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_14.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_15.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_16.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=0.50, \beta=0.51,$ \mathversion{normal}%
+           $N_0=10, t_{\text{END}}=50, 200$ realizations$, \Delta t=1$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_17.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_18.eps}\hfill
+    \includegraphics[width=0.3\textwidth]{f_qmharmosci_19.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_20.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_qmharmosci_21.eps}
+  \end{center} 
+\end{itemize}
+\end{Solution}
+
+\begin{Solution}{Nonlinear_One_Step}
+\textbf{ Non-linear one-step process - growth of a competitive %
+    population - \texttt{onestepfast.m, nonlingrowthmaster.m}} \\
+This time the transition rates are $r(n)= \beta n$ and 
+$g(n)=\alpha n + \gamma n(n-1)$. The solutions for the first moment are 
+$$ <n(t)>=\frac{\beta-\alpha}{\gamma} \quad\text{and}\quad <n(t)>\equiv 0 .$$
+
+Here are some examples of the simulation:
+\begin{itemize}
+\item LEFT: 
+        \mathversion{bold}$\alpha=0.50, \beta=1.0, \gamma=0.05$ \mathversion{normal}%
+           $N_0=100, t_{\text{END}}=500, 1$ realization$, \Delta t=2$ and \\
+RIGHT: 
+\mathversion{bold}$\alpha=0.1, \beta=1.1, \gamma=0.01$ \mathversion{normal}%
+           $N_0=120, t_{\text{END}}=30, 1$ realization$, \Delta t=1$
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_1.eps}\hfill
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_2.eps}
+  \end{center} 
+\item \mathversion{bold}$\alpha=0.1, \beta=1.1, \gamma=0.01$ \mathversion{normal}%
+           $N_0=120, t_{\text{END}}=10, 100$ realizations$, \Delta t=1$ 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_4.eps}\hfill
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_5.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_3.eps}\hfill
+    \includegraphics[width=0.45\textwidth]{f_nonlingrowth_6.eps}
+  \end{center} 
+
+\end{itemize}
+\end{Solution}
+
+\begin{Solution}{Random_Telegraph}
+\textbf{ The Random Telegraph Process  - \texttt{onestepfast.m, telegraphmaster.m}}\\
+
+First of all you have to rewrite the master-equation into the known
+form. Therefore you have to identify the transition rates as
+$$ r(n)=a n \quad\text{and}\quad g(n)=b(1-n) .$$
+
+
+Some analytical results:
+$$ <n(t)> = <n^2(t)> =\frac{a}{a+b} ,$$
+
+Here are some results of the simulation:
+\begin{itemize}
+\item %
+LEFT: \mathversion{bold}$a=0.1, b=0.9,$ \mathversion{normal}%
+           $N_0=1, t_{\text{END}}=10, 1$ realization$, \Delta t=1$ and \\ 
+RIGHT: \mathversion{bold}$a=0.1, b=0.9,$ \mathversion{normal}%
+           $N_0=1, t_{\text{END}}=100, 1$ realization$, \Delta t=1$
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_telegraph_1.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_telegraph_2.eps}
+  \end{center} 
+\item \mathversion{bold}$a=0.1, b=0.9,$ \mathversion{normal}%
+           $N_0=1, t_{\text{END}}=50, 100$ realizations$, \Delta t=1$ \\
+You can see that the first and the second moment have the same value, like
+expected by the analytical results. The probability distribution in
+the last figure shows $P(0)$ and $P(1)$.
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_telegraph_3.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_telegraph_5.eps}
+  \end{center} 
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_telegraph_4.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_telegraph_6.eps}
+  \end{center} 
+\item \mathversion{bold}$a=0.1, b=0.9,$ \mathversion{normal}%
+           $N_0=1, t_{\text{END}}=10, 100$ realizations$, \Delta t=0.2$ \\
+The left figure shows a patch plot of the correlation matrix. The colorbar
+identifies the colors with the corresponding values of the correlation matrix.
+The red line indicates the normalized second moment $<n(t)n(t)>=<n^2(t)>.$
+The right figure displays five correlation functions with a fixed $t$ and
+varying time difference $t-t'$. As expected the correlation decays 
+exponentially and the correlation length i about $1/(a+b)$ (see asssignment).
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_telegraph_7.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_telegraph_8.eps}
+  \end{center} 
+
+\end{itemize}
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{Solution}{Monomolecular_Reaction}
+\textbf{ Monomolecular Chemical Reaction $A \leftrightarrows X$  %
+    - \texttt{onestepfast.m, reactionmaster.m}} \\
+First of all let us calculate the stationary distribution here as an example.
+$$ P_{\text{stat}}(n)= \frac{\prod\limits_{i=0}^{n-1}g(i)}{\prod\limits_{i=1}^{n}
+        r(i)} P_{\text{stat}}(0) = \frac{A^n}{n! k^n} P_{\text{stat}}(0) ,$$
+and 
+\begin{eqnarray*}
+ \sum_{i=0}^\infty P_{\text{stat}}(i) &=& P_{\text{stat}}(0) + 
+        \sum_{i=1}^\infty P_{\text{stat}}(i) = P_{\text{stat}}(0) +
+        \sum_{i=1}^\infty \frac{A^i}{i! k^i} P_{\text{stat}}(0) = \\
+&=& P_{\text{stat}}(0) \left( 1+ (e^{Ak}-1)\right) = P_{\text{stat}}(0)e^{Ak}, 
+\end{eqnarray*}
+and therefore
+$$ P_{\text{stat}}(0) = e^{-Ak} \quad\Rightarrow\quad P_{\text{stat}}(n)=
+        \frac{A^n}{n!} e^{-Ak} .$$
+The rest of the analytical results are given in the assignment, we don not repeat 
+them here.
+
+
+Here are some examples of the simulation:
+\begin{itemize}
+\item \mathversion{bold}$k=1, A=100,$ \mathversion{normal}%
+           $N_0=100, t_{\text{END}}=80, 1$ realization
+  \begin{center}
+    \includegraphics[width=0.5\textwidth]{f_reaction_1.eps}
+  \end{center} 
+\item \mathversion{bold}$k=1, A=100,$ \mathversion{normal}%
+           $N_0=100, t_{\text{END}}=50, 100$ realizations$, \Delta t=1$ 
+  \begin{center}        
+    \hspace*{-1cm}
+    \includegraphics[width=0.45\textwidth]{f_reaction_2.eps}\hfill
+    \includegraphics[width=0.45\textwidth]{f_reaction_3.eps}
+  \end{center} 
+  \begin{center}        
+    \hspace*{-1cm}
+    \includegraphics[width=0.45\textwidth]{f_reaction_4.eps}\hfill
+    \includegraphics[width=0.45\textwidth]{f_reaction_5.eps}
+  \end{center} 
+The red line in the right figure is a Poisson distribution (which is
+the analytical result for the stationary distribution for this process.)
+with mean $100$. You can see the excellent agreement with the simulated curve.
+
+\end{itemize}
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solutions for Chapter 5}
+\begin{Solution}{Johnson_Noise}
+\textbf{Johnson Noise - \texttt{sdeornstein.m}} \\
+
+First of all you have to identify the parameters (functions) $q$ and $D$
+of the SDE form used in the lecture:
+$$ q= 1/\tau, \quad \text{and}\quad D=c .$$
+
+Some simulation results:     
+\begin{itemize}
+\item \mathversion{bold}$i_0=0, q=1, D=1,$ \mathversion{normal}%
+           $t_{\text{END}}=1000, \Delta t=0.2, 1000$ realizations\\
+The last figure on the right is a simulation for different time
+discretizations $\Delta t=0.5, 0.2$ and $0.1$ using $2000$ realizations
+and $t_{\text{END}}=100$.
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_johnson_2.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_johnson_3.eps}
+  \end{center}
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_johnson_1.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_johnson_4.eps}
+  \end{center}
+\newpage
+\item \mathversion{bold}$i_0=0, q=0.01, D=100,$ \mathversion{normal}%
+           $t_{\text{END}}=250, \Delta t=0.2, 100$ realizations
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.47\textwidth]{f_johnson_5.eps}\hfill
+    \includegraphics[width=0.47\textwidth]{f_johnson_6.eps}
+  \end{center}
+  \begin{center}
+    \hspace*{-1cm}
+    \includegraphics[width=0.6\textwidth]{f_johnson_7.eps}
+  \end{center}
+\end{itemize}
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solutions for Chapter 6}
 \begin{Solution}{}
 \end{Solution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 6}
-\begin{Solution}{}
-\end{Solution}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Solutions to Chapter 7}
+\section{Solutions for Chapter 7}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
