@@ -52,7 +52,7 @@ the interface between program and visualization tool/graphical output should
 be comfortable. Last not least the availability of the program should be
 guaranteed. The corresponding compilers should be available at low, in the 
 ideal case at no cost to the students for home exercises. Furthermore, they
-should be portable on PC with Windows or Linux operating systems, on Macintosh
+should be portable on PCs with Windows or Linux operating systems, on Macintosh
 and on workstations from the UNIX world (IBM AIX, Solaris, SGI Irix, ...).
 Since almost all universities do have a high--performance parallel computer 
 the language should also allow to demonstrate high--performance parallel 
@@ -83,31 +83,31 @@ of the corresponding programs are listed in the appendix.
     \leavevmode
     \begin{tabular}{llp{3cm}|c|c}
       Language & OS & Software & Machine & CPU time \\\hline\hline  
-   Fortran 90 & Linux & Nag f90 Compiler V2.2(260) & Pentium 133 & 2.1 sec.\\\hline
+   Fortran 90 & Linux & Nag f90 Compiler V2.2(260) & Pentium 133 & 2.1 sec.\\
            & Linux & Nag f90 Compiler V2.2(260) with -O3 & Pentium 133 & 2.4 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) & Pentium 133 & 2.3 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) wiht -O4& Pentium 133 & 2.3 sec.\\
            & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
-           & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.4 sec.\\
-   C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\\hline
-   C       & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
-   C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\\hline
-   C++     & Linux & egcs-1.0.3 with -O3 & Pentium 133 & 1.8 sec. \\\hline
+           & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.4 sec.\\\hline
+   C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\
+           & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
+   C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\
+           & Linux & egcs-1.0.3 with -O3 & Pentium 133 & 1.8 sec. \\\hline
       Java & Linux & JDK 1.1.6v4 & Pentium II 333 & 6 sec. \\\hline
-           & Linux & using JIT TYA (V1.0) & Pentium II 333 & 3 sec.\\\hline
-           & Linux &           & Pentium 133 & 16 sec. \\\hline
-           & Linux & using JIT TYA (V1.0) & Pentium 133 & 10 sec.\\\hline
-           & Linux &           & Pentium 200 MMX & 9 sec. \\\hline
-           & Linux & JDK 1.1.7 without JIT & DEC Alpha 21164 600 & 6 sec. \\\hline
-           & Win95 & JDK 1.1.7 using Symantec JIT & Pentium 133 & 9 sec. \\\hline
-           & Win95 & JDK 1.1.7 without JIT & Pentium 133 & 19 sec. \\\hline
-           & Win95 & JDK 1.2 using Symantec JIT & Pentium 133 & 8 sec. \\\hline
+           & Linux & using JIT TYA (V1.0) & Pentium II 333 & 3 sec.\\
+           & Linux &           & Pentium 133 & 16 sec. \\
+           & Linux & using JIT TYA (V1.0) & Pentium 133 & 10 sec.\\
+           & Linux &           & Pentium 200 MMX & 9 sec. \\
+           & Linux & JDK 1.1.7 without JIT & DEC Alpha 21164 600 & 6 sec. \\
+           & Win95 & JDK 1.1.7 using Symantec JIT & Pentium 133 & 9 sec. \\
+           & Win95 & JDK 1.1.7 without JIT & Pentium 133 & 19 sec. \\
+           & Win95 & JDK 1.2 using Symantec JIT & Pentium 133 & 8 sec. \\
            & Win95 & JDK 1.2 without JIT & Pentium 133 & 22 sec. \\\hline
-   Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\\hline
-           & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\\hline 
+   Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\
+           & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\
            & Linux & Matlab 5.2 & Pentium 133 &  224 sec.\\\hline
    Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
-Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
+Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
            & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
     \end{tabular}
     \caption[Performance Table.]%
@@ -121,7 +121,8 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
       the JDK use \texttt{-Djava.compiler=tya} or 
       set the environement variable \texttt{JAVA\_COMPILER=tya}. To avoid
       using the JIT use option \texttt{-nojit} up to JDK1.1.7 on Windows or
-      for all other platforms set \texttt{JAVA\_COMPILER=none}.
+      for all other platforms set the environment variable 
+      \texttt{JAVA\_COMPILER=none}.
       }
     \label{tab:performance}
   \end{center}
@@ -200,7 +201,8 @@ source code into Java byte--code, which is the machine language for the Java
 Virtual Machine (JVM). The JVM is an abstract machine which runs on each system
 that supports Java. Other languages may also be compiled into Java byte-code.
 
-Java is robust. Java contains features, exception handling, which simplify the
+Java is robust. Java contains features, called 
+exception handling, which simplify the
 tasks of error handling and recovery.
 
 Java is secure. Since Java has been designed for distributed applications, 
@@ -263,13 +265,14 @@ Java 1.1 and the development kit for it, JDK 1.1.
 Meanwhile most of the browsers adapted the new Java 1.1 language specification.
 Also many new APIs (Application Progammers Interfaces) like Java 3D or 
 most important the JFC\footnote{The Java Foundation Classes, which
-consist of the Swing API and many more components like (almost complete set of)  
+consist of the Swing API and many more components like (an 
+almost complete set of)  
 the Internet Foundation Classes (IFC). You can either use Java 1.1 together
 with the JFC 1.1 for Swing 1.1 or Java 2, which already includes JFC 1.1 for
-Swing 1.1 and also Java 2D and some more APIs.}
+Swing 1.1 and also Java 2D and some more new APIs.}
 have appeared, some
-of them have been officially included in the Java 1.2 (now called Java 2)
-specifications. Together with the JDK 1.2, Java 2 appeared in January 1999.
+of them have been officially included in the Java 1.2 specifications
+(now called Java 2). Together with the JDK 1.2, Java 2 appeared in January 1999.
 But no browser supports this standard right now, although most
 of the software available for Java and written in Java seem to be
 already adapted to the new standard. Another change occurred to the
@@ -328,16 +331,19 @@ the RMI protocol supplied by Java.
         Be aware that not everything is supported by the browsers and
         sometimes you get strange results compared to using the
         appletviewer.       
-\item[Java Workshop] A commercial IDE for Java by SUN. Free trial versions
+\item[Java Workshop] A commercial IDE\footnote{Integrated 
+    Development Environment} 
+  for Java by SUN. Free trial versions
   for universities and educational institutions are available.\\  
-\item[Freebuilder] A freely available IDE\footnote{Integrated Development
-    Environment} for Java. \\
+\item[Freebuilder] A freely available IDE for Java. \\
+\item[TOBA] ???
+\item[Fortran to Java] ???
 \end{description}
 
 \item[] \textbf{Java Packages:}
 \begin{description}
 \item[simulation] This is the package developed during the writing
-        of the book. It provides only some very basic features, which
+        of this book. It provides only some very basic features, which
         might be of interest or can ease writing code. We have also
         included some freely available source codes, which also
         try to ease writing Java code.
@@ -361,10 +367,12 @@ the RMI protocol supplied by Java.
         variance, linear least square fit, etc.). It also provides some
         basic functionallity for linear algebra, like matrix decomposition,
         determinant, trace, solving linear systems, etc.
-\item[JavaSci] A freely available package with support for many 
+\item[JSci] A freely available package with support for many 
   physics constants, mathematical operations, etc. \\
    It includes methods for fast Fourier transformations, ordinary differential 
-   equations, complex numbers and much more.
+   equations, complex numbers and much more. We prefer to use the JNL
+   implementation of the complex number classes, because they will
+   more probable become the standard.
 \end{description}
 
 \end{description}
@@ -397,12 +405,12 @@ operating system. But if you use the new Swing components supplied
 with the Java 2 standard or extend the Java 1.1 standard with the Swing
 components, you can choose the appearance of the graphical look, which then
 is the same across all platforms. So if you are using the new Java 2 standard
-(JDK1.2), you should definitely use the new Swing components, if you
+(JDK1.2), you should definitely use the new Swing components. If you
 still use the AWT components (like we do here in this book), you should
 keep in mind that the look (not the functionality) 
 of the program can be different on different platforms. 
 A big advantage of the Swing components is that they do not use any
-native code for the platform, which the AWT components did.
+native code, which the AWT components do.
 
 The main reason for the wide availability of Java
 is that SUN Microsystems distributes the Java Development Kit (JDK)
@@ -431,7 +439,9 @@ Environment) called \href{http://www.freebuilder.org/}{FreeBuilder}.
 This is a complete environment to write Java programs comfortably,
 which is the first under the GNU license. It is still in alpha
 development stage, but it already comprises a lot of features. Of
-course, there are many commercial ones available, like SUN's Java Workshop.
+course, there are many commercial ones available, like SUN's Java Workshop
+or Simplicity for Java (WWW ???).
+
 
 Opposing to other languages, which use the ASCII character set, Java
 uses the Unicode character set \href{http://unicode.org}{(Unicode WWW
@@ -469,7 +479,7 @@ add complex number support to Java (e.g. JNL).
 
 \subsection{The ``HelloWorld'' Program -- Applications and Applets}
 \label{sec:HelloWorld}
-Now let's start with the traditional ``Hello World'' program written
+Now let us start with the traditional ``Hello World'' program written
 in Java.
 
 \subsubsection{Application}
@@ -480,7 +490,7 @@ You have to save the program in a file called
 To execute the above example you have to type in the commando line the
 following:
 \begin{itemize}
-\item Compiler: \verb/javac HelloWorld_Application.java/  
+\item Compiler: \verb/javac HelloWorld_Application.java/  \\
   $\Longrightarrow$ produces HelloWorld\_Application.class 
   in the same directory.
 \item JVM:  \verb/java HelloWorld_Application/
@@ -501,10 +511,11 @@ is a class. The curly bracket appearing after the class name
 In the second line the \verb|main| method is introduced. The main
 method is declared \verb|void| because the method does not return a
 value. The main method is executed when you run the class as an
-application. In the present case the only parameter, the argument
+application. The only parameter, the argument
 of the main method, is an array of String object.
 
-In the third line the method \verb|println()| of the system class out
+In the third line the method \verb|println()| of the system class 
+\verb|out|
 is invoked. This method simply prints a string and terminates with a 
 new--line command. Alternatively you could use the 
 \verb|System.out.print()| method, which does the same, but does
@@ -515,8 +526,10 @@ Java. Please, do not worry if you do not understand everything. You are
 not expected to understand everything at this stage.
 
 If you are using Emacs/XEamcs and JDE you could have started Emacs and
-then just use the ``JDE New'' method in the ``Files'' menu. Then you
-have to type the \verb|System.out.println()| code. To compile
+then just used the ``JDE New'' method in the ``Files'' menu. Then you
+have to type the \verb|System.out.println()| code, which could
+again be accomplished by using the \verb|Generate| menu in the
+JDE menu. To compile
 use the ``compile'' command in the ``JDE'' menu and similar
 the ``run'' command in the same menu. This saves you a lot of keystrokes. 
 
@@ -532,7 +545,7 @@ server program,
 e.g. a WWW browser like Netscape Navigator\footnote{You need at least 
 version 4.06 or patches for earlier versions to use all features of Java 1.1}, 
 the Internet Explorer\footnote{Seems to run Java 1.1 programs since
-version 4.}(Don't),
+version 4, but does not conform to the Java standards.}(Don't),
 HotJava or the appletviewer\footnote{included with the JDK.}.
 
 The big difference between an applet and an application is that
@@ -558,7 +571,7 @@ The ``Hello World'' example written as an applet has the following form:
 
 Applets have to be derived from the applet class
 \verb|java.applet.Applet|, which include the principal facilities of
-the Abstract Window toolkit (AWT) and the interface with X/Motif on
+the Abstract Windowing Toolkit (AWT) and the interface with X/Motif on
 Unix, Windows on PC, and Mac-OS on Macintosh platforms.
 As you can see there is no main method in an applet. Instead if an applet
 is started by a server, the init() method is executed first. There is also
@@ -683,8 +696,8 @@ needed anymore and the structure of the classes is represented
 much better.
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=8cm,angle=-90]{Figures/HelloWorldApplet2.eps}
-    \includegraphics[width=8cm,angle=-90]{Figures/HelloWorldApplication2.eps}
+    \includegraphics[width=7cm]{Figures/HelloWorldApplet2.eps}
+    \includegraphics[width=5.5cm]{Figures/HelloWorldApplication2.eps}
     \caption{The output of the \texttt{javadoc} command from the JDK 1.2.}
     \label{fig:Java2HTMLDoc}
   \end{center}
