@@ -484,8 +484,8 @@ regions have to the integral we want to evaluate, instead of
 spreading them evenly. To this end we rewrite the integral 
 (\ref{INT_VARRED}) in the form
 \begin{equation*}
-I = \int \frac{f(x)}{p(x)} p(x) dx = \langle 
-\frac{f(x)}{p(x)}\rangle,
+I = \int \frac{f(x)}{p(x)} p(x) dx = \left\langle 
+\frac{f(x)}{p(x)}\right\rangle,
 \end{equation*}
 where $X$ is a random variable with probability density $p(x)$.
 $P(x)$ is called the importance sampling distribution.  Since the
@@ -498,7 +498,7 @@ according to $p(x)$
 The function $p(x)$ has to be chosen in such a way that the 
 variance of $f(x)/p(x)$ 
 \begin{equation*}
-{\rm Var} = \langle (\frac{f(x)}{p(x)}-I)^2\rangle
+{\rm Var} = \left\langle (\frac{f(x)}{p(x)}-I)^2\right\rangle
    = \int_a^b \frac{f^2(x)}{p(x)}dx - I^2
 \end{equation*}
 is minimal. If $f(x)>0$ it follows from the above equation that
@@ -644,7 +644,7 @@ Accordingly, the difference between expectation values and the
 true ensemble average
 scales with $1/\sqrt{N}$. Such a property is called
 self--averaging. It follows from the above discussion that  
-Random walks do not have the self--averaging property.
+random walks do not have the self--averaging property.
 
 At this stage it might be appropriate to introduce the concept of 
 universality, which allows the classification of the critical 
@@ -662,8 +662,8 @@ random walks the critical exponent $\nu$ strongly depends on the
 dimension of the lattice.
 
 Since we want to sample with the help of the following program
-configurations of ideal polymers it is important to consider how 
-many configurations are possible. To this end we compute the 
+configurations of ideal polymers it is important to consider the 
+number of possible configurations. To this end we compute the 
 number $Z_N$ of distinct random walks. Since each lattice site 
 has $q$ neighbors,
 the number of distinct possibilities at each step is $q$ and the 
@@ -674,10 +674,10 @@ Z_N = q^N.
 \end{equation}
 
 In order to demonstrate the above theoretical results we want to 
-simulate now a random walk on a two dimensional lattice.
-The listing can be seen below and will.
+simulate a random walk on a two dimensional lattice.
+The listing can be seen below.
 
-\subsubsection{Listing of the program random walk}
+\subsubsection{Listing of the program rw\_2d.m}
 \inputlisting{./Listings/rw_2d.m}
 
 A few comments to the listing seem appropriate. 
@@ -703,10 +703,10 @@ line 69 with the command
 axis([-maximum maximum -maximum maximum]);
 \end{verbatim}. 
 With the help of the {\sf hold on} {\sf hold off} construction we 
-already know we plot the ten realizations in the same plot.
+plot  ten realizations on the same figure.
 
 We run the program and generate 10 realizations of a random walk
-of 1000 step lengths. These realizations can be seen in Fig. 
+of 1000 steps lengths. These realizations can be seen in Fig. 
 (\ref{F_RW_2D}).
 \begin{figure}
 \label{F_RW_2D}
@@ -714,15 +714,11 @@ of 1000 step lengths. These realizations can be seen in Fig.
 \caption{Ten realizations of a two--dimensional random walk on a square
 lattice.}
 \end{figure}
-It is now interesting to investigate the end--to--distance of the
+It is now left to the exercises to
+investigate the end--to--distance of the
 ideal polymer chain in order to check whether the simulation is in 
-agreement with the Gaussian polymer theory. bla bla bla...
+agreement with the Gaussian polymer theory.
 
-Figuren: end-to-end !!!!\\
-
-Figuren/Tabelle: kritischer Exponent !!!! \\
-
-Diskussion \\
 
 \subsection{Real chains}
 In Fig. (\ref{F_RW_2D}) we see that the realizations of the random walk, i.e. 
@@ -822,9 +818,21 @@ On a two--dimensional square lattice $\mu = 0.128$, on a 3d cubic lattice
 $\mu = 0.065$ \cite{KREMER_AND_BINDER}. Because of this exponential 
 decrease it is very  difficult to generate very long chains with 
 the simple sampling algorithm. This problem is called the 
-"attrition problem".
-
-FIGUREN ZUM ATTRITION PROBLEM !!!!!!!!!
+"attrition problem". In Fig. (\ref{F_RW_ATTRITION}) we have 
+plotted the average number of trials necessary to generate 
+polymers of a given length as a function of the length of the
+polymers.
+\begin{figure}
+\label{F_RW_ATTRITION}
+\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\caption{Attrition problem: The average number of trials necessary to 
+generate polmers of a given length increases exponetially with the
+lentgth of the polymers .}
+\end{figure}
+The figure was generated with the help of the program {\sf 
+RW\_2D\_sa.m}.
+\subsubsection{Listing of the program RW\_2D\_sa.m}
+\inputlisting{./Listings/rw_2d_sa.m}
 
 \subsubsection{Importance sampling}
 To overcome the attrition problem it is necessary to exploit 
@@ -884,8 +892,8 @@ The flow diagram of the program can be seen in Fig.
 \end{figure}
 
 
-\subsubsection{Listing of the program {\sf RW\_2D\_sa2.m}}
-\inputlisting{./Listings/rw_2D_sa2.m}
+\subsubsection{Listing of the program {\sf rw\_2d\_sa2.m}}
+\inputlisting{./Listings/rw_2d_sa2.m}
 
 Let us comment on the program. BLA BLA BLA !!!!!!!!!
 We run the program for the following set of parameters. We variate
@@ -1059,21 +1067,3 @@ FIGUREN: FEHLER!!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Stochastische Prozesse}
-Master-Gleichungen
-
-\chapter{Monte Carlo Methoden in der statistischen Mechanik}
-Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
-Simulated annealing; travelling salesman;
-
-\chapter{Non-equilibrium MC}
-Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
-
-\chapter{Brownsche Dynamik Simulationen}
-Omega-entwicklung; SDE;
-
-
-\chapter{Rest}
-stochastische Resonanzen; Muster Erkennung; random Walks;
-
-\chapter{Stochastische Wellenfunktionsmethoden}
