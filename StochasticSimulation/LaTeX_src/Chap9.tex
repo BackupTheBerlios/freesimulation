@@ -750,6 +750,7 @@ Here we want to demonstrate, how to write and use a parallel program
 employing the Ehrenfest model as an example problem. 
 
 \subsubsection{Symphony}
+\label{sec:Symphony}
 Using Symphony is very easy in this case. The idea is to compute the same
 model (number of time steps) with different number of fleas on dog one. Then we
 can generate very easily the statistics for the Ehrenfest model discussed
@@ -817,6 +818,12 @@ following program:
 This produces a data file containing the variables (\verb|n0d Nd na nb|) 
 and can be plotted using Ptplot or by any plotting program e.g. gnuplot (after 
 starting gnuplot use for example \verb|gnuplot "gnu.out" using 1:3|).
+
+
+?? Discuss sprintf() and Stringbuffer
+????? Other method (String, arrays)
+?? new version (ints)
+
 
 %%%%%%%%%%%%%%%%%%%%%%%
 
