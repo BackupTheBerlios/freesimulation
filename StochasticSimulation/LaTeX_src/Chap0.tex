@@ -639,9 +639,9 @@ A last remark concerns the documentation for the programs. We have
 learned, that we can include documentation comments using 
 \verb|/** .... */|. These comments are processed by using the
 \verb|javadoc| command from the JDK. If you run the javadoc command as: 
-\begin{verbatim}
+\begin{sverbatim}
   javadoc HelloWorld_Application.java HelloWorld_Applet.java  
-\end{verbatim}
+\end{sverbatim}
 you get some HTML files: packages.html, tree.html, AllNames.html,
 HelloWorld\_Applet.html, HelloWorld\_Application.html. All these
 files describe the written classes. The tree.html file gives a tree
@@ -990,18 +990,18 @@ qualified name to the class. So if you would like to
 use the HelloWorld class from above in your programs, you could either
 type \verb|de.freiburg.simulation.HelloWorld()| in your program
 or you can use
-\begin{verbatim}
+\begin{sverbatim}
 import de.freiburg.simulation.*;
 ....
    HelloWorld();
-\end{verbatim}
+\end{sverbatim}
 to import all classes in the \verb|de.freiburg.simulation| class.
 You can also use:
-\begin{verbatim}
+\begin{sverbatim}
 import de.freiburg.simulation.HelloWorld;
 ....
    HelloWorld();
-\end{verbatim}
+\end{sverbatim}
 if you just want to import one special class.
 
 We have already made use of the \verb|import|-statement in the ``Hello World'' 
@@ -1130,11 +1130,11 @@ means is incremented by.
 For our forthcoming applications the most important control statement
 is the \verb|for| statement. It is used to loop over a range of values
 from the beginning to the end. Its syntax is
-\begin{verbatim}
+\begin{sverbatim}
 for (init_expressions; boolean_expr; incr_expressions) {
     statements
 }
-\end{verbatim}
+\end{sverbatim}
 where \verb|init_expressions| denotes the initial value of the iterated
 variable, \verb|incr_expressions| denotes the increment of the iterated
 variable. For both you can specify more than one expression separated
@@ -1430,13 +1430,13 @@ this notation when we discussed the command line parameters.
 You can also create the array and initialize it right away by using
 (also in Java 1.0):
 \begin{verbatim}
-        int intarray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int[] intarray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int intarray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int[] intarray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 \end{verbatim}
 or one step further, create an array of objects (here strings) and
 create the elements in the same step:
 \begin{verbatim}
-        String stringarray[] = {"a","b","c","d","e","f","g"};
+  String stringarray[] = {"a","b","c","d","e","f","g"};
 \end{verbatim}
 In Java you can even put the brackets behind the type instead of the
 variable name (not possible in C). So it does not matter if you
@@ -1444,16 +1444,16 @@ write \verb|int intarray[];| or \verb|int[] intarray;|.
 
 In Java 1.1 you can also use \emph{anonymous arrays}:
 \begin{verbatim}
-        String[] texts;
-        texts = new String[] {"a","b","c","d","e","f","g"};
-        System.out.println(new char[] {'h','e','l','l','o'});
+  String[] texts;
+  texts = new String[] {"a","b","c","d","e","f","g"};
+  System.out.println(new char[] {'h','e','l','l','o'});
 \end{verbatim}
 So you can create and initialize arrays without even using a variable.
 
 Multidimensional arrays are also supported. Just like in C they are
 arrays of arrays. For example
 \begin{verbatim}
-        double matrix[][] = new double[10][10]; 
+  double matrix[][] = new double[10][10]; 
 \end{verbatim}
 creates a 10 by 10 matrix, called \verb|matrix|, 
 meaning that you have created 10 arrays
@@ -1461,10 +1461,10 @@ of type \verb|double[10]|. An important point to make is that you
 do not have to specify all dimensions at once. You can for example
 create a triangular matrix by submitting:
 \begin{verbatim}
-        double matrix[][] = new double[10][];
-        for (int i=0; i<10; i++) {
-                matrix[i] = new double[i+1];
-        } 
+  double matrix[][] = new double[10][];
+  for (int i=0; i<10; i++) {
+         matrix[i] = new double[i+1];
+  } 
 \end{verbatim}
 To access multidimensional arrays you can also use one dimensional
 array syntax (as in C). If you have a two dimensional array 
@@ -1482,9 +1482,9 @@ and afterwards calculate the mean.
 The last important point to address is the copying of arrays. 
 You can not just write
 \begin{verbatim}
-        int[] array1 = {1,2,3,4,5};
-        int[] array2;
-        array2 = array1;          // WRONG ! - ERROR ! 
+  int[] array1 = {1,2,3,4,5};
+  int[] array2;
+  array2 = array1;          // WRONG ! - ERROR ! 
 \end{verbatim}
 This would only copy the reference of the array1 object to the array2
 object, not the values, the memory address is the same. 
@@ -1492,7 +1492,7 @@ To copy the values of arrays you have to use the
 \verb|arraycopy()| method of the java.lang.System class. 
 So to copy an array in the above example, you have to write:
 \begin{verbatim}
-        System.arraycopy(array1,0,array2,0,array1.length);
+  System.arraycopy(array1,0,array2,0,array1.length);
 \end{verbatim}
 This copies all elements of array1 to array2 staring from element 0. 
 The remaining parts of array2 are not created!
@@ -1505,24 +1505,24 @@ type using a modified version of the Quicksort\footnote{This is
 a sorting algorithm, which is very versatile and efficient for
 most of the problems.} algorithm. So to sort a whole array 
 of double values, you just have to use
-\begin{verbatim}
+\begin{sverbatim}
   /* JAVA 2 */
   import java.util.*;
   double[] array = new double[1000];
   ....
   Arrays.sort(array,0,1000); // to sort the whole array
-\end{verbatim}
+\end{sverbatim}
 You can even sort an array of strings or arbitrary objects.
 
 Another new functionality is the \verb|fill()| method. Often you
 want to assign a value to a whole array of doubles for example.
 In Java 2 you can do this using
-\begin{verbatim}
+\begin{sverbatim}
   /* JAVA 2 */
   import java.util.*;
   double[] array = new double[1000];
   Arrays.fill(array,1.0);
-\end{verbatim}
+\end{sverbatim}
 which sets the whole array to 1.
 
 Furthermore there is a comparison method for arrays called
@@ -1530,14 +1530,14 @@ Furthermore there is a comparison method for arrays called
 last but not least there is a binary search algorithm to
 find a value in an (sorted) array. So for example to find the index of the
 array element equal to 2.5 you can use the code:
-\begin{verbatim}
+\begin{sverbatim}
   /* JAVA 2 */
   import java.util.*;
   double[] array = new double[1000];
   ....
   Arrays.sort(array);
   int index = Arrays.binarysearch( array, 2.5 );
-\end{verbatim}
+\end{sverbatim}
 
 \subsection{Parameters from the Command Line or a HTML File}
 \label{sec:Parameter}
@@ -1558,16 +1558,16 @@ program using command line parameters:
 \loadlisting{ParamCommandLine.java}{Listings_Java/ParamCommandLine.java}
 So if you run the program as \verb|java ParamCommandLine 12 34 abcd t5|
 the output on the screen will be
-\begin{verbatim}
+\begin{sverbatim}
  Parameter No. 0 : 12
  Parameter No. 1 : 34
  Parameter No. 2 : abcd
  Parameter No. 3 : t5
-\end{verbatim}
+\end{sverbatim}
 and if you don't supply parameters it will be
-\begin{verbatim}
+\begin{sverbatim}
  NO parameters specified !
-\end{verbatim}
+\end{sverbatim}
 We also see the concatenation of strings in the output statement.
 And because you can only supply one argument to the  \verb|println()|
 method, you have to concatenate all outputs to one long string.
@@ -1593,11 +1593,11 @@ of the parameter \verb|DisplayText| doesn't have
 to be converted. Then in the \verb|paint()| method we display
 the transmitted parameters on the screen. The output in the 
 appletviewer or in Netscape should look like this:
-\begin{verbatim}
+\begin{sverbatim}
   Parameter NumberofPoints is 10000
 
   Parameter DisplayText is "This_is_a_test_parameter!"
-\end{verbatim}
+\end{sverbatim}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2224,10 +2224,22 @@ in table \ref{tab:PrintfModifiers}.
   \begin{center}
     \begin{tabular}{cl}
       Modifier & Type to be formatted \\ \hline
-      d & integer \\
-      f & float \\
-      f & double \\
-      o & \\
+      \%bd & byte \\
+      \%hd & short \\
+      \%d & signed integer \\
+      \%ld & long \\
+      \%u & unsigned integer \\
+      \%o & unsigned octal integer \\
+      \%x / \%X & unsigned hexadecimal integer (lower or uppercase)\\
+      \%f & float \\
+      \%lf & double \\
+      \%e / \%E & float, scientific notation \\
+      \%g / \%G & float, same as f or e, depending on value \\
+      \%s & String \\
+      \%c & character\\
+      \%p & object identity hash code in unsigned hexadecimal \\
+      \%$\backslash$n & platform independent line seprarator\\
+      \%n & counts characters\\
     \end{tabular}
     \caption{All possible modifiers to be used in the format 
       string given to the printf()/sprintf()/fprintf() methods supplied 
