@@ -33,7 +33,7 @@ public class Distribution {
     /** Calculate a integer random number between 0 and N 
         (including 0 and N) 
         -- use a Random class of the calling class */
-    public int nextInteger(Random rand2, int N) {
+    public static int nextInteger(Random rand2, int N) {
         return (int)Math.round(N*rand2.nextDouble());
     }
 
