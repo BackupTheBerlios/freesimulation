@@ -365,75 +365,27 @@
 %%% Color definitions
 \definecolor{tabgray}{gray}{0.6} %% the gray for table rows
 
-%%%
-%%% Design our own Titlepage !! %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-\begin{titlepage}
+%%% No page numbering for front matter stuff and title
+\pagestyle{empty}
 
-%%% Title 
-\begin{center}
-\huge 
-\textcolor{red}{
-\textbf{
-Stochastic Methods For Physics Using Java: \\
-An Introduction
-} }
-\end{center}
-\vspace*{.5cm}
+%%% Front Cover Text %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input FrontCover.tex
+\cleardoublepage
 
-%%% Authors
-\begin{center}
-\LARGE
-\textcolor{blue}{
-\textsc{F. Petruccione and P. Biechele }}
-\end{center}
-\vfill
-%%%
-%%% VERSION NUMBER !!!!!
-%%%
-\begin{center}
-\textsf{\LARGE Version 0.5}
-\end{center}
-%%%
-%%%
-%%% 
-\vfill
-%% Copyright 
-\begin{center}
-\large
-  Copyright (c)  2000  Francesco Petruccione and Peter Biechele \\
-      Permission is granted to copy, distribute and/or modify this document
-      under the terms of the GNU Free Documentation License, Version 1.1
-      or any later version published by the Free Software Foundation;
-      with no Invariant Sections, with the
-      Front-Cover Texts being FRONT LIST, and with the Back-Cover Texts 
-      being BACK LIST.
-      A copy of the license is included in the section entitled "GNU
-      Free Documentation License".\\
-      All programs contained herein are under the GNU GPL.
-\end{center}
-\vspace*{.5cm}
-
-%%% Date
-\begin{center}
-\large
-\textsf{Version of the \today}
-\end{center}
-
-\end{titlepage}
-%%% End Of Titlepage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% page numbering on
+\pagestyle{fancy}
 
 
 %%% Table Of Contents / Figures / Listings / Tables -- Roman Page Numbering
 \pagenumbering{Roman}
 \tableofcontents
-\clearpage
+\cleardoublepage
 \listoffigures 
-\clearpage
+\cleardoublepage
 \listoftables
-\clearpage
+\cleardoublepage
 \lstlistoflistings
-\clearpage
+\cleardoublepage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -515,6 +467,12 @@ An Introduction
 %%% Print Index
 \printindex
 
+%%% No page numbering for front matter stuff and title
+\pagestyle{empty}
+
+%%% Back Cover Text %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input BackCover.tex
+\cleardoublepage
 
 %%% End of Document
 \end{document}
