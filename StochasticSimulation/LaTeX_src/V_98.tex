@@ -16,8 +16,8 @@
 %           openright ????
 %
 % Create Index
-%\usepackage{makeidx}
-%\makeindex
+\usepackage{makeidx}
+\makeindex
 
 %%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
 \usepackage{times,helvet}
@@ -32,9 +32,16 @@
 
 %%%%%%%  The graphicx/color style for picture inclusion and color support
 \usepackage[dvips]{graphicx,color}
+\usepackage{colortbl} %% colored tables
 % set path for figures
 % more directories can be added by using {dir/} for each
 \graphicspath{ {Figures/} }
+
+%%% Change floating table layout
+%%% can also be used for new floating objects or figures
+\usepackage{float}
+\floatstyle{ruled}
+\restylefloat{table}
 
 %%% The Listings package - include source code
 \usepackage{listings}
@@ -112,7 +119,6 @@
 %%% moreverb   : erweiterte Umgebungen fuer Listings
 %%% multicol   : verbesserte Spalten-Handling
 %%%%%%%%%%%%%% floatfig   : Bilder von Text umfliessen lassen (alt)
-%%% float      : verbesserte Bilder Umgebung
 %%% psfrag     : Text in PS Bildern, durch TeX Fonts ersetzen
 %%% exscale    : Skalierung von Mathe Symbolen besser
 %%% natbib     : verbessertes Referenzieren 
@@ -151,9 +157,9 @@
 % \@addtoreset{equation}{section}
 %\makeatother
 %% Mengensymbol C: complex numbers
-\newcommand{\setC}{\ensuremath{\mathbf{C}}}
+\newcommand{\setC}{\ensuremath{\mathbb{C}}}
 % Symbol fuer relle Zahlen.
-\newcommand{\setR}{\ensuremath{\mathbf{R}}}
+\newcommand{\setR}{\ensuremath{\mathbb{R}}}
 %% Mittelwert Symbol
 \newcommand{\lr}[1]{\left\langle #1 \right\rangle}
 
@@ -214,7 +220,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-%\includeonly{IntroToJava,ObjectOriented}
+\includeonly{IntroToJava,ObjectOriented,AppendixMainText}
 
 %\includeonly{CD_ROM,Chap7,Chap8,Chap9,Listings,Solutions}
 
@@ -326,7 +332,8 @@
 % Now insert the Index
 %%\addtocontents{toc}{\protect\vspace{1.5ex}}
 %%\addcontentsline{toc}{chapter}{\protect\numberline{}Index}
-%%\printindex
+
+\printindex
 
 \end{document}
 
