@@ -748,9 +748,9 @@ very time consuming). The first and easiest possibility is to call the
 The repaint method then in
 turn calls the \verb|update()| method of all components contained in the 
 component for which the repaint method has been called.
-Each of the repaint methods then calls the corresponding 
+Each of the update methods then calls the corresponding 
 \verb|paint()| method, which finally displays the change on the 
-screen.
+screen (see also figure \ref{fig:PaintMethod}).
 
 Here an example: you create a \verb|Panel|, which contains two labels.
 Now you start a simulation and change the second label. Now to 
@@ -766,7 +766,7 @@ directs all calls to the update methods.
 In our example you might want to redisplay the labels at once, because
 your simulation calculation is going on and does not allow the
 repaint method to start. In this case you have to call the 
-\verb|repaint()| method of the label components yourself and it will 
+\verb|update()| method of the label components yourself and it will 
 redisplay it at once. 
 
 A third possibility would be to call the \verb|paint()| methods of the
