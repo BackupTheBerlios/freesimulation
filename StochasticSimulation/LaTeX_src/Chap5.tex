@@ -34,8 +34,8 @@ property. Namely, it is selfconsistent in the following sense.
 Let us apply the above formula twice, starting from,
 \begin{equation*}
 X(t+2\Delta t) = X(t+\Delta t) 
- - qX(t+ \Delta t) \Delta t + \sqrt{D} \sqrt{\Delta t} \xi(t+\Delta t)
-\end{equation*}.
+ - qX(t+ \Delta t) \Delta t + \sqrt{D} \sqrt{\Delta t} \xi(t+\Delta t).
+\end{equation*}
 Inserting (\ref{SDE_APPROX}) we immediately obtain keeping 
 terms up to first order in $\Delta t$
 \begin{equation*}
@@ -60,7 +60,7 @@ the Chapman--Kolmogorov equation.
 
 
 Due to the presence of a stochastic term, the Gaussain stochastic
-process $\xi(t)$ the above equation is a typical example of a 
+process $\xi(t)$ the above equation is a discretized version of a 
 so--called {\em stochastic differential equation} (SDE). It is the aim
 of this section to introduce into some  peculiarities of stochastic
 differential equations. In particular we will also show the
@@ -91,7 +91,8 @@ Eq. (\ref{SDE_LANGEVIN_DISCR}) as
 Obviuosly, the limit $dt \rightarrow 0$ of the above equation does not
 exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
 is everywhere continuous but nowhere differentiable. Nevertheless it is
-custumary to ``pretend'' \cite{GILLESPIE} that $dx/dt$ exists even for
+custumary in the physical literature to ``pretend'' (\cite{GILLESPIE})
+that $dx/dt$ exists even for
 nonvanishing $D$. In fact we know that we can write
 \begin{equation*}
 \frac{\xi(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
@@ -114,7 +115,41 @@ averaged properties:
 \end{eqnarray*}
 which satisfy the requirement of no correlation at different
 times. Note, that the white noise process  $\eta$ has
-infinite variance.
+infinite variance. Accordingly, the spectral density, i.e.,
+the Fourier transform of the correlation function of $\eta$ is 
+constant. This is the reason for calling $\eta$ a white noise
+process.
+
+It is important to establish precisely the relationship
+between the white noise process and the Wiener process.
+We know already that the special Wiener process $dW(dt)$
+is a normal random variable with mean zero and variance $dt$
+\begin{equation*}
+dW(dt) = {\bf N}(0,dt).
+\end{equation*}
+It follows from the theorems of Gaussian probability densities
+that
+\begin{equation*}
+{\bf N}(0,dt) =  dt {\bf N}(0,1/dt).
+\end{equation*}
+Because of the definition of the Gaussian white noise process we 
+can conclude that
+\begin{equation*}
+dt \eta(t) = dW(dt)
+\end{equation*}
+and hence we have formally in the limit $dt \rightarrow 0$
+\begin{equation*}
+\frac{dW}{dt} = \eta(t).
+\end{equation*}
+This equation asserts that the derivative of the Wiener process is 
+the white noise process. However, we know already that the Wiener
+process is not differentiable so that the white noise process must 
+be ill--defined. We will see shortly how these formal difficulties 
+may easily be circumvented in the proper definition
+of stochastic differential equations. Before doing so we will 
+consider for a 
+moment the most classical Langevin equation of statistical 
+physics, namely the one describing Brownian motion.
 
 \section{The Langevin equation and Brownian motion}
 In 1908 Langevin considered the problem of the dynamical 
@@ -148,7 +183,7 @@ differential equation, i.e. of a differential equation whose
 coefficients are random functions of the time with some given
 statistical properties. 
 It is clear that choosing $L(t)=\sqrt{\Gamma} \eta(t)$,
-where $\eta(t)$ is a Gaussian white noise process, the langevin 
+where $\eta(t)$ is a Gaussian white noise process, the Langevin 
 equation of Brownian motion describes an Ornstein--Uhlenbeck
 process.
 The stochastic process $V(t)$ is 
@@ -191,101 +226,344 @@ coefficient $\gamma$ and the random fluctuations.
 Eq. (\ref{FDT}) is a simple version of the so--called
 fluctuation--dissipation theorem.
 
-\section{The Ito formula}
-In the previous sections we have considered Langevin equations 
-from a rather intuitive point of view. Here we want to consider
-such equations in a more formal setting and in greater generality.
-Let us begin by considering the one--dimensional stochastic 
-differential equation for the stochastic variable $X(t)$
+
+\section{Stochastic integration}
+It is the aim of this section to show how the formal problems
+arising in the formulation of Langevin equations can be avoided.
+Let us begin by formulating the Langevin equation in a discrete 
+way,
 \begin{equation*}
-\dot{X}(t) = a(X(t),t) + \eta(t),
+dX(t) = a(X(t),t) dt + b(X(t),t) \eta(t) dt,
 \end{equation*}
-where $\eta(t)$ is a normal white noise process.
-It follows from the above equation that up 
-to terms of the order $dt$ the increment $dX(t)$
-of the stochastic variable $X(t)$ during a time step $dt$
-is given by
+where $a(X(t),t)$ is a deterministic drift and $b(X(t),t)$ is the 
+diffusion term, $\eta(t)$ being a Gaussian white noise process.
+We proceed by integrating the above equation from $t_0$ to $t$
+and obtain for each sample path
 \begin{equation*}
-dX(t) = a(X(t),t)dt + dW(t),
+X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s) 
++ \int_{t_0}^t b(x(s),s) \eta(s) ds.
 \end{equation*}
-where
+Since the Wiener process $W(t)$ can be represented as the integral
+over a white noise process, i.e.,
+\begin{equation}
+W(t) = \int_{t_0}^t ds \eta(s)
+\end{equation}
+the integral form of the Langevin equation can be written as
+\begin{equation}
+\label{SDE_INTEGRAL}
+X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s) 
++ \int_{t_0}^t b(x(s),s) dW(s).
+\end{equation}
+The above expression is 
+expected to make sense because the Wiener process is continuous. 
+We will see shortly that the above 
+equation does have a precise meaning. In fact
+from here on a solution of a stochastic differential equation will be 
+interpreted as a solution 
+of the corresponding integral equation, which will be written
+in the short--hand notation
 \begin{equation*}
-dW(t) = \int_t^{t+dt} \eta(t') dt'
+dX(t) =   a(X(s),s) dt + b(x(s),s) dW(t).
+\end{equation*}
+
+Of course, the second integral in Eq. (\ref{SDE_INTEGRAL}) is not 
+an ordinary integral.  It is an integral with respect to the 
+Wiener process $W(t)$. Such integrals are called {\em stochastic 
+integrals} and we will define and discuss them now.
+
+\subsection{Definition of the stochastic Ito integral}
+The stating point for the definition of the Ito integral is the
+following reasoning. For $b(X(t),t)=b=\text{const}$ the stochastic 
+integral
+\begin{equation*}
+I = \int_{t_0}^t bdW(s)
+\end{equation*}
+is expected to be defined and to be equal to
+\begin{equation*}
+I = b \{ W(t) - W(t_0) \}.
+\end{equation*}
+In general it seems to be safe to treat the the stochastic 
+integral 
+\begin{equation*}
+I(f) = \int_{t_0}^t f(X(s),s) dW(s)
+\end{equation*}
+as a kind of Riemann--Stieltjes integral, i.e., as a limit of 
+partial sums. To do so we devide the interval $[t_0,t]$ into $n$
+subintervals
+\begin{equation*}
+t_0 \le t_1 \le t_2 \le \cdots \le t_{n-1} \le t
+\end{equation*}
+and define intermediate points $\tau_i$
+\begin{equation*}
+t_{i-1} \le \tau_i \le t_i.
+\end{equation*}
+The stochastic integral $I(f)$ is then defined as the limit
+of the partial sums
+\begin{equation*}
+S_n = \sum_{i=1}^n f(\tau_i) \left[  W(t_i) - W(t_{i-1} \right].
+\end{equation*}
+In general it turns out that the definition of the stochastic 
+integral depends on the particular choice of the intermediate 
+point $\tau_i$. In the definition of the Ito stochastic integral
+the intermediate points are chosen to be at the beginning of
+the corresponding time interval, i.e.,
+\begin{equation*}
+\tau_i = t_{i-1}.
+\end{equation*}
+Accordingly the Ito stochastic integral is defined as the limit of 
+the partial sums
+\begin{equation*}
+S_n = \sum_{i=1}^n f(t_{i-1}) [  W(t_i) - W(t_{i-1}) ].
+\end{equation*}
+The limit of the sequence of partial sums is to be understood in the
+following sense. The random variable $S_n$ is said to converge to $S$
+ in the mean square limit if
+\begin{equation*}
+\lim_{n \rightarrow \infty}
+ <(S_n -S)^2> =0.
+\end{equation*}
+The above limit is usually written as
+\begin{equation*}
+\text{ms-} \lim_{n \rightarrow \infty} S_n = S.
+\end{equation*}
+In this sense the Ito stochastic integral of the function $g(t)$ is
+defined as
+\begin{equation*}
+\int_{t_0}^t f(t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
+   \left\{ \sum_{i=1}^{\infty} f(t_{i-1}) [W(t_i) - W(t_{i-1})]   \right\}.
+\end{equation*}
+
+\subsection{The Stratonovich stochastic integral}
+An alterantive definition of a stochastic  integral has been given by
+Stratonovich. He suggested the following definition
+\begin{equation*}
+S\int_{t_0}^t g(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
+   \left\{ \sum_{i=1}^{\infty} f( \frac{x(t_{i})+ x(t_{i-1})}{2}) 
+[W(t_i) - W(t_{i-1})]   \right\}.
+\end{equation*}
+Note, that in this definition the integrand is evaluated in an
+averaged way.
+
+\subsection{Ito Calculus}
+We now want to derive some very useful formulas. In order to do so 
+we have to introduce a special class of functions. A function $g(t)$
+is called a {\em nonanticipating function} of $t$ if for all
+$s$ and $t$ such that $t<s$, $g(t)$ is statistically independent 
+of $W(s)-W(t)$. In other words $g(t)$ is independent of the 
+behaviour of the Wiener process in the future of $t$. Within the 
+context of the stochastic differential equations such functions 
+are quite reasonable since they express the fact that the future 
+does not affect the present. This guarantees, evidently, 
+causality.
+
+We are now in the position to give the proof of the fundamental 
+equation of Ito calculus, namely, that
+\begin{equation*}
+dW(t)^2 = dt 
+\end{equation*}
+and that
+\begin{equation*}
+dW(t)^{2+N} =0 
+\end{equation*}
+for $N \ge 1$. These formulas will allow for a comfortable 
+handling of stochastic diferentials.
+
+We begin by proving that
+\begin{equation}
+\label{PROOFDW2DT}
+\int_{t_0}^t \left[ dW(t') \right]^2 g(t') = \int_{t_0}^t dt' 
+g(t')
+\end{equation}
+for a nonanticipating function $g(t)$. By definition of the 
+stochastic Ito integral we have
+\begin{eqnarray*}
+\int_{t_0}^t \left[ dW(t') \right]^2 g(t') & = & 
+\text{ms-}\lim_{n \rightarrow \infty} \sum_i g_{i-1} \Delta W_i^2 \\
+   & = & \lim_{n \rightarrow \infty} 
+    < \left[ \sum_i g_{i-1} \Delta W_i^2 \right]^2>.
+\end{eqnarray*}
+Eq. (\ref{PROOFDW2DT}) is of course to be understood in the mean
+square sense, so we consider the following expression
+\begin{eqnarray*}
+I & = & \lim_{n \rightarrow \infty} 
+< \left[ \sum_i g_{i-1} (\Delta W_i^2  -\Delta t_i)\right]^2   > 
+\\
+& = & \lim_{n \rightarrow \infty} 
+<  \sum_i (g_{i-1})^2 (\Delta W_i^2  -\Delta t_i^2)
++\sum_{i>j} 2 g_{i-1}g_{j-1} (\Delta W_j^2  -\Delta t_j)
+ (\Delta W_i^2  -\Delta t_i) >.
+\end{eqnarray*}
+We can now exploit the fact that in the first sum in the above expression
+the $(g_{i-1})^2$ and $(\Delta W_i^2  -\Delta t_i^2)$ and accordingly in the 
+second sum $g_{i-1}g_{j-1} (\Delta W_j^2  -\Delta t_j)$ and 
+$(\Delta W_i^2  -\Delta t_i)$ are statistically independent from 
+each other because the function $g$ is nonanticipating and because 
+of the properties of the Wiener process. This statistical 
+independence permits to factorize the mean value. So we find
+\begin{equation*}
+I = 2 \lim_{n \rightarrow \infty} 
+\left[ \sum_i \Delta t_i <(g_{i-1})^2> \right],
+\end{equation*}
+where we have used the following properties of the Wiener process
+\begin{equation*}
+<\Delta W_i^2> = \Delta t_i
+\end{equation*}
+and
+\begin{equation*}
+<(\Delta W_i^2 - \Delta t_i)^2> = 2 \Delta t_i^2.
+\end{equation*}
+Hence we can conclude that
+\begin{equation*}
+\text{ms-}\lim_{n \rightarrow} 
+\left( \sum_i g_{i-1} \Delta W_i^2 - \sum_i g_{i-1} \Delta t_i \right)
+=0.
+\end{equation*}
+Since 
+\begin{equation*}
+\text{ms-}\lim_{n\rightarrow \infty} \sum_i g_{i-1} \Delta t_i =
+\int_{t_0}^t dt' g(t')
+\end{equation*}
+we have completed the proof of Eq. (\ref{PROOFDW2DT}).
+The importance of Eq. (\ref{PROOFDW2DT}) is the following one. Because
+of the definition of stochastic differential equations $dW(t)$
+occurs only in integrals, so that we can explicitly write
+\begin{equation*}
+dW(t)^2 \equiv dt.
+\end{equation*}
+Accordingly, it is straightforward to show that in the same sense
+\begin{equation*}
+dW(t)^{2+N} \equiv 0, \;\;\; \text{for} \;\;\; N>0.
+\end{equation*}
+In the following it will be of some importance to have 
+multiplication rules for stochastic differentials. The following
+multipication table sums up the rules for products of stochastic 
+differntials.
+\begin{table}
+\caption{Multiplication table for products of stochastic differentials.}
+\begin{center}
+\begin{tabular}{|c||c|c|c|}\hline 
+$\times$ & $dW$ & $dW^2$ & $dt$ \\ \hline \hline
+$dW$     & $dt$ & $0$    & $0$   \\ \hline
+$dW^2$   &  $0$ & $0$    &  $0$  \\ \hline
+$dt$     &  $0$ & $0$    & $0$  \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+As an example of the application of the above formulas we consider the
+integration of a polynomial. Let us look at
+\begin{eqnarray*}
+d[W(t)]^n & = & [W(t) + dW(t)]^n - W(t)^n \\
+          & = & \sum_{r=1}^n {n \choose r} W(t)^{n-r} dW(t)^r .
+\end{eqnarray*}
+Using the fact that $dW(t)^r = 0$ for $r>2$ we conclude that
+\begin{equation*}
+d[W(t)]^n = n W(t)^{n-1}dW(t) +
+\frac{n(n-1)}{2} W(t)^{n-2} dt
+\end{equation*}
+so that
+\begin{equation*}
+\int_{t_0}^t W(t')dW(t') = \frac{1}{n+1}  [W(t)^{n+1} - W(t_0)^{n+1}]
+   -\frac{n}{2} \int_{t_0}^t W(t')^{n-1} dt.
 \end{equation*}
 
 
-\section{The equivalence of stochastic differential equations 
+
+\section{Ito stochastic differential equations}
+Having defined stochastic integrals the proper definition of a
+stochastic differential equation can be given. The stochastic variable
+$X(t)$ obeys the Ito stochastic differential equation
+\begin{equation}
+\label{ITOSDE}
+dX(t) = a(X(t),t) dt + b(X(t),t) dW(t)
+\end{equation}
+if for all $t$ and $t_0$ the follwing integral equation holds
+\begin{equation}
+X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s) 
+     + \int_{t_0}^t dW(s) b(X(s),s).
+\end{equation}
+
+\subsection{Ito's formula}
+In this subsection we want to consider a function
+$f$ of the stchastic variable $X(t)$ and derive a Ito stochastic
+differential equation for $f$. We begin by expanding the differential 
+$df(x(t))$ to second order in $dW(t)$
+\begin{eqnarray*}
+df(X(t)) & = & f(X(t)+dX(t)) - f(X(t)) \\
+         & = & f'(X(t)) dX(t) + \frac{1}{2} f''(X(t)) dX(t)^2 + \ldots.
+\end{eqnarray*}
+Inserting the Ito stochastic differential equation (\ref{ITOSDE})
+for $DX(t)$ we get
+\begin{equation*}
+df(X(t)) =  f'(X(t)) \{a(X(t),t)dt + b(X(t),t) dW(t) \}
+      + \frac{1}{2} f''(X(t)) b(X(t),t)^2 [dW(t)]^2 + \ldots ,
+\end{equation*}
+where we have discarded all other terms of higher order. Using
+finally $[dW(t)]^2 =dt$ we get
+\begin{equation}
+\label{ITOFORMULA}
+df(X(t)) = \{a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2
+\} dt 
+    + b(X(t),t)f'(X(t)) dW(t).
+\end{equation}
+The above equation is Ito's formula and expresses the fact that 
+for stochastic differential equations in
+general the change of variables is not given by the rules of 
+ordinary calculus.
+
+
+\subsection{The equivalence of stochastic differential equations 
 and of the Fokker--Planck equation}
+Let us now look at the time development of an arbitrary function
+$f(X(t))$.
+Using Ito's formula we immediately have
+\begin{eqnarray*}
+\frac{<f(X(t))>}{dt} & = & <\frac{df(X(t))}{dt}> = 
+               \frac{d}{dt} <f(X(t)) > \\
+       & = & < a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2   >.
+\end{eqnarray*} 
+Since, $X(t)$ is a Markov process it does have a conditional
+probability density $T(x,t|x_0,t_0)$ and accordingly we can write
+\begin{eqnarray*}
+\frac{d}{dt} <f(X(t)) > &=& \int dx f(x) T(x,t|x_0,t_0) \\
+          & = & \int dx 
+       [a(X(t),t) f'(X(t))   \frac{1}{2} f''(X(t)) b(X(t),t)^2] T(x,t|x_0,t_0).
+\end{eqnarray*}
+The above equation can now be integrated by parts. Disregarding
+surface terms we obtain
+\begin{equation*}
+\int dx f(x) \frac{\partial}{\partial t} T = \int dx f(x)
+   \{ - \frac{\partial}{\partial x}[a(x,t)T] + \frac{1}{2} 
+        \frac{\partial^2}{\partial x^2}[b(x,t)^2 T] \}.
+\end{equation*}
+Since, by construction $f$ is an arbitrary function of $x$ we can
+conclude that
+\begin{equation*}
+ \frac{\partial}{\partial t} T(x,t|x_0,t_0) =
+   \{ - \frac{\partial}{\partial x}[a(x,t)T(x,t|x_0,t_0)] + \frac{1}{2} 
+        \frac{\partial^2}{\partial x^2}[b(x,t)^2 T(x,t|x_0,t_0)] \}.
+\end{equation*}
+We immediately recognize that the above equation is aFokker--Planck
+equation. Hence we have shown the the equivalence of a diffusion
+process defined in terls of stochastic differential equation with
+drift coefficient $a(x(t),t)$ and a diffusion coefficient
+$b(X(t),t)^2$ and the above Fokker--Planck equation.
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{The numerical integration of stochastic differential 
 equations}
-\subsection{The Ornstein--Uhlenbeck process}
-
-
-
-
-
-
-\subsection{Brownian motion}
-As an example of the application of the Fokker--Planck
-equation we consider Brownian motion. A heavy particle is immersed 
-in a fluid of light particles. The large particle and the small 
-molecules collide in a random fashion. These 
-collisions induce sudden variations of the velocity of the 
-Brownian particle. As a consequence the position $X$ of the Brownian 
-motion may be described by a Markov 
-process, if observed on a time scale which is larger then the 
-autocorrelation time of the velocity, i.e. many collisions have 
-occurred between two observations. If we regard, for simplicity a 
-one--dimensional 
-situation, the Brownian particle makes random jumps back and forth 
-along the $x$--axis. The jumps may have any length, but the
-probability for large jumps falls off rapidly. 
-It is reasonable to assume that these probabilities are 
-symmetrical and independent of the starting point.
-
-Hence we have
-\begin{equation*}
-a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
-\end{equation*}
-and
-\begin{equation}
-a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
-\end{equation}
-The Fokker--Planck equation of Brownian motion thus reads
-\begin{equation}
-\label{BROWNIAN}
-\frac{\partial}{\partial t} P(X,t) = \frac{a_2}{2} 
-    \frac{\partial^2}{\partial x^2} P(x,t).
-\end{equation}
-The above equation is a diffusion equation and we immediately
-identify the diffusion constant to be
-\begin{equation}
-D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
-\end{equation}
-The above relation is known as the Einstein relation. It relates 
-the diffusion constant with the microscopic jumps of the Brownian 
-particle.
-
-Let us now consider an ensemble of Brownian particles, which are
-concentrated in $X=0$ at time $t=0$. Their position at time $t$ is 
-a stochastic process $X(t)$, whose transition probability is given 
-by (\ref{BROWNIAN}). This process, as we know, is a Wiener 
-process. The probability density of the Brownian particles  with 
-initial condition $P(x,0) = \delta(x)$ at time $t>0$ is easily 
-found to be
-\begin{equation}
-P(x,t) = \frac{1}{\sqrt{4 \pi D t}} \exp(-x^2/4Dt).
-\end{equation}
-This is a gaussian with maximum at $x=0$ and whose standard variation grows
-as
-\begin{equation}
-\langle X^2(t) \rangle = 2 D t.
-\end{equation}
-Hence, the width of the distribution increases with the square 
-root of the time. A behaviour which we already know from our 
-discussion of random walks.
-
 
 
 \bibliographystyle{peter}
