@@ -125,9 +125,13 @@ public class Distribution {
   }
 
   /** Generate binomial distributed random numbers using
-      rejection method. Parameters: n and p
+      direct method (for small n). Parameters: n and p
    */
-  public static double nextBinomial(Random rand, int n, int q) {
-    return 0;
+  public static int nextBinomial(Random rand, int n, double p) {
+      int hits=0;
+      for (int i=0; i<n; i++) {
+	  if (rand.nextDouble() < p) hits++;
+      }
+      return hits;
   }
 }
