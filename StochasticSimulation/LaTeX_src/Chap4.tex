@@ -1571,10 +1571,180 @@ process. The
 \texttt{q=1}, and \texttt{D=1}.}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercises}
+
+\begin{Ex}
+\label{Linear_One_Step}
+\textbf{Linear one-step process - quantized harmonic oscillator in a %
+    radiation field  \cite[page 143]{kampen}} \\
+Let $n=0,1,2.\ldots$ numerate the state of a quantized harmonic oscillator 
+with energy $h\nu(n+1/2).$ Transitions between the states are induced by the
+interaction of the oscillator with the radiation field. The transition 
+probability is given by the dipole moments. The only allowed transitions
+according to the dipole moments are from $n$ to $n+1$ and from $n$ to $n-1$
+(see quantum mechanics lecture).
+
+Therefore the transition rates (probabilities per unit time) are:
+\begin{itemize}
+\item $g(n-1)=\beta n$ for the transition $(n-1) \rightarrow n$ and
+\item $r(n)=\alpha n$ for the transition $n \rightarrow (n-1).$
+\end{itemize}
+$\alpha$ and $\beta$ are two constants, which depend only on the radiation
+density at the frequency $\nu$ and not on $n.$ 
+
+Finally the Master equation for this special one-step process reads
+$$ \frac{\partial}{\partial t} P(n,t) = \alpha n P(n+1,t) +\beta(n+1)P(n-1,t)
+     -(\alpha n+\beta(n+1))P(n,t).$$
+
+Write a program to simulate the given Master-equation for the one-step
+process using the numerical scheme, learned in the lecture.
+Choose the parameters $\alpha$ and $\beta$. The result should be a
+plot of $P(n,t)$ for different $n$. Plot also $P(n)$ at large $t$, which 
+gives the distribution of the
+harmonic oscillators with $n$ (and therefore the energy) in the steady state.
+
+The exact stationary solution of the Master-equation
+is $P_S(n)= \text{const} \cdot \left(\frac{\beta}{\alpha}\right)^n.$ 
+\end{Ex}
+
+\begin{Ex}
+\label{Nonlinear_One_Step}
+\textbf{Non-linear one-step process - growth of a competitive %
+    population \cite[page 163]{kampen} } \\
+The number of individuals of some species is called $n.$ The death rate for
+this population is $\alpha$ and the birth rate (e.g. by fission)
+is $\beta.$ $\alpha$ and $\beta$ are fixed and independent of the
+age, otherwise it would not be a Markov process. Both rates are per unit time.
+
+This would be still a linear one-step process. So consider an additional
+rate: the competition rate between the individuals of the population.
+This rate is an additional death rate and is $\gamma(n-1).$
+
+Therefore the transition rates (probabilities per unit time) are:
+\begin{itemize}
+\item $g(n)=\beta n$ for the transition $n\rightarrow n+1$
+\item $r(n)=\alpha n+\gamma n(n-1)$ for the transition $n \rightarrow n-1.$
+\end{itemize}
+$\alpha$, $\beta$ and $\gamma$ are constants, which do not depend on $n.$
+
+Finally the Master equation for this one-step process reads
+$$ \frac{\partial}{\partial t} P(n,t) = (\alpha n+\gamma n(n-1))P(n+1,t) +
+     \beta n P(n-1,t) - (\alpha n+\beta n+\gamma n(n-1))P(n,t).$$
+
+Write again a program to simulate the Master equation and again choose suitable
+parameters $\alpha, \beta,\gamma.$ View the time dependence of the population $n$
+and try to find out the behaviour of the stationary solutions.
+
+The equation for the first moment (so called macroscopic equation) is called
+the {\em Malthus-Verhulst equation} and reads
+$$ \dot{<n>} = (\beta-\alpha)<n>-\gamma <n>^2.$$
+If you neglect the nonlinear term on the right hand side, 
+you get {\em Malthus law}. Then
+the solution is just an exponential growth of the population. 
+
+The solutions to the nonlinear equation can be calculated and you get
+$$ <n>=\frac{\beta-\alpha}{\gamma} \quad\text{and}\quad <n>\equiv 0 ,$$
+where the first one is the stable solution (a so called attractor) 
+and the second one is unstable.
+
+{\em example parameters:} $\alpha=0.5, \beta=1, \gamma=0.05 .$
+\end{Ex}
+
+\begin{Ex}
+\label{Random_Telegraph}
+\textbf{The Random Telegraph Process \cite[page 77]{gardiner}} \\
+The Random-Telegraph process is the most simple Markov-process possible.
+It is a discrete process, which has only two possible states, called
+$n=0$ and $n=1$. The master-equation reads
+$$ \begin{cases}
+ \frac{\partial}{\partial t} P(0,t\mid n'') &= bP(1,t\mid n'')-aP(0,t\mid n'') \\
+ \frac{\partial}{\partial t} P(1,t\mid n'') &= aP(0,t\mid n'')-bP(1,t\mid n''). \\
+           \end{cases} $$
+$a$ and $b$ are the transition rates from state $0\rightarrow 1$
+and $1\rightarrow 0$. Examples of this equation are processes, which jump
+from one state to the other and back (e.g. spin flipping). 
+
+We can rewrite the two above equations into one equation, resulting in 
+the familiar master-equation - DO IT. (you have to ????)
+Then write a program to
+simulate the master-equation. Use $n=1$ as the initial condition.
+For the long time behavior - the stationary solution - the initial
+condition is not significant. Try different settings for 
+the parameters $a$ and $b$.
+
+Compare the results of the simulation with the exact analytical results.
+For $t\to\infty$ the stationary solution for the first moment is:
+$$ P(0)=\frac{b}{a+b}, \quad P(1)=\frac{a}{a+b} ,$$  
+and
+$$ <n> = \sum_{n=0}^1 nP(n)=P(1)=\frac{a}{a+b} .$$
+And for the stationary covariance (for the second moment set $t=t'$) 
+we get $(t\ge t')$
+$$ <n(t)n(t')> = \left(\frac{a}{a+b}\right)^2+\frac{ab}{(a+b)^2}
+        e^{-(a+b)(t-t')} .$$
+
+{\em Comment:} This is an example of an ergodic process (a process with
+identical ensemble mean and time mean), where you can 
+explicitly prove the ergodicity. 
+Because if the correlation time is finite, the
+system is ergodic. And in this case the correlation time is
+$$t_C := \frac{1}{\text{var}(n(0))}\int_0^\infty dt |\text{var}(n(t))| = 
+              \frac{1}{(a+b)}$$ 
+and therefore finite.
+\end{Ex}
+
+\begin{Ex}
+\label{Monomolecular_Reaction}
+\textbf{Monomolecular Chemical Reaction $A \leftrightarrows X$  %
+       \cite[page 183]{schnakenberg} } \\
+A further example of a discrete one-step process is a chemical reaction,
+where an atom can be either bound to a molecule (call it state X) 
+or be by itself (call it state A). We assume that we have an A-reservoir,
+so that there are always enough atoms to become absorbed by a molecule. 
+The number of molecules (state X) is called $N$, the number of atoms $A.$ 
+Another example of
+this situation would be an atom in the ground state at a given temperature.
+The atom jumps to a higher state and back, depending on the temperature;
+assuming low temperatures (A-reservoir).
+
+For chemical reactions the transition rates are given by the rate-constant
+$k$, depending on the temperature. The derivation is based on the 
+Stoﬂzahlansatz. So the transition of atoms to molecules is proportional
+to the number of atoms in the reservoir $A$ and the transition of molecules
+releasing an atom is proportional to the number of molecules $N.$
+$$ W_{N+1,N} = A \quad \text{and} \quad W_{N-1,N} = kN .$$
+
+Then the master-equation is
+$$ \frac{\partial}{\partial t} P(N,t) = AP(N-1,t)+k(N+1)P(N+1,t)-(A+kN)P(N,t).$$
+
+Again write a program to simulate the master-equation. Use $k=1, A=100$ for
+the parameters and $N(0)=A$ as initial value.
+Then compare the simulation results with the analytical results:
+$$ <N(t)> = A+ (<N(0)>-A)e^{-t} \longrightarrow A \quad\text{for}\quad 
+                 t\to\infty,$$
+$$ P_{\text{stat}}(N) = \frac{A^N}{N!} e^{-kA} \qquad 
+          \text{Poisson-distribution} . $$ 
+Also try different parameters and initial conditions.
+
+{\em Comment:} In this example we assumed that there is enough time for the 
+reactants to diffuse in the volume. That means the diffusion of atoms and 
+molecules is very fast compared to the time a reaction takes place.
+If the two time scales are almost the same, we also have to simulate
+the diffusion. Such systems are known as reaction-diffusion systems
+- we will discuss them later on.
+\end{Ex}
+
+\begin{Ex}
+\label{Payroll}
+
+\end{Ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \bibliographystyle{peter}
-\bibliography{V_98}
+\bibliography{V_98,simulit}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% Ende von Kap. 4 %%%%%%%%%%%%%%%%%%%%

@@ -1195,6 +1195,163 @@ radius $R$ after three equidistant steps with size $a$.
 \end{center}
 \end{Ex}
 
+\begin{Ex}
+\label{Scaling_Random_Walk}
+\textbf{Scaling Behavior of Random Walk in 2D and 3D} \\
+Write a program for a 2D random walk on a square lattice (symmetric and
+asymmetric). Use this program to calculate the scaling behavior of the
+end-to-end distance $< R^2 >$ for different lengths $N$ of the walk.
+
+After viewing some nice walks, plot the end-to-end distance versus the
+length $N$ of the random walk. If you have enough data, do a least square
+fit using the \texttt{polyfit} function of Matlab using a   
+fit function: $$ < R^2 > = a N^b ,$$ to get $a$ and $b.$
+
+Then extend the program to a 3D random walk on a cubic lattice and 
+again analyze the scaling behavior of the end-to-end distance.
+
+Now compare your results $(b)$ with the experiments done in the lecture
+about the self-avoiding random walk!
+
+Remark: A least square fit is a method, where you fit a analytically
+known function with (observed) data. The function is given using
+certain parameters (here the function is $y=R^2=a N^b$) and the 
+parameters have to be calculated. This is done by minimizing the
+euclidean distance (``mean square'') between the function and the data.
+\end{Ex}
+
+\begin{Ex}
+\label{Percolation}
+\textbf{Percolation in 2D and Cluster Algorithms %
+        \cite[Chapter 4.2]{mackeown:97}} \\
+Assume we have a 2D plane divided into cells of equal size. We start by
+sweeping the whole plane from the upper left corner to the 
+lower right corner. With probability $p$ we set each cell to one 
+(with probability $1-p$ to zero). Then we are left with an array of
+ones and zeros. 
+
+Now we analyze this pattern by looking for clusters of ones in the whole
+plane. A cluster is an area of ones where  the ones are connected to 
+each other in the nearest neighbor sense (no diagonal bonds possible).
+If we have a cluster connecting the left side with the right side or the
+upper and the lower side, we call
+it a {\em spanning cluster}. Otherwise it is just a finite cluster of
+a certain size.
+
+Now, one is interested in the critical probability $p_c$, where such 
+spanning clusters occur or do not occur. Of course using a simulation
+with finite size, we get a broad interval (instead of a sharp one) 
+in which the transition of the two behaviors takes place. We will  
+neglect such finite size effects and concentrate on the transition
+probability.
+
+{\small
+Now you can watch the configurations and decide if there is a spanning
+cluster or not. That is very tedious. Therefore we give a very easy algorithm
+for clustering the given configuration ({\em The Hoshen-Kopelman algorithm}): 
+We need two arrays, one stores the indices (say $N(m)$, a 1D array) 
+and the other
+one stores the labels assigned to each site (say $L(i,j)$, a $N\times N$-array,
+where $N$ is the number of cells in one direction).
+
+You scan all the \underline{occupied sites} 
+starting with the upper left corner assigning a 
+label to each site using the following rules (unoccupied sites are labeled
+with zero):
+\begin{itemize}
+\item if neither of the site above and to the left of the cell are occupied,
+  you assign a new integer value $m$ to the site and set 
+  $N(m)=m$. 
+\item if the left and/or the upper site are occupied and have the same
+  label assigned to them, you give the site the same label.
+\item if the labels of the left and upper site are different, you assign
+  the smaller (say $k$) of the two labels to the new site. And you set the index
+  of the larger one also equal to this value ($N(\text{larger})=k$).
+\end{itemize}
+After you have swept over all sites, you have to remove redundant labels
+from  the array $N$. An index is redundant, 
+if the index $h$ is not equivalent to the label stored in $N(h)$. 
+and change the corresponding labels in the 2D array $L(i,j)$. 
+Now you are done: Just look for the labels on opposite faces, if there
+are same labels on them, you have a spanning cluster.
+} %end small
+
+Write a program for a percolation in 2D and try to estimate the 
+critical probability. Increase the size of the grid and compare.
+To that end plot the probability distribution of having a spanning
+cluster versus the probability $p$ used for creating the configuration.
+For 2D $p_c$ can be calculated analytically: $p_c=0.5.$
+\end{Ex}
+
+\begin{Ex}
+\label{Einstein_Solid}
+\textbf{The Einstein Solid and the Boltzmann Distribution %
+              \cite[Chapter 5]{ruhla:92} } \\
+The probability for an oscillator in a solid to be in a state with energy 
+$\epsilon$ is given by the Boltzmann distribution (canonical distribution)
+$$ P(\epsilon_i) = 
+      \frac{1}{Z}\exp \left( - \frac{\epsilon_i}{k T} \right) \quad ,$$
+where $Z$ is the partition function ($Z=\sum_i \exp(-\epsilon_i/kT)$).
+This distribution plays a very important role in physics and 
+especially in statistical
+mechanics. To get a first impression of the distribution and to
+have a very simple model producing a Boltzmann distribution, we study
+a very simple model for a solid, named after Einstein. 
+
+We study a 2D plane and divide
+the plane into cells of equal sizes, like quantum mechanics through
+the Heisenberg uncertainty principle prescribes. Each cell represents
+an atom and each atom can vibrate around its equilibrium position in the
+middle of the cell. The strength of the vibration is quantized and
+given in multiples of a fundamental mode with energy $\hbar \omega$. 
+Because we have an isolated
+system, no energy gets dissipated or absorbed. The only way of changing
+the configuration is by hopping of a quanta from one cell to another
+(which is just a transfer of an energy quantum $\hbar \omega.)$
+
+The algorithm (sometimes called temperature game) reads as follows:
+\begin{itemize}
+\item Initialize all cells with 1 quanta
+\item Choose a source cell and a destination cell at random (drawn
+  from a uniform distribution)
+\item If there is NO quanta in the source cell, draw new random numbers.
+\item If there is a quanta in the source cell to jump and the destination
+  cell is not equivalent to the source cell, do a jump of one quanta from
+  source cell to destination cell.
+\item Having done enough jumps, we reach the equilibrium situation. Now we can
+  count the number of cells $\nu$ having zero, one, two, etc. quanta in it (call
+  these $m(\nu)=m(\epsilon_\nu)$).
+  By plotting the corresponding histogram, we get the Boltzmann distribution.
+\end{itemize}
+The energy of a cell at the end is just the number of quantas $\nu$ times
+the energy per quanta plus $1/2\hbar\omega$ (assuming harmonic oscillations).
+From now on, we neglect the zero temperatur energy of the harmonic oscillator
+to make life easier (it is just a shift of energy anyway.).
+
+The Boltzmann distribution for the histogram is 
+$$ m(\epsilon_\nu) = m(0) \exp
+        \left(-\frac{\nu\hbar \omega}{kT}\right)\quad .$$
+So to find the ``temperature'' of the solid, we have to use a fit of the
+Boltzmann distribution to the data and extract the value $\nu_{1/2}$, where
+the distribution has come down to half of the initial value $m(0)$. 
+Then we can use
+$$ \frac{\hbar\omega}{kT} = \frac{\ln 2}{\nu_{1/2}} \quad ,$$ 
+and can calculate the temperature for the given system. The temperature
+depends only on the size of the simulation and therefore the total number of 
+quantas present.
+
+Write a program to implement the above algorithm in Matlab. Watch the
+configuration evolving in time (especially at the first steps). Compare
+the calculated distribution with a Boltzmann distribution using a least square
+fit in a semilogarithmic (y-axes) plot (use \texttt{polyfit}). Why don´t
+we get a uniform distribution as an equilibrium distribution? 
+\end{Ex}
+
+
+%\begin{Ex}
+%\label{Percolation}
+%\end{Ex}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{peter}

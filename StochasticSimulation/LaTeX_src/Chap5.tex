@@ -1091,11 +1091,63 @@ simulation the maxima are expected  to be at 0.8727 and 0.1273
 respectively. The histogram reproduced in Fig. (\ref{F_SDENOISEIN_2})
 is in agreement with this theoretical prediction.
 
+\section{Exercises}
+
+\begin{Ex}
+\label{Johnson_Noise}
+\textbf{Johnson Noise \cite[]{gillespie:96} } \\
+Johnson noise is the thermally generated electrical noise appearing in a conductor. 
+Assume we have a rigid wire loop of self-inductance $L$ and resistance $R$ at
+absolute temperature $T$. We can visualize this using the figure below. 
+\begin{center}
+\includegraphics[width=5cm]{f_johnson.eps}
+\end{center}
+There is no external potential, just the interactions between the conducting
+electrons and the vibrations of the atomic lattice give rise to a temporally \text{var}ying
+electromotive force in the loop (for details see \cite[]{gillespie:96}). 
+
+The circuit equation gives (the integral of the electric potential around the 
+loop must be zero)
+$$ -RI(t)+V(t)-L\frac{dI(t)}{dt}=0.$$
+Taking averages gives (assume $<V(t)>=0$) $$ -L\frac{d<I(t)>}{dt} =R<I(t)> .$$
+If we can measure $I(t)$ we have an experimental way of determining $R$ and $L$.
+
+We rewrite the first equation using $\tau:=L/R$ and $V(t):=Lc^{1/2}\Gamma(t)$, where
+$\Gamma(t)$ is a Gaussian white noise and $c>0$ constant:
+$$ \frac{dI(t)}{dt}=-\frac{1}{\tau}I(t)+c^{1/2}\Gamma(t) .$$
+This is just the Langevin-equation for an Ornstein-Uhlenbeck process with
+relaxation time $\tau$ and diffusion constant $c.$
+The diffusion constant $c$ can be calculated by using the equipartition
+theorem of statistical mechanics and applying the results for the 
+Ornstein-Uhlenbeck process. We get $c=2kTR/L^2.$
+
+Write a program to solve the Langevin equation for $I(t)$ with the initial
+condition $I(t)=i_0.$ Use the Euler method for solving stochastic
+differential equations. Use the three different sets of parameters:
+\begin{itemize}
+\item $\tau=1, c=1, i_0=0, \Delta t=0,001 $
+\item $\tau=1, c=1, i_0=0, \Delta t=0,0001 $
+\item $\tau=0,001, c=1.000.000, i_0=0, \Delta t=0,001 $
+\end{itemize}
+(Remark: the first and the third parameter set lead to the same
+constant $\tau c^{1/2}$ for discussing $\tau\to 0$, the limit to Gaussian
+white noise.)
+
+The exact solution is ($\mathbf{N}( , )$ denotes a normal distribution):
+$$ I(t)= \mathbf{N}\left(i_0e^{- \frac{R}{L}(t-t_0)} , \frac{kT}{L}
+        \left(1-e^{-2\frac{R}{L}(t-t_0)}\right) \right) .$$
+
+Also calculate the (auto-)covariance function $ C_I(t'):=\text{cov}(I_s(t),I_s(t+t')) $
+(the subscript $s$ indicates that the process should be stationary)
+and analyze the spectrum thereof - use a log-log plot for the
+spectrum. The spectrum is the cosine transform of $C_I$.
+\end{Ex}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{peter}
-\bibliography{V_98}
+\bibliography{V_98,simulit}
 
 
 \chapter{Monte Carlo Methoden in der statistischen Mechanik}
