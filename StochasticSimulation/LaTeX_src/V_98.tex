@@ -104,10 +104,6 @@
 \lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily, frame=bt}
 %        ,spread=0.2cm, extendedchars=true, breaklines=false}
 
-%%% SHOW ALL Labels 
-\usepackage{showkeys}
-
-
 % Use extended theorem style
 \usepackage{theorem}
 
@@ -119,6 +115,14 @@
 %                bibtex chap2     etc.  (for each chapter)
 %                latex mainfile    ! 2 times ! 
 \usepackage{chapterbib}
+
+
+%%%%%%%%%%
+%%%%%%%%%%  CHANGE this for printed versions %%%%%%%
+%%%%%%%%%%
+
+%%% SHOW ALL Labels 
+%\usepackage{showkeys}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -228,8 +232,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{IntroToJava,ObjectOriented,PlottingWithJava,%
-  DataAnalyis,AppendixMainText}
+\includeonly{IntroToJava,ObjectOriented,PlottingWithJava}%,%
+%  DataAnalyis,AppendixMainText}
+%\includeonly{SDE}
 
 %\includeonly{CD_ROM,Chap7,Chap8,Chap9,Listings,Solutions}
 
@@ -251,7 +256,7 @@
 \definecolor{tabgray}{gray}{0.6} %% the gray for table rows
 
 % Title and Author
-\title{Stochastic Methods for Physics using Java: \\ An introduction}
+\title{Stochastic Methods For Physics Using Java: \\ An Introduction}
 \author{F. Petruccione and P. Biechele}
 \maketitle
 
