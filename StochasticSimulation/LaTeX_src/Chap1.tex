@@ -224,11 +224,10 @@ some or all of its methods (see chapter \ref{chap:IntroJava}). The
 second package we have to import is the \verb|java.awt| package, where 
 \verb|awt| stands for the Abstract Windowing Toolkit. This is one of 
 the biggest packages in Java 1.1 and includes all the nice graphics
-capabilities of Java.\footnote{The discussion is based on Java 1.1, but 
-if you just prepend a capital {\protect\verb|J|} to all class names, you can
-use the new Swing/Java 2 components. You also have to change the import
-command from {\protect\verb|import java.awt;|} to 
-{\protect\verb|import javax.swing;|}.
+capabilities of Java.\footnote{The discussion is based on Java 1.1, but %
+if you just prepend a capital \texttt{J} to all class names, you can %
+use the new Swing/Java 2 components. You also have to change the import %
+command from \texttt{import java.awt;} to \texttt{import javax.swing;}. %
 You should not use both together in one program.}
 
 Java programs look different on different systems, because they use
@@ -271,7 +270,7 @@ hierarchies of the Applet class.
     \setlength{\unitlength}{.8cm}
     \input{Figures/AppletHierarchy.pic}
     \label{hierarchyapplet}
-\caption{This figure shows the inheritance hierarchy of the Applet class.}
+    \caption{This figure shows the inheritance hierarchy of the Applet class.}
   \end{center}
 \end{figure}
 
@@ -294,13 +293,11 @@ viewer. The following figure shows the hierarchy relations of some (not all!)
 components and layout classes of the \verb|java.awt| package.
 
 \begin{figure}
-  \begin{center}
-    \leavevmode
-    \setlength{\unitlength}{.8cm}
-    \input{Figures/FrameHierarchy.pic}
-\label{awthierarchy}
-\caption{The hierarchy of the AWT package.}
-  \end{center}
+  \hspace*{-1cm}
+  \setlength{\unitlength}{.65cm}
+  \input{Figures/FrameHierarchy.pic}
+  \label{awthierarchy}
+  \caption{The hierarchy of the AWT package.}
 \end{figure}
 
 Now we have the necessary background to understand what is going on in the
@@ -321,6 +318,7 @@ components defined in the Java 1.1 standard is shown in table
 \begin{table}[htbp]
   \begin{center}
     \begin{tabular}{c|p{0.6\textwidth}}
+      Component & Usage \\\hline
       Button & A button with text on it. \\
       Canvas & A drawing area. \\
       Checkbox & A list of clickable choices (more than one can 
@@ -541,6 +539,7 @@ They are summarized in the following table.
     \small
     \leavevmode
     \begin{tabular}{p{5cm}|p{8cm}}
+      Method & Purpose \\\hline\hline
       \verb|addLegend(int, String)| & draw a legend for one plot number\\
       \verb|addXTick()| & \\
       \verb|addYTick()| & \\
@@ -559,7 +558,8 @@ They are summarized in the following table.
       \verb|addPoint(int, double, double, boolean)| & add a point to the plot,
       the boolean var. decides, if the point gets connected with the last one.
       The integer var. is the plot number.\\
-      \verb|addPointWithErrorBars(int, double, double, double, double, boolean)| & %
+      \verb|addPointWithErrorBars(int,| 
+                     \verb|double, double, double, double, boolean)| & %
       add a point to the plot with errorbars. Th additional vars. specify the
       lower and higer y coordinate of the error bar.\\
       \verb|setBars(boolean)| & bar plotting on or off \\
