@@ -1,4 +1,6 @@
+
 \chapter{Stochastic differential equations}
+
 In the previous section we have derived an exact simulation algorithm
 for the generation of trajectories of the Ornstein--Uhlenbeck process.
 The ``exact'' update formula was
@@ -563,7 +565,7 @@ $b(X(t),t)^2$ and the above Fokker--Planck equation.
 In subsection \ref{STRATONOVICHSUB} we have seen that it is 
 possible to give other definitions of the stochastic integral.
 One such definition is the Stratonovich stochastic integral defined 
-in Eq. (\ref{STRATONOVICHI}). It is clear that it is then possible 
+in Eq. (\ref{STRATONOVICHDEFI}). It is clear that it is then possible 
 to define stochastic differential equations using the 
 Stratonovich integral, i.e.,
 \begin{equation}
@@ -1091,6 +1093,285 @@ simulation the maxima are expected  to be at 0.8727 and 0.1273
 respectively. The histogram reproduced in Fig. (\ref{F_SDENOISEIN_2})
 is in agreement with this theoretical prediction.
 
+
+\section{Stochastic resonance}
+In order to get aquainted with 
+the numerical integration of stochastic differential equations we discuss a
+phenomenon which occurs as
+the response of a nonlinear system in the presence of noise: stochastic 
+resonance. For a comprehensive introduction see \cite{Lanzara,Bulsara}. 
+We already know that the effect of noise on the time evolution of 
+deteministic linear system is rather trivial. If the statistical properties of
+the input noise are known it is traightforward to compute the statistical
+properties of the output signal. For nonlinear systems the situation changes
+dramatically. The presence of the noise influences the evolution of the
+system often in a counterintuitive way. The numerical integration of the
+corresponding stochastic differential equations allows us to look at the
+realizations of the process and to gain insight in these interesting
+phenomena. 
+
+The phenomenon of stochastic resonance was proposed by Benzi \textit{et al.}
+\cite{Benzi,Benzi2} in a series of papers in which they address the problem
+of the periodic switching of the Earth's climate between periods of relative
+warmth and ice ages. It is known from the statistical analysis of continental
+ice volume over the last million years that this switching is random and that 
+it occurs with an approximate period of 100000 years. It is as well known that
+the eccentricity of the Earth orbit varies with roughly the same period. 
+However,
+the associated variations of the solar energy influx on the earth surface are
+so small, that climatologists doubt that  such a small external periodic force
+effect might induce such climatic changes. In their seminal papers Benzi
+\textit{et al.} represent the global climate with the help of a bistable
+``climatic potential''. One minimum of the potential represents a small
+temperture typical of an ice age, the other one a more  warm climate.
+These authors then show that the weak periodic variation of the eccentricity
+together with other random perturbations modelled as additive noise (e.g.
+short--term climate fluctuations) might explain the periodicity observed for
+the transition between one and the other of the two stable climate 
+states. They name this
+phenomenon stochastic resonance for the following reason: the
+signal--to--noise ratio, i.e. the response of the system, is maximized when a
+parameter of the stochastic force is tuned to an optimal value.
+
+It is the aim of this section to introduce the basic principles of stochastic
+resonance \cite{McNamara,Gammaitoni} and to simulate a simple model 
+showing this phenomenon.
+It is clear from the example discussed above that the basic mechanism  of 
+stochastic resonance relies upon three essential ingredients:
+a bistable system, a periodc driving signal, and a noise signal.
+
+The simplest version of a one--dimensional nonlinear dynamical system 
+is the damped anharmonic oscillator with the following equation of motion
+\begin{equation}
+m \frac{d^2x}{dt^2} + \gamma \frac{dx}{dt} = - \frac{dU(x)}{dx} 
+ + \sqrt{D} \chi(t).
+\end{equation}
+The above Langevin equation describes the motion of a classical particle of
+mass $m$ in a potential $U(x)$ and with an additive stochastic force
+$\chi(t)$,
+where $\chi(t)$
+is a Gaussian white noise characteized by
+\begin{equation}
+\langle \chi(t) =0 \rangle; \;\;\; \langle \chi(t) \chi(t')\rangle =
+\delta(t - t').
+\end{equation}
+The potential $U$ is bistable and we assume that it has the simple form
+\begin{equation}
+U(x) = -a \frac{x^2}{2} + b \frac{x^4}{4}.
+\end{equation}
+For $a> 0$ the potential $U$ is bistable with an unstable state at $x=0$
+and two stable states at $x_s = \pm \sqrt{a/b}$. The stable states are
+separated by a barrier of height $\Delta U = a^2/4b$. The system remains
+dynamically stable for $b>0$, and becomes monostable for $a \le 0$.
+Furthermore we assume that the system is overdamped by neglecting the inertial
+term $m d^2x/dt^2$. 
+Rescaling the resulting Langevin equation with the damping constant
+$\gamma$  we finally obtain the so--called stochastic Ginzburg--Landau
+equation
+\begin{equation}
+\label{Stoch_Ginzburg_Landau}
+\frac{dx(t)}{dt} = ax - bx^3 + \sqrt{D} \chi(t),
+\end{equation}
+an equation which is often encountered in the theory of nonequilibrium
+critical phenomena. 
+
+\subsection{Reaction rate theory}
+Let us now investigate some fundamental properties of the above dynamical
+system. We begin by considering the case $D=0$ (no fluctuations). If the 
+system is initially in a stable state it remains there for ever. 
+The typical local
+time scale is the relaxation time $\tau_r$ inside the wells. This time scale 
+can be determined by considering small variations around the 
+minimum of the well.
+To do so we linearize Eq. (\ref{Stoch_Ginzburg_Landau}) 
+around the stable state $x_s = \sqrt{a/b}$ with the help of
+\begin{equation}
+x(t) = x_s + \delta x(t)
+\end{equation}
+and obtain
+\begin{equation}
+\frac{d(\delta x)}{dt} = -2a \delta x.
+\end{equation}
+Thus, the  time scale $\tau_r$ of the relaxation inside the wells is
+\begin{equation}
+  \tau_r = \frac{1}{2a} = \frac{1}{U''(x_s)}.
+\end{equation}
+
+The situation changes in the presence of noise. The fluctuating forces allow
+the system to jump between the two stable states. If the noise strength $D$ 
+is small compared to the barrier height, these jumps are rare events. 
+It is a well--know result of Kramers reaction--rate theory (see e.g.
+\cite{Haenggi:Kramers}) that the mean escape time $T_e(x)$ out of one basin of
+attraction can be written for sufficiently low noise ($\Delta U/D \gg 1$)in 
+the form of the Arrhenius law
+\begin{equation}
+  \label{eq:Arrhenius}
+  T_e(x) = A \exp(\Delta U(x)/D),
+\end{equation}
+where $A$ is a prefactor which depends on the form of the potential. For the
+special potential we consider here, performing a Gaussian approximation of the
+potentail around the minimum and the maximum and using the condition
+$\Delta U/ D >> 1$ one gets the so--called Kramers
+formula (or Arrhenius formula) for the escape time of a bistable system
+\begin{equation}
+\label{eq:Kramers}
+  \tau_k = \frac{2\pi}{\sqrt{|U''(0)|U''(x_s)}} \exp [ 2 \Delta U / D ].
+\end{equation}
+The escape time $\tau_k$ is the global time scale of the bistable system.
+The physical content of the assumptions we stated above is the following
+one: The Kramers time $\tau_k$ is derived under the assumption that the
+probability density within a well is roughly in equilibrium when the escape
+takes place. Thus, the condition $\Delta U/D \gg 1$ guarantees that the two
+time scales, the relaxation time and the Kramers time are different. The
+system relaxes quickly (on a short time scale) to a local equilibrium at the
+stable states and approaches global equilibrium (transitions over the barrier)
+on a slow time scale. It follows from Eq. (\ref{eq:Kramers}) that
+\begin{equation}
+  \frac{\tau_k}{\tau_r} = 2 \sqrt{2} \pi \exp(2 \Delta U /D) \gg 1.
+\end{equation}
+The rate to jump over the barrier $W_k$ is obviously the inverse escape time
+\begin{equation}
+  w_k = \tau_k^{-1} = \frac{a}{\sqrt{2} \pi} \exp(-2 \Delta U/D).
+\end{equation}
+
+\subsection{The stochastic resonance}
+Having reviewed some basilar results of the theory of nonlinear stochastic
+systems we are now ready to look at the phenomenon of stochastic resonance.
+In the preceeding subsections we made use only of two of the basic ingredients
+of the recipe for stochastic resonance. The phenomenon only occurs in the
+presence of a periodic driving signal. If we add such a signal to the bistable
+system just considered its dynamics will be governed by the following Langevin
+equation
+\begin{equation}
+  \frac{dx}{dt} = - \frac{\partial U(x,t)}{\partial x} + \sqrt{D} \chi(t), 
+\end{equation}
+where the bistable potential takes now the form
+\begin{equation}
+\label{eq:bistablepotential}
+  U(x,t) = -a \frac{x^2}{2} +b \frac{x^4}{4} - Ax \cos(\omega_s t),
+\end{equation}
+where $A$ and $\omega_s= 2 \pi/T_s$ are the amplitude 
+and the frequency of the periodic
+signal. As a consequence of the periodic forcing term the potential tilts
+periodically between up  and down. When the periodic force is at its
+maximum (or minimum)  the difference between the escape rates from the two
+states is maximum. The periodic forcing is assumed to be so
+weak that it can not let the particle roll periodically from one potential
+well into the other one. Nevertheless, the noise--induced hopping beween the
+two wells  may become synchronized with the weak periodic forcing. This is 
+signature of stochastic resonance. Stochastic resonace manifests itself by a
+synchronization of activated hopping between the potential minima with the
+weak periodic forcing. 
+
+The manifestation of the phenomenon may be visualized with the help of the
+output signal. It is clear that in the absence of the periodic driving
+the escape process is induced by the fluctuating force and is random. Thus, in
+this case the output signal $x(t)$ looks like dichotomous noise. The
+probability density of residence times between two jumps is exponential
+\begin{equation}
+  P(t) = \frac{1}{\tau_k} \exp(-t/\tau_k),
+\end{equation}
+where the Kramers time can be
+interpreted as the mean residence time spent by the system in one well.
+The periodic driving force alters this situation. The modulation synchronizes
+the hopping. The output signal reveals a quasiperiodic contribution to the
+jump process, which has a maximum if the system jumps, on average, two times
+per cycle of the external forcing. This is the stochastic resonance condition,
+which for small driving frequencies $\omega_s \ll \omega_k$ 
+can be approximated by \cite{Jung}
+\begin{equation}
+\label{eq:ResonanceCondition}
+  T_s = 2 \tau_k = \frac{2 \pi \sqrt{2}}{a} \exp(2 \Delta U / D).
+\end{equation}
+The same condition formulated in terms of the noise intensity reads
+\begin{equation}
+\label{eq:ResonanceConditionD}
+  D_0 = \frac{2 \Delta U}{\ln(a/(\sqrt{2} \omega_s)}.
+\end{equation}
+At this resonance condition the coherent contribution of the jump process has
+a maximum.
+
+Now that we have learned the basic aspects of stochastic resonance let us 
+write a program to simulate it. Before doing so it is very helpful to write
+the basic equations of motion in dimensionless form. To this end we write
+the bistable potential (\ref{eq:bistablepotential}) in the form
+\begin{equation}
+  \label{eq:bistabledimless}
+  U(x,t) = \Delta U \left[ -2\left( \frac{x}{x_s} \right)^2 
+                           + \left( \frac{x}{x_s} \right)^4 \right] - 
+                 U_1 \left(\frac{x}{x_s} \right) \cos(\omega_s t),.
+\end{equation}
+where $U_1 = A x_s$. The Langevin equation of motion can then be written as
+\begin{equation}
+  \label{eq:langevindimless1}
+  \frac{dx}{dt} = 4 \Delta U \left( \frac{x}{x_s^2} - 
+                   \frac{x^3}{x_s^4} \right)
+                  + \frac{U_1}{x_s} \cos(\omega_s t)
+                  + \sqrt{D} \xi(t).
+\end{equation}
+If we devide the above equation through $4 \Delta U$ and multiply it by $x_s$
+\begin{equation}
+  \label{eq:langevindimless2}
+  \frac{1}{x_s} \frac{x_s^2}{4 \Delta U} \frac{dx}{dt} 
+ =  \left( \frac{x}{x_s} - 
+                   \frac{x^3}{x_s^3} \right)
+                  + \frac{U_1}{ 4 \Delta U } \cos(\omega_s t)
+                  + \frac{x_s}{4 \Delta U}\sqrt{D} \xi(t).
+\end{equation}
+If we now choose the unit of length to be $x_s$ and the time unit to be
+$1/a$, note that $x_s^2/4 \Delta U = 1/a$, the dimensionless form of the above
+equation reads
+\begin{equation}
+  \label{eq:langevindimless3}
+  dx 
+ =  \left( x - 
+              x^3 \right)dt 
+                  + \frac{U_1}{ 4 \Delta U} \cos(\omega_s t)dt
+                  + \sqrt{D} \eta(t) \sqrt{dt},
+\end{equation}
+where for notational convenience we have named $x$ and $t$ to denote the 
+corresponding dimensionless quantities and $D$ denotes the dimensionless
+noise intensity. Recall, that in the units defined above $D$ has the dimension
+$a x_s^2$.
+
+HIER KOMMT DAS LISTING DES PROGRAMMES:
+
+\verb|StochasticResonance.java|
+
+Before running the program let us formulate the resonace condition in
+dimensionless units. It follows from Eq. (\ref{eq:ResonanceConditionD}) that
+\begin{equation}
+  \label{eq:ResonanceConditionDless}
+  D_0= \frac{1}{2 \ln (1/\sqrt{2} \omega_s)}.
+\end{equation}
+To give a numerical example, for $\omega_s= 0.1$ the  time scale matching
+condition states that we have to choose $D= 0.2556$. Let us run now the
+program keeping first $\omega_s$ fixed and varying $D$ and then keeping $D$
+fixed and varying $\omega_s$.
+
+
+
+Here comes the simulation and the discussion.
+
+
+Now we could discuss:
+\begin{itemize}
+\item the periodic response
+\item the signal to noise ratio
+\end{itemize}
+
+Let us finally look at the spectrum of the output signal. ...
+
+
+
+Since its original formulation the phenomenon of stochastic resonance has been
+observed in several physical and biological systems. These observations are
+reviewed in 
+\cite{Gammaitoni} and the introductory article \cite{Bulsara} .
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Exercises}
 
 \begin{Ex}
@@ -1150,18 +1431,3 @@ spectrum. The spectrum is the cosine transform of $C_I$.
 \bibliography{V_98,simulit}
 
 
-\chapter{Monte Carlo Methoden in der statistischen Mechanik}
-Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
-Simulated annealing; travelling salesman;
-
-\chapter{Non-equilibrium MC}
-Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
-
-\chapter{Brownsche Dynamik Simulationen}
-Omega-entwicklung; SDE;
-
-
-\chapter{Rest}
-stochastische Resonanzen; Muster Erkennung; random Walks;
-
-\chapter{Stochastische Wellenfunktionsmethoden}
