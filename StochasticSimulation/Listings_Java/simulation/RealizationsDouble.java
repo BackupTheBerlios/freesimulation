@@ -11,7 +11,10 @@ package simulation;
  *
  *
  */
- 
+
+import java.awt.*;
+import ptolemy.plot.*; 
+
 /**
  *  <p>
  * You can add single realizations (time series) to this class
@@ -26,7 +29,8 @@ public class RealizationsDouble  {
     private int length;
     private int sampleSize;
 
-    /* The acumulated moments of all added realizations. */
+    /* The acumulated moments of all added realizations. 
+       The format: array[Moment][time] */
     private double[][] array; 
 
     /** if no maximum moment is specified, use 4. */
@@ -74,6 +78,47 @@ public class RealizationsDouble  {
 	    for (int j=0; j<length; j++) {
 		dummy[i][j] = array[i][j] / sampleSize; } }  
 	return dummy; }    
+
+    /** Plot one moment (1=mean, 2=second moment, etc.) 
+        and the corresponding error of the realizations in a 
+        seperate window.The moment of course has to be at most half of the 
+        maximum moment saved in the object (see computeError). */
+    public void plotMoment(int moment) {
+        if (2*moment-1>maxMoment || moment<1) return;
+        moment--;
+
+        Frame f = new simulation.CloseableFrame();
+        Plot plot = new Plot();
+        plot.setButtons(true);
+        plot.setTitle("Moment "+(moment+1)+" of the Realizations");
+        plot.setXLabel("# of time steps");
+        plot.setYLabel("Moment "+(moment+1));
+        f.setLayout(new BorderLayout());
+        f.add(plot,"Center");
+        f.pack();
+        f.show();
+
+        simulation.Plotting.errorBarPlot(plot,0,
+                                         array[moment],computeError(moment+1));
+    }
+
+    /** Computes the error of a moment (only possible if 2*moment is
+        computed by the object) and returns the error. 
+        e.g. for the second moment error, you need the 4th moment. 
+        The mean is moment = 1, etc. */
+    public double[] computeError(int moment) {
+        double[] error = new double[length];
+        double factor;
+
+        if (2*moment-1>maxMoment || moment<1) return error;
+        moment--;
+        
+        factor = 1/Math.sqrt(sampleSize);
+        for (int i=0; i<length; i++) {
+            error[i]=factor*( array[2*moment][i]/sampleSize
+                - Math.pow(array[moment][i]/sampleSize,2) ); }
+        return error;
+    }
     
 } // RealizationsDouble
 
