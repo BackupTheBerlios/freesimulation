@@ -1992,78 +1992,6 @@ protected void finalize() throws Throwable;
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Keywords and APIs in Java 1.1 and Java 2}
-
-Here we list all the standard packages (APIs) included in the Java 1.1
-language standard. The important packages (for our purposes) are
-written in small caps.
-
-\paragraph{Java 1.1 packages}
-\begin{description}
-\item[\textsc{java.applet}] includes the superclass of all Java applets (small package)
-\item[\textsc{java.awt}] the Abstract Windowing Toolkit (large package)
-\item[java.awt.datatransfer] provides data exchange between programs
-\item[\textsc{java.awt.event}] event handling for the AWT (Mouse, etc.)
-\item[java.awt.image] rarely used classes for image processing (use AWT) 
-\item[java.awt.peer] rarely used interfaces for the AWT
-\item[java.beans] interfaces and classes for beans programmer
-\item[\textsc{java.io}] all the input/output classes (very big)
-\item[\textsc{java.lang}]  central Java language classes (largest package)
-\item[java.lang.reflect] part of the Java Reflection API (small)
-\item[\textsc{java.math}] arbitrary precision arithmetic (small)
-\item[java.net] networking package
-\item[java.rmi] RMI is Remote Method Invocation. It is a mechanism that enables an object on one Java virtual machine to invoke methods on an object in another Java virtual machine. 
-\item[java.rmi.dgc] RMI distributed garbage-collection (DGC). 
-\item[java.rmi.registry] Methods to access the RMI registry.
-\item[java.rmi.server] RMI server classes and methods.
-\item[java.security] A security framework. This includes classes that implement an easily configurable, fine-grained access control security architecture.
-\item[java.security.acl / java.security.cert / java.security.interfaces / java.security.spec] Additional security features.
-\item[java.sql] Provides the JDBC (Java Database Connectivity) package. JDBC is a standard API for executing SQL statements.
-\item[java.text] for writing internationalized programs (date, time, etc.)
-\item[\textsc{java.util}] useful classes, often used, e.g. millisecond time,
-  calendar, random numbers, vectors, etc.
-\item[java.util.zip] data compression and decompression classes
-\end{description}
-
-\paragraph{Java 2 packages}
-Additional API packages in Java 2 are:
-\begin{description}
-\item[java.awt.color] Provides classes for color spaces.
-\item[java.awt.dnd] Provides interfaces and classes for supporting drag-and-drop operations.
-\item[java.awt.font] Provides classes and interface relating to fonts. It contains support for representing Type 1, Type 1 Multiple Master fonts,
-OpenType fonts, and TrueType fonts. 
-\item[java.awt.geom] The Java 2D classes for defining and performing operations on objects related to two-dimensional geometry. 
-\item[java.awt.im] Classes and an interface for the input method framework. This framework enables all text editing components to receive Japanese, Chinese, or Korean text input through input methods. 
-\item[java.awt.image.renderable] Classes and interfaces for producing rendering-independent images.
-\item[\textsc{java.awt.print}] A general printing API, including document types, 
-  page setup and formats and job control dialogs.
-\item[java.beancontext] A bean context is a container for beans and defines the execution environment for the beans it contains.
-\item[java.lang.ref] Provides reference-object classes, which support a limited degree of interaction with the garbage collector.
-\item[java.rmi.activation] Provides support for RMI Object Activation.
-\item[java.util.jar] For reading and writing the JAR (Java ARchive) file format, which is based on the standard ZIP file format with an optional manifest file. 
-\item[javax.accessibility] Defines a contract between user-interface components and an assistive technology that provides access to those components. 
-\item[\textsc{javax.swing}] Provides a set of "lightweight" (all-Java language) components that, to the maximum degree possible, work the same on all
-platforms. 
-\item[java.swingx.*] There are 15 more packages in the Swing package, which we are not describing here in detail. Take a look at the Swing tutorial or documentation.
-\item[org.omg.COBRA] Provides the mapping of the OMG CORBA APIs to the JavaTM programming language, including the class ORB, which is implemented so that a programmer can use it as a fully-functional Object Request Broker (ORB).
-\item[org.omg.*] 6 more packages are provided for using COBRA with Java. See the API documentation.
-\end{description}
-
-\subsubsection{Reserved words in Java}
-The following words are reserved for Java and can not be used for names
-of classes, variables or methods:
-\begin{verbatim}
-abstract, boolean, break, byte, byvalue, case, cast, catch, char,
-class, const, continue, default, do, double, else, extends,
-false, final, finally, float, for, future, generic, goto, if,
-implements, import, inner, instanceof, int, interface, long,
-native, new, null, operator, oouter, package, private, protected, 
-public, rest, return, short, static, strictfp, super, switch, 
-synchronized, this, throw, throws, transient, true, try, var,
-void, volatile, while, widefp
-\end{verbatim}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The System class: Screen-Output and Keyboard-Input}
 
 Now we are in a place to discuss the \verb|System.out.println()| statement
@@ -2336,7 +2264,83 @@ Here a short example:
 \lstinputlisting{Listings_Java/TestPassingFunctions.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Name conventions in Java}
+\section{Structure and small Overview of Java}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Keywords and APIs in Java 1.1 and Java 2}
+
+Here we list all the standard packages (APIs) included in the Java 1.1
+language standard. The important packages (for our purposes) are
+written in small caps.
+
+\paragraph{Java 1.1 packages}
+\begin{description}
+\item[\textsc{java.applet}] includes the superclass of all Java applets (small package)
+\item[\textsc{java.awt}] the Abstract Windowing Toolkit (large package)
+\item[java.awt.datatransfer] provides data exchange between programs
+\item[\textsc{java.awt.event}] event handling for the AWT (Mouse, etc.)
+\item[java.awt.image] rarely used classes for image processing (use AWT) 
+\item[java.awt.peer] rarely used interfaces for the AWT
+\item[java.beans] interfaces and classes for beans programmer
+\item[\textsc{java.io}] all the input/output classes (very big)
+\item[\textsc{java.lang}]  central Java language classes (largest package)
+\item[java.lang.reflect] part of the Java Reflection API (small)
+\item[\textsc{java.math}] arbitrary precision arithmetic (small)
+\item[java.net] networking package
+\item[java.rmi] RMI is Remote Method Invocation. It is a mechanism that enables an object on one Java virtual machine to invoke methods on an object in another Java virtual machine. 
+\item[java.rmi.dgc] RMI distributed garbage-collection (DGC). 
+\item[java.rmi.registry] Methods to access the RMI registry.
+\item[java.rmi.server] RMI server classes and methods.
+\item[java.security] A security framework. This includes classes that implement an easily configurable, fine-grained access control security architecture.
+\item[java.security.acl / java.security.cert / java.security.interfaces / java.security.spec] Additional security features.
+\item[java.sql] Provides the JDBC (Java Database Connectivity) package. JDBC is a standard API for executing SQL statements.
+\item[java.text] for writing internationalized programs (date, time, etc.)
+\item[\textsc{java.util}] useful classes, often used, e.g. millisecond time,
+  calendar, random numbers, vectors, etc.
+\item[java.util.zip] data compression and decompression classes
+\end{description}
+
+\paragraph{Java 2 packages}
+Additional API packages in Java 2 are:
+\begin{description}
+\item[java.awt.color] Provides classes for color spaces.
+\item[java.awt.dnd] Provides interfaces and classes for supporting drag-and-drop operations.
+\item[java.awt.font] Provides classes and interface relating to fonts. It contains support for representing Type 1, Type 1 Multiple Master fonts,
+OpenType fonts, and TrueType fonts. 
+\item[java.awt.geom] The Java 2D classes for defining and performing operations on objects related to two-dimensional geometry. 
+\item[java.awt.im] Classes and an interface for the input method framework. This framework enables all text editing components to receive Japanese, Chinese, or Korean text input through input methods. 
+\item[java.awt.image.renderable] Classes and interfaces for producing rendering-independent images.
+\item[\textsc{java.awt.print}] A general printing API, including document types, 
+  page setup and formats and job control dialogs.
+\item[java.beancontext] A bean context is a container for beans and defines the execution environment for the beans it contains.
+\item[java.lang.ref] Provides reference-object classes, which support a limited degree of interaction with the garbage collector.
+\item[java.rmi.activation] Provides support for RMI Object Activation.
+\item[java.util.jar] For reading and writing the JAR (Java ARchive) file format, which is based on the standard ZIP file format with an optional manifest file. 
+\item[javax.accessibility] Defines a contract between user-interface components and an assistive technology that provides access to those components. 
+\item[\textsc{javax.swing}] Provides a set of "lightweight" (all-Java language) components that, to the maximum degree possible, work the same on all
+platforms. 
+\item[java.swingx.*] There are 15 more packages in the Swing package, which we are not describing here in detail. Take a look at the Swing tutorial or documentation.
+\item[org.omg.COBRA] Provides the mapping of the OMG CORBA APIs to the JavaTM programming language, including the class ORB, which is implemented so that a programmer can use it as a fully-functional Object Request Broker (ORB).
+\item[org.omg.*] 6 more packages are provided for using COBRA with Java. See the API documentation.
+\end{description}
+
+\subsubsection{Reserved words in Java}
+The following words are reserved for Java and can not be used for names
+of classes, variables or methods:
+\begin{verbatim}
+abstract, boolean, break, byte, byvalue, case, cast, catch, char,
+class, const, continue, default, do, double, else, extends,
+false, final, finally, float, for, future, generic, goto, if,
+implements, import, inner, instanceof, int, interface, long,
+native, new, null, operator, oouter, package, private, protected, 
+public, rest, return, short, static, strictfp, super, switch, 
+synchronized, this, throw, throws, transient, true, try, var,
+void, volatile, while, widefp
+\end{verbatim}
+
+%%%%%%
+
+\subsection{Name Conventions in Java}
 In order to make the Java codes more readable it is customary to stick
 to the followinh nam conventions.
 
@@ -2417,6 +2421,103 @@ starting with the page \verb|jdk1.2/docs/index.html|
 \end{figure}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applications and Applets revisited}
+
+After learning many things about object oriented programming,
+we want to recapitulate the basic differences and features of
+the two possible ways of writing and starting Java programs.
+
+\subsection{Application}
+A Java application is in the traditional language a ``normal'' program.
+In Java slang it is a class, which only has to have a \verb|main|
+method, which has to be \verb|static| and \verb|public|. This is also of course the
+entrance point, if you start the Java application. Then the program
+executes sequentially the code given in the main method (of course it
+goes parallel, if you use threads somewhere in the application - see
+\ref{sec:ParallelJava}). There are no restrictions of any sort using
+features in an application.
+
+
+\subsection{Applet}
+An applet is a Java class, which can be loaded into a virtual machine
+and can then be executed their. For example a web browser could load
+the applet, check if it is an applet allowed to be started on the
+machine the browser is running on and then ``starts the applet''.
+
+This is basically the most confusing part of an applet: What are the
+instructions, which get executed when the browser ``starts the applet''?
+To that purpose go ahead and write a simple program 
+(see e.g. \verb|ShowTrace.java|), which only 
+prints out the place where the execution just takes place and ``start''
+the Java class on the command line as an application, in the appletviewer
+as an applet and in a browser as an applet. What you will get is shown
+in figure \ref{fig:LineOfExecution}.
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
+    \includegraphics[width=\textwidth]{Figures/LineOfExecution.eps}
+    \caption{The line of execution in an application and an applet in
+        the appletviewer or the Netscape Navigator V4.08. For the application
+        only the part above the first line and below the second line are
+        actually the parts, which can not be avoided. The remaining
+        part is just provided to show you how to write an application,
+        which can be used as an applet, too.}
+    \label{fig:LineOfExecution}
+  \end{center}
+\end{figure}
+
+So for the applets you have to write (implement) at least the 
+\verb|init()| method to get things going. But now you will ask, why did we
+not supply an  \verb|init()| method when we wrote our first 
+HelloWorld applet? The answer is we did, but we did not write it explicitly,
+because we left it empty. The trick was that for an applet there is
+always another thread (see \ref{sec:ParallelJava} for an introduction to threads)
+running, which takes care of (re)painting the windows (panels) used by the applet.
+This thread is a method of the AWT package (see \ref{sec:AWTIntro}) and
+the method is the \verb|paint()| method. And in the    HelloWorld applet
+we have overriden the \verb|paint()| method to display our message.
+
+Actually the threads and methods used for painting and repainting
+the windows or panels is a little bit more tricky and involved, so we
+have to postpone the discussion to a later chapter. Here only the basics:
+There is a method \verb|repaint()|, which calls the \verb|update()|
+method and that in turn calls the \verb|paint()| method, when there is time
+to do so. This sounds very complicated in the first place, but 
+it will be resolved later on.
+
+There is another issue to be addressed here in the context of applets.
+So far we have always written a seperate HTML file to use with the
+appletviewer, which then in turn calls the applet itself. The burden
+of having two files for one applet can be avoided by putting the
+HTML Code at the beginning of the Java class file in a comment. Then
+if you call the appletviewer with the Java class file 
+it executes the HTML code supplied
+in the Java class file and starts the applet. It even starts in
+the Netscape Navigator, although it probably makes no sense for
+large programs embedded in a set of HTML pages kept uptodate in a
+different way as the Java source code. But it certainly eases
+writing small applets and getting not confused by too many files on
+your disks. 
+
+Here a small example showing the described feature:
+\inputlisting{Listings_Java/test_Applet.java}
+You can start it (first you have to compile it) 
+by typing \verb|appletviewer test_applet.java| or 
+in the Netscape Navigator type 
+\verb|file:/home/user/test_Applet.java|\footnote{You have to substitue the path 
+  by an appropiate one for your system and configuration.}.
+Then on the command line or the terminal with which you started the browser  
+you see the short message.
+
+
+\subsection{Programs as Applets and Applications}
+To write a class to be run as an applet and an application
+you can use figure \ref{fig:LineOfExecution} to get the correct order
+of the methods, which get called in either case. As an example, we have used
+in later chapters for the bigger programs the following philosophy
+to have the programs runs as applet as well as a standalone application:
+\inputlisting{Listings_Java/TestAppletApplication.java}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2633,103 +2734,6 @@ An overview of the most important methods is given in table
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Applications and Applets revisited}
-
-After learning many things about object oriented programming,
-we want to recapitulate the basic differences and features of
-the two possible ways of writing and starting Java programs.
-
-\subsection{Application}
-A Java application is in the traditional language a ``normal'' program.
-In Java slang it is a class, which only has to have a \verb|main|
-method, which has to be \verb|static| and \verb|public|. This is also of course the
-entrance point, if you start the Java application. Then the program
-executes sequentially the code given in the main method (of course it
-goes parallel, if you use threads somewhere in the application - see
-\ref{sec:ParallelJava}). There are no restrictions of any sort using
-features in an application.
-
-
-\subsection{Applet}
-An applet is a Java class, which can be loaded into a virtual machine
-and can then be executed their. For example a web browser could load
-the applet, check if it is an applet allowed to be started on the
-machine the browser is running on and then ``starts the applet''.
-
-This is basically the most confusing part of an applet: What are the
-instructions, which get executed when the browser ``starts the applet''?
-To that purpose go ahead and write a simple program 
-(see e.g. \verb|ShowTrace.java|), which only 
-prints out the place where the execution just takes place and ``start''
-the Java class on the command line as an application, in the appletviewer
-as an applet and in a browser as an applet. What you will get is shown
-in figure \ref{fig:LineOfExecution}.
-\begin{figure}[htbp]
-  \begin{center}
-    \leavevmode
-    \includegraphics[width=\textwidth]{Figures/LineOfExecution.eps}
-    \caption{The line of execution in an application and an applet in
-        the appletviewer or the Netscape Navigator V4.08. For the application
-        only the part above the first line and below the second line are
-        actually the parts, which can not be avoided. The remaining
-        part is just provided to show you how to write an application,
-        which can be used as an applet, too.}
-    \label{fig:LineOfExecution}
-  \end{center}
-\end{figure}
-
-So for the applets you have to write (implement) at least the 
-\verb|init()| method to get things going. But now you will ask, why did we
-not supply an  \verb|init()| method when we wrote our first 
-HelloWorld applet? The answer is we did, but we did not write it explicitly,
-because we left it empty. The trick was that for an applet there is
-always another thread (see \ref{sec:ParallelJava} for an introduction to threads)
-running, which takes care of (re)painting the windows (panels) used by the applet.
-This thread is a method of the AWT package (see \ref{sec:AWTIntro}) and
-the method is the \verb|paint()| method. And in the    HelloWorld applet
-we have overriden the \verb|paint()| method to display our message.
-
-Actually the threads and methods used for painting and repainting
-the windows or panels is a little bit more tricky and involved, so we
-have to postpone the discussion to a later chapter. Here only the basics:
-There is a method \verb|repaint()|, which calls the \verb|update()|
-method and that in turn calls the \verb|paint()| method, when there is time
-to do so. This sounds very complicated in the first place, but 
-it will be resolved later on.
-
-There is another issue to be addressed here in the context of applets.
-So far we have always written a seperate HTML file to use with the
-appletviewer, which then in turn calls the applet itself. The burden
-of having two files for one applet can be avoided by putting the
-HTML Code at the beginning of the Java class file in a comment. Then
-if you call the appletviewer with the Java class file 
-it executes the HTML code supplied
-in the Java class file and starts the applet. It even starts in
-the Netscape Navigator, although it probably makes no sense for
-large programs embedded in a set of HTML pages kept uptodate in a
-different way as the Java source code. But it certainly eases
-writing small applets and getting not confused by too many files on
-your disks. 
-
-Here a small example showing the described feature:
-\inputlisting{Listings_Java/test_Applet.java}
-You can start it (first you have to compile it) 
-by typing \verb|appletviewer test_applet.java| or 
-in the Netscape Navigator type 
-\verb|file:/home/user/test_Applet.java|\footnote{You have to substitue the path 
-  by an appropiate one for your system and configuration.}.
-Then on the command line or the terminal with which you started the browser  
-you see the short message.
-
-
-\subsection{Programs as Applets and Applications}
-To write a class to be run as an applet and an application
-you can use figure \ref{fig:LineOfExecution} to get the correct order
-of the methods, which get called in either case. As an example, we have used
-in later chapters for the bigger programs the following philosophy
-to have the programs runs as applet as well as a standalone application:
-\inputlisting{Listings_Java/TestAppletApplication.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Advanced Java Features}
