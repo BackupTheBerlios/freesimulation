@@ -39,7 +39,7 @@
 %%% The Listings package - include source code
 \usepackage{listings}
 
-%%% OLD package: 
+%%% OLD package <0.19 : 
 %%%\selectlisting{java}
 %%%\selectlisting{matlab}
 % line numbers ? And what stepsize ?
@@ -47,17 +47,22 @@
 % use small font size for typesetting listings
 %%%\prelisting{\small\smallskip\hrule\smallskip}
 %%%\postlisting{\smallskip\hrule\smallskip}
+%% removed in 0.19
+%%        pre=\small\smallskip\hrule\smallskip,
+%%        post=\smallskip\hrule\smallskip,
+%% USE INSTEAD: frame=bltr or bt
 
-%%% NEW package >= V0.19
+%% for compatability using 0.19 instead of 0.20
+\newcommand{\lstlistoflistings}{\listoflistings}
+%%
+%%% NEW package >= V0.20
 \lstloadlanguages{Java,Matlab,HTML,TeX}
-\lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily,
-        pre=\small\smallskip\hrule\smallskip,
-        post=\smallskip\hrule\smallskip,
-        spread=1cm}
-
+%\lstloadaspects{breaklines}
+\lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily, frame=bt}
+%        ,spread=0.2cm, extendedchars=true, breaklines=false}
 
 %%% SHOW ALL Labels 
-%%\usepackage{showkeys}
+\usepackage{showkeys}
 
 
 % Use extended theorem style
@@ -182,7 +187,12 @@
 
 \newcommand{\href}[2]{#2}
 
-%\usepackage[dvips]{hyperref}
+%%% for pdflatex (still problems with links)
+%%% \usepackage[pdftex]{hyperref}
+
+%% for dvips / ps2pdf or dvips / Acrobat Distiller
+%%\usepackage[dvips]{hyperref}
+
 %\usepackage[extension=pdf,hyperfigures,hyperindex,%
 %baseurl={http://phym1.physik.uni-freiburg.de/\string~frpe/},%
 %pdftitle={Manuskript for Stochastic Simulations in Physics},%
@@ -204,7 +214,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{Chap0}
+\includeonly{Chap1}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,JavaSummary}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,7 +230,7 @@
 \begin{document}
 
 % Title and Author
-\title{Stochastic Methods for Physics: \\ An introduction}
+\title{Stochastic Methods for Physics using Java: \\ An introduction}
 \author{F. Petruccione and P. Biechele}
 \maketitle
 
@@ -230,7 +240,7 @@
 \clearpage
 \listoffigures 
 \clearpage
-\listoflistings
+\lstlistoflistings
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -244,35 +254,26 @@
 \lstset{language=java,basicstyle=\small,stringstyle=\ttfamily}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART I
-\part{Introduction}
+\part{Java}
 
-%%% Chapter 0 -- Java Intro
-\include{Chap0}
-
-%%% Chapter 1 -- Introduction
-\include{Chap1}
-
-%%%\lstset{language=matlab}
-
-%%% Chapter 2 
-\include{Chap2}
-
-%%% Chapter 3 
-\include{Chap3}
+\include{IntroToJava}
+\include{ObjectOriented}
+\include{PlottingWithJava}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART II
-\part{Stochastic Processes}
+\part{Introduction to Stochastic Variables}
 
-%%% Chapter 4 
-\include{Chap4}
-
-%%% Chapter 5 
-\include{Chap5}
-
-%%% Chapter 6 - included in Chap4
-%%\include{Chap6}
+\include{StochasticVariables}
+\include{DataAnalysis}
+\include{SamplingOfProbDists}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART III
+\part{Stochastic Processes}
+
+\include{MarkovProcesses}
+\include{SDE}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART IV
 \part{Advanced Simulation Techniques}
 
 %%% Chapter 7 
@@ -284,7 +285,7 @@
 %%% Chapter 9 
 \include{Chap9}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART IV
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART V
 \part{Applications}
 
 %%% Chapter 10
@@ -296,14 +297,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices
 \appendix
 
+% Summary of Java
+\include{JavaSummary}
+
+% Listings/Tables referred to from the main text
+\include{AppendixMainText}
+ 
 % Listings of programs
 \include{Listings}
 
 % Solutions to exercises
 \include{Solutions}
 
-% Summary of Java
-\include{JavaSummary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%% 
 
 % Bibliographien
 %% These commands are ignored by the chapterbib package
