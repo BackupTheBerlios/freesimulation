@@ -335,7 +335,7 @@ there are many many ``powerful'' CPUs connected mostly by some kind
 of networking cable to the internet\footnote{The name for the network of
 all computers in the world connected together.} 
 or the intranet\footnote{The computers connected e.g. in a company 
-(not necessarily connected to the outer world, the internet.}.
+(not necessarily connected to the outer world), the internet.}.
 
 On the high performance computer market the CPUs were getting more and more 
 expensive compared to the performance gained by using these formula one
@@ -510,7 +510,6 @@ Now that we have decided or know about the hardware we want to use
 for the problem we want to solve, we have to decide what software
 model to use to get all CPUs working for us.  
 
-
 First of all you have to think about an algorithm for the parallel
 implementation of the problem to be solved. This is actually a 
 difficult and time consuming part and you probably have many different
@@ -546,8 +545,9 @@ on different platforms and use the fastest platform for your problem.
       HPF & High Performance Fortran \\
       MPI & Message Passing Interface \\
       PVM & Parallel Virtual Machine \\
-      RMI & Remote Method Invocation \\
       OpenMP & Open Multiple Processes \\
+      RMI & Remote Method Invocation \\
+      COBRA & Common Object Request Broker Adapter \\
     \end{tabular}
     \caption{Abbreviations used for the models in parallel programming.}
     \label{tab:ParallelAbbrev}
@@ -555,6 +555,35 @@ on different platforms and use the fastest platform for your problem.
 \end{table}
 
 But what are the differences between the software models?
+\subsubsection{RMI and COBRA}
+COBRA and RMI are basically an open standard for a service
+provided by many computers to distribute objects (in the sense of objects
+the oriented paradigm) across heterogenous networks. It is kind of a
+network service to supply programs with certain objects not available
+on the computer running the program. What you need for this to work are
+so-called ORB (Object Request Brokers), which are servers for objects and
+their names. You can call it the ``object oriented version of MPI''.
+
+Both can of course be used for object oriented parallel computing, but
+still they have not gained a lot of attraction in the scientific
+community. Not because they are inferior to the other models, but there
+is a much higher hill to be climbed in order to write programs using 
+RMI or COBRA. Of course this is a very subjective opinion, but all the
+other models are very widespread for high performance computing. RMI and
+COBRA are still in their beginnings. 
+
+This ansatz to distributed (parallel) computing is mostly used for 
+large databases, network applications, etc. RMI is included in standard 
+Java, but COBRA is coming seperatley and you need additional software.
+
+But you should keep in mind, that RMI and COBRA are actually ``extensions''
+to using threads, because threads are only possible for shared memory
+systems. For distributed memory systems, like large intranets or even the
+whole internet, you have to use RMI for parallel applications in Java or
+choose COBRA. The other choices are the subject of the next few sections.
+A nice introduction to RMI and COBRA in Java is \cite[]{DistributedComputing}.
+
+
 \subsubsection{OpenMP}
 If you want to spend
 less time for coding, you should use OpenMP, a directives based approach;
@@ -678,7 +707,7 @@ available for all unixes and even for Win32 since a few months ago,
 although the performance is much better on unix.}
 you have to edit the file \verb|../Symphony/SymphonyServer/tasks.sym| to
 contain the parameters you want to compute, e.g. it could look like this:
-{\small
+\begin{small}
 \begin{verbatim}
 process=DogFlea;
 entryPoint=run;
@@ -686,7 +715,8 @@ param(n0d),min=10,max=1000,incr=10;
 param(Nd),const=1000;
 return (na,nb) as {EVENT @DogFlea @run0};
 timeout=1;
-\end{verbatim} }
+\end{verbatim} 
+\end{small}
 Now you start the Symphony server with 
 \begin{verbatim}
   .../Symphony/SymphonyServer/start_server
@@ -705,7 +735,7 @@ change the path accordingly.
 The clients are only computing, if the appletviewer window is visible, so
 the user calling the page to start the Symphony applet can decide if she/he
 wants to participate or not. On the clients you get the messages:
-{\small
+\begin{small}
 \begin{verbatim}
  {DogFlea.59} 
 ...got to process DogFlea.59
@@ -716,7 +746,8 @@ wants to participate or not. On the clients you get the messages:
  Output Field: na=479;  Output Field: nb=521; 
  Time to process: 3.0 seconds;  
 ** End of Symphony run **   
-\end{verbatim} }
+\end{verbatim} 
+\end{small}
 This shows one job, which was run using $810$ fleas initially on dog 1 and
 $1000$ fleas alltogether. The results get saved in a file called \verb|event.log|
 in a directory 
@@ -994,6 +1025,14 @@ makes most of the problems. For a more detailed discussion and examples
 of e.g. a Round-Robin Scheduler written in Java,
 you should take a look at a book about threading (like \cite[]{JavaThreads}).
  
+An important issue concerning threads is of course a race condition. This 
+is the problem of ensuring that a variable (e.g. a global one) is
+accessed by only one thread at a time and if a variable is changed,
+all the other threads have to know about it. To ensure these there
+are certain constructions to be used, like the \verb|synchronized| keyword.
+Because this is a rather complex topic, you should consult a 
+comprehensive discussion, e.g. in \cite[]{JavaThreads}.   
+
 Just to complete this section, we want to mention some more methods of
 the Thread class. 
 \begin{description}
@@ -3200,3 +3239,8 @@ excellent over the whole range of wavenumbers.
 
 
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "V_98"
+%%% End: 

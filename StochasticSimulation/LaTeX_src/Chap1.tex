@@ -202,7 +202,8 @@ the point where we feel the necessity to learn something about the graphical
 possibilities of Java.
 
 
-\subsection{A very easy plot -- the awt and applet Packages}
+\subsection{The Most Easy Plot -- The AWT And Applet Packages}
+\label{sec:AWTIntro}
 
 Before trying to plot the data generated with the program
 \verb|RadoactiveDecay| we want to discuss the most simple Java code which
@@ -213,22 +214,27 @@ an application.
 
 \loadlisting{PlotEasy.java}{./Listings_Java/PlotEasy.java}
 
-As we can see the code begins by importing packages. We already met the first
+As we can see the code starts by importing packages. We already met the first
 one, the \verb|java.applet.Applet| package in the applet version of the
 HelloWorld program. The \verb|java.applet| package is a small package. It
 simply contains the \verb|Applet| class, which is the superclass of all
 applets, i.e., in order to create your own applet you have to create a subclass
 of this class and override (overload) 
-some or all of its methods (see Chapter 0). The
+some or all of its methods (see chapter \ref{chap:IntroJava}). The
 second package we have to import is the \verb|java.awt| package, where 
 \verb|awt| stands for the Abstract Windowing Toolkit. This is one of 
 the biggest packages in Java 1.1 and includes all the nice graphics
-capabilities of Java.
+capabilities of Java.\footnote{The discussion is based on Java 1.1, but 
+if you just prepend a capital {\protect\verb|J|} to all class names, you can
+use the new Swing/Java 2 components. You also have to change the import
+command from {\protect\verb|import java.awt;|} to 
+{\protect\verb|import javax.swing;|}.
+You should not use both together in one program.}
 
 Java programs look different on different systems, because they use
 the AWT, which is an abstract class, just defining the necessary
 methods and fields to write programs using graphics functionallity.
-To accomplish this Java uses a so-called peer architecture:
+To accomplish this, Java uses a so-called peer architecture:
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
@@ -306,14 +312,74 @@ Object $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Window
 $\rightarrow$ Frame. The \verb|Frame| class represents an optionally resizable
 application window with a title bar. 
 
-????
-With the help of the method \verb|add|,
-das ich nicht ganz verstehe wird dann ...... !!!!!!!!!!!
+With the help of the \verb|add(Component)| method in the \verb|Container| class,
+we can ``add'' arbitrary components to our container. E.g. we can add
+a button or a label to the frame we have created (for example: ???).
+A list of all AWT 
+components defined in the Java 1.1 standard is shown in table 
+\ref{tab:AWTComponents}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{c|p{0.6\textwidth}}
+      Button & A button with text on it. \\
+      Canvas & A drawing area. \\
+      Checkbox & A list of clickable choices (more than one can 
+                 be choosen at a time). \\
+      CheckboxGroup & A list of clickable choices 
+                      (only one can be choosen at a time). \\
+      Choice & A list of choices, like a pull-down menu. \\
+      Label & A short text to be displayed in the GUI. \\
+      Scrollbar & Sometimes called a slider. \\
+      TextComponent.TextArea & Multiple lines of text to be 
+                               displayed or optionally editable.\\
+      TextComponent.TextField & A line of text, optionally editable. \\
+      Container.Panel & A ``box'' to contain other components. \\
+      Container.ScrollPane & A container to hold large areas, which cannot
+              be displayed and have to be scrolled using the scroll panes. \\
+      Container.Window.Frame & An optionally resizable window with 
+                               title and decorations. \\
+      Container.Window.Dialog & A dialog window to ask a question or display
+                                a notification. \\
+      Container.Window.FileDialog & For choosing/browsing files/directories. \\
+    \end{tabular}
+    \caption{A list of all defined AWT components of the Java 1.1 API.}
+    \label{tab:AWTComponents}
+  \end{center}
+\end{table}
+
+The arrangement (in Java called layout) of the components and the containers
+for each container can be defined by using a layout manager. By default it
+always uses the \verb|FlowLayout| manager for an application, 
+which just puts the components
+beside each other in a line and if the window is too small it wraps them to
+the next line. For an applet the default is the borderlayout manager.
+More sophisticated layout managers are given in the 
+table \ref{tab:AWTLayouts}. Unfortunately it is a pretty difficult
+task to handle these layout managers, but still for not too complicated
+arrangements it is enough to use these. If you want to have more
+complex layouts and easier handling you should go and use the 
+Swing/JFC packages (they are also available for Java 1.1 as mentioned
+in the introductory chapter.).
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{c|l}
+      FlowLayout & The default layout, everything beside each other. \\
+      GridLayout & Put all components/container in a table structure. \\
+      BorderLayout & Use a center and 4 borders to put the components/containers.\\
+      CardLayout & Put components/containers like cards on a stack.\\
+      GridBagLayout & A very versatile but complicated layout manager. \\
+    \end{tabular}
+    \caption{All possible layouts in the AWT package of Java 1.1.}
+    \label{tab:AWTLayouts}
+  \end{center}
+\end{table}
 
 With the help of the method \verb|setSize(int width, int height)| we fix the
 dimensions of the frame (in pixels). The \verb|show()| method displays the
 frame. As we already know \verb|a.init()| calls the \verb|init()| 
-method of the Applet class and therefore starts the applet.
+method of the Applet class and therefore starts the applet. There is also
+a method called \verb|setResizable(boolean)| for the Frame class, which
+decides if the window can be resized by the user or not.
 
 In principle the part of the code we just described is not necessary. We
 included it only to allow the program to be run as an application and as 
@@ -375,12 +441,15 @@ g.setcolor(Color.red)
 \end{verbatim}
 in line xy before drawing the corresponding curve.
 
+????????????????????
 It is important to note that in the lines xx--yy we have added the
 code
 \begin{verbatim}
 frame.WindowListener()
 \end{verbatim}
-which allows to handle the request to close the window.
+which allows to handle the request to close the window. These ``events''
+are in the \verb|java.awt.event| package and will be discussed later
+in section \ref{sec:AWTAdvanced}. 
 
 \subsection{Ptplot -- extending Javas Graphics Capabilities}
 The quality of the plot of the simulation results are rather poor
@@ -504,8 +573,14 @@ They are summarized in the following table.
   \end{center}
 \end{table}
 
+PLOTTING FILES ???????
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Printing in Java and with Ptplot}
+????
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The results of the simulation}
 
 The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and 

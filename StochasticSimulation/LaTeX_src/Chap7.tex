@@ -652,6 +652,87 @@ step of $\Delta t= 0.01$ which runs for 10000 steps. The total time of the run
 is $10000 \times 0.01 = 100$ in reduced units or $2.17 \times 10^{-10}s$ for
 argon. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\section{Advanced AWT Features}
+\label{sec:AWTAdvanced}
+As a short inlet, we want to discuss some advanced features of the Java
+AWT package, so that you are able to understand all the code
+of the upcoming simulations.
+
+\subsection{Mouse Cursor}
+If you want to use different cursors for the mouse, you have to take
+a look at the java.awt.Cursor class. You can define a cursor for every
+component displayed on the screen. So if you have a canvas and want to 
+notify the user that there is a calculation going on in this canvas,
+you just employ the commands:
+\begin{verbatim}
+Canvas canv;
+canv.setCursor(Cursor.WAIT_CURSOR); // calculation starts
+.....
+canv.setCursor(Cursor.DEFAULT_CURSOR); // calculation is finished
+\end{verbatim}
+
+\subsection{ScrollPanes}
+To use a ScrollPane you just instantiate one, use a Panel inside the
+ScrollPane if you want to put many components in it and at last
+add the ScrollPane to a Container (like a Frame). 
+\lstinputlisting{Listings_Java/ScrollPaneDemo.java} 
+
+\subsection{Properties and Resources}
+Properties are like Xdefaults in a UNIX environment and deliver
+information about the run-time environment. By reading the property list
+a program can set defaults, choose colors and fonts and more. In Java 1.1
+there are 21 system properties defined. Only 9 of them can be accessed
+by applets, but an application has access to all of them.
+
+So for example, you can get the file seperator to distinguish between
+the \verb|/| on UNIX systems and the \verb|\| on Windows systems. You
+could just use (both as application or applet accesible):
+\begin{lstlisting}{}
+  String s = System.getProperty (file.separator);
+  System.out.println(s);
+\end{lstlisting}
+Some important properties are listed in table \ref{tab:Properties}.
+The properties are usually defined in a file somewhere in the java
+installation. You can also define your own properties and use them
+for example to read parameters from local files in a browser. This is
+the only way to do this, because of security reasons.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{l|c|c|c}
+      Name & Description & Sample Values & Access in Applet \\
+      \verb|file.separator| & File separator & \verb|/| or \verb|\| & YES \\
+      \verb|java.vendor| & JVM vendor & \verb|Netscape Communications| & YES \\
+      \verb|line.separator| & Line separator & \verb|\n| & YES \\
+      \verb|os.arch| & Operating system architecture & \verb|x86| or \verb|80486| & YES \\
+      \verb|os.name| & Operating system name & \verb|Linux| or \verb|Windows NT| & YES \\
+      \verb|path.separator| & Path separator & \verb|:| or \verb|;| & YES \\
+      \verb|user.home| & User´s home directory & \verb|/home/john| & NO \\
+      \verb|user.name| & User´s login name & \verb|john| & NO \\
+   \end{tabular}
+    \caption{A list of important properties to be read out by a Java program.}
+    \label{tab:Properties}
+  \end{center}
+\end{table}
+
+Another interesting topic are the resource bundles. With this you can
+supply a file containing language depenedent information to your
+Java program. This is similar to using your own properties (called
+server properties). The package responsible for the functionality is
+the \verb|java.util.Properties| package. For a complete description look
+at the API documentation or take a look at \cite[]{JavaAWTReference}. 
+
+
+\subsection{Events}
+
+
+\subsection{A Complete GUI for the Molecular Dynamics Program}
+putting it all together !
+
+\subsection{Features not discussed in this book}
+Not mentioned: Cut and Paste (Clipboard), Images, Sound 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \section{A molecular dynamics program}
 Hier soll das Programm MolDyn eingefuehrt und erlaeutert werden.
 Typisches Bild zeigen. Ablaufdiagramm. Javac mit option fuer grosse jobs!
@@ -666,6 +747,7 @@ Nur Listing mit dem code; kein GUI!!!
 GUI als Appendix !!!
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Analysis of the Results}
 We already mentioned that the aim of a Molecular Dynamics simulation is to
 investigate macroscopic properties of a fluid starting from the microscopic
@@ -1409,3 +1491,8 @@ Appendix: The GUI!!!
 
 
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "V_98"
+%%% End: 

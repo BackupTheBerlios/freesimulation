@@ -8,6 +8,7 @@ Install Toolkit
 
 
 \chapter{Short Introduction to Programming in Java}
+\label{chap:IntroJava}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Programming in Java}
@@ -188,6 +189,8 @@ Every object has a class that defines its data and the methods that operate
 on these data. Classes are hierarchically arranged. A subclass inherits the 
 behaviour of its superclass. A class is the basic unit of compilation
 and of the execution in Java. All Java programs are classes.
+Of course you do not have to use the object oriented programming style,
+you can still stick to the procedural style in Java too.
 
 Java is a distributed language, which simply means that it provides a lot of 
 tools for networking. Java is the programming language of the Internet.
@@ -211,6 +214,9 @@ same regardless of the platform on which the Java compiler runs. Furthermore,
 there are no ``implementation defined'' behaviours in Java. For example, Java
 specifies the size of each primitive data type. The integer 
 types byte, short, int, long are 8, 16, 32 or 64--bit long, respectively.
+This also avoids the use of any preprocessor available to all other
+languages, most notably used exessivly in C and C++ to catch all
+platform relevant parameters.
 
 Java is a high--performance language. 
 Usually implementations of Java are used running 
@@ -286,7 +292,8 @@ the RMI protocol supplied by Java.
 
 
 
-\subsection{Java tools necessary or useful for writing Java programs}
+\subsection{Java tools for writing Java programs}
+
 \begin{description}
 \item[] \textbf{Programs:} 
 \begin{description}
@@ -394,6 +401,8 @@ is the same across all platforms. So if you are using the new Java 2 standard
 still use the AWT components (like we do here in this book), you should
 keep in mind that the look (not the functionality) 
 of the program can be different on different platforms. 
+A big advantage of the Swing components is that they do not use any
+native code for the platform, which the AWT components did.
 
 The main reason for the wide availability of Java
 is that SUN Microsystems distributes the Java Development Kit (JDK)
@@ -495,9 +504,11 @@ value. The main method is executed when you run the class as an
 application. In the present case the only parameter, the argument
 of the main method, is an array of String object.
 
-In the third line the method \verb|println| of the system class out
+In the third line the method \verb|println()| of the system class out
 is invoked. This method simply prints a string and terminates with a 
-new--line  command.
+new--line command. Alternatively you could use the 
+\verb|System.out.print()| method, which does the same, but does
+not print a newline at the end. 
 
 You have just written and executed your first application in
 Java. Please, do not worry if you do not understand everything. You are
@@ -505,8 +516,8 @@ not expected to understand everything at this stage.
 
 If you are using Emacs/XEamcs and JDE you could have started Emacs and
 then just use the ``JDE New'' method in the ``Files'' menu. Then you
-just have to type the \verb|System.out.println()| code. To compile
-just use the ``compile'' command in the ``JDE'' menu and similar
+have to type the \verb|System.out.println()| code. To compile
+use the ``compile'' command in the ``JDE'' menu and similar
 the ``run'' command in the same menu. This saves you a lot of keystrokes. 
 
 \subsubsection{Applet}
@@ -607,6 +618,28 @@ package structure (not used here). The most important file is the
 AllNames.html, which is an index of all written programs in this package
 (for an introduction to packages see later).
 
+You can even include special predefined strings to supply the
+author and many more informations to the javadoc command, either
+for a class or a method, whereas the documentations for the method
+can also be supplied for a class:
+\begin{lstlisting}{}
+  /**
+      @author Peter Biechele
+      @version 1.0
+  */
+  .. class ... { }
+
+  /** 
+      @see <a class name>
+      @see <class name>#<method name>
+
+      @param  a b c
+      @return d
+      @exception  none
+  */
+  .. method ... { }
+\end{lstlisting}
+
 This of course gives us the opportunity to write our 
 explanations/documentation
 betweeen the \verb|/** .... */| commands using HTML constructs like
@@ -641,6 +674,7 @@ are available in the Java documentation of the
 JDK and just has to be copied into a subdirectory  
 of the HTML directoryc called \verb|images| . 
 Then it looks like the figure on the left.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Variables}
@@ -685,14 +719,16 @@ char  & Unicode character & $\backslash$u0000 & 16 bits & $\backslash$u0000 \\
 \end{table}
 
 
-The following comments have to be done. In a Java program every
+The following comments have to be made. In a Java program every
 variable must have a type that precedes its name when the variable is
 declared. For example the integer i may be declared as
-
 \begin{verbatim}
 int i;
 \end{verbatim}
-
+and integer/long values can be expressed as
+\begin{verbatim}
+int i = 123;    long l = 1234567889L;   long l2 = 123456789l;
+\end{verbatim}
 
 Char values represent characters. They appear in Java between single
 quotes, e.g.
@@ -718,7 +754,8 @@ and are considered to be constants of type \verb|double|
 unless they are specified with \verb|f| or \verb|F|, which makes them
 then \verb|float| constants.
 
-In Java strings are not a primitive type. Java provides a String
+In Java strings are not of primitive type and they are not an
+array of chars like in C. Java provides a String
 class to deal with sequences of character data. The java string
 class provides methods to operate on String objects.
 
@@ -755,38 +792,60 @@ Just write the primitive type in round brackets in front of the value to
 be converted, e.g. \verb|result=(double)a*b| casts \verb|a| to 
 a double value and
 then multiplies it with \verb|b|, assigning the result to \verb|result|.
+You can also use the wrapper classes to be discussed below, but
+it is much more complex and should be avoided.
 
 A common problem is to convert from strings to primitive types and
 vice versa. Because strings are objects and not primitive types, we
 need a method for the conversion. For that reason Java has so called
-wrapper classes in \verb|Java.lang| for all the primitive types. 
+wrapper classes, subclasses of the \verb|Java.lang.Number| class 
+for all primitive datatypes. 
 These classes provide all the necessary methods for all types of
-conversion. The \verb|valueOf()| method always converts a string
+conversion. 
+
+The static \verb|.valueOf(String s)| method always converts a string
 to the corresponding wrapper class of a primitive type, e.g. 
-\begin{verbatim}
+\begin{lstlisting}{}
         double a;
-        String text;
-        a=(text.valueOf()).doubleValue();
-\end{verbatim}
-The third line converts the string to the \verb|Double| class and then
+        String text="+1.234";
+
+        Double D = Double.valueOf(text);
+        a = D.doubleValue();
+
+        a=Double.valueOf(text).doubleValue();
+\end{lstlisting}
+The fourth line converts the string to the \verb|Double| class and in the
+fifth line 
 the \verb|doubleValue()| method converts the Double wrapper class 
-to a double primitive type.
+to a double primitive type. The last line shows how to do it in
+one line.
 For the other types you just have to substitute float or int 
-for double, i.e., \verb|floatValue()|, \verb|intValue()|.
+for double, i.e., \verb|floatValue()|, \verb|intValue()| and the
+corresponding wrapper class (\verb|Integer| for \verb|Double|, etc.).
  
-Another method, later used in the \verb|ParamApplet.java| program is, e.g.,
-the \verb|Integer.parseInt()| method, which gives back a primitive
-type integer instead of the wrapper class like \verb|valueOf()|.
-For other conversions you can use the \verb|Long.parseLong()| or the
-\verb|Long.parseByte()| method.
+Another (easier) method, 
+later used in the \verb|ParamApplet.java| program is, e.g.,
+the \verb|Integer.parseInt(String s)| method, which gives back a primitive
+type integer instead of the wrapper class like \verb|valueOf(String s)|.
+For other conversions you can use the \verb|Long.parseLong(String s)| or the
+\verb|Long.parseByte(String s)| method.
+
 These methods  simplify the conversion a little bit. For the example, see
 \verb|ParamApplet.java| in line 11. But this method is only 
 available to Integer, Long and Byte wrapper classes, NOT for
-Float and Double. In this case you have to use the \verb|valueOf()| and
-\verb|doubleValue()|, \verb|floatValue()| methods.
+Float and Double as of Java 1.1. Fortunately they are included in the
+Java 2 specification.
+In the Java 1.1 case you have to use the \verb|valueOf(String s)| and
+\verb|doubleValue(String s)|, \verb|floatValue(String s)| methods.
 
-To convert a double value to a string you have to use the \verb|toString()|
-method, which is available for all primitive data types. 
+To convert a double value to a string you have to use the \verb|toString(dobule d)|
+method, which is available for all primitive data types.
+For example, two ways of doing it are:
+\begin{lstlisting}{}
+  double d = 3.1234;
+  String s1 = Double.toString(d);    <------ most easy way
+  String s2 = (new Double(d)).toString();
+\end{lstlisting} 
 
 
 
@@ -794,12 +853,12 @@ method, which is available for all primitive data types.
 \subsection{Packages and import statements}
 \subsubsection{Packages}
 Because Java was designed to be able to load code distributed
-over the whole internet, you have to avoid name conflicts
+over the whole internet dynamically, you have to avoid name conflicts
 between the programs (classes). The Java solution 
 for an Internet--wide unique naming scheme is to put
 every class in a \emph{package}. A package  is a group of related
 and possibly cooperating classes. The naming scheme is based on the
-internet domain name of the orgaization at which the package is developed.
+internet domain name of the organization at which the package is developed.
 
 The name of the package is given
 at the beginning of a file before the actual program (class)
@@ -840,7 +899,8 @@ package. This means you can put your programs in the current directory.
 This is not recommended for medium to complex programs, but for
 test purposes and very small programs this is very convenient.
 
-If you have written a lot of small classes, which all work together, you
+If you have written a lot of small classes, which all work together
+(called a project), you
 can put them all inside a ``jar'' file and give the jar file
 to friends instead of the whole bunch of small class files.
 A jar file is just an archive created by the \verb|jar| program 
@@ -885,6 +945,27 @@ we did not have to use an import statement in the ``Hello World''
 application.  
 
 
+\subsection{Compiling Projects}
+If you write a program consisting of many classes and files, you
+may think that this is a lot of work to compile all of them. Or if
+you are used to writing code in other languages, you might think
+of using tools for checking if a program has to be recompiled, if you make
+changes to some files. One of these tools might be the famous ``make''
+utility. But fortunately this is not needed for JKava, because
+the JDK developers (or to be precise the Java standard) already
+takes care of these problems. 
+
+You have to arrange your code in the different classes according to 
+certain rules (packages). So the directory structure is already a
+nice tree structure of your project. If you then want to compile
+the whole project, but only the files which have changed\footnote{Notice
+that there is no dependance of classes on others classes in the
+sense of recompilation. Java does dynamical run-time linking and no static 
+linking at the end of the compilation process as in all other languages.}
+should be recopmpiled, you issue the
+command \verb|javac -depend -d base_directory main.java|. Then
+the Java compiler takes care of all ``dependencies''.   
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Simple arithmetics, Conditional Statements and Loops}
 \label{sec:Loops}
@@ -920,6 +1001,8 @@ This does not make a difference, if you just have these statements
 alone, but in some complex expressions this might make a difference.
 The postfix (prefix) version of the operator ++ evaluates  the value
 of the operand before (after) the increment operation.
+For example \verb|i = j++| means setting i to j and then increment j by one.
+But \verb|i = ++j| means setting i to j+1.
 
 There is no operator for calculating powers, instead you have to use
 (like in C) the \verb|Math.pow()| method of the \verb|Math| class.
@@ -1178,8 +1261,15 @@ have to use
 return;
 \end{verbatim}
 if the method has a return type, the \verb|return| must include an
-expression for a returned type.
+expression for a returned type. You can use as many return statements 
+as you like, but only one is executed each time the method gets called.
 
+\paragraph{recursive programming}
+As in most other languages, recursive programming is allowed, although
+it should be avoided. First because of the clarity of the code
+and second it has low performance and larger memory consumption. 
+Therefore we do not see any reason to show an example, just
+avoid using recursive algorithms.
 
 
 An dieser stelle sollten einige beispiele kommen!!!!!
@@ -1292,7 +1382,20 @@ The destruction is easy to explain: it is done automatically
 by the garbage collector (like for all objects). This is different to
 other languages like C, C++ and Fortran 90, where you explicitly
 have to destroy (free) the allocated memory. 
-
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      C & C++ & Java \\\hline
+      malloc & new & new \\
+      free & dispose & -- \\
+      \multicolumn{2}{c}{Pointer} & References + Garbage Collector \\
+      \multicolumn{2}{c}{Pointer arithmetic possible}& there is no 
+                                                    reference arithmetic \\
+    \end{tabular}
+    \caption{A comparison of the different memory allocation commands in different languages.}
+    \label{tab:MemoryAllocation}
+  \end{center}
+\end{table}
 To create an array you have to use the \verb|new| keyword used for
 creating (instantiating) objects. So to create a one dimensional
 array, called \verb|intarray|, with 10 elements you use:
@@ -1367,12 +1470,13 @@ and afterwards calculate the mean.
 The last important point to address is the copying of arrays. 
 You can not just write
 \begin{verbatim}
-        int[] array1 = new int[] {1,2,3,4,5};
-        int[] array2 = new int[10];
+        int[] array1 = {1,2,3,4,5};
+        int[] array2;
         array2 = array1;                // WRONG ! - ERROR ! 
 \end{verbatim}
 This would only copy the reference of the array1 object to the array2
-object, not the values. To copy arrays you have to use the 
+object, not the values, the memory address is the same. 
+To copy the values of arrays you have to use the 
 \verb|arraycopy()| method of the java.lang.System class. 
 So to copy an array in the above example, you have to write:
 \begin{verbatim}
@@ -1555,13 +1659,17 @@ The first line only declares a string object called text and does not
 allocate (instantiate) the memory for the value of the object, just
 the reference to the value.
 
-An interface is a just a class, which does not implement all the
-methods defined in the class. Therefore you can just define methods
-which should be implemented (maybe system dependent) somewhere else.
+An interface is a just a(n abstract) class, which does not implement all the
+methods defined in the class. All methods are automatically of public.
+Therefore you can just define methods
+which should be implemented (maybe system dependent, e.g. if you use
+the native modifier) somewhere else.
 Most of the GUI classes of the AWT introduced later on are
 actually interfaces and not classes.
 
-Abstract classes are also special classes, which can not be instantiated,
+Abstract classes/methods 
+are also special classes, which can not be instantiated
+and contain no code for the methods,
 but they are not relevant for us, so we skip the explanation.
 
 As an example for the most important issues about objects, we want to
@@ -1579,7 +1687,7 @@ to explain basic concepts while discussing this example.
 
 \inputlisting{Listings_Java/Needle.java}
 
-\subsubsection{Class variables}
+\subsubsection{Class variables and Modifiers}
 The needle class has four fields which correspond to the four
 coordinates which specify the position of the needle. 
 The term fields is used in Java as a synonym for variables.
@@ -1603,8 +1711,8 @@ In Table \ref{tab:modifiers} we give an overview of some available modifiers.
     \leavevmode
     \begin{tabular}{l|p{8cm}}
      Modifiers &                                 \\ \hline \hline
-     final & variables may not be changed, classes may not be 
-                                   subclassed\\\hline
+     final & variables may not be changed, methods can not be overwritten,
+             classes may not be subclassed\\\hline
      public & accessible from anywhere\\ \hline
      static & defines a top-level class, a class variable (field) or 
                  a class method\\\hline
@@ -1789,7 +1897,7 @@ the methods of the Applet class as necessary.
 
 \subsubsection{Overview of all packages in Java 1.1}
 
-Here we list all the standard packages included in the Java 1.1
+Here we list all the standard packages (APIs) included in the Java 1.1
 language standard. The important packages (for our purposes)
 are written in small caps.
 \begin{description}
@@ -1858,94 +1966,193 @@ class (see line 7).
 
 A last remark concerns the escape codes used in line 15 and line 25.
 The first one, $/$'' displays a quotation mark and the second
-one,$/$n, 
-is just a 
-newline character. These are analogous to the C escape codes.
+one a newline.
+To include arbitrary formatting (escape) characters
+to the string supplied to the print() and println() methods, you
+can use similar to C the \verb|\n|, \verb|\t| or \verb|\\| codes
+to get a newline, a tab or a backslash in the output. You should 
+also note that, if you use e.g. \verb|System.out.println(5+7)| you
+get \verb|12| as output, so if you want to see \verb|5 7| you have
+to use \verb|System.out.print(5+" "+7)|.
 
 Although this looks very complicated, if you don't want to go into
 details, just copy this part to your own program and your are done.
 But after you got used to object oriented programming you won't have
 any problems understanding the code above anymore.
 
+\subsubsection{Easy Input and Lava Rocks Printf()}
+Another easy solution is to use the \verb|EasyIn| and the
+\verb|Printf()| methods, supplied by our \verb|simulation| class
+and the ''Lava Rocks''\footnote{This is a freely available package,
+containing some easy to use methods, mostly for C programmers
+who switched to Java. For details see \ref{sec:LavaRocks}.} package.
 
-\subsection{Standard Mathematical Functions and Mathematical Libraries}
-\label{sec:Standard_Math}
-
-The standard mathematical functions of Java are declared in the 
-Java.lang.Math class, which consists of static constants and methods
-for common mathematical manipulations. It contains sine, cosine, logarithm, exponential,
-square root and much more. Do not confuse this class with the
-java.Math class, which was introduced to Java 1.1 for arbitrary
-precision arithmetic -- we are not discussing this.
-
-Some useful constant in the \verb|Math| class  are \verb|Math.Pi|
-($\pi$) and \verb|Math.E| ($e$).
-
-
-
-In the following table we have summarized some of the most useful the 
-\verb|Math|. Note, that all angles are in radins and allparameters and
-return values are double (unless otherwise stated). 
-Here is a table of the methods:
-\begin{table}[htbp]
-\caption{Some useful mathenatical fuinctions defined in the
-  java.lang.Math class.}
-  \begin{center}
-    \leavevmode
-    \begin{tabular}{ll}
-      abs() & absolute value \\
-      acos()/asin()/atan() & arcus cosine/sine/tangent \\
-      atan2(x,y) & arctangent (x/y)  \\
-      sin()/cos()/tan() & sine/cosine/tangent\\
-      exp() / log() & exponential and natural logarithm \\
-      ceil(x) & smallest whole number $\ge x$ \\
-      floor(x) & largest whole number $\le x$ \\
-      rint() & x rounded to the nearest integer; \\
-             &  if neither integer is
-                        nearer, rounds to the even one. \\
-      round() & (int) floor (x+0.5) for float x \\
-       ~       & (long) floor(x+0.5) for double x \\
-      pow(x,y ) & $y^x$\\
-      min(x,y)/max(x,y)  & minimum (maximum)  of x and y for any numeric type  \\
-      sqrt() & square root of a double \\
-      random() & random numbers (use java.util.Random class)\\
-      IEEEremainder() & special remainder function \\
-    \end{tabular}
-    \caption{Overview of the mathematical methods available in Java 1.1 in the java.lang.Math class.}
-    \label{tab:math_table}
-  \end{center}
-\end{table}
-
-These are all class methods, so they can be called from anywhere.
-Here are some examples:
+\paragraph{Easy Input}
+You can easily use these methods to get input from keyboard
+for different primitive data types. For example to input
+a primitive data types, you just use
 \begin{verbatim}
- a=Math.exp(2.1);        // e to the 2.1
- distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));  // Euclidean distance
-\end{verbatim} 
-By the way, there is no easy import statement to avoid the Math in front
-of the methods, you always should use it, although it seems 
-tedious.
+import simulation.*;
+.....
+   double  d = EasyIn.readDouble();    // reads an double from System.in
+   int     i = EasyIn.readInt();       // reads an int from System.in
+   float   f = EasyIn.readFloat();     // reads a float from System.in
+   boolean b = EasyIn.readBoolean();   // reads a boolean from System.in
+.....
+\end{verbatim}
 
-Here is a test program for the three rounding methods available:
-\inputlisting{Listings_Java/Test_Roundings.java}
-And the output is:
-\input{Listings_Java/Test_Roundings.output}
+\paragraph{Lava Rocks -- Printf()}
+To use the Lava Rocks package you could write a code like
+\begin{verbatim}
+import lava.clib.*;
+.....
+   int i=100;
+   float f=165.234f;
+   Stdio.printf( "%8d and %8.1f : test text\n", new Object [] { 
+                                    new Integer(i), new Float (f) } );
+.....                 
+\end{verbatim}
+Remember that you need the \verb|lava.jar| file in the classpath.
+The output will look like
+\begin{verbatim}
+     100 and    165.2 : test text
+\end{verbatim}
 
-For most of our simulations, we will need routines (methods) to
-calculate the mean, variance or other statistical measures of
-a times series for example. Unfortunately
-these (easy and) important methods are not part of the
-standard Java language. But Visual Numerics, a software company,
-has proposed a standard class for statistical functions, which are
-essential for all statistical problems. They also supplied a new class
-for complex numbers. This library is called the Java Numerical Library
-(JNL) and is free. It is also proposed to become standard in the
-next Java language specification.
+There are three additional things to mention: 
 
-There are also other classes, which extend the standard Java language
-for matrix computations (BLAS) and much more (e.g. the JNT). If we need
-them in the course of the book, we will introduce you to them there.
+If you use the
+same format string (the first argument to the printf method) 
+very often, you can speed things up by saving the format string
+and only use the variable every time, like:
+\begin{verbatim}
+   PrintfFormatString fmt = new PrintfFormatString ("%8d and %8.1f : test text\n");
+\end{verbatim}
+Now you can use \verb|fmt| instead of the string in all printf commands
+and it will be much faster.
 
+There is also an ''easier'' way of using printf without creating
+an object array, which is much more inefficient and should be avoided.
+
+And there is a platform neutral code for newlines: Use \verb|%\n| instead
+of \verb|\n| in the format strings and you always get a newline,
+no matter which platform you run the program.
+
+There is another free implmentation of the printf command for
+Java called \verb|Format.java| of the \verb|corejava| package.
+But it has much less functionality and so we decided to use
+the Lava Rocks implementation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Passing Arguments to Methods}
+We want to review all the aspects concerning the passing of
+arguments to methods or -- for former FORTRAN programmers --
+passing arguments to subroutines/functions.
+
+\paragraph{Global Variables}
+First of all there is of course always the possibility to 
+pass variables as global variables. This is easy to use,
+but it makes it difficult to follow a program structure.
+So it is preferred to use arguments to methods in an
+argument list.
+
+\paragraph{Primitive Data Types}
+The important point to note here is that Java always
+passes primitive data types by value and all the other
+arguments by reference (reference data types). 
+This means that all primitive
+variables of the argument list can be changed within
+the method and the dummy variables used in the method 
+can be viewed as local variabels.
+
+\paragraph{Reference Data Types}
+But the reference data types (e.g. arrays, objects, etc.)
+are passed by reference and therefore only the memory
+address is passed to the method. That is again the reason that
+by using the standard assignment or comparison operators,
+you do not compare the values of the reference data type, but
+the memory addresses where the data is stored. Therefore there
+is the \verb|equals()| operator used for comparing reference data
+types. By the way there is no method
+of getting the actual memory address for a reference data type,
+which would be a severe security problem.
+
+If you pass a reference data type to a method it should be
+clear, that every change of the dummy variable used for
+the reference data type used in the method, will result in a change
+of the passed reference variable. So for example for arrays:
+\begin{lstlisting}{}
+  .....
+  public void main (String[] args) {
+    ...
+    int[] array = {1,2,3,4,5};
+    test(array);
+    ...
+  }
+  public void test(int[] dummyarray) {
+    int length=dummyarray.length;
+    for (int j=0; j<length; j++) {
+      array[j]=0;
+    }
+  }
+  .....
+\end{lstlisting}
+In this example we pass an array of integers, where the values are all 
+not zero. In the subroutine we change the values of the dummyarray.
+But we passed only the memeory location, so the change is actually
+a change in the \verb|array| array. If you print the result after
+the call to the method, all elements are zero!
+
+If you now think about changing a primitive data type inside a method 
+passed it, there is no simple way of using reference types for 
+them. 
+
+\paragraph{Instance Variables}
+A nice and clear way of passing arguments between methods, is
+using instance variables. The problem here is that you have
+to create a new class and define instance variables for it.
+Then you can instantiate an object of this new class and
+change the values of the instance variables from the main
+program or the methods therein. But still you have the problem
+of passing the instance to the methods.
+
+\paragraph{Methods (Functions) as Arguments} 
+Especially for scientists it is of great importance to know how
+to pass a function (method) to another method.
+
+The first solution would be to write a method as a class method,
+therefore accessible from every instance of the class and
+so you do not need to pass the method as an argument at all.
+
+The second solution is much more versatile and general.
+But as always you have to do more work. You need an interface,
+which defines the function you would like to pass to a method
+(Declaration). Then you need a class, which implements this
+interface, therefore representing the real function (Implementation).
+And at last you write your program/class, which instantiates
+the former class and now you can pass the function by reference
+to all methods you like (Usage).  
+
+Here a short example:
+\begin{description}
+\item[Declaration]
+\begin{verbatim}
+  interface function {
+    double f (double x); 
+  }
+\end{verbatim}
+\item[Implementation]
+\begin{verbatim}
+  class SquareFunc implements function {
+    public double f (double x) {
+       return (x*x) ;    //  <----- here is the actual function
+    }
+  }
+\end{verbatim}
+\item[Usage]
+\lstinputlisting{Listings_Java/TestPassingFunctions.java}
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Name conventions in Java}
 In order to make the Java codes more readable it is customary to stick
 to the followinh nam conventions.
@@ -2014,6 +2221,208 @@ The general structure of a Java program is:
 \item Classes
 \item Interfaces
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Higher Mathematics in Java}
+
+\subsection{Standard Mathematical Functions in Java}
+\label{sec:Standard_Math}
+
+The standard mathematical functions of Java are declared in the 
+Java.lang.Math class, which consists of static constants and methods
+for common mathematical manipulations. 
+It contains sine, cosine, logarithm, exponential,
+square root and much more. Do not confuse this class with the
+java.Math class, which was introduced to Java 1.1 for arbitrary
+precision arithmetic -- we are not discussing this, read the
+API documentation for details.
+
+Some useful constant in the \verb|Math| class  are \verb|Math.Pi|
+($\pi$) and \verb|Math.E| ($e$).
+
+
+
+In the following table we have summarized some of the most useful the 
+\verb|Math|. Note, that all angles are in radins and allparameters and
+return values are double (unless otherwise stated). 
+Here is a table of the methods:
+\begin{table}[htbp]
+\caption{Some useful mathenatical fuinctions defined in the
+  java.lang.Math class.}
+  \begin{center}
+    \leavevmode
+    \begin{tabular}{ll}
+      abs() & absolute value \\
+      acos()/asin()/atan() & arcus cosine/sine/tangent \\
+      atan2(x,y) & arctangent (x/y)  \\
+      sin()/cos()/tan() & sine/cosine/tangent\\
+      exp() / log() & exponential and natural logarithm \\
+      ceil(x) & smallest whole number $\ge x$ \\
+      floor(x) & largest whole number $\le x$ \\
+      rint() & x rounded to the nearest integer; \\
+             &  if neither integer is
+                        nearer, rounds to the even one. \\
+      round() & (int) floor (x+0.5) for float x \\
+       ~       & (long) floor(x+0.5) for double x \\
+      pow(x,y ) & $y^x$\\
+      min(x,y)/max(x,y)  & minimum (maximum)  of x and y for any numeric type  \\
+      sqrt() & square root of a double \\
+      random() & random numbers (use java.util.Random class)\\
+      IEEEremainder() & special remainder function \\
+    \end{tabular}
+    \caption{Overview of the mathematical methods available in Java 1.1 in the java.lang.Math class.}
+    \label{tab:math_table}
+  \end{center}
+\end{table}
+
+These are all class methods, so they can be called from anywhere.
+Here are some examples:
+\begin{verbatim}
+ a=Math.exp(2.1);        // e to the 2.1
+ distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));  // Euclidean distance
+\end{verbatim} 
+By the way, there is no easy import statement to avoid the Math in front
+of the methods, you always should use it, although it seems 
+tedious.
+
+Here is a test program for the three rounding methods available:
+\inputlisting{Listings_Java/Test_Roundings.java}
+And the output is:
+\input{Listings_Java/Test_Roundings.output}
+
+For most of our simulations, we will need routines (methods) to
+calculate the mean, variance or other statistical measures of
+a times series for example. Unfortunately
+these (easy and) important methods are not part of the
+standard Java language. But Visual Numerics, a well known software company,
+has proposed a standard class for statistical functions, which are
+essential for all statistical problems. They also supplied a new class
+for complex numbers. This library is called the Java Numerical Library
+(JNL) and is free. It is also proposed to become standard in the
+next Java language specification.
+
+There are also other classes, which extend the standard Java language
+for matrix computations (BLAS) and much more (e.g. the JNT). Some of 
+them will be discussed in greater detail now.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Numerical Libraries - The JNL}
+The JNL (Java Numerical Library) was designed and implemented by 
+Visual Numerics. It is a free library to supply additional 
+mathematical functions, complex numbers, statistical operations 
+and some basic vector and matrix operations for scientists (no
+sparse matrix support), which
+are missing in the Java standard. They have proposed it as a
+standard for the next version of Java.
+
+The algorithms used are taken from the LinPack library, which
+are a collection of programs for linear algebra in C and Fortran.
+A short list of some of the functions included in the JNL is
+given in table \ref{tab:JNL}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{c||l|l}
+      Class  & example methods & purpose \\\hline\hline
+      SFun &  & Special Functions \\
+           & \verb|public static double sinh(double x)| & hyperbolic sine function \\
+           & \verb|public static double gamma(double x)| & the gamma function \\
+           & \verb|public static double erf(double x)| & the error function \\\hline
+      Statistics &  & Statistical functions \\
+           & \verb|public static double average(double[] x)| & the sample mean\\
+           & \verb|public static double normalCDF(double x)| & 
+                             cummulative normal distribution function\\
+           & \verb|public static double[] linearFit(double[] x, double[] y)| &
+                             linear least square estimator \\\hline
+      Complex &  & for handling complex numbers \\\hline
+      DoubleVector &  & using vector operations on arrays of type double\\
+      ComplexVector & & the same for complex vectors \\\hline 
+      DoubleMatrix &  & using matrix operations on 2D arrays of type double\\
+      ComplexMatrix & & the same for complex matrices \\\hline 
+    \end{tabular}
+    \caption{A (very) short list of JNL classes supplied with JNL 1.0 revision f for the new JDK 1.2. There are two 1.0f versions around, one which works with both Java 1.1 and Java 2 and one which has some trouble with Java 2.}
+    \label{tab:JNL}
+  \end{center}
+\end{table}
+Eight more classes (four for double and four for complex) for
+matrices are provided, which performa matrix decompositions,
+like Cholesky, LU, QR and SVD decompositions. They can be
+used for an efficient solution to linear systems of equations.
+ 
+For a complete list of supplied functions, please consult the online 
+documentation coming with the JNL package.
+
+\paragraph{Complex numbers}
+This part of the JNL deserves a seperate discussion. We will not need
+complex numbers in most parts of the book, but for example when
+we discuss quantum mechanical problems, we have to come back to
+treating complex numbers in Java.
+
+Because complex numbers are not a primitive data type in Java (yet),
+and there is no operator overloading like in C++ for example, we
+can not write \verb|a+b|, if a and b are complex numbers. We have
+create a new object called Complex and define methods to work with
+these objects. This is exactly the solution followed by the JNL,
+so we do not need to do it again.
+
+To instantiate complex numbers issue 
+\begin{verbatim}
+import VisualNumerics.math.*;
+  ......
+  Complex c1 = new Complex(1,2); // means c1 = 1+2i  
+  Complex c2 = new Complex(2);   // means c2 = 2  
+  System.out.println(c1);  // gives   1+2i  on screen
+  ......
+\end{verbatim}
+By the way you can change the output character for the complex
+unit \verb|i| by using \verb|Complex.suffix="j";| for example.
+
+To add two complex numbers use one of the two possible methods:
+\begin{verbatim}
+   Complex cresult1 = Complex.add(c1,c2);
+   Complex cresult2 = c1.add(c2);
+\end{verbatim}
+The first version is the static method and the second one is
+the instance method of the class Complex. There are analogous
+static methods for \verb|Complex.subtract(c1,c2)|, \verb|Complex.divide(c1,c2)|
+and \verb|Complex.multiply(c1,c2)| and of course the same with
+instance methods.
+
+You can extract real and imaginary part from a complex number
+easily by using
+\begin{verbatim}
+  System.out.println(" Real part: "+c1.re);
+  System.out.println(" Imaginary part: "+c1.im);
+\end{verbatim}
+
+An overview of the most important methods is given in table 
+\ref{tab:JNLComplex}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{l|l}
+      \verb|Complex.abs(z)| & absolute value \\
+      \verb|Complex.argument(z)| & the argument of the complex number z \\
+      \verb|Complex.conjugate(z)| & conjugate of z  \\
+      \verb|Complex.sqrt(z)| & the square root of z \\
+      \verb|Complex.pow(z1,z2)| & the power of z1 to the z2\\
+      \verb|Complex.pow(z,d)| & the power of z to the (double) d\\
+      \verb|Complex.exp(z)| & the natural exponential of z \\
+      \verb|Complex.sin(z)| & the sine of z \\
+    \end{tabular}
+    \caption{An overview of the most important methods supplied by the 
+      Complex class of the JNL. z represents a complex number 
+      (\texttt{Complex z;}).}
+    \label{tab:JNLComplex}
+  \end{center}
+\end{table}
+
+
+\subsection{The JavaSci Package}
+????
+
+\subsection{Lapack for Java and the JNT - JamPack and Jama}
+????
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Applications and Applets revisited}
@@ -2106,7 +2515,7 @@ you see the short message.
 
 
 \subsection{Programs as Applets and Applications}
-To write a class tobe run as an applet and an application
+To write a class to be run as an applet and an application
 you can use figure \ref{fig:LineOfExecution} to get the correct order
 of the methods, which get called in either case. As an example, we have used
 in later chapters for the bigger programs the following philosophy
@@ -2114,6 +2523,51 @@ to have the programs runs as applet as well as a standalone application:
 \inputlisting{Listings_Java/TestAppletApplication.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Advanced Java Features}
+
+\subsection{Including Native Code (e.g. C, Fortran, etc.)}
+To include native code into a Java program, there is the so-called
+JNI (Java Native Interface). This allows for inclusion of native
+FORTRAN, C or other language codes. To refer to such a method,
+you just use
+\begin{lstlisting}{}
+...
+native FORTRANFunction();
+\end{lstlisting}
+The code for the method has to be implemented in FORTRAN or C, etc.
+
+\subsection{Vectors}
+For a scientists there is a confusing class called \verb|java.util.Vectors|, 
+which has nothing to do with mathematical vectors. This class realizes
+an array of objects, which can have a variable length. For example
+you can store names of persons in an vector and add or delete them as
+you like without taking care of the number and the access. For details
+refer to the API documentation.
+
+\subsection{Stack}
+There is also a class \verb|java.util.Stack|, which utilizes as the
+name suggests a stack. A stack is a kind of pile, where you can put
+things on it and take them away, but only the last one put in. It is
+for example used for many operating system tasks on a lower level.
+Again take a look at the API documentation for details.
+
+\subsection{Hashtable}
+Another often occuring class of the \verb|java.util| package is the
+hashtable class. It realizes a table with associations between so-called
+keys and values, which has to be a one-to-one correspondence. So for
+example you can store the name of a person and its age in a hashtable.
+
+
+\subsection{Debugging Java}
+????
+
+\subsection{??}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %% ???????????????????
 
@@ -2147,3 +2601,8 @@ Moment calulation
 \bibliography{V_98,simulit}
 
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "V_98"
+%%% End: 
