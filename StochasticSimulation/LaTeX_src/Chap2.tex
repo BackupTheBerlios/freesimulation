@@ -855,7 +855,7 @@ In figure \ref{fig:FileIOClasses} you can see the main classes of the
 package, which are all subclasses of the \verb|java.lang.object| class.
 \begin{figure}[htbp]
   \begin{center}
-%%    \includegraphics[width=\textwidth]{Figures/IOClasses.eps}
+    \includegraphics[width=\textwidth]{Figures/IOClasses.eps}
     \caption{Overview of the \texttt{io} package in Java 1.1 and 
       related classes.}
     \label{fig:FileIOClasses}
@@ -892,7 +892,8 @@ meaning to put the output of the first stream to the input of the
 second stream (see figure \ref{fig:ConnectingStreams}). 
 \begin{figure}[htbp]
   \begin{center}
-    % \includegraphics[width=\textwidth]{Figures/StreamsConnect.eps}
+    \setlength{\unitlength}{.7cm} 
+    \input{Figures/StreamsConnect.pic}
     \caption{Connecting two streams together to get advanced functionality.}
     \label{fig:ConnectingStreams}
   \end{center}
@@ -1187,15 +1188,16 @@ of handling the exception. If not, the exception is propagated
 up to the next higher (calling) code block (method, class, etc.).
 If none of the code up to the main method catches the exception,
 an error message is shown on the command line and the program stops
-with a stacktrace showing the last commands executed. This progragation
-is a great simplification, because you can catch all of ythe exceptions
-in one place and not distribvuted through the whole class hierarchy.
+with a stacktrace showing the last commands executed. This propagation
+is a great simplification, because you can catch all of the exceptions
+in one place and not distributed through the whole class hierarchy.
 
 The exception handling is located in the \verb|java.lang.Throwable| class.
 Exceptions are objects and there are two types: Errors and Exceptions.
 Errors are usually not recoverable and the program has to exit with
 an error message. From exceptions you can recover, e.g. 
-``Array out of Bounds'', or ``IO Exception'', etc.
+``Array out of Bounds'', or ``IO Exception'', etc. The exceptions,
+which are automatically caught are the \verb|RuntimeExceptions|.
 
 The way of handling exceptions is easily seen in the above examples
 about file I/O. You put the code, which can throw an exception in a
@@ -1214,36 +1216,56 @@ try {
 \end{verbatim}
 The \verb|java.lang.Throwable| keyword in the catch clause has to be
 exchanged by one of the exceptions in table \ref{tab:Exceptions}. 
-
 \begin{table}[htbp]
   \begin{center}
-    \begin{tabular}{ll}
-      Exception name & Ocurrence \\\hline
-      IOException & Some IO problem. \\
-      ArrayIndexOutOfBoundsException & array is out of bounds \\
-     ??? & ??? \\
+    \begin{tabular}{lcp{.6\textwidth}}
+      Exception name & RTE & Ocurrence/Reason \\\hline
+      IOException & N & Some IO problem (has lots of subclasses). \\
+      ArrayIndexOutOfBoundsException & Y & array is out of bounds \\
+      ArtihmeticException & Y & Integer division by zero \\
+      NullPointerException & Y & If a \verb|null| instead of an object is used\\
+      NegativeArraySizeException & Y & if you trie to create a negative sized array\\
     \end{tabular}
-    \caption{Some of the important exceptions in the \texttt{java.lang.Throwable} class. A detailed list is in the API documentation.}
+    \caption{Some of the important exceptions in the 
+      \texttt{java.lang.Throwable} class. A detailed list is in the 
+      API documentation. RTE means \texttt{RuntimeException} and therefore
+      do not have to be catched.}
     \label{tab:Exceptions}
   \end{center}
 \end{table}
+
 Instead of explicitly catching exceptions you can also just
 write \verb|throws IOException| after the class definition, before
 the actual code. Then the exceptions are handed to the next higher 
 instance and if there is no calling class anymore an error is
 displayed. With this you can propagate all your exceptions to the
-parent class of all of the classes and catch all the exceptions there.
+parent class of all of the classes and catch the exceptions there.
 
-If you ask how do you know what exceptions to catch, there are only
+If you ask how do you know what exceptions to catch (if some of the
+code is not written by you or is very complex), there are only
 two possibilities: read the whole code and look for exeptions, which
 can be thrown by it or wait for the exceptions to occur on the
-command line. 
+standard output. 
 
 You can even use your own exceptions very easily by using the keyword
 \verb|throw| and your own name of an exception. That is an easy way
 of handling exceptional conditions in your own code, like energy
-turns zero or step size/accuracy gets too large.
-
+turns zero or step size/accuracy gets too large, e.g.
+\begin{verbatim}
+  try {
+       energy = newEnergy(energy);
+       if (energy == 0 ) {
+           throw  new EnergyZeroException(); 
+       }
+  } catch (EnergyZeroException e) {
+       // do something about zero energy
+  } catch (OtherExceptions e) {
+       // maybe another exception to be caught
+  } finally {
+       // Always do something here, even if a certain exception
+       // has been thrown, but not catched yet
+  }
+\end{verbatim}
 
 
 %%%%%%%%%%%%
