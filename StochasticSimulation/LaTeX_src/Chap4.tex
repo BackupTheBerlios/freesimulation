@@ -1301,8 +1301,132 @@ where we have introduced
 \begin{equation*}
 \Delta t_i = t_{i+1} - t_i.
 \end{equation*}
-Thus, the increments $\Delta t_i$ are evidently statistical 
-independent.
+Thus, the increments $\Delta W_i$ are evidently statistically
+independent and are distributed according to
+\begin{equation*}
+P(\delta w,\Delta t) = \frac{1}{[2 \pi \Delta t)]^{-1/2}}
+\exp[-\Delta w^2/2 \Delta t].
+\end{equation*}
+
+Let us now generate numerically some realizations of the Wiener 
+process. To this end we need a way of calculating for a given 
+value of the Wiener process $W(t)$ at time $t$ the value of the
+process at time $t+\Delta t$. We will present an algorithm which
+is exact for any positive value of $\Delta t$ (\cite{GILLESPIE}).
+
+The algorithm exploits the fact that we know analytically the
+conditional transition probability density. $T(w,t|w',t')$ is a 
+Gaussian  with with mean $w'$ and variance $\sigma^2=2(t-t')$.
+Accordingly, given $W(t)$ the increment $\delta W(t)$
+\begin{equation}
+\label{ADVANCE_WIENER}
+W(t+\Delta t) = W(t) + \Delta W(t)
+\end{equation}
+is distributed according to a Gaussian with zero mean and variance
+$\sigma^2=2\Delta t$. The above formula is the update formula
+for the algorithm for the generation of realizations of the Wiener
+process. The algorithm essentially consists of the following 
+steps:
+
+(i) Let $W(t)$ be given.
+
+(ii) Draw a Gaussian distributed random number $\Delta W$
+with zero mean and variance $\sigma^2=2\Delta t$).
+
+(iii) Advance the stochastic process according to the formula
+(\ref{ADVANCE_WIENER}).
+
+(iv) Goto to (i) until the desired final time is reached.
+
+A flow diagram of the program \texttt{wiener.m} can be seen in 
+Fig. (\ref{F_WIENER_ALGORITHM}). 
+\begin{figure}
+\label{F_WIENER_ALGORITHM}
+\includegraphics[width=10cm]{./Figures/f_wiener_algorithm.eps}
+\caption{Flow diagram of the program \texttt{wiener.m}}
+\end{figure}
+\subsubsection{Listing of the function \texttt{wiener.m}}
+\inputlisting{./Listings/wiener.m}
+
+Let us run the program two times with the following parameters
+\texttt{xstart=0}, \texttt{tend=50}, \texttt{deltat=0.01}, 
+\texttt{nreal=1} in order to generate two realizations of the 
+Wiener process. The two independent realizations can be seen 
+on Figs. (\ref{F_WIENER_R1}) and (\ref{F_WIENER_R2}). The great 
+variability of the realizations is evident. 
+\begin{figure}
+\label{F_WIENER_R1}
+\includegraphics[width=10cm]{./Figures/f_wiener_r1.eps}
+\caption{One realization of the Wiener process.
+The parameters used in the simulation are \texttt{xstart=0},
+\texttt{tend=50}, \texttt{deltat=0.01}, and \texttt{nreal=1}.}
+\end{figure}
+\begin{figure}
+\label{F_WIENER_R2}
+\includegraphics[width=10cm]{./Figures/f_wiener_r2.eps}
+\caption{One realization of the Wiener process.
+The parameters used in the simulation are \texttt{xstart=0},
+\texttt{tend=50}, \texttt{deltat=0.01}, and \texttt{nreal=1}.}
+\end{figure}
+In Fig. (\ref{F_WIENER}) we show an ensemble average of the
+Wiener process over 1000 realizations.
+\begin{figure}
+\label{F_WIENER_R1}
+\includegraphics[width=10cm]{./Figures/f_wiener.eps}
+\caption{One realization of the Wiener process.
+The parameters used in the simulation are \texttt{xstart=0},
+\texttt{tend=5}, \texttt{deltat=0.01}, and \texttt{nreal=1000}.}
+\end{figure}
+
+\subsection{The Ornstein--Uhlenbeck Process}
+Up to know we have considered only Fokker--Planck equations 
+without drift. 
+As a simple example of a Fokker--Planck equation with an 
+additional linear drift we consider
+\begin{equation}
+\label{ORNSTEIN}
+\frac{\partial}{\partial t} T(x,t|x',t') = 
+\frac{\partial}{\partial x} [qx T(x,t|x',t')] 
++ \frac{1}{2} D \frac{\partial^2}{\partial x^2} T(x,t|x',t').
+\end{equation}
+The above Fokker--Planck equation defines the Ornstein--Uhlenbeck
+process. 
+
+Again, we can look at the equation of motion for the characteristic
+function of the Ornstein--Uhlenbeck process
+\begin{equation*}
+G(s,t) = \int_{-\infty}{\infty} \exp(isx) T(x,t|x',t').
+\end{equation*}
+The equation reads
+\begin{equation*}
+\frac{\partial}{\partial t}G(s,t) = -qs \frac{\partial}{\partial s} 
+G(s,t) - \frac{1}{2} Ds^2 G(s,t).
+\end{equation*}
+The above partial differential equation may be solved by the 
+method of characteristics (\cite{GARDINER}). Its solution
+for $T(x,0|x',0)=\delta(x-x')$ requires the
+initial condition 
+\begin{equation*}
+G(s,0) = \exp(ix's)
+\end{equation*}
+and reads
+\begin{equation*}
+G(s,t) = \exp\left[ -\frac{Ds^2}{4q}[1-\exp(-2qt)] + isx'\exp(-qt) 
+\right].
+\end{equation*}
+Hence, the transition probability $T(x,t|x',0)$ is a Gaussian
+with mean
+\begin{equation*}
+\langle X(t) \rangle = x'\exp(-qt)
+\end{equation*}
+and variance
+\begin{equation}
+\text{Var} \{ X(t) \} = \frac{D}{2q} [1- \exp(-2qt)].
+\end{equation}
+In contrast to the Wiener process the Ornstein--Uhlenbeck process
+has a stationary distribution in the limit $t\longrightarrow \infty$
+which is a Gaussian with zero mean and variance $D/2q$.
+
 
 \section{Stochastic differential equations}
 \subsection{The Langevin equation and Brownian motion}
