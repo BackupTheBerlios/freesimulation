@@ -601,7 +601,7 @@ The simulation was performed with the help of the program
 {\sf mciis.m} whose listing can be seen below.
 
 \subsubsection{Listing of the program mciis.m}
-%\includelistings{.\Listings\mciis.m}
+\inputlisting{./Listings/mciis.m}
 
 The importance sampling function is chosen to be $p(x)=a\exp(-x)$,
 where the constant $a$ is chosen such that $p(x)$ is normalized
@@ -626,13 +626,309 @@ time is smaller compared to the standard Monte Carlo algorithm
 because a much smaller number of realizations is required in order
 to achieve a desired accuracy (variance).
 
+\section{Sampling of polymer configurations}
+\subsection{Ideal chains}
+One of the simplest idealizations of a flexible polymer chain 
+consists in replacing it by a random walk on a lattice. The walk 
+is a succession of steps starting from one end and reaching an 
+arbitrary end point. The analogy between the random walk and the
+polymer stems from the fact that one regards the realizations of 
+the random walk as a possible configuration of the polymer chain.
+We will start by generalizing the one--dimensional random walk
+discussed in the previous chapter.
+
+For simplicity, we consider cubic lattices in $d$ dimensions,
+i.e. a square lattice for $d=2$ and a cubic lattice for $d=3$.
+The stepping probability $p$ from a given site to one of its $q=2d$
+neighbors  is assumed to equal $p=1/q$. The number $q$ is called
+the coordination number of the lattice. The length of one step
+will be $l$. The analogy between random walks and polymer chains 
+is very helpful since it allows to investigate global properties 
+of the polymer.
+
+Let us assume that the random walk begins at $\vec{R}_0$ and that 
+it ends after $N$ steps at $\vec{R}_N$. A typical global property
+of interest in polymer physics is the end--to--end vector,
+which is given by
+\begin{equation*}
+\vec{R} = \vec{R}_N -\vec{R}_0.
+\end{equation*}
+Of course, the end--to--end vector is the sum of the statistically 
+independent increment vectors
+\begin{equation*}
+\vec{r}_i = \vec{R}_i - \vec{R}_{i-1} \;\;\; {\rm for} \;\;\; 
+       i=1, \ldots, N,
+\end{equation*}
+i.e.,
+\begin{equation*}
+\vec{R} = \sum_{i=1}^N \vec{r}_i.
+\end{equation*}
+It is easy to generalize the results obtained previously for the 
+one--dimensional random walk to $d$ dimensions. It is clear, that 
+the projections of the $d$ dimensional $N$ step random walk onto 
+the Cartesian axes are again one--dimensional random walks of, on 
+average, $N/d$ steps. These walks are statistically independent, 
+so that the probability density $p(\vec{R})$ for the displacement
+of the $d$--dimensional random walk of $N$ steps is simply 
+obtained as the product of $d$ one--dimensional random walks of $N/d$
+steps each
+\begin{equation*}
+P(\vec{R},N) = P(R_1,N/d) P(R_2,N/d) \cdots P(R_d,N/d),
+\end{equation*}
+which inserting the Gaussian density for $P(R_1,N/d)$ from Chap. 2 Eq. 
+(????) is immediately found to be a $d$--dimensional Gaussian 
+probability density
+\begin{equation*}
+P(\vec{R},N) = \left(3/2 \pi Nl^2 \right)^{(3/2)} 
+              \exp\left( - \frac{3\vec{R}^2}{2Nl^2}\right).
+\end{equation*}
+Obviously, the mean of the end--to--end distance is zero. The mean
+square end--to--end distance, i.e. the variance of $\vec{R}$, 
+is (see Chap. 2) 
+\begin{equation}
+\label{RW_R2}
+\langle \vec{R}^2 \rangle = N l^2,
+\end{equation}
+which is again linear in $N$.
+
+It is also instructive to look at the fluctuations of $\vec{R}^2$,
+\begin{equation*}
+\Delta_R = \frac{\sqrt{\langle \vec{R}^4 \rangle - 
+                   \langle \vec{R}^2\rangle^2}}
+             {\langle \vec{R}^2\rangle}
+             = \sqrt{\frac{2}{3}}.
+\end{equation*}
+We immediately recognize that the variance $\Delta_R$ does not 
+decrease with increasing system size, as it is usually the case. 
+Random walks do not have the so--called self--averaging property.
+
+At this stage it might be appropriate to introduce the concept of 
+universality, which allows the classification of the critical 
+behaviour of a large variety of systems in classes with the same 
+universality. The simple properties of the random walk allow the 
+introduction of the Gaussian universality class. Denoting by
+$R = \sqrt{\langle \vec{R}^2\rangle}$ the size of the polymer, we 
+can write  Eq. (\ref{RW_R2}) in the form
+\begin{equation*}
+R = N^{\nu}l,
+\end{equation*}
+where for the simple random walk $\nu = 1/2$ and is independent of 
+the dimensionality of the lattice. As we will see soon, for other 
+random walks the critical exponent $\nu$ strongly depends on the 
+dimension of the lattice.
+
+Since we want to sample with the help of the following program
+configurations of ideal polymers it is important to consider how 
+many configurations are possible. To this end we compute the 
+number $Z_N$ of distinct random walks. Since each lattice site 
+has $q$ neighbors,
+the number of distinct possibilities at each step is $q$ and the 
+total number of configurations is
+\begin{equation}
+\label{Z_NRW}
+Z_N = q^N.
+\end{equation}
+
+In order to demonstrate the above theoretical results we want to 
+simulate now a random walk on a two dimensional lattice.
+The listing can be seen below and will be discussed soon.
+
+\subsubsection{Listing of the program random walk}
+
+Figuren: Konfigurationen !!!! \\
+
+Figuren: end-to-end !!!!\\
+
+Figuren/Tabelle: kritischer Exponent !!!! \\
+
+Diskussion \\
+
+\subsection{Real chains}
+In Fig. () we see that the realizations of the random walk, i.e. 
+the polymer chains intersect themselves. This is of course an 
+unphysical behaviour since real polymer chains do not intersect.
+In order to simulate real chains on a lattice we still can 
+represent  the polymer as a random walk, but now the walk can not 
+intersect itself. Such random walks are called self--avoiding 
+random walks (SAW). In other words the SAW has the constraint that 
+the walker cannot return to sites he already visited. As a natural 
+consequence SAWs are more extended then the usual random walks. Of 
+course, also the universal properties of the SAW are different 
+from those of the Gaussian random walk. In particular the exponent
+$\nu$ strongly depends on the dimension of the lattice. It is 
+clear that in $d=1$ a SAW is simply a rigid rod and we have 
+$\nu=1$. For increasing dimension of the lattice $\nu$ 
+decreases as the self--avoiding constraint becomes less important. 
+For large dimensions the difference between random walk and SAW 
+vanishes. In fact for the critical dimension $d_c =4$ random walk 
+and SAW have the same universal properties. In general it is not 
+possible to evaluate the critical exponent $\nu$ analytically for the 
+SAW. This is possible only for $d=1,d=2$ and $d \ge4$. However, a 
+simple mean field theory, the Flory theory, makes the following 
+predictions
+\begin{equation*}
+\nu = \left\{ \begin{array}{cl}
+               3/(2+d) & \;\;\; {\rm for} \;\;\; 1 \le d \le 4, \\
+               1/2     & \;\;\; {\rm for} \;\;\; d\ge 4.
+\end{array}
+       \right.
+\end{equation*}
+As we will see this theoretical predictions agree well with the 
+stochastic simulations (!!!!!).
+
+The total number of self--avoiding random walks of $N$  steps has 
+(for large $N$) the following asymptotic form
+\begin{equation*}
+Z_N = {\rm constant} N^{\gamma-1} q_{\rm eff}^N.
+\end{equation*}
+The second factor in the above scaling law reminds us of the expression
+(\ref{Z_NRW})  which holds for ideal random walks. The effective 
+coordination number is smaller then the coordination number $q$, 
+e.g. in 3 dimensions we have $q_{\rm eff}=4.68$. The first factor
+$N^{\gamma -1}$  is called the enhancement factor. The universal
+exponent $\gamma$ depends on the dimension of the lattice
+\begin{equation*}
+\gamma \approx \left\{ \begin{array}{cl}
+                        7/6 & {\rm for} \;\;\; d=3 \\
+                        4/3 & {\rm for} \;\;\; d=2.
+                       \end{array}
+               \right.
+\end{equation*}
+Note that for $d=1$ we have $Z_N = 2$, independently of $N$. 
+Hence, $q_{\rm eff} = 1$ and $\gamma =1$.
+
+As an application of the sampling techniques we have learned in 
+this chapter we want now to address the problem of generating 
+configurations of real polymer chains on a lattice, or in other 
+words we want to generate realizations of SAW on the computer.
+
+DISKUSSION VON E(R2) SAW !!!!!!!!!!!!!
+
+\subsubsection{Simple sampling}
+The simplest algorithm to generate chains of  length $N$ is the 
+following one. We start at the origin. The first step is, of 
+course,  taken randomly from the $q$ adjacent sites. The following 
+steps are taken from the remaining $q_0=q-1$ possible directions, 
+because a direct backfolding is forbidden. Of course, the SAW 
+condition is also violated whenever the chosen lattice site is 
+already taken. In fact, the self--avoiding walk has an infinite
+memory. In such cases the attempted walk is terminated and 
+discarded and we have to start with a new chain. In this way we 
+automatically fulfill the condition that all walks  of equal 
+length have the same probability. All sampled configurations are 
+statistically independent and hence the standard error analysis 
+is possible. It is instructive to estimate that the success rate
+$s_N$, i.e., the fraction of walks that will continue successfully 
+for $N$ steps, is of the order
+\begin{equation*}
+s_N = \frac{Z_N(SAW)}{q(q-1)^N} \approx
+      \frac{N^{\gamma -1} q_{\rm eff}^N}{q(q-1)^N}
+       = \left( \frac{q_{\rm eff}^N}{q-1}\right) 
+         \left( \frac{q-1}{q} \right) N^{\gamma -1},
+\end{equation*}
+which for large $N$ decreases exponentially as
+\begin{equation*}
+s_N \approx \exp(-N \mu),
+\end{equation*}
+with $\mu=\ln[(q-1)/q_{\rm eff}]$. 
+On a two--dimesnional lattice $1/\mu = 7.75$, on a 3d lattice
+$1/\mu = 15.4$ (CHECK!!!!!!!!!!!!!!!!). Because of this exponential 
+decrease it is very  difficult to generate very long chains with 
+the simple sampling algorithm. This problem is called the 
+"attrition problem".
+
+FIGUREN ZUM ATTRITION PROBLEM !!!!!!!!!
+
+\subsubsection{Biased sampling}
+To overcome the attrition problem it is necessary to exploit 
+biased sampling techniques. One such technique is the "inversely
+restricted sampling" of Rosenbluth and Rosenbluth. The idea is to
+associate each SAW of $N$ steps with appropriately chosen weighting 
+factors. 
+
+We consider a SAW of $i$ steps on a lattice with the coordination 
+number $q$. In order to sample the next step we have to check  
+which of the $q_0 = q-1$ neighboring sites is empty. Essentially,
+we have two possibilities:
+
+1. If $k$ ($q_0 \ge k >0$) sites are empty we choose the possible 
+steps with equal probability $1/k$.
+
+2. If there is no empty site ($k=0$) we terminate the walk and 
+start from the beginning.
+
+It is clear that each $N$ step walk has the probability
+\begin{equation*}
+P_N(\{ \vec{r}_i \}) = \prod_{i=1}^N (k_i)^{-1}
+\end{equation*}
+and hence dense configurations are more probable. Thus this 
+obvious procedure of choosing only among those  sites that do not 
+violate the SAW condition does not give equal statistical weights
+to the generated configurations. But since we have seen that these 
+weight can be calculated we can compensate this bias by weighting 
+each chain in the sample by the factor
+\begin{equation*}
+W_N(\{ \vec{r}_i \}) =  \prod_{i=1}^N \frac{k_i}{q_0}.
+\end{equation*}
+Since, $W_N P_N = q_0^{-N}$ the biased sampling procedure samples 
+exactly the same configuration space as the simpling sampling.
+
+The correct way to estimate $\langle \vec{R}^2 \rangle$ is
+\begin{equation*}
+\langle \vec{R}^2 \rangle = \frac{\sum_{l=1}^M W_{N,l} R^2_{N,l}}
+                               {\sum_{l=1}^M W_{N,l}},
+\end{equation*}
+where the sum is over all realizations.
+
+In order to compare the two sampling techniques we have written a 
+program {\sf RW\_2D\_sa2.m} which by specifying an input parameter
+draws configurations of real chains on a two--dimensional squared lattice 
+with the simple sampling 
+technique or with the biased (importance) sampling technique.
 
 
 
+\subsubsection{Listing of the program {\sf RW\_2D\_sa2.m}}
+\inputlisting{./Listings/RW_2D_sa2.m}
 
-\section{Self--Avoiding random walks}
-\subsection{Simple sampling}
-\subsection{Importance sampling}
+Let us comment on the program. BLA BLA BLA !!!!!!!!!
+
+In table (\ref{T_SAW}) we see some results of the simulations.
+\begin{table}
+\label{T_SAW}
+\caption{Values of $<\vec{R}^2>$ as functions of $N$, 
+for the two--dimensional random walk with biased sampling.}
+\begin{tabular}{rrrr} \hline \hline
+$N$ & Memory & No. chains & $<\vec{R}^2>$ \\ \hline
+10  & 0        & 1000     &    123 \\
+10  & $\infty$ & 1000     & 123 \\
+20  & 0        & 1000     & 123   \\
+20  & $\infty$ & 1000     & 123 \\
+30  & 0        & 1000     & 123 \\ 
+30  & $\infty$ & 1000     & 123 \\ \hline \hline
+\end{tabular}
+\end{table}
+
+
+In table (\ref{T_SAW_NU}) we show some estimated values of 
+the critical exponent $\mu$.
+\begin{table}
+\label{T_SAW_NU}
+\caption{The critical exponent $\nu$.}
+\begin{tabular}{lll}\hline \hline
+Memory   & $\nu$ & $\nu_{\rm Theory}$ \\ \hline
+0        & 123   & 1/2 (RW)  \\
+$\infty$ & 123   & 3/4 (Flory)
+\end{tabular}
+\end{table}
+
+IRGENDEIN VERGLEICH ZWISCHEN SIMPLE UND IMPORTANCE SAMPLING !!!!!
+
+
+FIGUREN: REALISIERUNGEN, SKALENVERHALTEN, End-TO-END ABSTAND,
+FEHLER, USW.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
