@@ -24,8 +24,10 @@ package simulation.SDE;
  * <p>
  * dX = mu X dt + sigma X dW
  * <p>
+ * <p> Because we know an exact solution, we also implement the exact solution
+ * interface. </p>
  */
-public class LognormalRW implements SDEfunction {
+public class LognormalRW implements SDEfunction, ExactSolution {
     
     private double mu;
     private double sigma;
@@ -46,6 +48,7 @@ public class LognormalRW implements SDEfunction {
     public void setSigma(double param) {
         this.sigma=param; }
 
+    /** The SDE drift and diffusion terms. */
     public double[] SDEterms(double x, double t) {
         double[] retVal = new double[2];
 
@@ -54,4 +57,21 @@ public class LognormalRW implements SDEfunction {
         return retVal;
     }
     
+    //////////////////////////////////////////////////////
+    
+    /** The random number generator used for the exact solution. 
+        You can change it because it is public. */
+    public java.util.Random rand = new java.util.Random();
+
+    /** <p> The exact solution for the lognormal RW. Use the nextGaussian 
+        method of rand object to get normally distributed random 
+        numbers. </p> */
+    public double SDEexact(double time, double ValueAtZero) {
+        double dummy = rand.nextGaussian();
+        return ValueAtZero*Math.exp((mu-0.5*sigma*sigma)*time
+                                    +sigma*dummy*Math.sqrt(time));
+    }
+
 } // LognormalRW
+
+
