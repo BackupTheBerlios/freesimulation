@@ -1,0 +1,189 @@
+<?xml version="1.0" ?>
+
+<project name="SimulationLib" default="archive">
+  <description>Compile the Simulation Lib</description>
+
+  <property name="junit.jar" location="/usr/share/java/junit-3.8.1.jar"/>
+
+
+
+  <property name="source.dir" location="src"/>
+  <property name="source.test.dir" location="test"/>
+  <property name="jar.name" value="StochasticSimulation"/>
+  <property name="package.name" value="de.berlios.${jar.name}"/>
+
+
+  <property name="build.dir" location="build"/>
+  <property name="dist.dir" location="dist"/>
+
+  <property name="test.dir" location="${build.dir}/test"/>
+  <property name="test.data.dir" location="${test.dir}/data"/>
+  <property name="test.reports.dir" location="${test.dir}/reports"/>
+
+  <property name="compile.deprecation" value="true"/>
+
+
+  <path id="test.classpath">
+    <path refid="compile.classpath"/>
+    <pathelement location="${junit.jar}"/>
+    <pathelement location="${build.dir}/classes"/>
+    <pathelement location="${build.dir}/test"/>
+  </path>
+
+  <path id="compile.classpath">
+    <pathelement location="../../ptplot3.1/ptolemy/plot/plot.jar"/>
+  </path>
+
+
+
+
+  <target name="h" depends="help"
+    description="Gives help information">
+  </target>
+
+  <target name="help" depends="info"
+    description="Gives help information">
+    <echo message=" Usage:"/>
+    <echo message=" (more info: type man ant running unix)"/>
+    <echo message=" ant :: do everything"/>
+    <echo message=" "/>
+    <echo message=" ant &lt;targetName&gt; :: execute target &lt;targetName&gt;"/>
+    <echo message=" ant -projecthelp  ::  list all possible targets"/>
+    <echo message=" "/>
+    <echo message=" e.g. ant compile :: just compile"/>
+  </target>
+
+  <target name="info"
+    description="Gives all information available">
+
+    <echo message="Ant Properties:"/>
+    <echo message="ant.file = ${ant.file}"/>
+    <echo message="ant.home = ${ant.home}"/>
+    <echo message="ant.java.version = ${ant.java.version}"/>
+    <echo message="ant.version = ${ant.version}"/>
+    <echo message="basedir = ${basedir}"/>
+
+    <echo message="JVM Properties:"/>
+
+    <echo message="java.home = ${java.home}"/>
+    <echo message="user.home = ${user.home}"/>
+    <echo message="user.name = ${user.name}"/>
+  </target>
+
+
+
+  <target name="init"
+    description="Init the build scripts.">
+
+    <mkdir dir="${build.dir}/classes"/>
+    <mkdir dir="${dist.dir}"/>
+  </target>
+
+  <target name="test-init"
+    description="Init the test scripts.">
+
+    <mkdir dir="${test.dir}"/>
+    <delete dir="${test.reports.dir}"/>
+    <delete dir="${test.data.dir}"/>
+    <mkdir dir="${test.reports.dir}"/>
+    <mkdir dir="${test.data.dir}"/>
+  </target>
+
+
+
+  <target name="test-compile" depends="compile,test-init"
+    description="Compile the Tests.">
+
+    <javac destdir="${test.dir}"
+      debug="${build.debug}"
+      includeAntRuntime="false"
+      srcdir="${source.test.dir}">
+      <classpath refid="test.classpath"/>
+    </javac>
+
+    <copy todir="${test.dir}">
+      <fileset dir="test" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="test" depends="test-compile"
+    description="Execute the Tests.">
+
+    <junit fork="true"
+      printsummary="false" 
+      errorProperty="test.failed"
+      failureProperty="test.failed">
+      <classpath>
+	<path refid="test.classpath"/>
+	<pathelement path="${java.class.path}"/>
+      </classpath>
+      <formatter type="brief" usefile="false"/>
+      <formatter type="xml"/>
+
+      <test name="${testcase}" todir="${test.data.dir}" if="testcase"/>
+      <batchtest todir="${test.data.dir}" unless="testcase">
+	<fileset dir="${test.dir}" includes="**/*Test.class"/>
+      </batchtest>
+    </junit>
+
+    <junitreport todir="${test.data.dir}">
+      <fileset dir="${test.data.dir}">
+	<include name="TEST-*.xml"/>
+      </fileset>
+      <report format="frames" todir="${test.reports.dir}"/>
+    </junitreport>
+
+    <fail message="Tests Failed. Check log and/or reports."
+      if="test.failed"/>
+  </target>
+
+
+
+  <target name="compile" depends="init"
+    description="Compile the code">
+
+    <javac 
+      srcdir="${source.dir}"
+      destdir="${build.dir}/classes"
+      deprecation="${compile.deprecation}"
+      listfiles="true" >
+      <classpath refid="compile.classpath"/>
+    </javac>
+    <echo>Compilation complete !</echo>
+  </target>
+
+
+
+  <target name="archive" depends="test, doc"
+    description="Create jar file">
+
+    <jar destfile="${dist.dir}/${jar.name}.jar"
+      basedir="${build.dir}/classes"/>
+  </target>
+
+
+
+  <target name="clean" depends="init, test-init"
+    description="Remove temporary dirs">
+
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+    <delete dir="${test.dir}"/>
+  </target>
+
+
+
+  <target name="doc" depends="init"
+    description="Create documentation">
+
+    <javadoc destdir="${build.dir}/doc"
+      sourcepath="${source.dir}"
+      packagenames="${package.name}" >
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+  </target>
+  
+
+</project>
+
