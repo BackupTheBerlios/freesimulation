@@ -850,7 +850,7 @@ For example, two ways of doing it are:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Packages and import statements}
+\subsection{Packages and import Statements}
 \subsubsection{Packages}
 Because Java was designed to be able to load code distributed
 over the whole internet dynamically, you have to avoid name conflicts
@@ -938,7 +938,7 @@ defines applets and their behaviour, and the \verb|java.awt|-class, which
 will be explained later.
  
 There is one class, which is always imported without any import statement:
-the \verb|java.lang| class. This is the fundamental class of Java and it is
+the \verb|java.lang.*| classes. This is the fundamental class of Java and it is
 implicitly imported for all Java programs, so you do not have to specify
 it. For example the System class is in \verb|Java.lang|, that is why
 we did not have to use an import statement in the ``Hello World''
@@ -1701,20 +1701,7 @@ There is a nice feature to be used with the final keyword. You can
 define a final variable, actually computed in an arbitrary method. 
 The method is then executed before any other code of the program,
 even before the main method. An example would be:
-\begin{lstlisting}{}
-  public class TestFinal {
-
-    public final double Pi = computePi(); //   <-- call method
-
-    public void main (String[] args) {
-      .....
-    }
-  
-    public double computePi() {
-      return Math.PI;
-    }
-}
-\end{lstlisting}
+\lstinputlisting{Listings_Java/TestFinal.java}
  
 The variable \verb|cross| is declared to be \verb|static|.  This
 modifier 
@@ -1898,7 +1885,7 @@ Different from C++,  you can not inherit from more than one class
 in Java, meaning that there is always only one superclass for each
 class. 
 The only way of having multiple inheritance is by using
-interfaces, which we will not cover in our introduction.
+interfaces, which we will not cover extensivly in our introduction.
 
 If you write a subclass you can overwrite methods already defined
 in the super class. This is called overloading of methods,
@@ -1915,12 +1902,37 @@ In the words of object oriented programming, writing an applet is
 called: defining a subclass of the Applet class and overloading
 the methods of the Applet class as necessary.
 
+One nice and important feature in Java is, that all classes which
+do not have an explicit parent, inherit from the \verb|java.lang.Object| 
+class. So you can call this class the father of all classes.
+There are only a few methods defined in this (abstract) class,
+which you can always override. For example the \verb|toString()| 
+method is in \verb|java.lang.Object|. If you override this method,
+you can define your own objects, which can then be printed by
+the usual \verb|println()| commands. In table \ref{tab:JavaLangObject}
+all methods defined in \verb|java.lang.Object| are displayed.
+\begin{table}[htbp]
+  \begin{center}
+\begin{lstlisting}{}
+public boolean equals (Object obj);
+protected Object clone() throws 
+               CloneNotSupportedException, OutOfMemoryError;
+public String toString ();
+public int hashCode(); 
+protected void finalize() throws Throwable;
+\end{lstlisting}
+    \caption{All methods belonging to the (abstract) 
+               \texttt{java.lang.Object} class.}
+    \label{tab:JavaLangObject}
+  \end{center}
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Overview of all keywords and APIs in Java 1.1 and Java 2}
 
 Here we list all the standard packages (APIs) included in the Java 1.1
-language standard. The important packages (for our purposes)
-are written in small caps.
+language standard. The important packages (for our purposes) are
+written in small caps.
 
 \paragraph{Java 1.1 packages}
 \begin{description}
@@ -2288,14 +2300,28 @@ The first lette of the name is an uppercas letter. If the
 
 
 
-\subsection{Summary and Overview}
-The general structure of a Java program is:
-\begin{itemize}
-\item package
-\item import
-\item Classes
-\item Interfaces
-\end{itemize}
+\subsection{Java Documentation}
+As the time of writing the JDK (1.1 or 2) is distributed in
+two parts. The first one is the software itself, including all
+the tools and programs necessary to write Java programs. 
+The second one is the API documentation. 
+In the directory \verb|JAVA_HOME|, on UNIX this could be 
+\verb|/usr/local/jdk1.2|, \verb|/usr/local/lib/jdk1.2| or 
+\verb|/usr/lib/jdk1.2| and on Windows this might be \verb|c:\jdk1.2|, 
+you can find all the documentation in the subdirectory
+\verb|docs|. It is of course best viewed using a web browser
+starting with the page \verb|jdk1.2/docs/index.html| 
+(see also figure \ref{fig:JDKFiles}).
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/JDKDocumentation.eps}
+    \caption{The file structure of the JDK distribution, both the binary and the documentation package.}
+    \label{fig:JDKDocumentation}
+  \end{center}
+\end{figure}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Higher Mathematics in Java}
@@ -2311,6 +2337,13 @@ square root and much more. Do not confuse this class with the
 java.Math class, which was introduced to Java 1.1 for arbitrary
 precision arithmetic -- we are not discussing this, read the
 API documentation for details.
+
+Java math is always conforming to the IEEE 754 standard and all
+algorithms used in the math API are guaranteed to produce the
+same results as those from netlib's 
+\emph{Freely Distributable Math Library}\footnote{Called \verb|fdlibm|.
+Netlib is a 
+It is available online from \href{http://netlib.org/}{http://netlib.org/}.}.
 
 Some useful constant in the \verb|Math| class  are \verb|Math.Pi|
 ($\pi$) and \verb|Math.E| ($e$).
