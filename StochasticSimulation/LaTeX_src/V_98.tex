@@ -35,8 +35,21 @@
 
 %%% The Listings package - include source code
 \usepackage{listings}
+% standard listing gormatting
 \selectlisting{matlab}
-\labelstyle[5]{\ttfamily}
+% line numbers ? And what stepsize ?
+\labelstyle[1]{\ttfamily}
+% use small font size for typesetting listings
+\prelisting{\small}
+
+%%% The Chapterbib package for Bibliographies per chapter
+% TeX usage:  Just insert \bibliography{...bib} where you want to have a bib
+%             The style can be given for each bib or in the main file !
+% Compile usage: latex mainfile
+%                bibtex chap1
+%                bibtex chap2     etc.  (for each chapter)
+%                latex mainfile    ! 2 times ! 
+\usepackage{chapterbib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%  END OF IMPORTANT STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,17 +64,17 @@
 %%% Make fancy (our own) headings and footings
 %\usepackage{fancyhdr}
 %%%%%%%%%% Umschalten auf eigene Kopfzeilen !! (fancyheadings Style) %%%%%%%%%
-%\lhead[\fancyplain{}{\bfseries\thepage}]%
-%%  {\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\rightmark}}
-%\rhead[\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\leftmark}]%
-%  {\fancyplain{}{\bfseries\thepage}}
-%\chead{}
-%\lfoot{}
-%\rfoot{}
-%\cfoot{}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+  {\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\rightmark}}
+\rhead[\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\leftmark}]%
+  {\fancyplain{}{\bfseries\thepage}}
+\chead{}
+\lfoot{}
+\rfoot{}
+\cfoot{}
 %% Damit das scharfe s auch richtig geschrieben wird und nicht 'SS'
 %% kommt von \uppercase\relax von oben ! 
-%\edef\SS{\ss}
+\edef\SS{\ss}
 
 %%%%%% Small Styles :
 %%% 
@@ -182,8 +195,10 @@
 \include{Chap3}
 
 %%% Chapter 4 
+%\include{Chap4}
 
 %%% Chapter 5 
+%\include{Chap5}
 
 %%% Chapter 6 
 
@@ -202,10 +217,10 @@
 
 % Bibliographien
 \bibliographystyle{peter}
-\bibliography{./TheoPh}
-\addtocontents{toc}{\protect\vspace{1.5ex}}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
-\clearpage
+%%%\bibliography{./TheoPh}
+%%\addtocontents{toc}{\protect\vspace{1.5ex}}
+%%\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
+%%\clearpage
 
 % Now insert the Index
 %%\addtocontents{toc}{\protect\vspace{1.5ex}}
