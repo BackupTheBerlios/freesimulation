@@ -287,7 +287,7 @@ the RMI protocol supplied by Java.
 
 
 
-\subsection{Java tools for writing Java programs}
+\subsection{Tools for writing Java programs}
 
 \begin{description}
 \item[] \textbf{Programs:} 
@@ -641,6 +641,8 @@ betweeen the \verb|/** .... */| commands using HTML constructs like
 \verb|<hr>| for a horizontal rule or others - try it. 
 Because this code gets directly included in the HTML files produced by
 the \verb|javadoc| command, you can have nicley formatted documentation.
+But you should avoid using \verb|<h1>| to \verb|<h6>| -- the heading 
+commands -- because javadoc uses them for its own structure.
 
 If you load AllNames.html into a browser, you get the HTML file shown
 in figure \ref{fig:javadoc1}.
@@ -710,7 +712,8 @@ char  & Unicode character & $\backslash$u0000 & 16 bits & $\backslash$u0000 \\
 &&& &$\backslash$uFFFF   \\ \hline
 \end{tabular}
 \end{center}
-\caption{Primitive data types in Java.}
+\caption{Primitive data types in Java. The byte and char data types have
+  been introduced in Java 1.1 and in Java 2 there was a void type added.}
 \end{table}
 
 
@@ -894,6 +897,7 @@ package. This means you can put your programs in the current directory.
 This is not recommended for medium to complex programs, but for
 test purposes and very small programs this is very convenient.
 
+\subsubsection{The jar Tool}
 If you have written a lot of small classes, which all work together
 (called a project), you
 can put them all inside a ``jar'' file and give the jar file
@@ -902,7 +906,30 @@ A jar file is just an archive created by the \verb|jar| program
 coming with the JDK. It works like the well-known UNIX \verb|tar|
 command. This is actually a very nice method for packaging
 applets on the internet, because the jar command also compresses
-its contents.  
+its contents. 
+
+For example to view the contents of a jar file you can issue the command
+\verb|jar tvf lava.jar| (the Lava Rocks jar file). Some of the
+available options used with jar are given in table \ref{tab:JarOptions}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{cp{0.7\textwidth}}
+      Option & Description \\\hline
+      c & create jar file\\
+      t & table of contents of jar file\\
+      x & extract files from jar archive\\
+      f & name of jar file comes as first argument after options (the
+          default is the standard input/output) \\
+      v & verbose output \\
+      O & do not compress (used for jars residing in the CLASSPATH)\\
+    \end{tabular}
+    \caption{Options of the jar command. The jar tool is included in the JDK.}
+    \label{tab:JarOptions}
+  \end{center}
+\end{table}
+Jar files are portable from one platform to the other, but as you can 
+see jar is not as powerful as the tar command in UNIX.
+
 
 \subsubsection{Import statement}
 Before learning more about the syntax of Java, we have to explain another
@@ -1303,7 +1330,7 @@ case expressions have to be integral values and not any boolean
 expressions like \verb|i>2|. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Parameters from the command line or from a html file}
+\subsection{Parameters from the command line or a html file}
 \label{sec:Parameter}
 
 \subsubsection{Parameters from the command line}
@@ -1363,7 +1390,7 @@ appletviewer or in Netscape should look like this:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Arrays}
+\subsection{Arrays and Matrices}
 \label{sec:Arrays}
 
 Before discussing the notion of classes and objects, we want to introduce
@@ -1480,6 +1507,48 @@ So to copy an array in the above example, you have to write:
 This copies all elements of array1 to array2 staring from element 0. 
 The remaining parts 
 of array2 is not created!
+
+\subsection{Arrays in Java 2}
+A new class \verb|Arrays| in the \verb|java.util| package has been
+introduced in Java 2, which is of great interest not only to scientific
+programmers. It includes methods for sorting arrays of arbitrary
+type using a modified version of the Quicksort\footnote{This is
+a sorting algorithm, which is very versatile and efficient for
+most of the problems.} algorithm. So to sort a whole array 
+of double values, you just have to use
+\begin{verbatim}
+  /* JAVA 2 */
+  import java.util.*;
+  double[] array = new double[1000];
+  ....
+  Arrays.sort(array,0,1000); // to sort the whole array
+\end{verbatim}
+You can even sort an array of strings or arbitrary objects.
+
+Another new functionality is the \verb|fill()| method. Often you
+want to assign a value to a whole array of doubles for example.
+In Java 2 you can do this using
+\begin{verbatim}
+  /* JAVA 2 */
+  import java.util.*;
+  double[] array = new double[1000];
+  Arrays.fill(array,1.0);
+\end{verbatim}
+which sets the whole array to 1.
+
+Furthermore there is a comparison method for arrays called
+\verb|Arrays.equals(double[], double[])| for all data types and
+last but not least there is a binary search algorithm to
+find a value in an (sorted) array. So for example to find the index of the
+array element equal to 2.5 you can use the code:
+\begin{verbatim}
+  /* JAVA 2 */
+  import java.util.*;
+  double[] array = new double[1000];
+  ....
+  Arrays.sort(array);
+  int index = Arrays.binarysearch( array, 2.5 );
+\end{verbatim}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1923,7 +1992,7 @@ protected void finalize() throws Throwable;
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Overview of all keywords and APIs in Java 1.1 and Java 2}
+\subsection{Keywords and APIs in Java 1.1 and Java 2}
 
 Here we list all the standard packages (APIs) included in the Java 1.1
 language standard. The important packages (for our purposes) are
@@ -2055,7 +2124,8 @@ details, just copy this part to your own program and your are done.
 But after you got used to object oriented programming you won't have
 any problems understanding the code above anymore.
 
-\subsubsection{Easy Input and Lava Rocks Printf()}
+\subsubsection{Easy Input and Lava Rocks printf()}
+\label{sec:LavaRocks}
 Another easy solution is to use the \verb|EasyIn| and the
 \verb|Printf()| methods, supplied by our \verb|simulation| class
 and the ''Lava Rocks''\footnote{This is a freely available package,
@@ -2078,7 +2148,7 @@ import simulation.*;
 \end{verbatim}
 \end{small}
 
-\paragraph{Lava Rocks -- Printf()}
+\paragraph{Lava Rocks -- printf()/sprintf()/fprintf()}
 To use the Lava Rocks package you could write a code like
 \begin{small}
 \begin{verbatim}
@@ -2096,6 +2166,29 @@ The output will look like
 \begin{verbatim}
      100 and    165.2 : test text
 \end{verbatim}
+If you are familiar with the C routines, then you can find all
+the modifiers used for formatting the different types of variables
+in table \ref{tab:PrintfModifiers}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{cl}
+      Modifier & Type to be formatted \\ \hline
+      d & integer \\
+      f & float \\
+      f & double \\
+      o & \\
+    \end{tabular}
+    \caption{All possible modifiers to be used in the format 
+      string given to the printf()/sprintf()/fprintf() methods supplied 
+      by the Lava Rocks package.}
+    \label{tab:PrintfModifiers}
+  \end{center}
+\end{table}
+The modifiers represent the place, where the actual value of the variable 
+has to be inserted before the output is sent to the screen (or file, 
+or string). So you have to make sure that the order of the modifiers and
+the order of the supplied variables is correct, otherwise you get
+unpleasant results or strange errors.
 
 There are three additional things to mention: 
 If you use the
@@ -2104,6 +2197,8 @@ very often, you can speed things up by saving the format string
 and only use the variable every time, like:
 \begin{small}
 \begin{verbatim}
+   import lava.clib.stdio.*;
+   .....
    PrintfFormatString fmt = 
       new PrintfFormatString ("%8d and %8.1f : test text\n");
 \end{verbatim}
@@ -2118,7 +2213,13 @@ And there is a platform neutral code for newlines: Use \verb|%\n| instead
 of \verb|\n| in the format strings and you always get a newline,
 no matter which platform you run the program.
 
-There is another free implmentation of the printf command for
+The same holds for the other two methods \verb|sprintf()|, which writes
+the formatted output to a stringbuffer (we will discuss this in section
+\ref{sec:FileIO} and in section \ref{sec:Symphony} in more detail.),
+and \verb|fprintf()|, which writes the output to a file (actually a
+Writer, see section \ref{sec:FileIO}).
+
+There is another free implementation of the printf command for
 Java called \verb|Format.java| of the \verb|corejava| package.
 But it has much less functionality and so we decided to use
 the Lava Rocks implementation.
@@ -2527,7 +2628,7 @@ An overview of the most important methods is given in table
 \subsection{The JavaSci Package}
 ????
 
-\subsection{Lapack for Java and the JNT - JamPack and Jama}
+\subsection{JNT, Lapack for Java - JamPack and Jama}
 ????
 
 
@@ -2633,16 +2734,20 @@ to have the programs runs as applet as well as a standalone application:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Advanced Java Features}
 
-\subsection{Including Native Code (e.g. C, Fortran, etc.)}
+\subsection{Including Native Code (C and C++)}
 To include native code into a Java program, there is the so-called
 JNI (Java Native Interface). This allows for inclusion of native
-FORTRAN, C or other language codes. To refer to such a method,
-you just use
+C or C++ codes. To refer to such a method, you just use
 \begin{lstlisting}{}
 ...
-native FORTRANFunction();
+native CFunction();
 \end{lstlisting}
-The code for the method has to be implemented in FORTRAN or C, etc.
+The code for the method has to be implemented in C or C++.
+
+At the moment there is no direct interface to other languages like
+Fortran. If you want to include Fortran code you have to use
+a C wrapper code and then use the JNI with that C wrapper code
+for inclusion to Java.
 
 \subsection{Vectors}
 For a scientists there is a confusing class called \verb|java.util.Vectors|, 
@@ -2669,9 +2774,24 @@ example you can store the name of a person and its age in a hashtable.
 \subsection{Debugging Java}
 ????
 
-\subsection{??}
+\subsection{Serialization}
+One problem of objects is how to ``save'' objects to disk for example.
+Or sometimes you want to submit an object to another applet or
+application using RMI accross networks, or you might want to
+store the object for the next call of the same program (called 
+persistence). 
 
+For all
+these reasons and many more, there is a method called serialization,
+which transforms an object in a byte stream and back. 
+To save an object to a file for later use, you could easily serialize
+the object and store the byte stream to a file. Later on you reread
+the file and deserialize the byte stream back to an object. 
 
+If you create your own classes and want objects (instances of your 
+class) to be serializable you have to implement the serializable interface.
+We do not need this in the context of this book, but it is
+important to know what is behind this.  
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
