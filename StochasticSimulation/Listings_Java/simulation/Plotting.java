@@ -80,4 +80,15 @@ public final class Plotting {
     }
     plot2D(PlotObject,plotNumber,x,dummyY,number);
   }
+
+  public static void plot2D(PlotApplet PlotObject, int plotNumber,
+                            double[] y, int number) {
+    double dummy;
+    boolean connect=false;
+    for (int i=0; i<number; i++) {
+      dummy=(double)i;
+      PlotObject.plot().addPoint(plotNumber,dummy,y[i],connect);
+      if (connect==false) connect=true;
+    }    
+  }
 }
