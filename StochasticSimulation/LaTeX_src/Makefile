@@ -35,7 +35,7 @@ DVIPS=dvips
 XDVI=xdvi
 BIBTEX=bibtex
 LATEX2HTML=latex2html
-TTH=l2h
+TTH=tth
 PS2PDF=ps2pdf
 
 ### Variables
@@ -124,9 +124,13 @@ clean:
 	 done
 	@$(RM) $(addsuffix .$(CLEANUP_SUFFIXES_FILES),$(APPENDIX))
 
-REAL_CLEANUP_SUFFIXES=ps pdf
+
+##
+## .out / .brf  --  used by hyperef package
+##
+REAL_CLEANUP_SUFFIXES=ps pdf out brf
 realclean: clean
-	@echo " Additionally cleaning up .ps .pdf files ($(INCLUDE_ONLY_FILENAME)) ! "
+	@echo " Additionally cleaning up $(REAL_CLEANUP_SUFFIXES) files ($(INCLUDE_ONLY_FILENAME)) ! "
 	@$(RM) $(addprefix $(MAIN_TEX_FILE).,$(REAL_CLEANUP_SUFFIXES))
 	@$(RM) $(INCLUDE_ONLY_FILENAME)
 
@@ -450,12 +454,25 @@ viewdvi dviview:
 ### HTML 
 ## ATTENTION: Takes a LONG time ....
 html: $(MAIN_TEX_FILE).tex
-	$(LATEX2HTML) -toc_depth 2 -long_titles 3 -split +3 -white \
-		-transparent -image_type png -tmp /tmp $(MAIN_TEX_FILE).tex
+# Generating inclusion file and aux files
+	@echo "%\includeonly{}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+# Create all bibtex files of all chapters
+	-@for chap in $(ALL_CHAPTERS); do $(BIBTEX) $$chap; done
+	$(LATEX2HTML) -html_version 3.2,math,i18n,table -no_math -toc_depth 2 -long_titles 3 -split +3 -white -no_images \
+		 -image_type png -tmp /tmp $(MAIN_TEX_FILE).tex
 
-### tth (HTML)
+### Documentation of latex2html options:
+###
+###	-transparent
+###
+###
+###
+
+
+### tth (HTML) V3.0.8
 tth: $(MAIN_TEX_FILE).tex
-	$(TTH) $(MAIN_TEX_FILE) -a -e1
+	$(TTH) $(MAIN_TEX_FILE) -a -e1 -w2
 
 
 
@@ -495,3 +512,23 @@ help HELP Help:
 	@echo "### Part1	--	Make just Part 1 of Book"
 	@echo "### The same up to "Part5" !! "
 	@echo "###"
+	@echo "### clean	--	Delete all produced files"
+	@echo "### realclean	--	Delete additionaö to clean, the files .ps, .pdf, $(INCLUDE_ONLY_FILENAME)"
+	@echo "###"
+	@echo "###"
+
+
+
+LIST_OF_M_FILES=cltgen.m          gaussdistr.m   mcpi.m                ornstein.m         qmharmoscimaster.m  rw2dsa.m           trandom1.m \
+darts.m           hitandmiss.m   mcpiscore.m           payrollmaster.m    random1.m           rw2dsa2.m          variance.m \
+decaymaster.m     hitandmiss2.m  momentsrand.m         percolation.m      reactionmaster.m    rw_scaling.m       walkmaster.m \
+einstein_solid.m  importance.m   neumann.m             photoabsorbtion.m  rejection.m         rwdt.m             wiener.m \
+expdistr.m        linear_con.m   nonlingrowthmaster.m  poisson.m          relfreq.m           rwdtn.m \
+first_passage.m   mciis.m        onestep.m             poissonmaster.m    rw1d.m              sdeornstein.m \
+galton_board.m    mcistandard.m  onestepfast.m         pokertest.m        rw2d.m              telegraphmaster.m
+
+### Just until we have coverted all .m files to Java files
+workaround:
+	@mkdir Listings
+	@for file in $(LIST_OF_M_FILES);do touch Listings/$$file;done
+	@echo " Look into directory Listings/ !!"
