@@ -1,6 +1,9 @@
-\chapter{Stochastic processes and master equations}
+\chapter{Markov processes and master equations}
 This chapter is devoted
-to the introduction of some mathematical concepts. 
+to the introduction of some mathematical concepts, which allow the
+correct treatment of time--dependent probabilistic phenomena. 
+Such processes occur in many branches of physics. A typical example,
+is for instance, the dynamics of the velocity field in a turbulent fluid.
 We will introduce stochastic processes as time dependent stochastic 
 variables and we will 
 learn how the dynamics of a particular class of stochastic 
@@ -24,7 +27,8 @@ we obtain an ordinary function
 \begin{equation*}
 y(t) = f(x,t),
 \end{equation*}
-which is a {\em realization} of the stochastic process. It is 
+which is a {\em realization} of the stochastic process
+\cite{VAN_KAMPEN}. It is 
 customary in statistical physics to regard the stochastic process 
 as an {\em ensemble} of such realizations.
 
@@ -47,10 +51,10 @@ $P_n$ $(n=1,2,\ldots)$ is defined, which allows the evaluation of
 expectation values like
 \begin{eqnarray*}
 \lefteqn{<Y(t_1) Y(t_2) \cdots Y(t_n)>} \\
-&& = \int dy_1 dy_2 \cdots dy_n 
+&& = \int dy_1 \int dy_2 \cdots \int dy_n 
         y_1 y_2 \cdots y_n P_n(y_1,t_1;y_2,t_2; \ldots, y_n,t_n).
 \end{eqnarray*}
-It has been shown by Kolmogorov \cite{KOLMOGOROV} that the 
+It has been shown by Kolmogorov (\cite{VAN_KAMPEN}) that the 
 hierarchy of joint probability densities introduced above 
 completely specifies
 a stochastic process if the following four consistency conditions 
@@ -68,7 +72,7 @@ With increasing $n$ the description of the stochastic process gets
 more precise. It is important to 
 make the following remarks.  The condition (iii) implies that each 
 density $P_n$ includes the knowledge of all previous densities
-$P_k$ with $k<n$. Furthermore the density $P_n$ does have the 
+$P_k$ with $k<n$. Furthermore, the density $P_n$ does have the 
 following property if two time arguments are identical
 \begin{equation*}
 P_n(x,t;y_1,t;y_2,t_2; \ldots ; y_{n-1},t_{n-1}) = 
@@ -86,13 +90,23 @@ P_3(y_1,t_1;y_2,t_2;y_3,t_3) &=& P_1(y_1,t_1) P_1(y_2,t_2)P_1(y_3,t_3)
 \\
 \text{and so on.} &&
 \end{eqnarray*}
+This means that the value of $Y$ at time $t$ is completely 
+independent of its values in the past and in the future. An even
+more special case occurs when the $P_1(y_i,t_i)$ are independent 
+of $t_i$. In this case the same probability law governs the 
+process for all times. Such processes are called
+{\em Bernoulli trials} (\cite{GARDINER}). In the next section we 
+will introduce the next most simple class, the {\em Markov processes},
+in which the knowledge of only the presents determines the future.
+
 
 \section{Markov processes}
-In order to define the class of stochastic processes which will be 
+In order to define the class of stochastic processes, which will be 
 of central importance in the forthcoming theoretical discussions 
-and in the examples of the next chapters we will need 
-the definition of conditional probability densities.
-We will denote conditional probability densities by
+and in the examples of the next chapters, we will formulate
+the {\em Markov assumption}. This assumption is formulated in 
+terms of conditional probability densities which we 
+will denote by
 $T_n(x,t|y_1,t_1;y_2,t_2; \ldots, y_n,t_n)$. This quantity gives 
 the probability that the stochastic process takes the value $x$ at 
 time $t$ given that it had the value $y_1$ at time $t_1$, $y_2$
@@ -113,14 +127,17 @@ T_{n-1}(x,t|y_1,t_1;y_2,t_2; \ldots, y_{n-1},t_{n-1}).
 Now we are in the position to define the class of Markov 
 processes. Let $t_1< \cdots <t_n < t_{n+1}$ be an ordered sequence 
 of times. A Markov process is defined through the following 
-condition for the conditional probability density
-\begin{eqnarray*}
+condition for the conditional probability density of the
+stochastic process
+\begin{equation*}
 T_{n}(y_{n+1},t_{n+1}|y_1,t;y_2,t_2; \ldots, y_{n},t_{n})
-&&= T_{1}(y_{n+1},t_{n+1}|y_{n},t_{n}).
-\end{eqnarray*}
+= T_{1}(y_{n+1},t_{n+1}|y_{n},t_{n}).
+\end{equation*}
 In other words, the conditional probability density at $t_{n+1}$
 given the value of $y_n$ at time $t_n$ is uniquely determined and 
-is not affected by any value of $y$ at earlier times.
+is not affected by any value of $y$ at earlier times. Thus, the
+conditional probability density is determined completely by the 
+knowledge of the most recent condition.
 The above definition implies that for a Markov process all
 $T_n$ with $n \ge 1$ can be determined from the
 conditional probability density $T_1$, which will also be called
@@ -139,7 +156,7 @@ P_3(y_1,t_1;y_2,t_2;y_3,t_3) &=&
     & = & T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1)
            P_1(y_1,t_1).
 \end{eqnarray}
-Integrating the above equation (\ref{P_3}) over $y_2$ we obtain 
+Integrating the above equation (\ref{P3}) over $y_2$ we obtain 
 \begin{equation}
 P_2(y_1,t_1;y_3,t_3) = P_1(y_1,t_1) 
        \int dy_2 T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1).
@@ -148,7 +165,7 @@ Dividing both sides by $P_1(y_1,t_1)$ we obtain an identity which
 must be obeyed by the transition probability of any Markov process
 \begin{equation}
 \label{CHAPMAN_KOLMOGOROV}
-T_1(y_1,t_3|y_1,t_1) =  
+T_1(y_3,t_3|y_1,t_1) =  
        \int dy_2 T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1).
 \end{equation}
 The above identity is called the {\em Chapman--Komogorov 
@@ -163,10 +180,11 @@ As we already noted the functions $P_1$ and $T_1$ uniquely define
 a Markov process. However, these two functions are not arbitrary.
 They must satisfy the Chapman--Kolmogorov equation and the obvious
 consistency condition
-\begin{equation*}
+\begin{equation}
+\label{CONSISTENCY}
 P_1(y_2,t_2) =  
        \int dy_1  T_1(y_2,t_2|y_1,t_1) P_1(y_1,t_1).
-\end{equation*}
+\end{equation}
 For the sake of a compact notation we will write now $P=P_1$ and 
 $T=T_1$.
 
@@ -182,18 +200,18 @@ transition probabilty density.
 \subsection{The generator of a Markov process}
 We consider the time evolution of the expectation value
 of  a function $f(y)$.
-
 Thus,
 \begin{eqnarray*}
 \frac{\partial}{\partial t} \langle f(y) \rangle &=&
  \frac{\partial}{\partial t} 
-    \left\{  \int dy f(y) p(y,t)  \right\}  \\
+    \left\{  \int dy f(y) P(y,t)  \right\}  \\
  &= & \lim_{\Delta t \rightarrow 0} \frac{1}{\Delta t}
-       \left\{  \int dy f(y) \left[p(y,t+\Delta t) - p(y,t) \right]  
+       \left\{  \int dy f(y) \left[P(y,t+\Delta t) - P(y,t) \right]  
        \right\}.
 \end{eqnarray*}
-Making use of the Chapman--Kolmogorov equation in the first term 
-on the right hand side of the above equation we obtain
+Making use of the consistency condition (\ref{CONSISTENCY}) 
+in the first term 
+on the right--hand side of the above equation we obtain
 \begin{equation*}
 \frac{\partial}{\partial t} \langle f(y) \rangle =
    \lim_{\Delta t \rightarrow 0} \frac{1}{\Delta t}
@@ -202,7 +220,7 @@ on the right hand side of the above equation we obtain
        \right\}.
 \end{equation*}
 We rename the integration variables in the positive 
-term of the right hand side of the above equation ($y \rightarrow y'$,
+term of the right--hand side of the above equation ($y \rightarrow y'$,
 $y' \rightarrow y$) to obtain
 \begin{equation*}
 \frac{\partial}{\partial t} \langle f(y) \rangle =
@@ -219,9 +237,7 @@ which we can also write as
          - \delta(y-y') f(y') \right].
 \right\}
 \end{equation*}
-
-
-To this end it is convenient to introduce the infinitesimal 
+At this point it is convenient to introduce the infinitesimal 
 generator of a Markov process ${\cal{A}}$ as
 \begin{equation}
 \label{DEF_GENERATOR}
@@ -232,16 +248,16 @@ generator of a Markov process ${\cal{A}}$ as
 $f(y)$ is some measurable function for which the above 
 limit exists. Evidently ${\cal{A}}$ is a linear operator, which 
 can be determined from the transition probability density. 
-When the operator ${\cal{A}}$ operates on $g$ it describes the
-change of the expectation value of $g$ in an infinitesimal time 
+When the operator ${\cal{A}}$ operates on $f$ it describes the
+change of the expectation value of $f$ in an infinitesimal time 
 step. As a consequence of the Chapman--Kolmogorov equation each time 
 step $t-t_1$ can be decomposed into a sequence of smaller time 
-steps. So it is plausible to try to characterize the Markov
+steps. So it is plausible to characterize the Markov
 process by regarding infinitesimal time steps. 
 The importance of the generator ${\cal{A}}$ lies in the fact
-that together with some initial condition $p(x,t=0)$ it specifies
+that together with some initial condition $P(x,t=0)$ it specifies
 uniquely the Markov process.
-Thus, the time evolution equation for the expectation value can be written 
+The time evolution equation for the expectation value can be written 
 in the compact and suggestive form
 \begin{equation}
 \label{EQ_EXPECTATION}
@@ -253,51 +269,62 @@ in the compact and suggestive form
 \subsection{The differential Chapman--Kolmogorov equation}
 With the help of the generator we derive an equation of motion for
 the transition probability $T$.
-Multiplying equation (\ref{EQ_EXPECTATION}) 
+Multiplying equation (\ref{DEF_GENERATOR}) 
 with $T(x,t|x',t')$ ($t'<t$) and 
 integrating over $x$ we obtain
 \begin{eqnarray*}
-\lefteqn{\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t')} \\
+\lefteqn{\int dx \left[ {\cal{A}}(t) f(x) \right] T(x,t|x',t')} \\
 && = \lim_{\Delta t \rightarrow 0}
     \frac{1}{\Delta t} 
-    \left[\int dy g(y)T(y,t+\Delta t|x',t') - 
-        \int dx g(x) T(x,t|x',t')  \right],
+    \left[\int dy f(y)T(y,t+\Delta t|x',t') - 
+        \int dx f(x) T(x,t|x',t')  \right],
 \end{eqnarray*}
 where we made use of the Chapman--Kolmogorov equation.
-We now rename the variable $y$ on the right hand side of the above 
+We now rename the variable $y$ on the right--hand side of the above 
 equation and call it $x$ and perform the limit $\Delta t \rightarrow 
 0$
 \begin{equation}
 \label{KOL_FORWARD_0}
-\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t') =
-  \int dx g(x) \frac{\partial}{\partial t} T(x,t|x',t').
+\int dx \left[ {\cal{A}}(t) f(x) \right] T(x,t|x',t') =
+  \int dx f(x) \frac{\partial}{\partial t} T(x,t|x',t').
 \end{equation}
 It is convenient to introduce the adjoint operator ${\cal{A}}^{\dagger}$
-to the generator ${\cal{A}}$ according to
+to the generator ${\cal{A}}$ according to the following definition
 \begin{equation}
 \label{ADJOINT}
-\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t') =
-\int dx g(x) \left[ {\cal{A}}^{\dagger}(t)  T(x,t|x',t') \right].
+\int dx \left[ {\cal{A}}(t) f(x) \right] T(x,t|x',t') \equiv
+\int dx f(x) \left[ {\cal{A}}^{\dagger}(t)  T(x,t|x',t') \right].
 \end{equation}
+We will see in the next sections how the adjoint operator is
+explicitely constructed.
 Inserting Eq. (\ref{ADJOINT}) into Eq. (\ref{KOL_FORWARD_0})
 and considering that (\ref{ADJOINT}) holds for any 
-function $g(x)$ we conclude that
+function $f(x)$ we conclude that the equation of motion for the 
+transition probability is given by
 \begin{equation}
 \label{KOL_FORWARD}
 \frac{\partial}{\partial t} T(x,t|x',t') =
 {\cal{A}}^{\dagger}(t) T(x,t|x',t').
 \end{equation}
-We will call the above equation the differential Chapman--Kolmogorov equation.
+We will call the above equation the {\em differential 
+Chapman--Kolmogorov equation}. The differential 
+Chapman--Kolmogorov equation is the central equation of this 
+chapter. Together with some initial probability distribution it 
+defines completely a Markov process. With its help it is possible
+to compute time--dependent expectation values and multi--time 
+correlation functions. Because of its importance, it is sometimes
+named the {\em master equation} in the physical literature.
 
 \section{The Liouville equation}
-
 Let us consider a physical system whose dynamics is described
 by a system of ordinary differential equations of first order
 \begin{equation}
 \label{ORDINARY_DIFF}
 \frac{d}{dt} x(t) = g(x(t)),
 \end{equation}
-where $g$ is a function $R^d \rightarrow R^d$. The initial 
+where $g$ is a function $R^d \rightarrow R^d$. 
+It is clear that Hamiltonian systems belong to this class 
+(\cite{ARNOLD}). The initial 
 condition is
 \begin{equation*}
 x(0) = x \in R^d.
@@ -316,7 +343,7 @@ where $g^i$ denotes the $i$--th component of $g$.
 
 With the help of these formal preliminaries it is easy to 
 construct the generator of a deterministic Markov process.
-Obviously we have for the expecatation value
+Obviously we have for the expectation value
 \begin{equation*}
 Ef(x(t)) = f(\phi(x,t)),
 \end{equation*}
@@ -326,14 +353,14 @@ Inserting the above expectation value into the definition of a
 generator (\ref{DEF_GENERATOR}) we immediately obtain
 \begin{eqnarray*}
 {\cal{A}}_L(t) f & = & \lim_{t\rightarrow 0} \frac{1}{t}
-                        \left[ Ef(x_t) - f(x)\right] \\
+                        \left[ Ef(x(t)) - f(x)\right] \\
              & = & \lim_{t\rightarrow 0} \frac{1}{t}
                         \left[ f(\phi(x,t)) - f(\phi(0,x))\right] \\
               & = & \frac{d}{dt} f(x) ,
 \end{eqnarray*}
 and finally, using Eq. (\ref{COORDINATE_FREE}),
 \begin{equation*}
-{\cal{A}}_L(t) f = \sum_i \frac{\partial}{\partial x_i}(x) g^i(x).
+{\cal{A}}_L(t) f = \sum_i \frac{\partial f}{\partial x_i}(x) g^i(x).
 \end{equation*}
 
 
@@ -341,13 +368,13 @@ Having determined the generator it is now straightforward to
 evaluate the corresponding differential Chapman--Kolmogorov 
 equation. To this end we only 
 have to determine the operator which is adjoint to
-${\cal{A}}_L$. It is evident that we have
+${\cal{A}}_L$ by partial integration. It is evident that we have
 \begin{eqnarray}
 \label{GEN_DET0}
 \int dx \left[{\cal{A}}_L f(x) \right]h(x) &=&
-          \sum_i \int dx \left[g_i 
+          \sum_i \int dx \left[g^i 
            \frac{\partial f}{\partial x_i} \right] h(x) \nonumber \\
-     & = & -\sum_i f \frac{\partial}{\partial x_i} g_i h(x).      
+     & = & -\sum_i f \frac{\partial}{\partial x_i} g^i h(x).      
 \end{eqnarray}
 Since Eq. (\ref{GEN_DET0}) holds for any function $h(x)$
 \begin{equation}
@@ -370,7 +397,10 @@ equation.
 The Liouville equation is the starting point for the microscopic 
 description of matter for classical as well as for quantum 
 mechanical systems. It is one of the fundamental equations of 
-statistical physics. In order to give an example of the occurrence
+statistical physics. 
+
+\subsection{Example: Classical statistical mechanics}
+In order to give an example of the occurrence
 of the Liouville equation we consider a closed classical system
 with $N$ degrees of freedom, e.g., $N$ particles in a 
 three--dimensional box. We know from classical mechanics, that the 
@@ -380,7 +410,7 @@ and $\vec{q}^N=(\vec{q}_1, \ldots, \vec{q}_N)$, where $\vec{p}_i$
 and $\vec{q}_i$ denote the momentum and the position of the 
 $i$--th particle. 
 
-If the system is Hamiltonian \cite{ARNOLD}, 
+If the system is Hamiltonian (\cite{ARNOLD}), 
 i.e., if we can define a Hamiltonian
 $H(\vec{p}^N,\vec{q}^N)$, then the time evolution of the momentum 
 and of the position of the particles is given by Hamilton's 
@@ -397,7 +427,7 @@ the state of the system. There is always some uncertainty in the
 initial conditions. Therefore, we regard $(\vec{p}^N,\vec{q}^N)$
 as a stochastic variable which is initially distributed according 
 to the joint probability density $P^N(\vec{p}^N,\vec{q}^N,0)$. 
-Following the above derivation the dynamics of this probability distribution
+The dynamics of this probability distribution
 is described by the following 
 Liouville equation
 \begin{equation*}
@@ -405,7 +435,7 @@ Liouville equation
 \end{equation*}
 where
 \begin{equation*}
-{\cal{A}}_L^{\dagger} = \sum_{i=1}^N \left( 
+{\cal{A}}_L^{\dagger} = -\sum_{i=1}^N \left( 
       \frac{\partial H}{\partial \vec{p}_i} 
             \cdot \frac{\partial}{\partial \vec{q}_i} 
          - \frac{\partial H}{\partial \vec{q}_i} 
@@ -414,15 +444,17 @@ where
 \end{equation*}
 The Liouville equation is often written in the following form
 \begin{equation*}
-i \frac{\partial}{\partial t} P^N =  {\cal{L}} P^N,
+i \frac{\partial}{\partial t} P^N(\vec{p}^N,\vec{q}^N,t) =  
+  {\cal{L}} P^N(\vec{p}^N,\vec{q}^N,t),
 \end{equation*}
 where
 \begin{equation*}
-{\cal{L}} = - i {\cal{A}}_L^{\dagger}.
+{\cal{L}} =  i {\cal{A}}_L^{\dagger}.
 \end{equation*}
 The operator ${\cal{L}}$ is called the Liouville operator.
 If the probability disribution at time $t=0$ is known the above 
-Liouville equation may be solved  to find the probability density
+Liouville equation may be integrated formally  
+to find the probability density
 at later times $t$
 \begin{equation*}
 P^N(\vec{p}^N,\vec{q}^N,t) = \exp(-i {\cal{L}}t)  
@@ -434,11 +466,11 @@ of the Liouville equation is done in kinetic theory. From the
 Liouville equation it is possible to derive a hierarchy of 
 equations for probability densities, the so--called 
 BBGKY--hierarchy from which kinetic equations may be derived
-\cite{REICHL}
+(\cite{REICHL}).
 
 
 \section{The master equation}
-Let us now introduce jump processes \cite{DAVIES,KAPPLER}.
+Let us now introduce jump processes (\cite{DAVIES,FELLER}).
 We consider a system in a given state $x$.  
 In order to characterize a jump process, i.e., a process
 in which the system undergoes sudden discontinuous changes of its state,
@@ -447,7 +479,7 @@ the system to remain in $x$ during the time interval $dt$
 \begin{equation*}
 (1-\lambda(x) dt)
 \end{equation*}
-and the probability that the system jump from state $x$ to state
+and the probability that the system jumps from state $x$ to state
 $x'$ during the time interval $dt$ 
 \begin{equation*}
 \lambda(x) Q(x',x) dt,
@@ -478,7 +510,7 @@ We start from Eq. (\ref{KOL_FORWARD_0})
 \int dx \left[ {\cal{A}}_M(t) f(x) \right] T(x,t|x',t') =
   \int dx f(x) \frac{\partial}{\partial t} T(x,t|x',t').
 \end{equation}
-and insert the generator (\ref{GEN_JUMP}) into the left hand side 
+and insert the generator (\ref{GEN_JUMP}) into the left--hand side 
 of the above equation
 \begin{eqnarray*}
 \lefteqn{\int dx \left[ {\cal{A}}_M(t) f(x) \right] T(x,t|x',t')} 
@@ -500,7 +532,8 @@ above equation we get
           T(x,t|x',t')      \right]
 \end{eqnarray}
 From Eq. (\ref{KOL_FORWARD_J0}) and from Eq. (\ref{ADJOINT_JUMP}) 
-we conclude that the Kolmogorow forward equation of a jump process
+we conclude that the differential Chapman--Kolmogorov equation 
+of a jump process
 reads
 \begin{eqnarray} 
 \label{KOL_FORWARD_J1}
@@ -533,31 +566,33 @@ for a jump process in its final form
 \end{equation}
 The above equation is called the master equation. 
 The name master equation appears for the first time in a paper by
-Nordsieck, Lamb and Uhlenbeck \cite{NORDSIECK}. 
+Nordsieck, Lamb and Uhlenbeck (\cite{NORDSIECK}). 
 It was chosen to denote an equation from which
-all relevant equation and results can be derived. 
+all relevant equations and results can be derived. 
 
 In the physical literature Eq. (\ref{MASTER_JUMP}) is written in 
 the simplified form
 \begin{equation}
 \label{MASTER_JUMP_P}
 \frac{\partial}{\partial t} P(x,t) =
- \int dx'' \left( w(x,x'') P(x'')
+ \int dx'' \left( w(x,x'') P(x'',t)
  - w(x'',x) P(x,t) \right).
 \end{equation}
-This equation has the following meaning \cite{VAN_KAMPEN}. Take a 
-time $t'$ and a state $y'$ and consider the solution of Eq. (\ref{MASTER_JUMP_P})
+This equation has the following meaning (\cite{VAN_KAMPEN}). Take a 
+time $t'$ and a state $x'$ and consider 
+the solution of Eq. (\ref{MASTER_JUMP_P})
 for $t \ge t'$ with the initial condition $P(x,t') = 
 \delta(x-x')$. This solution is the conditional transition 
 probability $T(x,t|x',t')$ of the Markov process for each choice
-of $x'$ and $t'$. It is important to keep in mind that Eq. (\ref{MASTER_JUMP_P})
+of $x'$ and $t'$. It is important to keep in mind that 
+Eq. (\ref{MASTER_JUMP_P})
 is always to be interpreted as an equation for $T$ and not for 
 $P$.
 
 In the above form the physical meaning of the master equation is 
 also evident. The master equation is a balance equation for the
 probability to find the system in some state. The first term in 
-the master equation describe the gain of state due to transitions 
+the master equation describes the gain of state due to transitions 
 from the other states. The second term is the loss due to the 
 transitions from the given state into the others. Evidently,
 the term with $x=x'$ does not contribute to the integral.
@@ -567,9 +602,9 @@ As a very simple example we consider the master equation
 description of radioactive decay. To this end let
 $P(n,t)$ be the probability density to find $n$ radioactive nuclei
 at time $t$. The probability for a nucleus to decay in unit time will
-be denoted by $\gamma$. Since the number of nuclei is integer
+be denoted by $\gamma$. Since the number of nuclei is integer,
 the master equation for the time evolution of $P(n,t)$ will assume 
-the following form
+the following discrete form
 \begin{equation}
 \label{MASTER_JUMP_P_N}
 \frac{\partial}{\partial t} P(n,t) =
@@ -579,10 +614,11 @@ the following form
 It is clear that the transition probability per unit time is given 
 by
 \begin{equation*}
-w(n,n') \gamma n' \delta(n,n'-1) \;\;\; (n \neq n').
+w(n,n') = \gamma n' \delta(n,n'-1) \;\;\; (n \neq n').
 \end{equation*}
 Substitution of the above $w(n,n')$ into the master equation
-(\ref{MASTER_JUMP_P_N}) yields
+(\ref{MASTER_JUMP_P_N}) yields the master equation of radioactive 
+decay
 \begin{equation}
 \frac{\partial}{\partial t} P(n,t) = 
 \gamma (n+1) P(n+1,t) - \gamma n P(n,t).
@@ -603,7 +639,8 @@ To this end we consider
          - \gamma  \sum_{n=0}^{\infty} n^2 P(n) \\
   & = & - \gamma \sum_{n=0}^{\infty} n P(n) .
 \end{eqnarray*}
-Thus we have found the following average of the stochastic 
+Thus we have found the following dynamical equation for the 
+average of the stochastic 
 variable $N(t)$
 \begin{equation}
 \frac{d}{dt} \langle N(t) \rangle = - \gamma \langle N(t) \rangle.
@@ -621,20 +658,21 @@ of the master equation for a one--step process. We will consider
 such stochastic processes in more detail in later chapters.
 
 \section{The Fokker--Planck equation}
-In this section we want to derive the Fokker--Planck equation,
-which is a special type of master equation \cite{VAN_KAMPEN}
+In this section we want to derive the Fokker--Planck equation
+(\cite{RISKEN}),
+which is a special type of master equation (\cite{VAN_KAMPEN})
 in the limit of small jumps.
 We begin by expressing the transition probability $w$ as a 
 function of the size $r$ of the jump and of the starting point
 \begin{equation*}
-w(y|y') = w(y';r); \;\;\; r=y-y'.
+w(y,y') = w(y';r); \;\;\; r=y-y'.
 \end{equation*}
 The master equation (\ref{MASTER_JUMP_P}) then reads
-\begin{equation*}
+\begin{equation}
 \label{MASTER_SMALL_JUMP}
 \frac{\partial}{\partial t} P(y,t) =
   \int dr w(y-r;r)P(y-r,t) - \int dr w(y;-r)P(y,t).
-\end{equation*}
+\end{equation}
 In order to consider the limit of small jumps essentially
 two assumptions will be needed. The first is that
 the function
@@ -658,7 +696,7 @@ Eq. (\ref{MASTER_SMALL_JUMP}) in a Taylor series
    \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
    \right)^{\nu}
     \left\{  a_{\nu}(y) P(y,t) \right\}
-    - P(y,t) \int dr w(y;-r),
+    - P(y,t) \int_{-\infty}^{\infty} dr w(y;-r),
 \end{equation}
 where we have defined
 \begin{equation*}
@@ -677,7 +715,7 @@ The above expansion is called the Kramers--Moyal expansion.
 Formally, we can write
 \begin{equation}
 \frac{\partial}{\partial t} P(y,t) = {\cal{A}}_{KM}^{\dagger}(y)
-         P(y,t)
+         P(y,t),
 \end{equation}
 where we introduced the adjoint generator
 \begin{equation*}
@@ -694,10 +732,10 @@ generator  reads
     \left( \frac{\partial}{\partial y} 
    \right)^{\nu}.
 \end{equation*}
-It is clear that dealing with the Kramers--moyal expansion will 
-not be easier then dealing with the original master equation.
+It is clear that dealing with the {\em Kramers--Moyal} expansion will 
+not be easier than dealing with the original master equation.
 
-A particularly interesting approximation to a jump process is 
+A particularly interesting and useful approximation to a jump process is 
 obtained by keeping only terms up to the second order in $\nu$
 \begin{equation}
 \label{FOKKER_PLANCK}
@@ -706,7 +744,7 @@ obtained by keeping only terms up to the second order in $\nu$
    + \frac{1}{2} \frac{\partial^2}{\partial y^2} 
       \left\{ a_2(y) P(y,t) \right\}.
 \end{equation}
-The above equation is called the Fokker--Planck equation.
+The above equation is called the {\em Fokker--Planck equation}.
 The first term on the right--hand side is usally called the drift
 term since it is essentially Liouvillian. The second term
 on the right--hand side is the diffusion term. In a later chapter
@@ -728,23 +766,24 @@ in a fluid of light particles. The large particle and the small
 molecules collide in a random fashion. These 
 collisions induce sudden variations of the velocity of the 
 Brownian particle. As a consequence the position $X$ of the Brownian 
-motion, if observed on a time scale which is larger then the 
+motion may be described by a Markov 
+process, if observed on a time scale which is larger then the 
 autocorrelation time of the velocity, i.e. many collisions have 
-occurred between two observations, may be described by a Markov 
-process. If we regard, for simplicity a one--dimensional 
+occurred between two observations. If we regard, for simplicity a 
+one--dimensional 
 situation, the Brownian particle makes random jumps back and forth 
-along the $x$--axis. The jumps my have any length but the
+along the $x$--axis. The jumps may have any length, but the
 probability for large jumps falls off rapidly. 
 It is reasonable to assume that these probabilities are 
-symmetrical and independent from the starting point.
+symmetrical and independent of the starting point.
 
 Hence we have
 \begin{equation*}
-a_1 = \frac{\Delta X}{\Delta t} = 0
+a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
 \end{equation*}
 and
 \begin{equation}
-a_2 = \frac{(\Delta X)^2}{\Delta t}= \text{const}.
+a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
 \end{equation}
 The Fokker--Planck equation of Brownian motion thus reads
 \begin{equation}
@@ -755,7 +794,7 @@ The Fokker--Planck equation of Brownian motion thus reads
 The above equation is a diffusion equation and we immediately
 identify the diffusion constant to be
 \begin{equation}
-D = \frac{(\Delta X)^2}{2 \Delta t}.
+D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
 \end{equation}
 The above relation is known as the Einstein relation. It relates 
 the diffusion constant with the microscopic jumps of the Brownian 
@@ -776,9 +815,27 @@ as
 \begin{equation}
 \langle X^2(t) \rangle = 2 D t.
 \end{equation}
-Hence, the width of the distribution increases witd the square 
+Hence, the width of the distribution increases with the square 
 root of the time. A behaviour which we already know from our 
 discussion of random walks.
+
+\section{Beyond this chapter}
+In this chapter we have introduced the key concepts which arise
+in the theory of stochastic processes. The mathematical more 
+interested reader will find a mathematical more precise introduction 
+in the classical books by Feller
+(\cite{FELLER}) and by Doob (\cite{DOOB}). 
+
+Students interested in the physical applications of stochastic processes
+should read the classical paper by Chandrasekhar 
+(\cite{CHANDRASEKHAR}) which is reprinted in \cite{WAX}.
+
+In this chapter we have only introduced the formal description,
+i.e., the kinematics of Markov processes. We have not discussed
+how Markov processes can be derived from some microscopic picture.
+A survey of such techniques can be found in the book by Oppenheim 
+et al. (\cite{OPPENHEIM}).
+
 
 \bibliographystyle{peter}
 \bibliography{V_98}
