@@ -5,6 +5,23 @@ import ptplot.*;
 
 public final class Plotting {
 
+  /** Plot a graph using errorbars.
+      yerr contains the positive, symmetric error in the data points. */
+  public static void errorBar(PlotApplet PlotObject, int plotNumber,
+                              double[] x, double[] y, double[] yerr,
+                              int number) {
+    double lowY,highY;    
+    boolean connect=false;
+    for (int i=0; i<number; i++) {
+      // Calculate the error bars
+      lowY=y[i]-yerr[i];
+      highY=y[i]+yerr[i];
+      PlotObject.plot().addPointWithErrorBars(plotNumber,
+                                              x[i],y[i],lowY,highY,connect);
+      if (connect==false) connect=true;
+    }    
+  }
+
   /** Plot a bar graph. 
     Calculate the midpoints for the bars automatically
     from the histogram  */
