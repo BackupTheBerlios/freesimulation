@@ -17,13 +17,38 @@ import VisualNumerics.math.*;
 public class EuropeanBinaryCall extends BinaryCall {
 
     public double exactSolution(double asset, double time) {
-        double d1,d2,dummy;
-        d1=(Math.log(asset/strike)+(interestRate-dividend+vol2half)
-            *(maturityTime-time)) / (volatility*Math.sqrt(maturityTime-time));
-        d2=d1-volatility*Math.sqrt(maturityTime-time);
-        dummy = Math.exp(-interestRate*(maturityTime-time)) 
-            * Statistics.normalCdf(d2);
-        return dummy;            
+        setup(asset,time);
+        return Math.exp(-interestRate*dt)*Statistics.normalCdf(d[1]);
     }
+    public double exactTheta(double asset, double time) {
+        setup(asset,time);
+        if (dt!=0) {
+            return interestRate*Math.exp(-interestRate*dt)
+                *Statistics.normalCdf(d[1])
+                + Math.exp(-interestRate*dt)*nPrime(d[1])
+                * (d[0]/(2*dt)-(interestRate-dividend)/(volatility*Math.sqrt(dt))); }
+        else {
+            return 0; }
+    }
+    public double exactDelta(double asset, double time) {
+        setup(asset,time);
+        if (asset!=0) {
+            return Math.exp(-interestRate*dt)*nPrime(d[1])
+                / (volatility*asset*Math.sqrt(dt)); }
+        else {
+            return 0; }
+    }
+    public double exactGamma(double asset, double time) {
+        setup(asset,time);
+        if (asset!=0) {     
+            return - Math.exp(-interestRate*dt)*d[0]*nPrime(d[1]) 
+                / (volatility*volatility*asset*asset*dt); }
+        else {
+            return 0; }
+    }
+
+    /** We have an exact solution, so override and return true here. */
+    public boolean existsExactSolution() {
+        return true; }
 
 } // EuropeanBinaryCall

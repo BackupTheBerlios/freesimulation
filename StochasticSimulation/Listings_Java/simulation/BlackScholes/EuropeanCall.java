@@ -17,14 +17,34 @@ import VisualNumerics.math.*;
 public class EuropeanCall extends Call  {
 
     public double exactSolution(double asset, double time) {
-        double d1,d2,dummy;
-        d1=(Math.log(asset/strike)+(interestRate-dividend+vol2half)
-            *(maturityTime-time)) / (volatility*Math.sqrt(maturityTime-time));
-        d2=d1-volatility*Math.sqrt(maturityTime-time);
-        dummy = asset*Math.exp(-dividend*(maturityTime-time))
-                *Statistics.normalCdf(d1) - strike*Math.exp
-            (-interestRate*(maturityTime-time)) * Statistics.normalCdf(d2);
-        return dummy;            
+        setup(asset,time);
+        return asset*Math.exp(-dividend*(maturityTime-time))
+            *Statistics.normalCdf(d[0]) - strike*Math.exp
+            (-interestRate*(maturityTime-time)) * Statistics.normalCdf(d[1]);
     }
+    public double exactTheta(double asset, double time) {
+        setup(asset,time);
+        return -volatility*asset*Math.exp(-dividend*dt)*nPrime(d[0])
+                                 / (2*Math.sqrt(dt))
+            + dividend*asset*Statistics.normalCdf(d[0])*Math.exp(-dividend*dt)
+            - interestRate*strike*Math.exp(-interestRate*dt)
+                                 *Statistics.normalCdf(d[1]);
+    }
+    public double exactDelta(double asset, double time) {
+        setup(asset,time);
+        return Math.exp(-dividend*dt)*Statistics.normalCdf(d[0]);
+    }
+    public double exactGamma(double asset, double time) {
+        setup(asset,time);
+        if (asset!=0) {
+            return Math.exp(-dividend*dt)*nPrime(d[0]) 
+                / (volatility*asset*Math.sqrt(dt)); }
+        else {
+            return 0; }
+    }
+
+    /** We have an exact solution, so override and return true here. */
+    public boolean existsExactSolution() {
+        return true; }
     
 } // EuropeanCall

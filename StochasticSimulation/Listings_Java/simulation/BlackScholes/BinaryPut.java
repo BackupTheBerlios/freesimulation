@@ -22,4 +22,12 @@ public abstract class BinaryPut extends Put  {
             return 0.0; }
     }
 
+    public void boundaryConditions(double time, 
+                                   double[] Value, double[] asset) {
+        int lastIndex = Value.length-1; 
+        Value[lastIndex]=0;
+        Value[0]=Math.exp(-(interestRate)*(maturityTime-time));
+        return;
+    }
+
 } // BinaryPut

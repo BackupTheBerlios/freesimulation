@@ -34,4 +34,8 @@ public class AmericanOneTouchPut extends BinaryPut {
         return dummy;
     }
 
+    /** We have an exact solution, so override and return true here. */
+    public boolean existsExactSolution() {
+        return true; }
+
 } // AmericanOneTouchPut

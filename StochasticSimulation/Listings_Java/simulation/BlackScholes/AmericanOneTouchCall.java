@@ -34,4 +34,8 @@ public class AmericanOneTouchCall extends BinaryCall {
         return dummy;
     }
 
-} // AmericanBinaryCall
+    /** We have an exact solution, so override and return true here. */
+    public boolean existsExactSolution() {
+        return true; }
+
+} // AmericanOneTouchCall

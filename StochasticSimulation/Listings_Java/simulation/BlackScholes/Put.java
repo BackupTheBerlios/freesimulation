@@ -24,5 +24,5 @@ public abstract class Put extends Option  {
         Value[0]=strike*Math.exp(-(interestRate)*(maturityTime-time));
         return;
     }
-
+        
 } // Put
