@@ -23,7 +23,7 @@ It is clear that it is not possible to teach simulation methods without
 performing some numerical experiments in the classroom and that it is 
 impossible for the students to learn stochastic simulation methods without 
 implementing the algorithms. Therefore, the theory and the corresponding 
-algorithms will be presented in a highly interconnected (intertwined), and, we 
+algorithms will be presented in a highly interconnected, and, we 
 hope, organic way.
 
 In order to stick to this idea it was necessary to choose a programming 
@@ -40,9 +40,10 @@ language. The obvious criteria for taking such a decision are
 The first criterion is of course very important because already simple 
 stochastic algorithms require a considerable amount of CPU time.
 A secondary aim of the course is to make the student acquainted with a 
-programming language "in action" so they should learn something about a "good 
-programming style" for real-life problems. Visualization of the results 
-obtained allows to understand in a plastic way what is going on physically. so 
+programming language ``in action'' so they should learn something 
+about a ``good 
+programming style'' for real-life problems. Visualization of the results 
+obtained allows to understand in a plastic way what is going on physically. So 
 the interface between program and visualization tool/graphical output should
 be comfortable. Last not least the availability of the program should be
 guaranteed. The corresponding compilers should be available at low, in the 
@@ -54,8 +55,9 @@ the language should also allow to demonstrate high--performance parallel
 algorithms.
 
 Because of our background of convinced Fortran users we considered the 
-following alternatives: our beloved Fortran, a language which is popular in 
-the engineering and applied mathematics communities, MATLAB, and Java, the 
+following alternatives: our beloved Fortran, MATLAB, a language which 
+is popular in 
+the engineering and applied mathematics communities, and Java, the 
 "Wunderkind" of software developers and of the Internet community. We have 
 not considered C, C++ for the simple reason that we never felt the necessity 
 to learn them.
@@ -69,7 +71,8 @@ We checked the power (the efficiency) of the languages considered by the
 following benchmark, which represent the prototype of a stochastic simulation. 
 We generated 100 trajectories of a typical one-step stochastic process
 and compared the CPU times obtained by different languages. The result
-of the benchmarks are summarized in the following table.
+of the benchmarks are summarized in the following table. The listings
+of the corresponding programs are listed in the appendix.
 
 \begin{table}[htbp]
   \begin{center}
@@ -132,7 +135,7 @@ We have just seen some good reasons to choose Java as the programming language
 for our purposes. Here we want to mention some more technical points, from a 
 computational science point of view, in favour of Java.
 
-Sun has described Java as follows \cite[]{javanutshell}:
+SUN Microsystems has described Java as follows \cite[]{javanutshell}:
 \begin{quote}
 Java: A simple, object--oriented, distributed, interpreted, robust, secure,
 architecture neutral, portable, high--performance, multi-thread, and dynamic 
@@ -181,8 +184,8 @@ In particular there is protection against deleting and modifying files.
 
 Java is architecture neutral and portable. The byte-code format is always the 
 same regardless of the platform on which the Java compiler runs. Furthermore,
-there are no "implementation defined" behaviours in Java. For example, Java
-specifies the size of each primitive data type. For instance, the integer 
+there are no ``implementation defined'' behaviours in Java. For example, Java
+specifies the size of each primitive data type. The integer 
 types byte, short, int, long are 8, 16, 32 or 64--bit long, respectively.
 
 Java is a high--performance language. 
@@ -199,9 +202,10 @@ Java is dynamic. Any Java class can be loaded into a running Java interpreter
 at any time.
 
 Java includes the zlib compression library in the 1.1. language specification.
-That makes it very easy to write and read compressed data. These are
+These are
 the freely available compression libraries used in the well-known
 gzip compressor.
+That makes it very easy to write and read compressed data. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,17 +253,17 @@ also freely available and have nice Java editing modes.
 
 There is also a freely available IDE (Integrated Development 
 Environment) called \href{http://www.freebuilder.org/}{FreeBuilder}.
-This is a complete environment to write Java programs comfortably.
-There are many commercial ones available, like SUN's Java Workshop,
-but this is the first under the GNU license. It is still in alpha
-development stage, but it already comprises a lot of features.
+This is a complete environment to write Java programs comfortably,
+which is the first under the GNU license. It is still in alpha
+development stage, but it already comprises a lot of features. Of
+course, there are many commercial ones available, like SUN's Java Workshop.
 
 Opposing to other languages, which use the ASCII character set, Java
 uses the Unicode character set \href{http://unicode.org}{(Unicode WWW
 Homepage)}. 
 Unicode consists of characters represented
 by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
-use 256 different characters (ASCII) you can use all the 38885 different
+use 256 different characters (ASCII) but you can use all the 38885 different
 characters available in the Unicode set (Version 2) for writing a Java program.
 This means you can name your variables using for example Japanese or Greek
 characters. Right from the beginning, Java is an international language.
@@ -272,9 +276,9 @@ You can use either the /* \ldots */ syntax (borrowed from C) for
 multi-line comments or the // syntax (borrowed from C++) for single
 line comments. Additionally you can use /** \ldots */ for comments
 to automatically generate a HTML documentation file for the class
-defined in the file.
+defined in the file. We will see later on how zhis can be achieved.
  
-\subsection{The "HelloWorld" Program}
+\subsection{The ``HelloWorld'' Program}
 \label{sec:HelloWorld}
 Now let's start with the traditional ``Hello World'' program written
 in Java.
@@ -284,7 +288,8 @@ in Java.
 \inputlisting{Listings_Java/HelloWorld_Application.java}
 You have to save the program in a file called 
 \verb|HelloWorld_Application.java|.
-To execute the above example you have to proceed as follows:
+To execute the above example you have to type in the commando line the
+following:
 \begin{itemize}
 \item Compiler: \verb/javac HelloWorld_Application.java/  
   $\Longrightarrow$ produces HelloWorld\_Application.class 
@@ -297,10 +302,11 @@ three lines.
 
 In the first line the program declares 
 with the help of the \texttt{class} statement a class called 
-HelloWorld. The identifier following the \texttt{class} statement is
+\verb|HelloWorld_Application|. 
+The identifier following the \texttt{class} statement is
 the name by which the class will be referenced. Each Java program
 is a class. The curly bracket appearing after the class name
-HelloWorld introduce the following class member. 
+\verb|HelloWorld_Application| introduces the following class member. 
 
 
 In the second line the \verb|main| method is introduced. The main
@@ -313,7 +319,9 @@ In the third line the method \verb|println| of the system class out
 is invoked. This method simply prints a string and terminates with a 
 new--line  command.
 
-You have just written and executed your first application in Java.
+You have just written and executed your first application in
+Java. Please, do not worry if you do not undestand everything. You are
+not expected to understand everything at this stage.
 
 
 \subsubsection{Applet}
@@ -337,9 +345,9 @@ do not have access to local file systems, so it is not possible
 to save data on the file system from an applet. It is also not
 possible for an applet to issue a print command, the process of
 printing has to be initiated by the server (browser). 
-And an apllet is not allowed to do time consuming tasks like
+And an applet is not allowed to do time consuming tasks like
 long computations. This has to be kept in mind, when writing
-programs.
+applets.
 
 
 The ``Hello World'' example written as an applet has the following form:
@@ -360,7 +368,7 @@ The paint() method appearing in the ``Hello World'' applet is
 responsible for the visual part of the applet. It uses a canvas
 (drawing area) with a size defined by the calling HTML file. In our case
 this HTML file could look like:
-\inputlisting{Listings_Java/HelloWorld_Applet.html}
+\inputlisting{./Listings_Java/call_HelloWorld_Applet.html}
 The code parameter given in the HTML file defines the name of the applet
 to be run. Because there is no init() and no start() method in our
 example, the paint() method gets executed by the browser (or appletviewer).
@@ -376,7 +384,8 @@ To run the applet you can either type
 \end{itemize}
 
 The question arising now, when to use an application and when to use
-an applet, is difficult to answer. We will decide for each program
+an applet, is difficult to answer. In the following chapters we will 
+decide for each program
 separately, which way to go. Time consuming calculations should
 definitly be written as an application, small programs can be
 written as an applet of course.
@@ -410,7 +419,7 @@ and for the HelloWorld\_Application you get:
   \includegraphics[width=5cm]{Listings_Java/HelloWorld_Application.eps}
 \end{center}
 The missing graphics is available in the Java documentation of the
-JDK and just have to be copied into the HTML directory.
+JDK and just has to be copied into the HTML directory.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Variables}
@@ -425,13 +434,14 @@ definite type and that each type has identical size and behaviour on
 all Java implementations.  Java has built in primitive data types
 to support integer, floating--point, boolean, and character values.
 The primitive data types of Java for integers, floating--points,
-characters and boolean variables are listed in the table
-below.
+characters and boolean variables are listed in table
+\ref{table:primitivedata}.
 \begin{table}[htbp]
+\label{table:primitivedata}
 \begin{center}
 \begin{tabular}{l|l|l|l|l|l}
 Type & Contains & Default & Size & Min \\
-     &          &         &      & Max \\ \hline
+     &          &         &      & Max \\ \hline \hline
 byte  & signed integer & 0 & 8bits & -128  \\
 &&& & 127    \\ \hline
 short & signed integer & 0 & 16 bit &-32768 \\
@@ -475,7 +485,7 @@ $\backslash$uxxxx, where xxxx is a sequence of four hexadecimal digits.
 Float and double types have special values that may be the result of
 certain floating-point operations. For example in the java.lang.Float
 and java.lang.Double classes the special values
-\verb|POSITIVE_INFINITY|, \verb|NEGATIVE INFINITY|, and 
+\verb|POSITIVE_INFINITY|, \verb|NEGATIVE_INFINITY|, and 
 \verb|NaN| (not-a-number) are
 defined.
 
@@ -497,7 +507,7 @@ to false and all objects (remember they are references) are initialized
 to \verb|null|. So there is no ambiguity like in other languages, if
 a variable has a defined value at certain points of the program. 
 Although Java forces you to include sometimes a statement to
-initialize variables, just to get easier to read source code.
+initialize variables, just to make easier to read source code.
 We will see an example for this later on, when we discuss loops
 and calculate averages of sequences of numbers.
 
@@ -548,7 +558,7 @@ type integer instead of the wrapper class like \verb|valueOf()|.
 This simplifies the conversion a little bit. For the example, see
 \verb|ParamApplet.java| in line 11. But this method is only 
 available to Integer, Long and Byte wrapper classes, NOT for
-Float and Double. Their you have to use the \verb|valueOf()| and
+Float and Double. In this case you have to use the \verb|valueOf()| and
 \verb|doubleValue()|, \verb|floatValue()| methods.
 
 To convert a double value to a string you have to use the \verb|toString()|
@@ -563,20 +573,20 @@ over the whole internet, you have to avoid name conflicts
 between the programs (classes). The solution in Java is to put
 every class in a \emph{package}. The name of the package is given
 at the beginning of a file before the actual program (class)
-definition starts. So for example if we put a
+definition starts. So for example if we put the statement
 \begin{quotation}
   \verb/ package de.freiburg.simulation; / 
 \end{quotation}
 at the beginning of the ``Hello World'' application, we can compile
-the application with \verb/javac HelloWorld.java / like before.
+the application with \verb/javac HelloWorld_Application.java / like before.
 But to run the application we have to use
 \begin{quotation}
-  \verb/ java de.freiburg.simulation.HelloWorld / . 
+  \verb/ java de.freiburg.simulation.HelloWorld_Application / . 
 \end{quotation}
 You are wondering why the program does not start? It cannot, because
 there is one more thing to know. Java is looking for programs (classes)
 in the directory structure given by the class name. So
-for the example above you have to put the \verb/HelloWorld.class/ file
+for the example above you have to put the \verb/HelloWorld_Application.class/ file
 in the directory \verb|de/freiburg/simulation/| and issue the command
 in the directory, where the directory tree starts.
 
@@ -637,7 +647,7 @@ application.
 \label{sec:Loops}
 
 \subsubsection{Simple arithmetics}
-As we already mentioned Java  supports almost all of the the standard
+As we already mentioned Java  supports almost all of the standard
 C operators. The arithmetic operators that operate on numerical types
 are 
 \begin{center}
@@ -764,6 +774,18 @@ expression is evaluated \textit{before} the statement is exectuted, while in
 the second construct the boolean expression is evaluated \textit{after} the
 statement has been performed!
 
+In order too give an example we write down an equivalent code using
+the
+\verb|while| statement of the \verb|for| loop of the
+\verb|DataMean.java| program. Lines 13 to 15 have to be replaced by
+\begin{verbatim}
+int i;
+while(i<N){
+  mean += rand.nextDouble();
+  i++;
+}
+\end{verbatim}
+
 \subsubsection{Conditional Statements}
 \paragraph{if-else}
 The \verb|if| statement is the fundamental form of conditional control
@@ -802,7 +824,7 @@ out of a loop. E.g., an unlabeld \verb|break| terminates the innermost
 
 The \verb|continue| statement is used only within loops. It skips to
 the end of the loop's body and evaluates the boolean expression that
-controls the loop. The \verb|reurn| statement terminates execution of
+controls the loop. The \verb|return| statement terminates execution of
 a method and returns to the invoker. If a method returns no value you
 have to use
 \begin{verbatim}
@@ -829,14 +851,19 @@ switch(expression) {
 }
 \end{verbatim}
 After evaluating the expression, the switch statement executes
-ncertain code within the block depending on the integral value of the
-expression. This information is indicated by the integer labe follwing
+certain code within the block depending on the integral value of the
+expression. This information is indicated by the integer label follwing
 the \verb|case:| statement. If there is no \verb|case:| label that
 matches the value of the expression, the \verb|swich| command executes
 the code following \verb|default:|, if there is one. Otherwise,
 \verb|switch| does nothing.
 
-Auch an dieser stelle ein Beispiel !!! (??????)
+An example of the use of the \verb|switch| statement is found in the
+simple program \verb|DiceGame.java| 
+
+%\inputlisting{Listings_Java/DiceGame.java}
+
+Ich habe leider das .class Programm auf Diskette! Brine ich morgen mit.
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parameters from the command line or from a html file}
@@ -906,12 +933,12 @@ little bit special.
 
 The first question is how to create arrays and how to destroy them.
 The destruction is easy to explain: it is done automatically
-by the garbage collector (like all objects). This is different to
+by the garbage collector (like for all objects). This is different to
 other languages like C, C++ and Fortran 90, where you explicitly
 have to destroy (free) the allocated memory. 
 
 To create an array you have to use the \verb|new| keyword used for
-creating (instantiating) objects. So to create an one dimensional
+creating (instantiating) objects. So to create a one dimensional
 array with 10 elements you use:
 \begin{verbatim}
         int intarray[] = new int[10];
@@ -968,11 +995,12 @@ create a triangular matrix by submitting:
         } 
 \end{verbatim}
 To access multidimenisonal arrays you can also use one dimensional
-array syntax (as in C). If you have an two dimensional array 
+array syntax (as in C). If you have a two dimensional array 
 you can access the element [i,j] by accessing the element [i+j*columns]. 
 
 Now let's look at an example using arrays. We have rewritten the program
-above to calculate the average of random numbers by using arrays.
+\verb|DataMean| above to calculate the average of random 
+numbers by using arrays.
 
 \inputlisting{Listings_Java/DataMean_Array.java}
 
@@ -994,7 +1022,8 @@ So to copy an array in the above example, you have to write:
 \begin{verbatim}
         System.arraycopy(array1,0,array2,0,array1.length);
 \end{verbatim}
-This copies all elements of array1 to array2. The remaining parts 
+This copies all elements of array1 to array2 staring from element 0. 
+The remaining parts 
 of array2 is not created!
 
 
@@ -1013,10 +1042,10 @@ We have already met a lot of object oriented features
 without discussing them in detail. 
 \begin{quote}
 A class is a collection of data and methods that operate on that data. In
-Fortran or C we called the methods procedures ore functions. An object
+Fortran or C we call the methods procedures or functions. An object
 is an instance of the class, meaning it is a thing to work with. The class
-defines the data necessary for the object and the functions which can be
-operated on them.   
+defines the data necessary for the object and the functions which can
+operate on them.   
 \end{quote}
 For example you can have a class ``Car'', which describes all the 
 eigenschaften of a car, e.g. type, age, weight, etc. Then you have a
@@ -1034,7 +1063,7 @@ putting them in front of the method separated by a point.
 For example to calulate the mean of an array of doubles, you can
 either write a method which takes the array as an argument (like you would
 in Fortran or C): \verb|mean(array[])| or you can use the object
-orinted feature: 
+oriented feature: 
 \begin{verbatim}
         Data dat = new Data(); 
         result = dat.mean();
@@ -1067,14 +1096,16 @@ The \verb|static| modifier defines a field (variable), which is belonging
 to the class and not to the object. So every object of that class 
 has the same value for a \verb|static| field. The \verb|public| modifier
 on the other hand defines a field or method, which is special to 
-an object not to the class -- this is also called a instance field or
+an object not to the class -- this is also called an instance field or
 method, the \verb|static| version is called a class variable or method.
 \begin{table}[htbp]
   \begin{center}
     \leavevmode
     \begin{tabular}{l|p{8cm}}
-     final & variables may not be changed, classes may not be subclassed\\\hline
-     public & accessible from anywhere\\
+     Modifiers &                                 \\ \hline \hline
+     final & variables may not be changed, classes may not be 
+                                   subclassed\\\hline
+     public & accessible from anywhere\\ \hline
      static & defines a top-level class, a class variable (field) or 
                  a class method\\\hline
      private & only within the defining class visible, not in other 
@@ -1151,7 +1182,7 @@ A simple example is given by the
 HelloWorld\_Applet.java program in section \ref{sec:Applet}.
 There we have extended the Applet class of the Java.applet package
 and therefore making our programm a subclass of the Applet class.
-So we inheritet all the methods and fields of that class. Then we
+So we inherited all the methods and fields of that class. Then we
 overloaded the \verb|paint()| method to display our message. 
 In the words of object oriented programming, writing an applet is
 called: defining a subclass of the Applet class and overloading
