@@ -76,7 +76,7 @@ At the beginning of the eighties two important papers appeared which reported
 on the possibility to include also quantum mechanical effects in the MD
 simulations.
 
-\subsection{The equations of motion}
+\subsection{The Equations of Motion}
 The classical Molecular Dynamics algorithm solves the equation of motion for a
 set of $N$ particles. A mechanical system with $3N$ degrees of freedom is
 fully characterised by a set of $3N$ generalised coordinates $q_i$, 
@@ -120,7 +120,7 @@ we integrate the equations of motion? These questions will be addressed in the
 following two sections.
 
 
-\section{Simple Models and interaction Potentials}
+\section{Simple Models and Interaction Potentials}
 In the first Molecular Dynamics simulation the classical fluid of interest was
 liquid Argon. In liquid argon the atoms are chemically inert and can be
 assumed to be spherical. For this reason the forces between any two atoms 
@@ -239,7 +239,7 @@ In this case the potential reads
 where $z_i$ and $z_j$ denote the charge of the ion $i$ and $j$, respectively.
 
 
-\section{Algorithms for the Integration of Newton's equations of Motion}
+\section{Algorithms for the Integration of Newton's Equations of Motion}
 In this section we want to get acquainted with algorithms for the numerical
 integration of Newton's equations of motion. We will write them for notational
 convenience as
@@ -263,7 +263,7 @@ chosen in such a way that the integration methods generates a stable
 solution. For a conservative system $h$ must be chosen small enough to
 ensure that the total energy is conserved within the required accuracy.
 
-\subsection{Euler methods}
+\subsection{Euler Methods}
 The easiest but not particularly precise choice are Euler algorithms. 
 We write Newton's equation of motion in the following form
 \begin{displaymath}
@@ -304,7 +304,7 @@ only one evaluation of the forces is necessary. This last predictor/corrector
 Euler algorithm turns out to be less accurate then the modified Euler
 algorithm.
 
-\subsection{The Gear algorithm}
+\subsection{The Gear Algorithm}
 Some Molecular Dynamics simulations employ the Gear algorithm. The Gear
 algorithm is a systematic predictor--corrector scheme. In the first predictor
 step the positions and the velocities are developed in a Taylor series. Then
@@ -379,8 +379,8 @@ and
                     \right).
 \end{displaymath}
 
-\subsection{Verlet and Beeman algorithm}
-\subsubsection{The Verlet algorithm}
+\subsection{Verlet and Beeman Algorithm}
+\subsubsection{The Verlet Algorithm}
 One of the most popular algorithms for the integration of Newton's equations
 of motion is the Verlet algorithm. The Verlet algorithm is less accurate then
 the Gear algorithm but it is simpler and requires much less memory. 
@@ -411,7 +411,7 @@ $x_{n+1}$ can be computed in the first step as
 The global errors associated with the Verlet algorithm are third order for the
 positions and second--order for the velocities.
 
-\subsubsection{The velocity form of the Verlet algorithm}
+\subsubsection{The Velocity Form of the Verlet Algorithm}
 A mathematically equivalent version of the Verlet algorithm is the so called
 velocity Verlet algorithm, which is given by
 \begin{displaymath}
@@ -428,7 +428,7 @@ velocities with the help of the corresponding expression we obtain immediately
 the Verlet algorithm from the velocity Verlet algorithm. In the following we
 will refer the velocity Verlet algorithm as \textit{the} Verlet algorihm. 
 
-\subsubsection{The Beeman algorithm}
+\subsubsection{The Beeman Algorithm}
 Another well--known algorithm is the Beeman algorithm, which also avoids the
 round--off errors of the original Verlet algorithm. It can be written in the
 following form
@@ -467,7 +467,7 @@ energy may fluctuate. As a matter of fact such deviations are less relevant in
 algorithms with a higher precision, however the latter may show a drift in the
 mean value of the energy.
 
-\subsection{The comparison of the algorithms}
+\subsection{The Comparison of the Algorithms}
 In order to compare the algorithms we consider the harmonic oscillator
 \begin{displaymath}
   \frac{d^2}{dt^2}x = - x,
@@ -483,7 +483,7 @@ Plot Vergleich error,...
 
 
 \section{The Algorithm for the Simulation}
-\subsection{Periodic Boundary conditions}
+\subsection{Periodic Boundary Conditions}
 We have seen in the previous section that a Molecular Dynamics code has to 
 store at
 least $3N$ coordinates of the $N$ molecules we are interested in. To this
@@ -541,7 +541,7 @@ if (z[i] > L ) z[i] = z[i] - L;
 if (z[i] < 0 ) z[i] = z[i] + L;
 \end{verbatim}
 
-\subsection{Potential cutoff}
+\subsection{Potential Cutoff}
 \index{potential cutoff}
 Because of the periodic boundary conditions we have to compute the forces in
 an infinite system. Of course, this is not feasible. Consider the
@@ -564,7 +564,7 @@ i.e.,
 For the Lennard--Jones potential the cutoff radius is usually chosen to be
 $r_c \approx 2.5 \sigma$.
 
-\subsection{The minimum image convention}
+\subsection{The Minimum Image Convention}
 \index{minimum image convention}
 If the cutoff radius $r_c$ is smaller than half of the length of the
 simulation box $L$, the minimum image convention may be used. 
@@ -608,7 +608,7 @@ rij = Math.sqrt(xij*xij + yij*yij + zij*zij);
 It is important to remark that in the minimum image convention each particle
 interacts exactly with $(N-1)$ particles.
 
-\subsection{Reduced variables}
+\subsection{Reduced Variables}
 In a MD simulation the equations of motion of the particles are integrated
 many times. It is therefore important to keep numerical roundoff errors as
 small as possible. A prerequisite for small roundoff errors is to choose units
@@ -914,11 +914,11 @@ is done. This makes programs not very responsive.
 \subsection{A Complete GUI for the Molecular Dynamics Program}
 putting it all together !  ????
 
-\subsection{Features not discussed in this book}
+\subsection{Features not Discussed in this Book}
 Not mentioned: Cut and Paste (Clipboard), Images, Sound 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\section{A molecular dynamics program}
+\section{A Molecular Dynamics Program}
 Hier soll das Programm MolDyn eingefuehrt und erlaeutert werden.
 Typisches Bild zeigen. Ablaufdiagramm. Javac mit option fuer grosse jobs!
 Ansprechen: Anfangsbedingungen der Orte, Anfangsbedingungen der
@@ -944,7 +944,7 @@ words, it is based upon the micro canonical ($E,V,N$) ensemble.
 
 
 
-\subsection{The pair correlation function}
+\subsection{The Pair Correlation Function}
 The best way to characterise the structure of a monoatomic fluid is to look at
 the pair-correlation function $g(r)$. The radial distribution function $g(r)$
 is a measure of the correlations of the positions of the particles, which are 
@@ -1206,7 +1206,7 @@ p = \frac{NkT}{V} - \frac{n^2}{6} \int_V d\vec{r} r
   \end{center}
 \end{figure}
 
-\subsection{Thermodynamic quantities}
+\subsection{Thermodynamic Quantities}
 From the principle of equipartition of energy it follows
 that at equilibrium each degree of freedom in the system has a kinetic energy
 $\frac{1}{2} kT$. Hence for $N$ particles in a 3d simulation the 
@@ -1231,7 +1231,7 @@ Hier fehlen noch einige Bemerkungen.
 
 Def. von Pot. Energie, usw. Diesen Abschnitt vor g(r)!!!!!!
 
-\subsection{Dynamical quantities}
+\subsection{Dynamical Quantities}
 Up to now we have considered only static equilibrium properties of the fluid.
 Time--dependent correlation functions are important tools for the description
 of dynamical phenomena. In particular we are interested in understanding the
@@ -1329,7 +1329,7 @@ we are interested in having an ensemble at constant temperature, i.e. a
 canonical ensemble ($NVT$). It is therefore the subject of the section to
 derive a canonical molecular dynamics simulation algorithm.
 
-\subsection{Velocity rescaling}
+\subsection{Velocity Rescaling}
 The easiest way to keep the temperature fixed to a wished temperature
 is to rescale the velocities at each time step. Let us be more precise. We
 denote by $T_0$ the desired temperature and by $K_0$ the corresponding kinetic
@@ -1377,7 +1377,7 @@ The parameter $\zeta_G$ is proportional to the change of the potential energy
 in a time step. In the next subsection, we will see that the simple rescaling
 algorithm introduced here may be given a more profound theoretical foundation.
 
-\subsection{The Gaussian thermostat}
+\subsection{The Gaussian Thermostat}
 In 1929 Gauss formulated a general principle of mechanics for the 
 description of systems with holonom and nonholonom constraints. 
 The Gaussian principle of least Zwang introduces as a measure of the constraint

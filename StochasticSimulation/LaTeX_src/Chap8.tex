@@ -1,6 +1,6 @@
 \chapter{Monte-Carlo Methods}
 
-\section{The M(RT)$^2$ algorithm}
+\section{The M(RT)$^2$ Algorithm}
 \label{sec:MRT2}
 
 In a certain sense this chapter is the logical continuation of Chap. xx,
@@ -328,7 +328,7 @@ original literature and to excellent textbooks. Here we prefer, in order to
 review some of the basic features of the physics of phase transitions to
 recall the mean field approach of Pierre Weiss. 
 
-\subsection{The mean field theory}
+\subsection{The Mean Field Theory}
 In order to understand better the physics behind the Ising model, we want to
 treat it in the most simple approximation showing phase transitions and some of
 their characteristic features. The basic idea of mean field approximations is
@@ -546,7 +546,7 @@ $\gamma$, $\delta$, and $\eta$ are not independent, but obey some scaling
 relations. 
 \cite{GouldSpornickTobochnik}
 
-\section{The Monte Carlo simulation}
+\section{The Monte Carlo Simulation}
 In the preceeding section we have convinced ourselves of the necessity of an
 efficient numerical algorithm for the Ising model. We will now apply the
 M(RT)$^2$ algorithm to the Ising model in order to compute numerically the
@@ -690,7 +690,7 @@ the algorithm should occur at random. In practice, in order to save CPU time,
 one sweeps across the lattice.
 
 
-\subsection{The code}
+\subsection{The Code}
 
 Listing und Beschreibung.
 
@@ -736,7 +736,7 @@ Listing und Beschreibung.
 \end{figure}
 
 
-\section{Data analysis}
+\section{Data Analysis}
 This section is devoted to the analysis of the data generated with the help of
 the Monte Carlo simulation of the Ising model. The thermal quantities of
 interest are, as we know, the mea energy $<E>$ and the heat capacity C.
@@ -788,7 +788,7 @@ and the latter from the fluctuations of the magnetisation
   \chi = \frac{1}{kT} \left( <M^2> - <M>^2  \right)
 \end{displaymath}
 
-\subsection{Estimation of errors}
+\subsection{Estimation of Errors}
 The Monte Carlo as well as the Molecular Dynamics simulation 
 of physical systems produce raw data, e.g. the energy or the magnetisation of
 the system, in form of a finite time series of correlated data. Typically,
@@ -801,7 +801,7 @@ is the estimation of the variance of finite time averages.
 We now discuss in some detail the analysis of the data
 \cite{FlyvbjergPetersen,Flyvbjerg}.
 
-\subsubsection{Preliminary considerations}
+\subsubsection{Preliminary Considerations}
 Let us consider a Monte Carlo simulation in which some quantity, say $x$ is
 computed. The simulation is performed over $n$ steps and $x_1$, $x_2$,
 $\ldots$,  $x_n$ denote the result of the $n$ consecutive measurements of the
@@ -874,7 +874,7 @@ some approximations of the above expression unbiased estimators based on
 the correlation functions we prefer to describe here another way for the
 estimation of $\sigma^2(m)$.
 
-\subsubsection{The "Blocking" method}
+\subsubsection{The "Blocking" Method}
 The method we want to describe now is to be preferred from a computational
 point of view and because it gives information about the quality of the
 estimate of $\sigma^2(m)$. The method is based on the repeated "blocking" of
@@ -980,7 +980,7 @@ fluctuations. This constant value is the estimate for $\sigma^2(m)$.
   \end{center}
 \end{figure}
 
-\subsection{Finite size effects}
+\subsection{Finite Size Effects}
 WICHTIG!!!!! Es gibt eine exakte Lsg. fuer das diskrete LxL 2D Ising modell
 mit periodischen randbedingungen. Dies koennte man in den Figuren plotten.
 A. E. Ferdinand and M. E. Fisher, Phys. Rev. 185 (1969) 832
@@ -1025,7 +1025,7 @@ finite--size scaling laws.
 
 
 
-\section{The cluster algorithm}
+\section{The Cluster Algorithm}
 The simulations of the Ising model have shown that as the temperature is
 decreased, in the absence of an external field,  clusters of spins of both
 signs tend to expand as we approach the transition. In this situation the

@@ -9,7 +9,7 @@ devoted to the introduction of the fundamental concepts of
 probability theory.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The nature of probabilities}
+\section{The Nature of Probabilities}
 In the previous chapter we have already made use of probabilistic 
 notions in an intuitive way. However, we have not asked the 
 following question: What are probabilities? How can we formulate 
@@ -22,7 +22,7 @@ a) the axiomatic interpretation, b) the frequency interpretation, and
 c) the ensemble interpretation.
 
 
-\subsection{The axiomatic interpretation}
+\subsection{The Axiomatic Interpretation}
 The axiomatic definition \cite{FELLER} of probabilities has been proposed by 
 Kolmogorov in 1933. The formal objects to which we want to 
 attribute probabilities are called {\em events} and are subsets
@@ -55,7 +55,7 @@ $P(\bar{e}) = 1- P(e)$;
 
 
 
-\subsection{The relative frequency interpretation}
+\subsection{The Relative Frequency Interpretation}
 In his attempt to axiomatize probability theory, von Mises
 introduced in 1919 the notion of a {\em Kollektiv}, which stands
 for a single infinite sequence of random events such as the 
@@ -100,7 +100,7 @@ definition of probability.
 a 4 in play of die.}
 \end{figure}
 
-\subsection{The ensemble interpretation}
+\subsection{The Ensemble Interpretation}
 We know from statistical mechanics  the notion of {\em ensemble}. An
 ensemble is a collection of a large number $N$ of equally prepared
 systems (equal models). A simple example is the microcanonical
@@ -198,7 +198,7 @@ which are of fundamental importance while studying stochastic
 processes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The definition of stochastic variables}
+\section{The Definition of Stochastic Variables}
 A stochastic variable $X$ is an object which is defined by a space 
 of states (space of events, phase space) and by a probability 
 density over this set. The space of state may be discrete, e.g. 
@@ -252,7 +252,7 @@ F(x) = \int_{-\infty}^x dx' P(x'),
 \end{equation}
 or equivalently by $F'(x)= P(x)$.
 
-\subsection{Further characterization of stochastic variables}
+\subsection{Further Characterization of Stochastic Variables}
 A stochastic variable is completely defined by the space of states 
 and by the probability density function. However, it is helpful to 
 introduce some other quantities in order to characterize them.
@@ -312,11 +312,11 @@ infinite number of nonvanishing cumulants.
 
 REMARK ( kappai given then g(k) unique !!!???????????ß) 
 
-\subsection{Some important random variables}
+\subsection{Some Important Random Variables}
 Let us first introduce and discuss briefly some important 
 continuous one dimensional probability densities.
 
-\subsubsection{The uniform density}
+\subsubsection{The Uniform Density}
 The simplest density is the uniform density which is constant if $x$
 lies within the interval $[a,b]$ and zero otherwise, i.e.,
 \begin{equation}
@@ -334,7 +334,7 @@ is
 As we will see the uniform probability density will play a 
 fundamental role in the forthcoming chapters.
 
-\subsubsection{The exponential density function} 
+\subsubsection{The Exponential Density Function} 
 The exponential density function is defined as
 \begin{equation}
 P(x) = a \exp(-ax),
@@ -346,7 +346,7 @@ variable are equal
 \langle X \rangle = \sigma = \frac{1}{a}.
 \end{equation}
 
-\subsubsection{The Gaussian or normal density function}
+\subsubsection{The Gaussian or Normal Density Function}
 The most important density function for physics is the 
 gaussian probability density. It has the form
 \begin{equation}
@@ -362,7 +362,7 @@ G(k) = \exp(i \mu_1k - \frac{1}{2} \sigma^2 k^2),
 which means that $\kappa_1 = \mu_1$, $\kappa_2 = \sigma^2$ and 
 that all higher cumulants vanish.
 
-\subsubsection{The Cauchy or Lorentz density} 
+\subsubsection{The Cauchy or Lorentz Density} 
 The Cauchy or Lorentz density is defined as
 \begin{equation}
 P(x) = \frac{1}{\pi} \frac{a}{(x-x_0)^2 + a^2}
@@ -374,7 +374,7 @@ fact, not even the integral defining  the mean value converges.
 Let us now discuss some typical discrete probability densities.
 The discrete random variable will be denoted by $N$.
 
-\subsubsection{The discrete uniform probability density} 
+\subsubsection{The Discrete Uniform Probability Density} 
 The discrete uniform probability density is defined by
 \begin{equation}
 P(n) = \frac{1}{n_2 -n_1 +1}
@@ -395,7 +395,7 @@ relations
 \sum_{n=1}^N n= \frac{N(N+1)}{2}; \sum_{n=1}^{N} n^2 = \frac{N(N+1)(2N+1)}{6}. 
 \end{equation}
 
-\subsubsection{The binomial distribution}
+\subsubsection{The Binomial Distribution}
 Let us assume that the random variable $Y$ 
 can take only two values $\{y_1,y_2\}$, the probability for the 
 value $y_1$ being $p$ and correspondingly for $y_2$ (1-p). If we 
@@ -420,7 +420,7 @@ It is easy to check the normalization of the binomial distribution since
         p^n (1-p)^{(N-n)}.
 \end{equation}
 
-\subsubsection{The Poisson density}
+\subsubsection{The Poisson Density}
 The Poisson density as we already know
 is defined as
 \begin{equation}
@@ -463,7 +463,7 @@ So that finally for $a \gg 1$
 Thus, in the limit $a \gg 1$ the Poisson density resembles a
 Gaussian density with mean $a$ and variance $a$.
 
-\subsection{Multivariate random variables}
+\subsection{Multivariate Random Variables}
 Up to now we have considered only one dimensional stochastic 
 variables. Obviously, $n$ random variables $X_1, X_2, \ldots, X_n$ 
 which are sampled simultaneously can be interpreted as the 
@@ -589,7 +589,7 @@ G(\vec{k}) = \exp(-\frac{1}{2} k_i A_{ij} k_j + i \mu_ik_i).
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The random variables transformation theorem}
+\section{The Random Variables Transformation Theorem}
 We will discuss in this subsection a very helpful theorem by 
 Gillespie. The proof of the theorem can be found in the book by
 Gillespie \cite{GILLESPIE} or in his paper \cite{GILLESPIE_THEOREM}. 
@@ -616,7 +616,7 @@ The integrals extend over the range of all $X_i$.
 For a proof of the random variable transformation theory see 
 Gillespie.
 
-\subsection{The addition of stochastic variables}
+\subsection{The Addition of Stochastic Variables}
 As a first simple example of the application of the random 
 variable theorem we consider the addition of two stochastic 
 variables $X_1$ and $X_2$ with joint probability density
@@ -673,7 +673,7 @@ and
 
 
 
-\subsection{One--to--one transformations}
+\subsection{One--to--One Transformations}
 Let us consider the following application of the random variables
 transformation theorem. Let $X$ be a random variable with
 probability density $P(x)$ and let the random variable $Y$ be 
@@ -717,7 +717,7 @@ P(y_1, \ldots, y_n) = P(x_1, \ldots, x_n)
 
 BEMERKUNG: ANALOGIE ZUR ANALYSIS !!!!!!!
 
-\subsection{The central limit theorem}
+\subsection{The Central Limit Theorem}
 As an essential application of the random variable transformation 
 theorem we prove the central limit theorem.
 Let us consider $N$ statistically independent random variables $X_i$
@@ -819,7 +819,7 @@ variables $X_i$ have mean $\mu$ and variance $\sigma^2$. This is
 the reason for the foremost importance of the Gaussian 
 distribution.
 
-\subsection{The $\chi^2$--distribution}
+\subsection{The $\chi^2$--Distribution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
@@ -1269,7 +1269,7 @@ turns zero or step size/accuracy gets too large, e.g.
 
 
 %%%%%%%%%%%%
-\subsection{The discrete--time random walk}
+\subsection{The Discrete--Time Random Walk}
 A drunkard leaves a pub. His house is at the end of a straight
 street. Each time  he moves he walks one
 step to the direction of his home  or one step in the opposite direction
@@ -1365,7 +1365,7 @@ the random walk. This can be seen in Fig. (\ref{F_RWDTN}).
 random walk. the program {\sf rwdtn} was run for nstep=100 and 
 nreal=1000.}
 \end{figure}
-\subsection{Generation of Gaussian random numbers}
+\subsection{Generation of Gaussian Random Numbers}
 As a simple demonstration of the central limit theorem we want to 
 generate Gaussian distributed random numbers by adding uniformly 
 distributed ones.
@@ -1428,7 +1428,7 @@ Of course, estimates should be unbiased, i.e., for very large samples
 the estimate based on the sample size $N$ should converge to the
 ensemble averages.
 
-\subsubsection{Mean values}
+\subsubsection{Mean Values}
 Let us consider $N$ copies $X_1, \ldots, X_N$  of a random variable
 $X$ and let us build the new stochastic variable
 \begin{equation*}
@@ -1452,7 +1452,7 @@ distribution which has the same mean value as $X$, but with a variance
 which is smaller by a factor of $N$. Up to terms of the order
 $O(N^{-2})$ the distribution of $Z$ is Gaussian.
 
-\subsubsection{Estimating mean and variance}
+\subsubsection{Estimating Mean and Variance}
 Let us consider to have the sample $x_1, \ldots, x_N$. A natural
 estimator of the mean value $\mu$ is the sample mean
 \begin{equation*}
@@ -1503,7 +1503,7 @@ The function of the additional second term which would be identically
 equal to zero if $m$ were exact is to correct the rounding errors of
 the first term \cite{PRESS}.
 
-\subsubsection{Confidence levels}
+\subsubsection{Confidence Levels}
 It is important to have also a quantitative characterization of the
 goodness of the estimation. To this end we assign to every 
 estimation a certain confidence interval, which is to be chosen in 
@@ -1530,7 +1530,7 @@ the interval $[m-\sigma_m, m+\sigma_m]$ contains the population mean.
 
 In general we have...
 
-\section{Beyond this chapter}
+\section{Beyond this Chapter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}

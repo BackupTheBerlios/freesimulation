@@ -1,7 +1,7 @@
 %%%%%%%
 %%%%%%% Chapter 1
 %%%%%%%
-\chapter{Stochastic Simulation methods}
+\chapter{Stochastic Simulation Methods}
 
 Among the numerical techniques available to computational physics,
 stochastic methods, also called Monte Carlo methods, play a 
@@ -20,7 +20,7 @@ In order to elucidate the two important points just mentioned
 we consider in the following two simple examples.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The radioactive decay}
+\section{The Radioactive Decay}
 As an example of a natural stochastic process we consider radioactive decay.
 Many  heavy nuclei are intrinsically unstable and decay to 
 lighter, more stable elements
@@ -110,7 +110,7 @@ end loop over time
 Before writing a program in Java to simulate the radioactive decay, let
 us briefly discuss the generation of random numbers in Java.
 
-\subsection{Random numbers in Java}
+\subsection{Random Numbers in Java}
 In the introduction we have already met different possible ways to generate
 random numbers in Java. The first method  \verb|random()| we encountered 
 was contained in the \verb|Math| class of the \verb|java.lang| package.
@@ -165,7 +165,7 @@ and standard deviation 1.0.
 Now we are in the position to write a Java code for the simulation of
 the radioactive decay.
 
-\subsection{The Simulation code}
+\subsection{The Simulation Code}
 The above algorithm written in Java is shown in the following listing.
 \loadlisting{RadioactiveDecay.java}{./Listings_Java/RadioactiveDecay.java}
 
@@ -202,7 +202,7 @@ the point where we feel the necessity to learn something about the graphical
 possibilities of Java.
 
 
-\subsection{The Most Easy Plot -- The AWT And Applet Packages}
+\subsection{The Most Easy Plot -- The AWT and Applet Packages}
 \label{sec:AWTIntro}
 
 Before trying to plot the data generated with the program
@@ -309,9 +309,19 @@ Object $\rightarrow$ Component $\rightarrow$ Container $\rightarrow$ Window
 $\rightarrow$ Frame. The \verb|Frame| class represents an optionally resizable
 application window with a title bar. 
 
-With the help of the \verb|add(Component)| method in the \verb|Container| class,
+With the help of the \verb|add(Component)| method in the 
+\verb|Container| class,
 we can ``add'' arbitrary components to our container. E.g. we can add
-a button or a label to the frame we have created (for example: ???).
+a button or a label to the frame we have created, for example:
+\begin{verbatim}
+  Frame f = new Frame("Test Frame");
+  Button but = new Button("Test"});
+  ....
+  f.add(but);  // here we add the Button to the Frame
+  ....
+  f.show(); // finally we show the Frame on the screen
+\end{verbatim}
+
 A list of all AWT 
 components defined in the Java 1.1 standard is shown in table 
 \ref{tab:AWTComponents}.
@@ -423,7 +433,7 @@ everytime the windows has to be redrawn, because of some events like
 scolling in the browser window or, like here, resizing the window. 
 
 Having learned the basic graphical tools of the AWT with the help of
-the easiest plot program, we can now apply what we have just learned
+the most easy plot program, we can now apply what we have just learned
 to the simulation of the radioactive decay.
 \loadlisting{RadioactiveDecay\_easyplot.java}%
               {./Listings_Java/RadioactiveDecay_easyplot.java}
@@ -439,7 +449,6 @@ g.setcolor(Color.red)
 \end{verbatim}
 in line xy before drawing the corresponding curve.
 
-????????????????????
 It is important to note that in the lines xx--yy we have added the
 code
 \begin{verbatim}
@@ -449,7 +458,7 @@ which allows to handle the request to close the window. These ``events''
 are in the \verb|java.awt.event| package and will be discussed later
 in section \ref{sec:AWTAdvanced}. 
 
-\subsection{Ptplot -- extending Javas Graphics Capabilities}
+\subsection{Ptplot -- Extending Javas Graphics Capabilities}
 The quality of the plot of the simulation results are rather poor
 compared to high standards we are used to today. It is clear, that we
 could now go on refining the plot with the help of the Java
@@ -573,7 +582,46 @@ They are summarized in the following table.
   \end{center}
 \end{table}
 
-PLOTTING FILES ???????
+Although this is the most common way of using ptplot in this book, there
+is another feature coming with ptplot. It can read data files and plot
+the data. For this you have to write a script, which contains the
+commands for the plot to be created. This scripting language
+is borrowed from the \emph{pxgraph} program. It is like using GNUPlot with
+its scripting facilities. For details you can look at the 
+documentation coming with the ptplot package. For us it will be
+easier to read the files into Java and then use ptplot to plot it on 
+screen.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{3D plots in Java -- Java3D}
+Sometimes you are forced to use 3D plots to visualize your data
+and therefore it is natural to ask for a package to accomplish
+three dimensional plots. Unfortunately to our knowledge there is
+(yet) no freely available package in Java for 3D plots. Ptplot
+can only handle 2D plots and JSci can handle some easy 3D plots.
+
+There is also a program called 
+\verb|SciVis|\footnote{\href{???}{???}|}
+which is completely written in Java and allows for 2D and 3D plots
+in many different ways. But up to now, there are only C and
+Fortran interfaces to supply data to it. You can also read from
+files, but first you would have to understand the data format.
+The authors told us they are developing a Java interface to
+supply data directly to \verb|SciVis|, but we have not heart any
+news yet. 
+
+At the moment, the best solution is to write the data to a file
+and use an external program available to you. The most common
+denominator would possibly be GNUPlot, which is available for many
+different platforms and can create a lot of different 3D plots.
+
+Since Java 2, there is a new (external) API -- not included in the JDK 1.2
+disribution, you have to get it seperatly -- called \emph{Java3D}. 
+This is a full implementation of threee dimensional routines to
+produce all kinds of 3D scenes and objects and even move them, etc.
+With this API it seems to be possible to write a fairly easy
+3D plotting program in the near future. So this lack of features
+in Java for the scientist should be gone soon. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Printing in Java and with Ptplot}
@@ -637,6 +685,24 @@ Because most of the time you need postscript (or EPS) files of the
 created plots or graphics, this is the most common use of the
 printing features for a scientist.
 
+There is one caveat to mention: if you are going to insert the
+produced postscript files into TeX/LaTeX, you will have to do
+some editing om the postscript files. First of all you have to
+add a bounding box line at the beginning of the postscript
+file. You can do this by hand, put a line
+\begin{verbatim}
+ %%BoundingBox:  0 0 800 800
+\end{verbatim}
+at the beginning of the postscript file (You can adapt the numbers
+to the figure at hand and check the area by viewing it in 
+ghostscript/ghostview.) or you can use a program to automatically
+calculate and insert a bounding box command (like e.g. epstool,
+gsview on Windows, etc.). The second change is to remove all the 
+lines between \verb|%%BeginSetup| and \verb|%%EndSetup| except
+a possible rotate line like \verb|90 rotate 0 -595 translate|.
+This is necessary, because some strange effects appear in the
+resulting \verb|.dvi| or \verb|.ps| file after "texing".
+
 Another drawback might be the resolution of the postscript file.
 This happens especially when printing GUI components and is not
 present when plotting ptplot plots fortunately. Java kind of rasters
@@ -656,10 +722,24 @@ color handling and printing. This is a big step ahead, but for the
 details we refer to the API documentation, because it is also a
 bit more difficult to understand.
 
+\paragraph{Printing from an Applet}
+Usually applets are not allowed to initiate printjobs, unless
+a \verb|SecurityManager|, another important Java class, explicitly
+allows for it. Most of the time the browser or appletviewer has
+to initiate the printjob, allowed by the security manager. 
+
+What you can do is, write a main method in the applet and start
+it as an application. Do the plots  and print them from the
+application. 
+
+If you use a security manager and are allowed to print, you need a
+frame for your applet, because the  \verb|getPrintJob()| command
+only takes a frame and not an applet as first argument. So just
+put a frame into the applet and then put the applet inside the frame.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The results of the simulation}
+\subsection{The Results of the Simulation}
 
 The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and 
 (\ref{FIG_DECAYB}).
@@ -737,8 +817,18 @@ P = \frac{\mu^n \exp(-\mu)}{n!},
 where $\mu = \beta t$. The above distribution is the well know
 Poisson distribution.
 
-HERE:: ???? barPlots , Errorbars, histogram !!!!!!!!!!!!!!!!!!
+\subsubsection{Plot Methods in the Simulation Package}
+Because sometimes it is easier to use ready made routines, we
+have added some plotting convenience classes and methods to
+get the plots faster. If you take the shortcut presented here
+or you want to use the low level ptplot interface does not 
+matter, it is totally up to you.
 
+?????
+\paragraph{plot2D()}
+\paragraph{errorBars()}
+\paragraph{histogram()}
+\paragraph{barPlots()}
 
 It is now easy to verify that the number of decays in a given 
 interval is distributed according to the Poisson distribution.
@@ -748,7 +838,7 @@ program we plot in a histogram the distribution of the number of
 decays and overlay the expected Poisson
 distribution.  
 
-\subsubsection{Listing of the program decayr}
+\subsubsection{Listing of the Program decayr}
 \inputlisting{./Listings/decayr.m}
 
 
@@ -775,7 +865,7 @@ for N0=100 and lambda = 0.001.}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Simple Monte Carlo evaluation of integrals}
+\section{Simple Monte Carlo Evaluation of Integrals}
 It is the purpose of this subsection to introduce Monte Carlo Methods
 in the context of the numerical evaluation of definite integrals.
 We will see in later chapters that Monte Carlo integration is the
@@ -1099,3 +1189,8 @@ series for $e$ ($\sum_{i=0}^\infty 1/i! = e$)?
 
 \bibliographystyle{peter}
 \bibliography{V_98,simulit}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "V_98"
+%%% End: 

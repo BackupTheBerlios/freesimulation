@@ -1,5 +1,5 @@
 
-\chapter{Stochastic differential equations}
+\chapter{Stochastic Differential Equations}
 
 In the previous section we have derived an exact simulation algorithm
 for the generation of trajectories of the Ornstein--Uhlenbeck process.
@@ -154,7 +154,7 @@ consider for a
 moment the most classical Langevin equation of statistical 
 physics, namely the one describing Brownian motion.
 
-\section{The Langevin equation and Brownian motion}
+\section{The Langevin Equation and Brownian Motion}
 In 1908 Langevin considered the problem of the dynamical 
 description of Brownian motion (\cite{VAN_KAMPEN}). 
 He suggested that the equation of 
@@ -231,7 +231,7 @@ Eq. (\ref{FDT}) is a simple version of the so--called
 fluctuation--dissipation theorem.
 
 
-\section{Stochastic integration}
+\section{Stochastic Integration}
 It is the aim of this section to show how the formal problems
 arising in the formulation of Langevin equations can be avoided.
 Let us begin by formulating the Langevin equation in a discrete 
@@ -278,7 +278,7 @@ mathematical definition of stochastic integrals see \cite{GARD,
 POTTER,KLOEDEN_AN,OETTINGER}. We will follow here the more
 {\em physical} line of reasoning of \cite{gardiner}.
 
-\subsection{Definition of the stochastic Ito integral}
+\subsection{Definition of the Stochastic Ito Integral}
 The starting point for the definition of the Ito integral is the
 following reasoning. For $b(X(t),t)=b=\text{const}$, the stochastic 
 integral
@@ -340,7 +340,7 @@ defined as
    \left\{ \sum_{i=1}^{n} f(t_{i-1}) [W(t_i) - W(t_{i-1})]   \right\}.
 \end{equation*}
 
-\subsection{The Stratonovich stochastic integral}
+\subsection{The Stratonovich Stochastic Integral}
 \label{STRATONOVICHSUB}
 An alternative definition of a stochastic  integral has been given by
 Stratonovich. He suggested the following definition
@@ -477,7 +477,7 @@ so that
 
 
 
-\section{Ito stochastic differential equations}
+\section{Ito Stochastic Differential Equations}
 Having defined stochastic integrals the proper definition of a
 stochastic differential equation can be given (Again we follow 
 \cite{gardiner}. The mathematically interested reader should
@@ -493,7 +493,7 @@ X(t) = X(t_0) + \int_{t_0}^t ds a(X(s),s)
      + \int_{t_0}^t dW(s) b(X(s),s).
 \end{equation}
 
-\subsection{Ito's formula}
+\subsection{Ito's Formula}
 In this subsection we want to consider a function
 $f$ of the stochastic variable $X(t)$ and derive an Ito stochastic
 differential equation for $f$. We begin by expanding the differential 
@@ -522,8 +522,8 @@ the change of variables is not given by the rules of
 ordinary calculus.
 
 
-\subsection{The equivalence of stochastic differential equations 
-and of the Fokker--Planck equation}
+\subsection{The Equivalence of Stochastic Differential Equations 
+  and of the Fokker--Planck Equation}
 Let us now look at the time development of the expectation value 
 of an arbitrary function
 $f(X(t))$.
@@ -561,7 +561,7 @@ process defined in terms of a stochastic differential equation with
 drift coefficient $a(x(t),t)$ and a diffusion coefficient
 $b(X(t),t)^2$ and the above Fokker--Planck equation.
 
-\section{The Stratonovich stochastic differential equation}
+\section{The Stratonovich Stochastic Differential Equation}
 In subsection \ref{STRATONOVICHSUB} we have seen that it is 
 possible to give other definitions of the stochastic integral.
 One such definition is the Stratonovich stochastic integral defined 
@@ -722,7 +722,7 @@ dilemma can be found in \cite{VAN_KAMPEN}.
 
 
 
-\section[The Euler--Maruyama method]%
+\section[The Euler--Maruyama Method]%
 {The numerical integration of stochastic differential 
 equations: The Euler--Maruyama method}
 Let us begin this section by review some basic facts of numerical 
@@ -855,7 +855,7 @@ Under suitable smoothness conditions for the functions $g$ the
 Euler scheme can be shown to have order of weak convergence 
 $\nu=1$.
 
-\subsection{The Ornstein-Uhlenbeck process}
+\subsection{The Ornstein-Uhlenbeck Process}
 As a first example of the application of the Euler algorithm
 we consider again the Ornstein--Uhlenbeck process.
 The implementation of the stochastic Euler algorithm has been 
@@ -918,7 +918,7 @@ leads to the estimate $<X^2>|_{t=4}=0.497182$, which is in very
 good agreement with the expected exact result. The simulation took
 1729 sec on the laptop.
 
-\subsection{Noise induced transitions}
+\subsection{Noise Induced Transitions}
 In this second example of the application of the stochastic Euler 
 method we want to simulate a stochastic differential equation with
 multiplicative noise and consider noise induced transitions.
@@ -1094,7 +1094,7 @@ respectively. The histogram reproduced in Fig. (\ref{F_SDENOISEIN_2})
 is in agreement with this theoretical prediction.
 
 
-\section{Stochastic resonance}
+\section{Stochastic Resonance}
 In order to get aquainted with 
 the numerical integration of stochastic differential equations we discuss a
 phenomenon which occurs as
@@ -1175,7 +1175,7 @@ equation
 an equation which is often encountered in the theory of nonequilibrium
 critical phenomena. 
 
-\subsection{Reaction rate theory}
+\subsection{Reaction Rate Theory}
 Let us now investigate some fundamental properties of the above dynamical
 system. We begin by considering the case $D=0$ (no fluctuations). If the 
 system is initially in a stable state it remains there for ever. 
@@ -1234,7 +1234,7 @@ The rate to jump over the barrier $W_k$ is obviously the inverse escape time
   w_k = \tau_k^{-1} = \frac{a}{\sqrt{2} \pi} \exp(-2 \Delta U/D).
 \end{equation}
 
-\subsection{The stochastic resonance}
+\subsection{The Stochastic Resonance}
 Having reviewed some basilar results of the theory of nonlinear stochastic
 systems we are now ready to look at the phenomenon of stochastic resonance.
 In the preceeding subsections we made use only of two of the basic ingredients

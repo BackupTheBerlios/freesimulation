@@ -10,7 +10,7 @@
 \label{sec:Programming}
 
 
-\subsection{General considerations}
+\subsection{General Considerations}
 \label{sec:General_considerations}
 This book is about stochastic simulation methods and their applications to
 physical systems. The material is presented at an introductory level. We do 
@@ -21,7 +21,7 @@ informal as possible and as precise as necessary.
 
 
 
-\subsection{Programming languages -- Why Java ?}
+\subsection{Programming Languages -- Why Java ?}
 \label{sec:Programming_languages}
 It is clear that it is not possible to teach simulation methods without 
 performing some numerical experiments in the classroom and that it is 
@@ -83,7 +83,12 @@ of the corresponding programs are listed in the appendix.
     \leavevmode
     \begin{tabular}{llp{3cm}|c|c}
       Language & OS & Software & Machine & CPU time \\\hline\hline  
-   Fortran & Linux & Nag f90 Compiler & ? & \\\hline
+   Fortran 90 & Linux & Nag f90 Compiler V2.2(260) & Pentium 133 & 2.1 sec.\\\hline
+           & Linux & Nag f90 Compiler V2.2(260) with -O3 & Pentium 133 & 2.4 sec.\\
+           & Linux & Nag f95 Compiler V1.0(436) & Pentium 133 & 2.3 sec.\\
+           & Linux & Nag f95 Compiler V1.0(436) wiht -O4& Pentium 133 & 2.3 sec.\\
+           & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
+           & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.4 sec.\\
    C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\\hline
    C       & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
    C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\\hline
@@ -233,7 +238,7 @@ gzip compressor.
 That makes it very easy to write and read compressed data. 
 
 
-\subsection{Brief history of Java}
+\subsection{Brief History of Java}
 Java started off in 1991 as a project by James Gosling at that time called
 Oaks. Its purpose was focussed on the use as OS software for consumer
 electronic devices. A small group decided to adapt Oak to a web
@@ -287,7 +292,7 @@ the RMI protocol supplied by Java.
 
 
 
-\subsection{Tools for writing and using Java}
+\subsection{Tools for Writing and Using Java}
 
 \begin{description}
 \item[] \textbf{Programs:} 
@@ -367,7 +372,7 @@ the RMI protocol supplied by Java.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Basic elements of Java}
+\section{Basic Elements of Java}
 \label{sec:Basic_elements_of_Java}
 Like in other languages to write a program you first need an editor
 to type the source code. Second you need a compiler to translate
@@ -860,7 +865,7 @@ For example, two ways of doing it are:
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Packages and import Statements}
+\subsection{Packages and Import Statements}
 \subsubsection{Packages}
 Because Java was designed to be able to load code distributed
 over the whole internet dynamically, you have to avoid name conflicts
@@ -1001,7 +1006,7 @@ command \verb|javac -depend -d base_directory main.java|. Then
 the Java compiler takes care of all ``dependencies''.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simple arithmetics, Conditional Statements and Loops}
+\subsection{Simple Arithmetics, Conditional Statements and Loops}
 \label{sec:Loops}
 
 \subsubsection{Simple arithmetics}
@@ -1342,7 +1347,7 @@ case expressions have to be integral values and not any boolean
 expressions like \verb|i>2|. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Parameters from the command line or a html file}
+\subsection{Parameters from the Command Line or a HTML File}
 \label{sec:Parameter}
 
 \subsubsection{Parameters from the command line}
@@ -1580,7 +1585,7 @@ statistical properties of an double array.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{A classical example: The Buffon needle}
+\subsection{A Classical Example: The Buffon Needle}
 
 It seems that the earliest documented application of stochastic simulation
 methods to the solution of an integral has been advanced by Comte de
@@ -2058,7 +2063,7 @@ protected void finalize() throws Throwable;
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The System class: Screen-Output and Keyboard-Input}
+\subsection{The System Class: Screen-Output and Keyboard-Input}
 
 Now we are in a place to discuss the \verb|System.out.println()| statement
 already used in the ``HelloWorld'' program. This is calling the
@@ -2331,7 +2336,7 @@ Here a short example:
 \lstinputlisting{Listings_Java/TestPassingFunctions.java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Structure and small Overview of Java}
+\section{Structure and Overview of Java}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Keywords and APIs in Java 1.1 and Java 2}
@@ -2419,15 +2424,15 @@ The first lette of the name is an uppercas letter. If the
   one begins with an uppercase letter, e.g., \verb|Needle|,
   \verb|Reader|, \verb|StringToken|.
 
-\paragraph{Methods.} The names of methods are verbs or verb--phrases
-  (???). They begin with lowercase letters. If the name cionsists of
-  more then one word, the second and all the following words begin
+\paragraph{Methods.} The names of methods are verbs or verb--phrases. 
+  They begin with lowercase letters. If the name consists of
+  more than one word, the second and all the following words begin
   with an uppercase letter. To give some examples:
 \begin{itemize}
-\item methods which set the value of a variable or return the value of
+\item methods, which set the value of a variable or return the value of
   a variable begin with \verb|set| or \verb|get|; e.g.,
   \verb|setName|, \verb|getData|.
-\item method which check some condition and return a result  get the
+\item methods, which check some condition and return a result  get the
   prefix \verb|is|, e.g., \verb|isSmaller|.
 \item methods, which simply perform some conversions are characteized
   by the returned type and have the prefix \verb|to|, e.g.,
@@ -2489,7 +2494,7 @@ starting with the page \verb|jdk1.2/docs/index.html|
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Applications and Applets revisited}
+\section{Applications and Applets Revisited}
 
 After learning many things about object oriented programming,
 we want to recapitulate the basic differences and features of
@@ -2796,11 +2801,18 @@ An overview of the most important methods is given in table
 \end{table}
 
 
-\subsection{The JavaSci Package}
+\subsection{The JSci Package}
 ????
+FFT,
+ODEs,
+Physics,
+Plots,
+
 
 \subsection{JNT, Lapack for Java - JamPack and Jama}
 ????
+\subsubsection{JNT}
+\subsubsection{Lapack}
 
 
 
@@ -2871,7 +2883,13 @@ important to know what is behind this.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Online References}
-\label{sec:Online_Refernces}
+\label{sec:OnlineReferences}
+
+\href{http://java.sun.com/}{http://java.sun.com/} is the homepage of
+Java from SUN. A good starting point. \\
+
+\href{http://www.javasoft.com/}{http://www.javasoft.com/} \\
+
 ??????
 
 

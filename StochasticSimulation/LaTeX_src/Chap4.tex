@@ -1,4 +1,4 @@
-\chapter{Markov processes and master equations}
+\chapter{Markov Processes and Master Equations}
 This chapter is devoted
 to the introduction of some mathematical concepts, which allow the
 correct treatment of time--dependent probabilistic phenomena. 
@@ -12,7 +12,7 @@ with the help of differential Chapman--Kolmogorov equations.
 These concepts will be applied
 in the next chapters to typical examples from statistical physics.
 
-\section{Stochastic processes}
+\section{Stochastic Processes}
 We have already learned in Chap. 2 that once a stochastic variable 
 $X$ has been defined it is possible to define other stochastic 
 variables, say $Y$, as functions of $X$ by some mapping $f$. In 
@@ -100,7 +100,7 @@ will introduce the next most simple class, the {\em Markov processes},
 in which the knowledge of only the presents determines the future.
 
 
-\section{Markov processes}
+\section{Markov Processes}
 In order to define the class of stochastic processes, which will be 
 of central importance in the forthcoming theoretical discussions 
 and in the examples of the next chapters, we will formulate
@@ -189,7 +189,7 @@ For the sake of a compact notation we will write now $P=P_1$ and
 $T=T_1$.
 
 
-\section{The differential Chapman--Kolmogorov equation}
+\section{The Differential Chapman--Kolmogorov Equation}
 We now derive a differential  form of the Chapman--Kolmogorov 
 equation which is more practical for physical applications.
 We will proceed in two steps. First, we introduce the concept
@@ -197,7 +197,7 @@ of generator of a stochastic process. Second, we will construct
 with the help of the generator an equation of motion for the
 transition probabilty density.
 
-\subsection{The generator of a Markov process}
+\subsection{The Generator of a Markov Process}
 We consider the time evolution of the expectation value
 of  a function $f(y)$.
 Thus,
@@ -266,7 +266,7 @@ in the compact and suggestive form
 \end{equation}
 
 
-\subsection{The differential Chapman--Kolmogorov equation}
+\subsection{The Differential Chapman--Kolmogorov Equation}
 With the help of the generator we derive an equation of motion for
 the transition probability $T$.
 Multiplying equation (\ref{DEF_GENERATOR}) 
@@ -330,7 +330,7 @@ processes, for jump processes and for diffusion processes.
 \caption{Overview of the theor of stochastic processes.}
 \end{figure}
 
-\section{The Liouville equation}
+\section{The Liouville Equation}
 Let us consider a physical system whose dynamics is described
 by a system of ordinary differential equations of first order
 \begin{equation}
@@ -414,7 +414,7 @@ description of matter for classical as well as for quantum
 mechanical systems. It is one of the fundamental equations of 
 statistical physics. 
 
-\subsection{Example: Classical statistical mechanics}
+\subsection{Example: Classical Statistical Mechanics}
 In order to give an example of the occurrence
 of the Liouville equation we consider a closed classical system
 with $N$ degrees of freedom, e.g., $N$ particles in a 
@@ -484,7 +484,7 @@ BBGKY--hierarchy from which kinetic equations may be derived
 (\cite{REICHL}).
 
 
-\section{The master equation}
+\section{The Master Equation}
 Let us now introduce jump processes (\cite{DAVIES,FELLER}).
 We consider a system in a given state $x$.  
 In order to characterize a jump process, i.e., a process
@@ -627,7 +627,7 @@ defined in terms of a master equation can be simulated
 numerically.
 
 
-\section{Stochastic simulation}
+\section{Stochastic Simulation}
 In principle there are two ways to treat numerically
 stochastic processes which are defined in terms of master
 equations. In the first approach one solves numerically the
@@ -778,7 +778,7 @@ will be given there.
 The program will be applied in the next subsections.
 
 
-\subsection{Radioactive decay}
+\subsection{Radioactive Decay}
 As a first example we consider the master equation 
 description of the radioactive decay. To this end let
 $P(n,t)$ be the probability density to find $n$ radioactive nuclei
@@ -850,7 +850,7 @@ is 30 and the ensemble average was taken over 10 realizations.
 The decay rate is $\gamma=0.1$.}
 \end{figure}  
 
-\subsection{The Poisson process}
+\subsection{The Poisson Process}
 A further important one--step process is the Poisson process, which
 is defined by
 \begin{equation}
@@ -1009,7 +1009,7 @@ As we can see for a larger value of \texttt{q} the variance of the
 process gets smaller. Thus the dynamics of the process is nearly 
 deterministic.
 
-\subsection{The continuous time random walk}
+\subsection{The Continuous Time Random Walk}
 In this subsection we want to consider the master equation for
 the one--dimensional random walk. The steps of the walker are of 
 length $l$. The positions of the walker are $nl$ and are labelled
@@ -1115,7 +1115,7 @@ in $l$ and get
 which is a special type of Fokker--Planck equation, as we will see 
 in the next section.
 
-\section{The Fokker--Planck equation}
+\section{The Fokker--Planck Equation}
 In this section we want to derive the Fokker--Planck equation
 (\cite{RISKEN}),
 which is a special type of master equation (\cite{VAN_KAMPEN})
@@ -1208,7 +1208,7 @@ term since it is essentially Liouvillian. The second term
 on the right--hand side is the diffusion term. In a later section
 we will learn how to deal with this equation.
 
-\subsection{The Wiener process}
+\subsection{The Wiener Process}
 Let us consider the important special case 
 of vanishing drift, i.e. $a_1=0$, and diffusion coefficient
 equal to one, i.e. $a_2=1$. The generator takes the form 
@@ -1573,7 +1573,7 @@ process. The
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{L\'evy Processes}
+\section{L\'evy or Stable Distributions}
 In this section we address again the problem of the random walk. As we already
 know the canonical application of the random walk is the theory of Brownian
 motion. The chaotic motion of the Brownian particles over the length scale
@@ -1584,7 +1584,6 @@ $\tau$. It is the aim of this chapter to go "beyond Brownian motion"
 Brownian motion which have proven to be a rich field in probability theory,
 statistical physics, chaotic dynamics, and, last not least, in economics.  
 
-\section{L\'evy or Stable distributions}
 We know already that from a mathematical point of view  
 the problem of the random walk is the problem of the addition of independent
 (usually identically distributed) random variables. For example, if the
@@ -1773,8 +1772,8 @@ In the next section we are going to construct the
 most general form of all stable distributions, which is due to L\'evy..
 
 
-\section{The Cauchy process}
-\subsection{Bachelier's Chain Equation}
+\subsection{The Cauchy Process}
+\subsubsection{Bachelier's Chain Equation}
 Let us now consider a Markov process $X(t)$ and let its space of states by
 $R$. As we know the conditional transition probability $T(x,t|x',t')$
 satisfies the Chapman--Kolmogorov equation. In order to derive a differential
@@ -1805,7 +1804,7 @@ Cauchy process and hence it is not possible to derive a differential form of
 the Chapman--Kolmogorov equation, i.e., there is no master equation describing
 the dynamics of the Cauchy process.
 
-\subsection{The realizations of the Cauchy process}
+\subsubsection{The Realizations of the Cauchy Process}
 In order to generate trajectories of the Cauchy process we first have to be
 able to generate Cauchy distributed random numbers. We have already seen in
 Chapter 2 that Cauchy distributed random numbers can be generated as the ratio
@@ -1906,10 +1905,9 @@ for any $\epsilon >0$. For continous Markov processes the above limit can be
 shown to be zero with probability 1.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-\section{L\'evy processes}
+\subsection{L\'evy Processes}
 We have just seen that there exist Markov processes which can not be described
 by a master equation. Such processes are generally called L\'evy
 processes. We now want to characterize them in general \cite{Montroll}.
@@ -2095,7 +2093,7 @@ interesting applications.
 Several other interesting properties of the L\`evy distributions can be found
 in the literature \cite{MontrollBendler,BouchadGeorges}.
 
-\subsection{The numerical generation of Levy distributed random variables}
+\subsection{The Numerical Generation of Levy Distributed Random Variables}
 In general the generation of stable random variables is quite an involved
 business. We will start our discussion by presenting an algorithm which allows
 the generation of random numbers distributed according to $S_{\alpha}(1,0)$.
@@ -2132,11 +2130,11 @@ variables it is clear that
 
 \cite{Mantegna}
 
-
-\section{Fractal space processes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fractal Space Processes}
 \cite{ShlesingerEncyclopedia} \cite{Hughes}
 
-\subsection{Levy flights}
+\subsection{Levy Flights}
 As a first example of a random walk which does not belong to the  class of
 Brownian motion, we consider a random walk process for which the variance of
 the jump length is infinite. The absence of a finite variance implies the
@@ -2145,7 +2143,7 @@ the process. This makes such L\`evy random walks, which are also called L\`evy
 flights, scale invariant fractals. A particular illustrative and pedagogical
 examle is the one--dimensional Weiertstrass random walk.
 
-\subsubsection{The Weierstrass random walk}
+\subsubsection{The Weierstrass Random Walk}
 The Weierstrass random walk is a discrete space one--dimensional L\`evy
 flight. It represents a very simple model for a random process which generates
 self--similar clusters.
@@ -2333,9 +2331,10 @@ in finance.  For a recent survey of the applications of L\`evy statistics to
 physical systems see Ref. \cite{MoreLevyBook}. This refernce contains also
 an article by Mandelbrot on L\'evy.
 
-\section{The continuous time random walk}
-Hier fehlt ein ganzes Stueck!!!!!!!!!
-\subsection{L\'evy alks}
+\section{The Continuous Time Random Walk}
+???????? Hier fehlt ein ganzes Stueck!!!!!!!!!
+
+\subsection{L\'evy Walks}
 Because of the  infinite moments L\'evy flights have been ignored in the
 physical literature. It has been shown however that rather then focusing on
 this characteristic feature of Levy flights one shoul concentrate on their

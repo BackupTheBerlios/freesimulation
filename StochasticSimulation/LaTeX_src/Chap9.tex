@@ -83,7 +83,7 @@ erstem mal vorkommt schon in Kap, 2 gemacht?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{The Ehrenfest dog--flea model}
+\section{The Ehrenfest Dog--Flea Model}
 \label{sec:EhrenfestModel}
 The fundamental problem of statistical mechanics is to describe 
 how a system reaches
@@ -97,7 +97,7 @@ processes to the investigation of problems in statistical mechanics. The model
 has been formulated originally to discuss the meaning of the $H$--theorem in
 thermodynamics. Here, we follow the discussion in \cite{Jancel,KacLogan}.
 
-\subsection{The model}
+\subsection{The Model}
 We consider $2N$ balls (fleas) numbered from 1 to $2N$. The balls are
 distributed in two urns (dogs), say $A$ and $B$. At random we choose an
 integer between 1 and $2N$ and move the ball whose number has been drawn from 
@@ -249,9 +249,9 @@ around $\langle k \rangle =0$ with variance $\langle k^2 \rangle = N/2$,
 \end{displaymath}
 
 
-\subsection{The simulation}
+\subsection{The Simulation}
 Schr\"odinger erwaehnen;
-\subsection{Discussion of the results}
+\subsection{Discussion of the Results}
 \subsubsection{The "Umkehreinwand" of Loschmidt}
 The "Umkehreinwand" has been formulated in 1876 by Loschmidt as an argument
 against Boltzmann's kinetic theory, which is based upon the Boltzmann
@@ -296,7 +296,7 @@ is a very large number!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Parallel progamming with Java - Introduction}
+\section{Parallel Progamming with Java - Introduction}
 \label{sec:ParallelJava}
 
 At this point it certainly makes sense to stop for a second with the 
@@ -320,7 +320,7 @@ example of parallel programming in Java using the Ehrenfest model as an
 example problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{What is parallel/concurrent programming?  \\
+\subsection{What is Parallel/Concurrent Programming?  \\
             Why do we have to do it?}
 
 These are probably the most often asked questions of the late 90s
@@ -652,6 +652,8 @@ meanwhile software packages available, which convert OpenMP programs into
 usual Fortran/C/C++ code using MPI calls and therefore running on
 distributed memory machines, e.g. OdinMP, etc.}
 and the worse performance compared to good MPI programs.
+
+??? Example OpenMP program
 
 \subsubsection{Symphony}
 An alternative to OpenMP would be to use a kind of server, which distributes
@@ -1139,12 +1141,12 @@ refer to \cite[]{JavaThreads}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \subsubsection{MPI and Java}
 
-??????????? which interface ???
+??????????? which interface MpiJava ???
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Master equations, entropy, asnd the $H$--theorem}
+\section{Master Equations, Entropy, and the $H$--Theorem}
 In this section we are going to discuss in more detail the connections between
 the master equation and the entropy. In particular we want to derive the
 $H$--theorem, which we have already mentioned in the previous section. 
@@ -1166,7 +1168,7 @@ symmetric, i.e.,
   w(x|x') P_{\textrm{eq}}(x',t) = w(x'|x) P_{\textrm{eq}}(x,t).
 \end{equation}
 
-\subsection{Case (i): The symmetric transition matrix}
+\subsubsection{Case (i): The Symmetric Transition Matrix}
 It is evident that for these case the master equation (\ref{eq:MasterH}) can
 be written in the simplified form
 \begin{equation}
@@ -1249,7 +1251,7 @@ nonvanishing transition matrix elements. If the set of the states $x$ does not
 decay into two or more independent subsets, the equilibrium is uniquely
 characterized by the form (\ref{eq:MasterHEqSym}).
 
-\subsubsection{Case (ii): Detailed balance}
+\subsubsection{Case (ii): Detailed Balance}
 Case (ii) is of course more general than case (i). In order to
 investigate this second case we choose the following $H$--function
 \begin{equation}
@@ -1325,8 +1327,8 @@ which is independent of $p(x)$. At equilibrium $H=0$, so that
 $S^{\textrm{eq}}$ is the thermodynamic entropy.
 
 
-\section{Nonequilbrium thermodynamics}
-\subsection{balance equations of fluid dynamics}
+\section{Nonequilbrium Thermodynamics}
+\subsection{Balance Equations of Fluid Dynamics}
 In classical theoretical physics the dynamics of fluids is described with the
 help of the balance equations of nonequlibrium thermodynamics for the mass,
 the momentum, and the energy. These balance equations are derived under the
@@ -1377,7 +1379,7 @@ The Burgers equation is a one--dimensional version of the Navier--Stokes
 equation. It is often used in gas dynamics since it shows shock wave
 solutions, and as a simple model of turbulence.
 
-\subsection{The definition of the phase space}
+\subsection{The Definition of the Phase Space}
 In this subsection we define the space of
 states of the fluid. Once the accessible states of the fluid
 are known it
@@ -1476,7 +1478,7 @@ Formally, the resulting phase space may be written as
 \right\} \;\;\; .
 \end{equation}
 
-\subsection{The construction of the master equation}
+\subsection{The Construction of the Master Equation}
 
 In order to obtain the master equation for the Burgers model  we proceed
 as follows: We show explicitly how stochastic processes can be
@@ -1493,7 +1495,7 @@ according to
 {\cal{O}} \, P \left( \{ N_u^{\lambda} \} ;t \right) \;\;\; .
 \end{equation}
 
-\subsubsection{Viscosity as a many--particle random walk}
+\subsubsection{Viscosity as a Many--Particle Random Walk}
 In this section we are going to describe viscous fluids within
 our stochastic
 approach. In the simplest cases, the Navier--Stokes equation
@@ -1846,7 +1848,7 @@ v_{\lambda -1}^2}{2 \; \delta l }
 which, in turn, leads to Burgers' equation~(\ref{BURGERS}) in the
 continuum limit $\delta l \longrightarrow 0$.
 
-\subsubsection{The nonlinear convection term}
+\subsubsection{The Nonlinear Convection Term}
 Up to now, we have shown how to deal with  viscous diffusion. 
 However, it is of great importance
 to include
@@ -2054,7 +2056,7 @@ formulation
 can, indeed, be given a clear physical interpretation as we will see in one of
 the next setions.
 
-\subsection{The stochastic simulation algorithm}
+\subsection{The Stochastic Simulation Algorithm}
 It is the aim of this section to show that the master equation formulation
 of the Burgers equation naturally leads to very transparent numerical
 simulation algorithms.
@@ -2188,7 +2190,7 @@ for example, nonlinear wave solutions like shock waves and ``humps''.
 Thus, Burgers' equation is interesting as it makes possible the study
 of
 the interplay of nonlinear propagation and viscous diffusion.
-\subsubsection{Shock waves}
+\subsubsection{Shock Waves}
 The first example we are going to treat is the shock wave
 solution of Burgers'
 equation. The shock wave solution is obtained for the following
@@ -2254,7 +2256,7 @@ confluence of two shocks propagating with different velocities to the right
 ($R=100$). Again the analytical solution for this problem \cite{WHITHAM}
 is indicated by the lines.
 
-\section{Hydrodynamic fluctuations}
+\section{Hydrodynamic Fluctuations}
 In section 2 we proposed a master equation for the stochastic
 description of Burgers' equation. This master equation
 has been constructed in such a way that the
@@ -2553,8 +2555,8 @@ dynamics of the fluctuations.
 
 %%%%%%%%%%%%%%% !!!!!!!!!!!!!!!!!!
 
-\section{Homogeneous turbulence: The Burgers equation}
-\subsection{Homogeneous turbulence}
+\section{Homogeneous Turbulence: The Burgers Equation}
+\subsection{Homogeneous Turbulence}
 A turbulent fluid is usually characterized by irregular and disordered
 temporal variations of the velocity field at each point of the fluid and
 conversely  the variations of the velocity vary irregularly from point to
@@ -2781,7 +2783,7 @@ which shows the exponential cut--off due to the vscosity.
 For Burgerslence the dissipation spectra $k^2E(k)$ is constant until the
 cut--off by viscous decay.
 
-\subsection{The master equation formulation}
+\subsection{The Master Equation Formulation}
 We now turn to the master equation formulation of the problem.
 The stochastic process $\delta u N_{\lambda}(t)$ obviously
 represents a
@@ -3148,7 +3150,7 @@ parameters in this way, it might be possible to simulate
 directly that
 velocity field which is actually measured.
 
-\subsection{The stochastic simulation}
+\subsection{The Stochastic Simulation}
 In this subsection we will apply the stochastic simulation method
 described above to Burgers' model of homogeneous turbulence.
 Let us first
@@ -3232,8 +3234,7 @@ where the Taylor microscale $\Lambda$ is defined by
 \end{equation}
 
 The following simulations have been performed along the lines
-described
-in subsection A employing the parameters
+described in subsection A employing the parameters
 $\delta u = 5\cdot 10^{-4}$
 and $M+1 = 1024$. The random initial configuration is given by
 \begin{equation}
