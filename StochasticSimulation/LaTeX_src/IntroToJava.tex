@@ -47,9 +47,9 @@ A secondary aim of the course is to make the student acquainted with a
 programming language ``in action'' so they should learn something 
 about a ``good 
 programming style'' for real-life problems. Visualization of the results 
-obtained allows to understand in a plastic way what is going on physically. So 
+obtained allows to understand more easily what is going on physically. So 
 the interface between program and visualization tool/graphical output should
-be comfortable. Last not least the availability of the program should be
+be comfortable. Last but not least the availability of the program should be
 guaranteed. The corresponding compilers should be available at low, in the 
 ideal case at no cost to the students for home exercises. Furthermore, they
 should be portable on PCs with Windows or Linux operating systems, on Macintosh
@@ -74,6 +74,7 @@ course, all are clean. But not all are equally powerful.
 We checked the power (the efficiency) of the languages considered by the 
 following benchmark, which represent the prototype of a stochastic simulation. 
 We generated 100 trajectories of a typical one-step stochastic process
+(see Chapter \ref{sec:OneStepProcesses}
 and compared the CPU times obtained by different languages. The result
 of the benchmarks are summarized in Table \ref{tab:Performance}. The listings
 of the corresponding programs are presented in the appendix.
@@ -87,31 +88,33 @@ of the corresponding programs are presented in the appendix.
            & Linux & Nag f90 Compiler V2.2(260) with -O3 & Pentium 133 & 2.4 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) & Pentium 133 & 2.3 sec.\\
            & Linux & Nag f95 Compiler V1.0(436) with -O4& Pentium 133 & 2.3 sec.\\
-\rowcolor[gray]{0.85} & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
+\rowcolor{tabgray} & Linux & Pallas f95 Compiler V3.0-3 & Pentium 133 & 1.3 sec.\\
            & Linux & Pallas f95 Compiler V3.0-3 with -O4& Pentium 133 & 1.4 sec.\\\hline
    C       & Linux & GCC 2.7.2.3 & Pentium 133 & 2.1 sec. \\
-\rowcolor[gray]{0.85} & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
+\rowcolor{tabgray} & Linux & GCC 2.7.2.3 with -O3 & Pentium 133 & 2.0 sec. \\\hline
    C++     & Linux & egcs-1.0.3 & Pentium 133 & 2.2 sec. \\
            & Linux & egcs-1.0.3 with -O3 & Pentium 133 & 1.8 sec. \\\hline
       Java & Linux & JDK 1.1.7, no JIT & Pentium 133 & 16 sec. \\
-\rowcolor[gray]{0.85} & Linux & JDK 1.1.7, with JIT TYA (V1.3) & Pentium 133 & 10 sec.\\
+\rowcolor{tabgray} & Linux & JDK 1.1.7, with JIT TYA (V1.3) & Pentium 133 & 10 sec.\\
            & Linux & JDK 1.1.7, no JIT & DEC Alpha 21164 600 & 6 sec. \\
            & Win95 & JDK 1.1.7, with Symantec JIT & Pentium 133 & 9 sec. \\
            & Win95 & JDK 1.1.7, no JIT & Pentium 133 & 19 sec. \\
-\rowcolor[gray]{0.85}  & Win95 & JDK 1.2, with Symantec JIT & Pentium 133 & 8 sec. \\
+\rowcolor{tabgray} & Win95 & JDK 1.2, with Symantec JIT & Pentium 133 & 8 sec. \\
            & Win95 & JDK 1.2, no JIT & Pentium 133 & 22 sec. \\\hline
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\
-\rowcolor[gray]{0.85}  & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\
+\rowcolor{tabgray} & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\
            & Linux & Matlab 5.2 & Pentium 133 &  224 sec.\\\hline
    Maple   & Linux & Maple V Rel. 4 & ??? & \\\hline
 Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
-\rowcolor[gray]{0.85} & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
+\rowcolor{tabgray} & Win95 & with Compiler    & Pentium 133 & 26 Min. \\ \hline
     \end{tabular}
     \caption[Performance Table.]%
     {Performance comparison for different languages, operating
       systems (OS), and platforms.
       The test program is a one-step stochastic process. We create 100
-      realizations, $g(n)=0.4n, r(n)=0.5n$. On Windows 95 the JIT from
+      realizations, $g(n)=0.4n, r(n)=0.5n$ (see Chapter 
+      \ref{sec:OneStepProcesses}).
+      On Windows 95 the JIT from
       Symantec is included and automatically used, when executing programs
       with the java command in the JDK. The TYA JIT for Linux is freely
       available and easy to install. Usage: with the Java virtual machine of
@@ -128,26 +131,30 @@ Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\
 
 Of course, in the above test we have not optimized the algorithm to the 
 different platforms. Nevertheless, the table clearly shows that MATLAB is 
-very slow. Even the compiled version of MATLAB is slower by a factor of 
-about 100 
+very slow. Even the compiled version of MATLAB is by a factor of 
+about 100 slower
 compared to the Fortran code. This is a good reason to disregard MATLAB!
 
 Now we have to decide between Java and Fortran. As can be read off from
 the Table \ref{tab:Performance} the criteria of numerical efficiency
 clearly speaks for Fortran. The argument in favour of 
-Java which compensates the slightly slower performance (today!, in future 
-this might be different) is its portability and the free availability of the
+Java which compensates the slightly slower performance -- Today!, in future 
+this might be different. -- is its portability and the free availability of the
 compiler and of the visualization tools. Java runs on every platform and 
-it is available at no cost. 
+it is available at no cost. We do not even have to change any line
+of code to get a faster performance, because we just have to get a faster
+Just in Time compiler or the new HotSpot technology, which improve
+performance by factors of 2 to 10 or even more. This will free the
+programmer from time consuming and difficult optimizaions. 
+There is for example a compiler called High Performance Java by IBM. It generates
+much faster code on IBM workstation compared to the JDK from SUN and the 
+speed is already comparable to C/C++. 
+For a comparison with this compiler see \cite[]{HPJ}.
 
-There is also a compiler called High Performance Java by IBM. It generates
-much faster code on an workstation. For a comparison with this
-compiler see \cite[]{HPJ}.
-
-Last not least, we want to mention another advantage of Java. It seems
+Last but not least, we want to mention a further advantage of Java. It seems
 \cite[]{bigbucks} that there is  a great need for Java programmers in 
-different branches of industry today. This need will be even greater in future 
-years. So learning Java, might be a kind of ``life insurance'' for students of 
+various branches of industry today. This need will even grow in future 
+years. So learning Java might be a kind of ``life insurance'' for students of 
 physics. It will put them in the position to find a good  job in the
 software industry.
 
@@ -156,9 +163,13 @@ software industry.
 \subsection{Java}
 \label{sec:Java}
 
-We have just seen some good reasons to choose Java as the programming language
+In Chapter \ref{sec:Programming_languages} we have given
+some good reasons to choose Java as the programming language
 for our purposes. Here we want to mention some more technical points, from a 
-computational science point of view, in favour of Java.
+computational science point of view, in favour of Java. Some of the points
+are very technical and are only be understood with knowledge about
+pogramming. So for beginners it might be useful to come back again here
+after learning Java in the next chapters.
 
 SUN Microsystems has described Java as follows \cite[]{javanutshell}:
 \begin{quote}
@@ -177,16 +188,16 @@ have been omitted. For example, in Java there is no \verb|goto|
 it has labelled break and continue statements. The preprocessor of C has been 
 eliminated; the program you write is the program that the compiler sees. In 
 Java there are no  operator overloading and no multiple inheritance 
-features of C++. (But you can use interfaces to simulate multiple inheritance
-and argument overloading is possible.)
+features known from C++. But you can use interfaces to simulate 
+multiple inheritance and argument overloading is also possible.
 One major simplification is that Java does not have pointers!
-In Java memory is managed automatically, so the programmer is not responsible 
-for the management  of memory space. In particular Java implements an 
+In Java memory is taken care of automatically, so the programmer is not responsible 
+for the management  of memory space. In particular, Java implements an 
 automatic  garbage collector.
 
 Java is an object--oriented language and you do not have to think in a 
 procedural--based way, as it is the case in Fortran for example. In order to 
-solve problems in Java you have to use the notions of classes and objects. 
+solve problems in Java we are forced to use the notions of classes and objects. 
 Every object has a class that defines its data and the methods that operate 
 on these data. Classes are hierarchically arranged. A subclass inherits the 
 behaviour of its superclass. A class is the basic unit of compilation
@@ -200,11 +211,12 @@ tools for networking. Java is the programming language of the Internet.
 Java is an interpreted language. The Java compiler compiles the Java
 source code into Java byte--code, which is the machine language for the Java
 Virtual Machine (JVM). The JVM is an abstract machine which runs on each system
-that supports Java. Other languages may also be compiled into Java byte-code.
+that supports Java. Programs written in other languages 
+may also be compiled into Java byte-code.
 
-Java is robust. Java contains features, called 
-exception handling, which simplify the
-tasks of error handling and recovery.
+Java is robust. Java contains a feature, called 
+exception handling, which simplifies the
+task of error handling and recovery.
 
 Java is secure. Since Java has been designed for distributed applications
 high security standards have been implemented. For example, direct access to
@@ -216,15 +228,16 @@ Java is architecture neutral and portable. The byte-code format is always the
 same regardless of the platform on which the Java compiler runs. Furthermore,
 there are no ``implementation defined'' behaviours in Java. For example, Java
 specifies the size of each primitive data type. The integer 
-types byte, short, int, long are 8, 16, 32 or 64--bit long, respectively.
+types byte, short, int, long take 8, 16, 32, 64 bit of memory, respectively.
 This also avoids the use of any preprocessor available to all other
-languages, most notably used excessively in C and C++ to catch all
+languages, excessively used in C and C++ to catch all
 platform relevant parameters.
 
 Java is a high--performance language. 
-Usually implementations of Java are used running 
-Java programs interpretatively. It is however possible to run Java with a 
-Just In Time (JIT) compiler. JIT compiling increases the performance of Java 
+Usually Java is run using an interpreter, the so-called  Java Virtual Machine.
+It is however possible to run Java with a 
+Just In Time (JIT) compiler, which translates the bytecode to native code
+before the code gets executed. JIT compiling increases the performance of Java 
 considerably.
 
 Java is multi-threaded. It supports multiple threads of execution which can 
@@ -288,10 +301,10 @@ a ``small set of instructions and interfaces'' based on Java to
 be used to drive and use arbitrary electronic devices in a local network--
 the actual aim of the Oaks/Java project started in 1991. The idea is that every 
 JINI device reports to a ``naming service'' and tells it, what services
-it provides to the network. The server can then tell, what services are at
-all available to somebody at some place. The device therefore can be 
+it provides to the network. The server can then tell, what services are
+available at all to somebody at some place. Therefore the device can be 
 taken to any place in the world and used in any JINI network to which
-it gets connected. You do not even need a JVM in the device, you can 
+it can connect. You do not even need a JVM in the device, you can 
 use a JVM supplied by a different device (e.g. a computer or browser) 
 available in the network. The whole system is based on Java code and
 the RMI protocol supplied by Java.
@@ -299,67 +312,118 @@ the RMI protocol supplied by Java.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Tools for Writing and Using Java}
+\index{tools for Java}
+
+Although we are describing many different programs in this chapter, the only 
+necessary tools to work out the programs in this book are the JDK, an editor
+like Emacs/XEmacs maybe with JDE and a WWW browser like Netscape or
+Internet Explorer. 
 
 \subsection{Programs:} 
 \begin{description}
-\item[JDK] The Java Development Kit, distributed freely by SUN.\\
+\item[JDK] \index{JDK} The Java Development Kit, distributed freely by SUN.\\
         This kit is available for almost all platforms, e.g. Windows,
         Solaris, Macintosh, Linux, etc. This is the first package to get,
         to use Java. It consists of a Java compiler, a virtual machine 
         and a debugger. There
         are of course many other compilers, JVMs and debuggers
-        available, but this is the place to start with. A disadvantage
-        of the JDK for Windows user is, that you have to use the
+        available, but this is the program to start with. A disadvantage
+        of the JDK especially for Windows user is, that you have to use the
         command line to use it. There are no graphical interfaces  coming with the
         package to start, compile or debug Java programs.
-\item[MRJ/SDK] Apple develops the Java developement kit for the Macintosh and
+        For Linux there is  a seperate package available, which contains
+        the threaded versions for the JDK 1.1. This is mostly not
+        included in the standard packages for the Linux distributions.
+\item[MRJ/SDK] \index{MRJ} Apple develops the Java developement kit for the Macintosh and
   distributes two versions: the MRJ runtime environement (in version 2.0 included
   in MacOS 8.5 and the new version MRJ 2.1.2 from \href{http://developer.apple.com/java/}%
   {http://developer.apple.com/java/}) and the SDK for Macintosh in version
   2.1 as of the time of writing also available from the address above. These are
   versions supporting Java 1.1.7 and Swing/JFC. The new version MRJ 2.2
         is just getting available.
-\item[Emacs/XEmacs] This is an editor available for most platforms.\\
-        We basically use this very powerful but sometimes confusing
-        editor to do all our programming, text editing and more. It is
-        also available for Windows, but it is mostly used on UNIX machines.
-        You are of course free to use ANY editor you like, which is available
-        to you. 
-\item[JDE] JDE (Java Development Environment) is an Emacs/Xemacs extension
-        written in Elisp. \\
-        It enables you to write Java code in a shorter time, if you are
-        using the emacs or xemacs editor. 
-\item[mpEdit] A freely available editor written completely in Java and
+\item[GuavaC] \index{GuavaC} OLD WWW ADDRESS !!
+  \href{http://www.cs.berkeley.edu/~engberg/guavac/}{Guavac} 
+  is a free Java compiler written in C++. 
+\item[Jikes] \index{Jikes} 
+  Jikes is a Java compiler developed at IBM fully conforming
+  to the Java specifications. It is free and much faster than most
+  other compilers. Thy byte code produced is only slightly different.
+  It is a nice replacement for the javac compiler of the JDK.
+\item[Kaffe] \index{Kaffe} \href{http://www.kaffe.org/}{Kaffe} 
+  is an open source 
+  JVM. It is a replacement for the java JVM of the JDK. In version 1.0 it is
+  already almost fully Java 1.1 compatible and it includes some of the
+  Java 2 features. It runs under Windows and Unix systems. There is also
+  a commercial version of Kaffe sold by 
+  \href{http://www.transvirtual.com}{transvirtual}.
+\item[GCJ] \index{GCJ} This is the 
+  \href{http://sourceware.cygnus.com/java/gcj.html}{GNU compiler for Java}. 
+  It can compile java
+  source code files inot class files (bytecode) and it can even
+  compile class files or source files directly into executable
+  files on the platform running GCJ. GCJ is actually a front end
+  to the free famous GCC/EGCS compiler suite. To compile class files
+  to object code you also need the libgcj runtime library.
+\item[CJ/GJ] \index{CJ} \index{GJ}
+  \href{http://wwwipd.ira.uka.de/~pizza/gj/}{GJ}
+  is an extension to the Java language that supports
+  generic types. This can be used to for example to add primitive
+  complex types to Java. This has been already done and the project
+  is called \href{http://wwwipd.ira.uka.de/~gunthner}{CJ}. 
+  The idea is to translate the Java source code including
+  the generic types like the primitive complex type to pure Java 1.1
+  or Java 1.2 code and then compile it with any Java compiler available.
+\item[Jolt] The \href{http://www.redhat.com/}
+  {JOLT - Java Open Language Toolkit} - Project. Tries to
+  compose a full freely available Java developement kit. Should
+  include kaffe, guavac and more.
+\item[Emacs/XEmacs] \index{Emacs}\index{XEmacs}
+  This is an editor available for most platforms.\\
+  We basically use this very powerful but sometimes confusing
+  editor to do all our programming, text editing and more. It is
+  also available for Windows, but it is mostly used on UNIX machines.
+  We are using the Emacs/XEmacs editor throughout the book, but 
+  there is no restriction to any of the programs or examples, if
+  you use a different editor.
+\item[mpEdit] \index{mpEdit} A freely available editor written completely in Java and
   therefore available on all platforms.\\ 
   It has all necessary features to write Java/C or C++ programs.
-\item[Netscape Navigator/Communicator] A web browser like the Internet 
-        Explorer, but written by Netscape inc. and the source code is
-        freely available and fully conforming to the Java standard. \\
-        We used Netscape and the appletviewer of the JDK to test all
-        the applets in this book.
-        Be aware that not everything is supported by all browsers and
-        sometimes you get strange results or the browser crashes,
-        although the program did run with the appletviewer.
-\item[Java Workshop] A commercial Integrated 
+\item[JDE] \index{JDE} JDE (Java Development Environment) is an Emacs/Xemacs 
+  extension
+  written in Elisp. \\
+  It enables you to write Java code in a shorter time, if you are
+  using the emacs or xemacs editor. 
+\item[Netscape Navigator/Communicator] \index{Netscape}
+  A web browser like the Internet 
+  Explorer, but written by Netscape inc. and the source code is
+  freely available and fully conforming to the Java standard. \\
+  We used Netscape and the appletviewer of the JDK to test all
+  the applets in this book.
+  Be aware that not everything is supported by all browsers and
+  sometimes you get different results or the browser crashes,
+  although the program did run with the appletviewer.
+\item[Java Workshop] \index{Java Workshop}A commercial Integrated 
     Development Environment (IDE)        
   for Java by SUN. Free trial versions
   for universities and educational institutions are available.
         Unfortunately it produces not very readable code for later
         editing.  
-\item[Freebuilder] A freely available IDE for Java. \\
+\item[Freebuilder] \index{Freebuilder}A freely available IDE for Java. \\
   Already in a usable state, although it is officially in alpha stage.
-\item[Netbeans] A commercial IDE for Java written in Java \\
+\item[Netbeans]\index{Netbeans} A commercial IDE for Java written in Java \\
   This is an object oriented IDE for Java. It is free for academic and 
   personal use, but not for commercial use.
-\item[Simplicity] A commercial IDE for Java written in  Java\\
+\item[Simplicity for Java] \index{Simplicity for Java}
+  A commercial IDE for Java written in  Java\\
   A very nice and easy to use IDE for Java. It is very easy to get started
-  with it and it even can write event handling code for your 
-  graphical user interfaces (GUI).
-\item[TOBA] A Java to C Compiler for Linux\\
+  with it. It can even write event handling code for your 
+  graphical user interfaces (GUI). Free trial versions are available
+  from the \href{http://www.datarepresentations.com/}{homepage for Simplicity}.
+\item[TOBA] \index{TOBA} A Java to C Compiler for Linux\\
   It converts Java source code to C and compiles the C code to get better
   performance. It runs on Linux, Solaris and IRIX and supports Java 1.1.
-  It seems to be no longer developed (April 99).
-\item[Fortran to Java] A Fortran 77 to Java Compiler. \\
+  It seems to be no longer developed (August 99).
+\item[Fortran to Java] \index{Fortran to Java} A Fortran 77 to Java Compiler. \\
   You can convert very easily Fortran 77 programs to Java. This is a part of the
   ``Java Access to Numerical Libraries'' project at the University of 
   Tennesee in the US. F2j was already capable of translating the
@@ -367,21 +431,30 @@ the RMI protocol supplied by Java.
 \end{description}
 
 \subsection{Java Packages:}
+All these packages are used extensivly throughout this book and they
+are recommended for own Java projects. For most of the programs
+presented in this book, you have to install these packages.
 \begin{description}
-\item[simulation] This is the package developed during the writing
-        of this book. It provides only some very basic features, which
-        might be of interest or can ease writing code. Some source
+\item[simulation] \index{simulation package} ??? (mehr Werbung)
+  This is the package developed during the writing
+        of this book. It provides some basic features, which
+        might be of interest or can ease writing code. All the missing
+        methods and classes, which are essential for writing code
+        for stochastic simulations have been included in this package.
+        Some source
         code of freely available software have been included for
         convenience, adhering to the softwae licenses of course. 
-\item[Ptolemy (Ptplot)] A package to produce 2D plots from data. \\
-        Ptolemy (version 1.0 from January 1999, which includes version
-        2.0 of Ptplot.)
+\item[Ptolemy (Ptplot)] \index{Ptolemy} \index{ptplot}
+  A package to produce 2D plots from data. \\
+        Ptolemy -- version 1.0 from January 1999 includes version
+        2.0 of Ptplot --
         is actually a whole set of useful packages, but so far only the
         plot package, called Ptplot is currently fully functional. We will
         use it extensively for all plotting in 2D. It has a nice
         zoom feature and it allows for the most important plot styles
         needed.
-\item[JNL] The Java Numerical Library written by Visual Numerics and
+\item[JNL] \index{JNL} \index{Java Numerical Library}
+  The Java Numerical Library is written by Visual Numerics and
         distributed freely\footnote{But please consult the License Agreement
         coming with the software.}. It is also submitted to the standardizing
         committee for proof to include it in the next release of the
@@ -393,12 +466,20 @@ the RMI protocol supplied by Java.
         variance, linear least square fit, etc.). It also provides some
         basic functionality for linear algebra, like matrix decomposition,
         determinant, trace, solving linear systems, etc.
-\item[JSci] A freely available package with support for many 
+\item[JSci] \index{JSci} A freely available package, which contains many 
   physics constants, mathematical operations, etc. \\
-   It includes methods for fast Fourier transformations, ordinary differential 
-   equations, complex numbers and much more. We prefer to use the JNL
-   implementation of the complex number classes, because they will
-   more probably become the standard.
+  It includes methods for fast Fourier transformations, ordinary differential 
+  equations, complex numbers and much more. We prefer to use the JNL
+  implementation of the complex number classes, because they will
+  more probably become a standard in a future release of Java.
+\item[Swing] \index{Swing} 
+  Swing is the replacement for the AWT. It is included in the
+  Java 2 standard and therefore the JDK 1.2. For Java 1.1 you can get
+  a seperate package, which works with the JDK 1.1. 
+\item[Biss-AWT] \index{Biss-AWT} 
+  This package is meant to be a replacement for the AWT and
+  can be considered the free alternative to the Swing library. We are not 
+  using it in this book.
 \end{description}
 
 
@@ -406,7 +487,7 @@ the RMI protocol supplied by Java.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Basic Elements of Java}
 \label{sec:Basic_elements_of_Java}
-Like in other languages to write a program you first need an editor
+To write a program we first need an editor
 to type the source code. Second you need a compiler to translate
 the Java code to byte-code. And last, in contrast to most
 traditional languages like C, C++ and Fortran, we need a virtual
@@ -423,7 +504,7 @@ machine (interpreter, called JVM) to execute the byte-code.
 
 So for every platform, where a virtual machine is available,
 you can execute the byte-code without any compatibility problems.
-But the ``look and feel'' can be different, for example Java buttons
+But the ``look and feel'' can be different: for example Java buttons
 in Windows look different from buttons in X11/Motif using a UNIX
 operating system. But if you use the new Swing components supplied
 with the Java 2 standard or extend the Java 1.1 standard with the Swing
@@ -440,84 +521,85 @@ The main reason for the wide availability of Java
 is that SUN Microsystems distributes the Java Development Kit (JDK)
 freely for a number of important platforms (Windows, Solaris/Linux,
 other Unix systems). The JDK consists of a compiler (javac), a
-debugger (jdb) and a virtual machine (java)\footnote{Actually there
+debugger (jdb) and a virtual machine (java)\footnote{Actually, there
 are some more components like the javadoc command to create HTML
 documentation or the jar tool to create zipped packages of
-class files belonging together - see later on.}.
+class files belonging together - see Chapter \ref{sec:javadoc}}.
 
-The JDK can be downloaded from the internet from the 
+The JDK can be downloaded from the Internet from the 
 \href{http://www.javasoft.com}{JDK Javasoft link page}.
-The newest version (as of the time of writing) is 1.2. 
+The latest version, as of the time of writing, is 1.2. 
 Throughout the book,
 we will use the Java 1.1 language version and the JDK 1.1.7,
 because the Java 2 standard is not yet implemented in any JVM of the
 web browsers available.
 
 The only additional thing necessary to have a Java programming
-environment is an text-editor to write the Java programs. For that
-you should use your favorite editor, e.g. emacs or xemacs, which are
+environment is a text-editor to write the Java programs.
+Use your favorite editor, e.g. emacs or xemacs, which are
 also freely available and have nice Java editing modes.
 
 There is also a freely available IDE (Integrated Development 
 Environment) called \href{http://www.freebuilder.org/}{FreeBuilder}.
-This is a complete environment to write Java programs comfortably,
-which is the first under the GNU license. It is still in alpha
-development stage, but it already comprises a lot of features. Of
-course, there are many commercial ones available, like SUN's Java Workshop
-or \href{http://www.datarepresentations.com/}{Simplicity for Java}.
+This is a complete environment to write Java programs comfortably.
+Since it is the first running under the GNU license, it is free, but
+still in alpha development stage, but it already comprises a lot of features. Of
+course, there are many commercial IDEs available, like SUN's Java Workshop
+or Simplicity for Java.
 
 
 Opposing to other languages, which use the ASCII character set, Java
-uses the Unicode character set \href{http://unicode.org}{(to the 
-Unicode WWW Homepage)}. 
+uses the  \href{http://unicode.org}{Unicode character set}.
 Unicode consists of characters represented
-by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
-use 256 different characters (ASCII) but you can use all the 38885 different
+by 2 bytes instead of 1 byte like in the ASCII set. So you can use 
+all the 38885 different
 characters available in the Unicode set (Version 2) for writing a Java program.
 This means you can name your variables using for example Japanese or Greek
 characters. Right from the beginning, Java is an international language.
 
 Java is also case sensitive and doesn't need any special characters
-to mark continuation lines. 
+to mark continuation lines as is necessary in Fortran for example.
 
 Comments are used just like in C and C++.
 You can use either the /* \ldots */ syntax (borrowed from C) for
 multi-line comments or the // syntax (borrowed from C++) for single
 line comments. Additionally you can use /** \ldots */ for comments
 to automatically generate a HTML documentation file for the class
-defined in the file. We will see later on how this can be achieved.
+defined in the file. We will see in Chapter \ref{sec:javadoc} 
+how this can be achieved.
  
 There are also certain disadvantages, which should not be forgotten
 to mention: The learning curve is certainly steeper for the beginner
 for Java than for Matlab or even Fortran. This is of course due
 to the full use of the object oriented approach used for all Java
-programs. This clearly shows up, when we will introduce e.g. the
+programs. This clearly shows up when we will introduce e.g. the
 file and keyboard input/output capabilities of Java.
-But in the long term learning Java definitely pays off. 
+But in the long term, learning Java definitely pays off. 
 
 A second point to note is, that for scientists a big concern are always
 complex numbers. They are currently not supported as primitive types as 
 in Fortran for example, but there are (standardized) packages, which
-add complex number support to Java (e.g. JNL). 
+add complex number support to Java (e.g. JNL). And the CJ compiler,
+an extension to the Java compiler, can even handle primitive complex types.
 
 
 \subsection{The ``HelloWorld'' Program -- Applications and Applets}
 \label{sec:HelloWorld}
-Now let us start with the traditional ``Hello World'' program written
-in Java.
 
 \subsubsection{Application}
 
+Now let us start with the traditional ``Hello World'' program written
+in Java. Type the following code using your favourite text editor 
+and save the program in a file called \verb|HelloWorld_Application.java|.
 \inputlisting{Listings_Java/HelloWorld_Application.java}
-You have to save the program in a file called 
-\verb|HelloWorld_Application.java|.
-To execute the above example you have to type in the commando line the
-following:
+
+If we use the JDK 1.1 or 1.2 under Windows or Unix, we can execute
+the above example by typing on the command line:
 \begin{itemize}
 \item Compiler: \verb/javac HelloWorld_Application.java/  \\
   $\Longrightarrow$ produces HelloWorld\_Application.class 
   in the same directory.
-\item JVM:  \verb/java HelloWorld_Application/
+\item Byte-Code Executor (JVM):  \verb/java HelloWorld_Application/
 \item Output on screen: \verb|Hello World !|
 \end{itemize}
 Let us now try to understand the above code. The program consists of
@@ -528,15 +610,14 @@ with the help of the \texttt{class} statement a class called
 \verb|HelloWorld_Application|. 
 The identifier following the \texttt{class} statement is
 the name by which the class will be referenced. Each Java program
-is a class. The curly bracket appearing after the class name
-\verb|HelloWorld_Application| introduces the following class member. 
-
+is a class. The definition of the class is included in the curly brackets
+between line 6 and line 10.
 
 In the second line the \verb|main| method is introduced. The main
 method is declared \verb|void| because the method does not return a
 value. The main method is executed when you run the class as an
 application. The only parameter, the argument
-of the main method, is an array of String object.
+of the main method, is an array of String objects, here named \verb|args|.
 
 In the third line the method \verb|println()| of the system class 
 \verb|out|
@@ -555,21 +636,21 @@ have to type the \verb|System.out.println()| code, which could
 again be accomplished by using the \verb|Generate| menu in the
 JDE menu. To compile
 use the ``compile'' command in the ``JDE'' menu and similar
-the ``run'' command in the same menu. This saves you a lot of keystrokes. 
+the ``run'' command in the same menu.  
 
 \subsubsection{Applet}
 \label{sec:Applet}
 
-Java offers another possibility to execute code, so called Applets.
-In contrast to the stand--alone Java application which starts at
-\verb!main! and runs until it is completed, the applet is a kind of
+Java offers another possibility to execute programs, the so-called Applets.
+In contrast to the stand--alone Java application which starts with a
+\verb!main! method and runs until it is completed, the applet is a kind of
 sub--program which runs under the control of some other program.
 Usually, applets are (small) Java programs, which are started by a 
 server program,
 e.g. a WWW browser like Netscape Navigator\footnote{You need at least 
 version 4.06 or patches for earlier versions to use all features of Java 1.1}, 
 the Internet Explorer\footnote{Seems to run Java 1.1 programs since
-version 4, but does not conform to the Java standards.}(Don't),
+version 4, but does not conform to the Java standards.},
 HotJava or the appletviewer\footnote{included with the JDK.}.
 
 In the case of an applet, you have a browser loading a HTML 
@@ -585,10 +666,10 @@ where to find the applet (see figure \ref{fig:HTMLOverview}).
 \end{figure}
 You should note that HTML is not a programming language, but
 it is a mark-up language to produce a text with additional
-``commands'' for the meaning of the text parts. It does also
+``commands'' for the meaning of the text parts. It does
 not give any details about the formatting or layout of the
-text. To start an applet HTML has some special marks, which we
-will see in a moment.  
+text. To start an applet, HTML uses some special marks, which we
+will discuss in a moment.  
 
 The big difference between an applet and an application is that
 applets are not allowed to do certain things. For example applets
@@ -600,15 +681,8 @@ And an applet is not allowed to do time consuming tasks like
 long computations. This has to be kept in mind, when writing
 applets.
 
-You can actually have applets accessing the local file system by using
-``signed applets''. These are applets having a signature coming
-with them (in the JDK you use \verb|javakey| for that purpose), 
-which is checked by the server before the execution. So
-if you have signed your own applet and tell your browser to accept 
-all applets signed with your signature, you can use file commands
-inside your applets (see \cite[page 142]{javanutshell}).
 
-The ``Hello World'' example written as an applet has the following form:
+The ``Hello World'' example written as an applet takes the following form:
 \inputlisting{Listings_Java/HelloWorld_Applet.java}
 
 Applets have to be derived from the applet class
@@ -617,8 +691,8 @@ the Abstract Windowing Toolkit (AWT) and the interface with X/Motif on
 Unix, Windows on PC, and Mac-OS on Macintosh platforms.
 As you can see there is no main method in an applet. Instead if an applet
 is started by a server, the init() method is executed first. There is also
-a start() (stop()) method, which is executed if the applet becomes
-visible (disappears) in the server window (e.g. by scrolling in the
+a start() and a stop() method, which are executed if the applet becomes
+visible or disappears in the server window (e.g. by scrolling in the
 Netscape Navigator window).
 
 Many methods are available to set up the display in an assigned applet area.
@@ -630,9 +704,9 @@ this HTML file could look like:
 %%\lstinputlisting[language=HTML]{Listings_Java/call_HelloWorld_Applet.html}
 \lstinputlisting{Listings_Java/call_HelloWorld_Applet.html}
 The code parameter given in the HTML file defines the name of the applet
-to be run. Because there is no init() and no start() method in our
-example, the paint() method gets executed by the browser (or appletviewer).
-The size of the canvas has to be given in pixels explicitly in the
+to be executed. Because there is no init() and no start() method in our
+example, the paint() method is called by the browser or appletviewer.
+The size of the canvas has to be given explicitly in pixels in the
 HTML file.
 
 To run the applet you can either type
@@ -655,17 +729,20 @@ definitely be written as an application, small programs can be
 written as an applet. Although this is not mandatory it should
 be obeyed by a good Java programmer.
 
-In Java 1.1 a new package (see later) was introduced, which allows
-so called ``trusted applets''. These are specially signed libraries,
-which are signed with a key by a person you trust. Only if the
-signature is valid and you trust that person, the ``trusted applet''
+In Java 1.1 a new package has been introduced, which allows for
+so-called ``trusted applets''. These are specially signed libraries,
+which are signed with a key by a person we trust 
+(using the JDK we have to use \verb|javakey| for that purpose). Only if the
+signature is valid and we trust that person, the ``trusted applet''
 has access to the local files system -- basically it can do everything
-an application could do on your machine. This is already implemented with
-the appletviewer, in different ``servers'' it might work or not. In the
+an application could do on our machine (see \cite[page 142]{javanutshell}).
+ This is already implemented with
+the appletviewer, on other ``servers'' it might work or not. In the
 future this will be extended to a more extensive set of rules for the
 allowed methods of an applet.
 
 \paragraph{Documenting Java Programs -- javadoc}
+\label{sec:javadoc}
 A last remark concerns the documentation for the programs. We have
 learned, that we can include documentation comments using 
 \verb|/** .... */|. These comments are processed by using the
@@ -963,21 +1040,38 @@ For example, two ways of doing it are:
   String s2 = (new Double(d)).toString();
 \end{lstlisting} 
 
-
+\paragraph{Convenience Classes of the simulation Package for Conversions}
+The \verb|simulation| package provides in the \verb|util| class methods
+to convert all primitive types to Strings and Strings to primitive types.
+Therefore we can for example use 
+\begin{sverbatim}
+  double dum = simulation.Util.stringToDouble("23.4567");
+  String text = simulation.Util.doubleToString(7.4562);
+\end{sverbatim}
+to convert a String to a double or a double to a String. There are analogous
+methods to convert int, long and float variables. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Packages and Import Statements}
 \subsection{Packages}
+\index{packages}
 Because Java was designed to be able to load code distributed
 over the whole internet dynamically, you have to avoid name conflicts
-between the programs (classes). The Java solution 
+between the programs/classes. The Java solution 
 for an Internet--wide unique naming scheme is to put
 every class in a \emph{package}. A package  is a group of related
-and possibly cooperating classes. The naming scheme is based on the
+and possibly cooperating classes. The naming scheme should be based on the
 internet domain name of the organization at which the package is developed.
 
+If we are not using the package command at all, Java uses the \emph{empty 
+package}. \index{empty package}
+Then we have to put our programs into the current directory.
+This is not recommended for medium to complex programs, but for
+test purposes and very small programs this is very convenient.
+
+\index{import statement}
 The name of the package is given
-at the beginning of a file before the actual program (class)
+at the beginning of a file before the actual program/class
 definition starts. So for example if we put the statement
 \begin{quotation}
   \verb/ package de.freiburg.simulation; / 
@@ -988,17 +1082,32 @@ But to run the application we have to use
 \begin{quotation}
   \verb/ java de.freiburg.simulation.HelloWorld_Application / . 
 \end{quotation}
-You are wondering why the program does not start? It cannot, because
-there is one more thing to know. Java is looking for programs (classes)
+The program does not start? It cannot, because
+there is one more thing to know. Java is looking for programs/classes
 in the directory structure given by the package and the class name. So
-for the example above you have to put the 
+for the example above we have to put the 
 \verb/HelloWorld_Application.class/ file
-in the directory \verb|de/freiburg/simulation/| and issue the command
-in the directory, where the directory tree starts.
+in the directory \verb|de/freiburg/simulation/| and issue the \verb|java|
+command in the directory, where the directory tree starts.
 
-You could also use an environment variable called \verb|CLASSPATH|. It
-describes the directories to search for the class files. So if the
-\verb|CLASSPATH|-variable includes \verb|/home/user/java| you can
+For example on a Unix machine execute:
+\begin{sverbatim}
+ mkdir de
+ mkdir de/freiburg
+ mkdir de/freiburg/simulation
+ cp HelloWorld_Application.class de/freiburg/simulation/
+ java de.freiburg.simulation.HelloWorld_Application
+\end{sverbatim}
+On a Windows machine we have to change the \verb|mkdir| command into
+the \verb|md| command and \verb|cp| into \verb|copy|.
+
+\index{classpath}
+\index{CLASSPATH}
+We can also use an environment variable called \verb|CLASSPATH| to tell
+the java executor (JVM) where to find the class files. 
+If for example the
+\verb|CLASSPATH|-variable includes the directory \verb|/home/user/java|
+you can
 start the above example in this directory, if the class is in the 
 subdirectory  \verb|de/freiburg/simulation/|. It has to be noted that
 the entries in a \verb|CLASSPATH| specification may also be ZIP files
@@ -1006,15 +1115,27 @@ that contain these classes. On Unix systems the directories in a
 \verb|CLASSPATH| specification are separated by `` :'' ( on Windows systems
 by ``;'').
 
+For example on a Unix system:
+\begin{sverbatim}
+ export CLASSPATH="$CLASSPATH:/home/user/java"
+ cd /home/user
+ java HelloWorld_Application
+ java de.freiburg.simulation.HelloWorld_Application
+\end{sverbatim}
+Only one of the last two lines have to be used, depending on the
+location of the class file. On Windows you have to change the first
+two lines to
+\begin{sverbatim}
+  set CLASSPATH="%CLASSPATH;c:\java"
+  cd c:\
+\end{sverbatim}
 
-All the standard commands (classes) of Java are stored in a central jar
+All the standard API classes of Java are stored in a central jar
 file, which is additionally packed to save disk space. These classes
 are always searched, no matter the \verb|CLASSPATH|-variable is set to.
+This might be different on some systems and the Java API class file
+path has to be included in the \verb|CLASSPATH|-variable. 
 
-If you are not using the package command at all, Java uses the empty 
-package. This means you can put your programs in the current directory.
-This is not recommended for medium to complex programs, but for
-test purposes and very small programs this is very convenient.
 
 \subsection{The jar Tool}
 If you have written a lot of small classes, which all work together
