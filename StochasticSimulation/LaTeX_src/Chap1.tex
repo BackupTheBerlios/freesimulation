@@ -118,40 +118,9 @@ end loop over time
 
 The above algorithm written in MATLAB is shown in the following listing.
 {\bf Listing xy} Program decay
-\begin{verbatim}
-% decay - Program to simulate radioactive decay
-clear; help decay; % Clear memory and print header
-N0 = input('Enter number of nuclei N0 - ');
-tend = input('Enter final time in s (300) - ');
-lambda = input('Enter decay constant lambda in s^-1 (0.01-0.03) - ');
-% calculate decay probability in time step dt
-dt = 1;
-p= lambda*dt;
-N_out(1)=N0;
-N_ex(1)=N0;
-m=N0;
-N=N0;
-% time loop
-for t=1:tend
-      for i=1:m 
-        R = rand(1,1);
-        if ( R < p) 
-        N=N-1;
-        end
-      end
-   m=N;
-   N_out(t+1)= N;
-   N_ex(t+1) = N0*exp(-lambda*t);
- end
-subplot(2,1,1)
-plot(0:300,N_out,'x',0:300,N_ex,'-');
-title('Radioactive decay: simulation (x); exact (solid)'); 
-xlabel('time'); ylabel('number of nuclei');
-subplot(2,1,2)
-semilogy(0:300,N_out,'x',0:300,N_ex,'-');
-title('Radioactive decay: simulation (x); exact (solid)'); 
-xlabel('time'); ylabel('number of nuclei');
-\end{verbatim}
+\subsubsection{Listing of the program decay.m}
+\inputlisting{./Listings/decay.m}
+
 
 The program is straightforward. In line xy the relevant variables 
 are initialized. The main loop starts is line xy. bla bla.
@@ -254,68 +223,8 @@ remove the existing graph; the following data are addeded to the
 current graph. The overplotting of data is terminated by 
 setting "{\sf hold off}".
 
-{\bf Listing of the program decayr}
-\begin{verbatim}
-% decayr - Program to simulate radioactive decay
-clear; help decayr; % Clear memory and print header
-N0 = input('Enter number of nuclei N0 (100 - 1000) - ');
-tend = input('Enter final time in s (100-300) - ');
-lambda = input('Enter decay constant lambda in s^-1 (0.001-0.0001) - ');
-nreal = input('Enter number of realizations (100-1000) - ');
-% calculate decay probability in time step dt
-dt = 1;
-p= lambda*N0*dt;
-N_out(1)=N0;
-N_ex(1)=N0;
-N_out(2:tend+1)=0;
-% realizations loop
-for j= 1:nreal
-   N=N0;
-% time loop
-for t=1:tend 
-        R = rand(1,1);
-        if ( R < p) 
-        N=N-1;
-        end
-   N_out(t+1)= N_out(t+1)+N;
-end
-% count number of decays
-ndecay(j) = N0-N;
-end
-%Compute analytical solution
-for t=1:tend+1
-   N_ex(t) = N0*exp(-lambda*t);
-end
-% Compute mean values
- N_out = N_out/nreal;
-subplot(2,1,1)
-plot(0:tend,N_out,'x',0:tend,N_ex,'-');
-title('Radioactive decay: simulation (x); exact (solid)'); 
-xlabel('time'); ylabel('number of nuclei');
-subplot(2,1,2)
-semilogy(0:tend,N_out,'x',0:tend,N_ex,'-');
-title('Radioactive decay: simulation (x); exact (solid)'); 
-xlabel('time'); ylabel('number of nuclei');
-pause;
-subplot(1,1,1)
-% plot histogram of number of decays
-x=[1:N0/2];
-[m,xout]=hist(ndecay,x);
-bar(xout,m);
-title('Distribution of number of decays (Poisson distribution (solid))');
-xlabel('number of decays'); ylabel('frequency');
-%pause;
-% Compute Poisson distribution
-mu=tend*lambda*N0;
-for i = 1:N0/2
-   poi(i) = (mu^i)*exp(-mu)/prod(1:i);
-end
-nor=sum(m);
-hold on;
-%plot(xout,m,'x',xout,nor*poi,'--');
-plot(xout,nor*poi,'-');
-hold off;
-\end{verbatim}
+\subsubsection{Listing of the program decayr}
+\inputlisting{./Listings/decayr.m}
 
 
 Run the program for the following two sets of parameters:
@@ -459,7 +368,9 @@ and correspondingly the estimate of the variance by using
    (f(x_i)- \hat{f})^2 = \sigma_f^2.
 \end{equation}
 The quantity $\sigma_f = \sqrt{{\rm Var}(f_1, \ldots, f_n)}$ 
-is also called the standard deviation. However,
+is also called the standard deviation. In the previous expression
+we have used the short--hand
+notation $f(x_i) = f_i$. However,
 we are not interested in the error of $f$ but in the error of the
 estimate $I_n$ which is a sum over random numbers. 
 
@@ -505,7 +416,7 @@ $\langle \delta f_i \delta f_j \rangle = \langle f_i \rangle \langle f_j \rangle
 and that for $i=j$ we have $\langle \delta f_i^2 \rangle = \sigma_f$ 
 for all $i$ it follows from the above equation that
 \begin{equation}
-\sigma_I = \sum_{i=1}^n \left(
+\sigma_I^2 = \sum_{i=1}^n \left(
       \frac{\partial I_n}{\partial f_i} \right)^2 \sigma_f^2
       = \frac{1}{n^2} n \sigma_f^2 = \frac{\sigma_f^2}{n}
 \end{equation}
@@ -529,29 +440,8 @@ methods.
 We begin by the standard method. The listing of an according 
 program can be seen below.
 
-{\bf Listing of the program mcpi.}
-\begin{verbatim}
-% mcpi - Program to estimate pi with the help of the
-% standard Monte Carlo method
-clear; help mcpi;
-n = input('Enter number of random numbers n (< 16384)- ');
-% Draw n random numbers
-r = rand(n,1);
-In=0;
-for i= 1:n
-   f(i) = sqrt(1-r(i)*r(i));
-   f2(i) = f(i)^2;
-   In = In + f(i);
-end
-In = In/n;
-varf=0;
-for i=1:n
-   varf = varf + (f(i) -In)^2;
-end
-varf = varf/(n-1);
-vari= varf/n;
-fprintf('The MC estimate of pi is %g +- %f \n',4*In,sqrt(vari));
-\end{verbatim}
+\subsubsection{Listing of the program mcpi.}
+\inputlisting{./Listings/mcpi.m}
 
 We run the program for $n=10, 100, 1000, 10000$. The result of the 
 four simulations can be seen in Fig. xy.
@@ -564,33 +454,9 @@ estimate.}
 
 Next we write a program for the scoring  method. 
 
-{\bf Listing of the program mcpiscore.m}
+\subsubsection{Listing of the program mcpiscore.m}
+\inputlisting{./Listings/mcpiscore.m}
 
-\begin{verbatim}
-% mcpiscore - Program to estimate pi by the Monte carlo
-% scoring method
-clear; help mcpiscore;
-n= input('Enter number of random pairs to draw (<16394) - ');
-rx=rand(n,1);
-ry=rand(n,1);
-In=0;
-for i=1:n
-   if ( rx(i)*rx(i) + ry(i)*ry(i) <= 1)
-      In = In+1;
-   end
-end
-In = In/n;
-plot(rx,ry,'x');
-title('MC estimate of pi by the Hit or Miss method');
-xlabel('x');
-ylabel('sqrt(1-x^2)');
-hold on;
-x=[0:0.01:1];
-y=sqrt(1-x.^2);
-plot(x,y);
-hold off;
-fprintf('The MC estimate of pi is %g \n',4*In)
-\end{verbatim}
 Again we run the simulation for n=10, 100, 1000, 10000.
 The result of a simulation can be seen in the next Figure.
 \begin{figure}
@@ -619,5 +485,3 @@ the following integral
 stochastic method.
 Lit: Pirooz Mohazzabi, Monte Carlo estimation of $e$,
 Am. J. Phys. {\bf 66} (1998) 138--140.
-
-

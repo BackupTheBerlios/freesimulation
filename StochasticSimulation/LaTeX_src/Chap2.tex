@@ -11,18 +11,19 @@ probability theory.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The nature of probabilities}
 In the previous chapter we have already made use of probabilistic 
-notions in an intutitve way. However, we have not asked the 
+notions in an intuitive way. However, we have not asked the 
 following question: What are probabilities? How can we formulate 
 the notion of probability in such a way that it is useful for 
 physical applications?
 
-Essentially, there are three possible definitions of probability:
+Essentially, there are three possible definitions of probability
+\cite{BRODY}:
 a) the axiomatic interpretation, b) the frequency interpretation, and
 c) the ensemble interpretation.
 
 
 \subsection{The axiomatic interpretation}
-The axiomatic definition of probabilities has been proposed by 
+The axiomatic definition \cite{FELLER} of probabilities has been proposed by 
 Kolmogorov in 1933. The formal objects to which we want to 
 attribute probabilities are called {\em events} and are subsets
 of a basic set $\Omega$ which is called the {\em event space} or in 
@@ -61,7 +62,8 @@ for a single infinite sequence of random events such as the
 outcomes of throwing a coin. He defined then the probability of some 
 event to be the limit of its relative frequency in such a series of 
 observations when the series becomes infinitely long (the 
-Kollektiv). If we denote by $n$ the number of data in the series,
+Kollektiv) \cite{COMPAGNER,BRODY}. 
+If we denote by $n$ the number of data in the series,
 by $m(e)$ the number of times the event is observed in it, then
 the probability $P(e)$ is defined as
 \begin{equation}
@@ -84,32 +86,15 @@ look at the relative frequency $m(4)$ of the outcome of throwing a
 following program.
 
 {\bf Listing of the program relfreq.}
-\begin{verbatim}
-% Program relfreq: simulation of the evolution of the
-% relative frequency of throwing a die
-clear; help relfreq;
-R=rand(400,1);
-n=0;
-for i=1:400
-   if(R(i) > 0.5 & R(i) < 2/3) 
-      n = n +1;
-   end
-   m(i) = n/i;
-end
-plot(1:400,m,'x');
-title('Evolution of the relative frequency');
-xlabel('n'); ylabel('relative frequency');
-hold on;
-plot([1 400],[1/6 1/6],'-');
-hold off;
-\end{verbatim}
-
+\inputlisting{./Listings/relfreq.m}
 
 The result of an experiment for up to 400 throws is shown in Fig. 
-xy. Running the program again we observe another approach to the asymptotic
+(\ref{F_FRELFREQ}). Running the program again we observe 
+another approach to the asymptotic
 value. We recognize immediately the difficulties with von Mises 
 definition of probability.
 \begin{figure}
+\label{F_FRELFREQ}
 \includegraphics[width=10cm]{frelfreq.eps}
 \caption{Simulation of the evolution of the relative frequency of throwing
 a 4 in play of die.}
@@ -174,9 +159,9 @@ function
 \begin{equation}
 \chi_A(\omega) = \left\{ 
 \begin{array}{ll}
-1, & {\rm if \quad member \quad labelled} \omega {\rm \quad has 
+1, & {\rm if \quad member \quad labelled} \quad \omega {\rm \quad has 
 \quad property\quad} A \\
-0, & if not.
+0, & {rm if not}.
 \end{array}\right.
 \end{equation}
 The probability of $A$ in the ensemble is  simply defined as 
@@ -249,8 +234,8 @@ also have the form
 P(x) = \sum_n p_n \delta(x-x_n) + \tilde{P}(x),
 \end{equation}
 where
-$\tilde{P}(x) \ge 0$, $p_n \ge 0$, $\tilde{P}$ integrable function 
-and the normalization condition
+$\tilde{P}(x) \ge 0$, $p_n \ge 0$, $\tilde{P}$ integrable  
+and the normalization condition is
 \begin{equation}
 \sum_n p_n + \int dx \tilde{P}(x) =1.
 \end{equation}
@@ -320,21 +305,22 @@ cumulants are given by
 \kappa_2 &=& \mu_2 - \mu_1^2 =\sigma^2, \\
 \kappa_3 & = & \mu_3 - 3 \mu_2 \mu_1 + 2 \mu_1^3.
 \end{eqnarray}
+It can be shown \cite{Gardiner} that the cumulant generating 
+function  cannot be a polynomial of degree greater than 2, that 
+is, either all but the first two cumulants vanish or there is an 
+infinite number of nonvanishing cumulants.
+
+REMARK ( kappai given then g(k) unique !!!???????????ß) 
 
 \subsection{Some important random variables}
 Let us first introduce and discuss briefly some important 
 continuous one dimensional probability densities.
 
-{\bf The uniform density} \\
+\subsubsection{The uniform density}
 The simplest density is the uniform density which is constant if $x$
 lies within the interval $[a,b]$ and zero otherwise, i.e.,
 \begin{equation}
-P(x) = \left\{ 
-\begin{array}{ll}
-1/(b-a), & {\rm if} a\le x \le b \\
-0       , & {\rm otherwise}
-\end{array}
-\right.
+P(x) = 1/(b-a).
 \end{equation}
 It is easy to check that the mean of the uniform distribution is
 \begin{equation}
@@ -348,7 +334,7 @@ is
 As we will see the uniform probability density will play a 
 fundamental role in the forthcoming chapters.
 
-{\bf The exponential density function} \\
+\subsubsection{The exponential density function} 
 The exponential density function is defined as
 \begin{equation}
 P(x) = a \exp(-ax),
@@ -360,7 +346,7 @@ variable are equal
 \langle X \rangle = \sigma = \frac{1}{a}.
 \end{equation}
 
-{\bf  The Gaussian or normal density function}\\
+\subsubsection{The Gaussian or normal density function}
 The most important density function for physics is the 
 gaussian probability density. It has the form
 \begin{equation}
@@ -376,19 +362,19 @@ G(k) = \exp(i \mu_1k - \frac{1}{2} \sigma^2 k^2),
 which means that $\kappa_1 = \mu_1$, $\kappa_2 = \sigma^2$ and 
 that all higher cumulants vanish.
 
-{\bf The Cauchy or Lorentz density} \\
+\subsubsection{The Cauchy or Lorentz density} 
 The Cauchy or Lorentz density is defined as
 \begin{equation}
 P(x) = \frac{1}{\pi} \frac{a}{(x-x_0)^2 + a^2}
 \end{equation}
-for positive $a$ and $-\infty <x_0 < \infty$. It is an example of
-probability density which does not have a finite variance. In 
+for positive $a$ and $-\infty <x_0 < \infty$. It is an example of 
+a probability density which does not have a finite variance. In 
 fact, not even the integral defining  the mean value converges. 
 
 Let us now discuss some typical discrete probability densities.
 The discrete random variable will be denoted by $N$.
 
-{\bf The discrete uniform probability density} \\
+\subsubsection{The discrete uniform probability density} 
 The discrete uniform probability density is defined by
 \begin{equation}
 P(n) = \frac{1}{n_2 -n_1 +1}
@@ -409,12 +395,12 @@ relations
 \sum_{n=1}^N n= \frac{N(N+1)}{2}; \sum_{n=1}^{N} n^2 = \frac{N(N+1)(2N+1)}{6}. 
 \end{equation}
 
-{\bf The binomial distribution} \\
+\subsubsection{The binomial distribution}
 Let us assume that the random variable $Y$ 
 can take only two values $\{y_1,y_2\}$, the probability for the 
 value $y_1$ being $p$ and correspondingly for $y_2$ (1-p). If we 
 consider $N$ realizations of the stochastic variable $Y$ the 
-probability to find the value $y_1$ n times under the $n$ results
+probability to find the value $y_1$ $N$ times under the $n$ results
 is the binomial density $P(n)$
 \begin{equation}
 P(n) = \frac{N!}{n!(N-n)!} p^n(1-p)^{(N-n)},
@@ -428,29 +414,30 @@ and
 \begin{equation}
 \sigma^2 = Np(1-p).
 \end{equation}
-It is easy to chek the normalization of the binomial distribution since
+It is easy to check the normalization of the binomial distribution since
 \begin{equation}
 1 = [p + (1-p)]^n = \sum_{n=0}^N \frac{N!}{n! (N-n)!}
         p^n (1-p)^{(N-n)}.
 \end{equation}
 
-{\bf The Poisson density} \\
-The Poisson density as we already knoww
+\subsubsection{The Poisson density}
+The Poisson density as we already know
 is defined as
 \begin{equation}
 P(n) = \frac{\exp(-a) a^n}{n!},
 \end{equation}
 for $n > 0$ and $a \in R$. The mean value and the variance
-of the Possonian density are equal,
+of the Poisson density are equal,
 \begin{equation}
 \langle n \rangle = \sigma^2 = a.
 \end{equation}
-As we already know the Poissonian density is a limit of the 
+As we already know from the discussion of the radioactive decay the 
+Poisson density is a limit of the 
 binomial probability density for $N \rightarrow \infty$, $p \rightarrow 
 0$ while $Np=a={\rm const}$. Another limit of the Poisson density
 which deserves consideration is the limit $a \gg 1$: In this limit
 the Poisson density will be essentially different from zero only 
-for $n \approx a$. For $n \gg 1$ we know the Stirling formula 
+for $n \approx a$. For $n \gg 1$  the Stirling formula 
 holds
 \begin{equation}
 n! \approx (2 \pi n)^{1/2} n^n \exp(-n)
@@ -478,15 +465,15 @@ Gaussian density with mean $a$ and variance $a$.
 
 \subsection{Multivariate random variables}
 Up to now we have considered only one dimensional stochastic 
-variables. Obvioulsy, $n$ random variables $X_1, X_2, \ldots, X_n$ 
+variables. Obviously, $n$ random variables $X_1, X_2, \ldots, X_n$ 
 which are sampled simultaneously can be interpreted as the 
 components of an $n$--dimensional stochastic variable $X$.
 Their joint density function
 $P_n(x_1, \ldots, x_n)$ is defined through the statement
 \begin{equation}
 P_n(x_1, \ldots, x_n)dx_1 dx_2 \ldots dx_n \equiv
-{\rm Prob}\{ X_i \in (x_i,x_i+dx_i) \quad {\rm for \quad
-each \quad} i=1, \ldots , n\}.
+{\rm Prob}\{ X_i \in (x_i,x_i+dx_i) \quad \text{for 
+each} \quad i=1, \ldots , n\}.
 \end{equation}
 If we look at the subset of stochastic variables $X_1, \ldots 
 X_s$, for $s>n$ we can easily write down with the help of the
@@ -504,14 +491,14 @@ density of $X_1, \ldots , X_s$
 given that $X_{s+1}=x_{s+1}$, \ldots , $X_n = x_n$ and is easily 
 shown to be given by Bayes rule
 \begin{equation}
-P_{s|n-s}(x_1,dots,x_s|x_{s+1},\ldots,x_n) =
+P_{s|n-s}(x_1,\dots,x_s|x_{s+1},\ldots,x_n) =
 \frac{P_n(x_1, \ldots, x_n)}{P_{n-s}(x_{s+1}, \ldots, x_n)}.
 \end{equation}
 
 Two subsets $(X_1, \ldots, X_s)$ and $(X_{s+1}, \ldots, X_n)$ are 
 said to be statistically  independent if $P_n$ factorizes
 \begin{equation}
-P_n(x_1, \ldots, x_n)=P_s(x_1, \ldots, x_s)P_n(x_{s+1}, \ldots, 
+P_n(x_1, \ldots, x_n)=P_s(x_1, \ldots, x_s)P_{n-s}(x_{s+1}, \ldots, 
 x_n).
 \end{equation}
 In this case $P_s$ is the marginal as well as the conditional 
@@ -521,7 +508,7 @@ The definition of moments is easily generalized to the
 multivariate case
 \begin{equation}
 \langle X_1^{m_1} \ldots X_n^{m_n} \rangle =
-\int x_1^{m_1} \ldots x_n^{m_1} P(x_1, \ldots, x_n) dx_1 \ldots 
+\int x_1^{m_1} \ldots x_n^{m_n} P(x_1, \ldots, x_n) dx_1 \ldots 
 dx_n.
 \end{equation}
 Accordingly, the characteristic function is given by
@@ -529,7 +516,7 @@ Accordingly, the characteristic function is given by
 G(k_1, \dots, k_n) = \left\langle 
 \exp[i(k_1X_1 + \ldots +k_n X_n)]\right\rangle.
 \end{equation}
-Again the mutivariate Taylor expansion in the variables $k$ 
+Again the multivariate Taylor expansion in the variables $k_i$ 
 generates the moments
 \begin{equation}
 G(k_1, \dots, k_n) = \sum \frac{(ik_1)^{m_1} \ldots (ik_n)^{m_n}}
@@ -563,18 +550,25 @@ correlation coefficient
 \kappa(X_j^2)}}.
 \end{equation}
 For $n=2$ the statistical independence of $X_1$ and $X_2$ can be 
-expressed through one of the following criteria: (i) All moments 
+expressed through one of the following criteria: 
+
+(i) All moments 
 factorize, i.e., $\langle X_1^{m_1} X_2^{m_2}\rangle= 
-\langle X_1^{m_1}\rangle \langle X_2^{m_2}\rangle$. (ii) The 
+\langle X_1^{m_1}\rangle \langle X_2^{m_2}\rangle$. 
+
+(ii) The 
 characteristic function factorizes, i.e., $G(k_1,k_2) = 
-G(k_1)G(k_2)$. (iii) All cumulants $\kappa(X_1^{m_1}X_2^{m_2})$ 
+G(k_1)G(k_2)$. 
+
+(iii) All cumulants $\kappa(X_1^{m_1}X_2^{m_2})$ 
 vanish when both $m_1$ and $m_2$ differ from zero. Two variables $X_1$
 and $X_2$ are called uncorrelated if their covariance is zero. 
-This condition is weaker then statistical independence.
+This condition is weaker than statistical independence.
 
 A typical example of a multivariate density is the density of the multivariate 
 Gaussian distribution
 \begin{equation}
+\label{MULTI_GAUSS}
 p(\vec{x}) = \frac{(2\pi)^{-n/2}}{(\det A)^{1/2}}
      \exp\left( -\frac{1}{2} (\vec{x} - \vec{\mu})_i (A^{-1})_{ij} 
      (\vec{x}-\vec{\mu})_j \right),
@@ -596,17 +590,17 @@ G(\vec{k}) = \exp(-\frac{1}{2} k_i A_{ij} k_j + i \mu_ik_i).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The random variables transformation theorem}
-We will discuss in this subsection of very helpful theorem by 
+We will discuss in this subsection a very helpful theorem by 
 Gillespie. The proof of the theorem can be found in the book by
-Gillespie or in his paper (Am. J. Phys. 51 (1983) 523). 
+Gillespie \cite{GILLESPIE} or in his paper \cite{GILLESPIE_THEOREM}. 
 
 We know already that a stochastic variable is defined by 
 specifying its space of states and its probability density.
 Here, we consider the $n$--dimensional random variables $X=(X_1, \ldots, X_n)$ 
 which are specified by their joint probability density function
 $P(x_1, \ldots, x_n)$. Let $f_i$ be functions of the $n$ variables. With the 
-help of $f$ we map the $n$ random variables $X_1, \ldots, X_n$ 
-onto a new $m$ random variables $Y_1, \ldots, Y_m$ by
+help of the $f_i$ we map the $n$ random variables $X_1, \ldots, X_n$ 
+onto $m$  new random variables $Y_1, \ldots, Y_m$ by
 \begin{equation}
 Y_i = f_i(X).
 \end{equation}
@@ -647,7 +641,7 @@ following expression
 P(y) = \int P_{X_1}(x_1)P_{X_2}(y-x_1) dx_1.
 \end{equation}
 
-It is know easy to check that the following equations hold
+It is now easy to check that the following equations hold
 for the mean value and for the variance of the new stochastic 
 variable $Y=X_1 + X_2$
 \begin{equation}
@@ -681,7 +675,7 @@ and
 
 \subsection{One--to--one transformations}
 Let us consider the following application of the random variables
-transformation theorem. Let $X$ be a random variable wit 
+transformation theorem. Let $X$ be a random variable with
 probability density $P(x)$ and let the random variable $Y$ be 
 defined as $Y=f(X)$. Then the density function of $Y$ is given by
 \begin{equation}\label{ONE_TO_ONE}
@@ -701,7 +695,7 @@ dx = \left|{f^{-1}}'(z) \right| dz.
 \end{equation*}
 Integrating over $z$ yields
 \begin{equation*}
-P(y) = P(f^{-1}(y)) \left|{f^{-1}}'(y)) \right|.
+P(y) = P(f^{-1}(y)) \left|{f^{-1}}'(y) \right|.
 \end{equation*}
 Since $x=f^{-1}(y)$, then $|dx/dy|=|{f^{-1}}'(y))|$, and we can 
 rewrite the above equation as
@@ -721,9 +715,11 @@ P(y_1, \ldots, y_n) = P(x_1, \ldots, x_n)
      {\partial(y_1, \ldots, y_n)} \right|.
 \end{equation*}
 
+BEMERKUNG: ANALOGIE ZUR ANALYSIS !!!!!!!
+
 \subsection{The central limit theorem}
 As an essential application of the random variable transformation 
-theorem we want now to prove the central limit theorem.
+theorem we prove the central limit theorem.
 Let us consider $N$ statistically independent random variables $X_i$
 with the same probability density $P$, and, of course, the same mean $\mu$
 and the same variance $\sigma^2$. With the help of the $X_i$ we 
@@ -769,11 +765,12 @@ G(\chi) \equiv \int dx P(x) \exp[-i\chi(x-\mu)].
 \end{equation}
 The function $G$ can be expanded in a Taylor series
 \begin{equation}\label{TAYLORG}
-G(\chi) = G(0) + \chi G'(0) + \frac{\chi^2}{2} G''(0) + o(\chi^2).
+G(\chi) = G(0) + \chi G'(0) + \frac{\chi^2}{2} G''(0) + O(\chi^3).
 \end{equation}
 Since the $n$--th derivative of $G$ is given by
 \begin{equation}
-G^{(n)} = \int_{-\infty}^{\infty} dx P(x) [-i(x-\mu)]^n \exp[-i\chi(x-\mu)].
+G^{(n)}(\chi) = 
+    \int_{-\infty}^{\infty} dx P(x) [-i(x-\mu)]^n \exp[-i\chi(x-\mu)].
 \end{equation}
 For $\chi=0$ the above expression evidently reduces to
 \begin{equation}
@@ -783,14 +780,14 @@ In particular we find $G(0) =1$, $G'(0)= 0$ and $G''(0) =
 -\sigma^2$.
 Therefore, Eq. (\ref{TAYLORG}) can simply be written as
 \begin{equation}
-G(\chi) = 1 - \frac{\sigma^2\chi^2}{2} + o(\chi^2).
+G(\chi) = 1 - \frac{\sigma^2\chi^2}{2} + O(\chi^3).
 \end{equation}
 Inserting the above equation into Eq. (\ref{PZMITG}) 
 and putting $\chi=s/{\sqrt{N}}$ we get
 \begin{equation}\label{PZNFG}
 P(z_N) = \frac{1}{2\pi} \int ds \exp(isz_N)
    \left( 1- \frac{\sigma^2s^2}{2N} + 
-   o(\frac{s^2}{N^{-1}})\right)^N.
+   O(\frac{s^3}{N^{-3/2}})\right)^N.
 \end{equation}
 In the limit $N\rightarrow \infty$ we have, of course,
 \begin{equation}
@@ -814,7 +811,7 @@ with the help of the formula
 P(z_N) \approx \frac{1}{\sqrt{2\pi \sigma^2}} 
     \exp(-\frac{z_n^2}{2 \sigma^2}).
 \end{equation}
-Eq. (\ref{CLT}) is the central limit theorem. It states that the 
+Eq. (\ref{CLT}) is the {\em central limit theorem}. It states that the 
 random variable $z_N$ asymptotically becomes a Gaussian distributed
 random variable with zero mean and variance given by $\sigma^2$.
 It is to be remarked that we have only assumed that the random 
@@ -838,8 +835,8 @@ home in $r$ steps?
 In a more formal language we want to associate with each step
 a stochastic variable $X_i$ ($i=1,\ldots,r$) assuming only the 
 values $+1$ and $-1$ with probability $1/2$ each. If he starts at
-$n=0$, all possible positions being all integers $-\infty < n <
-\infty$, the position after $r$ steps will be
+$n=0$, all possible positions are integers $-\infty < n <
+\infty$. The position after $r$ steps will be
 \begin{equation*}
 Y = X_1 + X_2 + \cdots + X_r.
 \end{equation*}
@@ -854,9 +851,9 @@ to the number of steps. To put it differently the variance of the
 mean of the velocity tends to zero  for long times
 \begin{equation*}
 \left\langle \left( \frac{Y}{r}\right)^2\right\rangle =
-\frac{1}{r} \longrightarrow 0
+\frac{1}{r} \longrightarrow 0 \quad \text{as} \quad 
+   r \longrightarrow \infty.
 \end{equation*}
-for $r \longrightarrow \infty$.
 
 In order to find the probability distribution of $Y$ we make use
 of the characteristic function
@@ -875,9 +872,8 @@ to simulate the random walker in discrete time steps. The program
 is called {\sf rwdt} and its listing can be seen below.
 
 \subsubsection{Listing of the program rwdt.m}
-\begin{verbatim}
-\input{./Listings/rwdt.m}
-\end{verbatim}
+
+\inputlisting{./Listings/rwdt.m}
 
 In the program we have obviously to generate an integer valued random 
 variable which can assume with equal probability the values $+1$ 
@@ -886,7 +882,7 @@ such random numbers is
 \begin{verbatim}
 x = sign(rand(n,1)-0.5)
 \end{verbatim}
-We run the program for 1000 step, i.e., we choose the parameter 
+We run the program for 1000 steps, i.e., we choose the parameter 
 $nstep=1000$.
 Two realizations of the one--dimensional random walk can be seen 
 in Figs. (\ref{F_RWDT_1}) and (\ref{F_RWDT_2}). 
@@ -909,10 +905,9 @@ the estimation of the mean value and variance. The new program is called
 {\sf rwdtn} and generates {\sf nreal} realizations of the 
 stochastic process.
 Its listing can be seen below.
+
 \subsubsection{Listing of the program rwdtn.m}
-\begin{verbatim}
-\input{./Listings/rwdtn.m}
-\end{verbatim}
+\inputlisting{./Listings/rwdtn.m}
 We run the program for $nstep=100$ and $nreal=1000$. The estimated
 mean value of 0.274 and the estimated variance of 103.304 are in quite
 good agreement with the theoretical expected vales of 0 nd 100, respectively.
@@ -954,7 +949,7 @@ the new stochastic variable $Z$
 \begin{equation*}
 Z= \frac{1}{\sqrt{N}} (X'_1 + \ldots + X'_N).
 \end{equation*}
-Then the central limit states that the variable $Z$ is a Gaussian
+Then the central limit theorem states that the variable $Z$ is a Gaussian
 variable with mean $0$ and variance $\sigma^2$.
 
 With the help of the program {\sf cltgen} we want to demonstrate 
@@ -962,9 +957,7 @@ that already for $N=12$ we get Gaussian distributed random numbers
 in a very good approximation.
 
 \subsubsection{Listing of the program cltgen.m}
-\begin{verbatim}
-\input{.\Listings\cltgen.m}
-\end{verbatim}
+\inputlisting{./Listings/cltgen.m}
 
 In Fig. (\ref{F_CLTGEN}) we see the distribution of the Gaussian 
 random numbers generated with the help of the program {\sf 
@@ -978,7 +971,7 @@ drawn was chosen to be $n=1000$.}
 \end{figure}
 
 \subsection{Estimation}
-Experimental data are random numbers! An experiment provides
+{\em Experimental data are random numbers!} An experiment provides
 realizations of some random variable $X$. We call an $N$--fold
 realization of $X$ a sample of size $N$. It is of fundamental
 importance to distinguish between the estimate for the mean and the
@@ -1052,41 +1045,47 @@ If we assume, that there are no correlations we have $\sigma^2_m=
 s^2 = \frac{N}{N-1} \bar{\sigma}^2 = \frac{1}{N-1} \sum_{i=1}^N 
       (x_i - m)^2.
 \end{equation*}
-In practice, if the sample is large, rounding errors can be large. In
+In computations, if the sample is large, rounding errors can be large
+because $(x_i - m)$ is small. In
 these cases it is convenient to use the 
-corrected two--pass algorithm for $s^2$
+"corrected two--pass algorithm" for $s^2$
 \begin{equation*}
-s^2 = \frac{1}{N-1} \left\{ \frac{1}{N-1} \sum_{i=1}^N 
-      (x_i - m)^2 - \frac{1}{N} \left[ \frac{1}{N-1} \sum_{i=1}^N 
+s^2 = \frac{1}{N-1} \left\{ \sum_{i=1}^N 
+      (x_i - m)^2 - \frac{1}{N} \left[\sum_{i=1}^N 
       (x_i - m) \right]^2  \right\}.
 \end{equation*}
 The function of the additional second term which would be identically
 equal to zero if $m$ were exact is to correct the rounding errors of
-the first term (Lit. Press).
+the first term \cite{PRESS}.
 
 \subsubsection{Confidence levels}
 It is important to have also a quantitative characterization of the
-goodness of the estimation. if, for example, the mean values follows a
-gaussian distribution with mean value $m$ and standard deviation
-$\sigma_m$,
-as would be the case by virtue of the central limit theorem, for the
-mean of a set of $N$ variates from a distribution, then i $68.3 \%$ of
+goodness of the estimation. To this end we assign to every 
+estimation a certain confidence interval, which is to be chosen in 
+such a way that the true value lies within this interval at some
+predetermined level of confidence. Since we know, by virtue of the
+central limit theorem, that the mean value is Gaussian distributed
+a criterion for the error can be directly derived from the 
+geometric properties of the distribution. Assuming that the
+mean value is $m$ and that the standard deviation is
+$\sigma_m$ then the probability to find the true value in the
+interval $[m-\sigma,n+\sigma]$ is given by the surface 
+under a normal probability density
+between  $\mu-\sigma_m$ and $\mu + \sigma_m$
+\begin{equation*}
+{\rm Prob}(\mu \in [m-\sigma,n+\sigma]) =
+\int_{m-\sigma}^{m+\sigma} \frac{1}{\sigma \sqrt{2\pi}}
+       \exp\left( - \frac{(x-m)^2}{2\sigma^2}\right)
+       = 0.683.
+\end{equation*}
+Thus, in $68.3 \%$ of
 samples a value lying within $\pm \sigma_m$  of the population mean
 $\mu$ would be found. Conversely, there is $68.3 \%$ probability that
 the interval $[m-\sigma_m, m+\sigma_m]$ contains the population mean.
-This is so because the surface under a normal probability density
-between  $\mu-\sigma_m$ and $\mu + \sigma_m$ amount to $68.3 \%$.
 
 In general we have...
 
-
-
-
-
-
-
-
-
+\section{Beyond this chapter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
