@@ -1333,7 +1333,9 @@ are a collection of programs for linear algebra in C and Fortran.
 A short list of some of the functions included in the JNL is
 given in Table \ref{tab:JNL}.
 \index{JNL!list of functions}
-\begin{sidewaystable}[htbp]
+%\begin{sidewaystable}[htbp]
+\begin{landscape}
+\begin{table}[htbp]
     \begin{tabular}{>{\large}c||>{\scriptsize}l|l}
       \textbf{Class}  & \normalsize\textbf{example methods} & \textbf{purpose} \\\hline\hline
       SFun &  & Special Functions \\
@@ -1357,7 +1359,9 @@ given in Table \ref{tab:JNL}.
       works with both Java 1.1 and Java 2 and one which has some trouble %
       with Java 2.}
     \label{tab:JNL}
-\end{sidewaystable}
+%\end{sidewaystable}
+\end{table}
+\end{landscape}
 Eight more classes (four for double and four for complex) for
 matrices are provided, which perform matrix decompositions,
 like Cholesky, LU, QR and SVD decompositions. They can be
@@ -1456,7 +1460,9 @@ Then there are many convenience classes and some interesting other classes.
 The best way to learn the package is to study the API documentation. 
 In Table \ref{tab:JSciClasses} we give a short overview of interesting 
 classes and methods in the JavaSci package used throughout the book.
-\begin{sidewaystable}[htbp]
+\begin{landscape}
+\begin{table}[htbp]
+%\begin{sidewaystable}[htbp]
   \begin{center} \small
     \begin{tabular}{ll}
       \verb|JSci.chemistry.Atom| & Used to construct and store an atom 
@@ -1517,7 +1523,9 @@ classes and methods in the JavaSci package used throughout the book.
       the JSci/JavaSci package.}
     \label{tab:JSciClasses}
   \end{center}
-\end{sidewaystable}
+%\end{sidewaystable}
+\end{table}
+\end{landscape}
 The \verb|JSci.maths.ArrayMath| class also contains methods for
 calculating the mean, variance, standard deviation, etc. like
 the JNL. The \verb|JSci.maths| package  
@@ -1710,6 +1718,6 @@ the estimation, versus the number of random points used.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{peter}
-\bibliography{V_98,simulit}
+\bibliographystyle{Bibliographies\SimulationBook}
+\bibliography{Bibliographies\V_98,Bibliographies\simulit}
 
