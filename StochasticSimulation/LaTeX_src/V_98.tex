@@ -185,7 +185,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-%\includeonly{Chap9}
+\includeonly{Chap0,Chap9}
 %\includeonly{Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,7 +216,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Chapters !!!!  --  Arabic pagenumbering
 \pagenumbering{arabic}
-\setcounter{chapter}{0}
+%% to have 0 as the first chapter number
+\setcounter{chapter}{-1}
 \selectlisting{java}
 
 %%% Chapter 0 -- Java Intro
