@@ -31,6 +31,7 @@
 %%%%%%%  The graphicx/color style for picture inclusion and color support
 \usepackage[dvips]{graphicx,color}
 % set path for figures
+% more directories can be added by using {dir/} for each
 \graphicspath{ {Figures/} }
 
 %%% The Listings package - include source code
@@ -43,9 +44,13 @@
 \prelisting{\small\smallskip\hrule\smallskip}
 \postlisting{\smallskip\hrule\smallskip}
 
+
+% Use extended theorem style
+\usepackage{theorem}
+
 %%% The Chapterbib package for Bibliographies per chapter
 % TeX usage:  Just insert \bibliography{...bib} where you want to have a bib
-%             The style can be given for each bib or in the main file !
+%             The style can be given for each bib, but NOT in the main file !
 % Compile usage: latex mainfile
 %                bibtex chap1
 %                bibtex chap2     etc.  (for each chapter)
@@ -109,9 +114,9 @@
 %%%%%%%% Am Ende des Kompilierens, alle benutzten Zusatzfiles ausgeben %%%
 %%%\listfiles
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%  Here we define our own commands %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Here we define our own commands and environements %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\bo}[1]{\mathbf{#1}}
 \newcommand{\lvec}[1]{\overrightarrow{#1}} 
 
@@ -127,6 +132,18 @@
 \newcommand{\setR}{\ensuremath{\mathbf{R}}}
 %% Mittelwert Symbol
 \newcommand{\lr}[1]{\left\langle #1 \right\rangle}
+
+%%% Environement for exercises (uses theorem style)
+{ \theoremstyle{plain} %% oder {break}
+  \theoremheaderfont{\bfseries\scshape}
+  \theorembodyfont{\itshape}
+\newtheorem{Ex}{Exercise}[chapter] }
+%%% Environement for solutions 
+\newenvironment{Solution}[1]
+   { \begin{flushleft} \vspace{.5cm} %
+     {\Large\textbf{\textsc{Solution to exercise \ref{#1}}}} 
+     \end{flushleft} }
+   { \vspace{.3cm} }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,7 +172,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-%\includeonly{Chap5}
+%\includeonly{Chap1,Chap2,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,15 +227,21 @@
 %%% Chapter 9 
 
 
-%%% Anhaenge
+%%% Appendices
 \appendix
+
+% Listings of programs
 \include{Listings}
-%%\include{historic}
-%%\include{dict}
+
+% Solutions to exercises
+\include{Solutions}
+
 
 % Bibliographien
-\bibliographystyle{peter}
-\bibliography{V_98}
+%% These commands are ignored by the chapterbib package
+%%\bibliographystyle{peter}
+%%\bibliography{V_98,simulit}
+
 %%\addtocontents{toc}{\protect\vspace{1.5ex}}
 %%\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
 %%\clearpage
