@@ -112,7 +112,7 @@
 \bibpunct{[}{]}{;}{a}{,}{,}
 
 %%%%%%%% Am Ende des Kompilierens, alle benutzten Zusatzfiles ausgeben %%%
-%%%\listfiles
+\listfiles
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%  Here we define our own commands and environements %%%%%%
@@ -139,10 +139,10 @@
   \theorembodyfont{\itshape}
 \newtheorem{Ex}{Exercise}[chapter] }
 %%% Environement for solutions 
-\newenvironment{Solution}[1]
+\newenvironment{Solution}[1]%
    { \begin{flushleft} \vspace{.5cm} %
-     {\Large\textbf{\textsc{Solution to exercise \ref{#1}}}} 
-     \end{flushleft} }
+     {\Large\textbf{\textsc{Solution to exercise \ref{#1}}}}%
+     \end{flushleft} }%
    { \vspace{.3cm} }
 
 
@@ -156,7 +156,7 @@
 %pdftitle={Manuskript for Stochastic Simulations in Physics},%
 %pdfauthor={PD Dr. F. Petruccione, Layout: P. Biechele},%
 %pdfsubject={Stochastic Simulation},%
-%pdfkeywords={Physics},%
+%pdfkeywords={Physics,Stochastics,Simulation,Computer},%
 %pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
 
 %%\usepackage{xr}
@@ -180,8 +180,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Over-full v-boxes on even pages are due to the \v{c} in author's name
-\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
-\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+\vfuzz5pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz5pt % Don't report over-full h-boxes if over-edge is small
 
 \begin{document}
 
