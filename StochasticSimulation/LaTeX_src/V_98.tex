@@ -37,11 +37,47 @@
 % more directories can be added by using {dir/} for each
 \graphicspath{ {Figures/} }
 
+
 %%% Change floating table layout
 %%% can also be used for new floating objects or figures
 \usepackage{float}
+%%% rotating   : Drehen von Bildern/Tabllen/Sonstigem
+\usepackage{rotating}
+
+%%% caption2   : Erweiterte Anpassungen der Captions
+%% use small captions and boldface caption labels
+%%%% enhanced captions: load late
+\usepackage[small,bf]{caption2}
+
+%%% Use this package to correct the behaviour of the float
+%%% package together with the caption/caption2 package 
+%%% inparticular the sidewaystable environment
+%\usepackage[figuresright]{rotfloat}
+%%% has to be done AFTER both: rotfloat and float have been loaded
 \floatstyle{ruled}
 \restylefloat{table}
+
+%%%%%% Small Styles :
+%%% 
+%%%%%%%%%%% calc       : Rechnen mit TeX Groessen
+%%% hhline     : verbesserte Linien in Tabellen
+%%% array      : verbesserte Tabellenkontrolle
+%%% enumerate  : erweiterte enumerate Umgebung
+%%% fancybox   : erweiterte Boxen-Umgebungen
+%%% moreverb   : erweiterte Umgebungen fuer Listings
+%%% multicol   : verbesserte Spalten-Handling
+%%%%%%%%%%%%%% floatfig   : Bilder von Text umfliessen lassen (alt)
+%%% psfrag     : Text in PS Bildern, durch TeX Fonts ersetzen
+%%% exscale    : Skalierung von Mathe Symbolen besser
+%%% natbib     : verbessertes Referenzieren 
+%%% pifont     : spezielle Listen mit PS Symbolen 
+%%% subfigure  : Mehrere Bilder in einem figure mit eigenen Unterschriften
+%%%%%% picinpar   : Bilder in Text einbinden oder eben Anfangsbuchstaben
+%%%%%% !!! Probleme mit AMSTeX und Picinpar --> deshalb wrapfigure !
+%%% wrapfigure : Bilder in Text einbinden oder eben Anfangsbuchstaben
+%%% ifthen : If Clauses for newcommands
+%%%
+\usepackage{array,exscale,natbib,subfigure,ifthen,multicol,verbatim}
 
 %%% The Listings package - include source code
 \usepackage{listings}
@@ -84,15 +120,11 @@
 %                latex mainfile    ! 2 times ! 
 \usepackage{chapterbib}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%  END OF IMPORTANT STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%  AND SETTINGS            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%% Example for setting colors to greyscale
-%%% 1 ist weiss und 0 ist schwarz
-%%%\definecolor{yellow}{gray}{1.00}
-%%%\definecolor{red}{gray}{0.02}
 
 %%% Make fancy (our own) headings and footings
 \usepackage{fancyhdr}
@@ -109,34 +141,10 @@
 %% kommt von \uppercase\relax von oben ! 
 \edef\SS{\ss}
 
-%%%%%% Small Styles :
-%%% 
-%%%%%%%%%%% calc       : Rechnen mit TeX Groessen
-%%% hhline     : verbesserte Linien in Tabellen
-%%% array      : verbesserte Tabellenkontrolle
-%%% enumerate  : erweiterte enumerate Umgebung
-%%% fancybox   : erweiterte Boxen-Umgebungen
-%%% moreverb   : erweiterte Umgebungen fuer Listings
-%%% multicol   : verbesserte Spalten-Handling
-%%%%%%%%%%%%%% floatfig   : Bilder von Text umfliessen lassen (alt)
-%%% psfrag     : Text in PS Bildern, durch TeX Fonts ersetzen
-%%% exscale    : Skalierung von Mathe Symbolen besser
-%%% natbib     : verbessertes Referenzieren 
-%%% pifont     : spezielle Listen mit PS Symbolen 
-%%% caption2   : Erweiterte Anpassungen der Captions
-%%% subfigure  : Mehrere Bilder in einem figure mit eigenen Unterschriften
-%%% rotating   : Drehen von Bildern/Tabllen/Sonstigem
-%%%%%% picinpar   : Bilder in Text einbinden oder eben Anfangsbuchstaben
-%%%%%% !!! Probleme mit AMSTeX und Picinpar --> deshalb wrapfigure !
-%%% wrapfigure : Bilder in Text einbinden oder eben Anfangsbuchstaben
-%%% ifthen : If Clauses for newcommands
-%%%
-%% use small captions and boldface caption labels
-\usepackage[small,bf]{caption2}
-\usepackage{array,rotating,exscale,natbib,subfigure,ifthen,multicol,verbatim}
 
 %%% English Hyphenations and Titles : LOAD AFTER NATBIB
 \usepackage[german,english]{babel}
+
 
 %%%%%%%%%% Definition des Layouts von \cite Befehlen !! (natbib Style) %%%%%%%
 \bibpunct{[}{]}{;}{a}{,}{,}
@@ -220,7 +228,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{IntroToJava,ObjectOriented,AppendixMainText}
+\includeonly{IntroToJava,ObjectOriented,PlottingWithJava,%
+  DataAnalyis,AppendixMainText}
 
 %\includeonly{CD_ROM,Chap7,Chap8,Chap9,Listings,Solutions}
 
@@ -235,6 +244,11 @@
 \hfuzz5pt % Don't report over-full h-boxes if over-edge is small
 
 \begin{document}
+%%% Example for setting colors to greyscale
+%%% 1 ist weiss und 0 ist schwarz
+%%%\definecolor{yellow}{gray}{1.00}
+%%%\definecolor{red}{gray}{0.02}
+\definecolor{tabgray}{gray}{0.6} %% the gray for table rows
 
 % Title and Author
 \title{Stochastic Methods for Physics using Java: \\ An introduction}
@@ -246,6 +260,8 @@
 \tableofcontents
 \clearpage
 \listoffigures 
+\clearpage
+\listoftables
 \clearpage
 \lstlistoflistings
 \clearpage
