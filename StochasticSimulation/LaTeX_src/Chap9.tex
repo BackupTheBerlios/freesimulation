@@ -1299,11 +1299,11 @@ In the  following we are going to investigate such a formulation for a very
 simple balance equation, the one dimensional Burgers equation, which is the
 equation of motion for a one--dimensinal velocity field $v(x,t)$,
 
-The Burgers equation is a one--dimensional version of the navier--Stokes
+The Burgers equation is a one--dimensional version of the Navier--Stokes
 equation. It is often used in gas dynamics since it shows shock wave
 solutions, and as a simple model of turbulence.
 
-\subsection{The definition of the phas space}
+\subsection{The definition of the phase space}
 In this subsection we define the space of
 states of the fluid. Once the accessible states of the fluid
 are known it
@@ -1524,6 +1524,7 @@ with the occupation number $N_u^{\lambda}$ of cell $\lambda$,
 Introducing the shift--operators ${\bf E}_{\lambda}$ which operate on an
 arbitrary function $F$ of the random varoables as 
 \begin{eqnarray}
+\label{SHIFT}
 {\bf{E}}_{\lambda} F(\ldots, N_u^{\lambda}, \ldots)  & = &
  F(\ldots, N_u^{\lambda} + 1, \ldots)                   \nonumber \\
 {\bf{E}}_{\lambda}^{-1} F(\ldots, N_u^{\lambda}, \ldots) & = &
@@ -1617,7 +1618,7 @@ holds
 \end{equation}
 This equation is true, of course, for any other product of
 shift operators
-appearing in our master equation (\ref{MASTEREQ}).
+appearing in our master equation (\ref{DIFFOP}).
 Thus, these products of shift operators when
 acting on a function of the stochastic variables have no influence
 on its expectation value and can, within the angular brackets,
@@ -1640,7 +1641,7 @@ multiplication operator)
 \begin{equation}
 \left[ {\cal{F}}, {\cal{A}} \right] := {\cal{F A}} - {\cal{A \; F}}
 \end{equation}
-and exploiting relation~(\ref{AFEXPEC}) equation~(\ref{TIMEEV})
+and exploiting relation~(\ref{AFEXPEC}), equation~(\ref{TIMEEV})
 takes the form
 \begin{equation}     \label{HGLN}
 \frac{\partial}{\partial t} \langle {\cal{F}} \rangle = \left\langle
