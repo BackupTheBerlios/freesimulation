@@ -420,7 +420,7 @@ is the binomial density $P(n)$
 P(n) = \frac{N!}{n!(N-n)!} p^n(1-p)^{(N-n)},
 \end{equation}
 for $0 \le n \le N$.
-The mean and variance of the binomial desnity are given by
+The mean and variance of the binomial density are given by
 \begin{equation}
 \langle n \rangle = Np,
 \end{equation}
@@ -499,7 +499,7 @@ x_n) dx_{s+1} \ldots dx_{n}.
 $P_s$ is a so--called {\em marginal distribution}.
 
 The {\em conditional density} 
-$P_{s|n-s}(x_1,dots,x_s|x_{s+1},\ldots,x_n)$ is the joint 
+$P_{s|n-s}(x_1,\dots,x_s|x_{s+1},\ldots,x_n)$ is the joint 
 density of $X_1, \ldots , X_s$
 given that $X_{s+1}=x_{s+1}$, \ldots , $X_n = x_n$ and is easily 
 shown to be given by Bayes rule
@@ -539,7 +539,7 @@ G(k_1, \dots, k_n) = \sum \frac{(ik_1)^{m_1} \ldots (ik_n)^{m_n}}
 For completness we mention that the cumulants 
 $\kappa(X_1^{m_1} \ldots X_n^{m_n})$ are defined as
 \begin{equation}
-\log G(k_1, \dots, k_n) = \sum' \frac{(ik_1)^{m_1} \ldots (ik_n)^{m_n}}
+\log G(k_1, \dots, k_n) = {\sum}' \frac{(ik_1)^{m_1} \ldots (ik_n)^{m_n}}
                   {m_1! \ldots m_n!} 
        \kappa(X_1^{m_1} \ldots X_n^{m_n}),
 \end{equation}
@@ -547,7 +547,7 @@ where the symbol $\sum'$ idicates that we do not have to sum when
 all $m$ vanish. As an example we give the $n \times n$ covariance
 matrix $\kappa(X_i X_j)$
 \begin{eqnarray}
-\kappa(X_i X_j) &=& 
+{\rm Cov}(X_i, X_j) &=& 
  \langle (X_i-\langle X_i \rangle)(X_j-\langle X_j \rangle)\rangle 
  \\
  & = & \langle X_i X_j \rangle - \langle X_i \rangle \langle X_j 
@@ -587,7 +587,7 @@ is given by
 \end{equation}
 that the covariance matrix is given by
 \begin{equation}
-\kappa(X_i X_j) = A_{ij},
+{\rm Cov}(X_i, X_j) = A_{ij},
 \end{equation}
 and that the generating function is
 \begin{equation}
@@ -604,40 +604,36 @@ We know already that a stochastic variable is defined by
 specifying its space of states and its probability density.
 Here, we consider the $n$--dimensional random variables $X=(X_1, \ldots, X_n)$ 
 which are specified by their joint probability density function
-$P(x_1, \ldots, x_n)$. Let $f$ be a function of the $n$ variables. With the 
-help of $y$ we map the $n$ random variables $X_1, \ldots, X_n$ 
-onto a new ($m$--dimensional) random variable $Y$ by
+$P(x_1, \ldots, x_n)$. Let $f_i$ be functions of the $n$ variables. With the 
+help of $f$ we map the $n$ random variables $X_1, \ldots, X_n$ 
+onto a new $m$ random variables $Y_1, \ldots, Y_m$ by
 \begin{equation}
-Y = f(X).
-\end{equation}
-The probability that $Y$ has a value between $y$ and $y+\Delta y$
-is given by
-\begin{equation}
-P(y) \Delta y = \int \int_{y<x_1+x_2 <y+\Delta y} p(x_1,x_2) dx_1 
-dx_2.
+Y_i = f_i(X).
 \end{equation}
 The random variable transformation theorem now states that the 
 probability density of the new stochastic variable $Y$ is given by
-the equivalent expression
+the expression
 \begin{eqnarray}
 \label{RVT}
-P(Y) &=& \int dx_1 \ldots dx_n \prod_{i=1}^{m} 
+P(Y_1, \ldots, Y_m) &=& \int dx_1 \ldots dx_n \prod_{i=1}^{m} 
 \delta(y_i - f_i(x_1, \ldots, x_n)) P(x_1, \ldots, x_n).
 \end{eqnarray}
 The integrals extend over the range of all $X_i$.
+For a proof of the random variable transformation theory see 
+Gillespie.
 
 \subsection{The addition of stochastic variables}
 As a first simple example of the application of the random 
 variable theorem we consider the addition of two stochastic 
 variables $X_1$ and $X_2$ with joint probability density
-$P(x-1,x_2)$. The probability density $P(Y) $ of a new stochastic variable
+$P(x_1,x_2)$. The probability density $P(Y) $ of a new stochastic variable
 $Y$ which is defined as the sum of $X_1$ and $X_2$ 
 \begin{equation}
 Y = X_1 + X_2
 \end{equation}
 is then given by
 \begin{equation}
-P(y) = \int \int \delta(x-1 +x_2 -y) P(x_1,x_2) dx_1 dx_2.
+P(y) = \int \int \delta(x_1 +x_2 -y) P(x_1,x_2) dx_1 dx_2.
 \end{equation}
 We can perform the integration over $x_1$ to obtain
 \begin{equation}
@@ -688,10 +684,10 @@ Let us consider the following application of the random variables
 transformation theorem. Let $X$ be a random variable wit 
 probability density $P(x)$ and let the random variable $Y$ be 
 defined as $Y=f(X)$. Then the density function of $Y$ is given by
-\begin{equation*}\label{ONE_TO_ONE}
+\begin{equation}\label{ONE_TO_ONE}
 P(y) = \int_{-\infty}^{\infty} dx P(x) \delta(y-f(x)).
-\end{equation*}
-For the case that the function $f$ is a smoothh, one--to--one
+\end{equation}
+For the case that the function $f$ is a smooth, one--to--one
 transformation the equation $y=f(x)$ can be solved uniquely for $x$
 as $x=f^{-1}(y)$. Let us now change the integration variable in 
 Eq. (\ref{ONE_TO_ONE}) from $x$ to $z=f(x)$
@@ -701,9 +697,9 @@ P(y) = \int_{-\infty}^{\infty} dz \left| {f^{-1}}'(z) \right|
 \end{equation*}
 where we have made use of
 \begin{equation*}
-dx = \left| P(f^{-1}(z)) \right| dz.
+dx = \left|{f^{-1}}'(z) \right| dz.
 \end{equation*}
-Integrationg over $z$ yields
+Integrating over $z$ yields
 \begin{equation*}
 P(y) = P(f^{-1}(y)) \left|{f^{-1}}'(y)) \right|.
 \end{equation*}
@@ -716,13 +712,13 @@ which is a very important formula in the theory of stochastic
 variables which we will use, e.g., in the next chapter.
 
 The previous result is easily generalized to many dimensions.
-If the transformations $Y_i =f_i(X_1, \ldots, X_n)$ for $i=1,\ldots,n)$ are 
+If the transformations $Y_i =f_i(X_1, \ldots, X_n)$ for $i=1,\ldots,n$ are 
 one--to--one, then the probability density of the variables $Y_i$ 
 is given by
 \begin{equation*}
 P(y_1, \ldots, y_n) = P(x_1, \ldots, x_n) 
-     \left|  \frac{\partial(y_1, \ldots, y_n)}
-     {\partial(x_1, \ldots, x_n)} \right|.
+     \left|  \frac{\partial(x_1, \ldots, x_n)}
+     {\partial(y_1, \ldots, y_n)} \right|.
 \end{equation*}
 
 \subsection{The central limit theorem}
@@ -752,15 +748,15 @@ the $\delta$--function in Eq. (\ref{PZN}) can be written as
 \begin{eqnarray}
 &&\delta\left(z_N -\frac{1}{\sqrt{N}} \sum_{j=1}^N (X_j -\mu) 
     \right) \\
-&=& \frac{1}{2\pi} \int ds \exp(isz_N) \prod_{j=1}^N 
-    \exp[-isn^{-1/2}(x_j - \mu)].
+&=& \frac{1}{2\pi} \int_{-\infty}^{\infty} ds \exp(isz_N) \prod_{j=1}^N 
+    \exp[-isN^{-1/2}(x_j - \mu)].
 \end{eqnarray}
 Inserting the above equation into Eq. (\ref{PZN}) and changing the 
-order of the integration we obtain
+order of the $x$ and $s$ integrations we obtain
 \begin{eqnarray}
 P(z_N) &=& \frac{1}{2 \pi} \int ds \exp(isz_N) \nonumber \\
     & & \times \prod_{j=1}^N \int dx_j P(x_j) 
-        \exp[-isN^{-1/2}(x_j - \mu).
+        \exp[-isN^{-1/2}(x_j - \mu)].
 \end{eqnarray}
 The above expression can be written more concisely in the form
 \begin{equation}\label{PZMITG}
@@ -771,13 +767,13 @@ where we have introduced the characteristic function $G$ by
 \begin{equation}
 G(\chi) \equiv \int dx P(x) \exp[-i\chi(x-\mu)].
 \end{equation}
-The function $G$ can be expanded in a taylor series
+The function $G$ can be expanded in a Taylor series
 \begin{equation}\label{TAYLORG}
 G(\chi) = G(0) + \chi G'(0) + \frac{\chi^2}{2} G''(0) + o(\chi^2).
 \end{equation}
 Since the $n$--th derivative of $G$ is given by
 \begin{equation}
-G^{(n)} = \int dx P(x) [-i(x-\mu)]^n \exp[-i\chi(x-\mu)].
+G^{(n)} = \int_{-\infty}^{\infty} dx P(x) [-i(x-\mu)]^n \exp[-i\chi(x-\mu)].
 \end{equation}
 For $\chi=0$ the above expression evidently reduces to
 \begin{equation}
@@ -807,7 +803,13 @@ as
 P(z_N) \approx \frac{1}{2\pi} \int ds \exp(isz_N)
       \exp(-\frac{\sigma^2s^2}{2}).
 \end{equation}
-The above integral can easily be evaluated to give
+The above integral can easily be evaluated
+with the help of the formula
+\begin{equation}
+\int_{-\infty}^{\infty} dx \exp(ibx)\exp(-a^2 x^2) =
+ \frac{\pi^{1/2}}{|a|} \exp\left(-\frac{b^2}{4a^2} \right)
+\end{equation}
+ to give
 \begin{equation} \label{CLT}
 P(z_N) \approx \frac{1}{\sqrt{2\pi \sigma^2}} 
     \exp(-\frac{z_n^2}{2 \sigma^2}).
@@ -836,7 +838,7 @@ home in $r$ steps?
 In a more formal language we want to associate with each step
 a stochastic variable $X_i$ ($i=1,\ldots,r$) assuming only the 
 values $+1$ and $-1$ with probability $1/2$ each. If he starts at
-$n=0$, all possible positions being all integers $-\infty n 
+$n=0$, all possible positions being all integers $-\infty < n <
 \infty$, the position after $r$ steps will be
 \begin{equation*}
 Y = X_1 + X_2 + \cdots + X_r.
@@ -844,7 +846,7 @@ Y = X_1 + X_2 + \cdots + X_r.
 It is easy to check that $\langle Y \rangle = 0$ and since
 the steps are mutually independent
 \begin{equation*}
-\langle Y^2 \rangle = r \langle X \rangle = r.
+\langle Y^2 \rangle = r \langle X^2 \rangle = r.
 \end{equation*}
 The above relation expresses the very typical behaviour of a 
 diffusive process: The mean squared displacement is proportional 
@@ -865,29 +867,78 @@ G_Y(k,r) = [G_X(k)]^r = [\frac{1}{2}\exp(ik) +
 The probability that $Y$ has the value $n$ is the coefficient
 of $\exp(ink)$
 \begin{equation*}
-p_n(r) = \frac{1}{2^r} {r \choose {\frac{1}{2} (r-n)}}.
+p_n(r) = \frac{1}{2^r} {r \choose {\frac{(r-n)}{2}}}.
 \end{equation*}
 
 In order to make clearer these concepts we want to write a program 
 to simulate the random walker in discrete time steps. The program
-is called {\sf rwdt}. bla bla.
-The program {\sf rwdtn} generates {\sf nreal} realizations of the 
-stochastic process.
+is called {\sf rwdt} and its listing can be seen below.
 
+\subsubsection{Listing of the program rwdt.m}
+\begin{verbatim}
+\input{./Listings/rwdt.m}
+\end{verbatim}
+
+In the program we have obviously to generate an integer valued random 
+variable which can assume with equal probability the values $+1$ 
+and $-1$. One way of generating an $n$--dimensional vector $x$ of 
+such random numbers is
+\begin{verbatim}
+x = sign(rand(n,1)-0.5)
+\end{verbatim}
+We run the program for 1000 step, i.e., we choose the parameter 
+$nstep=1000$.
+Two realizations of the one--dimensional random walk can be seen 
+in Figs. (\ref{F_RWDT_1}) and (\ref{F_RWDT_2}). 
+\begin{figure}
+\label{F_RWDT_1}
+\includegraphics[width=10cm]{./Figures/f_rwdt_1.eps}
+\caption{One realization of a one--dimensional random walk.}
+\end{figure}
+
+\begin{figure}
+\label{F_RWDT_2}
+\includegraphics[width=10cm]{./Figures/f_rwdt_2.eps}
+\caption{Another realization of a one--dimensional random walk.}
+\end{figure}
+
+In order to check the theoretical prediction that the mean square
+displacement is proportional to the number of steps we generalize the program
+{\sf rwdt} to allow for the generation of more realizations and 
+the estimation of the mean value and variance. The new program is called 
+{\sf rwdtn} and generates {\sf nreal} realizations of the 
+stochastic process.
+Its listing can be seen below.
+\subsubsection{Listing of the program rwdtn.m}
+\begin{verbatim}
+\input{./Listings/rwdtn.m}
+\end{verbatim}
+We run the program for $nstep=100$ and $nreal=1000$. The estimated
+mean value of 0.274 and the estimated variance of 103.304 are in quite
+good agreement with the theoretical expected vales of 0 nd 100, respectively.
+It is interesting to look also at the distribution of the end points of 
+the random walk. This can be seen in Fig. (\ref{F_RWDTN}).
+\begin{figure}
+\label{F_RWDTN}
+\includegraphics[width=10cm]{./Figures/f_rwdtn.eps}
+\caption{The distribution of the end--points of the one--dimensional 
+random walk. the program {\sf rwdtn} was run for nstep=100 and 
+nreal=1000.}
+\end{figure}
 \subsection{Generation of Gaussian random numbers}
 As a simple demonstration of the central limit theorem we want to 
 generate Gaussian distributed random numbers by adding uniformly 
 distributed ones.
 
 We know that uniformly distributed random numbers on the interval
-$[0,1)$ have $p(x) =1$ for $x\in[0,1)$. Then it is aesy to show 
+$[0,1)$ have $p(x) =1$ for $x\in[0,1)$. Then it is easy to show 
 that 
 \begin{equation*}
 \langle X\rangle = \frac{1}{2}
 \end{equation*}
 and
 \begin{equation*}
-{\rm Var}(X) = \int_0^1 x^2 dx - \langle X\rangle = \frac{1}{3} 
+{\rm Var}(X) = \int_0^1 x^2 dx - \langle X^2\rangle = \frac{1}{3} 
         -\frac{1}{4} = \frac{1}{12}.
 \end{equation*}
 Now let us consider the transformed random variable $X'$
@@ -910,12 +961,28 @@ With the help of the program {\sf cltgen} we want to demonstrate
 that already for $N=12$ we get Gaussian distributed random numbers
 in a very good approximation.
 
+\subsubsection{Listing of the program cltgen.m}
+\begin{verbatim}
+\input{.\Listings\cltgen.m}
+\end{verbatim}
+
+In Fig. (\ref{F_CLTGEN}) we see the distribution of the Gaussian 
+random numbers generated with the help of the program {\sf 
+cltgen}. The number of random numbers $Z$ was chosen to be 1000.
+\begin{figure}
+\label{F_CLTGEN}
+\includegraphics[width=10cm]{./Figures/f_cltgen.eps}
+\caption{The distribution of the Gaussian random numbers generate
+with the help of the program {\sf cltgen}. The number of random numbers 
+drawn was chosen to be $n=1000$.}
+\end{figure}
+
 \subsection{Estimation}
 Experimental data are random numbers! An experiment provides
 realizations of some random variable $X$. We call an $N$--fold
 realization of $X$ a sample of size $N$. It is of fundamental
 importance to distinguish between the estimate for the mean and the
-variance made on the basis of the sample, whic we will denote by $m$
+variance made on the basis of the sample, which we will denote by $m$
 and by $s$, respectively and the corresponding quantities for the
 (infinite) underlying population, the ensemble.
 
@@ -932,19 +999,19 @@ Z = \frac{1}{N}(X_1 + \cdots + X_N).
 $Z$ is the mean value of the $N$ realizations. Assuming that the $X_i$
 are uncorrelated we obtain for the cumulants of $Z$
 \begin{equation*}
-\kappa(Z^n) = \frac{1}{N^n} \sum_{i=1}^N \kappa(X_i^n) =
-      N^{-n+1}  \kappa(X^n).
+\kappa_n(Z) = \frac{1}{N^n} \sum_{i=1}^N \kappa_n(X_i) =
+      N^{-n+1}  \kappa_n(X).
 \end{equation*}
 In particular we have
 \begin{eqnarray*}
 \kappa(Z) & = & \langle Z \rangle = \langle X \rangle \\
-\kappa(Z^2) & = & {\rm Var}(Z) = \frac{1}{N} \kappa(X) = \frac{1}{N}
+\kappa_2(Z) & = & {\rm Var}(Z) = \frac{1}{N} \kappa_2(X) = \frac{1}{N}
                   {\rm Var}(X) \\
-\kappa(Z^n) & = & O(N^{-2}) \;\;\; {\rm for} \;\; N>2.
+\kappa_n(Z) & = & O(N^{-2}) \;\;\; {\rm for} \;\; N>2.
 \end{eqnarray*}
 In other words the mean value of $Z$ is a random variable with a
 distribution which has the same mean value as $X$, but with a variance
-which is smaller ba a afcator $N$. Up to terms of the order
+which is smaller by a factor of $N$. Up to terms of the order
 $O(N^{-2})$ the distribution of $Z$ is Gaussian.
 
 \subsubsection{Estimating mean and variance}
@@ -958,20 +1025,20 @@ be
 \begin{equation*}
   \bar{\sigma}^2 = \frac{1}{N} \sum_{i=1}^N (x_i -m)^2.
 \end{equation*}
-Unfortunately, the above estimator is biased, beacuse we make use of
-the already known $m$ instead if the unknown $\mu$. As can easily be
+Unfortunately, the above estimator is biased, because we make use of
+the already known $m$ instead of the unknown $\mu$. As can easily be
 seen
 by adding and subtracting $\mu$ in each term in the above equation we
 get
 \begin {eqnarray*}
- \bar{\sigma}^2 &=& \frac{1}{N} \sum_{i=1}^N (x_i - \mu -(m-\mu))^2 \\
+ \bar{\sigma}^2 &=& \frac{1}{N} \sum_{i=1}^N [x_i - \mu -(m-\mu)]^2 \\
                 & = & \frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2
                               -2(m-\mu)\frac{1}{N} \sum_{i=1}^N (x_i
                                    - \mu)
                            +(m-\mu)^2 \\
                & = & \frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2 - (m-\mu)^2.
 \end{eqnarray*}
-Now, by taking expectation values averaging over an infinty of samples
+Now, by taking expectation values averaging over an infinity of samples
 of size $N$ we have
 \begin{eqnarray*}
 E[\bar{\sigma}^2] &= & E\left[\frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2
@@ -979,20 +1046,21 @@ E[\bar{\sigma}^2] &= & E\left[\frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2
             - E\left[(m-\mu)^2 \right] \\
        & = & \sigma^2 - \sigma_m^2.
 \end{eqnarray*}
-If we assume, that there are no correlations we have $\sigma^2=
+If we assume, that there are no correlations we have $\sigma^2_m=
 \sigma^2/N$, an unbiased estimate of $\sigma^2$ is
 \begin{equation*}
 s^2 = \frac{N}{N-1} \bar{\sigma}^2 = \frac{1}{N-1} \sum_{i=1}^N 
       (x_i - m)^2.
 \end{equation*}
 In practice, if the sample is large, rounding errors can be large. In
-these cases it is convenient to use the following expression for $s^2$
+these cases it is convenient to use the 
+corrected two--pass algorithm for $s^2$
 \begin{equation*}
 s^2 = \frac{1}{N-1} \left\{ \frac{1}{N-1} \sum_{i=1}^N 
       (x_i - m)^2 - \frac{1}{N} \left[ \frac{1}{N-1} \sum_{i=1}^N 
       (x_i - m) \right]^2  \right\}.
 \end{equation*}
-The function of the additional second term whic would be identically
+The function of the additional second term which would be identically
 equal to zero if $m$ were exact is to correct the rounding errors of
 the first term (Lit. Press).
 
@@ -1001,13 +1069,13 @@ It is important to have also a quantitative characterization of the
 goodness of the estimation. if, for example, the mean values follows a
 gaussian distribution with mean value $m$ and standard deviation
 $\sigma_m$,
-as would be the caee by virtue of the central limit theorem, for the
+as would be the case by virtue of the central limit theorem, for the
 mean of a set of $N$ variates from a distribution, then i $68.3 \%$ of
-samples a avalue lying within $\pm \sigma_m$  of the population mean
+samples a value lying within $\pm \sigma_m$  of the population mean
 $\mu$ would be found. Conversely, there is $68.3 \%$ probability that
 the interval $[m-\sigma_m, m+\sigma_m]$ contains the population mean.
 This is so because the surface under a normal probability density
-between  $\mu-\sigma_m$ and $\mu + \sigma_m$ amount sto $68.3 \%$.
+between  $\mu-\sigma_m$ and $\mu + \sigma_m$ amount to $68.3 \%$.
 
 In general we have...
 
@@ -1034,8 +1102,3 @@ lichkeitstheoretische Grundbegriffe; typische
 Verteilungen (Poisson, Gauss, Binomial); 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The generation of random numbers}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Datenanalyse}
-Momente, Varianzen, Fehlefortpflanzung
