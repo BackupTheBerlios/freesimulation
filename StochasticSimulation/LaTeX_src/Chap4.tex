@@ -1,0 +1,464 @@
+\chapter{Stochastic processes and master equations}
+This chapter is devoted
+to the introduction of some mathematical concepts. 
+We will introduce stochastic processes and we will 
+see how a particular class of stochastic 
+processes, the so--called Markov processes  are described 
+with the help of master equations. These concepts will be applied
+in the next chapters to typical examples from statistical physics.
+
+\section{Stochastic processes}
+We have already learned in Chap. 2 that once a stochastic variable 
+$X$ has been defined it is possible to define other stochastic 
+variables, say $Y$, as functions of $X$ by some mapping $f$. In 
+particular, the quantity $Y$ may be a function of an additional
+time variable $t$, i.e.,
+\begin{equation*}
+Y(t) = f(X,t).
+\end{equation*}
+Sloppy speaking, such a quantity $Y(t)$ is called a {\em stochastic
+processes}. If we insert for $X$ one of its possible values $x$
+we obtain an ordinary function
+\begin{equation*}
+y(t) = f(x,t),
+\end{equation*}
+which is a {\em realization} of the stochastic process. It is 
+customary in statistical physics to regard the stochastic process 
+as an {\em ensemble} of such realizations.
+
+It follows immediately from the random variable transformation 
+theorem that the probability density for $Y(t)$ to take the value
+$y$ at time $t$ is given by
+\begin{equation*}
+P_1(y,t) = \int dx  \delta(y-f(x,t)) P(x)
+\end{equation*}
+and accordingly the joint probability density to  that $Y$ has the
+value $y_1$ at time $t_1$, the value $y_2$ at time $t_2$, 
+$\ldots$, and the value $y_n$ at time $t_n$ is given by
+\begin{eqnarray*}
+\lefteqn{P_n(y_1,t_1;y_2,t_2; \ldots, y_n,t_n)} \\
+&& = \int dx \delta(y_1-f(x,t_1))\delta(y_2-f(x,t_2)) \cdots 
+   \delta(y_n-f(x,t_n))  P(x).
+\end{eqnarray*}
+In such a way an infinite hierarchy of joint probability densities
+$P_n$ $(n=1,2,\ldots)$ is defined, which allows the evaluation of 
+expectation values like
+\begin{eqnarray*}
+\lefteqn{<Y(t_1) Y(t_2) \cdots Y(t_n)>} \\
+&& = \int dy_1 dy_2 \cdots dy_n 
+        y_1 y_2 \cdots y_n P_n(y_1,t_1;y_2,t_2; \ldots, y_n,t_n).
+\end{eqnarray*}
+It has been shown by Kolmogorov \cite{KOLMOGOROV} that the 
+hierarchy of joint probability densities introduced above 
+completely specifies
+a stochastic process if the following four consistency conditions 
+are satisfied
+
+(i) $P_n \ge 0$; \\
+(ii) $P_n$ is a symmetric function of the pairs $(y_1,t_1)$, 
+$\ldots$, $(y_n,t_n)$; \\
+(iii) $\int dy_n P_n(y_1,t_1; \ldots , y_n,t_n) =
+     P_{n-1}(y_1,t_1; \ldots ; y_{n-1},t_{n-1})$; \\
+(iv) $\int dy_1 P(y_1,t_1) =1$.
+
+Thus, the hierarchy of joint probability densities constitutes an 
+alternative way to define stochastic processes. 
+With increasing $n$ the description of the stochastic processes gets
+more precise. It is important to 
+make the following remarks.  The condition (iii) implies that each 
+density $P_n$ includes the knowledge of all previous densities
+$P_k$ with $k<n$. Furthermore the density $P_n$ does have the 
+following property if two time arguments are identical
+\begin{equation*}
+P_n(x,t;y_1,t;y_2,s_2; \ldots ; y_{n-1},s_{n-1}) = 
+P_{n-1}(x,t;y_2,s_2; \ldots ; y_{n-1},s_{n-1})) 
+\delta(x-y_1).
+\end{equation*}
+The hierarchy of probability densities is also the starting point 
+for the classification of stochastic processes. A stochastic 
+process is said to be purely random if events at different times 
+are not correlated. In this case the joint probability density 
+factorizes, i.e. we have
+\begin{eqnarray*}
+P_2(y_1,t_1;y_2,t_2) &=& P_1(y_1,t_1) P_1(y_2,t_2) \\
+P_3(y_1,t_1;y_2,t_2;y_3,t_3) &=& P_1(y_1,t_1) P_1(y_2,t_2)P_1(y_3,t_3) 
+\\
+\text{and so on.} &&
+\end{eqnarray*}
+
+\section{Markov processes}
+In order to define the class of stochastic processes which will be 
+of central importance in the forthcoming theoretical discussions 
+and in the examples of the next chapters we have to remind 
+ourselves of the definition of conditional probability densities.
+We will denote conditional probability densities by
+$T_n(x,t|y_1,t_1;y_2,t_2; \ldots, y_n,t_n)$. This quantity gives 
+the probability that the stochastic process takes the value $x$ at 
+time $t$ given that it had the value $y_1$ at time $t_1$, $y_2$
+at time $t_2$, $\ldots$, $y_n$ at time $t_n$, where we assume that
+$t_1< \cdots <t_n < t$.  The conditional probability density has 
+the following properties \\
+(i) $T_n \ge 0$, \\
+(ii) $\int dx T_n = 1$,  \\
+(iii) $T_n(x,t|y_1,t;y_2,t_2; \ldots, y_n,t_n) = \delta(x-y_1)$.\\
+As we already know the joint probability density can be written as
+\begin{eqnarray*}
+\lefteqn{P_n(x,t;y_1,t;y_2,t_2; \ldots, y_{n-1},t_{n-1})} \\
+&& = P_{n-1}(y_1,t;y_2,t_2; \ldots, y_{n-1},t_{n-1})
+T_{n-1}(x,t|y_1,t;y_2,t_2; \ldots, y_{n-1},t_{n-1}).
+\end{eqnarray*}
+Now we are in the position to define the class of Markov 
+processes. Let $t_1< \cdots <t_n < t_{n+1}$ be an ordered sequence 
+of times. A Markov process is defined through the following 
+condition for the conditional probability density
+\begin{eqnarray*}
+\lefteqn{T_{n}(y_{n+1},t_{n+1}|y_1,t;y_2,t_2; \ldots, y_{n},t_{n}}) \\
+&&= T_{1}(y_{n+1},t_{n+1}|y_{n},t_{n}).
+\end{eqnarray*}
+In other words, the conditional probability density at $t_{n+1}$
+given the value of $y_n$ at time $t_n$ is uniquely determined and 
+is not affected by any value of $y$ at earlier times.
+The above definition implies that for a Markov process all
+$T_n$ with $n \ge 1$ can be determined from the one step 
+transition probability $T_1$. As an immediate consequence a Markov 
+processes is completely characterized by the knowledge of the
+one step transition probability and by the probability density
+$P_1$. With the help of these two functions we can reconstruct the 
+whole hierarchy of probability densities. For example, we
+have
+\begin{eqnarray}
+\label{P3}
+P_3(y_1,t_1;y_2,t_2;y_3,t_3) &=& 
+      P_2(y_1,t_1;y_2,t_2) T_2(y_3,t_3|y_1,t_1;y_2,t_2)   
+         \nonumber \\
+    & = & T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1)
+           P_1(y_1,t_1).
+\end{eqnarray}
+
+Integrating the above equation (\ref{P_3}) over $y_2$ we obtain 
+\begin{equation}
+P_2(y_1,t_1;y_3,t_3) = P_1(y_1,t_1) 
+       \int dy_2 T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1).
+\end{equation}
+Dividing both sides by $P_1(y_1,t_1)$ we obtain an identity which 
+must be obeyed by the transition probability of any Markov process
+\begin{equation}
+\label{CHAPMAN_KOLMOGOROV}
+T_1(y_1,t_3|y_1,t_1) =  
+       \int dy_2 T_1(y_3,t_3|y_2,t_2) T_1(y_2,t_2|y_1,t_1).
+\end{equation}
+The above identity is called the {\em Chapman--Komogorov 
+equation}. It has a simple interpretation. The transition 
+probability between two states $y_1$ and $y_3$ with $t_1 <t_3$
+corresponds to the product of the transition probability between 
+the initial state and some intermediate state and the transition 
+between this intermediate state and the final state integrated
+over all intermediate states.
+
+As we already noted the functions $P_1$ and $T_1$ uniquely define 
+a Markov process. However, these two functions are not arbitrary.
+They must satisfy the Chapman--Kolmogorov equation and the obvious
+consistency condition
+\begin{equation*}
+P_1(y_2,t_2) =  
+       \int dy_1  T_1(y_2,t_2|y_1,t_1) P_1(y_1,t_1).
+\end{equation*}
+
+\section{The master equation}
+We now derive an equivalent form of the Chapman--Kolmogorov 
+equation which is more practical for physical applications.
+As a consequence of the Chapman--Kolmogorov equation each time 
+step $t-t_1$ can be decomposed into a sequence of smaller time 
+steps. So it is plausible to try to characterize the Markov
+process by regarding infinitesimal time steps. 
+
+To this end it is convenient to introduce the infinitesimal 
+generator of a Markov process ${\cal{A}}$ as
+\begin{equation}
+\label{DEF_GENERATOR}
+{\cal{A}}(t) g(x) = \lim_{\Delta t \rightarrow 0}
+    \frac{1}{\Delta t} 
+    \left[\int dy g(y)T(y,t+\Delta t|x,t) - g(x)  \right].
+\end{equation}
+$g(y)$ is some measurable function for which the above 
+limit exists. Evidently ${\cal{A}}$ is a linear operator, which 
+can be determined from the transition probability density. 
+When the operator ${\cal{A}}$ operates on $g$ it describes the
+change of the expectation value of $g$ in an infinitesimal time 
+step. The importance of the generator ${\cal{A}}$ lies in the fact
+that together with some initial condition $p(x,t=0)$ it specifies
+uniquely the Markov process.
+
+Multiplying the above equation with $T(x,t|x',t')$ ($t'<t$) and 
+integrating over $x$ we obtain
+\begin{eqnarray*}
+\lefteqn{\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t')} \\
+&& = \lim_{\Delta t \rightarrow 0}
+    \frac{1}{\Delta t} 
+    \left[\int dy g(y)T(y,t+\Delta t|x',t') - 
+        \int dx g(x) T(x,t|x',t')  \right],
+\end{eqnarray*}
+where we made use of the Chapman--Kolmogorov equation.
+We now rename the variable $y$ on the right hand side of the above 
+equation and call it $x$ and perform the limit $\Delta t \rightarrow 
+0$
+\begin{equation}
+\label{KOL_FORWARD_0}
+\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t') =
+  \int dx g(x) \frac{\partial}{\partial t} T(x,t|x',t').
+\end{equation}
+It is convenient to introduce the adjoint operator ${\cal{A}}^{\dagger}$
+to the generator ${\cal{A}}$ according to
+\begin{equation}
+\label{ADJOINT}
+\int dx \left[ {\cal{A}}(t) g(x) \right] T(x,t|x',t') =
+\int dx g(x) \left[ {\cal{A}}^{\dagger}(t)  T(x,t|x',t') \right].
+\end{equation}
+Inserting Eq. (\ref{ADJOINT}) into Eq. (\ref{KOL_FORWARD_0})
+and considering that (\ref{ADJOINT}) holds for any 
+function $g(x)$ we conclude that
+\begin{equation}
+\label{KOL_FORWARD}
+\frac{\partial}{\partial t} T(x,t|x',t') =
+{\cal{A}}^{\dagger}(t) T(x,t|x',t').
+\end{equation}
+We will call the above equation the master equation.
+The name master equation appears for the first time in a paper by
+Nordsieck, Lamb and Uhlenbeck \cite{NORDSIECK}. 
+It was chosen to denote an equation from which
+all relevant equation and results can be derived. 
+In the mathematical literature the 
+same equation  is known as the Kolmogorov forward
+equation.
+
+\section{The generator of a deterministic process: The Liouville 
+equation}
+
+Let us consider a physical system whose dynamics is described
+by a system of ordinary differential equations of first order
+\begin{equation}
+\label{ORDINARY_DIFF}
+\frac{d}{dt} x(t) = g(x(t)),
+\end{equation}
+where $g$ is a function $R^d \rightarrow R^d$. The initial 
+condition is
+\begin{equation*}
+x(0) = x \in R^d.
+\end{equation*}
+We denote the unique solution of this equation by $\phi(t,x)$,
+where the $x$ stresses the dependence on the initial condition.
+
+If $f:R^d \rightarrow R^d$ is a continuous differentiable function
+then it follows from Eq. (\ref{ORDINARY_DIFF}) and from
+$x(t)=\phi(x,t)$ that
+\begin{equation*}
+\frac{d}{dt} f(x(t)) = \sum_i \frac{\partial f}{\partial x_i}
+          (x(t)) g^i(x(t)),
+\end{equation*}
+where $g^i$ denotes the $i$--th component of $g$. 
+In order to construct the generator of a deterministic process
+it is helpful to  introduce 
+the first order differential operator
+\begin{equation*}
+Vf(x) = \sum_i \frac{\partial f}{\partial x_i}
+          (x) g^i(x).
+\end{equation*}
+It is well--known result from analysis that 
+$x(t)$ is a solution of the differential equation (\ref{ORDINARY_DIFF}) 
+if and only if 
+\begin{equation}
+\label{COORDINATE_FREE}
+\frac{d}{dt}f(x(t)) = V f(x(t))
+\end{equation}
+for all $f\in C^{\infty}$. Eq. (\ref{COORDINATE_FREE}) is the 
+coordinate free representation of the differential equation 
+(\ref{ORDINARY_DIFF}). The operator $V$ is a vector field and 
+$\phi(t,x)$ is called the flow of $V$.
+
+With the help of these formal preliminaries it is easy to 
+construct the generator of a deterministic Markov process.
+Obviously we have
+\begin{equation*}
+x_t = \phi(x,t)
+\end{equation*}
+and
+\begin{equation*}
+Ef(x_t) = f(\phi(x,t)),
+\end{equation*}
+where the symbol $E$ denotes the expectation value.
+
+Inserting the above expectation value into the definition of a 
+generator (\ref{DEF_GENERATOR}) we immediately obtain
+\begin{eqnarray*}
+{\cal{A}}_d(t) f & = & \lim_{t\rightarrow 0} \frac{1}{t}
+                        \left[ Ef(x_t) - f(x)\right] \\
+             & = & \lim_{t\rightarrow 0} \frac{1}{t}
+                        \left[ f(\phi(x,t)) - f(\phi(0,x))\right] \\
+              & = & \frac{d}{dt} f(x) ,
+\end{eqnarray*}
+and finally, using Eq. (\ref{COORDINATE_FREE}),
+\begin{equation*}
+{\cal{A}}_d(t) f = Vf.
+\end{equation*}
+Thus, the generator of a deterministic Markov process is the 
+vector field.
+
+Having determined the generator it is now straightforward to 
+evaluate the corresponding master equation. To this end we only 
+have to determine the operator which is adjoint to
+${\cal{A}}_d$. It is evident that we have
+\begin{eqnarray}
+\label{GEN_DET0}
+\int dx \left[{\cal{A}}_d f(x) \right]h(x) &=&
+          \sum_i \int dx \left[g_i 
+           \frac{\partial f}{\partial x_i} \right] h(x) \nonumber \\
+     & = & -\sum_i f \frac{\partial}{\partial x_i} g_i h(x).      
+\end{eqnarray}
+Since Eq. (\ref{GEN_DET0}) holds for any function $h(x)$
+\begin{equation}
+\label{GEN_DET_A}
+{\cal{A}}_d^{\dagger} h(x) = -\sum_i \frac{\partial}{\partial x_i}
+    \left(g_i h(x) \right).
+\end{equation}
+Inserting (\ref{GEN_DET_A}) into the Kolmogorov forward equation
+(\ref{KOL_FORWARD}) 
+leads to the master equation for a deterministic Markov process
+\begin{equation}
+\frac{\partial}{\partial} T(x,t|x',t') =
+ - \sum_i \frac{\partial}{\partial x_i}
+     \left(g_i(x)T(x,t|x',t')  \right).
+\end{equation}
+In statistical physics the above equation is called the Liouville 
+equation.
+
+\section{The generator of a jump process}
+Let us now introduce jump processes \cite{DAVIES,KAPPLER}.
+We consider a system in a given state $x$.  
+In order to characterize a jump process, i.e., a process
+in which the system undergoes sudden discontinuous changes of its state,
+we have to specify the probability for 
+the system to remain in $x$ during the time interval $dt$ is
+\begin{equation*}
+(1-\lambda(x) dt)
+\end{equation*}
+and the probability that the system jump from state $x$ to state
+$x'$ during the time interval $dt$ is
+\begin{equation*}
+\lambda(x) Q(x',x) dt,
+\end{equation*}
+where
+\begin{equation}
+\label{NORM_Q}
+\int dx' Q(x',x) =1.
+\end{equation}
+Then,
+\begin{equation*}
+Ef(x_{dt+t}) = (1-\lambda(x)dt) f(x)
+   + \lambda(x) dt \int dx'f(x') Q(x',x).
+\end{equation*}
+From the definition of the generator we obtain immediately the
+generator of the jump process
+\begin{equation}
+\label{GEN_JUMP}
+{\cal{A}}_j f(x) = \lambda(x) \int dx' \left( f(x') 
+-f(x)\right)Q(x',x),
+\end{equation}
+where we made use of Eq. (\ref{NORM_Q}).
+Again, in order to derive the Kolmogorov forward equation we have 
+to construct the adjoint operator to ${\cal{A}}_j$.
+We start from Eq. (\ref{KOL_FORWARD_0})  
+\begin{equation}
+\label{KOL_FORWARD_J0}
+\int dx \left[ {\cal{A}}_j(t) f(x) \right] T(x,t|x',t') =
+  \int dx f(x) \frac{\partial}{\partial t} T(x,t|x',t').
+\end{equation}
+and insert the generator (\ref{GEN_JUMP}) into the left hand side 
+of the above equation
+\begin{eqnarray*}
+\lefteqn{\int dx \left[ {\cal{A}}_j(t) f(x) \right] T(x,t|x',t')} 
+\\
+&=& \int dx \left[ \lambda(x)
+       \int dx'' \left(f(x'') -f(x) \right) Q(x'',x) \right] T(x,t|x',t') 
+       \\
+& = & \int dx \int dx'' \lambda(x) f(x'') Q(x'',x) T(x,t|x',t') \\
+& & - \int dx \int dx'' \lambda(x) f(x) Q(x'',x) T(x,t|x',t').
+\end{eqnarray*}
+By renaming $x \rightarrow x''$ and $x'' \rightarrow x$  in the first line of the
+above equation we get
+\begin{eqnarray}
+\label{ADJOINT_JUMP}
+\lefteqn{\int dx  f(x) \int dx'' \lambda(x'')  Q(x,x'') T(x'',t|x',t')}
+     \nonumber \\
+& & - \int dx f(x) \int dx'' \lambda(x)  Q(x'',x) T(x,t|x',t') \nonumber \\
+& \equiv & \int dx f(x) \left[ {\cal{A}}_j^{\dagger}(x) 
+          T(x,t|x',t')      \right]
+\end{eqnarray}
+From Eq. (\ref{KOL_FORWARD_J0}) and from Eq. (\ref{ADJOINT_JUMP}) 
+we conclude that the Kolmogorow forward equation of a jump process
+reads
+\begin{eqnarray} 
+\label{KOL_FORWARD_J1}
+\lefteqn{\frac{\partial}{\partial t} T(x,t|x',t') =} \nonumber \\ 
+&& \int dx'' \lambda(x'') Q(x,x'') T(x'',t|x',t')
+ - \int dx'' \lambda(x) Q(x'',x) T(x,t|x',t').
+\end{eqnarray}
+Because of Eq. (\ref{NORM_Q}) we can write the above equation also 
+in the form
+\begin{eqnarray} 
+\label{KOL_FORWARD_J2}
+\lefteqn{\frac{\partial}{\partial t} T(x,t|x',t') =} \nonumber \\ 
+&& \int dx'' \lambda(x'') Q(x,x'') T(x'',t|x',t')
+ - \lambda(x) T(x,t|x',t').
+\end{eqnarray}
+Usually the Kolmogorov forward equation for a jump process is 
+writen in a more suggestive form. To this end we introduce the 
+total transition rate pro time unit for a transition from state $x'$ 
+into  state $x$ to occur
+\begin{equation*}
+w(x,x') = \lambda(x') Q(x,x')
+\end{equation*}
+and write the master equation for a jump process in its final form
+\begin{equation}
+\label{MASTER_JUMP}
+\frac{\partial}{\partial t} T(x,t|x',t') =
+ \int dx'' \left( w(x,x'') T(x'',t|x',t')
+ - w(x'',x) T(x,t|x',t') \right).
+\end{equation}
+
+In the physical literature Eq. (\ref{MASTER_JUMP}) is written in 
+the simplified form
+\begin{equation}
+\label{MASTER_JUMP_P}
+\frac{\partial}{\partial t} P(x,t) =
+ \int dx'' \left( w(x,x'') P(x'')
+ - w(x'',x) P(x,t) \right).
+\end{equation}
+This equation has the following meaning \cite{VAN_KAMPEN}. Take a 
+time $t'$ and a state $y'$ and consider the solution of Eq. (\ref{MASTER_JUMP_P})
+for $t \ge t'$ with the initial condition $P(x,t') = 
+\delta(x-x')$. This solution is the conditional transition 
+probability $T(x,t|x',t')$ of the Markov process for each choice
+of $x'$ and $t'$. It is important to keep in mind that Eq. (\ref{MASTER_JUMP_P})
+is always to be interpreted as an equation for $T$ and not for 
+$P$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Ende von Kap. 4 %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Monte Carlo Methoden in der statistischen Mechanik}
+Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
+Simulated annealing; travelling salesman;
+
+\chapter{Non-equilibrium MC}
+Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
+
+\chapter{Brownsche Dynamik Simulationen}
+Omega-entwicklung; SDE;
+
+
+\chapter{Rest}
+stochastische Resonanzen; Muster Erkennung; random Walks;
+
+\chapter{Stochastische Wellenfunktionsmethoden}
