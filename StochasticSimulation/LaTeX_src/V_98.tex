@@ -147,6 +147,9 @@
      \end{flushleft} }%
    { \vspace{.3cm} }
 
+%% new listing environment
+\newcommand{\loadlisting}[2]{\subsubsection{Listing of #1} %
+  \inputlisting{#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -206,12 +209,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Chapters !!!!  --  Arabic pagenumbering
 \pagenumbering{arabic}
+\setcounter{chapter}{0}
+\selectlisting{java}
 
 %%% Chapter 0 -- Java Intro
 \include{Chap0}
 
 %%% Chapter 1 -- Introduction
 \include{Chap1}
+
+\selectlisting{matlab}
 
 %%% Chapter 2 
 \include{Chap2}
