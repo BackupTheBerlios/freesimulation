@@ -514,7 +514,7 @@ The output of the code can be seen in Fig. (\ref{fig:ptplotOutput}).
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
-%    \includegraphics{}
+    \includegraphics[angle=-90,width=\textwidth]{Figures/RadioactiveDecay_ptplot.eps}
     \caption{The output of the RadioactiveDecay\_ptplot.java program.}
     \label{fig:ptplotOutput}
   \end{center}
@@ -577,7 +577,85 @@ PLOTTING FILES ???????
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Printing in Java and with Ptplot}
-????
+Now that we have learned to make plots in Java, it is of great
+importance to get a printed version of our graphics. And even for
+this Java has commands for initiating a print job and preparing
+the output for the printer. Because the procedure has changed
+from Java 1.1 to Java 2, we only present the Java 1.1 version not
+to confuse you. In Java 1.0 there have been no methods for 
+printing in  Java, you would have to use screen capture programs
+for example.
+
+Because printing is of course system dependent, it is not as easy
+as issuing a print command, but it is still managable. 
+In Java printing is done basically in four steps:
+\begin{enumerate}
+\item Get a \verb|Toolkit| for the component you want to print. 
+  Use method \verb|getToolkit()| in the \verb|java.awt.Component| class.
+\item Get a \verb|PrintJob|. Use the 
+  \verb|getPrintJob(Frame f, String printjobname, Properties printprops)|
+  method in the \verb|java.awt.Toolkit| class.
+\item Start ``printing'':
+  \begin{enumerate}
+  \item Get the graphics context for the component in question. Use the
+    \verb|getGraphics()| mehtod of the \verb|java.awt.PrintJob| class.
+  \item Print the desired part of the component. If you want to print 
+    everything contained by the component use the \verb|printAll()|
+    method, otherwise use just the \verb|print()| method of the
+    \verb|Component| class.
+  \item Send the data to the printer or file by using the \verb|dispose()|
+    method of the \verb|java.awt.Graphics| class.
+  \end{enumerate}
+\item Finish printing and close dialog box. Use \verb|end()| method of
+  the \verb|java.awt.PrintJob| class.
+\end{enumerate}
+The program \verb|RadioactiveDecay_printing.java| demonstartes the use of
+the printing capabilities of Java. 
+\lstinputlisting[first=32,last=47]{Listings_Java/RadioactiveDecay_printing.java} 
+
+Of course there are some drawbacks to talk about. First of all with
+this code you always get the output in a size referring to your actual
+picture on the screen, it does not use the full paper size. If you want
+to use the whole page size available you have to scale the component
+to be plotted to the full size and scale back after printing. This is
+what we do in the convenience class we have written for easy printing
+in the simulation package. 
+
+So if you want to print a component scaled to the full size, you use
+the \verb|PrintComponent.Dialog()| method in the simulation package.
+It scales your component to the full size (no matter if it should be
+on a portrait or landscape page) and sends the scaled picture to the
+printer or a postscript file. After printing it scales back to the
+size it had before. The whole code above could therefore be
+substituted by the line
+\begin{verbatim}
+  import simulation.*;
+  ....
+  PrintComponent.Dialog(frame, plot, "Radioactive Decay");
+\end{verbatim}
+Because most of the time you need postscript (or EPS) files of the
+created plots or graphics, this is the most common use of the
+printing features for a scientist.
+
+Another drawback might be the resolution of the postscript file.
+This happens especially when printing GUI components and is not
+present when plotting ptplot plots fortunately. Java kind of rasters
+the screen display and because the screen resolution is much worse 
+than the printer resolution this gives unpleasant results. It also
+gives strange results if you scale a large GUI to a small A4 or Letter
+format for printing, which could look very ugly or even miss some
+of the displayed objects. But as already mentioned, most of the time
+we only need plots in postscript files and this works great with
+the code above.
+
+In Java 2 there has been some small changes to the printing
+interface. There has been introduced a new class: \verb|java.awt.print|.
+This class provides much more sophisticated methods and it even
+is able of handling color models, which is very important for
+color handling and printing. This is a big step ahead, but for the
+details we refer to the API documentation, because it is also a
+bit more difficult to understand.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
