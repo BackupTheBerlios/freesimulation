@@ -66,7 +66,7 @@ process $\xi(t)$, the above equation is a discretized version of a
 so--called {\em stochastic differential equation} (SDE). It is the aim
 of this section to introduce into some  peculiarities of stochastic
 differential equations. In particular we will also show the
-equivalence of stochastic process defined in terms of stochastic differential
+equivalence of stochastic processes defined in terms of stochastic differential
 equations and in terms of Fokker--Planck equations.
 
 The above expression is a special case of the  {\em standard form} of
@@ -74,7 +74,7 @@ a stochastic differential equation (some times stochastic
 differential equations are also called {\em Langevin} equations):
 \begin{equation}
 \label{SDE_LANGEVIN_DISCR}
-X(t+dt) = X(t) + A(X(t),t)dt + D(X(t),t)^{1/2} \xi(t) dt^{1/2},
+X(t+dt) = X(t) + A(X(t),t)dt + \sqrt{D(X(t),t)} \xi(t) dt^{1/2},
 \end{equation}
 where we have replaced $\Delta t$  by $dt$ to stress the infinitesimal
 character of the above equation. The term proportional to $dt$ is
@@ -87,7 +87,8 @@ the stochastic process $X(t)$ is continuous, but, in general, not
 differentiable. This can be seen by writing
 Eq. (\ref{SDE_LANGEVIN_DISCR}) as
 \begin{equation*}
-\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \xi(t)}
+\label{eq:XiinSDE}
+\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{\sqrt{D(X(t),t)} \xi(t)}
                                               {\sqrt{dt}}.
 \end{equation*}
 Obviously, the limit $dt \rightarrow 0$ of the above equation does not
@@ -95,7 +96,8 @@ exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
 is everywhere continuous but nowhere differentiable. Nevertheless it is
 customary in the physical literature to ``pretend'' (\cite{GILLESPIE})
 that $dx/dt$ exists even for
-non vanishing $D$. In fact we know that we can write
+non vanishing $D$. In fact we know that we can write (see section
+\ref{sec:WienerProcess})
 \begin{equation*}
 \frac{\xi(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
 {\bf N}(0,1/dt).
@@ -105,6 +107,7 @@ So, we may define a Gaussian {\em white noise process} as
 \eta(t) \equiv \lim_{dt \rightarrow 0}  {\bf N}(0,1/dt).
 \end{equation*}
 With the help of the above definition, we can now formally write
+(compare with \ref{eq:XiinSDE})
 \begin{equation*}
 \frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D(X(t),t)} \eta(t).
 \end{equation*}
@@ -195,7 +198,7 @@ completely defined once an initial condition $V(0)=V_0$ is specified.
 Its formal solution reads
 \begin{equation*}
 V(t) = V_0 \exp(-\gamma t) + \exp(-\gamma t) 
-    \int_0^t dt \exp(\gamma t') L(t').
+    \int_0^t dt' \exp(\gamma t') L(t').
 \end{equation*}
 Taking the average over an ensemble of Brownian particles all
 having the same initial condition we find for the mean value of 
@@ -222,12 +225,12 @@ we  expect that for long times
 \end{equation*}
 Hence we have
 \begin{equation}
-\label{FDT}
+\label{FDT1}
 \Gamma = 2 \gamma kT
 \end{equation}
 and we have established a relation between the attrition 
 coefficient $\gamma$ and the random fluctuations.
-Eq. (\ref{FDT}) is a simple version of the so--called
+Eq. (\ref{FDT1}) is a simple version of the so--called
 fluctuation--dissipation theorem.
 
 
@@ -298,7 +301,7 @@ as a kind of Riemann--Stieltjes integral, i.e., as a limit of
 partial sums. To do so we divide the interval $[t_0,t]$ into $n$
 subintervals
 \begin{equation*}
-t_0 \le t_1 \le t_2 \le \cdots \le t_{n-1} \le t
+t_0 \le t_1 \le t_2 \le \cdots \le t_{n-1} \le t_n \equiv t
 \end{equation*}
 and define intermediate points $\tau_i$
 \begin{equation*}
@@ -337,7 +340,8 @@ In this sense the Ito stochastic integral of the function $f(t)$ is
 defined as
 \begin{equation*}
 \int_{t_0}^t f(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
-   \left\{ \sum_{i=1}^{n} f(t_{i-1}) [W(t_i) - W(t_{i-1})]   \right\}.
+   \left\{ \sum_{i=1}^{n} f(t_{i-1}) [W(t_i) - W(t_{i-1})] 
+   \right\}.
 \end{equation*}
 
 \subsection{The Stratonovich Stochastic Integral}
@@ -350,6 +354,8 @@ S\int_{t_0}^t f(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
    \left\{ \sum_{i=1}^{n} f( \frac{x(t_{i})+ x(t_{i-1})}{2}, t_{i-1}) 
 [W(t_i) - W(t_{i-1})]   \right\}.
 \end{equation}
+The $S$ in front of the integral denotes a Stratonovich integral
+in contrast to the Ito integral.
 Note, that in this definition the integrand is evaluated in an
 averaged way.
 
@@ -462,7 +468,7 @@ As an example of the application of the above formulas we consider the
 integration of a polynomial. Let us look at
 \begin{eqnarray*}
 d[W(t)]^n & = & [W(t) + dW(t)]^n - W(t)^n \\
-          & = & \sum_{r=1}^n {n \choose r} W(t)^{n-r} dW(t)^r .
+          & = & \sum_{r=1}^n \binom{n}{r} W(t)^{n-r} dW(t)^r .
 \end{eqnarray*}
 Using the fact that $dW(t)^r = 0$ for $r>2$ we conclude that
 \begin{equation*}
@@ -576,7 +582,8 @@ X(t) = X(t_0) + \int_{t_0}^t ds \alpha(x(s),s) +
 In the mathematical literature it is customary to write
 the Stratonovich integral in the form
 \begin{equation*}
-\int_{t_0}^t  \beta(x(s),s) \circ dW(s),
+\int_{t_0}^t  \beta(x(s),s) \circ dW(s) 
+\equiv S\int_{t_0}^t  \beta(x(s),s) dW(s) ,
 \end{equation*}
 where the notation $\circ$ is called the {\em Ito circle}. From
 here on we will also stick to this notation.
@@ -619,7 +626,6 @@ dx(t_i) = a(x(t_{i-1}),t_{i-1}) (t_i -t_{i-1}) +
    b(x(t_{i-1}),t_{i-1}) (W(t_i) -W(t_{i-1}))
 \end{equation*}
 and of Ito's formula we get
-we get
 \begin{eqnarray*}
 \beta \left( \frac{x(t_i) + x(t_{i-1})}{2},t_{i-1} \right) & = &
  \beta(t_{i-1}) + \left[ a(t_{i-1}) \frac{\partial}{\partial x} 
@@ -643,7 +649,7 @@ partial sum of an Ito integral we conclude from the above discrete
 formula that
 \begin{equation}
 \int_{t_0}^t  \beta(x(s),s) \circ dW(s) = 
-\int  \beta(x(t',t') dW(t') 
+\int  \beta(x(t'),t') dW(t') 
  + \frac{1}{2} \int b(x(t'),t') 
  \frac{\partial}{\partial x} \beta(x(t'),t') dt'.
 \end{equation}
@@ -676,11 +682,11 @@ dx = \alpha dt + \beta \circ dW(t)
 is equivalent to the Ito stochastic differential equation
 \begin{equation*}
 dx = [\alpha + \frac{1}{2} \beta \frac{\partial}{\partial x} 
-\beta]dt + \beta \circ dW(t).
+\beta]dt + \beta dW(t).
 \end{equation*}
 
 \subsection{Ito or Stratonovich?}
-We have just seen the following. A given stochastic differential 
+We have just seen that a given stochastic differential 
 equation can be interpreted in two ways: in the sense of Ito and 
 in the sense of Stratonovich. Each of the two interpretations can be converted
 equivalently in the other version of the stochastic differential 
@@ -822,7 +828,7 @@ order $\nu$.
 The above criterion is simply the generalization of the usual 
 deterministic convergence criterion and reduces to it when the 
 diffusion coefficient vanishes and the initial condition is
-deterministic (\cite{KLOEDEN}). 
+deterministic (\cite{KLOEDEN_AN}). 
 The concept of a strongly  convergent scheme is relevant for the
 following reason: A strongly convergent scheme gives 
 approximations to the individual trajectories of the 
@@ -952,11 +958,11 @@ Fokker--Planck equation. The latter reads
 \end{equation*}
 where we have used
 \begin{equation*}
-a(X(t)) = (\frac{1}{2} - X(t))X(t)
+a(X(t)) = \left(\frac{1}{2} - X(t)\right) X(t)
 \end{equation*}
 and
 \begin{equation*}
-b(X(t)) = [\epsilon x(t) (1-X(t))]^2.
+b(X(t)) = [\epsilon X(t) (1-X(t))]^2.
 \end{equation*}
 Of course, the stationary solution has to satisfy
 \begin{equation*}
@@ -994,7 +1000,7 @@ Integrating the above expression gives
 \end{equation*}
 or
 \begin{equation*}
-P_S(x) = \frac{N}{b(x)} \exp{-\phi (x)},
+P_S(x) = \frac{N}{b(x)} \exp\{-\phi (x)\},
 \end{equation*}
 where
 \begin{equation*}
@@ -1007,7 +1013,7 @@ The factor $N$ is a normalization constant to be chosen such that
 
 Transposing the above sketched general theory to the stochastic 
 differential equation of interest  we get the stationary density,
-which sometimes also called the invariant density,
+which is sometimes also called the invariant density,
 \begin{equation*}
 P_S(x) = \frac{N}{x(1-x)} \exp\left( - \frac{1}
            {\epsilon^2 x(1-x)}\right)
@@ -1015,7 +1021,7 @@ P_S(x) = \frac{N}{x(1-x)} \exp\left( - \frac{1}
 
 Now we are in the position to simulate the stochastic differential
 equation (\ref{SDENOISEIN}). This will be done with the help of 
-the program \texttt{sdenosein.m}.
+the program \texttt{sdenoisein.m}.
 
 \subsubsection{Listing of the program \texttt{sdenoisein.m}}
 \inputlisting{./Listings/sdenoisein.m}
@@ -1052,7 +1058,7 @@ The result of this second simulation can be seen in Fig.
 (\ref{F_SDENOISEIN_2}).
 \begin{figure}
 \label{F_SDENOISEIN_2}
-\includegraphics[width=10cm]{./Figures/f_sdenoisein_1.eps}
+\includegraphics[width=10cm]{./Figures/f_sdenoisein_2.eps}
 \caption{Histogram of the invariant density of the stochastic differential 
 equation with multiolicative noise. The simulation was run from
 \texttt{tstart=0} to \texttt{tend=4} for 5000 realizations.
@@ -1068,7 +1074,7 @@ the larger noise the system undergoes a "stochastic bifurcation"
 which changes the number of the maxima of the invariant density. 
 Such a phenomenon is called a {\em noise induced transition}.
 
-Let us now try do see whether this observation is in agreement 
+Let us now try to see whether this observation is in agreement 
 with the stationary density we have derived at the beginning of 
 this subsection. The maxima of the stationary distribution are 
 easily evaluated from the equation
@@ -1102,7 +1108,7 @@ the response of a nonlinear system in the presence of noise: stochastic
 resonance. For a comprehensive introduction see \cite{Lanzara,Bulsara}. 
 We already know that the effect of noise on the time evolution of 
 deteministic linear system is rather trivial. If the statistical properties of
-the input noise are known it is traightforward to compute the statistical
+the input noise are known it is straightforward to compute the statistical
 properties of the output signal. For nonlinear systems the situation changes
 dramatically. The presence of the noise influences the evolution of the
 system often in a counterintuitive way. The numerical integration of the
@@ -1138,7 +1144,7 @@ resonance \cite{McNamara,Gammaitoni} and to simulate a simple model
 showing this phenomenon.
 It is clear from the example discussed above that the basic mechanism  of 
 stochastic resonance relies upon three essential ingredients:
-a bistable system, a periodc driving signal, and a noise signal.
+a bistable system, a periodic driving signal, and a noise signal.
 
 The simplest version of a one--dimensional nonlinear dynamical system 
 is the damped anharmonic oscillator with the following equation of motion
@@ -1150,15 +1156,24 @@ The above Langevin equation describes the motion of a classical particle of
 mass $m$ in a potential $U(x)$ and with an additive stochastic force
 $\chi(t)$,
 where $\chi(t)$
-is a Gaussian white noise characteized by
+is a Gaussian white noise characterized by
 \begin{equation}
-\langle \chi(t) =0 \rangle; \;\;\; \langle \chi(t) \chi(t')\rangle =
+\langle \chi(t) \rangle =0; \;\;\; \langle \chi(t) \chi(t')\rangle =
 \delta(t - t').
 \end{equation}
 The potential $U$ is bistable and we assume that it has the simple form
+(see figure \ref{fig:BistablePotential})
 \begin{equation}
 U(x) = -a \frac{x^2}{2} + b \frac{x^4}{4}.
 \end{equation}
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{Figures/BistablePotential.eps}
+    \caption{The potential $U(x)=-a \frac{x^2}{2} + b \frac{x^4}{4}$ 
+      for $a=1$ and $b=1$.}
+    \label{fig:BistablePotential}
+  \end{center}
+\end{figure}
 For $a> 0$ the potential $U$ is bistable with an unstable state at $x=0$
 and two stable states at $x_s = \pm \sqrt{a/b}$. The stable states are
 separated by a barrier of height $\Delta U = a^2/4b$. The system remains
@@ -1235,7 +1250,7 @@ The rate to jump over the barrier $W_k$ is obviously the inverse escape time
 \end{equation}
 
 \subsection{The Stochastic Resonance}
-Having reviewed some basilar results of the theory of nonlinear stochastic
+Having reviewed some basic results of the theory of nonlinear stochastic
 systems we are now ready to look at the phenomenon of stochastic resonance.
 In the preceeding subsections we made use only of two of the basic ingredients
 of the recipe for stochastic resonance. The phenomenon only occurs in the
@@ -1259,7 +1274,7 @@ states is maximum. The periodic forcing is assumed to be so
 weak that it can not let the particle roll periodically from one potential
 well into the other one. Nevertheless, the noise--induced hopping beween the
 two wells  may become synchronized with the weak periodic forcing. This is 
-signature of stochastic resonance. Stochastic resonace manifests itself by a
+signature of stochastic resonance. Stochastic resonance manifests itself by a
 synchronization of activated hopping between the potential minima with the
 weak periodic forcing. 
 
@@ -1286,7 +1301,7 @@ can be approximated by \cite{Jung}
 The same condition formulated in terms of the noise intensity reads
 \begin{equation}
 \label{eq:ResonanceConditionD}
-  D_0 = \frac{2 \Delta U}{\ln(a/(\sqrt{2} \omega_s)}.
+  D_0 = \frac{2 \Delta U}{\ln(a/(\sqrt{2} \omega_s))}.
 \end{equation}
 At this resonance condition the coherent contribution of the jump process has
 a maximum.
@@ -1334,9 +1349,7 @@ corresponding dimensionless quantities and $D$ denotes the dimensionless
 noise intensity. Recall, that in the units defined above $D$ has the dimension
 $a x_s^2$.
 
-HIER KOMMT DAS LISTING DES PROGRAMMES:
-
-\verb|StochasticResonance.java|
+%%%% ????????????? \inputlisting{StochasticResonance.java}
 
 Before running the program let us formulate the resonace condition in
 dimensionless units. It follows from Eq. (\ref{eq:ResonanceConditionD}) that
