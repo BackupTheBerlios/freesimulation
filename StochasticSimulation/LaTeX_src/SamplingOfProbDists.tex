@@ -31,6 +31,59 @@ for all practical purposes pseudo--random numbers appear to be
 random. Let us now see how such pseudo--random numbers can be 
 generated.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TO BE INSERTED SOMEWHERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\subsection{A Random Number Generator}
+Since the concepts we just introduced are quite abstract it may be
+useful to see them in action with the help of a second example.
+So let us write a class, which calculates random numbers uniformly
+distributed between 0 and 1. To this end we write a class
+\verb|RandomNumber|. It has three fields (variables), two of them are
+defined with the \verb|final| keyword.
+\inputlisting{Listings_Java/RandomNumber.java}
+In our example, we just set the seed in the constructor and as 
+you can see you have to supply the seed, when you instantiate the
+generator. Most of the constructors don't even need a parameter to 
+instantiate the object. 
+
+In the program we have made use of the \verb|Math.pow()| method, 
+which is defined in the \verb|Math| class of the standard
+Java API \verb|java.lang| and it computes the power of the first
+argument to the second one (see section \ref{sec:Standard_Math}).
+
+Additionally we have included some routines to show how
+private variables can be handled. Because there is no
+way for programs to access the fields of the class from
+the outside of this class, you have to supply methods to read
+or write the fields. This is actually the way you have to write
+Java beans discussed shortly in section \ref{sec:Beans}.
+
+Then the method \verb|nextRand()| is defined and returns the next
+random number calculated using a congruential method\footnote{See later 
+in this book for details about how to generate random numbers.}. 
+
+Now we have to write a program (class), which uses this class to 
+calculate the average of some random numbers.
+\inputlisting{Listings_Java/UseRandomNumber.java}
+The class is called \verb|UseRandomNumber| and just contains the
+main method. First we instantiate (create) an object of class
+\verb|RandomNumber|. Then we create an array and in a loop we
+create \verb|N| random numbers using the \verb|nextRand()| method
+of our class applied to the object we just created. The remaining
+part has already been explained.
+
+Remember that we have to put both programs in one directory called
+\verb|simu|, because we have used the \verb|package| command. Here it
+was just to get you acquainted with these terms.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
 \section{The Generation of Uniformly Distributed Random Numbers}
 We will begin with the generation of uniformly distributed random 
 numbers on the interval $[0,1)$. In the following we will often 
