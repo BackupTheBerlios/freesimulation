@@ -3,19 +3,21 @@
  *
  *
  * demonstrate plotting with ptplot, AWT, Events
- * and using out own package
+ * and using our own simulation package
  *
  * Created: Sun Nov 22 19:13:21 1998
  *
  * @author Francesco Petruccione
- * @version
+ * @author Peter Biechele
+ * @version 1.0
+ *
  */
 import java.util.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.applet.*;
-import ptplot.*;
+import java.applet.Applet;
+import ptolemy.plot.*;
 import simulation.*;
 
 // To use Ptplot write a subclass of PlotApplet
@@ -142,12 +144,16 @@ public class Weierstrass extends PlotApplet {
 
   /** Plot the actual data */
   public void init() {
-    super.newPlot();
+
     super.init();
-    plot().setTitle("Weierstrass Random Walk in 1D (alpha="+alpha+")");
+    Plot plot = (Plot)plot();
+
+    plot.setTitle("Weierstrass Random Walk in 1D (alpha="+alpha+")");
     // use our plot routine
-    // use the length "method" of arrays here
-    Plotting.plot2D(this,0,time,walk,time.length);
+    Plotting.plot2D(plot,0,
+		    ArrayConversion.int2Double1D(time),
+    		    ArrayConversion.int2Double1D(walk));
+
   }
 
   /** Method saves an array to a file :: ASCII */
@@ -186,6 +192,11 @@ public class Weierstrass extends PlotApplet {
     // end the printjob
     job.end();    
   }
+
+    // Has to be overwritten for some unknown reason !
+    public String getParameter(String name) {
+	return null;
+    }
 
 } // RandomWalk
 
