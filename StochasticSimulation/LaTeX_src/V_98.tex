@@ -18,8 +18,6 @@
 % Create Index
 %\usepackage{makeidx}
 %\makeindex
-%%% English Hyphenations and Titles
-\usepackage[german,english]{babel}
 
 %%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
 \usepackage{times,helvet,mathptm}
@@ -109,6 +107,9 @@
 \usepackage[small,bf]{caption2}
 \usepackage{array,exscale,natbib,subfigure,ifthen,multicol,verbatim}
 
+%%% English Hyphenations and Titles : LOAD AFTER NATBIB
+\usepackage[german,english]{babel}
+
 %%%%%%%%%% Definition des Layouts von \cite Befehlen !! (natbib Style) %%%%%%%
 \bibpunct{[}{]}{;}{a}{,}{,}
 
@@ -152,13 +153,14 @@
 %%% include HTML specials into DVI: HYPERREF PAKET
 %%%
 %%% Hyperref Package by Sebastian Rahtz
-\usepackage[extension=pdf,hyperfigures,hyperindex,%
+%\usepackage[dvips]{hyperref}
+%\usepackage[extension=pdf,hyperfigures,hyperindex,%
 %baseurl={http://phym1.physik.uni-freiburg.de/\string~frpe/},%
 %pdftitle={Manuskript for Stochastic Simulations in Physics},%
-%pdfauthor={PD Dr. F. Petruccione, Layout: P. Biechele},%
+%pdfauthor={PD Dr. F. Petruccione, P. Biechele},%
 %pdfsubject={Stochastic Simulation},%
 %pdfkeywords={Physics,Stochastics,Simulation,Computer},%
-pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
+%pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
 
 %%\usepackage{xr}
 %%\externaldocument{kap31.dvi}%
