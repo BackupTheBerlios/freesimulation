@@ -43,4 +43,13 @@ public final class DataAnalysis {
     return histo;
   }
 
+  public static int[] histogram(int[] data, int number,
+                                   int bins, double[] points) {
+      double[] dummydata = new double[number];
+      for (int j=0; j<number; j++) {
+	  dummydata[j]=(double)data[j];
+      }
+      return histogram(dummydata,number,bins,points);
+  }
+
 }
