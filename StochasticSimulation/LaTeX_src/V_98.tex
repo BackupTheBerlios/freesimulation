@@ -20,11 +20,15 @@
 %\makeindex
 
 %%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
-\usepackage{times,helvet,mathptm}
+\usepackage{times,helvet}
 
 %%% AMS LaTeX Extensions + Fonts 
 \usepackage{amssymb}
 \usepackage[centertags,intlimits,namelimits,sumlimits,reqno]{amsmath}
+
+%%%%%  Has to be specified after AMS packages, to avoid error messages
+%%%%%  of missing boldmath
+\usepackage{mathptm}
 
 %%%%%%%  The graphicx/color style for picture inclusion and color support
 \usepackage[dvips]{graphicx,color}
@@ -53,7 +57,7 @@
 
 
 %%% SHOW ALL Labels 
-\usepackage{showkeys}
+%%\usepackage{showkeys}
 
 
 % Use extended theorem style
@@ -160,9 +164,14 @@
      \end{flushleft} }%
    { \vspace{.3cm} }
 
+%% new verbatim environement
+\newenvironment{sverbatim}{\small\noindent\verbatim}%
+                           {\endverbatim\normalsize}
+
 %% new listing environments
 \newcommand{\inputlisting}[1]{\lstinputlisting{#1}}
-\newcommand{\loadlisting}[2]{\subsubsection{Listing of #1} %
+\newcommand{\loadlisting}[2]{%
+  \begin{flushleft}\textbf{Listing of #1}\end{flushleft} %
   \lstinputlisting{#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -195,7 +204,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{Chap1,Chap2}
+\includeonly{Chap0}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,JavaSummary}
 %\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -232,7 +241,7 @@
 \include{CD_ROM}
 
 \setcounter{chapter}{-1}
-\lstset{language=java}
+\lstset{language=java,basicstyle=\small,stringstyle=\ttfamily}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART I
 \part{Introduction}
