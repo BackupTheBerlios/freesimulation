@@ -865,10 +865,12 @@ $\nu=1$.
 As a first example of the application of the Euler algorithm
 we consider again the Ornstein--Uhlenbeck process.
 The implementation of the stochastic Euler algorithm has been 
-realized in the program \texttt{sdeornstein}.
+realized in the program \texttt{SDE.java} with the help
+of the \verb|OrnsteinUhlenbeck.java| method in the 
+\verb|simulation.SDE| package.
 
-\subsubsection{Listing of the program \texttt{sdeornstein.m}}
-\inputlisting{./Listings/sdeornstein.m}
+\inputlisting{Listings_Java/SDE.java}
+\inputlisting{Listings_Java/OrnsteinUhlenbeck.java}
 
 The algorithm is very similar to the algorithm for the generation 
 of exact trajectories of the Ornstein--Uhlenbeck process. 
@@ -921,8 +923,7 @@ The timesteps used are \texttt{deltat=0.2, 0.1, 0.05, 0.025}.}
 The figure clearly shows the expected linear convergence of the 
 estimate to the expected exact result. The linear extrapolation 
 leads to the estimate $<X^2>|_{t=4}=0.497182$, which is in very 
-good agreement with the expected exact result. The simulation took
-1729 sec on the laptop.
+good agreement with the expected exact result. 
 
 \subsection{Noise Induced Transitions}
 In this second example of the application of the stochastic Euler 
@@ -1021,14 +1022,15 @@ P_S(x) = \frac{N}{x(1-x)} \exp\left( - \frac{1}
 
 Now we are in the position to simulate the stochastic differential
 equation (\ref{SDENOISEIN}). This will be done with the help of 
-the program \texttt{sdenoisein.m}.
+the program \verb|SDE.java| and the function 
+\verb|simulation.SDE.NoiseInducedTransition.java|.
 
-\subsubsection{Listing of the program \texttt{sdenoisein.m}}
-\inputlisting{./Listings/sdenoisein.m}
+\inputlisting{Listings_Java/NoiseInducedTransition.java}
+
 The program generates trajectories of the stochastic process with 
 the help of the Euler algorithm. At the end of the simulation we evaluate 
 numerically the stationary distribution with the help
-of the MATLAB plotting function \texttt{hist}.
+of the plotting functions  in the \verb|simulation| package.
 
 In a first run we perform a simulation of 5000 trajectories for 
 the following parameters \texttt{xstart=0.5}, \texttt{epsilon=1},
@@ -1168,7 +1170,7 @@ U(x) = -a \frac{x^2}{2} + b \frac{x^4}{4}.
 \end{equation}
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{Figures/BistablePotential.eps}
+    \includegraphics[angle=-90,width=\textwidth]{Figures/BistablePotential.eps}
     \caption{The potential $U(x)=-a \frac{x^2}{2} + b \frac{x^4}{4}$ 
       for $a=1$ and $b=1$.}
     \label{fig:BistablePotential}
