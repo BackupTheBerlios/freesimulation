@@ -1,0 +1,215 @@
+%%%
+%%%
+%%% Main TeX File for Lecture Stochastic Simulations in Physics 
+%%%
+%%%   SS 1998  PD Dr. F. Petruccione  
+%%%
+%%%
+%%% (LaTeX2e Code: P. Biechele) 
+%%%
+%%%
+\documentclass[fleqn,10pt,a4paper,openright]{book}
+\NeedsTeXFormat{LaTeX2e}[1996/06/01]
+%
+% Options:  fleqn     Formulas left not centered
+%           leqno     formula numbers to the left, not right
+%           openright ????
+%
+% Create Index
+%\usepackage{makeidx}
+%\makeindex
+%%% English Hyphenations and Titles
+\usepackage[german,english]{babel}
+
+%%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
+\usepackage{times,helvet,mathptm}
+
+%%% AMS LaTeX Extensions + Fonts 
+\usepackage{amssymb}
+\usepackage[centertags,intlimits,namelimits,sumlimits,reqno]{amsmath}
+
+%%%%%%%  The graphicx/color style for picture inclusion and color support
+\usepackage[dvips]{graphicx,color}
+% set path for figures
+\graphicspath{ {Figures/} }
+
+%%% The Listings package - include source code
+\usepackage{listings}
+\selectlisting{matlab}
+\labelstyle[5]{\ttfamily}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%  END OF IMPORTANT STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%  AND SETTINGS            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Example for setting colors to greyscale
+%%% 1 ist weiss und 0 ist schwarz
+%%%\definecolor{yellow}{gray}{1.00}
+%%%\definecolor{red}{gray}{0.02}
+
+%%% Make fancy (our own) headings and footings
+%\usepackage{fancyhdr}
+%%%%%%%%%% Umschalten auf eigene Kopfzeilen !! (fancyheadings Style) %%%%%%%%%
+%\lhead[\fancyplain{}{\bfseries\thepage}]%
+%%  {\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\rightmark}}
+%\rhead[\fancyplain{}{\let\uppercase\relax \bfseries\sffamily\leftmark}]%
+%  {\fancyplain{}{\bfseries\thepage}}
+%\chead{}
+%\lfoot{}
+%\rfoot{}
+%\cfoot{}
+%% Damit das scharfe s auch richtig geschrieben wird und nicht 'SS'
+%% kommt von \uppercase\relax von oben ! 
+%\edef\SS{\ss}
+
+%%%%%% Small Styles :
+%%% 
+%%%%%%%%%%% calc       : Rechnen mit TeX Groessen
+%%% hhline     : verbesserte Linien in Tabellen
+%%% array      : verbesserte Tabellenkontrolle
+%%% enumerate  : erweiterte enumerate Umgebung
+%%% fancybox   : erweiterte Boxen-Umgebungen
+%%% moreverb   : erweiterte Umgebungen fuer Listings
+%%% multicol   : verbesserte Spalten-Handling
+%%%%%%%%%%%%%% floatfig   : Bilder von Text umfliessen lassen (alt)
+%%% float      : verbesserte Bilder Umgebung
+%%% psfrag     : Text in PS Bildern, durch TeX Fonts ersetzen
+%%% exscale    : Skalierung von Mathe Symbolen besser
+%%% natbib     : verbessertes Referenzieren 
+%%% pifont     : spezielle Listen mit PS Symbolen 
+%%% caption2   : Erweiterte Anpassungen der Captions
+%%% subfigure  : Mehrere Bilder in einem figure mit eigenen Unterschriften
+%%%%%% picinpar   : Bilder in Text einbinden oder eben Anfangsbuchstaben
+%%%%%% !!! Probleme mit AMSTeX und Picinpar --> deshalb wrapfigure !
+%%% wrapfigure : Bilder in Text einbinden oder eben Anfangsbuchstaben
+%%% ifthen : If Clauses for newcommands
+%%%
+%% use small captions and boldface caption labels
+\usepackage[small,bf]{caption2}
+\usepackage{array,exscale,natbib,subfigure,ifthen,multicol}
+
+%%%%%%%%%% Definition des Layouts von \cite Befehlen !! (natbib Style) %%%%%%%
+\bibpunct{[}{]}{;}{a}{,}{,}
+
+%%%%%%%% Am Ende des Kompilierens, alle benutzten Zusatzfiles ausgeben %%%
+%%%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%  Here we define our own commands %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bo}[1]{\mathbf{#1}}
+\newcommand{\lvec}[1]{\overrightarrow{#1}} 
+
+% Formelnummern: (chapter.section.equation)
+%\renewcommand{\theequation}{\thesection.\arabic{equation}}
+% equation fuer jeden Section zurueksetzen: 
+%\makeatletter
+% \@addtoreset{equation}{section}
+%\makeatother
+%% Mengensymbol C: complex numbers
+\newcommand{\setC}{\ensuremath{\mathbf{C}}}
+% Symbol fuer relle Zahlen.
+\newcommand{\setR}{\ensuremath{\mathbf{R}}}
+%% Mittelwert Symbol
+\newcommand{\lr}[1]{\left\langle #1 \right\rangle}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% include HTML specials into DVI: HYPERREF PAKET
+%%%
+%%% Hyperref Package by Sebastian Rahtz
+%\usepackage[extension=pdf,hyperfigures,hyperindex,%
+%baseurl={http://phym1.physik.uni-freiburg.de/\string~frpe/},%
+%pdftitle={Manuskript for Stochastic Simulations in Physics},%
+%pdfauthor={PD Dr. F. Petruccione, Layout: P. Biechele},%
+%pdfsubject={Stochastic Simulation},%
+%pdfkeywords={Physics},%
+%pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
+
+%%\usepackage{xr}
+%%\externaldocument{kap31.dvi}%
+%%%[http://phym1.physik.uni-freiburg.de/~hon/manuskript/kap31]
+
+%%%
+%%% After Texing, just dvips and then ps2pdf or Acrobat distiller !
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%   Which part should be compiled by TeX
+%\includeonly{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Over-full v-boxes on even pages are due to the \v{c} in author's name
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+
+\begin{document}
+
+% Title and Author
+\title{Stochastic Methods for Physics: \\ An introduction}
+\author{F. Petruccione}
+\maketitle
+
+% Inhaltsverzeichnis !!!! -- Römische Seitennummerierung
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage
+\listoffigures 
+\clearpage
+%%\listoflistings
+%%\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Chapters !!!!  --  Arabic pagenumbering
+\pagenumbering{arabic}
+
+%%% Chapter 1 -- Introduction
+\include{Chap1}
+
+%%% Chapter 2 
+\include{Chap2}
+
+%%% Chapter 3 
+\include{Chap3}
+
+%%% Chapter 4 
+
+%%% Chapter 5 
+
+%%% Chapter 6 
+
+%%% Chapter 7 
+
+%%% Chapter 8 
+
+%%% Chapter 9 
+
+
+%%% Anhaenge
+\appendix
+\include{Listings}
+%%\include{historic}
+%%\include{dict}
+
+% Bibliographien
+\bibliographystyle{peter}
+\bibliography{./TheoPh}
+\addtocontents{toc}{\protect\vspace{1.5ex}}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
+\clearpage
+
+% Now insert the Index
+%%\addtocontents{toc}{\protect\vspace{1.5ex}}
+%%\addcontentsline{toc}{chapter}{\protect\numberline{}Index}
+%%\printindex
+
+\end{document}

@@ -1,0 +1,146 @@
+%%%%%
+%%%%% Chapter 3
+%%%%%
+\chapter{Simple Sampling of Probability distributions Using Random numbers}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Transformationsmethode}
+Lit: D.T. Gillepsie, a theorem for physicists in the theory of 
+random variables, Am. J. Phys. 51 (1983) 520-533.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Importance Sampling}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Monte Carlo Integration}
+
+
+Programme:
+\begin{itemize}
+\item Monte--Carlo Bestimmung von $\pi$
+\item Monte-Carlo Bestimmung von $e$
+\item Monte-Carlo Integration
+\end{itemize}
+
+Literatur:
+\begin{itemize}
+\item Karlen Skript
+\item Stauffer
+\item Knuth
+\end{itemize}
+
+Programme:
+\begin{itemize}
+\item Test von Zufallszahlen Generatoren (1d, 2D, 3D)
+\end{itemize}
+
+
+%%%%% trandom1 %%%%%%%%%%%%%%%%
+\begin{verbatim}
+% trandom1 - Program to demonstrate the generation of random numbers
+% using the linear congruential method
+clear; help trandom1 %clear the memory and print header
+seed = input('Enter the seed (1) - ');
+m = input('Enter the modulus (8) - ');
+a = input('Enter the multiplier (5) - ');
+c = input('Enter the increment (1<=c<7) - ');
+% Set starting value
+R(1) = seed;
+% Generate vector of m random numbers
+for j=1:m
+   R(j+1) =floor(rem(a*R(j)+c,m));
+end
+%R=R/M;
+disp('The generated series is:')
+disp(R)
+plot(R,'x')
+title('The series of generated random numbers');
+xlabel('Term, i'); ylabel('Value');
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{verbatim}
+% trandom2 - Program to test random number generators
+% The program makes use of the random number generator random1
+clear; help trandom2; % clear memory and print header
+% Enter dimension of random vector
+n= input('Enter value of n-'); % 
+% generate random vector
+R1=random1(n);
+% plot random vector
+plot(R1)
+title('random numbers'); xlabel('random variable');
+disp('Histogram: press any keyboard key');
+pause;
+% plot histogram of random numbers
+x=(0.05:0.1:0.95);
+[m,xout] = hist(R1,x);
+bar(xout,m)
+xlabel('random number');
+title('1D distribution: Histogram');
+disp('2D plot: press any keyboard key');
+pause;
+% 2D plot: correlation of consecutive numbers
+R2x=R1(1:2:n-1);
+R2y=R1(2:2:n);
+plot(R2x,R2y,'x')
+title('2d distribution')
+disp('3D plot: press any keyboard key');
+pause;
+% 3D plot: correlation of consecutive numbers
+R3x=R1(1:3:n);
+R3y=R1(2:3:n);
+R3z=R1(3:3:n);
+%R3=random1(n,3);
+plot3(R3x,R3y,R3z,'x')
+title('3D distribution');xlabel('Random number');
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{verbatim}
+function R = random1(n)
+% function to generate random numbers
+a=65539;
+M=2^(31)-1;
+R(1) = 12345678;
+for j=1:n-1
+%   for i=1:n-1
+   R(j+1) =floor(rem(a*R(j),M));
+%end
+end
+R=R/M;
+\end{verbatim}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Stochastische Prozesse}
+Master-Gleichungen
+
+\chapter{Monte Carlo Methoden in der statistischen Mechanik}
+Metropolis; Ising; Finite-Size Effects; Random Walks; SAW (?)
+Simulated annealing; travelling salesman;
+
+\chapter{Non-equilibrium MC}
+Chemische Reaktionen, Diffusion; Reaktions-Diffusion, Turbulenz.
+
+\chapter{Brownsche Dynamik Simulationen}
+Omega-entwicklung; SDE;
+
+
+\chapter{Rest}
+stochastische Resonanzen; Muster Erkennung; random Walks;
+
+\chapter{Stochastische Wellenfunktionsmethoden}
+
