@@ -612,12 +612,8 @@ from the other states. The second term is the loss due to the
 transitions from the given state into the others. Evidently,
 the term with $x=x'$ does not contribute to the integral.
 
-\subsection{Example: Radioactive decay}
-As a very simple example we consider the master equation 
-description of radioactive decay. To this end let
-$P(n,t)$ be the probability density to find $n$ radioactive nuclei
-at time $t$. The probability for a nucleus to decay in unit time will
-be denoted by $\gamma$. Since the number of nuclei is integer,
+If the state space of the stochastic process is discrete, i.e.
+all integer numbers $n$,
 the master equation for the time evolution of $P(n,t)$ will assume 
 the following discrete form
 \begin{equation}
@@ -626,218 +622,12 @@ the following discrete form
  \sum_{n'} \left( w(n,n') P(n')
  - w(n',n) P(n,t) \right).
 \end{equation}
-It is clear that the transition probability per unit time is given 
-by
-\begin{equation*}
-w(n,n') = \gamma n' \delta(n,n'-1) \;\;\; (n \neq n').
-\end{equation*}
-Substitution of the above $w(n,n')$ into the master equation
-(\ref{MASTER_JUMP_P_N}) yields the master equation of radioactive 
-decay
-\begin{equation}
-\frac{\partial}{\partial t} P(n,t) = 
-\gamma (n+1) P(n+1,t) - \gamma n P(n,t).
-\end{equation}
-The above equation has to be solved for the initial condition
-$P(n,0)= \delta(n,n_0)$. 
-We will learn in the next chapters how such a master equation may 
-be solved numerically. Here, it is interesting to establish the
-relation between the master equation and the macroscopic 
-description in terms of differential equations we already met in 
-the introduction.
-To this end we consider
-\begin{eqnarray*}
-\sum_{n=0}^{\infty} n \dot{P}(n,t) &=&
-       \gamma \sum_{n=0}^{\infty} n(n+1)P(n+1) 
-         - \gamma  \sum_{n=0}^{\infty} n^2 P(n) \\
-  &=& \gamma \sum_{n=0}^{\infty} (n-1)n P(n) 
-         - \gamma  \sum_{n=0}^{\infty} n^2 P(n) \\
-  & = & - \gamma \sum_{n=0}^{\infty} n P(n) .
-\end{eqnarray*}
-Thus we have found the following dynamical equation for the 
-average of the stochastic 
-variable $N(t)$
-\begin{equation}
-\frac{d}{dt} \langle N(t) \rangle = - \gamma \langle N(t) \rangle.
-\end{equation}
-Note thate the mean value of the stochastic process obeys the 
-differential equation for the concentration. It is clear that the 
-above equation has the following solution for the initial value
-$\langle N(0)\rangle = n_0$
-\begin{equation*}
-\langle N(t) \rangle = n_0 \exp(-\gamma t).
-\end{equation*}
-
-The master equation for the radioactive decay is a simple example 
-of the master equation for a one--step process. We will consider
-such stochastic processes in more detail in later chapters.
+We will discuss in the next section how the stochastic processes 
+defined in terms of a master equation can be simulated 
+numerically.
 
 
-\section{The Fokker--Planck equation}
-In this section we want to derive the Fokker--Planck equation
-(\cite{RISKEN}),
-which is a special type of master equation (\cite{VAN_KAMPEN})
-in the limit of small jumps.
-We begin by expressing the transition probability $w$ as a 
-function of the size $r$ of the jump and of the starting point
-\begin{equation*}
-w(y,y') = w(y';r); \;\;\; r=y-y'.
-\end{equation*}
-The master equation (\ref{MASTER_JUMP_P}) then reads
-\begin{equation}
-\label{MASTER_SMALL_JUMP}
-\frac{\partial}{\partial t} P(y,t) =
-  \int dr w(y-r;r)P(y-r,t) - \int dr w(y;-r)P(y,t).
-\end{equation}
-In order to consider the limit of small jumps essentially
-two assumptions will be needed. The first is that
-the function
-$w(y;r)$ will be a sharply peaked function of $r$ and will
-vary slowly with $y$. To be more precise we assume that a $\delta >0$
-exists such that
-\begin{eqnarray*}
-w(y';r)  & \approx & 0 \;\;\; \text{for} \;\;\; |r|> \delta \\
-w(y'+\Delta y;r) & \approx & w(y';r) \;\;\; \text{for} |\Delta y| < 
-\delta.
-\end{eqnarray*}
-The second assumption is that the solution $P(y,t)$ of the master equation 
-in this limit will be a slowly varying function of $y$.
-
-If these assumptions hold it is safe to expand the shift from $y$
-to $y-r$ in the first integral in 
-Eq. (\ref{MASTER_SMALL_JUMP}) in a Taylor series
-\begin{equation}
-\label{MASTER_EXPAND}
-\frac{\partial}{\partial t} P(y,t) = \sum_{\nu=0}^{\infty}
-   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
-   \right)^{\nu}
-    \left\{  a_{\nu}(y) P(y,t) \right\}
-    - P(y,t) \int_{-\infty}^{\infty} dr w(y;-r),
-\end{equation}
-where we have defined
-\begin{equation*}
-a_{\nu}(y) = \int_{-\infty}^{\infty} dr r^{\nu} w(y;r).
-\end{equation*}
-Since the zeroth term in the sum and the second term of 
-Eq. (\ref{MASTER_EXPAND}) cancel the small jumps expansion 
-of the master equation reads
-\begin{equation}
-\frac{\partial}{\partial t} P(y,t) = \sum_{\nu=1}^{\infty}
-   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
-   \right)^{\nu}
-    \left\{  a_{\nu}(y) P(y,t) \right\}.
-\end{equation}
-The above expansion is called the Kramers--Moyal expansion. 
-Formally, we can write
-\begin{equation}
-\frac{\partial}{\partial t} P(y,t) = {\cal{A}}_{KM}^{\dagger}(y)
-         P(y,t),
-\end{equation}
-where we introduced the adjoint generator
-\begin{equation*}
-{\cal{A}}_{KM}^{\dagger}(y) = \sum_{\nu=1}^{\infty}
-   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
-   \right)^{\nu}
-     a_{\nu}(y).
-\end{equation*}
-It is easy to show by partial integration that the corresponding
-generator  reads
-\begin{equation*}
-{\cal{A}}_{KM}(y) = \sum_{\nu=1}^{\infty}
-   \frac{1}{\nu!}  a_{\nu}(y)
-    \left( \frac{\partial}{\partial y} 
-   \right)^{\nu}.
-\end{equation*}
-It is clear that dealing with the {\em Kramers--Moyal} expansion will 
-not be easier than dealing with the original master equation.
-
-A particularly interesting and useful approximation to a jump process is 
-obtained by keeping only terms up to the second order in $\nu$
-\begin{equation}
-\label{FOKKER_PLANCK}
-\frac{\partial}{\partial t} P(y,t) =
--\frac{\partial}{\partial y} \left\{ a_1(y) P(y,t) \right\}
-   + \frac{1}{2} \frac{\partial^2}{\partial y^2} 
-      \left\{ a_2(y) P(y,t) \right\}.
-\end{equation}
-The above equation is called the {\em Fokker--Planck equation}.
-The first term on the right--hand side is usally called the drift
-term since it is essentially Liouvillian. The second term
-on the right--hand side is the diffusion term. In a later chapter
-we will learn kow to deal with this equation.
-
-Let us mention at the end of this section the important special case 
-of vanishing drift, i.e. $a_1=0$ and $a_2=1$. The generator 
-\begin{equation}
-\label{WIENER_GENERATOR}
-{\cal{A}}_W = {\cal{A}}_W^{\dagger} = \frac{1}{2} 
-     \frac{\partial^2}{\partial y^2}
-\end{equation}
-generates a so--called Wiener process.
-
-\subsection{Brownian motion}
-As an example of the application of the Fokker--Planck
-equation we consider Brownian motion. A heavy particle is immersed 
-in a fluid of light particles. The large particle and the small 
-molecules collide in a random fashion. These 
-collisions induce sudden variations of the velocity of the 
-Brownian particle. As a consequence the position $X$ of the Brownian 
-motion may be described by a Markov 
-process, if observed on a time scale which is larger then the 
-autocorrelation time of the velocity, i.e. many collisions have 
-occurred between two observations. If we regard, for simplicity a 
-one--dimensional 
-situation, the Brownian particle makes random jumps back and forth 
-along the $x$--axis. The jumps may have any length, but the
-probability for large jumps falls off rapidly. 
-It is reasonable to assume that these probabilities are 
-symmetrical and independent of the starting point.
-
-Hence we have
-\begin{equation*}
-a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
-\end{equation*}
-and
-\begin{equation}
-a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
-\end{equation}
-The Fokker--Planck equation of Brownian motion thus reads
-\begin{equation}
-\label{BROWNIAN}
-\frac{\partial}{\partial t} P(X,t) = \frac{a_2}{2} 
-    \frac{\partial^2}{\partial x^2} P(x,t).
-\end{equation}
-The above equation is a diffusion equation and we immediately
-identify the diffusion constant to be
-\begin{equation}
-D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
-\end{equation}
-The above relation is known as the Einstein relation. It relates 
-the diffusion constant with the microscopic jumps of the Brownian 
-particle.
-
-Let us now consider an ensemble of Brownian particles, which are
-concentrated in $X=0$ at time $t=0$. Their position at time $t$ is 
-a stochastic process $X(t)$, whose transition probability is given 
-by (\ref{BROWNIAN}). This process, as we know, is a Wiener 
-process. The probability density of the Brownian particles  with 
-initial condition $P(x,0) = \delta(x)$ at time $t>0$ is easily 
-found to be
-\begin{equation}
-P(x,t) = \frac{1}{\sqrt{4 \pi D t}} \exp(-x^2/4Dt).
-\end{equation}
-This is a gaussian with maximum at $x=0$ and whose standard variation grows
-as
-\begin{equation}
-\langle X^2(t) \rangle = 2 D t.
-\end{equation}
-Hence, the width of the distribution increases with the square 
-root of the time. A behaviour which we already know from our 
-discussion of random walks.
-
-
-
-\section{The numerical treatment of master equations}
+\section{Stochastic simulation}
 In principle there are two ways to treat numerically
 stochastic processes which are defined in terms of master
 equations. In the first approach one solves numerically the
@@ -877,10 +667,10 @@ w(n',n) = 0 \;\;\; \text{otherwise}.
 \end{equation*}
 Exploiting the above structure we can write the master equation 
 for the discrete one--dimensional process (\ref{MASTER_JUMP_P_N})
-\begin{equation*}
-\dot{P}(n,t) = w(n,n+1)P(n+1,t) + w(n,n-1)P(n-1,t)
-        -w(n+1,n)P(n,t) -w(n-1,n)P(n).
-\end{equation*}
+\begin{eqnarray*}
+\dot{P}(n,t) &=& w(n,n+1)P(n+1,t) + w(n,n-1)P(n-1,t) \\
+       && -w(n+1,n)P(n,t) -w(n-1,n)P(n).
+\end{eqnarray*}
 Now it is convenient to introduce the following notation
 \begin{eqnarray*}
 r(n+1) \equiv w(n,n+1) \\
@@ -974,21 +764,79 @@ The flow chart of the algorithm can be seen in Fig.
     one--step process. The symbols used
      are explained in the text.}
 \end{figure}
-The algorithm has been implemented in the program {\texttt onestep.m}
-whose listing can be seen below. The program {\texttt onestep.m} makes
-use of a function called {\texttt decayymaster.m} in which the
-transitions rates $g(n)$ and $r(n)$ are specified. In the present case
-we have simulated a radioactive decay process and hence we have
-$g(n) \equiv 0$ and $r(n)= \gamma n$, where $\gamma$ is the decay constant.
+The algorithm has been implemented in the program {\texttt{onestep.m}}
+whose listing can be seen below. The program {\texttt{onestep.m}} makes
+use of a function called {\texttt{decayymaster.m}} in which the
+transitions rates $g(n)$ and $r(n)$ are specified. In the 
+following subsection we will discuss three typical one--step 
+processes. The specific form of the function \texttt{decaymaster} 
+will be given there.
 
-\subsubsection{Listing of the program {\texttt onestep.m}}
+\subsubsection{Listing of the program {\texttt{onestep.m}}}
 \inputlisting{./Listings/onestep.m}
 
-\subsubsection{Listing of the function {\texttt decaymaster.m}}
+The program will be applied in the next subsections.
+
+
+\subsection{Radioactive decay}
+As a first example we consider the master equation 
+description of radioactive decay. To this end let
+$P(n,t)$ be the probability density to find $n$ radioactive nuclei
+at time $t$. The probability for a nucleus to decay in unit time will
+be denoted by $\gamma$. The radioactive decay is a typical example
+of a one--step process. It is defined through
+the transition rates
+$g(n) \equiv 0$ and $r(n)= \gamma n$, where $\gamma$ is the decay constant.
+Substitution of the above $g(n)$ and $r(n)$ into the master equation
+for the one--step process
+(\ref{MASTER_ONE_STEP}) yields the master equation of radioactive 
+decay
+\begin{equation}
+\frac{\partial}{\partial t} P(n,t) = 
+\gamma (n+1) P(n+1,t) - \gamma n P(n,t).
+\end{equation}
+Before we apply the stochastic simulation algorithm to the 
+generation of trajectories of the stochastic process we consider
+for one moment the above master equation.
+
+The above equation has to be solved for the initial condition
+$P(n,0)= \delta(n,n_0)$. 
+It is interesting to establish the
+relation between the master equation and the macroscopic 
+description in terms of differential equations we already met in 
+the introduction.
+To this end we consider
+\begin{eqnarray*}
+\sum_{n=0}^{\infty} n \dot{P}(n,t) &=&
+       \gamma \sum_{n=0}^{\infty} n(n+1)P(n+1) 
+         - \gamma  \sum_{n=0}^{\infty} n^2 P(n) \\
+  &=& \gamma \sum_{n=0}^{\infty} (n-1)n P(n) 
+         - \gamma  \sum_{n=0}^{\infty} n^2 P(n) \\
+  & = & - \gamma \sum_{n=0}^{\infty} n P(n) .
+\end{eqnarray*}
+Thus we have found the following dynamical equation for the 
+average of the stochastic 
+variable $N(t)$
+\begin{equation}
+\frac{d}{dt} \langle N(t) \rangle = - \gamma \langle N(t) \rangle.
+\end{equation}
+Note thate the mean value of the stochastic process obeys the 
+differential equation for the concentration. It is clear that the 
+above equation has the following solution for the initial value
+$\langle N(0)\rangle = n_0$
+\begin{equation*}
+\langle N(t) \rangle = n_0 \exp(-\gamma t).
+\end{equation*}
+
+Let us now turn to the stochastic simulation. In order to use
+the program \texttt{onestep.m} we still have to specify
+the function \texttt{decaymaster.m}. The listing of this
+function can be seen below.
+\subsubsection{Listing of the function {\texttt{decaymaster.m}}}
 \inputlisting{./Listings/decaymaster.m}
 
-In order to simulate a radioactive decay process 
-we have run the program for the following parameters
+Now we are in the position to simulate the stochastic process of
+radioactive decay. We run the program for the following parameters
 {\texttt n0}$=500$, {\texttt tend}$=30$, and {\texttt nreal}$=10$.
 The decay rate is $\gamma=0.1$.
 The result of the simulation can be seen in Fig. (\ref{F_OS_DECAY}).
@@ -1001,22 +849,606 @@ The result of the simulation can be seen in Fig. (\ref{F_OS_DECAY}).
 is 30 and the ensemble average was taken over 10 realizations.
 The decay rate is $\gamma=0.1$.}
 \end{figure}  
-\section{Beyond this chapter}
-In this chapter we have introduced the key concepts which arise
-in the theory of stochastic processes. The mathematical more 
-interested reader will find a mathematical more precise introduction 
-in the classical books by Feller
-(\cite{FELLER}) and by Doob (\cite{DOOB}). 
 
-Students interested in the physical applications of stochastic processes
-should read the classical paper by Chandrasekhar 
-(\cite{CHANDRASEKHAR}) which is reprinted in \cite{WAX}.
+\subsection{The Poisson process}
+A further important one--step process is the Poisson process, whic 
+is defined by
+\begin{equation}
+r(n) = 0; \;\;\; g(n) = q = \text{const}.
+\end{equation}
+Inserting the above transition rates into the master equation
+(\ref{MASTER_ONE_STEP}) we get the master equation defining
+the Poisson process
+\begin{equation}
+\label{MASTER_POISSON}
+\frac{\partial}{\partial t} P(n,t|n',t') =
+  q [ P(n-1,t|n',t') - P(n,t|n',t')].
+\end{equation}
+The Poisson process describes a random walk over the integers
+$0,1,2,\ldots$. The steps of the walk are all of length $l$ and are 
+only to the right. They are performed at random times with 
+probability per unit time equal to $q$.
 
-In this chapter we have only introduced the formal description,
-i.e., the kinematics of Markov processes. We have not discussed
-how Markov processes can be derived from some microscopic picture.
-A survey of such techniques can be found in the book by Oppenheim 
-et al. (\cite{OPPENHEIM}).
+It is instructive to consider the analytical solution of the 
+above master equation (\ref{MASTER_POISSON}). The analytical
+solution will be constructive with the help of a very useful 
+technique which is based upon the characteristic function
+\begin{equation*}
+G(s,t) = \langle \exp(ins)\rangle = \sum_n P(n,t|n',t') \exp(ins).
+\end{equation*}
+The  equation of motion for the characteristic function is easily 
+obtained with the help of (\ref{MASTER_POISSON}). We find
+\begin{equation*}
+\frac{\partial}{\partial t} G(s,t) = 
+       q \left[ \exp(is) -1 \right] G(s,t).
+\end{equation*}
+Assuming that at time $t'$ the one--sided random walk starts at
+$n'=0$, the initial condition of the above differential equation
+reads
+\begin{equation*}
+G(s,0) = 1.
+\end{equation*}
+In this case the solution of the above differential equation of 
+motion  for the characteristic function is easily found. It reads
+\begin{equation*}
+G(s,t) = \exp\left\{ tq \left[ \exp(is)-1 \right]\right\}.
+\end{equation*}
+To read out the analytical solution for the transition probability
+$P(n,t|0,0)$ it is convenient to write the above solution in the
+form
+\begin{eqnarray*}
+G(s,t) &= & \exp(-tq) \exp \left[ tq \exp(is)\right] \\
+       &= & \sum_{n=0}^{\infty} \exp(-tq) 
+             \frac{[tq\exp(is)]^n}{n!}.
+\end{eqnarray*}
+For $s=0$ and from the definition of the characteristic function
+it follows immediately that
+\begin{equation*}
+P(n,t|0,0) = \exp(-tq) \frac{(tq)^n}{n!},
+\end{equation*}
+which evidently is a Poisson distribution. As we know the 
+characteristic function allows the determination of all moments of 
+the stochastic process through the relation
+\begin{equation*}
+\langle n(t)^m(t) \rangle = \left. 
+       \left( -i \frac{\partial}{\partial s} \right) G(s,t)  
+       \right|_{s=0}.
+\end{equation*}
+Applying the above formula we find
+\begin{equation*}
+\langle n(t) \rangle = qt
+\end{equation*}
+and
+\begin{equation*}
+\langle n^2(t) \rangle = qt + (qt)^2.
+\end{equation*}
+Accordingly, the variance of the Poisson process is given by
+\begin{equation*}
+\text{Var}(n) = \langle n^2(t) \rangle - \langle n(t) \rangle^2 = 
+   qt.
+\end{equation*}
+The simulation of the Poisson process is straightforward. We make 
+use of the program \texttt{onestep.m} and simply write a new 
+function \texttt{poissonmaster.m} according to the 
+master equation (\ref{MASTER_POISSON}) whose listing can be
+seen below.
+
+\subsubsection{Listing of the function {\texttt{poissonmaster.m}}}
+\inputlisting{./Listings/poissonmaster.m}
+
+To begin we generate one realization of the Poisson process. To 
+this end we run the program with the following parameters:
+\texttt{nstart=0}, \texttt{tend=30}, \texttt{nreal=1}. In the 
+function \texttt{poissonmaster} we have chosen the transition rate
+to be \texttt{q=1}. One realization of the Poisson process can be
+seen in Fig. (\ref{F_OS_POI_R}).
+\begin{figure}
+\label{F_OS_POI_R}
+\includegraphics[width=10cm]{./Figures/f_os_poi_r.eps}
+\caption{Stochastic simulation of the Poisson process. The 
+one--sided random walk starts at \texttt{nstart=0}.  
+{\texttt tend} is 30 and \texttt{nreal=1}.
+The jump rate is \texttt{q=1}.}
+\end{figure}  
+In Fig. (\ref{F_OS_POI_1}) we show an ensemble average over 20
+realizations of the Poisson process. The other parameters are 
+unchanged.
+\begin{figure}
+\label{F_OS_POI_1}
+\includegraphics[width=10cm]{./Figures/f_os_poi_1.eps}
+\caption{Stochastic simulation of the Poisson process. The 
+one--sided random walk starts at \texttt{nstart=0}.  
+{\texttt tend} is 30 and \texttt{nreal=20}.
+The jump rate is \texttt{q=1}.}
+\end{figure}
+It is interesting to consider the limit of continuous space for the
+Poisson process. Let us denote the distance travelled by 
+\begin{equation*}
+x=nl.
+\end{equation*}
+As a function of the new stochastic variable $x$ the 
+characteristic function $\tilde{G}$is
+\begin{equation*}
+\tilde{G}(s,t) = \langle \exp(isx) \rangle = 
+     \exp\{tq[\exp(ils)-1] \}.
+\end{equation*}
+We perform the limit $l \longrightarrow 0$ keeping 
+\begin{equation*}
+ql=v=\text{const}
+\end{equation*}
+and obtain
+\begin{equation*}
+\lim_{l\rightarrow 0}\tilde{G}(s,t) = \exp(itvs).
+\end{equation*}
+So, in the continuum limit the transition probability is
+\begin{equation*}
+P(x,t|0,0) = \delta(x-vt).
+\end{equation*}
+Thus, the Poisson process has a deterministic limit. This can also 
+be seen by considering, that in the same limit the master equation
+for the Poisson process turns into the Liouville equation
+\begin{equation*}
+\frac{\partial}{\partial t} P(x,t|0,0) = -v 
+\frac{\partial}{\partial x} P(x,t|0,0),
+\end{equation*}
+whose solution is the deterministic process we have just derived.
+This behaviour can also be seen in the simulation. To this end
+we run the program \texttt{onestep} with the function 
+\texttt{poissonmaster} choosing \texttt{q=10}. The result of the 
+simulation can be seen in Fig. (\ref{F_OS_POI_2}).
+\begin{figure}
+\label{F_OS_POI_2}
+\includegraphics[width=10cm]{./Figures/f_os_poi_2.eps}
+\caption{Stochastic simulation of the Poisson process. The 
+one--sided random walk starts at \texttt{nstart=0}.  
+{\texttt tend} is 30 and \texttt{nreal=20}.
+The jump rate is \texttt{q=10}.}
+\end{figure}
+As we can see for a larger value of \texttt{q} the variance of the
+process gets smaller. Thus the dynamics of the process is nearly 
+deterministic.
+
+\subsection{The continuous time random walk}
+In this subsection we want to consider the master equation for
+the one--dimensional random walk. The steps of the walker are of 
+length $l$. The positions of the walker are $nl$ and are labelled
+by the integer $n$. We already considered the random walk problem 
+in Chapter 2.  There the walker was allowed to take steps 
+to the left and to the right at some 
+discrete times $N\tau$, where the time step $\tau$ was fixed.
+Now, we consider a random walk which is continuous in time. The 
+walker is allowed to take steps to the left or to the right with 
+the probability per unit time $q$. This process is again described 
+by a master equation for a one--step process (\ref{MASTER_ONE_STEP})
+by choosing
+\begin{equation*}
+r(n) =g(n) =q.
+\end{equation*}
+Thus the master equation for the continuous time random walk
+reads
+\begin{eqnarray*}
+\frac{\partial}{\partial t} P(n,t|n',t') &=& 
+       q \left\{ P(n+1,t|n',t') + P(n-1,t|n',t')\right. \\
+       && \left.   2 P(n,t|n',t')  \right\}.
+\end{eqnarray*}
+Also the above master equation is easily solved with the help of 
+the characteristic function $G(s,t)$. It is easy to check that the
+characteristic function satisfies the equation
+\begin{equation*}
+\frac{\partial}{\partial t} G(s,t) = q [\exp(is) +\exp(-is) -2] G(s,t).
+\end{equation*}
+Assuming that the walker starts at time $t'=0$ in $n'=0$ we find
+$G(s,0)=1$ and the solution of the above equation reads
+\begin{equation*}
+G(s,t) = \exp\{[ \exp(is) +\exp(-is) -2  ]tq\}.
+\end{equation*}
+With the help of the above expression for the characteristic 
+function the moments are easily evaluated. We find
+\begin{eqnarray*}
+\langle n(t) \rangle &=& 0, \\
+\langle n^2(t) \rangle &=& 2tq.
+\end{eqnarray*}
+Again we find the typical behaviour of a diffusive process.
+
+The continuous time random walk is also easily simulated with the
+help of the program \texttt{onestep}. To this end we have to write
+a new function \texttt{walkmaster.m} which implements the 
+appropriate transition rates.
+
+\subsubsection{Listing of the function \texttt{walkmaster.m}}
+\inputlisting{./Listings/walkmaster.m}
+
+We run the program with the following parameters: 
+\texttt{nstart=0}, \texttt{nreal=10}, \texttt{tend=30}, and
+\texttt{q=1}. The result of the simulation can be seen in
+Fig. (\ref{F_CTRW}).
+\begin{figure}
+\label{F_CTRW}
+\includegraphics[width=10cm]{./Figures/f_ctrw.eps}
+\caption{Stochastic simulation of the continuous time
+random walk. The 
+random walk starts at \texttt{nstart=0}.  
+{\texttt tend} is 30 and \texttt{nreal=20}.
+The jump rate is \texttt{q=1}.}
+\end{figure}
+
+It is of particular interest to look at the continuous space limit
+of the continuous time random walk. Again we write for the 
+distance travelled by the walker $x=nl$. The characteristic
+function as afunction of $x$ reads
+\begin{eqnarray*}
+\tilde{G}(s,t) &=& G(sl,t) = \exp(ixs) \\
+                &=& \exp\{[\exp(ils)-\exp(ils)-2]tq \}.
+\end{eqnarray*}
+The limit of infinitesimally small steps $l \longrightarrow 0$ 
+leads to
+\begin{equation}
+\label{CHAR_WALK_X}
+\tilde{G}(s,t) = \exp(-s^2tD),
+\end{equation}
+where
+\begin{equation*}
+D=\lim_{l\rightarrow 0} (l^2q).
+\end{equation*}
+The quantity $D$ can be interpreted as the mean square distance 
+traveled  per unit time.  The characteristic function (\ref{CHAR_WALK_X})
+is the characteristic function of a Gaussian process of the form
+\begin{equation*}
+P(x,^t|0,0) = \frac{1}{(4\pi Dt)^{-1/2}} \exp\left( -x^2/4Dt 
+\right).
+\end{equation*}
+This is the transition probability of a so--called {\em Wiener process},
+which can be regarded as a continuous time random walk in the 
+limit of infinitesimally small step size. We will consider the 
+Wiener process in more detail in the next section.
+
+The following remark may serve as an introduction to the next 
+section. Of course, we can also expand directly the master equation
+(\ref{MASTER_WALK}) as a function of $x$ up to second order terms 
+in $l$. We get
+\begin{equation*}
+\frac{\partial}{\partial t} P(x,t|0,0) =
+     (l^2q) \frac{\partial^2}{\partial x^2} P(x,t|0,0),
+\end{equation*}
+which is a special type of Fokker--Planck equation, as we will see 
+in the next section.
+
+\section{The Fokker--Planck equation}
+In this section we want to derive the Fokker--Planck equation
+(\cite{RISKEN}),
+which is a special type of master equation (\cite{VAN_KAMPEN})
+in the limit of small jumps.
+We begin by expressing the transition probability $w$ as a 
+function of the size $r$ of the jump and of the starting point
+\begin{equation*}
+w(y,y') = w(y';r); \;\;\; r=y-y'.
+\end{equation*}
+The master equation (\ref{MASTER_JUMP_P}) then reads
+\begin{equation}
+\label{MASTER_SMALL_JUMP}
+\frac{\partial}{\partial t} P(y,t) =
+  \int dr w(y-r;r)P(y-r,t) - \int dr w(y;-r)P(y,t).
+\end{equation}
+In order to consider the limit of small jumps essentially
+two assumptions will be needed. The first is that
+the function
+$w(y;r)$ will be a sharply peaked function of $r$ and will
+vary slowly with $y$. To be more precise we assume that a $\delta >0$
+exists such that
+\begin{eqnarray*}
+w(y';r)  & \approx & 0 \;\;\; \text{for} \;\;\; |r|> \delta \\
+w(y'+\Delta y;r) & \approx & w(y';r) \;\;\; \text{for} |\Delta y| < 
+\delta.
+\end{eqnarray*}
+The second assumption is that the solution $P(y,t)$ of the master equation 
+in this limit will be a slowly varying function of $y$.
+
+If these assumptions hold it is safe to expand the shift from $y$
+to $y-r$ in the first integral in 
+Eq. (\ref{MASTER_SMALL_JUMP}) in a Taylor series
+\begin{equation}
+\label{MASTER_EXPAND}
+\frac{\partial}{\partial t} P(y,t) = \sum_{\nu=0}^{\infty}
+   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
+   \right)^{\nu}
+    \left\{  a_{\nu}(y) P(y,t) \right\}
+    - P(y,t) \int_{-\infty}^{\infty} dr w(y;-r),
+\end{equation}
+where we have defined
+\begin{equation*}
+a_{\nu}(y) = \int_{-\infty}^{\infty} dr r^{\nu} w(y;r).
+\end{equation*}
+Since the zeroth term in the sum and the second term of 
+Eq. (\ref{MASTER_EXPAND}) cancel the small jumps expansion 
+of the master equation reads
+\begin{equation}
+\frac{\partial}{\partial t} P(y,t) = \sum_{\nu=1}^{\infty}
+   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
+   \right)^{\nu}
+    \left\{  a_{\nu}(y) P(y,t) \right\}.
+\end{equation}
+The above expansion is called the Kramers--Moyal expansion. 
+Formally, we can write
+\begin{equation}
+\frac{\partial}{\partial t} P(y,t) = {\cal{A}}_{KM}^{\dagger}(y)
+         P(y,t),
+\end{equation}
+where we introduced the adjoint generator
+\begin{equation*}
+{\cal{A}}_{KM}^{\dagger}(y) = \sum_{\nu=1}^{\infty}
+   \frac{(-1)^{\nu}}{\nu!} \left( \frac{\partial}{\partial y} 
+   \right)^{\nu}
+     a_{\nu}(y).
+\end{equation*}
+It is easy to show by partial integration that the corresponding
+generator  reads
+\begin{equation*}
+{\cal{A}}_{KM}(y) = \sum_{\nu=1}^{\infty}
+   \frac{1}{\nu!}  a_{\nu}(y)
+    \left( \frac{\partial}{\partial y} 
+   \right)^{\nu}.
+\end{equation*}
+It is clear that dealing with the {\em Kramers--Moyal} expansion will 
+not be easier than dealing with the original master equation.
+
+A particularly interesting and useful approximation to a jump process is 
+obtained by keeping only terms up to the second order in $\nu$
+\begin{equation}
+\label{FOKKER_PLANCK}
+\frac{\partial}{\partial t} P(y,t) =
+-\frac{\partial}{\partial y} \left\{ a_1(y) P(y,t) \right\}
+   + \frac{1}{2} \frac{\partial^2}{\partial y^2} 
+      \left\{ a_2(y) P(y,t) \right\}.
+\end{equation}
+The above equation is called the {\em Fokker--Planck equation}.
+The first term on the right--hand side is usally called the drift
+term since it is essentially Liouvillian. The second term
+on the right--hand side is the diffusion term. In a later section
+we will learn how to deal with this equation.
+
+\subsection{The Wiener process}
+Let us consider the important special case 
+of vanishing drift, i.e. $a_1=0$, and diffusion coefficient
+equal to one, i.e. $a_2=1$. The generator takes the form 
+\begin{equation}
+\label{WIENER_GENERATOR}
+{\cal{A}}_W = {\cal{A}}_W^{\dagger} = \frac{1}{2} 
+     \frac{\partial^2}{\partial y^2},
+\end{equation}
+and it defines a Wiener process. We already met the corresponding
+Fokker--Planck equation, which we want to write down in the form
+\begin{equation*}
+\frac{\partial}{\partial t}P(w,t|w',t') =
+  \frac{1}{2} \frac{\partial^2}{\partial x^2} P(w,t|w',t').
+\end{equation*}
+The above equation can easily be solved with the help of the 
+characteristic function
+\begin{equation*}
+G(s,t) = \int dw P(w,t|w_0,t_0) \exp(isw),
+\end{equation*}
+where we hve assumed that the initial condition on the transition 
+probability is
+\begin{equation*}
+P(w,t_0|w_0,t_0) = \delta(w-w_0).
+\end{equation*}
+The characteristic function satisfies the equation
+\begin{equation*}
+\frac{\partial}{\partial t}G(s,t) = - \frac{1}{2} s^2 G(s,t),
+\end{equation*}
+whose solution given the initial condition $G(s,t_0)=\exp(isw_0)$ is
+\begin{equation*}
+G(s,t) = \exp\left[isw_0 -s^2(t-t_0)/2\right].
+\end{equation*}
+Performing the inverse Fourier transformation of the above 
+expression we find the transition probability
+\begin{equation}
+\label{TREANS_WIENER}
+P(w,t|w_0,t_0)= \frac{1}{[2 \pi (t-t_0)]^{-1/2}}
+     \exp\left[ -(w-w_0)^2/2(t-t_0)\right].
+\end{equation}
+Thus, the transition probability density is a Gaussian with
+\begin{eqnarray*}
+\langle W(t) \rangle &=& w_0 \\
+\langle [W(t)-w_0]^2\rangle = t-t_0.
+\end{eqnarray*}
+An initially sharp peaked distribution spreads in time.
+It is important to make some remarks on the Wiener process $W(t)$.
+
+The mean square of the Wiener process diverges linearly with time.
+As we already know this behaviour is typical for diffusion 
+processes and the trajectories of the Wiener process are very 
+variable. We will look at the trajectories of the Wiener process 
+soon. 
+
+Although the paths of the Wiener process are continuous they are 
+not differentiable since the derivative at any point is 
+almost certainly infinite \cite{GARDINER}.
+
+The Wiener process plays a central role in the description of 
+diffusion processes by means of stochastic differential equations.
+The reason is that the increments of the Wiener process
+\begin{equation*}
+\Delta W_i \equiv W(t_i) - W(t_i-1)
+\end{equation*}
+are statistically independent. This can be seen in the following 
+way. Let us consider the joint probability density
+\begin{eqnarray*}
+P(w_n,t_n; w_{n-1},t_{n-1}; \ldots ; w_0,t_0) &=&
+\prod_{i=0}^{n-1} P(w_{i+1},t_{i+1}|w_i,t_i) P(w_0,t_0).
+\end{eqnarray*}
+Exploiting the explicit form of the transition probabilities
+(\ref{TRANS_WIENER}) the above joint probability density can be 
+cast in the following form
+\begin{eqnarray*}
+P(w_n,t_n; w_{n-1},t_{n-1}; \ldots ; w_0,t_0) &=&
+\prod_{i=0}^{n-1} 
+\left\{ \frac{1}{[2 \pi (t_{i+1}-t_i)]^{-1/2}}
+\exp[-(w_{i+1}-w_i)^2/2(t_{i+1}-t_i)]
+\right\}
+P(w_0,t_0).
+\end{eqnarray*}
+Expressed in terms of the increments $\Delta W_i$ the above 
+equation reads
+\begin{eqnarray*}
+P(\Delta w_n,\Delta t_n; \Delta w_{n-1},\Delta t_{n-1}; \ldots ; w_0,t_0) &=&
+\prod_{i=0}^{n-1} 
+\left\{ \frac{1}{[2 \pi \Delta t_i)]^{-1/2}}
+\exp[-\Delta w_i^2/2 \Delta t_i]
+\right\}
+P(w_0,t_0),
+\end{eqnarray*}
+where we have introduced
+\begin{equation*}
+\Delta t_i = t_{i+1} - t_i.
+\end{equation*}
+Thus, the increments $\Delta t_i$ are evidently statistical 
+independent.
+
+\section{Stochastic differential equations}
+\subsection{The Langevin equation and Brownian motion}
+In 1908 Langevin considered the problem of the dynamical 
+description of Brownian motion. He suggested that the equation of 
+motion of a Brownian particle with mass $m=1$ be described by the
+following differential equation for the velocity $V$
+\begin{equation}
+\label{LANGEVIN}
+\frac{d}{dt} V = -\gamma V + L(t),
+\end{equation}
+where the terms on the right hand--side of the above equation 
+model the forces which the surrounding molecules excerpt on the 
+Brownian particle. Since these forces are unknown in detail the 
+following assumptions were postulated. The Brownian particle 
+moving in the fluid of surrounding particles feels
+a friction which is proportional to its velocity, $\gamma$  being 
+the friction coefficient. Furthermore, the Brownian particle hits
+the surrounding particles. These collisions cause irregular 
+changes in the velocity of the Brownian particle. Thus, the external force
+$L(t)$ is modeled as a stochastic process. The first two moments of the
+stochastic process $L(t)$ are assumed to 
+have the following properties
+\begin{eqnarray*}
+\langle L(t) \rangle &=& 0 \\
+\langle L(t) L(t') \rangle &=& \Gamma \delta(t-t').
+\end{eqnarray*}
+
+The Langevin equation is the prototype of a stochastic 
+differential equation, i.e. of a differential equation whose
+coefficients are random functions of the time with some given
+statistical properties. The stochastic process $V(t)$ is 
+completely defined once an initial condition $V(0)=V_0$ is specified.
+Its formal solution reads
+\begin{equation*}
+V(t) = V_0 \exp(-\gamma t) + \exp(-\gamma t) 
+    \int_0^t dt \exp(\gamma t') L(t').
+\end{equation*}
+Taking the average over an ensemble of Brownian particles all
+having the same initial condition we find for the mean value of 
+the velocity
+\begin{equation*}
+\langle V(t) \rangle = V_0 \exp(-\gamma t),
+\end{equation*}
+where we made use of the statistical properties of the Langevin 
+force $L(t)$. Accordingly, the second moment of the velocity field
+is found to be
+\begin{eqnarray*}
+\langle V^2(t) \rangle &=& V_0^2 \exp(-2\gamma t)
+          + \exp(-2 \gamma t) \int_0^t dt \int_0^t dt'
+             \exp(\gamma (t' + t'')) \langle L(t') L(t'') \rangle 
+             \\
+          &=& V_0^2 \exp(-2\gamma t) + \frac{\Gamma}{2 \gamma}
+             [1-\exp(-2 \gamma t)].
+\end{eqnarray*}
+Up to now the constant $\Gamma$ was left unspecified. From 
+equilibrium statistical physics we  expect that for long times 
+\begin{equation*}
+\langle V^2(t\rightarrow \infty) \rangle = kT.
+\end{equation*}
+Hence we have
+\begin{equation}
+\label{FDT}
+\Gamma = 2 \gamma kT
+\end{equation}
+and we have established a relation between the attrition 
+coefficient $\gamma$ and the random fluctuations.
+Eq. (\ref{FDT}) is a simple version of the so--called
+fluctuation--dissipation theorem.
+
+\subsection{The Ito formula}
+
+
+
+
+\subsection{The equivalence of stochastic differential equations 
+and of the Fokker--Planck equation}
+
+\section{The numerical integration of stochastic differential 
+equations}
+\subsection{The Ornstein--Uhlenbeck process}
+
+
+
+
+
+
+\subsection{Brownian motion}
+As an example of the application of the Fokker--Planck
+equation we consider Brownian motion. A heavy particle is immersed 
+in a fluid of light particles. The large particle and the small 
+molecules collide in a random fashion. These 
+collisions induce sudden variations of the velocity of the 
+Brownian particle. As a consequence the position $X$ of the Brownian 
+motion may be described by a Markov 
+process, if observed on a time scale which is larger then the 
+autocorrelation time of the velocity, i.e. many collisions have 
+occurred between two observations. If we regard, for simplicity a 
+one--dimensional 
+situation, the Brownian particle makes random jumps back and forth 
+along the $x$--axis. The jumps may have any length, but the
+probability for large jumps falls off rapidly. 
+It is reasonable to assume that these probabilities are 
+symmetrical and independent of the starting point.
+
+Hence we have
+\begin{equation*}
+a_1 = \frac{\langle \Delta X \rangle}{\Delta t} = 0
+\end{equation*}
+and
+\begin{equation}
+a_2 = \frac{\langle (\Delta X)^2\rangle}{\Delta t}= \text{const}.
+\end{equation}
+The Fokker--Planck equation of Brownian motion thus reads
+\begin{equation}
+\label{BROWNIAN}
+\frac{\partial}{\partial t} P(X,t) = \frac{a_2}{2} 
+    \frac{\partial^2}{\partial x^2} P(x,t).
+\end{equation}
+The above equation is a diffusion equation and we immediately
+identify the diffusion constant to be
+\begin{equation}
+D = \frac{\langle (\Delta X)^2\rangle}{2 \Delta t}.
+\end{equation}
+The above relation is known as the Einstein relation. It relates 
+the diffusion constant with the microscopic jumps of the Brownian 
+particle.
+
+Let us now consider an ensemble of Brownian particles, which are
+concentrated in $X=0$ at time $t=0$. Their position at time $t$ is 
+a stochastic process $X(t)$, whose transition probability is given 
+by (\ref{BROWNIAN}). This process, as we know, is a Wiener 
+process. The probability density of the Brownian particles  with 
+initial condition $P(x,0) = \delta(x)$ at time $t>0$ is easily 
+found to be
+\begin{equation}
+P(x,t) = \frac{1}{\sqrt{4 \pi D t}} \exp(-x^2/4Dt).
+\end{equation}
+This is a gaussian with maximum at $x=0$ and whose standard variation grows
+as
+\begin{equation}
+\langle X^2(t) \rangle = 2 D t.
+\end{equation}
+Hence, the width of the distribution increases with the square 
+root of the time. A behaviour which we already know from our 
+discussion of random walks.
 
 
 
