@@ -1,0 +1,91 @@
+Right
+Box 3 2
+        java.lang. 
+          object 
+SetTrack line
+Right 1
+Tag
+Down 1
+Right 0.5
+Box 3 1
+        FlowLayout
+ToTag
+Tag
+Down 2.5
+Right 0.5
+Box
+        GridLayout
+ToTag
+Tag
+Down 4
+Right 0.5
+Box
+        BorderLayout
+ToTag
+Tag
+Up 6
+Right 0.5
+Tilt 3 1
+        Graphics
+ToTag
+Up 3
+Right 0.5
+Tilt 3 1
+        Component
+Right 0.5
+Tag
+Up 2
+Right 0.5
+Box
+        Button
+ToTag
+Tag
+Up 3.5
+Right 0.5
+Box
+        Label
+ToTag
+Tag
+Down 1
+Right 0.5
+Box
+        Canvas
+ToTag
+Tag
+Up 0.5
+Right 0.5
+Tilt        
+        Container
+Right 0.5
+Tag
+Up 2.5 
+Right 0.5
+Box
+        Panel
+ToTag
+Tag
+Up 1
+Right 0.5
+Box
+        ScrollPane
+ToTag
+Tag
+Down 0.5 
+Right 0.5
+Box
+        Window
+Right 0.5
+Tag
+Up 1
+Right 0.5
+Box
+        Dialog
+ToTag
+Tag
+Down 1
+Right 0.5
+Box
+        \textbf{Frame}
+ToTag
+
+

@@ -1,0 +1,2296 @@
+%!
+%%BoundingBox: 32 151 257 829
+%%Title: f_onestep_algorithm
+%%CreationDate: Wed Jun 17 13:03:02 1998
+%%Creator: Tgif-3.0-p17 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+
+/tgifdict 7 dict def
+tgifdict begin
+
+/tgifellipsedict 6 dict def
+tgifellipsedict /mtrx matrix put
+
+/tgifellipse
+ { tgifellipsedict begin
+      /yrad exch def
+      /xrad exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      xrad yrad scale
+      0 0 1 0 360 arc
+      savematrix setmatrix
+   end
+ } def
+
+/tgifarrowtipdict 8 dict def
+tgifarrowtipdict /mtrx matrix put
+
+/tgifarrowtip
+ { tgifarrowtipdict begin
+      /dy exch def
+      /dx exch def
+      /h exch def
+      /w exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      dy dx atan rotate
+      0 0 moveto
+      w neg h lineto
+      w neg h neg lineto
+      savematrix setmatrix
+   end
+ } def
+
+/tgifcentertext { dup stringwidth pop 2 div neg 0 rmoveto } def
+
+end
+
+%%PageBoundingBox: 32 151 257 829
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.70 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         215 120 moveto 450 120 lineto 450 230 lineto 215 230 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      230 154 moveto (Initialize:) show
+   grestore
+
+% RCBOX
+1.000 0.000 0.000 setrgbcolor
+gsave
+   gsave
+      newpath
+         439 25 moveto
+         455 25 455 85 16 arcto 4 {pop} repeat
+         455 69 lineto
+         455 85 210 85 16 arcto 4 {pop} repeat
+         226 85 lineto
+         210 85 210 25 16 arcto 4 {pop} repeat
+         210 41 lineto
+         210 25 455 25 16 arcto 4 {pop} repeat
+      closepath
+      stroke
+   grestore
+grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      225 61 moveto (j = 1 to number of realizations) show
+   grestore
+
+% POLY/OPEN-SPLINE
+1.000 0.000 0.000 setrgbcolor
+gsave
+   newpath
+      315 1000 moveto
+      245 1057 lineto
+      315 1115 lineto
+      385 1057 lineto
+      315 1000 lineto
+   tgiforigctm setmatrix
+   1 setlinewidth
+   stroke
+grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      315 1046 moveto (all) tgifcentertext show
+      315 1066 moveto (realizations) tgifcentertext show
+      315 1086 moveto (done) tgifcentertext show
+   grestore
+
+% OVAL
+0 setgray
+gsave
+   gsave
+      newpath 317 1182 77 42 tgifellipse
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      280 1191 moveto (Plot Results) show
+   grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      330 85 moveto
+      35 0 atan dup cos 10.000 mul 330 exch sub
+      exch sin 10.000 mul 120 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      330 120 10.000 4.000 0 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      330 120 10.000 4.000 0 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      330 235 moveto
+      35 0 atan dup cos 10.000 mul 330 exch sub
+      exch sin 10.000 mul 270 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      330 270 10.000 4.000 0 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      330 270 10.000 4.000 0 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      325 330 moveto
+      35 0 atan dup cos 10.000 mul 325 exch sub
+      exch sin 10.000 mul 365 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      325 365 10.000 4.000 0 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      325 365 10.000 4.000 0 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      315 735 moveto
+      25 0 atan dup cos 10.000 mul 315 exch sub
+      exch sin 10.000 mul 760 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      315 760 10.000 4.000 0 25 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      315 760 10.000 4.000 0 25 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      315 1115 moveto
+      25 0 atan dup cos 10.000 mul 315 exch sub
+      exch sin 10.000 mul 1140 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      315 1140 10.000 4.000 0 25 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      315 1140 10.000 4.000 0 25 tgifarrowtip
+   closepath fill
+grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Italic findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      350 1126 moveto (YES) show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/NewCenturySchlbk-Italic findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      200 1036 moveto (NO) show
+   grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      310 595 moveto
+      40 0 atan dup cos 10.000 mul 310 exch sub
+      exch sin 10.000 mul 635 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      310 635 10.000 4.000 0 40 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      310 635 10.000 4.000 0 40 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      316 840 moveto
+      245 910 lineto
+      316 980 lineto
+      385 910 lineto
+      316 840 lineto
+   tgiforigctm setmatrix
+   1 setlinewidth
+   stroke
+grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      320 901 moveto (final time) tgifcentertext show
+      320 921 moveto (reached?) tgifcentertext show
+   grestore
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         225 760 moveto 415 760 lineto 415 820 lineto 225 820 lineto
+      closepath
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      240 786 moveto (record as required for) show
+      240 806 moveto (sampling and plotting) show
+   grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      245 656 moveto (Advance the process:) show
+   grestore
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         215 635 moveto 430 635 lineto 430 735 lineto 215 735 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% RCBOX
+0.000 0.000 1.000 setrgbcolor
+gsave
+   gsave
+      newpath
+         434 270 moveto
+         450 270 450 330 16 arcto 4 {pop} repeat
+         450 314 lineto
+         450 330 205 330 16 arcto 4 {pop} repeat
+         221 330 lineto
+         205 330 205 270 16 arcto 4 {pop} repeat
+         205 286 lineto
+         205 270 450 270 16 arcto 4 {pop} repeat
+      closepath
+      stroke
+   grestore
+grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      265 306 moveto (while t < tend) show
+   grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      240 391 moveto (Pick random jump time: ) show
+   grestore
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+59.625 -154.688 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.978 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 50 df<00E00001E00007E000FFE000F9E00001E00001E00001E00001E00001E000
+01E00001E00001E00001E00001E00001E00001E00001E00001E00001E00001E00001E000
+01E00001E00001E00001E00001E00001E00001E00001E00003F000FFFFC0FFFFC012217A
+A01E>49 D E
+/Fb 2 25 df<00FC00000000FF000000001FC00000000FC000000007E000000007E00000
+0007E000000003F000000003F000000001F000000001F800000001F800000000FC000000
+00FC00000000FC000000007E000000007E000000003F000000003F000000003F00000000
+1F800000001F800000000F800000000FC00000000FC00000001FE00000003FE00000007F
+E0000000F3F0000001E3F0000003C1F000000781F800000F81F800001F00FC00003E00FC
+00007C00FC0000F8007E0001F0007E0003E0003F0007E0003F000FC0003F001F80001F80
+3F00001F807E00001F80FC00000FC0F8000007E070000003E0232F7DAD29>21
+D<0000C0000000C0000000C0000000C0000000C0000000FFE00001FFF80007FFF8001F9F
+E0007F000000FE000000FC000001F8000003F8000003F0000007F0000007F0000007E000
+0007E0000007E0000003E0000003F0000003F0000001FBFE00007FFF00007FFF0000F7FE
+0003C00000078000000F0000001E0000001E0000003C0000007C00000078000000780000
+00F8000000F0000000F8000000F8000000F8000000FC000000FF0000007FC000003FF800
+001FFE00000FFFC00003FFF000007FFC00001FFE000003FF000000FF0000001F0000000F
+0000000F0000000F0000701E00003C1C00001FF8000003E0001D3C7EAD1F>24
+D E
+/Fc 5 112 df<00030007000E001C0038007000F001E001C003C0078007800F000F001E
+001E001E003C003C003C003C0078007800780078007800F800F800F000F000F000F000F0
+00F000F000F000F000F000F000F800F800780078007800780078003C003C003C003C001E
+001E001E000F000F000780078003C001C001E000F000700038001C000E0007000310437A
+B11B>40 D<C000E000700038001C000E000F000780038003C001E001E000F000F0007800
+780078003C003C003C003C001E001E001E001E001E001F001F000F000F000F000F000F00
+0F000F000F000F000F000F001F001F001E001E001E001E001E003C003C003C003C007800
+78007800F000F001E001E003C0038007800F000E001C0038007000E000C00010437CB11B
+>I<003F00F800FFC3FE03E1FF1E07807C1E0F807C0C1F003E001F003E003E001F003E00
+1F003E001F003E001F003E001F003E001F003E001F001F003E001F003E000F807C000780
+78000FE1F0000CFFC0001C3F00001C0000001C0000001C0000001E0000001F0000000FFF
+F8000FFFFF0007FFFFC00FFFFFF01E0007F83C0000F87800007CF800007CF000003CF000
+003CF000003CF000003CF800007C7C0000F83E0001F01F0003E007E01F8001FFFE00003F
+F0001F2D7E9D23>103 D<07C0FFC0FFC00FC007C007C007C007C007C007C007C007C007
+C007C007C007C007C007C007C007C007C007C007C007C007C007C007C007C007C007C007
+C007C007C007C007C007C007C007C007C007C007C007C007C00FE0FFFEFFFE0F2E7EAD14
+>108 D<001FE000007FF80001F03E0003C00F00078007800F0003C01F0003E03E0001F0
+3E0001F07C0000F87C0000F87C0000F8FC0000FCFC0000FCFC0000FCFC0000FCFC0000FC
+FC0000FCFC0000FCFC0000FCFC0000FC7C0000F87C0000F83E0001F03E0001F01F0003E0
+1F0003E00F8007C007C00F8001F03E00007FF800001FE0001E207E9E23>111
+D E
+/Fd 1 1 df<7FFFFFFFFFFFFFE0FFFFFFFFFFFFFFF0FFFFFFFFFFFFFFF07FFFFFFFFFFF
+FFE03C04789A4D>0 D E
+/Fe 1 62 df<7FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFF
+FFFFFFFFFF00000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000007FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFF
+FFFFFFFFFF0041187BA44C>61 D E
+/Ff 1 29 df<000FFFFFFFFC003FFFFFFFFE007FFFFFFFFE01FFFFFFFFFC03FFFFFFFFF8
+07E001C000000780018000000F00038000001E00038000001C0003800000380003800000
+700007000000600007000000E0000700000040000F00000000000F00000000000E000000
+00001E00000000001E00000000001E00000000001E00000000003C00000000003C000000
+00003C00000000007C00000000007C0000000000780000000000F80000000000F8000000
+0000F80000000000F80000000001F00000000001F00000000001F00000000003F0000000
+0003F00000000003E00000000007E00000000007E00000000007E0000000000FE0000000
+000FE0000000000FC00000000007800000002F2C7EAA2A>28 D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Ff(\034)39 b Fe(=)28 b
+Fd(\000)418 359 y Fc(log)r(\()p Fb(\030)568 368 y Fa(1)603
+359 y Fc(\))p 418 384 212 4 v 504 441 a Fb(\025)p Black
+Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         210 365 moveto 445 365 lineto 445 460 lineto 210 460 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      270 516 moveto (Pick increment:) show
+   grestore
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+37.125 -137.812 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 1 df<7FFFFFFFFFFFFFE0FFFFFFFFFFFFFFF0FFFFFFFFFFFFFFF07FFFFFFFFFFF
+FFE03C04789A4D>0 D E
+/Fb 2 51 df<000C00003C00007C0003FC00FFFC00FC7C00007C00007C00007C00007C00
+007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00
+007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00007C00
+007C00007C00007C00007C00007C00007C00007C0000FE007FFFFE7FFFFE172C7AAB23>
+49 D<007F800001FFF0000780FC000E003F001C001F8038000FC070000FC0600007E0F0
+0007E0FC0007F0FE0007F0FE0003F0FE0003F0FE0003F07C0007F0000007F0000007F000
+0007E000000FE000000FC000001FC000001F8000003F0000007E0000007C000000F80000
+01F0000003E0000007C000000F8000001E0000003C00000078000000F0003000E0003001
+C0003003800060070000600E0000E01FFFFFE03FFFFFE07FFFFFC0FFFFFFC0FFFFFFC01C
+2C7DAB23>I E
+/Fc 4 122 df<003F800000701FFF800000F83FFF800001F83FFF000001F8007F000001
+F8007F000003F8007F000003F0007E000003F0007E000007F000FE000007E000FE000007
+E000FC00000FC000FC00000FC001FC00001FC001FC00001F8001F800003F8001F800003F
+0003F800007E0003F800007E0003F00000FC0003F00001F80007F00001F80007F00003F0
+0007E00007E00007E00007C0000FE0000FC0000FE0001F80000FC0003F00000FC0007E00
+001FC000FC00001FC001F800001F8003F000001F8007C000003F800F8000003F801F0000
+003F003C0000003F00F80000007F01E00000007F07C00000007E1F000000007EFC000000
+00FFE000000000FF8000000000F800000000002D2C7BAB30>23 D<000000600000000000
+600000000000600000000000600000000000600000000000600000000000600000000000
+7FFF00000000FFFFC0000007F801C000001FDFFFC000007F87FE000000FF0000000003FC
+0000000007F8000000000FF8000000000FF0000000001FE0000000003FE0000000003FC0
+000000007FC0000000007F8000000000FF8000000000FF8000000000FF0000000000FF00
+00000000FF0000000000FF0000000000FF00000000007F00000000007F80000000007F80
+000000003F80000000001FC0000000000FE3FF80000007FFFFE0000001FC0060000003FF
+FFE000000F8FFF8000001E00000000003C0000000000F80000000001F00000000001E000
+00000003C0000000000780000000000F00000000000F00000000001E00000000003E0000
+0000003C00000000007C0000000000780000000000780000000000780000000000F80000
+000000F80000000000F80000000000F80000000000FC0000000000FC0000000000FE0000
+0000007F00000000007F80000000003FE0000000003FF8000000001FFF000000000FFFC0
+00000003FFF800000001FFFE000000007FFFC00000000FFFF000000003FFFC000000007F
+FF000000001FFF8000000003FFC000000000FFC0000000001FC0000000000FC000000000
+07C00000000007C00000000007C00000000007C0000002000780000003800F80000001C0
+0F00000000F83E000000003FF80000000007E000002A597EC42B>I<00000000000001C0
+00000000000007E00000000000001FE00000000000007FC0000000000001FF0000000000
+0007FC0000000000001FF00000000000007FC0000000000001FF0000000000000FFC0000
+000000003FF0000000000000FFC0000000000003FF0000000000000FF80000000000003F
+E0000000000000FF80000000000003FE0000000000001FF80000000000007FE000000000
+0001FF80000000000007FE0000000000001FF00000000000007FC0000000000001FF0000
+0000000007FC0000000000001FF00000000000007FC0000000000000FF00000000000000
+FF000000000000007FC00000000000001FF000000000000007FC00000000000001FF0000
+00000000007FC00000000000001FF000000000000007FE00000000000001FF8000000000
+00007FE00000000000001FF800000000000003FE00000000000000FF800000000000003F
+E00000000000000FF800000000000003FF00000000000000FFC00000000000003FF00000
+000000000FFC00000000000001FF000000000000007FC00000000000001FF00000000000
+0007FC00000000000001FF000000000000007FC00000000000001FE000000000000007E0
+00000000000001C03B3878B44C>60 D<003E0000000000FF800000E003C3C00003F00703
+E00003F00601F00003F00E01F00007F01C01F00007E01803F00007E03803F00007E03003
+F0000FE07003F0000FC06007F0000FC06007E0000FC06007E0001FC0E00FE0001F80C00F
+C0001F80001FC0001F80001F80003F80001F80003F00003F80003F00003F00003F00003F
+00007F00007F00007E00007E00007E00007E00007E00007E0000FE0000FE0000FC0000FC
+0000FC0000FC0000FC0000FC0001FC0000FC0001F80001F80001F80001F80001F80001F8
+0003F80001F80003F00001F80003F00000F80007F00000F8000FF00000FC000FE000007C
+001FE000007C003FE000003E00FFE000001F03CFC0000007FF8FC0000001FC0FC0000000
+001FC0000000001F80000000001F80000000003F80000000003F000007C0007F00001FE0
+007E00001FE000FC00001FE000FC00003FC001F800003FC003F000003F8003E000003800
+07C0000018000F8000001C001F0000000E007C0000000781F800000003FFE0000000007F
+000000002C407DAB30>121 D E
+/Fd 4 62 df<00000C00001C0000380000700000E00001C00003C0000780000F00000F00
+001E00003C00003C0000780000F80000F00001F00001E00003E00003E00007C00007C000
+07C0000F80000F80000F80001F00001F00001F00003F00003F00003E00003E00007E0000
+7E00007E00007E00007C00007C00007C0000FC0000FC0000FC0000FC0000FC0000FC0000
+FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000
+FC0000FC00007C00007C00007C00007E00007E00007E00007E00003E00003E00003F0000
+3F00001F00001F00001F00000F80000F80000F800007C00007C00007C00003E00003E000
+01E00001F00000F00000F800007800003C00003C00001E00000F00000F000007800003C0
+0001C00000E000007000003800001C00000C166476CA26>40 D<C00000E0000070000038
+00001C00000E00000F000007800003C00003C00001E00000F00000F000007800007C0000
+3C00003E00001E00001F00001F00000F80000F80000F800007C00007C00007C00003E000
+03E00003E00003F00003F00001F00001F00001F80001F80001F80001F80000F80000F800
+00F80000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC00
+00FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000FC0000F80000F80000F800
+01F80001F80001F80001F80001F00001F00003F00003F00003E00003E00003E00007C000
+07C00007C0000F80000F80000F80001F00001F00001E00003E00003C00007C0000780000
+F00000F00001E00003C00003C0000780000F00000E00001C0000380000700000E00000C0
+000016647BCA26>I<000030000000F0000001F0000003F000001FF00000FFF000FFFFF0
+00FFE7F000FF07F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0
+00000FF800001FFC007FFFFFFF7FFFFFFF7FFFFFFF204278C131>49
+D<7FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+007FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF
+0041187BA44C>61 D E
+/Fe 2 106 df<00000FE00000007FF8000001F81E000003F03F00000FE07F80001FC0FF
+80001F80FF80003F80FF80007F00FF80007F00FF80007F007F0000FE001C0000FE000000
+00FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000
+FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE000000FFFF
+FF8000FFFFFF8000FFFFFF800000FE00000000FE00000000FE00000000FE00000000FE00
+000000FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE0000
+0000FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE000000
+00FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000
+FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE00000000FE
+00000000FE00000000FE00000001FF8000007FFFFF00007FFFFF00007FFFFF000021467E
+C51E>102 D<01E00007F80007F8000FFC000FFC000FFC000FFC0007F80007F80001E000
+000000000000000000000000000000000000000000000000000000000000000000000000
+00000001FC00FFFC00FFFC00FFFC0007FC0003FC0001FC0001FC0001FC0001FC0001FC00
+01FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC00
+01FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC00
+01FC0001FC0001FC0001FC0001FC0003FE00FFFFF8FFFFF8FFFFF815437DC21C>105
+D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fe(if)82 b Fd(\()p Fc(\030)367
+422 y Fb(2)434 407 y Fc(<)27 b(y)585 422 y Fb(1)624 407
+y Fd(\))83 b Fc(\027)35 b Fd(=)27 b Fa(\000)p Fd(1)p
+Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+37.125 -157.500 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 3 62 df<00000000C00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E0000000007FFFFFFFFFFFFFFF00FFFFFF
+FFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF0000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+00C00000000041407BB84C>43 D<000030000000F0000001F0000003F000001FF00000FF
+F000FFFFF000FFE7F000FF07F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007F0000007
+F0000007F000000FF800001FFC007FFFFFFF7FFFFFFF7FFFFFFF204278C131>49
+D<7FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000
+007FFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF
+0041187BA44C>61 D E
+/Fb 1 24 df<003F800000701FFF800000F83FFF800001F83FFF000001F8007F000001F8
+007F000003F8007F000003F0007E000003F0007E000007F000FE000007E000FE000007E0
+00FC00000FC000FC00000FC001FC00001FC001FC00001F8001F800003F8001F800003F00
+03F800007E0003F800007E0003F00000FC0003F00001F80007F00001F80007F00003F000
+07E00007E00007E00007C0000FE0000FC0000FE0001F80000FC0003F00000FC0007E0000
+1FC000FC00001FC001F800001F8003F000001F8007C000003F800F8000003F801F000000
+3F003C0000003F00F80000007F01E00000007F07C00000007E1F000000007EFC00000000
+FFE000000000FF8000000000F800000000002D2C7BAB30>23 D E
+/Fc 3 116 df<0001FE00000007FFC000001F03F000007E00FC0000FC007E0001F8003F
+0003F0003F0007E0001F800FE0001FC00FC0000FC01FC0000FC03F80000FE03F800007E0
+3F800007E07F800007F07F000007F07F000007F0FF000007F0FF000007F0FF000007F0FF
+FFFFFFF0FFFFFFFFF0FF00000000FF00000000FF00000000FF00000000FF00000000FF00
+0000007F000000007F000000007F800000007F800000003F800000003F800000301FC000
+00301FC00000700FC00000600FE00000E007F00000C003F00001C001F800038000FC0007
+00003E001E00001F80F8000003FFE0000000FF0000242E7DAC2B>101
+D<01FC00FFFC00FFFC00FFFC0007FC0003FC0001FC0001FC0001FC0001FC0001FC0001FC
+0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC
+0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC
+0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC
+0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC0001FC
+0001FC0001FC0001FC0001FC0001FC0003FE00FFFFF8FFFFF8FFFFF815457DC41C>108
+D<003FE01801FFFC3807E01F780F0003F81E0001F83C0000F87C00007878000078F80000
+38F8000038F8000018F8000018FC000018FC000018FE000018FF8000007FC000007FFC00
+003FFFE0001FFFFC000FFFFF0007FFFFC003FFFFE000FFFFF0001FFFF80000FFF800000F
+FC000003FCC00001FEC00000FEC000007EE000007EE000003EE000003EF000003EF00000
+3EF000003EF800003CFC00007CFC000078FE0000F8FF0001F0F38003E0F1F00F80E07FFE
+00C00FF0001F2E7DAC26>115 D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fc(else)84 b Fb(\027)34
+b Fa(=)27 b(+1)p Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         210 495 moveto 440 495 lineto 440 595 lineto 210 595 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      320 460 moveto
+      35 0 atan dup cos 10.000 mul 320 exch sub
+      exch sin 10.000 mul 495 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      320 495 10.000 4.000 0 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      320 495 10.000 4.000 0 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+1.000 0.000 0.000 setrgbcolor
+gsave
+   newpath
+      200 60 moveto
+      0 -140 atan dup cos 10.000 mul exch sin 10.000 mul rmoveto
+      60 60 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      200 60 10.000 4.000 140 0 tgifarrowtip
+   1 setgray closepath fill
+   1.000 0.000 0.000 setrgbcolor
+   newpath
+      200 60 10.000 4.000 140 0 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+1.000 0.000 0.000 setrgbcolor
+gsave
+   newpath
+      60 60 moveto
+      60 1055 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+1.000 0.000 0.000 setrgbcolor
+gsave
+   newpath
+      60 1055 moveto
+      245 1055 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      200 300 moveto
+      0 -80 atan dup cos 10.000 mul exch sin 10.000 mul rmoveto
+      120 300 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      200 300 10.000 4.000 80 0 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      200 300 10.000 4.000 80 0 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      120 300 moveto
+      120 910 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      120 910 moveto
+      240 910 lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      315 820 moveto
+      20 0 atan dup cos 10.000 mul 315 exch sub
+      exch sin 10.000 mul 840 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      315 840 10.000 4.000 0 20 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      315 840 10.000 4.000 0 20 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      315 980 moveto
+      20 0 atan dup cos 10.000 mul 315 exch sub
+      exch sin 10.000 mul 1000 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      315 1000 10.000 4.000 0 20 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      315 1000 10.000 4.000 0 20 tgifarrowtip
+   closepath fill
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      340 991 moveto (YES) show
+   grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Bold findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      220 886 moveto (NO) show
+   grestore
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+73.688 68.625 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 49 df<003FC00000FFF00003E07C0007C03E000F801F000F000F001E0007801E00
+07803E0007C03E0007C07C0003E07C0003E07C0003E07C0003E07C0003E0FC0003F0FC00
+03F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC00
+03F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F07C0003E07C0003E07C0003E07E00
+07E03E0007C03E0007C03E0007C01F000F800F000F000F801F0007C03E0003F0FC0000FF
+F000003FC0001C2D7DAB23>48 D E
+/Fb 1 33 df<000007800000000000000000000007800000000000000000000007800000
+00000000000000000F80000000000000000000000F00000000000000000000000F000000
+00000000000000001F00000000000000000000001E00000000000000000000001E000000
+00000000000000003E00000000000000000000003C00000000000000000000007C000000
+0000000000000000F80000000000000000000000F80000000000000000000001F0000000
+0000000000000003E00000000000000000000007E0000000000000000000000FC0000000
+000000000000001F80000000000000000000003F00000000000000000000007E00000000
+00000000000000FC0000000000000000000003F8000000000000000000000FE000000000
+0000000000003FFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFF80FFFFFFFFFFFF
+FFFFFFFFFF803FFFFFFFFFFFFFFFFFFFFF000FE00000000000000000000003F800000000
+00000000000000FC00000000000000000000007E00000000000000000000003F00000000
+000000000000001F80000000000000000000000FC00000000000000000000007E0000000
+0000000000000003E00000000000000000000001F00000000000000000000000F8000000
+0000000000000000F800000000000000000000007C00000000000000000000003C000000
+00000000000000003E00000000000000000000001E00000000000000000000001E000000
+00000000000000001F00000000000000000000000F00000000000000000000000F000000
+00000000000000000F800000000000000000000007800000000000000000000007800000
+00000000000000000780000000000000000059347BB264>32 D E
+/Fc 1 117 df<00001C0000007E0000007E0000007E000000FE000000FC000000FC0000
+00FC000001FC000001F8000001F8000001F8000003F8000003F0000003F0000003F00000
+07F0000007E0000007E0007FFFFFFCFFFFFFFCFFFFFFF8000FC000000FC000001FC00000
+1F8000001F8000001F8000003F8000003F0000003F0000003F0000007F0000007E000000
+7E0000007E000000FE000000FC000000FC000000FC000001FC000001F8000001F8000001
+F8000003F8000003F0000003F0000003F0007007F0006007E0006007E000E007E000C00F
+E001C00FC001800FC003800FC0070007C0060007C00E0007C01C0003E0380001E0F00000
+FFC000003F00001E3F7EBD23>116 D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fc(t)28 b Fb( )g Fc(t)372
+422 y Fa(0)p Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+73.688 50.625 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 49 df<003FC00000FFF00003E07C0007C03E000F801F000F000F001E0007801E00
+07803E0007C03E0007C07C0003E07C0003E07C0003E07C0003E07C0003E0FC0003F0FC00
+03F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F0FC00
+03F0FC0003F0FC0003F0FC0003F0FC0003F0FC0003F07C0003E07C0003E07C0003E07E00
+07E03E0007C03E0007C03E0007C01F000F800F000F000F801F0007C03E0003F0FC0000FF
+F000003FC0001C2D7DAB23>48 D E
+/Fb 1 33 df<000007800000000000000000000007800000000000000000000007800000
+00000000000000000F80000000000000000000000F00000000000000000000000F000000
+00000000000000001F00000000000000000000001E00000000000000000000001E000000
+00000000000000003E00000000000000000000003C00000000000000000000007C000000
+0000000000000000F80000000000000000000000F80000000000000000000001F0000000
+0000000000000003E00000000000000000000007E0000000000000000000000FC0000000
+000000000000001F80000000000000000000003F00000000000000000000007E00000000
+00000000000000FC0000000000000000000003F8000000000000000000000FE000000000
+0000000000003FFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFF80FFFFFFFFFFFF
+FFFFFFFFFF803FFFFFFFFFFFFFFFFFFFFF000FE00000000000000000000003F800000000
+00000000000000FC00000000000000000000007E00000000000000000000003F00000000
+000000000000001F80000000000000000000000FC00000000000000000000007E0000000
+0000000000000003E00000000000000000000001F00000000000000000000000F8000000
+0000000000000000F800000000000000000000007C00000000000000000000003C000000
+00000000000000003E00000000000000000000001E00000000000000000000001E000000
+00000000000000001F00000000000000000000000F00000000000000000000000F000000
+00000000000000000F800000000000000000000007800000000000000000000007800000
+00000000000000000780000000000000000059347BB264>32 D E
+/Fc 1 111 df<00F80003FC000003FE001FFF0000071F007C0FC0000E0F80E007E0000C
+07C3C003E0001C07C70003F0001807CE0001F0003807DC0001F8003007D80001F800300F
+F80001F800700FF00001F800600FE00001F800600FE00001F800E00FC00003F800C01FC0
+0003F000C01F800003F000001F800003F000001F800007F000003F800007E000003F0000
+07E000003F000007E000003F00000FE000007F00000FC000007E00000FC000007E00001F
+C000007E00001F800000FE00001F800000FC00003F800000FC00003F000000FC00003F00
+7001FC00007F006001F800007E006001F80000FE006001F80000FC00E003F80000FC00C0
+03F00000FC01C003F00000F8018003F00000F8038007F00000F8030007E00000F8070007
+E00000F80E0007E00000781C000FE000007C38000FC000001FF0000380000007C000342D
+7DAB3A>110 D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fc(n)28 b Fb( )g Fc(n)418
+422 y Fa(0)p Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+59.625 -218.250 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 44 df<00000000C00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E0000000007FFFFFFFFFFFFFFF00FFFFFF
+FFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF0000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+00C00000000041407BB84C>43 D E
+/Fb 1 33 df<000007800000000000000000000007800000000000000000000007800000
+00000000000000000F80000000000000000000000F00000000000000000000000F000000
+00000000000000001F00000000000000000000001E00000000000000000000001E000000
+00000000000000003E00000000000000000000003C00000000000000000000007C000000
+0000000000000000F80000000000000000000000F80000000000000000000001F0000000
+0000000000000003E00000000000000000000007E0000000000000000000000FC0000000
+000000000000001F80000000000000000000003F00000000000000000000007E00000000
+00000000000000FC0000000000000000000003F8000000000000000000000FE000000000
+0000000000003FFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFF80FFFFFFFFFFFF
+FFFFFFFFFF803FFFFFFFFFFFFFFFFFFFFF000FE00000000000000000000003F800000000
+00000000000000FC00000000000000000000007E00000000000000000000003F00000000
+000000000000001F80000000000000000000000FC00000000000000000000007E0000000
+0000000000000003E00000000000000000000001F00000000000000000000000F8000000
+0000000000000000F800000000000000000000007C00000000000000000000003C000000
+00000000000000003E00000000000000000000001E00000000000000000000001E000000
+00000000000000001F00000000000000000000000F00000000000000000000000F000000
+00000000000000000F800000000000000000000007800000000000000000000007800000
+00000000000000000780000000000000000059347BB264>32 D E
+/Fc 2 117 df<000FFFFFFFFC003FFFFFFFFE007FFFFFFFFE01FFFFFFFFFC03FFFFFFFF
+F807E001C000000780018000000F00038000001E00038000001C00038000003800038000
+00700007000000600007000000E0000700000040000F00000000000F00000000000E0000
+0000001E00000000001E00000000001E00000000001E00000000003C00000000003C0000
+0000003C00000000007C00000000007C0000000000780000000000F80000000000F80000
+000000F80000000000F80000000001F00000000001F00000000001F00000000003F00000
+000003F00000000003E00000000007E00000000007E00000000007E0000000000FE00000
+00000FE0000000000FC00000000007800000002F2C7EAA2A>28 D<00001C0000007E0000
+007E0000007E000000FE000000FC000000FC000000FC000001FC000001F8000001F80000
+01F8000003F8000003F0000003F0000003F0000007F0000007E0000007E0007FFFFFFCFF
+FFFFFCFFFFFFF8000FC000000FC000001FC000001F8000001F8000001F8000003F800000
+3F0000003F0000003F0000007F0000007E0000007E0000007E000000FE000000FC000000
+FC000000FC000001FC000001F8000001F8000001F8000003F8000003F0000003F0000003
+F0007007F0006007E0006007E000E007E000C00FE001C00FC001800FC003800FC0070007
+C0060007C00E0007C01C0003E0380001E0F00000FFC000003F00001E3F7EBD23>116
+D E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fc(t)28 b Fb( )g Fc(t)22
+b Fa(+)g Fc(\034)p Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+% EPS
+end
+/tgiflevel4 save def
+/tgifdictcount4 countdictstack def
+/tgifopcount4 count 1 sub def
+userdict begin
+/showpage {} def
+/letter {} def
+/legal {} def
+/setpagedevice {} def
+/a4 {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [] 0 setdash newpath
+1 72 128 div 100.000 mul 100 div div dup neg scale
+72 0 mul neg 72 11.70 mul neg translate
+
+59.625 -237.375 translate 0.563 0.563 scale 0 rotate
+[1.777 -0.000 -0.000 1.777 0 0] concat
+
+%%BeginDocument: /tmp/Tgifa31834.eps
+%!PS-Adobe-2.0 EPSF-1.2
+/TeXDict 250 dict def TeXDict begin /N{def}def /B{bind def}N /S{exch}N
+/X{S N}B /TR{translate}N /isls false N /vsize 11 72 mul N /hsize 8.5 72
+mul N /landplus90{false}def /@rigin{isls{[0 landplus90{1 -1}{-1 1}
+ifelse 0 0 0]concat}if 72 Resolution div 72 VResolution div neg scale
+isls{landplus90{VResolution 72 div vsize mul 0 exch}{Resolution -72 div
+hsize mul 0}ifelse TR}if Resolution VResolution vsize -72 div 1 add mul
+TR[matrix currentmatrix{dup dup round sub abs 0.00001 lt{round}if}
+forall round exch round exch]setmatrix}N /@landscape{/isls true N}B
+/@manualfeed{statusdict /manualfeed true put}B /@copies{/#copies X}B
+/FMat[1 0 0 -1 0 0]N /FBB[0 0 0 0]N /nn 0 N /IE 0 N /ctr 0 N /df-tail{
+/nn 8 dict N nn begin /FontType 3 N /FontMatrix fntrx N /FontBBox FBB N
+string /base X array /BitMaps X /BuildChar{CharBuilder}N /Encoding IE N
+end dup{/foo setfont}2 array copy cvx N load 0 nn put /ctr 0 N[}B /df{
+/sf 1 N /fntrx FMat N df-tail}B /dfs{div /sf X /fntrx[sf 0 0 sf neg 0 0]
+N df-tail}B /E{pop nn dup definefont setfont}B /ch-width{ch-data dup
+length 5 sub get}B /ch-height{ch-data dup length 4 sub get}B /ch-xoff{
+128 ch-data dup length 3 sub get sub}B /ch-yoff{ch-data dup length 2 sub
+get 127 sub}B /ch-dx{ch-data dup length 1 sub get}B /ch-image{ch-data
+dup type /stringtype ne{ctr get /ctr ctr 1 add N}if}B /id 0 N /rw 0 N
+/rc 0 N /gp 0 N /cp 0 N /G 0 N /sf 0 N /CharBuilder{save 3 1 roll S dup
+/base get 2 index get S /BitMaps get S get /ch-data X pop /ctr 0 N ch-dx
+0 ch-xoff ch-yoff ch-height sub ch-xoff ch-width add ch-yoff
+setcachedevice ch-width ch-height true[1 0 0 -1 -.1 ch-xoff sub ch-yoff
+.1 sub]{ch-image}imagemask restore}B /D{/cc X dup type /stringtype ne{]}
+if nn /base get cc ctr put nn /BitMaps get S ctr S sf 1 ne{dup dup
+length 1 sub dup 2 index S get sf div put}if put /ctr ctr 1 add N}B /I{
+cc 1 add D}B /bop{userdict /bop-hook known{bop-hook}if /SI save N @rigin
+0 0 moveto /V matrix currentmatrix dup 1 get dup mul exch 0 get dup mul
+add .99 lt{/QV}{/RV}ifelse load def pop pop}N /eop{SI restore userdict
+/eop-hook known{eop-hook}if showpage}N /@start{userdict /start-hook
+known{start-hook}if pop /VResolution X /Resolution X 1000 div /DVImag X
+/IE 256 array N 0 1 255{IE S 1 string dup 0 3 index put cvn put}for
+65781.76 div /vsize X 65781.76 div /hsize X}N /p{show}N /RMat[1 0 0 -1 0
+0]N /BDot 260 string N /rulex 0 N /ruley 0 N /v{/ruley X /rulex X V}B /V
+{}B /RV statusdict begin /product where{pop false[(Display)(NeXT)
+(LaserWriter 16/600)]{dup length product length le{dup length product
+exch 0 exch getinterval eq{pop true exit}if}{pop}ifelse}forall}{false}
+ifelse end{{gsave TR -.1 .1 TR 1 1 scale rulex ruley false RMat{BDot}
+imagemask grestore}}{{gsave TR -.1 .1 TR rulex ruley scale 1 1 false
+RMat{BDot}imagemask grestore}}ifelse B /QV{gsave newpath transform round
+exch round exch itransform moveto rulex 0 rlineto 0 ruley neg rlineto
+rulex neg 0 rlineto fill grestore}B /a{moveto}B /delta 0 N /tail{dup
+/delta X 0 rmoveto}B /M{S p delta add tail}B /b{S p tail}B /c{-4 M}B /d{
+-3 M}B /e{-2 M}B /f{-1 M}B /g{0 M}B /h{1 M}B /i{2 M}B /j{3 M}B /k{4 M}B
+/w{0 rmoveto}B /l{p -4 w}B /m{p -3 w}B /n{p -2 w}B /o{p -1 w}B /q{p 1 w}
+B /r{p 2 w}B /s{p 3 w}B /t{p 4 w}B /x{0 S rmoveto}B /y{3 2 roll p a}B
+/bos{/SS save N}B /eos{SS restore}B end
+TeXDict begin /SDict 200 dict N SDict begin /@SpecialDefaults{/hs 612 N
+/vs 792 N /ho 0 N /vo 0 N /hsc 1 N /vsc 1 N /ang 0 N /CLIP 0 N /rwiSeen
+false N /rhiSeen false N /letter{}N /note{}N /a4{}N /legal{}N}B
+/@scaleunit 100 N /@hscale{@scaleunit div /hsc X}B /@vscale{@scaleunit
+div /vsc X}B /@hsize{/hs X /CLIP 1 N}B /@vsize{/vs X /CLIP 1 N}B /@clip{
+/CLIP 2 N}B /@hoffset{/ho X}B /@voffset{/vo X}B /@angle{/ang X}B /@rwi{
+10 div /rwi X /rwiSeen true N}B /@rhi{10 div /rhi X /rhiSeen true N}B
+/@llx{/llx X}B /@lly{/lly X}B /@urx{/urx X}B /@ury{/ury X}B /magscale
+true def end /@MacSetUp{userdict /md known{userdict /md get type
+/dicttype eq{userdict begin md length 10 add md maxlength ge{/md md dup
+length 20 add dict copy def}if end md begin /letter{}N /note{}N /legal{}
+N /od{txpose 1 0 mtx defaultmatrix dtransform S atan/pa X newpath
+clippath mark{transform{itransform moveto}}{transform{itransform lineto}
+}{6 -2 roll transform 6 -2 roll transform 6 -2 roll transform{
+itransform 6 2 roll itransform 6 2 roll itransform 6 2 roll curveto}}{{
+closepath}}pathforall newpath counttomark array astore /gc xdf pop ct 39
+0 put 10 fz 0 fs 2 F/|______Courier fnt invertflag{PaintBlack}if}N
+/txpose{pxs pys scale ppr aload pop por{noflips{pop S neg S TR pop 1 -1
+scale}if xflip yflip and{pop S neg S TR 180 rotate 1 -1 scale ppr 3 get
+ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg TR}if xflip yflip
+not and{pop S neg S TR pop 180 rotate ppr 3 get ppr 1 get neg sub neg 0
+TR}if yflip xflip not and{ppr 1 get neg ppr 0 get neg TR}if}{noflips{TR
+pop pop 270 rotate 1 -1 scale}if xflip yflip and{TR pop pop 90 rotate 1
+-1 scale ppr 3 get ppr 1 get neg sub neg ppr 2 get ppr 0 get neg sub neg
+TR}if xflip yflip not and{TR pop pop 90 rotate ppr 3 get ppr 1 get neg
+sub neg 0 TR}if yflip xflip not and{TR pop pop 270 rotate ppr 2 get ppr
+0 get neg sub neg 0 S TR}if}ifelse scaleby96{ppr aload pop 4 -1 roll add
+2 div 3 1 roll add 2 div 2 copy TR .96 dup scale neg S neg S TR}if}N /cp
+{pop pop showpage pm restore}N end}if}if}N /normalscale{Resolution 72
+div VResolution 72 div neg scale magscale{DVImag dup scale}if 0 setgray}
+N /psfts{S 65781.76 div N}N /startTexFig{/psf$SavedState save N userdict
+maxlength dict begin /magscale true def normalscale currentpoint TR
+/psf$ury psfts /psf$urx psfts /psf$lly psfts /psf$llx psfts /psf$y psfts
+/psf$x psfts currentpoint /psf$cy X /psf$cx X /psf$sx psf$x psf$urx
+psf$llx sub div N /psf$sy psf$y psf$ury psf$lly sub div N psf$sx psf$sy
+scale psf$cx psf$sx div psf$llx sub psf$cy psf$sy div psf$ury sub TR
+/showpage{}N /erasepage{}N /copypage{}N /p 3 def @MacSetUp}N /doclip{
+psf$llx psf$lly psf$urx psf$ury currentpoint 6 2 roll newpath 4 copy 4 2
+roll moveto 6 -1 roll S lineto S lineto S lineto closepath clip newpath
+moveto}N /endTexFig{end psf$SavedState restore}N /@beginspecial{SDict
+begin /SpecialSave save N gsave normalscale currentpoint TR
+@SpecialDefaults count /ocount X /dcount countdictstack N}N /@setspecial
+{CLIP 1 eq{newpath 0 0 moveto hs 0 rlineto 0 vs rlineto hs neg 0 rlineto
+closepath clip}if ho vo TR hsc vsc scale ang rotate rwiSeen{rwi urx llx
+sub div rhiSeen{rhi ury lly sub div}{dup}ifelse scale llx neg lly neg TR
+}{rhiSeen{rhi ury lly sub div dup scale llx neg lly neg TR}if}ifelse
+CLIP 2 eq{newpath llx lly moveto urx lly lineto urx ury lineto llx ury
+lineto closepath clip}if /showpage{}N /erasepage{}N /copypage{}N newpath
+}N /@endspecial{count ocount sub{pop}repeat countdictstack dcount sub{
+end}repeat grestore SpecialSave restore end}N /@defspecial{SDict begin}
+N /@fedspecial{end}B /li{lineto}B /rl{rlineto}B /rc{rcurveto}B /np{
+/SaveX currentpoint /SaveY X N 1 setlinecap newpath}N /st{stroke SaveX
+SaveY moveto}N /fil{fill SaveX SaveY moveto}N /ellipse{/endangle X
+/startangle X /yrad X /xrad X /savematrix matrix currentmatrix N TR xrad
+yrad scale 0 0 1 startangle endangle arc savematrix setmatrix}N end
+TeXDict begin /setcmykcolor where{pop}{/setcmykcolor{dup 10 eq{pop
+setrgbcolor}{1 sub 4 1 roll 3{3 index add neg dup 0 lt{pop 0}if 3 1 roll
+}repeat setrgbcolor pop}ifelse}B}ifelse /TeXcolorcmyk{setcmykcolor}def
+/TeXcolorrgb{setrgbcolor}def /TeXcolorgrey{setgray}def /TeXcolorgray{
+setgray}def /TeXcolorhsb{sethsbcolor}def /currentcmykcolor where{pop}{
+/currentcmykcolor{currentrgbcolor 10}B}ifelse /DC{exch dup userdict exch
+known{pop pop}{X}ifelse}B /GreenYellow{0.15 0 0.69 0 setcmykcolor}DC
+/Yellow{0 0 1 0 setcmykcolor}DC /Goldenrod{0 0.10 0.84 0 setcmykcolor}
+DC /Dandelion{0 0.29 0.84 0 setcmykcolor}DC /Apricot{0 0.32 0.52 0
+setcmykcolor}DC /Peach{0 0.50 0.70 0 setcmykcolor}DC /Melon{0 0.46 0.50
+0 setcmykcolor}DC /YellowOrange{0 0.42 1 0 setcmykcolor}DC /Orange{0
+0.61 0.87 0 setcmykcolor}DC /BurntOrange{0 0.51 1 0 setcmykcolor}DC
+/Bittersweet{0 0.75 1 0.24 setcmykcolor}DC /RedOrange{0 0.77 0.87 0
+setcmykcolor}DC /Mahogany{0 0.85 0.87 0.35 setcmykcolor}DC /Maroon{0
+0.87 0.68 0.32 setcmykcolor}DC /BrickRed{0 0.89 0.94 0.28 setcmykcolor}
+DC /Red{0 1 1 0 setcmykcolor}DC /OrangeRed{0 1 0.50 0 setcmykcolor}DC
+/RubineRed{0 1 0.13 0 setcmykcolor}DC /WildStrawberry{0 0.96 0.39 0
+setcmykcolor}DC /Salmon{0 0.53 0.38 0 setcmykcolor}DC /CarnationPink{0
+0.63 0 0 setcmykcolor}DC /Magenta{0 1 0 0 setcmykcolor}DC /VioletRed{0
+0.81 0 0 setcmykcolor}DC /Rhodamine{0 0.82 0 0 setcmykcolor}DC /Mulberry
+{0.34 0.90 0 0.02 setcmykcolor}DC /RedViolet{0.07 0.90 0 0.34
+setcmykcolor}DC /Fuchsia{0.47 0.91 0 0.08 setcmykcolor}DC /Lavender{0
+0.48 0 0 setcmykcolor}DC /Thistle{0.12 0.59 0 0 setcmykcolor}DC /Orchid{
+0.32 0.64 0 0 setcmykcolor}DC /DarkOrchid{0.40 0.80 0.20 0 setcmykcolor}
+DC /Purple{0.45 0.86 0 0 setcmykcolor}DC /Plum{0.50 1 0 0 setcmykcolor}
+DC /Violet{0.79 0.88 0 0 setcmykcolor}DC /RoyalPurple{0.75 0.90 0 0
+setcmykcolor}DC /BlueViolet{0.86 0.91 0 0.04 setcmykcolor}DC /Periwinkle
+{0.57 0.55 0 0 setcmykcolor}DC /CadetBlue{0.62 0.57 0.23 0 setcmykcolor}
+DC /CornflowerBlue{0.65 0.13 0 0 setcmykcolor}DC /MidnightBlue{0.98 0.13
+0 0.43 setcmykcolor}DC /NavyBlue{0.94 0.54 0 0 setcmykcolor}DC
+/RoyalBlue{1 0.50 0 0 setcmykcolor}DC /Blue{1 1 0 0 setcmykcolor}DC
+/Cerulean{0.94 0.11 0 0 setcmykcolor}DC /Cyan{1 0 0 0 setcmykcolor}DC
+/ProcessBlue{0.96 0 0 0 setcmykcolor}DC /SkyBlue{0.62 0 0.12 0
+setcmykcolor}DC /Turquoise{0.85 0 0.20 0 setcmykcolor}DC /TealBlue{0.86
+0 0.34 0.02 setcmykcolor}DC /Aquamarine{0.82 0 0.30 0 setcmykcolor}DC
+/BlueGreen{0.85 0 0.33 0 setcmykcolor}DC /Emerald{1 0 0.50 0
+setcmykcolor}DC /JungleGreen{0.99 0 0.52 0 setcmykcolor}DC /SeaGreen{
+0.69 0 0.50 0 setcmykcolor}DC /Green{1 0 1 0 setcmykcolor}DC
+/ForestGreen{0.91 0 0.88 0.12 setcmykcolor}DC /PineGreen{0.92 0 0.59
+0.25 setcmykcolor}DC /LimeGreen{0.50 0 1 0 setcmykcolor}DC /YellowGreen{
+0.44 0 0.74 0 setcmykcolor}DC /SpringGreen{0.26 0 0.76 0 setcmykcolor}
+DC /OliveGreen{0.64 0 0.95 0.40 setcmykcolor}DC /RawSienna{0 0.72 1 0.45
+setcmykcolor}DC /Sepia{0 0.83 1 0.70 setcmykcolor}DC /Brown{0 0.81 1
+0.60 setcmykcolor}DC /Tan{0.14 0.42 0.56 0 setcmykcolor}DC /Gray{0 0 0
+0.50 setcmykcolor}DC /Black{0 0 0 1 setcmykcolor}DC /White{0 0 0 0
+setcmykcolor}DC end
+TeXDict begin 40258431 52099146 1000 600 600 (/tmp/Tgifa31834.dvi)
+@start
+/Fa 1 44 df<00000000C00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E0000000007FFFFFFFFFFFFFFF00FFFFFF
+FFFFFFFFFF80FFFFFFFFFFFFFFFF807FFFFFFFFFFFFFFF0000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+01E00000000000000001E00000000000000001E00000000000000001E000000000000000
+00C00000000041407BB84C>43 D E
+/Fb 1 33 df<000007800000000000000000000007800000000000000000000007800000
+00000000000000000F80000000000000000000000F00000000000000000000000F000000
+00000000000000001F00000000000000000000001E00000000000000000000001E000000
+00000000000000003E00000000000000000000003C00000000000000000000007C000000
+0000000000000000F80000000000000000000000F80000000000000000000001F0000000
+0000000000000003E00000000000000000000007E0000000000000000000000FC0000000
+000000000000001F80000000000000000000003F00000000000000000000007E00000000
+00000000000000FC0000000000000000000003F8000000000000000000000FE000000000
+0000000000003FFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFF80FFFFFFFFFFFF
+FFFFFFFFFF803FFFFFFFFFFFFFFFFFFFFF000FE00000000000000000000003F800000000
+00000000000000FC00000000000000000000007E00000000000000000000003F00000000
+000000000000001F80000000000000000000000FC00000000000000000000007E0000000
+0000000000000003E00000000000000000000001F00000000000000000000000F8000000
+0000000000000000F800000000000000000000007C00000000000000000000003C000000
+00000000000000003E00000000000000000000001E00000000000000000000001E000000
+00000000000000001F00000000000000000000000F00000000000000000000000F000000
+00000000000000000F800000000000000000000007800000000000000000000007800000
+00000000000000000780000000000000000059347BB264>32 D E
+/Fc 2 111 df<003F800000701FFF800000F83FFF800001F83FFF000001F8007F000001
+F8007F000003F8007F000003F0007E000003F0007E000007F000FE000007E000FE000007
+E000FC00000FC000FC00000FC001FC00001FC001FC00001F8001F800003F8001F800003F
+0003F800007E0003F800007E0003F00000FC0003F00001F80007F00001F80007F00003F0
+0007E00007E00007E00007C0000FE0000FC0000FE0001F80000FC0003F00000FC0007E00
+001FC000FC00001FC001F800001F8003F000001F8007C000003F800F8000003F801F0000
+003F003C0000003F00F80000007F01E00000007F07C00000007E1F000000007EFC000000
+00FFE000000000FF8000000000F800000000002D2C7BAB30>23 D<00F80003FC000003FE
+001FFF0000071F007C0FC0000E0F80E007E0000C07C3C003E0001C07C70003F0001807CE
+0001F0003807DC0001F8003007D80001F800300FF80001F800700FF00001F800600FE000
+01F800600FE00001F800E00FC00003F800C01FC00003F000C01F800003F000001F800003
+F000001F800007F000003F800007E000003F000007E000003F000007E000003F00000FE0
+00007F00000FC000007E00000FC000007E00001FC000007E00001F800000FE00001F8000
+00FC00003F800000FC00003F000000FC00003F007001FC00007F006001F800007E006001
+F80000FE006001F80000FC00E003F80000FC00C003F00000FC01C003F00000F8018003F0
+0000F8038007F00000F8030007E00000F8070007E00000F80E0007E00000781C000FE000
+007C38000FC000001FF0000380000007C000342D7DAB3A>110 D
+E
+end
+TeXDict begin
+letter
+
+1 0 bop Black Black 146 407 a Fc(n)28 b Fb( )g Fc(n)22
+b Fa(+)g Fc(\027)p Black Black eop end
+userdict /end-hook known{end-hook}if
+%%EndDocument
+count tgifopcount4 sub dup 0 gt {{pop} repeat} {pop} ifelse
+countdictstack tgifdictcount4 sub dup 0 gt {{end} repeat} {pop} ifelse
+tgiflevel4 restore
+tgifdict begin
+
+grestore
+tgifsavedpage restore
+end
+%MatchingCreationDate: Wed Jun 17 13:03:02 1998

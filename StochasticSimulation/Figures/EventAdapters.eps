@@ -1,0 +1,274 @@
+%!
+%%BoundingBox: 7 569 530 771
+%%Title: EventAdpaters
+%%CreationDate: Sun Apr 11 20:58:03 1999
+%%Creator: Tgif-3.0-p17 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+
+/tgifdict 5 dict def
+tgifdict begin
+
+/tgifarrowtipdict 8 dict def
+tgifarrowtipdict /mtrx matrix put
+
+/tgifarrowtip
+ { tgifarrowtipdict begin
+      /dy exch def
+      /dx exch def
+      /h exch def
+      /w exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      dy dx atan rotate
+      0 0 moveto
+      w neg h lineto
+      w neg h neg lineto
+      savematrix setmatrix
+   end
+ } def
+
+/tgifcentertext { dup stringwidth pop 2 div neg 0 rmoveto } def
+
+end
+
+%%PageBoundingBox: 7 569 530 771
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.00 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      476 63 moveto (java.lang.object) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      96 189 moveto (WindowAdapter) tgifcentertext show
+      96 218 moveto (\(7 methods\)) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      268 189 moveto (KeyAdapter) tgifcentertext show
+      268 218 moveto (\(3 methods\)) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      428 189 moveto (MouseAdapter) tgifcentertext show
+      428 218 moveto (\(5 methods\)) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      624 189 moveto (MouseMotionAdapter) tgifcentertext show
+      624 218 moveto (\(2 methods\)) tgifcentertext show
+   grestore
+
+% TEXT
+0 setgray
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      844 189 moveto (ComponentAdapter) tgifcentertext show
+      844 218 moveto (\(4 methods\)) tgifcentertext show
+   grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      48 327 moveto (-) tgifcentertext show
+   grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      264 305 moveto (-KeyReleased\(\)) tgifcentertext show
+      264 326 moveto (-KeyPressed\(\)) tgifcentertext show
+      264 347 moveto (-KeyTyped\(\)) tgifcentertext show
+   grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      472 72 moveto
+      92 -368 atan dup cos 12.000 mul 104 exch sub
+      exch sin 12.000 mul 164 exch sub lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      104 164 12.000 5.000 -368 92 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      104 164 12.000 5.000 -368 92 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      472 72 moveto
+      92 -192 atan dup cos 12.000 mul 280 exch sub
+      exch sin 12.000 mul 164 exch sub lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      280 164 12.000 5.000 -192 92 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      280 164 12.000 5.000 -192 92 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      472 72 moveto
+      92 -36 atan dup cos 12.000 mul 436 exch sub
+      exch sin 12.000 mul 164 exch sub lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      436 164 12.000 5.000 -36 92 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      436 164 12.000 5.000 -36 92 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      472 72 moveto
+      92 152 atan dup cos 12.000 mul 624 exch sub
+      exch sin 12.000 mul 164 exch sub lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      624 164 12.000 5.000 152 92 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      624 164 12.000 5.000 152 92 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0.000 0.000 1.000 setrgbcolor
+gsave
+   newpath
+      472 76 moveto
+      80 376 atan dup cos 12.000 mul 848 exch sub
+      exch sin 12.000 mul 156 exch sub lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      848 156 12.000 5.000 376 80 tgifarrowtip
+   1 setgray closepath fill
+   0.000 0.000 1.000 setrgbcolor
+   newpath
+      848 156 12.000 5.000 376 80 tgifarrowtip
+   closepath fill
+grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      852 294 moveto (-ComponentHidden\(\)) tgifcentertext show
+      852 315 moveto (-ComponentMoved\(\)) tgifcentertext show
+      852 336 moveto (-ComponentResized\(\)) tgifcentertext show
+      852 357 moveto (-ComponentShown\(\)) tgifcentertext show
+   grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      428 284 moveto (-MouseClicked\(\)) tgifcentertext show
+      428 305 moveto (-MouseEntered\(\)) tgifcentertext show
+      428 326 moveto (-MouseExited\(\)) tgifcentertext show
+      428 347 moveto (-MousePressed\(\)) tgifcentertext show
+      428 368 moveto (-MouseReleased\(\)) tgifcentertext show
+   grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      628 315 moveto (-MouseDragged\(\)) tgifcentertext show
+      628 336 moveto (-MouseMoved\(\)) tgifcentertext show
+   grestore
+
+% TEXT
+0.184 0.310 0.310 setrgbcolor
+/Times-Roman findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      104 263 moveto (-WindowActivated\(\)) tgifcentertext show
+      104 284 moveto (-WindowClosed\(\)) tgifcentertext show
+      104 305 moveto (-WindowClosing\(\)) tgifcentertext show
+      104 326 moveto (-WindowDeactivated\(\)) tgifcentertext show
+      104 347 moveto (-WindowDeIconified\(\)) tgifcentertext show
+      104 368 moveto (-WindowIconified\(\)) tgifcentertext show
+      104 389 moveto (-WindowOpened\(\)) tgifcentertext show
+   grestore
+
+grestore
+tgifsavedpage restore
+end
+%MatchingCreationDate: Sun Apr 11 20:58:03 1999

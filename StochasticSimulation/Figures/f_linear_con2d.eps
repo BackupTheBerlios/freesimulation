@@ -1,0 +1,2079 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%Creator: MATLAB, The Mathworks, Inc.
+%%Title: F_linear_con2d.eps
+%%CreationDate: 05/20/98  11:24:23
+%%DocumentNeededFonts: Helvetica
+%%DocumentProcessColors: Cyan Magenta Yellow Black
+%%Extensions: CMYK
+%%Pages: 1
+%%BoundingBox:    63   207   558   607
+%%EndComments
+
+%%BeginProlog
+
+% MathWorks dictionary
+/MathWorks 160 dict begin
+
+% definition operators
+/bdef {bind def} bind def
+/ldef {load def} bind def
+/xdef {exch def} bdef
+/xstore {exch store} bdef
+
+% operator abbreviations
+/c  /clip ldef
+/cc /concat ldef
+/cp /closepath ldef
+/gr /grestore ldef
+/gs /gsave ldef
+/mt /moveto ldef
+/np /newpath ldef
+/cm /currentmatrix ldef
+/sm /setmatrix ldef
+/rc {rectclip} bdef
+/rf {rectfill} bdef
+/rm /rmoveto ldef
+/rl /rlineto ldef
+/s /show ldef
+/sc {setcmykcolor} bdef
+/sr /setrgbcolor ldef
+/sg /setgray ldef
+/w /setlinewidth ldef
+/j /setlinejoin ldef
+/cap /setlinecap ldef
+
+% page state control
+/pgsv () def
+/bpage {/pgsv save def} bdef
+/epage {pgsv restore} bdef
+/bplot /gsave ldef
+/eplot {stroke grestore} bdef
+
+% orientation switch
+/portraitMode 	0 def
+/landscapeMode 	1 def
+
+% coordinate system mappings
+/dpi2point 0 def
+
+% font control
+/FontSize 0 def
+/FMS {
+	/FontSize xstore		%save size off stack
+	findfont
+	[FontSize 0 0 FontSize neg 0 0]
+	makefont
+	setfont
+	}bdef
+
+/ISOLatin1Encoding where
+{pop
+/WindowsLatin1Encoding 256 array bdef
+ISOLatin1Encoding WindowsLatin1Encoding copy pop
+/.notdef/.notdef/quotesinglbase/florin/quotedblbase/ellipsis/dagger/daggerdbl
+/circumflex/perthousand/Scaron/guilsinglleft/OE/.notdef/.notdef/.notdef
+/.notdef/quoteleft/quoteright/quotedblleft/quotedblright/bullet/endash/emdash
+/tilde/trademark/scaron/guilsinglright/oe/.notdef/.notdef/Ydieresis
+WindowsLatin1Encoding 128 32 getinterval astore pop}
+{/WindowsLatin1Encoding StandardEncoding bdef} ifelse
+
+/reencode {
+exch dup where
+{pop load} {pop StandardEncoding} ifelse
+exch
+dup 3 1 roll
+findfont dup length dict begin
+  { 1 index /FID ne {def}{pop pop} ifelse } forall
+  /Encoding exch def
+  currentdict
+end
+definefont pop
+} bdef
+
+/isroman {
+findfont /CharStrings get
+/Agrave known
+} bdef
+
+/FMSR {
+3 1 roll 1 index
+dup isroman
+{reencode} {pop pop} ifelse
+exch FMS
+} bdef
+
+/csm {
+	1 dpi2point div -1 dpi2point div scale
+	neg translate
+	landscapeMode eq {90 rotate} if
+	} bdef
+
+% line types: solid, dotted, dashed, dotdash
+/SO { [] 0 setdash } bdef
+/DO { [.5 dpi2point mul 4 dpi2point mul] 0 setdash } bdef
+/DA { [6 dpi2point mul] 0 setdash } bdef
+/DD { [.5 dpi2point mul 4 dpi2point mul 6 dpi2point mul 4 dpi2point mul] 0 setdash } bdef
+
+% macros for lines and objects
+/L {
+	lineto
+	stroke
+	} bdef
+/MP {
+	3 1 roll moveto
+	1 sub {rlineto} repeat
+	} bdef
+/AP {
+	{rlineto} repeat
+	} bdef
+/PP {
+	closepath eofill
+	} bdef
+/DP {
+	closepath stroke
+	} bdef
+/MR {
+	4 -2 roll moveto
+	dup  0 exch rlineto
+	exch 0 rlineto
+	neg  0 exch rlineto
+	closepath
+	} bdef
+/FR {
+	MR stroke
+	} bdef
+/PR {
+	MR fill
+	} bdef
+/L1i {
+	{ currentfile picstr readhexstring pop } image
+	} bdef
+
+/tMatrix matrix def
+/MakeOval {
+	newpath
+	tMatrix currentmatrix pop
+	translate scale
+	0 0 1 0 360 arc
+	tMatrix setmatrix
+	} bdef
+/FO {
+	MakeOval
+	stroke
+	} bdef
+/PO {
+	MakeOval
+	fill
+	} bdef
+
+/PD {
+	currentlinecap 1 setlinecap 3 1 roll 2 copy moveto lineto stroke setlinecap
+	} bdef
+
+/FA {
+	newpath
+	tMatrix currentmatrix pop
+	translate scale
+	0 0 1 5 -2 roll arc
+	tMatrix setmatrix
+	stroke
+	} bdef
+/PA {
+	newpath
+	tMatrix currentmatrix pop
+	translate 0 0 moveto scale
+	0 0 1 5 -2 roll arc
+	closepath
+	tMatrix setmatrix
+	fill
+	} bdef
+
+/FAn {
+	newpath
+	tMatrix currentmatrix pop
+	translate scale
+	0 0 1 5 -2 roll arcn
+	tMatrix setmatrix
+	stroke
+	} bdef
+/PAn {
+	newpath
+	tMatrix currentmatrix pop
+	translate 0 0 moveto scale
+	0 0 1 5 -2 roll arcn
+	closepath
+	tMatrix setmatrix
+	fill
+	} bdef
+
+/MRR {
+	/vradius xdef
+	/hradius xdef
+	/lry xdef
+	/lrx xdef
+	/uly xdef
+	/ulx xdef
+	newpath
+	tMatrix currentmatrix pop
+	ulx hradius add uly vradius add translate
+	hradius vradius scale
+	0 0 1 180 270 arc 
+	tMatrix setmatrix
+	lrx hradius sub uly vradius add translate
+	hradius vradius scale
+	0 0 1 270 360 arc
+	tMatrix setmatrix
+	lrx hradius sub lry vradius sub translate
+	hradius vradius scale
+	0 0 1 0 90 arc
+	tMatrix setmatrix
+	ulx hradius add lry vradius sub translate
+	hradius vradius scale
+	0 0 1 90 180 arc
+	tMatrix setmatrix
+	closepath
+	} bdef
+/FRR {
+	MRR stroke } bdef
+/PRR {
+	MRR fill } bdef
+
+/MlrRR {
+	/lry xdef
+	/lrx xdef
+	/uly xdef
+	/ulx xdef
+	/rad lry uly sub 2 div def
+	newpath
+	tMatrix currentmatrix pop
+	ulx rad add uly rad add translate
+	rad rad scale
+	0 0 1 90 270 arc
+	tMatrix setmatrix
+	lrx rad sub lry rad sub translate
+	rad rad scale
+	0 0 1 270 90 arc
+	tMatrix setmatrix
+	closepath
+	} bdef
+/FlrRR {
+	MlrRR stroke } bdef
+/PlrRR {
+	MlrRR fill } bdef
+
+/MtbRR {
+	/lry xdef
+	/lrx xdef
+	/uly xdef
+	/ulx xdef
+	/rad lrx ulx sub 2 div def
+	newpath
+	tMatrix currentmatrix pop
+	ulx rad add uly rad add translate
+	rad rad scale
+	0 0 1 180 360 arc
+	tMatrix setmatrix
+	lrx rad sub lry rad sub translate
+	rad rad scale
+	0 0 1 0 180 arc
+	tMatrix setmatrix
+	closepath
+	} bdef
+/FtbRR {
+	MtbRR stroke } bdef
+/PtbRR {
+	MtbRR fill } bdef
+
+currentdict end def
+%%EndProlog
+
+%%BeginSetup
+MathWorks begin
+
+0 cap
+
+end
+%%EndSetup
+
+%%Page: 1 1
+%%BeginPageSetup
+%%PageBoundingBox:    63   207   558   607
+MathWorks begin
+bpage
+%%EndPageSetup
+
+%%BeginObject: graph1 1
+bplot
+
+/dpi2point 12 def
+portraitMode 0204 7344 csm
+
+  562    52  5937  4801 MR c np
+85 dict begin %Colortable dictionary
+/c0 { 0 0 0 sr} bdef
+/c1 { 1 1 1 sr} bdef
+/c2 { 1 0 0 sr} bdef
+/c3 { 0 1 0 sr} bdef
+/c4 { 0 0 1 sr} bdef
+/c5 { 1 1 0 sr} bdef
+/c6 { 1 0 1 sr} bdef
+/c7 { 0 1 1 sr} bdef
+1 j
+1 sg
+   0    0 6913 5185 PR
+6 w
+0 2334 -2325 -1069 0 -2335 6254 3792 4 MP
+PP
+2325 1070 0 2334 -2325 -1069 0 -2335 6254 3792 5 MP stroke
+2325 1070 3031 -821 -2325 -1069 3223 4612 4 MP
+PP
+-3031 820 2325 1070 3031 -821 -2325 -1069 3223 4612 5 MP stroke
+0 2334 3031 -820 0 -2335 898 3543 4 MP
+PP
+-3031 821 0 2334 3031 -820 0 -2335 898 3543 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+3223 4612 mt 6254 3792 L
+3223 4612 mt  898 3543 L
+ 898 3543 mt  898 1208 L
+3223 4612 mt 3295 4645 L
+%%IncludeResource: font Helvetica
+/Helvetica /WindowsLatin1Encoding 168 FMSR
+
+3326 4815 mt 
+(0) s
+3830 4448 mt 3901 4481 L
+3932 4651 mt 
+(0.2) s
+4436 4284 mt 4507 4317 L
+4538 4487 mt 
+(0.4) s
+5042 4120 mt 5113 4153 L
+5145 4323 mt 
+(0.6) s
+5648 3956 mt 5719 3988 L
+5751 4159 mt 
+(0.8) s
+6254 3792 mt 6325 3824 L
+6357 3995 mt 
+(1) s
+3223 4612 mt 3148 4633 L
+3021 4798 mt 
+(0) s
+2061 4077 mt 1985 4098 L
+1719 4263 mt 
+(0.5) s
+ 898 3543 mt  822 3563 L
+ 696 3728 mt 
+(1) s
+ 898 3543 mt  827 3510 L
+ 702 3558 mt 
+(0) s
+ 898 3076 mt  827 3043 L
+ 562 3091 mt 
+(0.2) s
+ 898 2609 mt  827 2576 L
+ 562 2624 mt 
+(0.4) s
+ 898 2142 mt  827 2109 L
+ 562 2157 mt 
+(0.6) s
+ 898 1675 mt  827 1643 L
+ 562 1690 mt 
+(0.8) s
+ 898 1208 mt  827 1176 L
+ 702 1223 mt 
+(1) s
+gs 898 388 5357 4225 MR c np
+
+gr 
+/c8 { 0.000000 0.000000 1.000000 sr} bdef
+c8
+2949 2867 mt 3021 2867 L
+2985 2831 mt 2985 2903 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2941 3101 mt 3013 3101 L
+2977 3065 mt 2977 3137 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1144 2742 mt 1216 2742 L
+1180 2706 mt 1180 2778 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3694 2676 mt 3766 2676 L
+3730 2640 mt 3730 2712 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3678 2679 mt 3750 2679 L
+3714 2643 mt 3714 2715 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3718 3277 mt 3790 3277 L
+3754 3241 mt 3754 3313 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4224 3257 mt 4296 3257 L
+4260 3221 mt 4260 3293 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4586 3023 mt 4658 3023 L
+4622 2987 mt 4622 3059 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4654 3071 mt 4726 3071 L
+4690 3035 mt 4690 3107 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4563 2677 mt 4635 2677 L
+4599 2641 mt 4599 2713 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4072 3255 mt 4144 3255 L
+4108 3219 mt 4108 3291 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3276 2803 mt 3348 2803 L
+3312 2767 mt 3312 2839 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4337 2326 mt 4409 2326 L
+4373 2290 mt 4373 2362 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4809 1923 mt 4881 1923 L
+4845 1887 mt 4845 1959 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4018 2036 mt 4090 2036 L
+4054 2000 mt 4054 2072 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4866 2333 mt 4938 2333 L
+4902 2297 mt 4902 2369 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2837 2423 mt 2909 2423 L
+2873 2387 mt 2873 2459 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5857 1749 mt 5929 1749 L
+5893 1713 mt 5893 1785 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1182 2973 mt 1254 2973 L
+1218 2937 mt 1218 3009 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3024 1388 mt 3096 1388 L
+3060 1352 mt 3060 1424 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4715 1929 mt 4787 1929 L
+4751 1893 mt 4751 1965 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5048 3302 mt 5120 3302 L
+5084 3266 mt 5084 3338 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5361 3923 mt 5433 3923 L
+5397 3887 mt 5397 3959 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5603 2175 mt 5675 2175 L
+5639 2139 mt 5639 2211 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3979 1932 mt 4051 1932 L
+4015 1896 mt 4015 1968 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5339 3474 mt 5411 3474 L
+5375 3438 mt 5375 3510 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5012 3314 mt 5084 3314 L
+5048 3278 mt 5048 3350 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3169 3369 mt 3241 3369 L
+3205 3333 mt 3205 3405 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2638 2663 mt 2710 2663 L
+2674 2627 mt 2674 2699 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2216 2875 mt 2288 2875 L
+2252 2839 mt 2252 2911 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4694 2079 mt 4766 2079 L
+4730 2043 mt 4730 2115 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2985 1051 mt 3057 1051 L
+3021 1015 mt 3021 1087 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3675 1906 mt 3747 1906 L
+3711 1870 mt 3711 1942 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2929 2018 mt 3001 2018 L
+2965 1982 mt 2965 2054 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4355 3588 mt 4427 3588 L
+4391 3552 mt 4391 3624 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3897 2992 mt 3969 2992 L
+3933 2956 mt 3933 3028 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4884 2579 mt 4956 2579 L
+4920 2543 mt 4920 2615 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4904 3489 mt 4976 3489 L
+4940 3453 mt 4940 3525 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2240 2489 mt 2312 2489 L
+2276 2453 mt 2276 2525 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5230 2672 mt 5302 2672 L
+5266 2636 mt 5266 2708 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5972 2277 mt 6044 2277 L
+6008 2241 mt 6008 2313 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5537 2387 mt 5609 2387 L
+5573 2351 mt 5573 2423 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3799 1995 mt 3871 1995 L
+3835 1959 mt 3835 2031 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4448 3770 mt 4520 3770 L
+4484 3734 mt 4484 3806 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4727 2904 mt 4799 2904 L
+4763 2868 mt 4763 2940 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5862 1884 mt 5934 1884 L
+5898 1848 mt 5898 1920 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5169 2650 mt 5241 2650 L
+5205 2614 mt 5205 2686 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3061 3622 mt 3133 3622 L
+3097 3586 mt 3097 3658 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4855 2966 mt 4927 2966 L
+4891 2930 mt 4891 3002 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4447 3076 mt 4519 3076 L
+4483 3040 mt 4483 3112 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2970 1928 mt 3042 1928 L
+3006 1892 mt 3006 1964 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+6114 3128 mt 6186 3128 L
+6150 3092 mt 6150 3164 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3476 3743 mt 3548 3743 L
+3512 3707 mt 3512 3779 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2045 1622 mt 2117 1622 L
+2081 1586 mt 2081 1658 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3490 1661 mt 3562 1661 L
+3526 1625 mt 3526 1697 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4669 1942 mt 4741 1942 L
+4705 1906 mt 4705 1978 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2325 2290 mt 2397 2290 L
+2361 2254 mt 2361 2326 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5695 3103 mt 5767 3103 L
+5731 3067 mt 5731 3139 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5097 1751 mt 5169 1751 L
+5133 1715 mt 5133 1787 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3486  798 mt 3558  798 L
+3522  762 mt 3522  834 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5217 3166 mt 5289 3166 L
+5253 3130 mt 5253 3202 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4753 2602 mt 4825 2602 L
+4789 2566 mt 4789 2638 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5181 3035 mt 5253 3035 L
+5217 2999 mt 5217 3071 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5830 1744 mt 5902 1744 L
+5866 1708 mt 5866 1780 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3662 3437 mt 3734 3437 L
+3698 3401 mt 3698 3473 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1769 2200 mt 1841 2200 L
+1805 2164 mt 1805 2236 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3049 3477 mt 3121 3477 L
+3085 3441 mt 3085 3513 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3646 2215 mt 3718 2215 L
+3682 2179 mt 3682 2251 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4654 1765 mt 4726 1765 L
+4690 1729 mt 4690 1801 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1998 3134 mt 2070 3134 L
+2034 3098 mt 2034 3170 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4905 2903 mt 4977 2903 L
+4941 2867 mt 4941 2939 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3450 2713 mt 3522 2713 L
+3486 2677 mt 3486 2749 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4864 2870 mt 4936 2870 L
+4900 2834 mt 4900 2906 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2906 1442 mt 2978 1442 L
+2942 1406 mt 2942 1478 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4352 3037 mt 4424 3037 L
+4388 3001 mt 4388 3073 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3385 2829 mt 3457 2829 L
+3421 2793 mt 3421 2865 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3256 1956 mt 3328 1956 L
+3292 1920 mt 3292 1992 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4559 3247 mt 4631 3247 L
+4595 3211 mt 4595 3283 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4865 3529 mt 4937 3529 L
+4901 3493 mt 4901 3565 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5057 2087 mt 5129 2087 L
+5093 2051 mt 5093 2123 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5579 2652 mt 5651 2652 L
+5615 2616 mt 5615 2688 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3869 2579 mt 3941 2579 L
+3905 2543 mt 3905 2615 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4684 2038 mt 4756 2038 L
+4720 2002 mt 4720 2074 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5032 1782 mt 5104 1782 L
+5068 1746 mt 5068 1818 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2626 2922 mt 2698 2922 L
+2662 2886 mt 2662 2958 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2108 3464 mt 2180 3464 L
+2144 3428 mt 2144 3500 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1234 3259 mt 1306 3259 L
+1270 3223 mt 1270 3295 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1577 3290 mt 1649 3290 L
+1613 3254 mt 1613 3326 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1952 3391 mt 2024 3391 L
+1988 3355 mt 1988 3427 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4581 1621 mt 4653 1621 L
+4617 1585 mt 4617 1657 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1889 3114 mt 1961 3114 L
+1925 3078 mt 1925 3150 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2562 1846 mt 2634 1846 L
+2598 1810 mt 2598 1882 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2171 1472 mt 2243 1472 L
+2207 1436 mt 2207 1508 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4183 2385 mt 4255 2385 L
+4219 2349 mt 4219 2421 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4111 2142 mt 4183 2142 L
+4147 2106 mt 4147 2178 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3752 2435 mt 3824 2435 L
+3788 2399 mt 3788 2471 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3147 2860 mt 3219 2860 L
+3183 2824 mt 3183 2896 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3926 2475 mt 3998 2475 L
+3962 2439 mt 3962 2511 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3520 2955 mt 3592 2955 L
+3556 2919 mt 3556 2991 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4344 1194 mt 4416 1194 L
+4380 1158 mt 4380 1230 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3818 1310 mt 3890 1310 L
+3854 1274 mt 3854 1346 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5019 1987 mt 5091 1987 L
+5055 1951 mt 5055 2023 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5314 3098 mt 5386 3098 L
+5350 3062 mt 5350 3134 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3905 2201 mt 3977 2201 L
+3941 2165 mt 3941 2237 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3500 1419 mt 3572 1419 L
+3536 1383 mt 3536 1455 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5923 2259 mt 5995 2259 L
+5959 2223 mt 5959 2295 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1682 1320 mt 1754 1320 L
+1718 1284 mt 1718 1356 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3548 2079 mt 3620 2079 L
+3584 2043 mt 3584 2115 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2847 2570 mt 2919 2570 L
+2883 2534 mt 2883 2606 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4869 2302 mt 4941 2302 L
+4905 2266 mt 4905 2338 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5346 3296 mt 5418 3296 L
+5382 3260 mt 5382 3332 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4533 2418 mt 4605 2418 L
+4569 2382 mt 4569 2454 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4964 3155 mt 5036 3155 L
+5000 3119 mt 5000 3191 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2679 3585 mt 2751 3585 L
+2715 3549 mt 2715 3621 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3109 3175 mt 3181 3175 L
+3145 3139 mt 3145 3211 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4360 3562 mt 4432 3562 L
+4396 3526 mt 4396 3598 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4883 2206 mt 4955 2206 L
+4919 2170 mt 4919 2242 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4835 2511 mt 4907 2511 L
+4871 2475 mt 4871 2547 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1877 2761 mt 1949 2761 L
+1913 2725 mt 1913 2797 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5438 1430 mt 5510 1430 L
+5474 1394 mt 5474 1466 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4693  911 mt 4765  911 L
+4729  875 mt 4729  947 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2246 3096 mt 2318 3096 L
+2282 3060 mt 2282 3132 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4376 2438 mt 4448 2438 L
+4412 2402 mt 4412 2474 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4266 2455 mt 4338 2455 L
+4302 2419 mt 4302 2491 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4601 1819 mt 4673 1819 L
+4637 1783 mt 4637 1855 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2251 1573 mt 2323 1573 L
+2287 1537 mt 2287 1609 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4655 2496 mt 4727 2496 L
+4691 2460 mt 4691 2532 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1142 2941 mt 1214 2941 L
+1178 2905 mt 1178 2977 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4810 2671 mt 4882 2671 L
+4846 2635 mt 4846 2707 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4354 3152 mt 4426 3152 L
+4390 3116 mt 4390 3188 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4334 2677 mt 4406 2677 L
+4370 2641 mt 4370 2713 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3885 1109 mt 3957 1109 L
+3921 1073 mt 3921 1145 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1944 2158 mt 2016 2158 L
+1980 2122 mt 1980 2194 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1933 2259 mt 2005 2259 L
+1969 2223 mt 1969 2295 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1721 1476 mt 1793 1476 L
+1757 1440 mt 1757 1512 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2517 2417 mt 2589 2417 L
+2553 2381 mt 2553 2453 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4327 2469 mt 4399 2469 L
+4363 2433 mt 4363 2505 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4255 2297 mt 4327 2297 L
+4291 2261 mt 4291 2333 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4232 2716 mt 4304 2716 L
+4268 2680 mt 4268 2752 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4810 3404 mt 4882 3404 L
+4846 3368 mt 4846 3440 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3743 3458 mt 3815 3458 L
+3779 3422 mt 3779 3494 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4334 2432 mt 4406 2432 L
+4370 2396 mt 4370 2468 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3048 2838 mt 3120 2838 L
+3084 2802 mt 3084 2874 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4304 2511 mt 4376 2511 L
+4340 2475 mt 4340 2547 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4417 2179 mt 4489 2179 L
+4453 2143 mt 4453 2215 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2761 1696 mt 2833 1696 L
+2797 1660 mt 2797 1732 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4839 2206 mt 4911 2206 L
+4875 2170 mt 4875 2242 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4650 1086 mt 4722 1086 L
+4686 1050 mt 4686 1122 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4379 2145 mt 4451 2145 L
+4415 2109 mt 4415 2181 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4463 3631 mt 4535 3631 L
+4499 3595 mt 4499 3667 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4570 2558 mt 4642 2558 L
+4606 2522 mt 4606 2594 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1693 3232 mt 1765 3232 L
+1729 3196 mt 1729 3268 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3904 1103 mt 3976 1103 L
+3940 1067 mt 3940 1139 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2658 1760 mt 2730 1760 L
+2694 1724 mt 2694 1796 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4712 1665 mt 4784 1665 L
+4748 1629 mt 4748 1701 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4124 2351 mt 4196 2351 L
+4160 2315 mt 4160 2387 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2206 2089 mt 2278 2089 L
+2242 2053 mt 2242 2125 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3938 1507 mt 4010 1507 L
+3974 1471 mt 3974 1543 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2853 3121 mt 2925 3121 L
+2889 3085 mt 2889 3157 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4430 3297 mt 4502 3297 L
+4466 3261 mt 4466 3333 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4366 3310 mt 4438 3310 L
+4402 3274 mt 4402 3346 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5347 3962 mt 5419 3962 L
+5383 3926 mt 5383 3998 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2056 1553 mt 2128 1553 L
+2092 1517 mt 2092 1589 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1396 2172 mt 1468 2172 L
+1432 2136 mt 1432 2208 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2831 2861 mt 2903 2861 L
+2867 2825 mt 2867 2897 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1975 2783 mt 2047 2783 L
+2011 2747 mt 2011 2819 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2465 2198 mt 2537 2198 L
+2501 2162 mt 2501 2234 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3908 2147 mt 3980 2147 L
+3944 2111 mt 3944 2183 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4151 1973 mt 4223 1973 L
+4187 1937 mt 4187 2009 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2125 1567 mt 2197 1567 L
+2161 1531 mt 2161 1603 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3998 1126 mt 4070 1126 L
+4034 1090 mt 4034 1162 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2227 2152 mt 2299 2152 L
+2263 2116 mt 2263 2188 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2948 1370 mt 3020 1370 L
+2984 1334 mt 2984 1406 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3733 1491 mt 3805 1491 L
+3769 1455 mt 3769 1527 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3984 2119 mt 4056 2119 L
+4020 2083 mt 4020 2155 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4398 1660 mt 4470 1660 L
+4434 1624 mt 4434 1696 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5499 2237 mt 5571 2237 L
+5535 2201 mt 5535 2273 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2769 1839 mt 2841 1839 L
+2805 1803 mt 2805 1875 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2892 1557 mt 2964 1557 L
+2928 1521 mt 2928 1593 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3379 1470 mt 3451 1470 L
+3415 1434 mt 3415 1506 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3888  810 mt 3960  810 L
+3924  774 mt 3924  846 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3309 2111 mt 3381 2111 L
+3345 2075 mt 3345 2147 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4469 2867 mt 4541 2867 L
+4505 2831 mt 4505 2903 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4757 2180 mt 4829 2180 L
+4793 2144 mt 4793 2216 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4088 2730 mt 4160 2730 L
+4124 2694 mt 4124 2766 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4279 1591 mt 4351 1591 L
+4315 1555 mt 4315 1627 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3702 1979 mt 3774 1979 L
+3738 1943 mt 3738 2015 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3554 2398 mt 3626 2398 L
+3590 2362 mt 3590 2434 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2586  913 mt 2658  913 L
+2622  877 mt 2622  949 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3031 1302 mt 3103 1302 L
+3067 1266 mt 3067 1338 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3900 3224 mt 3972 3224 L
+3936 3188 mt 3936 3260 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2363 3573 mt 2435 3573 L
+2399 3537 mt 2399 3609 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3465 3605 mt 3537 3605 L
+3501 3569 mt 3501 3641 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4073 2953 mt 4145 2953 L
+4109 2917 mt 4109 2989 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3491 2411 mt 3563 2411 L
+3527 2375 mt 3527 2447 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2725 2453 mt 2797 2453 L
+2761 2417 mt 2761 2489 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2686 2600 mt 2758 2600 L
+2722 2564 mt 2722 2636 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3917  765 mt 3989  765 L
+3953  729 mt 3953  801 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3092 1175 mt 3164 1175 L
+3128 1139 mt 3128 1211 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3483 1656 mt 3555 1656 L
+3519 1620 mt 3519 1692 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4637 1515 mt 4709 1515 L
+4673 1479 mt 4673 1551 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1787 1803 mt 1859 1803 L
+1823 1767 mt 1823 1839 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4077 3096 mt 4149 3096 L
+4113 3060 mt 4113 3132 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4360 2728 mt 4432 2728 L
+4396 2692 mt 4396 2764 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3206 2633 mt 3278 2633 L
+3242 2597 mt 3242 2669 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3079 3162 mt 3151 3162 L
+3115 3126 mt 3115 3198 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3876 3409 mt 3948 3409 L
+3912 3373 mt 3912 3445 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3501 1550 mt 3573 1550 L
+3537 1514 mt 3537 1586 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4106 3336 mt 4178 3336 L
+4142 3300 mt 4142 3372 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2713 2643 mt 2785 2643 L
+2749 2607 mt 2749 2679 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4079 3332 mt 4151 3332 L
+4115 3296 mt 4115 3368 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3975 1486 mt 4047 1486 L
+4011 1450 mt 4011 1522 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3423 1018 mt 3495 1018 L
+3459  982 mt 3459 1054 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3185 2439 mt 3257 2439 L
+3221 2403 mt 3221 2475 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3468 2929 mt 3540 2929 L
+3504 2893 mt 3504 2965 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3366 1788 mt 3438 1788 L
+3402 1752 mt 3402 1824 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3309 3084 mt 3381 3084 L
+3345 3048 mt 3345 3120 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3353 2999 mt 3425 2999 L
+3389 2963 mt 3389 3035 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4249 2818 mt 4321 2818 L
+4285 2782 mt 4285 2854 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2263 2617 mt 2335 2617 L
+2299 2581 mt 2299 2653 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2260 1497 mt 2332 1497 L
+2296 1461 mt 2296 1533 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1889 2115 mt 1961 2115 L
+1925 2079 mt 1925 2151 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2571 1225 mt 2643 1225 L
+2607 1189 mt 2607 1261 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3267 1801 mt 3339 1801 L
+3303 1765 mt 3303 1837 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2618 1798 mt 2690 1798 L
+2654 1762 mt 2654 1834 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3016 2929 mt 3088 2929 L
+3052 2893 mt 3052 2965 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2576 2746 mt 2648 2746 L
+2612 2710 mt 2612 2782 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3038 3134 mt 3110 3134 L
+3074 3098 mt 3074 3170 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3121 2385 mt 3193 2385 L
+3157 2349 mt 3157 2421 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2991 2726 mt 3063 2726 L
+3027 2690 mt 3027 2762 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4334 1823 mt 4406 1823 L
+4370 1787 mt 4370 1859 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3568 1374 mt 3640 1374 L
+3604 1338 mt 3604 1410 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3593 3621 mt 3665 3621 L
+3629 3585 mt 3629 3657 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2459 3059 mt 2531 3059 L
+2495 3023 mt 2495 3095 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1933 2516 mt 2005 2516 L
+1969 2480 mt 1969 2552 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2433 4095 mt 2505 4095 L
+2469 4059 mt 2469 4131 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4478 2087 mt 4550 2087 L
+4514 2051 mt 4514 2123 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3434 2712 mt 3506 2712 L
+3470 2676 mt 3470 2748 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3744 2684 mt 3816 2684 L
+3780 2648 mt 3780 2720 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3579 1415 mt 3651 1415 L
+3615 1379 mt 3615 1451 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3578 1723 mt 3650 1723 L
+3614 1687 mt 3614 1759 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1993 2488 mt 2065 2488 L
+2029 2452 mt 2029 2524 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3380 1791 mt 3452 1791 L
+3416 1755 mt 3416 1827 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2183 2275 mt 2255 2275 L
+2219 2239 mt 2219 2311 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3352 2301 mt 3424 2301 L
+3388 2265 mt 3388 2337 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2956 2892 mt 3028 2892 L
+2992 2856 mt 2992 2928 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2661 1137 mt 2733 1137 L
+2697 1101 mt 2697 1173 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3667 1591 mt 3739 1591 L
+3703 1555 mt 3703 1627 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3475  961 mt 3547  961 L
+3511  925 mt 3511  997 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3164 1808 mt 3236 1808 L
+3200 1772 mt 3200 1844 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3208 3117 mt 3280 3117 L
+3244 3081 mt 3244 3153 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4566 2077 mt 4638 2077 L
+4602 2041 mt 4602 2113 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2046 3755 mt 2118 3755 L
+2082 3719 mt 2082 3791 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2668 3572 mt 2740 3572 L
+2704 3536 mt 2704 3608 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2610 2875 mt 2682 2875 L
+2646 2839 mt 2646 2911 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3103 3140 mt 3175 3140 L
+3139 3104 mt 3139 3176 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3381 3109 mt 3453 3109 L
+3417 3073 mt 3417 3145 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2397 4122 mt 2469 4122 L
+2433 4086 mt 2433 4158 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3186 1863 mt 3258 1863 L
+3222 1827 mt 3222 1899 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2649 2707 mt 2721 2707 L
+2685 2671 mt 2685 2743 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2635 2621 mt 2707 2621 L
+2671 2585 mt 2671 2657 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1763 1834 mt 1835 1834 L
+1799 1798 mt 1799 1870 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1724 1926 mt 1796 1926 L
+1760 1890 mt 1760 1962 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1711 1548 mt 1783 1548 L
+1747 1512 mt 1747 1584 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2166 1068 mt 2238 1068 L
+2202 1032 mt 2202 1104 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2062 1656 mt 2134 1656 L
+2098 1620 mt 2098 1692 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1501 2548 mt 1573 2548 L
+1537 2512 mt 1537 2584 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2310 1925 mt 2382 1925 L
+2346 1889 mt 2346 1961 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3239 3312 mt 3311 3312 L
+3275 3276 mt 3275 3348 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2003 3585 mt 2075 3585 L
+2039 3549 mt 2039 3621 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3220 3499 mt 3292 3499 L
+3256 3463 mt 3256 3535 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2748 3200 mt 2820 3200 L
+2784 3164 mt 2784 3236 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2543 2988 mt 2615 2988 L
+2579 2952 mt 2579 3024 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3230 2036 mt 3302 2036 L
+3266 2000 mt 3266 2072 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4086 3310 mt 4158 3310 L
+4122 3274 mt 4122 3346 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5215 2828 mt 5287 2828 L
+5251 2792 mt 5251 2864 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3199 3087 mt 3271 3087 L
+3235 3051 mt 3235 3123 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3752 2720 mt 3824 2720 L
+3788 2684 mt 3788 2756 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3177 4397 mt 3249 4397 L
+3213 4361 mt 3213 4433 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1945 2200 mt 2017 2200 L
+1981 2164 mt 1981 2236 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3108 1313 mt 3180 1313 L
+3144 1277 mt 3144 1349 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3015  796 mt 3087  796 L
+3051  760 mt 3051  832 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1875 1806 mt 1947 1806 L
+1911 1770 mt 1911 1842 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1489 2439 mt 1561 2439 L
+1525 2403 mt 1525 2475 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3154 2572 mt 3226 2572 L
+3190 2536 mt 3190 2608 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3124 2528 mt 3196 2528 L
+3160 2492 mt 3160 2564 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3081 2542 mt 3153 2542 L
+3117 2506 mt 3117 2578 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3155 4039 mt 3227 4039 L
+3191 4003 mt 3191 4075 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2320 3064 mt 2392 3064 L
+2356 3028 mt 2356 3100 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2683 2789 mt 2755 2789 L
+2719 2753 mt 2719 2825 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2771 1738 mt 2843 1738 L
+2807 1702 mt 2807 1774 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2398 3177 mt 2470 3177 L
+2434 3141 mt 2434 3213 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2069 2760 mt 2141 2760 L
+2105 2724 mt 2105 2796 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2804 4027 mt 2876 4027 L
+2840 3991 mt 2840 4063 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2322 2117 mt 2394 2117 L
+2358 2081 mt 2358 2153 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1934 2084 mt 2006 2084 L
+1970 2048 mt 1970 2120 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3340 3255 mt 3412 3255 L
+3376 3219 mt 3376 3291 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3318 2573 mt 3390 2573 L
+3354 2537 mt 3354 2609 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2922 2509 mt 2994 2509 L
+2958 2473 mt 2958 2545 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2411 2507 mt 2483 2507 L
+2447 2471 mt 2447 2543 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2535 3284 mt 2607 3284 L
+2571 3248 mt 2571 3320 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4148 3327 mt 4220 3327 L
+4184 3291 mt 4184 3363 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3335 3561 mt 3407 3561 L
+3371 3525 mt 3371 3597 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2062 3815 mt 2134 3815 L
+2098 3779 mt 2098 3851 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2434 3896 mt 2506 3896 L
+2470 3860 mt 2470 3932 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1926 2938 mt 1998 2938 L
+1962 2902 mt 1962 2974 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1961 2768 mt 2033 2768 L
+1997 2732 mt 1997 2804 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1633 3275 mt 1705 3275 L
+1669 3239 mt 1669 3311 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1790 1605 mt 1862 1605 L
+1826 1569 mt 1826 1641 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2585 1124 mt 2657 1124 L
+2621 1088 mt 2621 1160 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2527 1179 mt 2599 1179 L
+2563 1143 mt 2563 1215 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2925 2574 mt 2997 2574 L
+2961 2538 mt 2961 2610 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3210 2504 mt 3282 2504 L
+3246 2468 mt 3246 2540 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4302 1240 mt 4374 1240 L
+4338 1204 mt 4338 1276 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2908 2475 mt 2980 2475 L
+2944 2439 mt 2944 2511 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3102 2769 mt 3174 2769 L
+3138 2733 mt 3138 2805 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2372 2591 mt 2444 2591 L
+2408 2555 mt 2408 2627 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2664 2394 mt 2736 2394 L
+2700 2358 mt 2700 2430 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2431 3571 mt 2503 3571 L
+2467 3535 mt 2467 3607 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1563 2844 mt 1635 2844 L
+1599 2808 mt 1599 2880 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1958 2906 mt 2030 2906 L
+1994 2870 mt 1994 2942 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1587 3400 mt 1659 3400 L
+1623 3364 mt 1623 3436 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1164 3112 mt 1236 3112 L
+1200 3076 mt 1200 3148 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+1820 1475 mt 1892 1475 L
+1856 1439 mt 1856 1511 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5366 3812 mt 5438 3812 L
+5402 3776 mt 5402 3848 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5217 3255 mt 5289 3255 L
+5253 3219 mt 5253 3291 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+5006 1802 mt 5078 1802 L
+5042 1766 mt 5042 1838 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+4601 1584 mt 4673 1584 L
+4637 1548 mt 4637 1620 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+0 sg
+2290  256 mt 
+(3D vectors of the random numbers) s
+gs 898 388 5357 4225 MR c np
+
+gr 
+c8
+3181 4565 mt 3253 4565 L
+3217 4529 mt 3217 4601 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3187 4612 mt 3259 4612 L
+3223 4576 mt 3223 4648 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+3065 3694 mt 3137 3694 L
+3101 3658 mt 3101 3730 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2143 1799 mt 2215 1799 L
+2179 1763 mt 2179 1835 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+2491 2317 mt 2563 2317 L
+2527 2281 mt 2527 2353 L
+gs 898 388 5357 4225 MR c np
+
+gr 
+
+end
+
+eplot
+%%EndObject graph 1
+
+epage
+end
+
+showpage
+
+%%Trailer
+%%EOF
