@@ -334,13 +334,15 @@ defined as
 \end{equation*}
 
 \subsection{The Stratonovich stochastic integral}
+\label{STRATONOVICHSUB}
 An alterantive definition of a stochastic  integral has been given by
 Stratonovich. He suggested the following definition
-\begin{equation*}
+\begin{equation}
+\label{STRATONOVICHDEFI}
 S\int_{t_0}^t g(x(t'),t') dW(t') = \text{ms-}\lim_{n \rightarrow \infty}
    \left\{ \sum_{i=1}^{\infty} f( \frac{x(t_{i})+ x(t_{i-1})}{2}) 
 [W(t_i) - W(t_{i-1})]   \right\}.
-\end{equation*}
+\end{equation}
 Note, that in this definition the integrand is evaluated in an
 averaged way.
 
@@ -542,28 +544,333 @@ conclude that
    \{ - \frac{\partial}{\partial x}[a(x,t)T(x,t|x_0,t_0)] + \frac{1}{2} 
         \frac{\partial^2}{\partial x^2}[b(x,t)^2 T(x,t|x_0,t_0)] \}.
 \end{equation*}
-We immediately recognize that the above equation is aFokker--Planck
-equation. Hence we have shown the the equivalence of a diffusion
+We immediately recognize that the above equation is a Fokker--Planck
+equation. Hence we have shown the equivalence of a diffusion
 process defined in terls of stochastic differential equation with
 drift coefficient $a(x(t),t)$ and a diffusion coefficient
 $b(X(t),t)^2$ and the above Fokker--Planck equation.
 
- 
+\section{The Stratonovich stochastic differential equation}
+In subsection \ref{STRATONOVICHSUB} we have seen that it is 
+possible to give other definitions of the stochastic integral.
+One such definition is the Stratonovich stochastic integral defined 
+in Eq. (\ref{STRATONOVICHI}). It is clear that is then possible 
+to define stochastic differential equations using the 
+Stratonovich integral, i.e.,
+\begin{equation}
+\label{STRATOSDE}
+X(t) = X(t_0) + \int_{t_0}^t ds \alpha(x(s),s) +
+      S \int_{t_0}^t dW(s) \beta(x(s),s).
+\end{equation}
+In the mathematical literature it is customary to write
+the Stratonovich integral in the form
+\begin{equation*}
+\int_{t_0}^t  \beta(x(s),s) \circ dW(s),
+\end{equation*}
+where the notation $\circ$ is called the {\em Ito circle}. From
+here on we will also stick to this notation.
+It is the aim of this subsection to show that stochastic 
+differential equations defined in terms of the Stratonovich 
+integral are equivalent to some appropriate Ito stochastic 
+differential equations.
 
+To this end we assume that the above $x(t)$ is also a solution of the Ito 
+stochastic differential equation
+\begin{equation}
+\label{ITOSDEINS}
+dx(t) = a(x(t),t) dt + b(x(t),t) dW(t)
+\end{equation}
+and try to derive expressions for the corresponding $\alpha$ and $\beta$
+in Eq. (\ref{STRATOSDE}).
 
+We begin by establishing the relation between the Ito and the 
+Stratonovich integral. By definition of the Stratonovich integral 
+we have
+\begin{equation}
+\label{STRATOIAPP}
+\int_{t_0}^t  \beta(x(s),s) \circ dW(s) \approx
+ \sum_i \beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right)
+  [W(t_i) -W(t_{i-1})].
+\end{equation}
+Using
+\begin{equation*}
+x(t_i) = x(t_{i-1}) + dx(t_{i-1})
+\end{equation*}
+the argument of the $\beta$ function can be written as
+\begin{equation*}
+\beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right) =
+ \beta \left( x(t_{i-1} + \frac{1}{2} dx(t_{i-1}) ,t_{i-1}\right).
+\end{equation*}
+Then, with the help of the Ito stochastic differential equation 
+(\ref{ITOSDEINS}) in the form
+\begin{equation*}
+dx(t_i) = a(x(t_{i-1}),t_{i-1}) (t_i -t_{i-1}) + 
+   b(x(t_{i-1}),t_{i-1}) (W(t_i) -W(t_{i-1}))
+\end{equation*}
+and of Ito's formula we get
+we get
+\begin{eqnarray*}
+\beta \left( \frac{x(t_i) -x(t_{i-1})}{2},t_{i-1} \right) & = &
+ \beta(t_{i-1}) + \left[ a(t_{i-1}) \frac{\partial}{\partial x} 
+ \beta(t_{i-1}) + \frac{1}{4} b^2(t_{i-1})
+                  \right] \frac{1}{2}(t_{i} - t_{i-1}) \\
+ &  + & \frac{1}{2} b(t_{i-1}) \frac{\partial}{\partial x} 
+ \beta(t_{i-1}) [W(t_i) - W(t_{i-1})].
+\end{eqnarray*}
+The above expression can now be inserted back into the Eq. 
+(\ref{STRATOIAPP}). Exploiting the fact that Ito calculus allows us to set 
+we find
+\begin{eqnarray*}
+\int_{t_0}^t  \beta(x(s),s) \circ dW(s) & \approx &
+\sum_i \beta(x(t_{i-1},t_{i-1}) [W(t_i) - W(t_{i-1})] \\
+ &  + & \frac{1}{2} \sum_i b(x(t_{i-1}),t_{i-1}) 
+ \frac{\partial}{\partial x} \beta(x(t_{i-1}),t_{i-1}) (t_i - 
+ t_{i-1}).
+\end{eqnarray*}
+Since the first term on the right side of the above equation is a
+partial sum of an Ito integral we conclude from the above discrete
+formula that
+\begin{equation}
+\int_{t_0}^t  \beta(x(s),s) \circ dW(s) = 
+\int  \beta(x(t',t') dW(t') 
+ + \frac{1}{2} \int b(x(t'),t') 
+ \frac{\partial}{\partial x} \beta(x(t'),t') dt'.
+\end{equation}
+The above formula gives us the relation between the Ito and the 
+Stratonovich integral of a function $\beta(x(t),t)$ in which $x(t)$
+is the solution of the Ito stochastic differential equation
+(\ref{ITOSDEINS}). The relation between the Ito and the 
+Staronovich form of stochastic differential equations can be seen 
+by setting
+\begin{eqnarray*}
+\alpha(x(t),t) & = & a(x(t),t) - \frac{1}{2} b(x(t),t) 
+\frac{\partial}{\partial x} b(x(t),t), \\
+\beta(x(t),t) & = & b(x(t),t).
+\end{eqnarray*}
+We then get the following important equivalence.
 
+The Ito stochastic differential equation
+\begin{equation}
+dx = a dt + b dW(t)
+\end{equation}
+is equivalent to the Stratonovich stochastic differential equation
+\begin{equation}
+dx = [a- \frac{1}{2} b \frac{partial}{\partial x}] dt + b \circ 
+dW(t).
+\end{equation}
+Conversely, the Stratonovich stochastic differential equation
+\begin{equation*}
+dx = \alpha dt + \beta \circ dW(t)
+\end{equation*}
+is equivalent to the Ito stochastic differential equation
+\begin{equation*}
+dx = [\alpha + \frac{1}{2} \beta \frac{\partial}{\partial x 
+\beta}]dt + \beta \circ dW(t).
+\end{equation*}
 
+\subsection{Ito or Stratonovich?}
+We have just seen the following. A given stochastic differential 
+equation can be interpreted in two ways: in the sense of Ito and 
+in the senso of Stratonovich. Each of the two interpretions can be converted
+equivalently in the respectively other version of the stochastic differential 
+equation. Thus, the question arises: When modelling a physical 
+system which interpretion should we use? 
 
+At the basis of the problem is the fact that 
+in the {\em more physical} Langevin equations we are confronted
+with $\delta$ correlated white noise process.
+Hence, the proper 
+mathematical analysis of stochastic differential equations was based 
+on the {\em mathematically safe} Wiener process and we were led
+automathematically to the ambiguities of defining Riemann sums for 
+stochastic integrals.
 
+All these difficulties can be circumvented by the following 
+reasoning. Real processes in nature do have finite correlation 
+times. Their spectrum might be flat, but not up to infinite 
+frequencies. Such a noise term is called colored  noise and could 
+have zero mean and the following correlation function
+\begin{equation*}
+< \eta(t) \eta(t+\tau) > = \frac{\sigma^2}{2m} \exp(- m |\tau|)
+\end{equation*}
+and the corresponding colored noise Langevin equation would read
+\begin{equation}
+\dot{X}(t) = a(X(t),t) + b(X(t),t) \eta(t).
+\end{equation}
+For such a colored noise process the Riemann sums do converge and 
+no ambiguity exists in choosing an interpretation.
 
-
-
-
+In other words the ambiguities vanish by performing first the 
+integration of the above colored noise Langevin equation and then 
+perform the white noise limit $\sigma \rightarrow \sigma m$ and 
+$m \rightarrow \infty$. Proceeding in this way we automatically 
+get the Stratonovich interpretation of the stochastic differential 
+equation. This is the content of the Wong-Zakai theorem 
+(\cite{HORSTHEMKE}). A good discussion of the Ito--Stratonovich
+dilemma can be found in \cite{VAN_KAMPEN}.
 
 
 
 \section{The numerical integration of stochastic differential 
 equations}
+\subsection{The Euler--Maruyama method}
+Essentially, we have already met the easiest method for the 
+numerical integration of stochastic differential equation while 
+motivating them at the beginning of this chapter.
+Assume that we are intersted in the solution of the following
+initial value problem for an Ito stochastic differential equation
+\begin{eqnarray*}
+dX(t) &=& a(X(t),t) dt + b(X(t),t) dW(t), \\
+X(t_0) &=& X_0,
+\end{eqnarray*}
+where $X_0$ is the initial condition at time $t_0$. The simplest 
+discretization scheme for the above differential equation
+is the Euler scheme, which in the context of stochastic 
+differential equations is sometimes called the Euler--Maruyama
+method. For a given partition 
+$t_0 < t_1 < \cdots < t_{n-1} < t_n=t_{end}$ 
+the Euler scheme is given by
+\begin{eqnarray*}
+\tilde{X}_n &=& \tilde{X}_{n-1} +a (\tilde{X}_{n-1},t_{n-1}) \Delta 
+t_n + b(\tilde{X}_{n-1},t_{n-1}) \Delta W_n, \\
+\tilde{X_0} &=& X_0,
+\end{eqnarray*}
+where $\Delta t_n = t_n - t_{n-1}$ and $\Delta W_n$
+is the Wiener increment
+\begin{equation*}
+\Delta W_n = W(t_n) - W(t_{n-1}).
+\end{equation*}
+Usually, we have $\Delta t_n = \Delta t = \text{const}$, so that
+we can generate the Wiener increment with the help of the formula
+\begin{equation*}
+\Delta W_n = \xi \sqrt{\Delta t},
+\end{equation*}
+where $\xi$ is a gaussian distributed random variable with mean 
+zero and unit variance. The random variable $\tilde{X}_n$ 
+generated by this iterative scheme is expected to approximate the 
+stochastic process $X(t)$. Sometimes the above scheme is also 
+termed the stochastic difference equation associated with the 
+corresponding stochastic differential equation.
+
+In order to characterize the quality of the approximation schemes 
+for stochastic differential equations we have to introduce the 
+concept of strong convergence. We say that a discrete 
+approximation $\tilde{X}$ with maximum time step $\Delta t$
+converges strongly to $X$ at time $t_{end}$ if
+\begin{equation*}
+\lim_{\Delta t \rightarrow 0} <|X(t_{end} - \tilde{X}(t_{end})|> 
+=0.
+\end{equation*}
+The order of convergence $\nu$ determines the numerical efficiency
+of a given numerical approximation scheme. If there exists a 
+positive constant $c$, which is independent of $\Delta t$ such 
+that for sufficiently small $\delta t$ we have
+\begin{equation*}
+<|X(t_{end} - \tilde{X}(t_{end})|^2>^{1/2} \le c (\Delta t)^{\nu},
+\end{equation*}
+then we say that the approximation scheme converges strongly with
+order $\nu$. 
+The above criterion is simply the generalization of the usual 
+deterministic convergence criterion and reduces to it when the 
+diffusion coefficient vanishes and the initial condition is
+deterministic (\cite{KLOEDEN}). 
+The concept of a strongly  convergent scheme is relevant for the
+following reason: A strongly convergent scheme gives 
+approximations to the individual trajectories of the 
+stochastic process. This is very important when the simulation is 
+expected to resolve characteristic features of the trajectories of 
+a stochastic process.
+
+It can be shown that the Euler scheme  has strong 
+order of convergence $\nu = 0.5$. Thus the oder of strong 
+convergence of the stochastic Euler scheme is quite poor.
+
+Fortunately, quite often one is not interested in constructing the 
+individual realizations of the stochastic process but only in some 
+averaged quantities, e.g., in some moments of the stochastic 
+process. This is always the case, when the stochastic differential 
+equation is regarded as an efficient numerical tool for the
+solution of a given Fokker--Planck equation. Namely, the latter 
+contains only information about the moments of the stochastic 
+process and not about the trajectories themselves. In these cases
+one is interested in the {\em weak} solutions of stochastic 
+differential equations. An approximation scheme is said to 
+converge weakly with order $\nu$ at time $t_{end}$ if for 
+sufficiently smooth functions $g$ there exists a positive constant 
+$c$, which does not depend on $\Delta t$ such that for 
+sufficiently small $\Delta t$ we have
+\begin{equation*}
+|<g(X(t_{end})> - <g(\tilde{X}(t_{end}))>| \le c (\Delta t)^{\nu}.
+\end{equation*}
+Under suitable smoothness conditions for the functions $g$ the 
+Euler scheme can be shown to have order of weak convergence 
+$\nu=1$.
+
+As a first example of the application of the Euler algorithm
+we consider again the Ornstein--Uhlenbeck process.
+The implementation of the stochastic Euler algorithm has been 
+realized in the program \texttt{sdeornstein}.
+
+\subsubsection{Listing of the program \texttt{sdeornstein.m}}
+\inputlisting{./Listings/sdeornstein.m}
+
+The algorithm is very similar to the algorithm for the generation 
+of exact trajectories of the Ornstein--Uhlenbeck process. 
+Instead of looking at the realizations we estimate the expectation
+value for $<X^2>$ at the fixed final time \texttt{tend=4} 
+(\texttt{tstart=0}). Choosing $q=1$ and $D=1$ the exact value of
+$<X^2(t=4)>$ is expected to be
+\begin{equation*}
+<X^2(t=4)> = \frac{1}{2}(1-\exp(-8)) = 0.4998.
+\end{equation*}
+Since we know from the general discussion of the Euler algorithm
+that the expecation values converge to the exact result linearly 
+with the time step we have included in the program a \texttt{for}
+loop over \texttt{istep} time steps \texttt{deltat} to see explicitely this
+dependence. At the end of the simulation we perform a linear fit
+of the results with the help of the function \texttt{polyfit} in 
+order to be able to extrapolate the results to $\Delta t =0$.
+
+The results of the simulation for 50.000 realizations 
+and \texttt{deltat=0.2, 0.1, 0.05, 0.025} are summarized in the following 
+table 
+\begin{table}
+\caption{Results of the simulation of the Ornstein--Uhlenbeck 
+process with the stochastic Euler method for different values of 
+the time step. The parameters of the Ornstein-Uhlenbeck process
+are \texttt{q=1}, \texttt{D=1}. The simulation was run from
+\texttt{tstart=0} to \texttt{tend=4} for 50000 realizations.
+The timesteps used are \texttt{deltat=0.2, 0.1, 0.05, 0.025}.}
+\begin{center}
+\begin{tabular}{|c|c|c|} \hline \hline
+$\Delta t$ & $<X^2>$ & $\sigma$ \\ \hline \hline
+0.2      & 0.557979 & 0.00354552 \\ \hline
+0.1      & 0.523506 & 0.00331771  \\ \hline
+0.05     & 0.511591 & 0.00322181  \\ \hline
+0.025    & 0.506859 & 0.00320129  \\ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+The same data have been plotted in Fig. (\ref{F_SDEORN_50}).
+\begin{figure}
+\label{F_SDEORN_50}
+\includegraphics[width=10cm]{./Figures/f_sdeorn_50.eps}
+\caption{Results of the simulation of the Ornstein--Uhlenbeck 
+process with the stochastic Euler method for different values of 
+the time step. The parameters of the Ornstein-Uhlenbeck process
+are \texttt{q=1}, \texttt{D=1}. The simulation was run from
+\texttt{tstart=0} to \texttt{tend=4} for 50000 realizations.
+The timesteps used are \texttt{deltat=0.2, 0.1, 0.05, 0.025}.} 
+\end{figure}
+The figure clearly shows the expected linear convergence of the 
+estimate to the expected exact result. The linear extrapolation 
+leads to the eximate $<X^2>|_{t=4}=0.497182$, which is in very 
+good agreement with the expected exact result. The simulation took
+1729 sec on the laptop.
+
+The extra value of 
+
+
 
 
 \bibliographystyle{peter}
