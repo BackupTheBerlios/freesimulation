@@ -315,6 +315,21 @@ to compute time--dependent expectation values and multi--time
 correlation functions. Because of its importance, it is sometimes
 named the {\em master equation} in the physical literature.
 
+
+Let us end this subsection with an overview of this chapter. In Fig. 
+(\ref{F_CHAP$_OVERVIEW}) we have schematically summerized the theory
+of stochastic processes.  Particular emphasis is given to Markov
+processes
+which will be at the center of the present and of the next chapters.
+In the next section we will construct
+the differential Chapman--Komogorov equation for deterministic Markov 
+processes, for jump processes and for diffusion processes.
+\begin{figure}
+\label{F_CHAP$_OVERVIEW}
+\includegraphics[width=10cm]{./Figures/f_chap4_overview.eps}
+\caption{Overview of the theor of stochastic processes.}
+\end{figure}
+
 \section{The Liouville equation}
 Let us consider a physical system whose dynamics is described
 by a system of ordinary differential equations of first order
@@ -657,6 +672,7 @@ The master equation for the radioactive decay is a simple example
 of the master equation for a one--step process. We will consider
 such stochastic processes in more detail in later chapters.
 
+
 \section{The Fokker--Planck equation}
 In this section we want to derive the Fokker--Planck equation
 (\cite{RISKEN}),
@@ -819,6 +835,172 @@ Hence, the width of the distribution increases with the square
 root of the time. A behaviour which we already know from our 
 discussion of random walks.
 
+
+
+\section{The numerical treatment of master equations}
+In principle there are two ways to treat numerically
+stochastic processes which are defined in terms of master
+equations. In the first approach one solves numerically the
+master equation as a differential equation for the probability
+density. Although this deterministic method is direct we will not consider it 
+here for the following reason. It  turns out that the direct 
+numerical solution of the master equation is not particularly 
+efficient from a computational point of view. The second approach,
+which we will introduce in this section relies upon the simulation 
+of the underlying stochastic process. In other words one considers 
+a particle and lets it jump from one state to another with certain 
+given transition rates. Such a procedure is called the generation 
+of a realization of the stochastic process. If a sufficiently 
+great number of realizations has been generated the interesting 
+statistical quantities can be evaluated as ensemble averages.
+
+In fact the numerical performance of the direct approach gets 
+worse compared to the stochastic simulation with increasing 
+dimension of the system considered. We already met a similar 
+situation when we considered numerical algorithms for the 
+computation of integrals. There the direct integration of 
+multidimensional integrals turned out to be less efficient then 
+the Monte--Carlo integration.
+
+In order to formulate a stochastic simulation algorithm we 
+consider for simplicity the master equation of a one--step 
+process. Sometimes such processes are also called birth--and--death
+processes. The range of such processes consists of all integers
+$n$ and the matrix of the transition probabilities per unit time
+allows only jumps between adjacent sites
+\begin{equation*}
+w(n',n) \neq 0 \;\;\; \text{for} \;\;\; n'=n \pm 1
+\end{equation*}
+and
+\begin{equation*}
+w(n',n) = 0 \;\;\; \text{otherwise}.
+\end{equation*}
+Exploiting the above structure we can write the master equation 
+for the discrete one--dimensional process (\ref{MASTER_JUMP_P_N})
+\begin{equation*}
+\dot{P}(n,t) = w(n,n+1)P(n+1,t) + w(n,n-1)P(n-1,t)
+        -w(n+1,n)P(n,t) -w(n-1,n)P(n).
+\end{equation*}
+Now it is convenient to introduce the following notation
+\begin{eqnarray*}
+r(n+1) \equiv w(n,n+1) \\
+g(n-1) \equiv w(n,n-1),
+\end{eqnarray*}
+so that the master equation for a general one--step process 
+may be written in the following 
+suggestive form
+\begin{equation}
+\label{MASTER_ONE_STEP}
+\dot{P}(n,t) = r(n+1)P(n+1,t) + g(n-1)P(n-1,t)
+        -[r(n)+ g(n)]P(n,t).
+\end{equation}
+
+Let us now assume that at time $t$ the particle is in state
+$n$. The total transition rate to leave this state, i.e. to jump 
+out of this state either to state $n+1$ or to state $n-1$, is 
+given by
+\begin{equation}
+\label{TOTAL_RATE_ONE_JUMP}
+\lambda(n) = r(n) + g(n).
+\end{equation}
+As we already know  the quantity $\lambda(n) dt$ is the 
+probability that the next jump occurs within the infinitesimal 
+time step $dt$. Accordingly the probability that the next jump 
+occurs after $(N+1)$ time steps $dt$ is given by
+\begin{equation*}
+q=[1-\lambda(n)dt]^N \lambda(n)dt,
+\end{equation*}
+where $[1-\lambda(n)dt]^N$ denotes the probability that no jump
+occurs during the first $N$ steps. We now write $(N+1)dt =t$, so 
+that we have
+\begin{equation*}
+q= \left( 1 - \frac{\lambda(n) t}{N+1}\right)^N \lambda(n) dt.
+\end{equation*}
+We now perform the limit $dt \rightarrow 0$ for fixed $t$. This 
+limit implies, of course, $N \rightarrow \infty$ and hence the 
+probability that a jump occurs after time $t$ is given by
+\begin{equation*}
+q= \lambda \exp(-\lambda t) dt = f(t) dt.
+\end{equation*}
+The waiting time distribution for the time of the next jump is an
+exponential distribution.
+It is now clear what we have to do in order to determine in the
+stochastic simulation the time 
+of the next jump.  We simply have to draw random times $\tau$ 
+which are distributed according to the density $f(t)$. Since $f(t)$
+is an exponential distribution, these random times can easily be 
+drawn with the help of the inversion method
+\begin{equation}
+\label{TAU_ONE_STEP}
+\tau = - \frac{1}{\lambda(n)} \log(\xi),
+\end{equation}
+where $\xi$ is a uniformly distributed random number on the 
+interval $[0,1)$. 
+
+Having determined the stochastic time of the
+next jump we still have to decide which transition actually takes 
+place. We have only two possibilities: In case of a jump the 
+particle can reach the state $(n-1)$ with probability
+\begin{equation*}
+y_1 = \frac{r(n)}{\lambda(n)}
+\end{equation*}
+or the state  $(n+1)$ with probability
+\begin{equation}
+y_2 = 1 -y_1 = \frac{g(n)}{\lambda(n)}.
+\end{equation}
+Thus, the algorithm for the simulation of a one--step--process
+reads: \\
+
+(i) Draw a uniformly distributed random number $\xi_1$ on $[0,1)$
+   and compute the random jump time $\tau$ according to 
+   (\ref{TAU_ONE_STEP}). 
+   
+(ii) Draw a uniformly distributed random number $\xi_2$ on 
+$[0,1)$. If the condition $(\xi_2 < y_1)$ is satisfied we set 
+$\nu =+1$.  Otherwise we set $\nu =-1$.
+
+(iii) Advance the process
+\begin{eqnarray*}
+t &\longrightarrow& t+\tau \\
+n & \longrightarrow & n + \nu.
+\end{eqnarray*}
+
+The flow chart of the algorithm can be seen in Fig. 
+(\ref{F_ONESTEP_ALGORITHM}).
+\begin{figure}
+\label{F_ONESTEP_ALGORITHM}
+\includegraphics[width=8cm]{./Figures/f_onestep_algorithm.eps}
+\caption{Flow chart of a stochastic simulation of a 
+    one--step process. The symbols used
+     are explained in the text.}
+\end{figure}
+The algorithm has been implemented in the program {\texttt onestep.m}
+whose listing can be seen below. The program {\texttt onestep.m} makes
+use of a function called {\texttt decayymaster.m} in which the
+transitions rates $g(n)$ and $r(n)$ are specified. In the present case
+we have simulated a radioactive decay process and hence we have
+$g(n) \equiv 0$ and $r(n)= \gamma n$, where $\gamma$ is the decay constant.
+
+\subsubsection{Listing of the program {\texttt onestep.m}}
+\inputlisting{./Listings/onestep.m}
+
+\subsubsection{Listing of the function {\texttt decaymaster.m}}
+\inputlisting{./Listings/decaymaster.m}
+
+In order to simulate a radioactive decay process 
+we have run the program for the following parameters
+{\texttt n0}$=500$, {\texttt tend}$=30$, and {\texttt nreal}$=10$.
+The decay rate is $\gamma=0.1$.
+The result of the simulation can be seen in Fig. (\ref{F_OS_DECAY}).
+
+\begin{figure}
+\label{F_OS_DECAY}
+\includegraphics[width=10cm]{./Figures/f_os_decay.eps}
+\caption{Stochastic simulation of radioactive decay. The initial
+  number of decaying nuclei is {\texttt n0}$= 100$. {\texttt tend}
+is 30 and the ensemble average was taken over 10 realizations.
+The decay rate is $\gamma=0.1$.}
+\end{figure}  
 \section{Beyond this chapter}
 In this chapter we have introduced the key concepts which arise
 in the theory of stochastic processes. The mathematical more 
@@ -835,6 +1017,7 @@ i.e., the kinematics of Markov processes. We have not discussed
 how Markov processes can be derived from some microscopic picture.
 A survey of such techniques can be found in the book by Oppenheim 
 et al. (\cite{OPPENHEIM}).
+
 
 
 \bibliographystyle{peter}
