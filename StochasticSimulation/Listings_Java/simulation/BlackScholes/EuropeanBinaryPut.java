@@ -34,7 +34,6 @@ package simulation.BlackScholes;
  */
 
 import simulation.BlackScholes.*;
-import VisualNumerics.math.*;
 
 /** An european put option. */
 public class EuropeanBinaryPut extends BinaryPut {

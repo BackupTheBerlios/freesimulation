@@ -33,7 +33,6 @@ package simulation.BlackScholes;
  * @version 1.0
  */
 
-import VisualNumerics.math.*;
 
 /** An American one-touch put option. */
 public class AmericanOneTouchPut extends BinaryPut {

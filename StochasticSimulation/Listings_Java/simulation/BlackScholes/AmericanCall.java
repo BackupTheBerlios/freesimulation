@@ -34,7 +34,6 @@ package simulation.BlackScholes;
  */
 
 import simulation.BlackScholes.*;
-import VisualNumerics.math.*;
 
 /** An American call option. */
 public class AmericanCall extends Call {

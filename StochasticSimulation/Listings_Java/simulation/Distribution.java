@@ -141,10 +141,18 @@ public class Distribution {
  	while (x2==0) { x2=rand.nextGaussian(); }
 	return x1/x2;
    }
+
   /** Generate Poisson distributed random numbers using
       transformation method. lambda is the parameter.
    */
   public static int nextPoisson(Random rand,int lambda) {
+      double lambdaD = (double)lambda;
+      return nextPoisson(rand, lambdaD);
+  }
+  /** Generate Poisson distributed random numbers using
+      transformation method. lambda is the parameter.
+   */
+  public static int nextPoisson(Random rand,double lambda) {
     double A=0;
     int k=0;
     double dummy;

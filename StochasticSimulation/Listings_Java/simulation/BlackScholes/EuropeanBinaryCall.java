@@ -34,7 +34,6 @@ package simulation.BlackScholes;
  */
 
 import simulation.BlackScholes.*;
-import VisualNumerics.math.*;
 
 /** An european call option. */
 public class EuropeanBinaryCall extends BinaryCall {

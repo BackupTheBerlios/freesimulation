@@ -108,4 +108,25 @@ public final class Statistics {
 	return sum(array, array.length);
     }
 
+    // ----------------------------------------------------------
+
+    /** Calculate the maximum of an double array. 
+	@param array  double values = array
+    */
+    public static double maximum ( double[] array ) {
+	double maximum;
+	int length = array.length;
+
+	maximum = array[0];
+	if (length > 1) {
+	    for (int i=1; i<length; i++) {
+		if (array[i]>maximum) {
+		    maximum = array[i];
+		}
+	    }
+	}
+
+	return maximum;
+    }
+
 }

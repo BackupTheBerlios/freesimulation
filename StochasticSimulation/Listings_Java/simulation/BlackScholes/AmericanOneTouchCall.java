@@ -33,7 +33,6 @@ package simulation.BlackScholes;
  * @version 1.0
  */
 
-import VisualNumerics.math.*;
 
 /** An American one-touch call option. */
 public class AmericanOneTouchCall extends BinaryCall {
