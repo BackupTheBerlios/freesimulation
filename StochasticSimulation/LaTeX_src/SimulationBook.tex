@@ -5,7 +5,15 @@
 %%%   SS 1998  PD Dr. F. Petruccione  
 %%%
 %%%
-%%% (LaTeX2e Code: P. Biechele) 
+%%% (LaTeX2e Code: Dr. P. Biechele) 
+%%%
+%%%
+%%% ATTENTION: Pool Size has to be extended from 70000 !!
+%%% for TeTeX user: kpsewhich texmf.cnf
+%%%                 edit the respective texmf.cnf and change line: 
+%%%                     pool_size= to pool_size=200000
+%%%                 texconfig init
+%%%
 %%%
 %%%
 \documentclass[fleqn,10pt,a4paper,openright]{book}
@@ -21,6 +29,9 @@
 
 %%% USE POSTSCRIPT FONTS (NOT TeX Fonts)
 \usepackage{times,helvet}
+
+%% Dimensions of paper
+\usepackage{a4wide}
 
 %%% AMS LaTeX Extensions + Fonts 
 \usepackage{amssymb}
@@ -41,8 +52,11 @@
 %%% Change floating table layout
 %%% can also be used for new floating objects or figures
 \usepackage{float}
-%%% rotating   : Drehen von Bildern/Tabllen/Sonstigem
-\usepackage{rotating}
+
+%%% rotating   : Drehen von Bildern/Tabellen/Sonstigem
+%%%\usepackage{rotating} %% DONT USE IT ANYMORE: OLD and ERRORS !
+%% instead of rotating use lscape package (together with graphicx)
+\usepackage{lscape}
 
 %%% caption2   : Erweiterte Anpassungen der Captions
 %% use small captions and boldface caption labels
@@ -52,7 +66,12 @@
 %%% Use this package to correct the behaviour of the float
 %%% package together with the caption/caption2 package 
 %%% inparticular the sidewaystable environment
+%%
+%% DOES NOT WORK and IS NOT NECESSARY WITH LSCAPE  !!!!
+%%
 %\usepackage[figuresright]{rotfloat}
+
+
 %%% has to be done AFTER both: rotfloat and float have been loaded
 \floatstyle{ruled}
 \restylefloat{table}
@@ -213,8 +232,8 @@
 
 %\usepackage[extension=pdf,hyperfigures,hyperindex,%
 %baseurl={http://phym1.physik.uni-freiburg.de/\string~frpe/},%
-%pdftitle={Manuskript for Stochastic Simulations in Physics},%
-%pdfauthor={PD Dr. F. Petruccione, P. Biechele},%
+%pdftitle={Manuscript for Stochastic Simulations in Physics using Java},%
+%pdfauthor={PD Dr. F. Petruccione, Dr. P. Biechele},%
 %pdfsubject={Stochastic Simulation},%
 %pdfkeywords={Physics,Stochastics,Simulation,Computer},%
 %pagebackref,bookmarks,colorlinks,raiselinks,plainpages,dvips]{hyperref}
@@ -234,9 +253,12 @@
 %%%%%   Which part should be compiled by TeX
 %\includeonly{IntroToJava,ObjectOriented,PlottingWithJava}%,%
 %  DataAnalyis,AppendixMainText}
-\includeonly{StochasticVariables}
+%%\includeonly{StochasticVariables,DataAnalysis,SamplingOfProbDists,%
+%% MarkovProcesses,SDE, Chap7,Chap8,Chap9}
 
 %\includeonly{CD_ROM,Chap7,Chap8,Chap9,Listings,Solutions}
+
+%\includeonly{GNU_Docu_License,GNU_Software_License}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,10 +277,55 @@
 %%%\definecolor{red}{gray}{0.02}
 \definecolor{tabgray}{gray}{0.6} %% the gray for table rows
 
-% Title and Author
-\title{Stochastic Methods For Physics Using Java: \\ An Introduction}
-\author{F. Petruccione and P. Biechele}
-\maketitle
+%%%%%%%%%%%%%
+%%%%%%%%%%%%% Design our own Titlepage !!
+%%%%%%%%%%%%%
+\begin{titlepage}
+
+%% Title 
+\begin{center}
+\huge 
+\textcolor{red}{
+\textbf{
+Stochastic Methods For Physics Using Java: \\
+An Introduction
+} }
+\end{center}
+\vspace*{.5cm}
+
+%% Authors
+\begin{center}
+\LARGE
+\textcolor{blue}{
+\textsc{F. Petruccione and P. Biechele }}
+\end{center}
+\vfill
+\textsf{\LARGE Version 0.3}
+\vfill
+%% Copyright 
+\begin{center}
+\large
+  Copyright (c)  2000  Francesco Petruccione and Peter Biechele \\
+      Permission is granted to copy, distribute and/or modify this document
+      under the terms of the GNU Free Documentation License, Version 1.1
+      or any later version published by the Free Software Foundation;
+      with no Invariant Sections, with the
+      Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+      A copy of the license is included in the section entitled "GNU
+      Free Documentation License".\\
+      All programs contained herein are under the GNU GPL.
+\end{center}
+\vspace*{.5cm}
+
+%% Date
+\begin{center}
+\large
+\textsf{Version of the \today}
+\end{center}
+
+\end{titlepage}
+%% End Of Titlepage
+
 
 % Inhaltsverzeichnis !!!! -- Römische Seitennummerierung
 \pagenumbering{Roman}
@@ -305,22 +372,22 @@
 \part{Advanced Simulation Techniques}
 
 %%% Chapter 7 
-\include{Chap7}
+\include{MolecularDynamics}
 
 %%% Chapter 8 
-\include{Chap8}
+\include{MonteCarlo}
 
 %%% Chapter 9 
-\include{Chap9}
+\include{NonEquilibriumMC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PART V
 \part{Applications}
 
 %%% Chapter 10
-\include{Chap10}
+\include{QuantumMechanics}
 
 %%% Chapter 11
-\include{Chap11}
+\include{RiskManagement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices
 \appendix
@@ -332,19 +399,23 @@
 \include{AppendixMainText}
  
 % Listings of programs
+%%% ??? Hyperref Problems with the refs in the sectionings !
 \include{Listings}
 
 % Solutions to exercises
 \include{Solutions}
 
 
+% GNU Licenses
+\include{GNU_Docu_License}
+\include{GNU_Software_License}
 
 %%%%%%%%%%%%%%%%%%%%%%% 
 
 % Bibliographien
 %% These commands are ignored by the chapterbib package
-%%\bibliographystyle{peter}
-%%\bibliography{V_98,simulit}
+%\bibliographystyle{peter}
+%\bibliography{V_98,simulit}
 
 %%\addtocontents{toc}{\protect\vspace{1.5ex}}
 %%\addcontentsline{toc}{chapter}{\protect\numberline{}Bibliography}
@@ -357,15 +428,4 @@
 \printindex
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
 
