@@ -452,18 +452,24 @@ in the \verb|Graphics| object \verb|g|.
 Other typical methods are shown in table \ref{tab:GraphicsMethods}.
 \begin{table}[htbp]
   \begin{center}
-    \begin{tabular}{c|l}
+    \begin{tabular}{c|p{3.2cm}}
       Method & Purpose \\\hline\hline
-      \verb|drawLine()| & Draw a line or point.\\
-      \verb|drawRect()| & Draw a rectangle \\
-      \verb|fillRect()| & Draw a filled rectangle. \\ 
-      \verb|drawArc()| & Draw a part of a circle. \\
-      \verb|fillArc()| & Draw and fill the arc. \\
-      \verb|drawPolygon(int[], int[], int)| & 
+      \verb|drawLine(x1, y1, x2, y2)| & Draw a line or point.\\
+      \verb|drawRect(x, y, width, height)|& Draw a rectangle \\
+      \verb|fillRect(x, y, width, height)| & Draw a filled rectangle. \\ 
+      \verb|clearRect(x, y, width, height)| & Clear a rectangle area. \\ 
+      \verb|drawArc(x,y,width,height,Angle0,arc)| & Draw a part of a circle. \\
+      \verb|fillArc(x,y,width,height,Angle0,arc)| & Draw and fill the arc. \\
+      \verb|drawPolygon(int[] x, int[] y, nPoints)| & 
          Draw a polygon with the given points. \\
-      \verb|fillPolygon()| & The same, but it also fills it with a color.\\    
+      \verb|fillPolygon(int[] x, int[] y, nPoint)| & 
+         Same, but fills it with a color.\\    
+      \verb|copyArea(x, y, width, height, dx, dy)| & Copy an area by dx/dy.\\
+      \verb|drawString(String text, x,y)| & Draw text at the position.\\
+      \verb|translate(x,y)| & Translate the origin. \\
     \end{tabular}
     \caption{List of some of the methods contained in the Graphics class.
+      All method arguments are of type integer, unless otherwise stated.
       More methods are available in the much more powerful Java2D API
       coming with Java2.}
     \label{tab:GraphicsMethods}
@@ -593,9 +599,17 @@ are in lines 28 to 33. In the \verb|init()| method we invoke the method
 \verb|super.newPlot()| to create a new plot, \verb|super.init()| to
 initialize it and \verb|plot().setTitle| to give the plot a title.
 
-A second possibility of using Ptplot, which we prefer to use, is to change the 
-lines 28 to 33 with:
+A second possibility of using Ptplot, which we prefer to use, is to extend
+the \verb|Applet| class instead of the \verb|PlotApplet| class and 
+change the lines 28 to 33 to:
 \lstinputlisting[first=28,last=33]{Listings_Java/Ptplot_Demo2.java}
+The difference is that the \verb|PlotApplet| class realizes a kind
+of interface for an applet to start plot commands confirming to the
+pxgraph commands and executes them from parameters given in the applet.
+Pxgraph is a program for the X windows system to plot data using
+batch files like gnuplot. The full pxgraph functionality is
+included in the ptplot package and can be used. For further documentation
+concerning this point, please refer to the ptplot documentation.
 
 Next we want to draw the results of the simulation of the radioactive
 decay process with the help of Ptplot and learn at the same time how
@@ -662,7 +676,8 @@ Although this is the most common way of using ptplot in this book, there
 is another feature coming with ptplot. It can read data files and plot
 the data. For this you have to write a script, which contains the
 commands for the plot to be created. This scripting language
-is borrowed from the \emph{pxgraph} program. It is like using GNUPlot with
+is borrowed from the \emph{pxgraph} program. It is like using ``gnuplot''
+ with
 its scripting facilities. For details you can look at the 
 documentation coming with the ptplot package. For us it will be
 easier to read the files into Java and then use ptplot to plot it on 
@@ -690,7 +705,7 @@ supply data directly to \verb|SciVis|.
 
 At the moment, the best solution is to write the data to a file
 and use an external program available to you. The most common
-denominator would possibly be GNUPlot, which is available for many
+denominator would possibly be ``gnuplot'', which is available for many
 different platforms and can create a lot of different 3D plots.
 
 Since Java 2, there is a new (external) API -- not included in the JDK 1.2
@@ -701,10 +716,41 @@ With this API it seems to be possible to write a fairly easy
 3D plotting program in the near future. So this lack of features
 in Java for the scientist should be gone soon. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Using (system dependent) external programs like gnuplot}
+There is a last way of obtaining 3D plots ``in Java'': You can use
+an external program like Gnuplot or any other command line tool and
+call it from a Java program. This of course is not system independent
+and is not recommended unless you are desperatly needing it.
+
+In Java there is a class called \verb|Runtime| in the \verb|java.lang|
+package, which consists of all kind of methods to change and
+use the environement you are running your Java program in. This can be used
+to start a subprocess of the running Java program. So starting an
+external process from a Java program can be done in two steps:
+\begin{itemize}
+\item Get a \verb|Runtime| object of the running Java program.
+\item Start a new process as a subprocess of the given \verb|Runtime| object.
+  You have to use the \verb|exec(String)| instance method of the  \verb|Process|
+  class for this. 
+\end{itemize}
+You can also read the standard output of the subprocess and use it in your 
+Java program. To demonstarte how it actually works, we give two examples:
+\begin{enumerate}
+\item A Java program starts a Gnuplot program, which plots a sine curve.
+  \inputlisting{Listings_Java/Gnuplot.java}
+\item A Java program executes a ``ls -al'' command on a UNIX machine,
+  which just gives the directory listing. For a Windows system you just
+  use the ``dir'' command instead.
+  \inputlisting{Listings_Java/DirectoryListing.java}
+  This time we also wait for the execution of the process to finish and 
+  then read the standard output and display it on the screen.
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Printing in Java and with Ptplot}
 Now that we have learned how to make plots in Java, it is of great
-importance to get a printed version of our graphics. And even for
+importance to get a printed version of our graphics. For
 this purpose Java has commands for initiating a print job and preparing
 the output for the printer. Java always produces potscript output.
 Because the procedure has changed
@@ -750,8 +796,8 @@ in the simulation package.
 
 So if you want to print a component scaled to the full size, you use
 the \verb|PrintComponent.Dialog()| method in the simulation package.
-It scales your component to the full size (no matter if it should be
-on a portrait or landscape page) and sends the scaled picture to the
+It scales your component to the full size -- no matter if it should be
+on a portrait or landscape page -- and sends the scaled picture to the
 printer or a postscript file. After printing it scales back to the
 size it had before. The whole code above could therefore be
 substituted by the line
@@ -763,6 +809,10 @@ substituted by the line
 Because most of the time you need postscript (or EPS) files of the
 created plots or graphics, this is the most common use of the
 printing features for a scientist.
+
+A second method of the \verb|simulation| class called \verb|DialogNoScaling()|
+can be used to produce unscaled output of the component or container.
+I thas the same syntax as the \verb|Dialog()| method before.
 
 There is one caveat to mention: if you are going to insert the
 produced postscript files into TeX/LaTeX, you will have to do
@@ -829,17 +879,26 @@ The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and
 (\ref{FIG_DECAYB}).
 \begin{figure}
 \label{FIG_DECAYA}
-\includegraphics[width=10cm]{Figures/f_decaya.eps}
-\caption{A realization of the stochastic process of radioactive decay.
-The parameters of the simulation were $N_0 = 100; 
-\quad p = 0.01 s^{-1}; \quad \Delta t = 1s;  \quad tend = 300s$}
+\begin{center}
+\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_1.eps}\\
+\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_2.eps}
+\end{center}
+\caption{Two realizations of the stochastic process of the radioactive decay.
+The first one with linear y axis scaling and the second one uses a logarithmic
+y axis scaling. The blue lines are the exact solution and the red ones
+are the simulations.
+The parameters of the simulation were choosen to be $N_0 = 100; 
+\quad p = \lambda \Delta t = 0.01 s^{-1}; \quad \Delta t = 1\text{s};
+\quad t_{\text{end}} = 300\text{s}$}
 \end{figure}
 \begin{figure}
 \label{FIG_DECAYB}
-\includegraphics[width=10cm]{Figures/f_decayb.eps}
-\caption{A realization of the stochastic process of radioactive decay.
-The parameters of the simulation were $N_0 = 1000; 
-\quad p = 0.03 s^{-1}; \quad \Delta t = 1s;  \quad tend = 100s$}
+\begin{center}
+\includegraphics[angle=-90,width=11cm,clip]{Figures/RadioactiveDecay_3.eps}\\
+\end{center}
+\caption{The same as figure \ref{FIG_DECAYA}, but with different parameters:
+$N_0 = 1000; \quad p = \lambda \Delta t = 0.03 s^{-1}; 
+\quad \Delta t = 1\text{s};  \quad t_{\text{end}} = 100\text{s}$}
 \end{figure}
  It is 
 immediately recognized that the simulation results fluctuate around 
@@ -853,7 +912,8 @@ a simple modification of the program \verb|RadioactiveDecay_ptplot.java|.
 \verb|nreal| and accordingly implement a loop over the different 
 realizations. This can be best seen in the listing of the 
 new program \verb|RadioactiveDecay_ptplot2.java|.
-\lstinputlisting[first=61,last=63]{Listings_Java/RadioactiveDecay_ptplot2.java}
+\lstinputlisting[first=61,last=63]%
+          {Listings_Java/RadioactiveDecay_ptplot2.java}
 
 At the end of the realizations loop
 we have to perform the average. This is seen in lines 61 to 63.
