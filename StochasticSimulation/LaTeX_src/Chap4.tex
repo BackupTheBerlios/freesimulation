@@ -910,7 +910,7 @@ which evidently is a Poisson distribution. As we know the
 characteristic function allows the determination of all moments of 
 the stochastic process through the relation
 \begin{equation*}
-\langle n(t)^m(t) \rangle = \left. 
+\langle n^m(t) \rangle = \left. 
        \left( -i \frac{\partial}{\partial s} \right) G(s,t)  
        \right|_{s=0}.
 \end{equation*}
@@ -1027,11 +1027,12 @@ r(n) =g(n) =q.
 \end{equation*}
 Thus the master equation for the continuous time random walk
 reads
-\begin{eqnarray*}
+\begin{eqnarray}
+\label{MASTERWALK}
 \frac{\partial}{\partial t} P(n,t|n',t') &=& 
        q \left\{ P(n+1,t|n',t') + P(n-1,t|n',t')\right. \\
-       && \left.  - 2 P(n,t|n',t')  \right\}.
-\end{eqnarray*}
+       && \left.  - 2 P(n,t|n',t')  \right\}. \nonumber
+\end{eqnarray}
 Again the above master equation is easily solved with the help of 
 the characteristic function $G(s,t)$. It is easy to check that the
 characteristic function satisfies the equation
@@ -1079,7 +1080,7 @@ distance travelled by the walker $x=nl$. The characteristic
 function as a function of $x$ reads
 \begin{eqnarray*}
 \tilde{G}(s,t) &=& G(sl,t) = \langle \exp(ixs) \rangle \\
-                &=& \exp\{[\exp(ils) + \exp(ils)-2]tq \}.
+                &=& \exp\{[\exp(ils) + \exp(-ils)-2]tq \}.
 \end{eqnarray*}
 The limit of infinitesimally small steps $l \longrightarrow 0$ 
 leads to
@@ -1092,7 +1093,7 @@ where
 D=\lim_{l\rightarrow 0} (l^2q).
 \end{equation*}
 The quantity $D$ can be interpreted as the mean square distance 
-travelled  per unit time.  The characteristic function (\ref{CHAR_WALK_X})
+traveled  per unit time.  The characteristic function (\ref{CHAR_WALK_X})
 is the characteristic function of a Gaussian process of the form
 \begin{equation*}
 P(x,t|0,0) = \frac{1}{(4\pi Dt)^{1/2}} \exp\left( -x^2/4Dt 
@@ -1105,7 +1106,7 @@ Wiener process in more detail in the next section.
 
 The following remark may serve as an introduction to the next 
 section. Of course, we can also expand directly the master equation
-(\ref{MASTER_WALK}) as a function of $x$ up to second order terms 
+(\ref{MASTERWALK}) as a function of $x$ up to second order terms 
 in $l$ and get
 \begin{equation*}
 \frac{\partial}{\partial t} P(x,t|0,0) =
@@ -1138,7 +1139,7 @@ vary slowly with $y$. To be more precise we assume that a $\delta >0$
 exists such that
 \begin{eqnarray*}
 w(y';r)  & \approx & 0 \;\;\; \text{for} \;\;\; |r|> \delta \\
-w(y'+\Delta y;r) & \approx & w(y';r) \;\;\; \text{for} |\Delta y| < 
+w(y'+\Delta y;r) & \approx & w(y';r) \;\;\; \text{for} \;\;\; |\Delta y| < 
 \delta.
 \end{eqnarray*}
 The second assumption is that the solution $P(y,t)$ of the master equation 
@@ -1222,18 +1223,18 @@ when we considered the continuous space limit of the the
 continuous time random walk.
 Now we want to write down this Fokker--Planck equation in the form
 \begin{equation*}
-\frac{\partial}{\partial t}P(w,t|w',t') =
-  \frac{1}{2} \frac{\partial^2}{\partial x^2} P(w,t|w',t').
+\frac{\partial}{\partial t}T(w,t|w_0,t_0) =
+  \frac{1}{2} \frac{\partial^2}{\partial x^2} T(w,t|w_0,t_0).
 \end{equation*}
 The above equation can easily be solved with the help of the 
 characteristic function
 \begin{equation*}
-G(s,t) = \int dw P(w,t|w_0,t_0) \exp(isw),
+G(s,t) = \int dw T(w,t|w_0,t_0) \exp(isw),
 \end{equation*}
 where we have assumed that the initial condition on the transition 
 probability is
 \begin{equation*}
-P(w,t_0|w_0,t_0) = \delta(w-w_0).
+T(w,t_0|w_0,t_0) = \delta(w-w_0).
 \end{equation*}
 The characteristic function satisfies the equation
 \begin{equation*}
@@ -1247,7 +1248,7 @@ Performing the inverse Fourier transformation of the above
 expression we find the transition probability
 \begin{equation}
 \label{TRANS_WIENER}
-P(w,t|w_0,t_0)= \frac{1}{[2 \pi (t-t_0)]^{1/2}}
+T(w,t|w_0,t_0)= \frac{1}{[2 \pi (t-t_0)]^{1/2}}
      \exp\left[ -(w-w_0)^2/2(t-t_0)\right].
 \end{equation}
 Thus, the transition probability density is a Gaussian with
@@ -1266,19 +1267,19 @@ soon.
 
 Although the paths of the Wiener process are continuous they are 
 not differentiable since the derivative at any point is 
-almost certainly infinite \cite{GARDINER}.
+almost certainly infinite (\cite{GARDINER}).
 
 The Wiener process plays a central role in the description of 
 diffusion processes by means of stochastic differential equations.
 The reason is that the increments of the Wiener process
 \begin{equation*}
-\Delta W_i \equiv W(t_i) - W(t_i-1) 
+\Delta W_i \equiv W(t_i) - W(t_{i-1}) \equiv W_i -W_{i-1} 
 \end{equation*}
 are statistically independent. This can be seen in the following 
 way. Let us consider the joint probability density
 \begin{eqnarray*}
 P(w_n,t_n; w_{n-1},t_{n-1}; \ldots ; w_0,t_0) &=&
-\prod_{i=0}^{n-1} P(w_{i+1},t_{i+1}|w_i,t_i) P(w_0,t_0).
+\prod_{i=0}^{n-1} T(w_{i+1},t_{i+1}|w_i,t_i) P(w_0,t_0).
 \end{eqnarray*}
 Exploiting the explicit form of the transition probabilities
 (\ref{TRANS_WIENER}) the above joint probability density can be 
@@ -1296,20 +1297,20 @@ equation reads
 \begin{eqnarray*}
 \lefteqn{
 P(\Delta w_n,\Delta t_n; \Delta w_{n-1},\Delta t_{n-1}; \ldots ; w_0,t_0) =} \\
-& &\prod_{i=0}^{n-1} 
+& &\prod_{i=1}^{n} 
 \left\{ \frac{1}{[2 \pi \Delta t_i)]^{1/2}}
 \exp[-\Delta w_i^2/2 \Delta t_i]
 \right\}
 P(w_0,t_0),
 \end{eqnarray*}
-where we have introduced
+where we have introduced the variables
 \begin{equation*}
-\Delta t_i = t_{i+1} - t_i.
+\Delta t_i = t_{i} - t_{i-1}.
 \end{equation*}
 Thus, the increments $\Delta W_i$ are evidently statistically
 independent and are distributed according to
 \begin{equation*}
-P(\delta w,\Delta t) = \frac{1}{[2 \pi \Delta t)]^{-1/2}}
+P(\Delta w,\Delta t) = \frac{1}{[2 \pi \Delta t)]^{1/2}}
 \exp[-\Delta w^2/2 \Delta t].
 \end{equation*}
 
@@ -1320,9 +1321,9 @@ by
 \begin{equation*}
 X \equiv {\bf N}(m,\sigma^2).
 \end{equation*}
-In particular we will name the random variable $\eta$
+In particular we will name the random variable $\xi$
 \begin{equation*}
-\eta \equiv {\bf N}(0,1)
+\xi \equiv {\bf N}(0,1)
 \end{equation*}
 the unit normal random variable. In this notation we can write
 for the Wiener $W(t)$ process
@@ -1343,7 +1344,7 @@ a +b {\bf N}(m,\sigma^2) = {\bf N} ( a+bm, b^2\sigma^2).
 \end{equation*}
 In particular we have for a unit normal random variable
 \begin{equation*}
-a+b\eta = {\bf N}(a,b^2).
+a+b\xi = {\bf N}(a,b^2).
 \end{equation*}
 Second, if ${\bf N}(m_1,\sigma_1^2)$ and ${\bf N}(m_2,\sigma_2^2)$ 
 are statistically independent, then
@@ -1359,9 +1360,9 @@ random variable transformation theorem.
 With the help of the first above rule it is clear that the 
 increment $\Delta W$ can be expressed as
 \begin{equation*}
-\Delta W = \sqrt{\Delta t} \eta,
+\Delta W = \sqrt{\Delta t} \xi,
 \end{equation*}
-where $\eta$ is the unit normal random variable.
+where $\xi$ is the unit normal random variable.
 
 Let us now generate numerically some realizations of the Wiener 
 process. To this end we need a way of calculating for a given 
@@ -1372,7 +1373,7 @@ is exact for any positive value of $\Delta t$ (\cite{GILLESPIE}).
 The algorithm exploits the fact that we know analytically the
 conditional transition probability density. $T(w,t|w',t')$ is a 
 Gaussian  with  mean $w'$ and variance $\sigma^2=2(t-t')$.
-Accordingly, given $W(t)$ the increment $\delta W(t)$
+Accordingly, given $W(t)$ the increment $\Delta W(t)$
 \begin{equation}
 \label{ADVANCE_WIENER}
 W(t+\Delta t) = W(t) + \Delta W(t)
@@ -1450,7 +1451,7 @@ process.
 Again, we can look at the equation of motion for the characteristic
 function of the Ornstein--Uhlenbeck process
 \begin{equation*}
-G(s,t) = \int_{-\infty}^{\infty} \exp(isx) T(x,t|x',t').
+G(s,t) = \int_{-\infty}^{\infty} dx \exp(isx) T(x,t|x',t').
 \end{equation*}
 The equation reads
 \begin{equation*}
@@ -1459,26 +1460,27 @@ G(s,t) - \frac{1}{2} Ds^2 G(s,t).
 \end{equation*}
 The above partial differential equation may be solved by the 
 method of characteristics (\cite{GARDINER}). Its solution
-for $T(x,0|x',0)=\delta(x-x')$ requires the
+for $T(x,t_0|x_0,t_0)=\delta(x-x_0)$ requires the
 initial condition 
 \begin{equation*}
-G(s,0) = \exp(ix's)
+G(s,0) = \exp(ix_0s)
 \end{equation*}
 and reads
 \begin{equation*}
-G(s,t) = \exp\left[ -\frac{Ds^2}{4q}[1-\exp(-2qt)] + isx'\exp(-qt) 
+G(s,t) = \exp\left[ -\frac{Ds^2}{4q}[1-\exp(-2q(t-t_0))] + 
+ isx'\exp(-q(t-t_0)) 
 \right].
 \end{equation*}
 Hence, the transition probability $T(x,t|x',0)$ is a Gaussian
 with mean
 \begin{equation}
 \label{MEAN_ORNSTEIN}
-\langle X(t) \rangle = x'\exp(-qt)
+\langle X(t) \rangle = x_0\exp(-q(t-t_0))
 \end{equation}
 and variance
 \begin{equation}
 \label{VAR_ORNSTEIN}
-\text{Var} \{ X(t) \} = \frac{D}{2q} [1- \exp(-2qt)].
+\text{Var} \{ X(t) \} = \frac{D}{2q} [1- \exp(-2q(t-t_0))].
 \end{equation}
 Since the Ornstein--Uhlenbeck process is a Gaussian process we can write
 \begin{equation*}
@@ -1502,14 +1504,14 @@ exact for any positive value of the time increment $\Delta t$
 replace in Eqs. (\ref{MEAN_ORNSTEIN}) and (\ref{VAR_ORNSTEIN})
 for the mean and variance of the Ornstein--Uhlenbeck process
 $t$ by $t+\Delta t$ and $t_0$ by $t$ and accordingly $x_0$ by
-$X(t)$. Since we now that the Ornstein--Uhlenbeck process
-is gaussian distributed it is now clear that the update
+$X(t)$. Since we know that the Ornstein--Uhlenbeck process
+is Gaussian distributed it is now clear that the update
 formula reads
 \begin{equation}
 X(t+\Delta t) = X(t) \exp(-qt) 
-+ \left[ \frac{D}{2q} [1-exp(-2q\Delta t)] \right]^{1/2} \eta,
++ \left[ \frac{D}{2q} [1-exp(-2q\Delta t)] \right]^{1/2} \xi,
 \end{equation}
-where $\eta$ is a Gaussian distributed random number with zero 
+where $\xi$ is a Gaussian distributed random number with zero 
 mean and unit variance. Since we know how to generate Gaussian 
 distributed random numbers the algorithm for the generation of 
 realizations of the Ornstein--Uhlenbeck process with diffusion constant
@@ -1519,7 +1521,7 @@ $D$ and inverse relaxation time $q$ reads
 
 (ii) Compute the constant coefficients 
 \begin{equation*}
-\mu \equiv \exp(-qt)
+\mu \equiv \exp(-q \Delta t)
 \end{equation*}
 and
 \begin{equation*}
@@ -1532,8 +1534,8 @@ and
 (iv) Replace $t$ by $t+\Delta t$. Terminate the simulation if $t$
 exceeed $t_{\text{end}}$.
 
-(v) Generate a gaussian distributed random number $\eta$ and 
-update the process replacing $X$ by $\mu X + \sigma \eta$.
+(v) Generate a Gaussian distributed random number $\xi$ and 
+update the process replacing $X$ by $\mu X + \sigma \xi$.
 
 (vi) Goto (iv).
 
@@ -1577,5 +1579,3 @@ process. The
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% Ende von Kap. 4 %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-

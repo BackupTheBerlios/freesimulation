@@ -3,16 +3,16 @@ In the previous section we have derived an exact simulation algorithm
 for the generation of trajectories of the Ornstein--Uhlenbeck process.
 The ``exact'' update formula was
 \begin{equation*}
-X{t+\Delta t} = X(t) \exp(-q \Delta t) +
-  \left[ \frac{D}{2q}(1-\exp(-2q\Delta t)) \right]^{1/2} \eta(t),
+X(t+\Delta t) = X(t) \exp(-q \Delta t) +
+  \left[ \frac{D}{2q}(1-\exp(-2q\Delta t)) \right]^{1/2} \xi(t),
 \end{equation*}
-where we have now written $\eta(t)$ to stress the fact that at each
-time step $t$ we hace to draw another Gaussian distributed random 
+where we have now written $\xi(t)$ to stress the fact that at each
+time step $t$ we have to draw another Gaussian distributed random 
 number. The update formula is exact in the sense that it holds for
 arbitrary values of $\Delta t$.
 
-However, it will turn oput to be convenient to have an update formula
-which works for small valkues of $\Delta t$. To this end we expand the
+However, it will turn out to be convenient to have an update formula
+which works for small values of $\Delta t$. To this end we expand the
 exact update formula to first order in $\Delta t$ and obtain
 \begin{eqnarray}
 X(t+\Delta t)& =& X(t) (1- q \Delta t) + 
@@ -21,20 +21,47 @@ X(t+\Delta t)& =& X(t) (1- q \Delta t) +
 \label{SDE_APPROX} 
   & = & X(t) - qX(t) \Delta t + \sqrt{D} \sqrt{\Delta t} \eta(t).
 \end{eqnarray}
-In the limit $Delta t \rightarrow 0$ this approximate uodate formula
-turns exact.  We recognize immediately that the stochastic increnet in
+In the limit $\Delta t \rightarrow 0$ this approximate update formula
+turns exact.  We recognize immediately that the stochastic increment in
 this discretized version of the Ornstein--Uhlenbeck process scales
 with the square root of the time increment $\Delta t$.
 
-It is now very important to realize that the 
-approximation (\ref{SDE_APPROX}) can be regarded as the discretization
-of a differential equation of the form
+Note that in deriving the above discretized update formula we have 
+intentionally omitted the terms linear in $\Delta t$ stemming from 
+the expansion of the factor in front of the stochastic term. In 
+doing so we have achieved that the update formula has an important
+property. Namely, it is selfconsistent in the following sense.
+Let us apply the above formula twice, starting from,
 \begin{equation*}
-\dot{X}(t) = -q X(t) + \sqrt{D} \eta(t).
+X(t+2\Delta t) = X(t+\Delta t) 
+ - qX(t+ \Delta t) \Delta t + \sqrt{D} \sqrt{\Delta t} \xi(t+\Delta t)
+\end{equation*}.
+Inserting (\ref{SDE_APPROX}) we immediately obtain keeping 
+terms up to first order in $\Delta t$
+\begin{equation*}
+X(t+2 \Delta t) = X(t) - q X(t) 2 \Delta t +
+   \sqrt{D} \sqrt{\Delta t} [\xi(t) + \xi(t+\Delta t)].
 \end{equation*}
+Since $\xi(t)$ and $\xi(t+\Delta)$ are statistically independent
+Gaussian stochastic processes we have
+\begin{equation*}
+\xi(t) + \xi(t+\Delta t) = {\bf N}(0,1) + {\bf N}(0,1) =
+  {\bf N}(0,2) = \sqrt{2} {\bf N}(0,1),
+\end{equation*}
+so that we finally have
+\begin{equation*}
+X(t+2 \Delta t) = X(t) - q X(t) 2 \Delta t +
+   \sqrt{D} \sqrt{2 \Delta t} \xi(t).
+\end{equation*}
+This selfconsistency of the discretized stochastic differential 
+equation expresses essentially the fundamental properties
+of the propagator of a Markov process as they are defined in
+the Chapman--Kolmogorov equation.
+
+
 Due to the presence of a stochastic term, the Gaussain stochastic
-process $\eta(t)$ the above equation is a typical example of a 
-so--caled {\em stochastic differential equation} (SDE). It is the aim
+process $\xi(t)$ the above equation is a typical example of a 
+so--called {\em stochastic differential equation} (SDE). It is the aim
 of this section to introduce into some  peculiarities of stochastic
 differential equations. In particular we will also show the
 equivalence of stochastic process defined in terms of stochastic differential
@@ -45,11 +72,11 @@ a stochastic differential equation (some times stochastic
 differential equations are also called {\em Langevin} equations):
 \begin{equation}
 \label{SDE_LANGEVIN_DISCR}
-X(t+dt) = X(t) + A(X(t),t)dt + D^{1/2} \eta(t) dt^{1/2},
+X(t+dt) = X(t) + A(X(t),t)dt + D(X(t),t)^{1/2} \xi(t) dt^{1/2},
 \end{equation}
 where we have replaced $\Delta t$  by $dt$ to stress the infinitesimal
 character of the above equation. The term proportional to $dt$ is
-called the {\em drift term}, wheras the term proportional to
+called the {\em drift term}, whereas the term proportional to
 $\sqrt{dt}$ is called the diffusion term. 
 
 The above definition of the stochastic process $X(t)$
@@ -58,52 +85,38 @@ the stochastic process $X(t)$ is continuous, but, in general, not
 differentiable. This can be seen by writing
 Eq. (\ref{SDE_LANGEVIN_DISCR}) as
 \begin{equation*}
-\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \eta(t)}
+\frac{X(t+dt) - X(t)}{dt} = A(X(t),t) + \frac{D^{1/2}(X(t),t) \xi(t)}
                                               {\sqrt{dt}}.
 \end{equation*}
 Obviuosly, the limit $dt \rightarrow 0$ of the above equation does not
 exist, unless $D\equiv 0$. Thus, a purely stochastic Markov process
-is everywhere continuous but nowhere differntiable. Nevertheless it is
+is everywhere continuous but nowhere differentiable. Nevertheless it is
 custumary to ``pretend'' \cite{GILLESPIE} that $dx/dt$ exists even for
 nonvanishing $D$. In fact we know that we can write
 \begin{equation*}
-\frac{\eta(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
+\frac{\xi(t)}{\sqrt{dt}} = \frac{1}{\sqrt{dt}} {\bf N}(0,1) =
 {\bf N}(0,1/dt).
 \end{equation*}
-So, we may define a gaussian {\em white noise process} as
+So, we may define a Gaussian {\em white noise process} as
 \begin{equation*}
-\xi(t) \equiv \lim_{dt \rightarrow 0}  {\bf N}(0,1/dt).
+\eta(t) \equiv \lim_{dt \rightarrow 0}  {\bf N}(0,1/dt).
 \end{equation*}
 With the help of the above definition, we can now formally write
 \begin{equation*}
-\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D}(X(t),t) \xi(t).
+\frac{d}{dt} X(t) = A(X(t),t) + \sqrt{D}(X(t),t) \eta(t).
 \end{equation*}
 This equation is called the white noise form of the Langevin equation.
 The white noise process introduced above does have the following
 averaged properties:
 \begin{eqnarray*}
-\langle \xi(t) \rangle &=& 0 \\
-\langle \xi(t) \xi(t´) \rangle &=& \delta(t-t´). 
+\langle \eta(t) \rangle &=& 0 \\
+\langle \eta(t) \eta(t') \rangle &=& \delta(t-t'),
 \end{eqnarray*}
+which satisfy the requirement of no correlation at different
+times. Note, that the white noise process  $\eta$ has
+infinite variance.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{The Langevin equation and Brownian motion}
+\section{The Langevin equation and Brownian motion}
 In 1908 Langevin considered the problem of the dynamical 
 description of Brownian motion. He suggested that the equation of 
 motion of a Brownian particle with mass $m=1$ be described by the
@@ -117,11 +130,12 @@ model the forces which the surrounding molecules excerpt on the
 Brownian particle. Since these forces are unknown in detail the 
 following assumptions were postulated. The Brownian particle 
 moving in the fluid of surrounding particles feels
-a friction which is proportional to its velocity, $\gamma$  being 
+a dissipative drag force which is proportional to its velocity, $\gamma$  being 
 the friction coefficient. Furthermore, the Brownian particle hits
 the surrounding particles. These collisions cause irregular 
 changes in the velocity of the Brownian particle. Thus, the external force
-$L(t)$ is modeled as a stochastic process. The first two moments of the
+$L(t)$ is modeled as a zero mean, temporally uncorrelated
+randomly fluctuating force. The first two moments of the
 stochastic process $L(t)$ are assumed to 
 have the following properties
 \begin{eqnarray*}
@@ -132,7 +146,12 @@ have the following properties
 The Langevin equation is the prototype of a stochastic 
 differential equation, i.e. of a differential equation whose
 coefficients are random functions of the time with some given
-statistical properties. The stochastic process $V(t)$ is 
+statistical properties. 
+It is clear that choosing $L(t)=\sqrt{\Gamma} \eta(t)$,
+where $\eta(t)$ is a Gaussian white noise process, the langevin 
+equation of Brownian motion describes an Ornstein--Uhlenbeck
+process.
+The stochastic process $V(t)$ is 
 completely defined once an initial condition $V(0)=V_0$ is specified.
 Its formal solution reads
 \begin{equation*}
@@ -157,7 +176,8 @@ is found to be
              [1-\exp(-2 \gamma t)].
 \end{eqnarray*}
 Up to now the constant $\Gamma$ was left unspecified. From 
-equilibrium statistical physics we  expect that for long times 
+equilibrium statistical physics (theorem of equipartition of energy) 
+we  expect that for long times 
 \begin{equation*}
 \langle V^2(t\rightarrow \infty) \rangle = kT.
 \end{equation*}
@@ -171,12 +191,30 @@ coefficient $\gamma$ and the random fluctuations.
 Eq. (\ref{FDT}) is a simple version of the so--called
 fluctuation--dissipation theorem.
 
-\subsection{The Ito formula}
+\section{The Ito formula}
+In the previous sections we have considered Langevin equations 
+from a rather intuitive point of view. Here we want to consider
+such equations in a more formal setting and in greater generality.
+Let us begin by considering the one--dimensional stochastic 
+differential equation for the stochastic variable $X(t)$
+\begin{equation*}
+\dot{X}(t) = a(X(t),t) + \eta(t),
+\end{equation*}
+where $\eta(t)$ is a normal white noise process.
+It follows from the above equation that up 
+to terms of the order $dt$ the increment $dX(t)$
+of the stochastic variable $X(t)$ during a time step $dt$
+is given by
+\begin{equation*}
+dX(t) = a(X(t),t)dt + dW(t),
+\end{equation*}
+where
+\begin{equation*}
+dW(t) = \int_t^{t+dt} \eta(t') dt'
+\end{equation*}
 
 
-
-
-\subsection{The equivalence of stochastic differential equations 
+\section{The equivalence of stochastic differential equations 
 and of the Fokker--Planck equation}
 
 \section{The numerical integration of stochastic differential 
