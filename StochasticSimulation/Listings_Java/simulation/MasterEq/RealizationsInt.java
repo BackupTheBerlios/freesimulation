@@ -10,14 +10,16 @@ package simulation.MasterEq;
  * @version 1.0
  *
  *
- 
- You can add single realizations (time series) to this class
- and get the final results (moments) by using the getArray() method.
- You can set the maximum computed moment and the length of the array
- for each instance of the class, but only once.
-
  */
-
+ 
+/**
+ *  <p>
+ * You can add single realizations (time series) to this class
+ * and get the final results (moments) by using the getArray() method.
+ * You can set the maximum computed moment and the length of the array
+ * for each instance of the class, but only once.
+ * <p>
+ */
 public class RealizationsInt  {
     
     private int maxMoment;
