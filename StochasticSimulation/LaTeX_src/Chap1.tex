@@ -155,7 +155,7 @@ an integer valued  random number between $0$ and $N$
 (the \verb|nextInteger()| method of the \verb|Distribution| class).
 In Java 2 there is already a method \verb|nextInt()| to produce 
 an integer valued random number between 0 and N. If you use Java 1.1
-you can use our convenience method in the \verb|distribution| class 
+you can use our convenience method in the \verb|Distribution| class 
 with the same name \verb|nextInt()|.
 
 For later purposes, let us mention that the package \verb|java.util| also
@@ -206,7 +206,7 @@ possibilities of Java.
 \label{sec:AWTIntro}
 
 Before trying to plot the data generated with the program
-\verb|RadoactiveDecay| we want to discuss the most simple Java code which
+\verb|RadioactiveDecay| we want to discuss the most simple Java code which
 allows to plot some 2 dimensional data. With the help of this example we will
 learn the foundations of the graphical tools of Java. The code we want to
 discuss is the \verb|PlotEasy| class which can be run as an applet or as
@@ -276,9 +276,10 @@ viewer. Figure \ref{fig:awthierarchy} shows the hierarchy relations
 of some (not all!)
 components and layouts classes of the \verb|java.awt| package.
 \begin{figure}
-  \hspace*{-1cm}
-  \setlength{\unitlength}{.65cm}
-  \input{Figures/FrameHierarchy.pic}
+  \begin{center}
+    \setlength{\unitlength}{.65cm}
+    \input{Figures/FrameHierarchy.pic}
+  \end{center}
   \label{fig:awthierarchy}
   \caption{The hierarchy of the AWT package.}
 \end{figure}
@@ -294,7 +295,7 @@ To get a \verb|Graphics| object you can ask for one by calling
 the \verb|getGraphics()| method of the \verb|Component| class (this is
 only possible, if the actual \verb|Component| class does have a drawable 
 graphic context, e.g. \verb|Canvas| or \verb|Container| objects). 
-It makes obviously no sense to have a drawing area for a \verb|button|
+It makes obviously no sense to have a drawing area for a \verb|Button|
 object for example. 
 More common (and most of the time easier) is to overrride the
 \verb|paint()| or \verb|update()| methods of a \verb|Component| object,
@@ -321,6 +322,14 @@ a button or a label to the frame we have created, for example:
   ....
   f.show(); // finally we show the Frame on the screen
 \end{sverbatim}
+The resulting window is shown in figure \ref{fig:ButtonDemo}.
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[height=2cm]{Figures/ButtonDemo.eps}
+    \caption{The output of the most easy window with a button using the AWT.}
+    \label{fig:ButtonDemo}
+  \end{center}
+\end{figure}
 
 A list of all AWT 
 components defined in the Java 1.1 standard is shown in table 
@@ -328,7 +337,7 @@ components defined in the Java 1.1 standard is shown in table
 \begin{table}[htbp]
   \begin{center}
     \begin{tabular}{c|p{0.6\textwidth}}
-      Component & \begin{center} Usage \end{center}\\\hline\hline
+      Component & {\centering Usage} \\\hline\hline
       Button & A button with text on it. \\
       Canvas & A drawing area. \\
       Checkbox & A list of clickable choices (more than one can 
@@ -337,6 +346,7 @@ components defined in the Java 1.1 standard is shown in table
                       (only one can be choosen at a time). \\
       Choice & A list of choices, like a pull-down menu. \\
       Label & A short text to be displayed in the GUI. \\
+      Menu & Many components are available to realize menus.\\
       Scrollbar & Sometimes called a slider. \\
       TextComponent.TextArea & Multiple lines of text to be 
                                displayed or optionally editable.\\
@@ -348,9 +358,28 @@ components defined in the Java 1.1 standard is shown in table
                                title and decorations. \\
       Container.Window.Dialog & A dialog window to ask a question or display
                                 a notification. \\
-      Container.Window.FileDialog & For choosing/browsing files/directories. \\
+      Container.Window.FileDialog & For choosing/browsing files/directories. \\\hline\hline
+      JRadioButton & A special Button (only one can be selected). \\
+      
+      JComboBox & Special purpose component to accomplish long lists.\\
+      JList & A group of items displayed in a column.\\
+      JSlider & For entering numeric values, which are bounded. \\
+      JProgressBar & Visible component to show how much of a job has been completed.\\
+      JColorChooser & Choose from a color box.\\
+      JFileChooser & Get a file or path from the user. \\
+      JTable & Display a table of data.\\
+      JTree & Display hierarchical data.\\
+      ToolTips & For every component you can have a balloon help/tool tip.\\\hline   
+      Container.JToolBar & Group several components (eg. Buttons) with icons.\\
+      Container.JSplitPane & Two panels in one. \\
+      Container.JTabbedPane & Sharing the same place by many panels, similar to carlayout.\\
     \end{tabular}
-    \caption{A list of all defined AWT components of the Java 1.1 API.}
+    \caption{A list of most of the defined AWT components of 
+      the Java 1.1 API and the
+      Java2 API (Swing). In Java2/Swing all the AWT Components are also
+      available with Swing by just adding a capital J to the beginning
+      of the components (e.g. JButton instead of Button, JComponent instead
+      of Component).}
     \label{tab:AWTComponents}
   \end{center}
 \end{table}
@@ -377,7 +406,9 @@ or Netbeans, it is also easy to set up your own windows.
       GridLayout & Put all components/container in a table structure. \\
       BorderLayout & Use a center and 4 borders to put the components/containers.\\
       CardLayout & Put components/containers like cards on a stack.\\
-      GridBagLayout & A very versatile but complicated layout manager. \\
+      GridBagLayout & A very versatile but complicated layout manager. \\\hline
+      BoxLayout & Components in a column, where the largest gives the width.\\
+      ``Absolute Positions'' & New in Java 2, but it is better to use the others. \\
     \end{tabular}
     \caption{All possible layouts in the AWT package of Java 1.1.}
     \label{tab:AWTLayouts}
@@ -386,7 +417,11 @@ or Netbeans, it is also easy to set up your own windows.
 
 Let us look back at the \verb|PlotEasy.java| program.
 With the help of the method \verb|setSize(int width, int height)| we fix the
-dimensions of the frame (in pixels). The \verb|show()| method displays the
+dimensions of the frame (in pixels). Another useful method is the 
+\verb|pack()| method of the \verb|Frame| class, which sets the size
+of the frame to the size necessary to display all contained components
+of the frame. 
+The \verb|show()| method displays the
 frame. As we already know \verb|a.init()| calls the \verb|init()| 
 method of the Applet class and therefore starts the applet. There is also
 a method called \verb|setResizable(boolean)| for the Frame class, which
@@ -410,14 +445,31 @@ class of the \verb|java.awt| package
 defines methods for drawing different kinds of shapes. The method which
 we use here is the
 \begin{sverbatim}
-drawLine(int x1, int y1, int x2, int y2)
+  drawLine(int x1, int y1, int x2, int y2)
 \end{sverbatim} 
 method, which simply draws a line with the current color 
-in the \verb|Graphics| object \verb|g|. Other typical methods are, e.g. 
-\verb|drawRect()| and \verb|fillRect()| to draw and fill with the current
-color rectangles, \verb|drawArc()| and \verb|fillArc| to draw and fill arcs,
-\verb|drawPolygon(int[] xPoints, int[] ypoints, int npoints| and 
-\verb|fillPolygon()| to draw polygons. There is no drawPoint() method as you
+in the \verb|Graphics| object \verb|g|. 
+Other typical methods are shown in table \ref{tab:GraphicsMethods}.
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{c|l}
+      Method & Purpose \\\hline\hline
+      \verb|drawLine()| & Draw a line or point.\\
+      \verb|drawRect()| & Draw a rectangle \\
+      \verb|fillRect()| & Draw a filled rectangle. \\ 
+      \verb|drawArc()| & Draw a part of a circle. \\
+      \verb|fillArc()| & Draw and fill the arc. \\
+      \verb|drawPolygon(int[], int[], int)| & 
+         Draw a polygon with the given points. \\
+      \verb|fillPolygon()| & The same, but it also fills it with a color.\\    
+    \end{tabular}
+    \caption{List of some of the methods contained in the Graphics class.
+      More methods are available in the much more powerful Java2D API
+      coming with Java2.}
+    \label{tab:GraphicsMethods}
+  \end{center}
+\end{table}
+There is no drawPoint() method as you
 might expect, but you can easily use the \verb|drawLine()| method 
 with same starting and endpoint of course. Much more graphics
 capabilities have been added by introducing the Java2D package
@@ -494,8 +546,8 @@ applications. One of these packages is Ptplot (you pronounce it
 pee--tee--plot). The Ptplot package is released under the liberal UC
 Berkley copyright. It has been developed by Edward A. Lee, C. Hylands,
 and W. Wu. You are free to download it at
-\href{http://ptolemy.eecs.berkely.edu/java/ptplot.html}%
-         {http://ptolemy.eecs.berkely.edu/java/ptplot.html}
+\href{http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot}%
+         {http://ptolemy.eecs.berkeley.edu/java/ptolemy.plot2.0/ptolemy/plot}
 where you also find
 the documentation and many demos of Ptplot. 
 
@@ -541,7 +593,7 @@ are in lines 28 to 33. In the \verb|init()| method we invoke the method
 \verb|super.newPlot()| to create a new plot, \verb|super.init()| to
 initialize it and \verb|plot().setTitle| to give the plot a title.
 
-A second possibility, which we prefer to use, is to change the 
+A second possibility of using Ptplot, which we prefer to use, is to change the 
 lines 28 to 33 with:
 \lstinputlisting[first=28,last=33]{Listings_Java/Ptplot_Demo2.java}
 
@@ -566,7 +618,7 @@ class and of the superclass \verb|PlotBox| of the \verb|Plot| class.
 All methods are called \verb|setMethod| where \verb|Method| is
 self-explaining. Several other methods are implemented in the
 \verb|Ptplot.PlotBox| class and its child, the \verb|Ptplot.Plot| class. 
-They are summarized in the following table. 
+They are summarized in table \ref{tab:PtplotMethods}. 
 \begin{table}[htbp]
   \begin{center}
     \small
@@ -634,8 +686,7 @@ Fortran interfaces to supply data to it. You can also read from
 files, but first you have to understand the data format, which is
 described in the users guide.
 The authors told us they are developing a Java interface to
-supply data directly to \verb|SciVis|, but we have not heart any
-news yet. 
+supply data directly to \verb|SciVis|. 
 
 At the moment, the best solution is to write the data to a file
 and use an external program available to you. The most common
@@ -644,18 +695,19 @@ different platforms and can create a lot of different 3D plots.
 
 Since Java 2, there is a new (external) API -- not included in the JDK 1.2
 disribution, you have to get it seperatly -- called \emph{Java3D}. 
-This is a full implementation of threee dimensional routines to
-produce all kinds of 3D scenes and objects and even move them, etc.
+This is a full implementation of three dimensional routines to
+produce all kinds of 3D scenes and objects and even move these scenes.
 With this API it seems to be possible to write a fairly easy
 3D plotting program in the near future. So this lack of features
 in Java for the scientist should be gone soon. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Printing in Java and with Ptplot}
-Now that we have learned to make plots in Java, it is of great
+Now that we have learned how to make plots in Java, it is of great
 importance to get a printed version of our graphics. And even for
-this Java has commands for initiating a print job and preparing
-the output for the printer. Because the procedure has changed
+this purpose Java has commands for initiating a print job and preparing
+the output for the printer. Java always produces potscript output.
+Because the procedure has changed
 from Java 1.1 to Java 2, we only present the Java 1.1 version not
 to confuse you. In Java 1.0 there have been no methods for 
 printing in  Java, you would have to use screen capture programs
@@ -673,7 +725,7 @@ In Java printing is done basically in four steps:
 \item Start ``printing'':
   \begin{enumerate}
   \item Get the graphics context for the component in question. Use the
-    \verb|getGraphics()| mehtod of the \verb|java.awt.PrintJob| class.
+    \verb|getGraphics()| method of the \verb|java.awt.PrintJob| class.
   \item Print the desired part of the component. If you want to print 
     everything contained by the component use the \verb|printAll()|
     method, otherwise use just the \verb|print()| method of the
@@ -716,9 +768,9 @@ There is one caveat to mention: if you are going to insert the
 produced postscript files into TeX/LaTeX, you will have to do
 some editing on the postscript files. First of all you have to
 add a bounding box line at the beginning of the postscript
-file. You can do this by hand, put a line
+file. You can do this by hand, put a line (for a portrait figure)
 \begin{verbatim}
- %%BoundingBox:  0 0 800 800
+ %%BoundingBox:  0 0 595 840
 \end{verbatim}
 at the beginning of the postscript file (You can adapt the numbers
 to the figure at hand and check the area by viewing it in 
@@ -742,20 +794,23 @@ we only need plots in postscript files and this works great with
 the code above.
 
 In Java 2 there has been some small changes to the printing
-interface. There has been introduced a new class: \verb|java.awt.print|.
-This class provides much more sophisticated methods and it even
-is able of handling color models, which is very important for
+interface. A new class has been introduced in Java2: \verb|java.awt.print|.
+This class provides much more sophisticated methods and it is even
+able of handling color models, which is very important for
 color handling and printing. This is a big step ahead, but for the
 details we refer to the API documentation, because it is also a
 bit more difficult to understand.
 
-Ptplot 2.1 printing facilities ?????
+Ptplot 2.1 printing facilities ????? (EPS)
 
 \paragraph{Printing from an Applet}
 Usually applets are not allowed to initiate printjobs, unless
 a \verb|SecurityManager|, another important Java class, explicitly
 allows for it. Most of the time the browser or appletviewer has
-to initiate the printjob, allowed by the security manager. 
+to initiate the printjob, allowed by the security manager. You can of
+course always use the printing facilities of the browser and plot
+the whole panel visible in the browser.
+
 
 What you can do is, write a main method in the applet and start
 it as an application. Do the plots  and print them from the
