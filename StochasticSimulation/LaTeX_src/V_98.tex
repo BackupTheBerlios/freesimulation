@@ -34,14 +34,21 @@
 
 %%% The Listings package - include source code
 \usepackage{listings}
-% standard listing gormatting
-\selectlisting{java}
-\selectlisting{matlab}
+
+%%% OLD package: 
+%%%\selectlisting{java}
+%%%\selectlisting{matlab}
 % line numbers ? And what stepsize ?
-\labelstyle[1]{\ttfamily}
+%%% \labelstyle[1]{\ttfamily}
 % use small font size for typesetting listings
-\prelisting{\small\smallskip\hrule\smallskip}
-\postlisting{\smallskip\hrule\smallskip}
+%%%\prelisting{\small\smallskip\hrule\smallskip}
+%%%\postlisting{\smallskip\hrule\smallskip}
+
+%%% NEW package >= V0.19
+\lstloadlanguages{Java,Matlab,HTML,TeX}
+\lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily,
+        pre=\small\smallskip\hrule\smallskip,
+        post=\smallskip\hrule\smallskip}
 
 
 %%% SHOW ALL Labels 
@@ -151,9 +158,10 @@
      \end{flushleft} }%
    { \vspace{.3cm} }
 
-%% new listing environment
+%% new listing environments
+\newcommand{\inputlisting}[1]{\lstinputlisting{#1}}
 \newcommand{\loadlisting}[2]{\subsubsection{Listing of #1} %
-  \inputlisting{#2}}
+  \lstinputlisting{#2}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -210,15 +218,14 @@
 \clearpage
 \listoffigures 
 \clearpage
-%%\listoflistings
-%%\clearpage
+\listoflistings
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Chapters !!!!  --  Arabic pagenumbering
 \pagenumbering{arabic}
-%% to have 0 as the first chapter number
-\setcounter{chapter}{-1}
-\selectlisting{java}
+\setcounter{chapter}{0}
+\lstset{language=java}
 
 %%% Chapter 0 -- Java Intro
 \include{Chap0}
@@ -226,7 +233,7 @@
 %%% Chapter 1 -- Introduction
 \include{Chap1}
 
-\selectlisting{matlab}
+%%%\lstset{language=matlab}
 
 %%% Chapter 2 
 \include{Chap2}
