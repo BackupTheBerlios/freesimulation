@@ -2,22 +2,28 @@
 %%%%%%% Chapter
 %%%%%%%
 \chapter{Plotting with Java}
-
 Among the numerical techniques available to computational physics,
 stochastic methods, also called Monte Carlo methods, play a 
 central role. They are particularly appealing because of their 
 immediacy, their power and the breadth of applications.
+Of course, in order to profit from the advantages of such techniques it is necessary to
+visulaize the the results of the simulations. It is the aim of this chapter to introduce into
+the graphical analysis of data with Java. 
 
+Our approach will be hands on. We will start by presenting the prototype of a stochastic 
+simulation algorithm: the simulation of radioactive decay. As we already know,
 Monte Carlo methods rely upon the use of random 
-numbers. Essentially there are two complimentary reasons to use
-stochastic simulation methods:
-the most obvious reason is the study of physical systems in 
-which random events arise naturally; the second reason is that the 
+numbers.  The radioactive decay is a physical system in 
+which random events arise naturally. Further on, we will learn that the 
 sampling of random numbers offers an efficient numerical method 
 to compute multidimensional integrals.
 
-In order to elucidate the two important points just mentioned
-we consider in the following two simple examples.
+The main part of the chapter is devoted to the graphical analysis of the data of the 
+simulation of radioactive decay. We will begin by introducing the foundations of 
+graphical tools of Java. Then, we proceed with the presentation of some more 
+comfortable graphical capabilities which  are freely available on the Internet and 
+with the discussion of some more advanced topics. All the tools will be applied to the
+simulation of the radioactive decay.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Radioactive Decay}
@@ -47,8 +53,9 @@ If at time $t=0$ we have $n_0$ nuclei, it follows from Eq.
 (\ref{DECAY_LAW}) that at the later time $t>0$ we are left
 with
 \begin{equation}\label{DECAY_NUMBER}
-n(t) = n_0 \exp(-\lambda t).
+n(t) = n_0 \exp(-\lambda t)
 \end{equation}
+nuclei.
 The half--life $t_{1/2}$ is easily evaluated from the condition
 \begin{equation}\label{HALF-LIFE_1}
   n(t_{1/2}) = \frac{n_0}{2}
@@ -202,7 +209,7 @@ the point where we feel the necessity to learn something about the graphical
 possibilities of Java.
 
 
-\subsection{The Most Easy Plot -- The AWT and Applet Packages}
+\section{The Most Easy Plot -- The AWT and Applet Packages}
 \label{sec:AWTIntro}
 
 Before trying to plot the data generated with the program
@@ -233,7 +240,7 @@ You should not use both together in one program.}
 Java programs look different on different systems, because they use
 the AWT, which is an abstract class, just defining the necessary
 methods and fields to write programs using graphics functionallity.
-To accomplish this, Java uses a so-called peer architecture, see figure
+To accomplish this, Java uses a so-called peer architecture, see Figure
 \ref{fig:peer}.
 \begin{figure}[htbp]
   \begin{center}
@@ -246,7 +253,7 @@ To accomplish this, Java uses a so-called peer architecture, see figure
 \end{figure}
 
 In order to understand the deep relation between applets and the AWT it is
-instructive to look at figure \ref{fig:hierarchyapplet}, 
+instructive to look at Figure \ref{fig:hierarchyapplet}, 
 which shows the inheritance hierarchies of the Applet class.
 \begin{figure}
   \begin{center}
@@ -297,9 +304,10 @@ only possible, if the actual \verb|Component| class does have a drawable
 graphic context, e.g. \verb|Canvas| or \verb|Container| objects). 
 It makes obviously no sense to have a drawing area for a \verb|Button|
 object for example. 
-More common (and most of the time easier) is to overrride the
+More common (and most of the time easier) is to override the
 \verb|paint()| or \verb|update()| methods of a \verb|Component| object,
-because both methods supply the \verb|Graphics| object a a parameter.
+because both methods supply the \verb|Graphics| object 
+ a parameter.
 
 Now we have the necessary background to understand what is going on in the
 \verb|PlotEasy.java| program. The class \verb|PlotEasy| extends the 
@@ -495,7 +503,7 @@ overloaded the \verb|update()| method and the default behaviour of the
 \verb|update()| method is to call the \verb|paint()| method again. In 
 chapter 0 we have learned, that the \verb|update()| method is called
 everytime the windows has to be redrawn, because of some events like
-scolling in the browser window or, like here, resizing the window
+scrolling in the browser window or, like here, resizing the window
 (see figure \ref{fig:PaintMethod}.).
 \begin{figure}[htbp]
   \begin{center}
@@ -541,7 +549,7 @@ which allows to handle the request to close the window. These ``events''
 are in the \verb|java.awt.event| package and will be discussed later
 in chapter \ref{sec:AWTAdvanced}. 
 
-\subsection{Ptplot -- Extending Javas Graphics Capabilities}
+\section{Ptplot -- Extending Javas Graphics Capabilities}
 The quality of the plot of the simulation results are rather poor
 compared to high standards we are used to today. It is clear, that we
 could now go on refining the plot with the help of the Java
@@ -573,7 +581,7 @@ The components of Ptplot have the following properties:
 \item error bars.
 \end{itemize}
 Before writing the first program using Ptplot take a look at the
-class hierarchy of Ptplot in figure \ref{fig:PtplotHierarchy}.
+class hierarchy of Ptplot in Figure \ref{fig:PtplotHierarchy}.
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
@@ -682,8 +690,161 @@ its scripting facilities. For details you can look at the
 documentation coming with the ptplot package. For us it will be
 easier to read the files into Java and then use ptplot to plot it on 
 screen.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plot Methods in the Simulation Package}
+In the previous section we have seen how to plot the result of the simulation with
+the help of the \verb|ptplot| package.  Here, we will present some additional features to 
+this package that we have added to the simulation package in order to make the plotting from 
+a Java program easier.
+
+The additional features are: .....
+
+
+In order to demonstrate them we consider again the simulation of the radioactive decay. 
+
+The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and 
+(\ref{FIG_DECAYB}).
+\begin{figure}
+\label{FIG_DECAYA}
+\begin{center}
+\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_1.eps}\\
+\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_2.eps}
+\end{center}
+\caption{Two realizations of the stochastic process of the radioactive decay.
+The first one with linear y axis scaling and the second one uses a logarithmic
+y axis scaling. The blue lines are the exact solution and the red ones
+are the simulations.
+The parameters of the simulation were choosen to be $N_0 = 100; 
+\quad p = \lambda \Delta t = 0.01 s^{-1}; \quad \Delta t = 1\text{s};
+\quad t_{\text{end}} = 300\text{s}$}
+\end{figure}
+\begin{figure}
+\label{FIG_DECAYB}
+\begin{center}
+\includegraphics[angle=-90,width=11cm,clip]{Figures/RadioactiveDecay_3.eps}\\
+\end{center}
+\caption{The same as figure \ref{FIG_DECAYA}, but with different parameters:
+$N_0 = 1000; \quad p = \lambda \Delta t = 0.03 s^{-1}; 
+\quad \Delta t = 1\text{s};  \quad t_{\text{end}} = 100\text{s}$}
+\end{figure}
+As we already know from Fig. XY 
+the results of the simulation  fluctuate around 
+the expected curve. This is of course not astonishing since the 
+exact result holds only for mean values. In order to achieve a better
+agreement with the decay law it is necessary to run the simulation
+several times and to take the average over the different 
+realizations of the decay process. This can easily be achieved by 
+a simple modification of the program \verb|RadioactiveDecay_ptplot.java|.
+ We introduce an additional input variable, the number of realizations
+\verb|nreal| and accordingly implement a loop over the different 
+realizations. This can be best seen in the listing of the 
+new program \verb|RadioactiveDecay_ptplot2.java|.
+\lstinputlisting[first=61,last=63]%
+          {Listings_Java/RadioactiveDecay_ptplot2.java}
+
+At the end of the realizations loop
+we perform the average. This is seen in lines 61 to 63.
+
+
+Note, furthermore,  that in order to speed up the program we have modified slightly 
+the algorithm  so that we can save a loop. We have exploited the fact that
+the probability to observe one decay in time $\Delta t$ is proportional to number of nuclei which 
+did not already decay, i.e.,
+\begin{equation}
+p = \beta \Delta t
+\end{equation}
+where $\beta = \lambda N$ and $\Delta t$ must be small enough so 
+that $\beta \delta t \ll 1$.
+
+With the help of \verb|histogram()| method we now want to look at the statistics of the number of decays
+in a given interval. To this end ....
+
+The reults of this test is seen in Fig. xy. In fact it can be shown that the number of decays in a given interval are distributed according to a Poisson distribution.
+From the elementary rules of combinatorics we know that
+the probability to observe $n$ decays in time $t=m\Delta t$ is therefore
+given by
+\begin{equation}
+P = p^n(1-p)^{m-n} {m \choose n}.
+\end{equation}
+Inserting the definition of $p$ the above expression can be cast 
+in the form
+\begin{equation}
+P = \left( \frac{\beta t}{m}\right)^n 
+     \left( \frac{1 - \beta t}{m} \right)^{m-n}
+      \frac{m!}{(m-n)! n!}.
+\end{equation}
+Performing the limit $\Delta t \longrightarrow 0$ (i.e. $m 
+\longrightarrow \infty$) and considering that
+\begin{equation}
+\left(1-  \frac{\beta t}{m} \right)^{m} \longrightarrow 
+            \exp(-\beta t),
+\end{equation}
+\begin{equation}
+\left( 1- \frac{ \beta t}{m} \right)^{-n} \longrightarrow 
+            1,
+\end{equation}
+and
+\begin{equation}
+\frac{m!}{(m-n)! n!} \longrightarrow m^n
+\end{equation}
+we obtain the result
+\begin{equation}
+P = \frac{\mu^n \exp(-\mu)}{n!},
+\end{equation}
+where $\mu = \beta t$. The above distribution is the well know
+Poisson distribution.
+
+\subsubsection{Plot Methods in the Simulation Package}
+Because sometimes it is easier to use ready made routines, we
+have added some plotting convenience classes and methods to
+get the plots faster. If you take the shortcut presented here
+or you want to use the low level ptplot interface does not 
+matter, it is totally up to you.
+
+?????
+\paragraph{plot2D()}
+\paragraph{errorBars()}
+\paragraph{histogram()}
+\paragraph{barPlots()}
+
+It is now easy to verify that the number of decays in a given 
+interval is distributed according to the Poisson distribution.
+To this end we have counted the number of decays in a given 
+interval. This is accomplished in the lines xy. At the end of the
+program we plot in a histogram the distribution of the number of 
+decays and overlay the expected Poisson
+distribution.  
+
+\subsubsection{Listing of the full Program}
+\lstinputlisting{Listings_Java/RadioactiveDecay_ptplot2.java}
+
+
+Run the program for the following two sets of parameters:
+\begin{eqnarray*}
+N_0= 100, p = 0.001 s^{-1}, \Delta t = 1s, t = 100s \\
+N_0= 100, p = 0.0001 s^{-1}, \Delta t = 1s, t = 100s
+\end{eqnarray*}
+with nreal = 100 and nreal = 1000.
+
+The result of  two simulations can be seen in figs. x and y.
+\begin{figure}
+\includegraphics[width=\textwidth]{Figures/f_decay1.eps}
+\caption{The distribution of the number of decays computed with 
+the program decayr. 100 realizations. The simulation was run for
+N0=100 and lambda=0.001.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Figures/f_decay2.eps}
+\caption{The distribution of the number of decays computed with 
+the program decayr. 1000 realizations. The simulation was run
+for N0=100 and lambda = 0.001.}
+\end{figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%
+\section{Advanced topics}
 \subsection{3D plots in Java -- Java3D}
 Sometimes you are forced to use 3D plots to visualize your data
 and therefore it is natural to ask for a package to accomplish
@@ -873,140 +1034,6 @@ put a frame into the applet and then put the applet inside the frame.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Results of the Simulation}
-
-The results of the simulation are plotted in Fig. (\ref{FIG_DECAYA}) and 
-(\ref{FIG_DECAYB}).
-\begin{figure}
-\label{FIG_DECAYA}
-\begin{center}
-\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_1.eps}\\
-\includegraphics[angle=-90,width=8cm]{Figures/RadioactiveDecay_2.eps}
-\end{center}
-\caption{Two realizations of the stochastic process of the radioactive decay.
-The first one with linear y axis scaling and the second one uses a logarithmic
-y axis scaling. The blue lines are the exact solution and the red ones
-are the simulations.
-The parameters of the simulation were choosen to be $N_0 = 100; 
-\quad p = \lambda \Delta t = 0.01 s^{-1}; \quad \Delta t = 1\text{s};
-\quad t_{\text{end}} = 300\text{s}$}
-\end{figure}
-\begin{figure}
-\label{FIG_DECAYB}
-\begin{center}
-\includegraphics[angle=-90,width=11cm,clip]{Figures/RadioactiveDecay_3.eps}\\
-\end{center}
-\caption{The same as figure \ref{FIG_DECAYA}, but with different parameters:
-$N_0 = 1000; \quad p = \lambda \Delta t = 0.03 s^{-1}; 
-\quad \Delta t = 1\text{s};  \quad t_{\text{end}} = 100\text{s}$}
-\end{figure}
- It is 
-immediately recognized that the simulation results fluctuate around 
-the expected curve. This is of course not astonishing since the 
-exact result holds for mean values. In order to achieve a better
-agreement with the decay law it is necessary to run the simulation
-several times and to take the average over the different 
-realizations of the decay process. This can easily be achieved by 
-a simple modification of the program \verb|RadioactiveDecay_ptplot.java|.
- We introduce an additional input variable, the number of realizations
-\verb|nreal| and accordingly implement a loop over the different 
-realizations. This can be best seen in the listing of the 
-new program \verb|RadioactiveDecay_ptplot2.java|.
-\lstinputlisting[first=61,last=63]%
-          {Listings_Java/RadioactiveDecay_ptplot2.java}
-
-At the end of the realizations loop
-we have to perform the average. This is seen in lines 61 to 63.
-(STRESS MORE THE IDEA OF REALIZATIONS!!!!; allgemeine Strategie erlaeutern.)
-
-Note that in order to speed up the program we have modified slightly 
-the algorithm  so that we can save a loop. ?????
-The probability to observe one decay in time $\Delta t$ is
-\begin{equation}
-p = \beta \Delta t
-\end{equation}
-where $\beta = \lambda N$ and $\Delta t$ must be small enough so 
-that $\beta \delta t \ll 1$. 
-From the elementary rules of combinatorics we know that
-the probability to observe $n$ decays in time $t=m\Delta t$ is therefore
-given by
-\begin{equation}
-P = p^n(1-p)^{m-n} {m \choose n}.
-\end{equation}
-Inserting the definition of $p$ the above expression can be cast 
-in the form
-\begin{equation}
-P = \left( \frac{\beta t}{m}\right)^n 
-     \left( \frac{1 - \beta t}{m} \right)^{m-n}
-      \frac{m!}{(m-n)! n!}.
-\end{equation}
-Performing the limit $\Delta t \longrightarrow 0$ (i.e. $m 
-\longrightarrow \infty$) and considering that
-\begin{equation}
-\left(1-  \frac{\beta t}{m} \right)^{m} \longrightarrow 
-            \exp(-\beta t),
-\end{equation}
-\begin{equation}
-\left( 1- \frac{ \beta t}{m} \right)^{-n} \longrightarrow 
-            1,
-\end{equation}
-and
-\begin{equation}
-\frac{m!}{(m-n)! n!} \longrightarrow m^n
-\end{equation}
-we obtain the result
-\begin{equation}
-P = \frac{\mu^n \exp(-\mu)}{n!},
-\end{equation}
-where $\mu = \beta t$. The above distribution is the well know
-Poisson distribution.
-
-\subsubsection{Plot Methods in the Simulation Package}
-Because sometimes it is easier to use ready made routines, we
-have added some plotting convenience classes and methods to
-get the plots faster. If you take the shortcut presented here
-or you want to use the low level ptplot interface does not 
-matter, it is totally up to you.
-
-?????
-\paragraph{plot2D()}
-\paragraph{errorBars()}
-\paragraph{histogram()}
-\paragraph{barPlots()}
-
-It is now easy to verify that the number of decays in a given 
-interval is distributed according to the Poisson distribution.
-To this end we have counted the number of decays in a given 
-interval. This is accomplished in the lines xy. At the end of the
-program we plot in a histogram the distribution of the number of 
-decays and overlay the expected Poisson
-distribution.  
-
-\subsubsection{Listing of the full Program}
-\lstinputlisting{Listings_Java/RadioactiveDecay_ptplot2.java}
-
-
-Run the program for the following two sets of parameters:
-\begin{eqnarray*}
-N_0= 100, p = 0.001 s^{-1}, \Delta t = 1s, t = 100s \\
-N_0= 100, p = 0.0001 s^{-1}, \Delta t = 1s, t = 100s
-\end{eqnarray*}
-with nreal = 100 and nreal = 1000.
-
-The result of  two simulations can be seen in figs. x and y.
-\begin{figure}
-\includegraphics[width=\textwidth]{Figures/f_decay1.eps}
-\caption{The distribution of the number of decays computed with 
-the program decayr. 100 realizations. The simulation was run for
-N0=100 and lambda=0.001.}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=\textwidth]{Figures/f_decay2.eps}
-\caption{The distribution of the number of decays computed with 
-the program decayr. 1000 realizations. The simulation was run
-for N0=100 and lambda = 0.001.}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simple Monte Carlo Evaluation of Integrals}
