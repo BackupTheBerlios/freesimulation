@@ -93,7 +93,8 @@ of the corresponding programs are listed in the appendix.
    Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
 Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & ca. 15 Min. \\\hline
     \end{tabular}
-    \caption{Performance comparison for different scenarios and languages.
+    \caption{Performance comparison for different languages, operating
+   systems (OS), and platforms.
       The test program is a one-step stochastic process. We create 100
       realizations, $g(n)=0.4n, r(n)=0.5n$. On Windows 95 the JIT from
       Symantec is included and automatically used, when executing programs
@@ -394,7 +395,7 @@ In Java 1.1 a new package (see later) was introduced, which allows
 so called ``trusted applets''. These are specially signed libraries,
 which are signed with a key by a person you trust. Only if the
 signature is valid and you trust that person, the ``trusted applet''
-has access to the local files system -- it basically can do everything
+has access to the local files system -- basically it can do everything
 an application could do on your machine. This is already implemented with
 the appletviewer, in different ``servers'' it might work or not. In the
 future this will be extended to a more extensive set of rules for the
@@ -409,7 +410,7 @@ learned, that we can include documentation comments using
 \end{verbatim}
 you get some HTML files: packages.html, tree.html, AllNames.html,
 HelloWorld\_Applet.html, HelloWorld\_Application.html. All these
-files describe the written classes. The tree.html gives a tree
+files describe the written classes. The tree.html file gives a tree
 showing the relatives of the class. The package.html gives the
 package structure (not used here). The most important file is the
 AllNames.html, which is an index of all written programs in this package
@@ -439,8 +440,9 @@ class (see figure \ref{fig:javadoc2}).
 \end{figure}
 The missing graphics on the right of figure \ref{fig:javadoc2} 
 are available in the Java documentation of the
-JDK and just has to be copied into a subdirectory called \verb|images| 
-of the HTML directory. Then it looks like the figure on the left.
+JDK and just has to be copied into a subdirectory  
+of the HTML directoryc called \verb|images| . 
+Then it looks like the figure on the left.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Variables}
@@ -477,7 +479,7 @@ double & floating--point & 0.0 & 64 bits &$\pm$4.94065645841246544E-324\\
 &&& &$\pm$1.79769313486231570E+308\\ \hline
 boolean & true or false      &  false & 1 bit&\\
 &&&       &  \\ \hline
-char  & Unicode character & $\backslash$u000 & 16 bits & $\backslash$u000 \\
+char  & Unicode character & $\backslash$u0000 & 16 bits & $\backslash$u0000 \\
 &&& &$\backslash$uFFFF   \\ \hline
 \end{tabular}
 \end{center}
@@ -571,12 +573,14 @@ to the corresponding wrapper class of a primitive type, e.g.
 The third line converts the string to the \verb|Double| class and then
 the \verb|doubleValue()| method converts to a double primitive type.
 For the other types you just have to substitute float or int 
-for double.
+for double, i.e., \verb|floatValue()|, \verb|intValue()|.
  
-Another method, later used in the \verb|ParamApplet.java| program is
+Another method, later used in the \verb|ParamApplet.java| program is, e.g.,
 the \verb|Integer.parseInt()| method, which gives back a primitive
 type integer instead of the wrapper class like \verb|valueOf()|.
-This simplifies the conversion a little bit. For the example, see
+For other conversions y<ou can use the \verb|Long.parseLong()| or the
+\verb|Long.parseByte()| method.
+These methods  simplify the conversion a little bit. For the example, see
 \verb|ParamApplet.java| in line 11. But this method is only 
 available to Integer, Long and Byte wrapper classes, NOT for
 Float and Double. In this case you have to use the \verb|valueOf()| and
@@ -588,12 +592,15 @@ method, which is available for all primitive data types.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{package and import statements}
+\subsection{Packages and import statements}
+\subsubsection{Packages}
 Because Java was designed to be able to load code distributed
 over the whole internet, you have to avoid name conflicts
-between the programs (classes). The solution in Java is to put
+between the programs (classes). The Java solution 
+for an Internet--wide unique naming scheme is to put
 every class in a \emph{package}. A package  is a group of related
-and possibly cooperating classes.
+and possibly cooperating classes. The naming scheme is based on the
+internet domain name of the orgaization at which the package is developed.
 
 The name of the package is given
 at the beginning of a file before the actual program (class)
@@ -618,7 +625,12 @@ You could also use an environment variable called \verb|CLASSPATH|. It
 describes the directories to search for the class files. So if the
 \verb|CLASSPATH|-variable includes \verb|/home/user/java| you can
 start the above example in this directory, if the class is in the 
-subdirectory  \verb|de/freiburg/simulation/|.
+subdirectory  \verb|de/freiburg/simulation/|. It has to be noted that
+the entries in a \verb|CLASSPATH| specification may also be ZIP files
+that contain these classes. On Unix systems the directories in a
+\verb|CLASSPATH| specification are separated by `` :'' ( on Windows systems
+by ``;'').
+
 
 All the standard commands (classes) of Java are stored in a central jar
 file, which is additionally packed to save disk space. These classes
@@ -630,7 +642,7 @@ This is not recommended for medium to complex programs, but for
 test purposes and very small programs this is very convenient.
 
 
-
+\subsubsection{Import statement}
 Before learning more about the syntax of Java, we have to explain another
 statement appearing in the part of any Java program before the actual
 definition of the class: the \verb|import|-statement. With \verb|import|
@@ -659,9 +671,9 @@ defines applets and their behaviour, and the \verb|java.awt|-class, which
 will be explained later.
  
 There is one class, which is always imported without any import statement:
-the java.lang class. This is the fundamental class of Java and it is
+the \verb|java.lang| class. This is the fundamental class of Java and it is
 implicitly imported for all Java programs, so you do not have to specify
-it. For example the System class is in Java.lang, that is why
+it. For example the System class is in \verb|Java.lang|, that is why
 we did not have to use an import statement in the ``Hello World''
 application.  
 
@@ -798,7 +810,7 @@ expression is evaluated \textit{before} the statement is executed, while in
 the second construct the boolean expression is evaluated \textit{after} the
 statement has been performed!
 
-In order too give an example we write down an equivalent code using
+In order to give an example we write down an equivalent code using
 the
 \verb|while| statement of the \verb|for| loop of the
 \verb|DataMean.java| program. Lines 13 to 15 have to be replaced by
@@ -832,6 +844,27 @@ optional \verb|else| statement \verb|statement2| is executed. Of
 course, \verb|if-else| constructions can be nested, i.e., an
 \verb|if-else| conditional control flow, can be placed within another
 \verb|if-else| statement.
+
+\paragraph{The conditional operator ?} The conditional operator ?
+provides a single expression yielding one of two alterantives depending on
+a boolean expression. To demonstrate its use we write down an
+\verb|if/else| Java code first and translate it into an equivalent  ? 
+construction. The \verb|if/else| code reads
+
+\begin{verbatim}
+if (a<b) 
+  x=1.0;
+else
+  x=2.0;
+\end{verbatim}
+The equivalent construction with the conditional operator ? is more
+compact
+\begin{verbatim}
+x= (a<b ? 1.0 : 2.0);
+\end{verbatim}
+The meaning of the different expressions in the above stement should
+be obvious.
+
 
 \paragraph{goto}
 We already remarked that Java does not have a \verb|goto| instruction
@@ -891,6 +924,7 @@ simple program \verb|DiceGame.java|
 \subsection{Parameters from the command line or from a html file}
 \label{sec:Parameter}
 
+\subsubsection{Parameters from the command line}
 The access of parameters given on the command line is as easy as it
 is in C and C++. The parameters are stored as strings in Java and
 are given as the parameters to the main() method of the application.
@@ -919,9 +953,11 @@ We also see the concatenation of strings in the output statement.
 And because you can only supply one argument to the  \verb|println()|
 method, you have to concatenate all outputs to one long string.
 
-A little bit different is the behaviour of applets, because there is
-no command line. But there is also a way to transmit parameters from 
-the calling HTML file to the Java applet. In the HTML file you can
+\subsubsection{Parameters from a HTML file}
+In applets there is no commando line. So, in order to transmit 
+parameters from the calling HTML file to the Java applet we have to
+proceed in a different way.
+In the HTML file you can
 specify \verb|<PARAM>| attributes like here:
 \inputlisting{Listings_Java/ParamApplet.html}
 
@@ -949,7 +985,8 @@ appletviewer or in Netscape should look like this:
 \label{sec:Arrays}
 
 Before discussing the notion of classes and objects, we want to introduce
-another reference type: the array. They are actually objects, but
+another reference type: the array. Arrays are actually objects
+(see \ref{sec:obiectoriented}), but
 Java provides many special commands for arrays, which makes them a 
 little bit special.
 
@@ -961,7 +998,7 @@ have to destroy (free) the allocated memory.
 
 To create an array you have to use the \verb|new| keyword used for
 creating (instantiating) objects. So to create a one dimensional
-array with 10 elements you use:
+array, called \verb|intarray|, with 10 elements you use:
 \begin{verbatim}
         int intarray[] = new int[10];
 \end{verbatim}
@@ -1006,7 +1043,8 @@ arrays of arrays. For example
 \begin{verbatim}
         double matrix[][] = new double[10][10]; 
 \end{verbatim}
-creates a 10 by 10 matrix, meaning that you have created 10 arrays
+creates a 10 by 10 matrix, called \verb|matrix|, 
+meaning that you have created 10 arrays
 of type \verb|double[10]|. An important point to make is that you
 do not have to specify all dimensions at once. You can for example
 create a triangular matrix by submitting:
@@ -1029,7 +1067,7 @@ numbers by using arrays.
 Here we first declare a double array called \verb|RandomNumber| and
 create it in Line 13. Then we store the random numbers in the array
 and afterwards calculate the mean.
-The last important point to note is the copying of arrays. 
+The last important point to address is the copying of arrays. 
 You can not just write
 \begin{verbatim}
         int[] array1 = new int[] = {1,2,3,4,5};
@@ -1051,19 +1089,111 @@ of array2 is not created!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Object Oriented Programming - Classes}
-
+\label{sec:objectoriented}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Classes and Objects}
-\label{sec:Classes_and_Objects}
-
+\subsection{The Buffon needle problem}
 The biggest step you have to take in mastering Java if you are
 coming from the Fortran or C community, is to switch to the object
 oriented paradigm. Although C++ programmers are used to objects, there
 are quite a number of differences to C++ in Java. That is why Java
-is closer to C than to C++.
+is closer to C than to C++. Since the notions of classes, objects, and
+methods are quite abstract we want to introduce them with the help of
+a classical example from probability theory. 
 
+It seems that the earliest documented application of stochastic simulation
+methods to the solution of an integral has been advanced by Comte de
+Buffon \footnote{Georges Loui Leclerc Comte de Buffon ($^*$ Montbard
+  (Dijon) 7. 9. 1707, \dag Paris 16. 4. 1788). He was director of the
+  Jardin des Plants in Paris and since 1753 member of the Acad\'emie 
+fran\c{c}aise. His  work ``Histoire naturelle'', in which theories
+about the origin of the earth and of  its organisms aare discussed,
+was one of the most famous and translated works of the Age of
+Enlightment. Influenced by I. Newton he sustained the scientific
+method based on observation and experiment. His work contains many
+ideas which entered furure scientific theories.}. The famous Buffon
+needle problem has been formulated in 1733 but published only in 1777. It is
+supposed
+to be the first experiment, a kind of analogue simulation, in the
+context of geometric probabilities. The problem can be stated in the
+following way: A needle of length $L$ ($L=2l$) is drawn at random onto a
+horizontal plane ruled with staight parallel lines. The distance
+between the lines is $D$ ($D \ge L$; $D=2d$). 
+What is the probability $P$ that the
+needle will intersect one of these lines?
+
+In fact Comte de Buffon performed the experiment of throwing the
+needles many times to determine the probability $P$. He also carried
+out the mathematical anaysis of the problem which we want to review
+shortly.
+
+For convenience we denote by $x$ the distance of the middle point of
+the needle to the nearest line and by $\phi$ ($0 \le \phi \le \pi$) the
+angle between the needle and this line (see
+Fig. (\ref{buffondefinition})). The quantities $x$ and $\phi$
+completely determine the position of the needle. It is evident from
+Fig. (\ref{buffondefinition}) that the needle crosses the line only if
+the condition
+\begin{equation}
+\label{buffoncondition}
+x \le l \sin \phi
+\end{equation}
+is satisfied.
+
+
+\begin{figure}
+\label{buffondefinition}
+\includegraphics{Figures/buffondefinition.eps}
+\caption{The Buffon needle problem. Definition of the variables $x$
+  and $\phi$.}
+\end{figure}
+
+Let us look at the possible positions of the needle in the $x$--$\phi$
+plane (see Fig. (\ref{buffonplane})). All positions lying below the
+$l\sin \phi$ curve between the abscissa 0 and $\pi$ satisfy the
+condition (\ref{buffoncondition}). The surface of this region is
+immediately found by integration, $F=2l$. The surface $F$ is a measure
+for the set of all positions of the needle which cross one line. On
+the other side it is clear that $\pi d$ is am measure for the surface
+of all possible ppositions of the half needle. The ratio of the two
+measures $ 2l/\pi d$ is the probability we were looking for, i.e.,
+\begin{equation}
+\label{buffonprobability}
+P = \frac{2 l}{\pi d}.
+\end{equation}
+
+\begin{figure}
+\label{buffonplane}
+\includegraphics{Figures/buffonplane.eps}
+\caption{The buffon needle problem. The $x$--$\phi$ plane.}
+\end{figure}
+
+Some years later (??) Laplace \footnote{Laplace, ...} recognized that
+the idea behind the Buffon needle experiment could be used to evaluate
+$\pi$ from the trhrows of the needles. Today we would call this a
+Monte Carlo determination of $\pi$. If we repeat the experiment $N$
+times and count the number of times the needle crosses a line $M$, the
+probability $P$ can be estimated by the relative frequency of hits
+\begin{equation}
+\label{buffonestimateP}
+P \approx M/N
+\end{equation}
+and hence we have with Eq. (\ref{buffonprobability})
+\begin{equation}
+\pi \approx \frac{2lN}{dM}
+\end{equation}
+Now, let us try to write a Java code for the simulation of the Buffon
+needle problem.
+
+
+
+\subsection{Classes and Objects}
+\label{sec:Classes_and_Objects}
+Before we begin to write the code we have to introduce some formal
+aspects of the Java language.
 We have already met a lot of object oriented features 
-without discussing them in detail. 
+without discussing them in detail.  For example, we already noticed
+that the fundamental unit of programming in Java is the {\em class}. A
+concise definition of classes and objects in Java could be:
 \begin{quote}
 A class is a collection of data and methods that operate on that data. In
 Fortran or C we call the methods procedures or functions. An object
@@ -1071,20 +1201,25 @@ is an instance of the class, meaning it is a thing to work with. The class
 defines the data necessary for the object and the functions which can
 operate on them.   
 \end{quote}
-For example you can have a class ``Car'', which describes all the 
-eigenschaften of a car, e.g. type, age, weight, etc. Then you have a
-``real'' car, let's say a Ford, 10 years old, 1000 kg, etc. So this
-is an object of the class ``Car''. A method would be the calculation
-of the monthly cost for the car. 
 
-An example already familiar to us, is an array. If you have an array 
+%For example you can have a class ``Car'', which describes all the 
+%eigenschaften of a car, e.g. type, age, weight, etc. Then you have a
+%``real'' car, let's say a Ford, 10 years old, 1000 kg, etc. So this
+%is an object of the class ``Car''. A method would be the calculation
+%of the monthly cost for the car. 
+
+In other words, like in other languages you can compute only with
+primitive types (integer, float, ...) but you can also creat and
+maipulate objects. An example already familiar to us, is the  array. 
+If you have an array 
 object you can call the method \verb|length| to get the number of
 elements of the array. 
 
 So what is the difference to the standard function approach here?
 Instead of using function arguments you supply the argument by 
-putting them in front of the method separated by a point. 
-For example to calculate the mean of an array of doubles, you can
+putting them in front of the method separated by a point, e.g., 
+\verb|args.length|. 
+To calculate the mean of an array of doubles, you can
 either write a method which takes the array as an argument (like you would
 in Fortran or C): \verb|mean(array[])| or you can use the object
 oriented feature: 
@@ -1111,17 +1246,39 @@ allocate (instantiate) the memory for the value of the object, just
 the reference to the value.
 
 As an example for the most important issues about objects, we want to
-write a class, which calculates random numbers by different methods and
-for different distributions. To that end we write a class 
-\verb|RandomNumber|. It has three fields (variables), two of them are
+write a Java code which allows the simulation of the Buffon needle
+problem. It is clear that in the problem at hand ``needles'' will play
+a central role. Each needle may be described by the $x$-- and
+$y$--coordinates of  its two ends. Of course, for each needle we can
+check wheteher it crosses a line or not. We draw needles at random so
+different needels will have different coordinates. However, needels
+have also generic properties wich justify to define needels as a class!
+
+
+The listing of the needle class code can be seen below. We are going
+to explain basic concepts while discussing this example.
+
+\inputlisting{Listings_Java/needle.java}
+
+\subsubsection{Class variables}
+The needle class has four fields which correspond to the four
+cordinates which specify the position of the needle. 
+The term fields is used in Javanese as a synonym for variables.
+Furthermore, we
+need some specification for the geometry involved in the problem.
+Some of the fields  are
 defined with the \verb|final| keyword. This is the equivalent to the
 const keyword in C. A final field can not be changed anymore.
-The \verb|static| modifier defines a field (variable), which is belonging
+The variable \verb|cross| is declared to be \verb|static|.  This
+modifier 
+defines a field (variable), which is belonging
 to the class and not to the object. So every object of that class 
 has the same value for a \verb|static| field. The \verb|public| modifier
 on the other hand defines a field or method, which is special to 
 an object not to the class -- this is also called an instance field or
-method, the \verb|static| version is called a class variable or method.
+method, the \verb|static| version is called a class variable or
+method.
+In table \ref{tab:modifiers} we give an overview of some available modifiers.
 \begin{table}[htbp]
   \begin{center}
     \leavevmode
@@ -1143,25 +1300,98 @@ method, the \verb|static| version is called a class variable or method.
     \label{tab:modifiers}
   \end{center}
 \end{table}
-
-\inputlisting{Listings_Java/RandomNumber.java}
-Class variables and methods are the closest relatives to global 
+It is important to remark that
+class variables and methods are the closest relatives to global 
 variables in all the other languages. They are accessible from all
 classes, but still are belonging to a class. So you could have two
 class methods with the same name, but for different classes.
+Having fixed also some constants, e.g. $\pi$ and the distance between
+parallel lines, we have to initialize the class. This is done by means
+of the constructor.
 
+
+\subsubsection{The constructor}
 An important part of any class is the constructor of the class. This is
 the method (function), which is called when an object of this
-class is instantiated. Here in our example, we just set the seed. As 
+class is instantiated. 
+
+In our example a needle is initialized in the following way. We draw
+at random the four coordinates \verb|NeedleX1|, \verb|NeedleX2|,
+\verb|NeedleY1|, and \verb|NeedleY2| which determine the position of
+the first needle. Note, that we have made use of the keyword
+\verb|this|.
+This keyword is always required when the argument of a method
+or a local variable ina method have the same name as one of the fields
+in the class. If the method is simple, as it is the case here, it is
+not necessary to be so careful.
+
+
+
+Here in our example, the constructor just sets the four coordinates. 
+As you can see we have to supply the coordinates, when instantiating the
+needle. However, it is important to remark, that most of the 
+constructors don't even need a parameter to 
+instantiate the object. 
+
+%Then the method \verb|nextRand()| is defined and returns the next
+%random calculated using a congruential method (see later in this
+%book). 
+
+
+\subsubsection{Class methods}
+Having initialized the class we now want to define some methods in our
+\verb|needle| class. The first  method is called \verb|NextNeedle| and
+simply returns a new needle.
+The return type of methods always has to be specified, if
+there is no return value you have to use the \verb|void| statement
+(as in C). The value to be returned is specified by the return keyword.
+
+Now we want to define a method which explicitly operates on an object.
+This second method is called \verb|CrossInspection| and checks whether
+a needle crosses a line or not. The \verb|CrossInspection| method
+returns the number of hits. Note that the variable \verb|cross| has
+been defined as a class variable with the help of the modifier \verb|static|.
+By this method our class \verb|needle| is completed.
+
+Next we need to look at the class \verb|nadel.java| which contains the
+\verb|main| method and demonstrates how to use the \verb|needle| class.
+
+\inputlisting{Listings_Java/buffon.java}
+
+By defining the \verb|needle| class in Java, we have created a new
+data type. Variables of this type can be declared by
+\begin{verbatim}
+needle FirstNeedle;
+\end{verbatim}
+\verb|FirstNeedle| is simply a name that refers to a \verb|needle|
+object. We now have to create dynamically the the object. This
+is done with the help of the \verb|new| keyword
+\begin{verbatim}
+needle FirstNeedle = new needle();
+\end{verbatim}
+Next, in a \verb|for| loop we draw \verb|N|  needles and with the help
+of the \verb|CrossInspection| method we check whether the needles
+cross the lines or not. Finally, the result, i.e. the estimated value
+for $\pi$ is printed.
+
+\subsubsection{A random number generator}
+Since the concepts we just introduced are quite abstract it may be
+useful to see them in action with the help of a second example.
+As a second example for the most impiortant issues about objects, we
+want to write a class, which calculates random numbers uniformly
+distributed bewtween 0 and 1. To this end we write a class
+\verb|RandomNumber|. It has three fields (variables), two of them are
+defined with the \verb|final| keyword.
+
+\inputlisting{Listings_Java/RandomNumber.java}
+
+Here in our example, we just set the seed. As 
 you can see you have to supply the seed, when instantiating the
 generator. Most of the constructors don't even need a parameter to 
 instantiate the object. 
-
 Then the method \verb|nextRand()| is defined and returns the next
 random calculated using a congruential method (see later in this
-book). The return type of methods always has to be specified, if
-there is no return value you have to use the \verb|void| statement
-(as in C). The value to be returned is specified by the return keyword.
+book). 
 
 Now we have to write a program (class), which uses this class to 
 calculate the average of some random numbers.
@@ -1173,10 +1403,11 @@ create \verb|N| random numbers using the \verb|nextRand()| method
 of our class applied to the object we just created. The remaining
 part has already been explained.
 
-A second example demonstrates how to create a class for calculating
+A third example demonstrates how to create a class for calculating
 some statistical measures for data sets. 
 
 Listing Moment Calc. (???)
+
 
 \subsubsection{Extending (Inheritance) and Overloading Classes}
 Often you want to define subclasses, which should inherit all
