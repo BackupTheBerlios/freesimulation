@@ -91,7 +91,7 @@ of the corresponding programs are listed in the appendix.
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\\hline
            & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\\hline 
    Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
-Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & ca. 15 Min. \\\hline
+Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 30 Min. \\\hline
     \end{tabular}
     \caption{Performance comparison for different languages, operating
    systems (OS), and platforms.
@@ -791,6 +791,73 @@ double (for a float use rand.Float()). You can also create normally
 distributed random numbers with the \verb|Random.nextGaussian()| method.
 The remaining parts of the program should be self explaining.
 
+\paragraph{Byte-Code of a class file}
+Using the \verb|DataMean()| program, we want to show the bytecode
+produced by the Java compiler. In the first line you can see the
+command to use (\verb|javap|) and below the output:
+\begin{verbatim}
+Command_Line>>> javap -c DataMean
+
+Compiled from DataMean.java
+public synchronized class DataMean extends java.lang.Object
+    /* ACC_SUPER bit set */
+{
+    public static void main(java.lang.String[]);
+    public DataMean();
+}
+
+Method void main(java.lang.String[])
+   0 sipush 10000
+   3 istore_3
+   4 new #10 <Class java.util.Random>
+   7 dup
+   8 invokespecial #12 <Method java.util.Random()>
+  11 astore_1
+  12 dconst_0
+  13 dstore 4
+  15 iconst_1
+  16 istore_2
+  17 goto 32
+  20 dload 4
+  22 aload_1
+  23 invokevirtual #17 <Method double nextDouble()>
+  26 dadd
+  27 dstore 4
+  29 iinc 2 1
+  32 iload_2
+  33 iload_3
+  34 if_icmplt 20
+  37 dload 4
+  39 iload_3
+  40 i2d      
+  41 ddiv
+  42 dstore 4
+  44 getstatic #18 <Field java.io.PrintStream out>
+  47 new #8 <Class java.lang.StringBuffer>
+  50 dup
+  51 ldc #2 <String " The mean of ">
+  53 invokespecial #13 <Method java.lang.StringBuffer(java.lang.String)>
+  56 iload_3
+  57 invokevirtual #15 <Method java.lang.StringBuffer append(int)>
+  60 ldc #4 <String " random numbers
+">
+  62 invokevirtual #16 <Method java.lang.StringBuffer append(java.lang.String)>
+  65 ldc #3 <String " between 0 and 1 is ">
+  67 invokevirtual #16 <Method java.lang.StringBuffer append(java.lang.String)>
+  70 dload 4
+  72 invokevirtual #14 <Method java.lang.StringBuffer append(double)>
+  75 ldc #1 <String " !">
+  77 invokevirtual #16 <Method java.lang.StringBuffer append(java.lang.String)>
+  80 invokevirtual #20 <Method java.lang.String toString()>
+  83 invokevirtual #19 <Method void println(java.lang.String)>
+  86 return
+
+Method DataMean()
+   0 aload_0
+   1 invokespecial #11 <Method java.lang.Object()>
+   4 return
+\end{verbatim}
+
 
 \paragraph{while and do--while}
 Java offers also the possibility to use other loop constructs, the
@@ -986,7 +1053,7 @@ appletviewer or in Netscape should look like this:
 
 Before discussing the notion of classes and objects, we want to introduce
 another reference type: the array. Arrays are actually objects
-(see \ref{sec:obiectoriented}), but
+(see \ref{sec:objectoriented}), but
 Java provides many special commands for arrays, which makes them a 
 little bit special.
 
@@ -1169,7 +1236,7 @@ P = \frac{2 l}{\pi d}.
 
 Some years later (??) Laplace \footnote{Laplace, ...} recognized that
 the idea behind the Buffon needle experiment could be used to evaluate
-$\pi$ from the trhrows of the needles. Today we would call this a
+$\pi$ from the throws of the needles. Today we would call this a
 Monte Carlo determination of $\pi$. If we repeat the experiment $N$
 times and count the number of times the needle crosses a line $M$, the
 probability $P$ can be estimated by the relative frequency of hits
@@ -1210,7 +1277,7 @@ operate on them.
 
 In other words, like in other languages you can compute only with
 primitive types (integer, float, ...) but you can also creat and
-maipulate objects. An example already familiar to us, is the  array. 
+manipulate objects. An example already familiar to us, is the  array. 
 If you have an array 
 object you can call the method \verb|length| to get the number of
 elements of the array. 
@@ -1251,8 +1318,8 @@ problem. It is clear that in the problem at hand ``needles'' will play
 a central role. Each needle may be described by the $x$-- and
 $y$--coordinates of  its two ends. Of course, for each needle we can
 check wheteher it crosses a line or not. We draw needles at random so
-different needels will have different coordinates. However, needels
-have also generic properties wich justify to define needels as a class!
+different needles will have different coordinates. However, needles
+have also generic properties wich justify to define needles as a class!
 
 
 The listing of the needle class code can be seen below. We are going
@@ -1263,7 +1330,7 @@ to explain basic concepts while discussing this example.
 \subsubsection{Class variables}
 The needle class has four fields which correspond to the four
 cordinates which specify the position of the needle. 
-The term fields is used in Javanese as a synonym for variables.
+The term fields is used in Java as a synonym for variables.
 Furthermore, we
 need some specification for the geometry involved in the problem.
 Some of the fields  are
@@ -1333,10 +1400,6 @@ needle. However, it is important to remark, that most of the
 constructors don't even need a parameter to 
 instantiate the object. 
 
-%Then the method \verb|nextRand()| is defined and returns the next
-%random calculated using a congruential method (see later in this
-%book). 
-
 
 \subsubsection{Class methods}
 Having initialized the class we now want to define some methods in our
@@ -1390,7 +1453,7 @@ you can see you have to supply the seed, when instantiating the
 generator. Most of the constructors don't even need a parameter to 
 instantiate the object. 
 Then the method \verb|nextRand()| is defined and returns the next
-random calculated using a congruential method (see later in this
+random number calculated using a congruential method (see later in this
 book). 
 
 Now we have to write a program (class), which uses this class to 
@@ -1403,10 +1466,20 @@ create \verb|N| random numbers using the \verb|nextRand()| method
 of our class applied to the object we just created. The remaining
 part has already been explained.
 
+\subsubsection{Calculating Moments}
 A third example demonstrates how to create a class for calculating
-some statistical measures for data sets. 
-
-Listing Moment Calc. (???)
+some statistical measures for data sets. Here we demonstrate the
+different approaches for programming in Java. You can use the
+``program in one file'' approach: 
+\inputlisting{Listings_Java/Moments_all.java}
+, the ``traditional procedural'' approach
+\inputlisting[23,28]{Listings_Java/Moments_procedural.java}
+\inputlisting[35,42]{Listings_Java/Moments_procedural.java}
+or an object oriented approach (two examples): 
+\inputlisting[23,28]{Listings_Java/Moments_object.java}
+\inputlisting{Listings_Java/MomentsData.java}
+\inputlisting[25,33]{Listings_Java/Moments_object2.java}
+\inputlisting{Listings_Java/MomentsData2.java}
 
 
 \subsubsection{Extending (Inheritance) and Overloading Classes}
@@ -1496,6 +1569,9 @@ you have to use the \verb|equals()| method of the String class to
 compare the value of two strings and not the references. 
 In line 25 we use the string concatenation operator $+$ for the output.
 
+By the way, you have probably already noticed, that 
+the \verb|for(;;)| loop in line 17 is a endless loop.
+
 The actual input takes place in line 21, where we assign the input
 to the string \verb|line|. The method used is \verb|readLine()|, which
 is a method of the \verb|BufferedReader| class. It reads input until
@@ -1563,25 +1639,30 @@ Here is a test program for the three rounding methods available:
 And the output is:
 \input{Listings_Java/Test_Roundings.output}
 
-
-Unfortunately these easy and important methods are not part of the
+For most of our simulations, we will need routines (methods) to
+calculate the mean, variance or other statistical measures of
+a times series for example. Unfortunately
+these (easy and) important methods are not part of the
 standard Java language. But Visual Numerics, a software company,
 has proposed a standard class for statistical functions, which are
 essential for all statistical problems. They also supplied a new class
 for complex numbers. This library is called the Java Numerical Library
-(JNL) and is free. 
+(JNL) and is free. It is alos proposed to become standard in the
+nes Java language specification.
 
 There are also other classes, which extend the standard Java language
 for matrix computations (BLAS) and much more (e.g. the JNT). If we need
 them in the course of the book, we will introduce you to them there.
 
 
-\subsubsection{Summary and Overview}
-General structure of a program:
-1) package
-2) import
-3) Classes
-4) Interfaces
+\subsection{Summary and Overview}
+The general structure of a Java program is:
+\begin{itemize}
+\item package
+\item import
+\item Classes
+\item Interfaces
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{More Advanced Features}
@@ -1597,7 +1678,7 @@ AWT, Graphics
 Example: Random Points
 
 Plotting using: Graph2D, Scivis,
-
+\inputlisting{Listings_Java/PlotEasy.java}
 
 \subsection{More Features}
 \label{sec:features}
@@ -1610,6 +1691,7 @@ Beans, EPS Output,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exercises}
 Pi Calculation:
+\inputlisting{Listings_Java/Pi_Calc_plain.java}
 \inputlisting{Listings_Java/Pi_Calc.java}
 
 
