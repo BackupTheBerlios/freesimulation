@@ -91,7 +91,8 @@ of the corresponding programs are listed in the appendix.
    Matlab  & Win95 & Matlab 5.1 & Pentium 166 & 330 sec.\\\hline
            & Win95 & Matcom Compiler V3.0 with Borland C++ 5 & Pentium 166 & 70 sec.\\\hline 
    Maple   & Linux & Maple V Rel. 4 & ? & \\\hline
-Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 30 Min. \\\hline
+Mathematica& Win95 & Mathematica V3.0 & Pentium 133 & 28 Min. \\\hline
+Mathematica& Win95 & Compiler         & Pentium 133 & 26 Min. \\ \hline
     \end{tabular}
     \caption{Performance comparison for different languages, operating
    systems (OS), and platforms.
@@ -707,6 +708,8 @@ expression \verb|i++| is equivalent to \verb|i=i+1| except that
 depending on the position of the symbols, e.g. \verb|i++| or \verb|++i|.
 This does not make a difference, if you just have these statements
 alone, but in some complex expressions this might make a difference.
+The postfix (prefix) version of the operator ++ evaluates  the value
+of the operand before (after) the increment operation.
 
 Java supports also a standard set of relational and logical operators,
 which all yield boolean values. They are listed below
@@ -733,7 +736,7 @@ $\mid\mid$ & conditional OR
 operate on  boolean expressions only.
 
 Java has also bitwise operators which operate on integers and on
-boolean types
+boolean types. They allow to perform bit manipulation on data.
 \begin{center}
 \begin{tabular}{ll}
 \& & and \\
@@ -957,6 +960,8 @@ return;
 if the method has a return type, the \verb|return| must include an
 expression for a returned type.
 
+
+
 An dieser stelle sollten einige beispiele kommen!!!!!
 
 \paragraph{switch/case}
@@ -1158,7 +1163,7 @@ of array2 is not created!
 \section{Object Oriented Programming - Classes}
 \label{sec:objectoriented}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Buffon needle problem}
+\subsection{A classical example: The Buffon needle}
 The biggest step you have to take in mastering Java if you are
 coming from the Fortran or C community, is to switch to the object
 oriented paradigm. Although C++ programmers are used to objects, there
@@ -1231,10 +1236,20 @@ P = \frac{2 l}{\pi d}.
 \begin{figure}
 \label{buffonplane}
 \includegraphics{Figures/buffonplane.eps}
-\caption{The buffon needle problem. The $x$--$\phi$ plane.}
+\caption{The buffon needle problem. The $x$--$\phi$ plane (schematically).}
 \end{figure}
 
-Some years later (??) Laplace \footnote{Laplace, ...} recognized that
+Some years later (??) Laplace 
+\footnote{Pierre Simon Marquis de Laplace, $\ast$ Beaumont--en--Auge
+  28.3.1749 \dag 5.3.1827 Paris. Laplace was one of the leading french
+  mathematicianbs of his time. Before being a member in the Acad\'emie
+  des sciences and a Professor at the \'Ecole Normale in Paris (1794)
+he was an exmainator at the \'Ecole militaire in Paris, where in 1785
+he examined Naplo\'eon Bonaparte. The most important contributions of
+Laplace where in celestial mechanics, cosmology, mathematical physics
+and, probability theory. In his work ``Th\'eotie analytique des
+probabilit\'es'' (1812) he develops  for the first time a systematic
+mathematical treatment of probabilistic problems.} recognized that
 the idea behind the Buffon needle experiment could be used to evaluate
 $\pi$ from the throws of the needles. Today we would call this a
 Monte Carlo determination of $\pi$. If we repeat the experiment $N$
@@ -1250,6 +1265,9 @@ and hence we have with Eq. (\ref{buffonprobability})
 \end{equation}
 Now, let us try to write a Java code for the simulation of the Buffon
 needle problem.
+
+
+EINFUEGEN: Buffon needle procedural !!!!
 
 
 
@@ -1319,17 +1337,17 @@ a central role. Each needle may be described by the $x$-- and
 $y$--coordinates of  its two ends. Of course, for each needle we can
 check wheteher it crosses a line or not. We draw needles at random so
 different needles will have different coordinates. However, needles
-have also generic properties wich justify to define needles as a class!
+have also generic properties which justify to define needles as a class!
 
 
 The listing of the needle class code can be seen below. We are going
 to explain basic concepts while discussing this example.
 
-\inputlisting{Listings_Java/needle.java}
+\inputlisting{Listings_Java/Needle.java}
 
 \subsubsection{Class variables}
 The needle class has four fields which correspond to the four
-cordinates which specify the position of the needle. 
+coordinates which specify the position of the needle. 
 The term fields is used in Java as a synonym for variables.
 Furthermore, we
 need some specification for the geometry involved in the problem.
@@ -1345,7 +1363,7 @@ on the other hand defines a field or method, which is special to
 an object not to the class -- this is also called an instance field or
 method, the \verb|static| version is called a class variable or
 method.
-In table \ref{tab:modifiers} we give an overview of some available modifiers.
+In Table \ref{tab:modifiers} we give an overview of some available modifiers.
 \begin{table}[htbp]
   \begin{center}
     \leavevmode
@@ -1388,7 +1406,7 @@ at random the four coordinates \verb|NeedleX1|, \verb|NeedleX2|,
 the first needle. Note, that we have made use of the keyword
 \verb|this|.
 This keyword is always required when the argument of a method
-or a local variable ina method have the same name as one of the fields
+or a local variable in a method have the same name as one of the fields
 in the class. If the method is simple, as it is the case here, it is
 not necessary to be so careful.
 
@@ -1416,7 +1434,7 @@ returns the number of hits. Note that the variable \verb|cross| has
 been defined as a class variable with the help of the modifier \verb|static|.
 By this method our class \verb|needle| is completed.
 
-Next we need to look at the class \verb|nadel.java| which contains the
+Next we need to look at the class \verb|buffon.java| which contains the
 \verb|main| method and demonstrates how to use the \verb|needle| class.
 
 \inputlisting{Listings_Java/buffon.java}
@@ -1427,7 +1445,7 @@ data type. Variables of this type can be declared by
 needle FirstNeedle;
 \end{verbatim}
 \verb|FirstNeedle| is simply a name that refers to a \verb|needle|
-object. We now have to create dynamically the the object. This
+object. We now have to create dynamically the object. This
 is done with the help of the \verb|new| keyword
 \begin{verbatim}
 needle FirstNeedle = new needle();
@@ -1440,7 +1458,7 @@ for $\pi$ is printed.
 \subsubsection{A random number generator}
 Since the concepts we just introduced are quite abstract it may be
 useful to see them in action with the help of a second example.
-As a second example for the most impiortant issues about objects, we
+As a second example for the most important issues about objects, we
 want to write a class, which calculates random numbers uniformly
 distributed bewtween 0 and 1. To this end we write a class
 \verb|RandomNumber|. It has three fields (variables), two of them are
@@ -1519,7 +1537,7 @@ the methods of the Applet class as necessary.
 \subsubsection{Overview of all packages in Java 1.1}
 
 Here we list all the standard packages included in the Java 1.1
-language standard. The important packages (in our point of view)
+language standard. The important packages (for our purposes)
 are written in small caps.
 \begin{description}
 \item[\textsc{java.applet}] includes the superclass of all Java applets (small package)
@@ -1586,7 +1604,9 @@ which can occur during the I/O. For that reason we have to use the
 class (see line 7).
 
 A last remark concerns the escape codes used in line 15 and line 25.
-The first one displays a quotation mark and the second one is just a 
+The first one, $/$'' displays a quotation mark and the second
+one,$/$n, 
+is just a 
 newline character. These are analogous to the C escape codes.
 
 Although this looks very complicated, if you don't want to go into
@@ -1599,22 +1619,41 @@ any problems understanding the code above anymore.
 \label{sec:Standard_Math}
 
 The standard mathematical functions of Java are declared in the 
-Java.lang.Math class and contains sine, cosine, logarithm, exponential,
+Java.lang.Math class, which consists of static constants and methods
+for common mathematical manipulations. It contains sine, cosine, logarithm, exponential,
 square root and much more. Do not confuse this class with the
 java.Math class, which was introduced to Java 1.1 for arbitrary
 precision arithmetic -- we are not discussing this.
+
+Some useful constant in the \verb|Math| class  are \verb|Math.Pi|
+($\pi$) and \verb|Math.E| ($e$).
+
+
+
+In the following table we have summarized some of the most useful the 
+\verb|Math|. Note, that all angles are in radins and allparameters and
+return values are double (unless otherwise stated). 
 Here is a table of the methods:
 \begin{table}[htbp]
+\caption{Some useful mathenatical fuinctions defined in the
+  java.lang.Math class.}
   \begin{center}
     \leavevmode
     \begin{tabular}{ll}
       abs() & absolute value \\
       acos()/asin()/atan() & arcus cosine/sine/tangent \\
+      atan2(x,y) & arctangent (x/y)  \\
       sin()/cos()/tan() & sine/cosine/tangent\\
       exp() / log() & exponential and natural logarithm \\
-      ceil()/floor()/round()/rint()&rounding of values (see test program)\\
-      pow() & power\\
-      min( , ) / max( , ) & minimum or maximum of two values \\
+      ceil(x) & smallest whole number $\ge x$ \\
+      floor(x) & largest whole number $\le x$ \\
+      rint() & x rounded to the nearest integer; \\
+             &  if neither integer is
+                        nearer, rounds to the even one. \\
+      round() & (int) floor (x+0.5) for float x \\
+       ~       & (long) floor(x+0.5) for double x \\
+      pow(x,y ) & $y^x$\\
+      min(x,y)/max(x,y)  & minimum (maximum)  of x and y for any numeric type  \\
       sqrt() & square root of a double \\
       random() & random numbers (use java.util.Random class)\\
       IEEEremainder() & special remainder function \\
@@ -1628,7 +1667,7 @@ These are all class methods, so they can be called from anywhere.
 Here are some examples:
 \begin{verbatim}
  a=Math.exp(2.1);        // e to the 2.1
- distance = Math.sqrt(Math.pow(x,2)+pow(y,2));  // Euclidean dist.
+ distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));  // Euclidean distance
 \end{verbatim} 
 By the way, there is no easy import statement to avoid the Math in front
 of the methods, you always should use it, although it seems 
@@ -1647,12 +1686,74 @@ standard Java language. But Visual Numerics, a software company,
 has proposed a standard class for statistical functions, which are
 essential for all statistical problems. They also supplied a new class
 for complex numbers. This library is called the Java Numerical Library
-(JNL) and is free. It is alos proposed to become standard in the
-nes Java language specification.
+(JNL) and is free. It is also proposed to become standard in the
+next Java language specification.
 
 There are also other classes, which extend the standard Java language
 for matrix computations (BLAS) and much more (e.g. the JNT). If we need
 them in the course of the book, we will introduce you to them there.
+
+\subsection{Names conventions in Java}
+In order to make the Java codes more readable it is customary to stick
+to the followinh nam conventions.
+
+\paragraph{Classes and Interfaces.} The names of classes and interfaces
+  should consist of one or more words which are joponed together. They
+  should describe appropriately the class and the interface. 
+The first lette of the name is an uppercas letter. If the
+  class name consists of more then one word each word after the first
+  one begins with an uppercase letter, e.g., \verb|Needle|,
+  \verb|Reader|, \verb|StringToken|.
+
+\paragraph{Methods.} The names of methods are verbs or verb--phrases
+  (???). They begin with lowercase letters. If the name cionsists of
+  more then one word, the second and all the following words begin
+  with an uppercase letter. To give some examples:
+\begin{itemize}
+\item methods which set the value of a variable or return the value of
+  a variable begin with \verb|set| or \verb|get|; e.g.,
+  \verb|setName|, \verb|getData|.
+\item method which check some condition and return a result  get the
+  prefix \verb|is|, e.g., \verb|isSmaller|.
+\item methods, which simply perform some conversions are characteized
+  by the returned type and have the prefix \verb|to|, e.g.,
+  \verb|toString|.
+\end{itemize}
+
+\paragraph{Instance Variables.} Names for instance variables are
+  words, nominal phrases, or short--hand notations. Like names for
+  methods the word begins with a lowercase letter and all following
+  words begin with an uppercase letter, e.g., \verb|next|,
+  \verb|dataVector|,
+\verb|minValue|.
+
+\paragraph{Local variables or parameters.} Local variables should get
+  short  names. Usually, they are named ny sequences of small
+  letters. Typical examples are acronyms (the first letter of each
+  word) of the name of the class for a variable, which keeps a
+  reference to an instanace of the class, e.g., \verb|v| for Random
+  Variable or short--hand notations, e.g., \verb|minx| for the minimal
+  value of the variable x. Single letter names should be avoided,
+  unless for temporary variables or variabl"oes which are used in
+  loops or for variables with an uncertain value of some type:
+\verb|b| for \verb|byte|, \verb|c| for \verb|char|, \verb|d| for
+  \verb|double|, \verb|e| for Exception, \verb|f| for \verb|float|,
+  \verb|i|,
+\verb|j|, \verb|k| for \verb|int|, \verb|l| for \verb|long|, \verb|o|
+  for \verb|Object|, \verb|s| for \verb|String|.
+
+\paragraph{Constants.} The names of constants may be composed by one
+  or more words. All characteres are upper--case letters and the words
+  are joined by \verb|_|, e.g., \verb|PI|,  \verb|MIN_VALUE|.
+
+\paragraph{Packages.} Packages, which are only used locally are
+  identified by a name which begins with a lower--case letter. This
+  word can not be \verb|java|; this keyword is reserved for
+  standard Java classes.
+
+
+
+
 
 
 \subsection{Summary and Overview}
