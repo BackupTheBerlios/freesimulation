@@ -48,7 +48,8 @@
 \lstloadlanguages{Java,Matlab,HTML,TeX}
 \lstset{basicstyle=\small, labelstep=5, labelstyle=\ttfamily,
         pre=\small\smallskip\hrule\smallskip,
-        post=\smallskip\hrule\smallskip}
+        post=\smallskip\hrule\smallskip,
+        spread=1cm}
 
 
 %%% SHOW ALL Labels 
@@ -194,8 +195,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%   Which part should be compiled by TeX
-\includeonly{Chap0,Chap1,Chap2,JavaSummary}
-%\includeonly{Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Listings,Solutions}
+%\includeonly{Chap0,Chap1,Chap2,JavaSummary}
+\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,JavaSummary}
+%\includeonly{CD_ROM,Chap0,Chap1,Chap2,Chap3,Chap4,Chap5,Chap6,Chap7,Chap8,Chap9,Listings,Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -225,7 +227,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Chapters !!!!  --  Arabic pagenumbering
 \pagenumbering{arabic}
-\setcounter{chapter}{0}
+
+%%% Chapter -0 -- CD ROM Explanations
+\include{CD_ROM}
+
+\setcounter{chapter}{-1}
 \lstset{language=java}
 
 %%% Chapter 0 -- Java Intro
