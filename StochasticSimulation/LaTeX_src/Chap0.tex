@@ -23,7 +23,7 @@ It is clear that it is not possible to teach simulation methods without
 performing some numerical experiments in the classroom and that it is 
 impossible for the students to learn stochastic simulation methods without 
 implementing the algorithms. Therefore, the theory and the corresponding 
-algorithms will be presented in a highly interconnected (interwined), and we 
+algorithms will be presented in a highly interconnected (interwined), and, we 
 hope, organic way.
 
 In order to stick to this idea it was necessary to choose a programming 
@@ -42,32 +42,32 @@ A secondary aim of the course is to make the student aquainted with a
 programming language "in action" so they should learn something about a "good 
 programming style" for real-life problems. Visualization of the results 
 obtained allows to understand in a plastic way what is going on physicaly. so 
-the interface between program and visulaization tool/ grapghical outout should
+the interface between program and visulaization tool/ graphical output should
 be comfortable. Last not least the availability of the program should be
 guaranteed. The corresponding compilers should be available at low, in the 
 ideal case at no, cost to the students for home exercises. Furthermore, they
 should be portable on PC with Windows or Linux operating systems, on Macintosh
-and on workstations from the UNIx world (AIX, Solaris, SGI, ...).
-Since almost all universities does have a highperformance parallel computer 
-the language should also allow to demonstrate highperformance parallel 
+and on workstations from the UNIX world (AIX, Solaris, SGI, ...).
+Since almost all universities do have a high--performance parallel computer 
+the language should also allow to demonstrate high--performance parallel 
 algorithms.
 
 Because of our background of convinced Fortran users we considered the 
-following alternatives: our beloved fortran, a language which is popular in 
-the engineering and applied mathematics communities, MATLAB and Java, the 
-"Wunderkind" of software developers and of the Internet community. We habe 
-not considered C, C++ for thwe simple reason that we never felt the necessity 
+following alternatives: our beloved Fortran, a language which is popular in 
+the engineering and applied mathematics communities, MATLAB, and Java, the 
+"Wunderkind" of software developers and of the Internet community. We have 
+not considered C, C++ for the simple reason that we never felt the necessity 
 to learn them.
 
-All the 3languages considered  in some sense satisfy the above criteria. All
+All the languages considered  in some sense satisfy the above criteria. All
 are more  or less portable on different platforms (at different expenses), all
-allow the use of good visulaization tools (at different prices), and, of 
+allow the use of good visualization tools (at different prices), and, of 
 course, all are clean. But not all are equally powerful. 
 
 We checked the power (the efficiency) of the languages considered by the 
-following benchmark, whic represent the prototype of atochastic simulation. 
+following benchmark, which represent the prototype of a stochastic simulation. 
 We generated 100 (?) trajectories of a typical one-step stochastic process
-and compared the CPu times obtained by the 3 different languages. The result
+and compared the CPU times obtained by the 3 different languages. The result
 of the benchmark are summarized in the following table.
 
 \begin{table}[htbp]
@@ -107,11 +107,11 @@ compared to the Fortran code. This is a good reason to disregard MATLAB!
 
 Now we have to decide between Java and Fortran. The argument in favour of 
 Java which compensates the slightly slower performance (today!, in future 
-this might be different) is its portability ant the free availability of the
+this might be different) is its portability and the free availability of the
 compiler and of the visualization tools. Java runs on every platform ant 
 it is available at no cost. 
 
-Last not least, we eant to mention another advantage of Java. It seems
+Last not least, we want to mention another advantage of Java. It seems
 \cite[]{bigbucks} that there is  a great need for Java programmers in 
 different branches of industry today. This need will be even greate in future 
 years. So learning Java, might be a kind of "life insurance" for students of 
@@ -123,7 +123,7 @@ physics. It will put them in the position to find a good (programming) job.
 \label{sec:Java}
 
 We have just seen some good reasons to choose Java as the programming language
-for our puprposes. Here we want to mention some more technical points, from a 
+for our purposes. Here we want to mention some more technical points, from a 
 computational science point of view, in favour of Java.
 
 Sun has described Java as follows \cite[]{javanutshell}:
@@ -137,22 +137,23 @@ Let us try to understand roughly what is meant by the above adjectives.
 
 Java is simple in the sense that the number of language constructs has been 
 kept as small as necessary. For ease of migration from other languages some
-basic language elements resemble C or C++. however, some features of these 
+basic language elements resemble C or C++. However, some features of these 
 languages which were rarely used and which have been considered to be unsafe 
 have been omitted. For example, in Java there is no goto statement; instead 
 it has labelled break and continue statements. The preprocessor of C has been 
 eliminated; the program you write is the program that the compiler sees. In 
-Java there are operator overloading and multiple inheritance features of C++.
+Java there are no  operator overloading and no multiple inheritance 
+features of C++.
 One major simplification is that Java does not have pointers!
 In Java memory is managed automatically, so the programmer is nor responsible 
 for the management  of memory space. In particular Java implements an 
-automaticis a garbage collector.
+automatic  garbage collector.
 
-Java is an object--oriented language and you do not have ti think in a 
-procedural--based way, asit is the case in Fortran for example. In order to 
+Java is an object--oriented language and you do not have to think in a 
+procedural--based way, as it is the case in Fortran for example. In order to 
 solve problems in Java you have to use the notions of classes and objects. 
 Every object has a class that defines its data and the methods that operate 
-on these data. Classes are hierarchically arranged. a subclass inherits the 
+on these data. Classes are hierarchically arranged. A subclass inherits the 
 behaviour of its superclass. A class is the basic unit of compilation
 and of the execution in Java. All Java programs are classes.
 
@@ -167,17 +168,17 @@ that supports Java. Other languages may also be compiled into Java bytecode.
 Java is robust. Java contains features, exception handling, which simplify the
 tasks of error handling and recovery.
 
-Java is secure. Since Java has been deigned for distributed applications 
+Java is secure. Since Java has been designed for distributed applications 
 high security standards have been implemented. For example, direct access to
-memeory is not allowed. Java contains four different levels of security 
+memory is not allowed. Java contains four different levels of security 
 checks and enforcements to prevent the introduction of viruses. 
 In particular there is protection against deleting and modifying files.
 
 Java is architecture neutral and portable. The bytecode format is always the 
-same regardless of the platform on which the Java complier runs. Furthermore,
+same regardless of the platform on which the Java compiler runs. Furthermore,
 there are no "implementation defined" behaviours in Java. For example, Java
-specifies the size of each primitive data type. Fir instance, the integer 
-types byte, short, int, long as 8, 16, 32 or 64--boiit long, respectively.
+specifies the size of each primitive data type. For instance, the integer 
+types byte, short, int, long as 8, 16, 32 or 64--bit long, respectively.
 
 Java is high--performance. Usually implementations of Java are used running 
 Java programs interpretatively. It is however possible to run Java with a 
@@ -185,7 +186,7 @@ Just In Time (JIT) compiler. JIT compiling increases the performance of Jave
 considerably.
 
 Java is multithread. It supports multiple threads of execution which can 
-handle different tasks. Multithreading increases the intecative performance 
+handle different tasks. Multithreading increases the interactive performance 
 of Java.
 
 Java is dynamic. Any Java class can be laoded into a running Java interpreter 
@@ -240,11 +241,11 @@ also freely available and have nice Java editing modes.
 
 FreeBuilder ?????
 
-Opposing to other labguages, which use the ASCII character set, Java
+Opposing to other languages, which use the ASCII character set, Java
 uses the Unicode character set. Unicode consists of characters represented
 by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
 use 256 different characters (ASCII) you can use all the 65535 different
-characters available in the Unicode set. for writing a Java program.
+characters available in the Unicode set for writing a Java program.
 This means you can name your variables using for example japanese or greek
 characters. Right from the beginning, Java is an international language.
 
@@ -264,7 +265,31 @@ in Java.
 \subsubsection{Application}
 
 \inputlisting{Listings_Java/HelloWorld_Application.java}
-To execute the example you have to proceed as follows:
+
+Let us now try to understand the above code. The program consists of
+three lines. 
+
+In the first line the program declares 
+with the help of the \texttt{class} statement a class called 
+HalloWorld. The identifier following the \texttt{class} statement is
+the name name by which the class will be referenced. Each Java program
+is a class. The curly bracket appearing after the class name
+HalloWorld introduce the following class member. 
+
+
+In the second line the \verb|main| method is introduced. The main
+method is declared \verb|void| because the method does not return a
+value. The main method is executed when you run the class as an
+application. In the present case the only parameter, the argument, 
+of the main method is an array of String object.
+
+In the third line the method \verb|println| of the system class out
+is invoked. This method simply prints a string and terminiates with a 
+new--line  command.
+
+
+
+To execute the above example you have to proceed as follows:
 \begin{itemize}
 \item \marginpar[Compiler]{Compiler}
         \verb/javac HelloWorld.java/  $\Longrightarrow$ produces
@@ -317,13 +342,213 @@ To run the applet you can either type
 
 \subsection{Variables}
 \label{sec:Variables}
-Primitive types, Strings, Objects (see later)
 
+Essentially, Java distingishes between two types of variables,
+primitive data types and refence data types.
+\subsubsection{Primitive data types}
+\label{sec:primitive_data_types}
+We already mentioned that in Java each variable or expresssion has a
+definite type and that each type has identical size and behaviour on
+all Java implementations.  Java has built in primitive data types
+to support integer, floating--point, boolean, and character values.
+The primitive data types of Java for integers, floating--points,
+characters and boolean variables are listed in the table
+below.
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{l|l|l|l|l|l}
+Type & Contains & Default & Size & Min & Max \\ \hline
+byte  & signed integer & 0 & 8bits &   &     \\ \hline
+short & signed integer & 0 & 16 bit &-32768 & 32767 \\ \hline
+int &   signed integer & 0 & 32 bits&       &        \\ \hline
+long & signed integer & 0 & 64 bits &       &        \\ \hline
+float & floating--point & 0.0 & 32 bits &     &          \\ \hline
+doulbe & floating--point & 0.0 & 64 bits &    &        \\ \hline
+boolean & true or false      &  false & 1 bit&       &  \\ \hline
+char  & Unicode character & \u000 & 16 bits &      &   \\ \hline
+\end{tabular}
+\end{center}
+\caption{Primitive data types in Java.}
+\end{table}
+
+
+The following comments have to be done. In a Java program every
+variable must have a type that precedes its name when the variable is
+declared. For example the integer i may be declared as
+
+\begin{quote}
+int i
+\end{quote}
+
+
+Char values represent characters. They apear in Java between single
+quotes, e.g.
+\begin{quote}
+char c = 'C`
+\end{quote}
+
+Float and double types have special values that may be the result of
+certain floating--point operations. For example in the java.lang.Float
+and java.lang.Double classes the special values
+\texttt{POSITIVE INFINITY}, $\texttt{NEGATIVE INFINITY}$, and 
+\texttt{NaN} (not--a--number) are
+defined.
+
+In Java strings are not a primitive type. Java provides a String
+object type to deal with sequences of character data. The java string
+class provides methods to operate on String objects.
+
+\subsubsection{Refence data types}
+\label{sec:Reference_data_types}
+
+All non--primitive data types in Java are objects and arrays. They are
+called also ``reference types'' because they are handeled by
+reference. For example you may pass the address of an object, which is
+stored in a variable, to a method. In contrast, primitive types are
+always passed by value.
+
+
+
+
+
+
+
+Primitive types, Strings, Objects (see later)
 \subsubsection{Parameters from the command line, from the calling html page}
+
+
 
 \subsection{Loops, Conditional Statements and simple Arithmetics}
 \label{sec:Loops}
-package, import, Operators +=,-=,++,\%, \&\&, ||, break,
+Because Java was designed to be able to load code distributed
+over the whole internet, you have to avoid name conflicts
+between the programs (classes). The solution in Java is to put
+every class in a \emph{package}. The name of the package is given
+at the beginning of a file before the actual program (class)
+definition starts. So for example if we put a
+\begin{quotation}
+  \verb/ package de.freiburg.simulation; / 
+\end{quotation}
+at the beginning of the ``Hello World'' application, we can compile
+the application with \verb/javac HelloWorld.java / like before.
+But to run the application we have to use
+\begin{quotation}
+  \verb/ java de.freiburg.simulation.HelloWorld / . 
+\end{quotation}
+You are wondering why the program doesn´t start? It can't, because
+there is one more thing to know. Java is looking for programs (classes)
+in the directory structure given by the class name. So
+for the example above you have to put the \verb/HelloWorld.class / file
+in the directory \verb|de/freiburg/simulation/| and issue the command
+in the directory, where the directory tree starts.
+
+You could also use an environment variable called \verb|CLASSPATH|. It
+describes the directories to search for the class files. So if the
+\verb|CLASSPATH|-variable includes \verb|/home/user/java | you can
+start the above example in this directory, if the class is in the 
+subdirectory  \verb|de/freiburg/simulation/|.
+
+All the standard commands (classes) of Java are stored in a central jar
+file, which is additionally packed to save disk space. These classes
+are always searched, no matter the \verb|CLASSPATH|-variable is set to.
+
+
+Before learning more about the syntax of Java, we have to explain another
+statement appearing in the part of any Java program before the actual
+definition of the class: the \verb|import|-statement. With \verb|import|
+you can make classes available, so you don't have to use the fully
+qualified name to the class. So if you would like to
+use the HelloWrold class from above in your programs, you could either
+type \verb|de.freiburg.simulation.HelloWorld() | in your programm
+or you can use
+\begin{verbatim}
+import de.freiburg.simulation.*;
+....
+   HelloWorld();
+\end{verbatim}
+to import all classes in the \verb|de.freiburg.simulation | class.
+You can also use:
+\begin{verbatim}
+import de.freiburg.simulation.HelloWorld;
+....
+   HelloWorld();
+\end{verbatim}
+if you just want to import one special class.
+
+We have already made of the \verb|import|-statement in the ``Hello World'' 
+applet. There we have imported the \verb|java.applet|-class, which
+defines applets and their behaviour, and the \verb|java.awt|-class, which
+will be explained later.
+ 
+
+
+
+As we already mentioned Java  supportsallmost all of the the standard
+C operators. The arithmetic operators that operate on numerical types
+are 
+\begin{center}
+\begin{tabular}{ll}
+$+$ & addition \\
+$-$ & subtraction                 \\
+$*$ & multiplication \\
+$/$ & division \\
+\% & remainder
+\end{tabular}
+\end{center}
+
+It is ipmortant to remark, that in Java integer division truncates
+toward zero (7/2=3).
+
+Java has to special opertors for incremet $++$ and decremet $--$. The 
+expression \verb|i++| is equivalent to \verb|i=i+1| except that
+\verb|i| is evaluated only once.
+
+Java supports also a standard set of relational and logical operators,
+which all yield boolean values. They are listed below
+
+\begin{center}
+\begin{tabular}{ll}
+$>$  & greater then \\
+$>=$ & greater then or equal to \\
+$<$  & less then \\
+$<=$ & less than or equal to \\
+$==$ & equal to \\
+$!=$ & not equalt to
+\end{tabular}
+\end{center}
+
+
+The conditional operators
+\begin{center}
+\begin{tabular}{ll}
+\& \& & conditional AND      \\
+||    & conditional OR
+\end{tabular}
+\end{center}
+operate on  boolean expressions only.
+
+Java has also bitwise operators which operate on integers and on
+boolena types
+\begin{center}
+\begin{tabular}{ll}
+\& & and \\
+| & or \\
+$\tilde{}$ & not \\
+$<<$ & left shift \\
+$>>$ & right shift \\
+$ >>>$ unsigned right shift 
+\end{tabular}
+\end{center}
+
+Lst not least we have to mention the fundamental assignment operator
+$=$. It may be used in combination with other operators, e.g., $+=$
+means is incremented by.
+
+
+
+
+
+Operators +=,-=,++,\%, \&\&, ||, break,
 do while, while, switch, for
 
 Example: Mean of Random numbers
