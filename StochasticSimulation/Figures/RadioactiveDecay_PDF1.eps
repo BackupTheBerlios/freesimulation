@@ -1,0 +1,463 @@
+%!PS-Adobe-3.0
+%%Title: Poisson
+%%BoundingBox: 0 0 600 850
+%%Pages: (atend)
+%%PageOrder: Ascend
+%%DocumentFonts: Helvetica Helvetica-Bold
+%%+Helvetica-Oblique Helvetica-BoldOblique
+%%+Times-Roman Times-Bold Times-Italic Times-BoldItalic
+%%+Courier Courier-Bold Courier-Oblique Courier-BoldOblique
+%%EndComments
+%%BeginProlog
+/BD {bind def} bind def
+/D {def} BD
+/ISOF {
+	dup findfont dup length 1 add dict begin {
+		1 index /FID eq {pop pop} {D} ifelse
+	} forall /Encoding ISOLatin1Encoding D
+	currentdict end definefont
+} BD
+/F [
+	/Helvetica ISOF
+	/Helvetica-Bold ISOF
+	/Helvetica-Oblique ISOF
+	/Helvetica-BoldOblique ISOF
+	/Times-Roman ISOF
+	/Times-Bold ISOF
+	/Times-Italic ISOF
+	/Times-BoldItalic ISOF
+	/Courier ISOF
+	/Courier-Bold ISOF
+	/Courier-Oblique ISOF
+	/Courier-BoldOblique ISOF
+] D
+/R {4 2 roll moveto 1 index 0 rlineto
+	0 exch rlineto neg 0 rlineto closepath} BD
+/Adict 8 dict D
+Adict /mtrx matrix put
+/A { Adict begin
+    /endangle exch D /startangle exch D
+    /yrad exch D /xrad exch D
+	/y exch D /x exch D
+    /savematrix mtrx currentmatrix D
+    x y translate xrad yrad scale
+    0 0 1 startangle endangle arc
+    savematrix setmatrix
+    end } BD
+/PY {
+    dup 1 ge {3 1 roll moveto} if
+    -1 2 {pop lineto} for
+    {closepath} if
+} BD
+/CL { dup 0 exch -1 1 arct} BD
+/RCL { dup 0 exch 1 1 arct} BD
+/RRdict 8 dict D
+RRdict /mtrx matrix put
+/RR {RRdict begin
+    /yrad exch D /xrad exch D
+    /height exch D /width exch D
+    /y exch D /x exch D
+	/width width xrad div D /height height yrad div D
+	/savematrix mtrx currentmatrix D
+ 	x y translate xrad yrad scale -90 rotate
+	1 0 moveto width RCL width 0 translate -90 rotate
+    height CL height 0 translate -90 rotate
+	width RCL width 0 translate -90 rotate height CL closepath
+	savematrix setmatrix
+	end } BD
+/SC {3 {255 div 3 1 roll} repeat setrgbcolor} BD
+/SF {
+	F exch get exch scalefont setfont
+	(abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890) stringwidth pop div
+	currentfont exch scalefont setfont} BD
+/RC {R clip newpath} BD
+/IC {initclip} BD
+/RF {R fill} BD
+/RS {R stroke} BD
+/RRF {RR fill} BD
+/RRS {RR stroke} BD
+/AS {A stroke} BD
+/AF {6 -2 roll 2 copy moveto 6 2 roll A fill} BD
+/PYS {PY stroke} BD
+/PYF {PY eofill} BD
+/NZ {dup 1 lt {pop 1} if} BD
+/DS {
+	moveto 1 index stringwidth pop NZ sub
+	1 index length 1 sub NZ div 0
+	3 2 roll ashow} BD
+/DL {moveto lineto stroke} BD
+/S {scale} BD
+/SP {/P save D} BD
+/EP {showpage P restore} BD
+/GS {gsave} BD
+/GR {grestore} BD
+/CM {
+	/cmapr 256 array D
+	/cmapg 256 array D
+	/cmapb 256 array D
+	/cmapgray null D
+	3 string exch 0 exch 1 exch 1 sub {
+		currentfile 2 index readhexstring pop
+		cmapr 2 index 2 index 0 get put
+		cmapg 2 index 2 index 1 get put
+		cmapb 2 index 2 index 2 get put
+	pop pop } for pop
+} BD
+/DII {
+	GS
+	/imgsave save D
+	translate scale
+	/imgh exch D
+	/imgw exch D
+	/imgy exch neg D
+	/imgx exch neg D
+	/imgstr imgw string D
+	/colorimage where {
+		pop
+		/cimgstr imgw 3 mul string D
+		imgw imgh 8 [imgw 0 0 imgh neg imgx imgy] {
+			currentfile imgstr readhexstring pop
+			0 1 imgw 1 sub {
+				2 copy get
+				cmapr 1 index get
+				cimgstr exch 3 index
+				3 mul exch put
+				cmapg 1 index get
+				cimgstr exch 3 index
+				3 mul 1 add exch put
+				cmapb 1 index get
+				cimgstr exch 3 index
+				3 mul 2 add exch put
+			pop pop } for pop cimgstr
+		} false 3 colorimage
+	} {
+		cmapgray null eq {
+			/cmapgray cmapr length array D
+			0 1 cmapr length 1 sub {
+				cmapgray exch
+				cmapr 1 index get .299 mul
+				cmapg 2 index get .587 mul
+				cmapb 3 index get .114 mul
+				add add cvi put
+			} for
+		} if
+		imgw imgh 8 [imgw 0 0 imgh neg 0 0] {
+			currentfile imgstr readhexstring pop
+			0 1 imgw 1 sub {
+				imgstr exch 2 copy get
+				cmapgray exch get put
+			} for
+		} image
+	} ifelse
+	imgsave restore
+	GR
+} BD
+/DI {
+	GS
+	/imgsave save D
+	translate scale
+	/imgh exch D
+	/imgw exch D
+	/imgy exch neg D
+	/imgx exch neg D
+	/imgstr imgw 3 mul string D
+	imgw imgh 8 [imgw 0 0 imgh neg imgx imgy] {
+		currentfile imgstr readhexstring pop
+	} bind false 3 colorimage
+    imgsave restore
+    GR
+} BD
+%%EndProlog
+%%BeginSetup
+90 rotate 0 -595 translate
+%%EndSetup
+
+%%Page:  1 1
+SP
+192 192 192 SC
+0 595 841 -595 RF
+255 255 255 SC
+0 595 841 -595 RF
+35 563 774 -540 RF
+0 0 0 SC
+35 563 774 -540 RS
+35 47 40 47 DL
+809 47 804 47 DL
+192 192 192 SC
+40 47 804 47 DL
+0 0 0 SC
+% Font[Helvetica, 0, 12]
+453 12 0 SF
+(-0.0) 25 6 47 DS
+35 85 40 85 DL
+809 85 804 85 DL
+192 192 192 SC
+40 85 804 85 DL
+0 0 0 SC
+(0.1) 17 14 78 DS
+35 123 40 123 DL
+809 123 804 123 DL
+192 192 192 SC
+40 123 804 123 DL
+0 0 0 SC
+(0.2) 17 14 116 DS
+35 160 40 160 DL
+809 160 804 160 DL
+192 192 192 SC
+40 160 804 160 DL
+0 0 0 SC
+(0.3) 17 14 153 DS
+35 198 40 198 DL
+809 198 804 198 DL
+192 192 192 SC
+40 198 804 198 DL
+0 0 0 SC
+(0.4) 17 14 191 DS
+35 236 40 236 DL
+809 236 804 236 DL
+192 192 192 SC
+40 236 804 236 DL
+0 0 0 SC
+(0.5) 17 14 229 DS
+35 274 40 274 DL
+809 274 804 274 DL
+192 192 192 SC
+40 274 804 274 DL
+0 0 0 SC
+(0.6) 17 14 267 DS
+35 311 40 311 DL
+809 311 804 311 DL
+192 192 192 SC
+40 311 804 311 DL
+0 0 0 SC
+(0.7) 17 14 304 DS
+35 349 40 349 DL
+809 349 804 349 DL
+192 192 192 SC
+40 349 804 349 DL
+0 0 0 SC
+(0.8) 17 14 342 DS
+35 387 40 387 DL
+809 387 804 387 DL
+192 192 192 SC
+40 387 804 387 DL
+0 0 0 SC
+(0.9) 17 14 380 DS
+35 425 40 425 DL
+809 425 804 425 DL
+192 192 192 SC
+40 425 804 425 DL
+0 0 0 SC
+(1.0) 17 14 418 DS
+35 462 40 462 DL
+809 462 804 462 DL
+192 192 192 SC
+40 462 804 462 DL
+0 0 0 SC
+(1.1) 17 14 455 DS
+35 500 40 500 DL
+809 500 804 500 DL
+192 192 192 SC
+40 500 804 500 DL
+0 0 0 SC
+(1.2) 17 14 493 DS
+35 538 40 538 DL
+809 538 804 538 DL
+192 192 192 SC
+40 538 804 538 DL
+0 0 0 SC
+(1.3) 17 14 531 DS
+(x10) 20 2 568 DS
+% Font[Helvetica, 0, 9]
+354 9 0 SF
+(2) 6 22 575 DS
+70 563 70 558 DL
+70 23 70 28 DL
+192 192 192 SC
+70 558 70 28 DL
+0 0 0 SC
+% Font[Helvetica, 0, 12]
+453 12 0 SF
+(-0) 15 63 5 DS
+141 563 141 558 DL
+141 23 141 28 DL
+192 192 192 SC
+141 558 141 28 DL
+0 0 0 SC
+(5) 7 138 5 DS
+212 563 212 558 DL
+212 23 212 28 DL
+192 192 192 SC
+212 558 212 28 DL
+0 0 0 SC
+(10) 14 205 5 DS
+283 563 283 558 DL
+283 23 283 28 DL
+192 192 192 SC
+283 558 283 28 DL
+0 0 0 SC
+(15) 14 276 5 DS
+354 563 354 558 DL
+354 23 354 28 DL
+192 192 192 SC
+354 558 354 28 DL
+0 0 0 SC
+(20) 14 347 5 DS
+425 563 425 558 DL
+425 23 425 28 DL
+192 192 192 SC
+425 558 425 28 DL
+0 0 0 SC
+(25) 14 418 5 DS
+496 563 496 558 DL
+496 23 496 28 DL
+192 192 192 SC
+496 558 496 28 DL
+0 0 0 SC
+(30) 14 489 5 DS
+567 563 567 558 DL
+567 23 567 28 DL
+192 192 192 SC
+567 558 567 28 DL
+0 0 0 SC
+(35) 14 560 5 DS
+638 563 638 558 DL
+638 23 638 28 DL
+192 192 192 SC
+638 558 638 28 DL
+0 0 0 SC
+(40) 14 631 5 DS
+709 563 709 558 DL
+709 23 709 28 DL
+192 192 192 SC
+709 558 709 28 DL
+0 0 0 SC
+(45) 14 702 5 DS
+780 563 780 558 DL
+780 23 780 28 DL
+192 192 192 SC
+780 558 780 28 DL
+0 0 0 SC
+(50) 14 773 5 DS
+% Font[Helvetica, 1, 14]
+544 14 1 SF
+() 0 422 568 DS
+0 0 255 SC
+77 47 77 47 DL
+91 51 91 47 DL
+105 66 105 47 DL
+119 111 119 47 DL
+134 168 134 47 DL
+148 311 148 47 DL
+162 326 162 47 DL
+176 538 176 47 DL
+191 519 191 47 DL
+205 534 205 47 DL
+219 515 219 47 DL
+233 391 233 47 DL
+247 357 247 47 DL
+262 213 262 47 DL
+276 175 276 47 DL
+290 115 290 47 DL
+304 96 304 47 DL
+318 58 318 47 DL
+333 58 333 47 DL
+347 55 347 47 DL
+361 51 361 47 DL
+375 55 375 47 DL
+390 47 390 47 DL
+404 47 404 47 DL
+418 47 418 47 DL
+432 47 432 47 DL
+446 47 446 47 DL
+461 47 461 47 DL
+475 47 475 47 DL
+489 47 489 47 DL
+503 47 503 47 DL
+517 47 517 47 DL
+532 47 532 47 DL
+546 47 546 47 DL
+560 47 560 47 DL
+574 47 574 47 DL
+589 47 589 47 DL
+603 47 603 47 DL
+617 47 617 47 DL
+631 47 631 47 DL
+645 47 645 47 DL
+660 47 660 47 DL
+674 47 674 47 DL
+688 47 688 47 DL
+702 47 702 47 DL
+716 47 716 47 DL
+731 47 731 47 DL
+745 47 745 47 DL
+759 47 759 47 DL
+773 47 773 47 DL
+255 0 0 SC
+84 49 70 47 DL
+98 56 84 49 DL
+112 76 98 56 DL
+127 118 112 76 DL
+141 190 127 118 DL
+155 285 141 190 DL
+169 387 155 285 DL
+183 472 169 387 DL
+198 519 183 472 DL
+212 519 198 519 DL
+226 477 212 519 DL
+240 405 226 477 DL
+254 322 240 405 DL
+269 244 254 322 DL
+283 178 269 244 DL
+297 129 283 178 DL
+311 95 297 129 DL
+326 74 311 95 DL
+340 61 326 74 DL
+354 54 340 61 DL
+368 50 354 54 DL
+382 49 368 50 DL
+397 48 382 49 DL
+411 47 397 48 DL
+425 47 411 47 DL
+439 47 425 47 DL
+453 47 439 47 DL
+468 47 453 47 DL
+482 47 468 47 DL
+496 47 482 47 DL
+510 47 496 47 DL
+525 47 510 47 DL
+539 47 525 47 DL
+553 47 539 47 DL
+567 47 553 47 DL
+581 47 567 47 DL
+596 47 581 47 DL
+610 47 596 47 DL
+624 47 610 47 DL
+638 47 624 47 DL
+652 47 638 47 DL
+667 47 652 47 DL
+681 47 667 47 DL
+695 47 681 47 DL
+709 47 695 47 DL
+724 47 709 47 DL
+738 47 724 47 DL
+752 47 738 47 DL
+766 47 752 47 DL
+IC
+805 590 31 -22 RC
+192 192 192 SC
+807 588 28 -19 RF
+255 255 255 SC
+806 589 806 569 DL
+807 589 834 589 DL
+134 134 134 SC
+807 569 835 569 DL
+835 589 835 570 DL
+0 0 0 SC
+% Font[Dialog, 0, 12]
+474 12 0 SF
+(fill) 17 812 575 DS
+EP
+%%Trailer
+%%Pages: 1
+%%EOF

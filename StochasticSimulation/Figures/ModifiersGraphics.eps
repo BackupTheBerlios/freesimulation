@@ -1,0 +1,201 @@
+%!
+%%BoundingBox: 38 384 510 776
+%%Title: ModifiersGraphics
+%%CreationDate: Mon Apr 12 14:33:06 1999
+%%Creator: Tgif-3.0-p17 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+
+/tgifdict 5 dict def
+tgifdict begin
+
+/tgifellipsedict 6 dict def
+tgifellipsedict /mtrx matrix put
+
+/tgifellipse
+ { tgifellipsedict begin
+      /yrad exch def
+      /xrad exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      xrad yrad scale
+      0 0 1 0 360 arc
+      savematrix setmatrix
+   end
+ } def
+
+/tgifcentertext { dup stringwidth pop 2 div neg 0 rmoveto } def
+
+end
+
+%%PageBoundingBox: 38 384 510 776
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.00 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% BOX
+0.184 0.310 0.310 setrgbcolor
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         72 32 moveto 904 32 lineto 904 720 lineto 72 720 lineto
+      closepath
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% RCBOX
+0.184 0.310 0.310 setrgbcolor
+gsave
+   gsave
+      newpath
+         744 96 moveto
+         760 96 760 416 16 arcto 4 {pop} repeat
+         760 400 lineto
+         760 416 136 416 16 arcto 4 {pop} repeat
+         152 416 lineto
+         136 416 136 96 16 arcto 4 {pop} repeat
+         136 112 lineto
+         136 96 760 96 16 arcto 4 {pop} repeat
+      closepath
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% RCBOX
+0.184 0.310 0.310 setrgbcolor
+gsave
+   gsave
+      newpath
+         736 456 moveto
+         752 456 752 688 16 arcto 4 {pop} repeat
+         752 672 lineto
+         752 688 128 688 16 arcto 4 {pop} repeat
+         144 688 lineto
+         128 688 128 456 16 arcto 4 {pop} repeat
+         128 472 lineto
+         128 456 752 456 16 arcto 4 {pop} repeat
+      closepath
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% OVAL
+0.184 0.310 0.310 setrgbcolor
+gsave
+   gsave
+      newpath 466 182 254 50 tgifellipse
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% OVAL
+0.184 0.310 0.310 setrgbcolor
+gsave
+   gsave
+      newpath 480 560 192 48 tgifellipse
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      160 70 moveto (everywhere) tgifcentertext show
+   grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      220 130 moveto (package 1) tgifcentertext show
+   grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      212 498 moveto (package 2) tgifcentertext show
+   grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      488 554 moveto (subClass of Class A) tgifcentertext show
+   grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      464 178 moveto (Class A) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      832 406 moveto (public) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      300 390 moveto (Default  \(no modifier used\)) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      416 586 moveto (protected) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      380 206 moveto (private) tgifcentertext show
+   grestore
+
+% OVAL
+0.184 0.310 0.310 setrgbcolor
+gsave
+   gsave
+      newpath 436 308 212 36 tgifellipse
+      3 setlinewidth
+      stroke
+   grestore
+grestore
+
+% TEXT
+0.000 0.000 1.000 setrgbcolor
+/Times-Roman findfont [34 0 0 -34 0 0] makefont setfont
+   gsave
+      448 314 moveto (subClass of Class A) tgifcentertext show
+   grestore
+
+grestore
+tgifsavedpage restore
+end
+%MatchingCreationDate: Mon Apr 12 14:33:06 1999

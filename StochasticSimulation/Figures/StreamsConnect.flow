@@ -1,0 +1,27 @@
+Right
+Skip 0 0 0 0
+Text
+ data objects
+Skip 1 1 1 1
+SetTrack arrow
+Right 2
+Skip 0 0 1 1
+SetTrack none
+Box 2 1
+  Input
+  Stream
+Box 2 1
+  Input
+  Filter
+Box 2 1
+  Output
+  Filter
+Box 2 1
+  Output
+  Stream
+Skip 0 0 1 1
+SetTrack arrow
+Right 2
+SetTrack none
+Text
+ data

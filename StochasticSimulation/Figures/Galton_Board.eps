@@ -1,0 +1,490 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 94 587 437 809
+%%Title: Galton_Board
+%%CreationDate: Mon May  4 11:53:26 1998
+%%Creator: Tgif-3.0-p13 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+%%Pages: 1
+%%DocumentFonts: (atend)
+%%DocumentPaperSizes: a4
+%%EndComments
+%%BeginProlog
+
+/tgifdict 37 dict def
+tgifdict begin
+
+/tgifellipsedict 6 dict def
+tgifellipsedict /mtrx matrix put
+
+/tgifellipse
+ { tgifellipsedict begin
+      /yrad exch def
+      /xrad exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      xrad yrad scale
+      0 0 1 0 360 arc
+      savematrix setmatrix
+   end
+ } def
+
+/tgifpatdict 10 dict def
+
+/tgifpatbyte
+ { currentdict /retstr get exch
+   pat i cellsz mod get put
+ } def
+
+/tgifpatproc
+ { 0 1 widthlim {tgifpatbyte} for retstr
+   /i i 1 add def
+ } def
+
+/tgifpatfill
+ { tgifpatdict begin
+      /h exch def
+      /w exch def
+      /lty exch def
+      /ltx exch def
+      /cellsz exch def
+      /pat exch def
+
+      /widthlim w cellsz div cvi 1 sub def
+      /retstr widthlim 1 add string def
+      /i 0 def
+
+      tgiforigctm setmatrix
+      ltx lty translate
+      w h true [1 0 0 1 0 0] {tgifpatproc} imagemask
+      ltx neg lty neg translate
+   end
+ } def
+
+/pat3 <8000000008000000> def
+/pat4 <8800000022000000> def
+/pat5 <8800220088002200> def
+/pat6 <8822882288228822> def
+/pat7 <aa55aa55aa55aa55> def
+/pat8 <77dd77dd77dd77dd> def
+/pat9 <77ffddff77ffddff> def
+/pat10 <77ffffff77ffffff> def
+/pat11 <7fffffff7fffffff> def
+/pat12 <8040200002040800> def
+/pat13 <40a00000040a0000> def
+/pat14 <ff888888ff888888> def
+/pat15 <ff808080ff080808> def
+/pat16 <f87422478f172271> def
+/pat17 <038448300c020101> def
+/pat18 <081c22c180010204> def
+/pat19 <8080413e080814e3> def
+/pat20 <8040201008040201> def
+/pat21 <8844221188442211> def
+/pat22 <77bbddee77bbddee> def
+/pat23 <c1e070381c0e0783> def
+/pat24 <7fbfdfeff7fbfdfe> def
+/pat25 <3e1f8fc7e3f1f87c> def
+/pat26 <0102040810204080> def
+/pat27 <1122448811224488> def
+/pat28 <eeddbb77eeddbb77> def
+/pat29 <83070e1c3870e0c1> def
+/pat30 <fefdfbf7efdfbf7f> def
+/pat31 <7cf8f1e3c78f1f3e> def
+
+end
+
+%%EndProlog
+%%BeginSetup
+%%PaperSize: a4
+%%BeginPaperSize: a4
+a4
+%%EndPaperSize
+%%EndSetup
+%%Page: 1 1
+
+%%PageBoundingBox: 94 587 437 809
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.70 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% OVAL
+0 setgray
+newpath 477 77 17 17 tgifellipse fill
+gsave
+   gsave
+      newpath 477 77 17 17 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 575 275 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 575 275 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 560 264 32 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 575 275 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 475 275 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 475 275 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 464 264 24 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 475 275 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 375 275 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 375 275 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 360 264 32 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 375 275 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 525 225 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 525 225 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 512 208 24 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 525 225 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 425 225 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 425 225 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 408 208 32 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 425 225 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 475 165 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 475 165 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 464 152 24 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 475 165 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 525 325 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 525 325 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 512 312 24 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 525 325 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 425 325 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 425 325 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 408 312 32 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 425 325 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 325 325 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 325 325 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 312 312 24 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 325 325 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 625 325 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 625 325 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 608 312 32 24 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 625 325 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 475 375 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 475 375 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 464 360 24 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 475 375 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 375 375 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 375 375 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 360 360 32 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 375 375 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 275 375 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 275 375 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 264 360 24 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 275 375 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 575 375 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 575 375 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 560 360 32 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 575 375 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% OVAL
+0 setgray
+gsave
+   newpath 675 375 10 10 tgifellipse
+   closepath 1 setgray fill
+   0 setgray
+   newpath 675 375 10 10 tgifellipse
+   closepath eoclip newpath
+   pat5 8 664 360 24 32 tgifpatfill
+grestore
+gsave
+   gsave
+      newpath 675 375 10 10 tgifellipse
+      stroke
+   grestore
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      170 450 moveto
+      775 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      170 400 moveto
+      170 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      275 400 moveto
+      275 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      375 400 moveto
+      375 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      475 400 moveto
+      475 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      575 400 moveto
+      575 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      675 400 moveto
+      675 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      775 400 moveto
+      775 450 lineto
+   tgiforigctm setmatrix
+   3 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+
+grestore
+tgifsavedpage restore
+end
+showpage
+
+%%Trailer
+%MatchingCreationDate: Mon May  4 11:53:26 1998
+%%DocumentFonts: 
+%%EOF

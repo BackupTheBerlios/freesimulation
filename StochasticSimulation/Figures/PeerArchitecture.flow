@@ -1,0 +1,20 @@
+Right
+SetTrack arrow
+Box 
+  Native Platform 
+  objects
+Tag
+Down 2
+Box
+  Win 32 / Motif / 
+  Mac / etc.
+ToTag
+Right
+Oval
+  \textbf{\large Peer Interfaces}
+Box
+  \textsf{Java Components}
+  \textsf{\small e.g. Frame, Button}
+Down 2
+Box
+  User Subclasses

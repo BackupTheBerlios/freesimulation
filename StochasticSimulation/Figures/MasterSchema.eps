@@ -1,0 +1,323 @@
+%!
+%%BoundingBox: 26 481 421 765
+%%Title: fig:MasterSchema
+%%CreationDate: Sun Jan 17 15:33:40 1999
+%%Creator: Tgif-3.0-p12 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+
+/tgifdict 8 dict def
+tgifdict begin
+
+/tgifarrowtipdict 8 dict def
+tgifarrowtipdict /mtrx matrix put
+
+/tgifarrowtip
+ { tgifarrowtipdict begin
+      /dy exch def
+      /dx exch def
+      /h exch def
+      /w exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      dy dx atan rotate
+      0 0 moveto
+      w neg h lineto
+      w neg h neg lineto
+      savematrix setmatrix
+   end
+ } def
+
+/tgifcentertext { dup stringwidth pop 2 div neg 0 rmoveto } def
+
+/tgifreencsmalldict 12 dict def
+/tgifReEncodeSmall
+ { tgifreencsmalldict begin
+      /newcodesandnames exch def
+      /newfontname exch def
+      /basefontname exch def
+
+      /basefontdict basefontname findfont def
+      /newfont basefontdict maxlength dict def
+
+      basefontdict
+      { exch dup /FID ne
+         { dup /Encoding eq
+            { exch dup length array copy newfont 3 1 roll put }
+            { exch newfont 3 1 roll put }
+            ifelse
+         }
+         { pop pop }
+         ifelse
+      }
+      forall
+
+      newfont /FontName newfontname put
+      newcodesandnames aload pop
+
+      newcodesandnames length 2 idiv
+      { newfont /Encoding get 3 1 roll put}
+      repeat
+
+      newfontname newfont definefont pop
+   end
+ } def
+
+/NewCenturySchlbk-Bold-vec [
+ 8#366 /odieresis
+ ] def
+/NewCenturySchlbk-Bold /NewCenturySchlbk-Bold-8 NewCenturySchlbk-Bold-vec tgifReEncodeSmall
+
+end
+
+%%PageBoundingBox: 26 481 421 765
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.00 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         50 50 moveto 300 50 lineto 300 150 lineto 50 150 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         350 50 moveto 600 50 lineto 600 150 lineto 350 150 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         200 250 moveto 450 250 lineto 450 350 lineto 200 350 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% BOX
+0 setgray
+gsave
+   10 setmiterlimit
+   gsave
+      newpath
+         200 450 moveto 450 450 lineto 450 550 lineto 200 550 lineto
+      closepath
+      2 setlinewidth
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      75 81 moveto (classical mechanics:) show
+      75 100 moveto () show
+      75 119 moveto (Hamilton's equations) show
+      75 138 moveto (of motion) show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      365 91 moveto (quantum mechanics:) show
+      365 110 moveto () show
+      365 129 moveto (Schr\366dinger equation) show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      250 309 moveto (Master Equation) show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [17 0 0 -17 0 0] makefont setfont
+   gsave
+      320 476 moveto (Phenomenological ) tgifcentertext show
+      320 495 moveto (equations) tgifcentertext show
+      320 514 moveto (of irreversible ) tgifcentertext show
+      320 533 moveto (thermodynamics) tgifcentertext show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [18 0 0 -18 0 0] makefont setfont
+   gsave
+      205 209 moveto (randomness assumption) show
+   grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      175 150 moveto
+      45 70 atan dup cos 10.000 mul 245 exch sub
+      exch sin 10.000 mul 195 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      245 195 10.000 4.000 70 45 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      245 195 10.000 4.000 70 45 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      280 215 moveto
+      35 45 atan dup cos 10.000 mul 325 exch sub
+      exch sin 10.000 mul 250 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      325 250 10.000 4.000 45 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      325 250 10.000 4.000 45 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      375 215 moveto
+      35 -50 atan dup cos 10.000 mul 325 exch sub
+      exch sin 10.000 mul 250 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      325 250 10.000 4.000 -50 35 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      325 250 10.000 4.000 -50 35 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      475 150 moveto
+      40 -70 atan dup cos 10.000 mul 405 exch sub
+      exch sin 10.000 mul 190 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      405 190 10.000 4.000 -70 40 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      405 190 10.000 4.000 -70 40 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      325 350 moveto
+      100 0 atan dup cos 10.000 mul 325 exch sub
+      exch sin 10.000 mul 450 exch sub lineto
+   tgiforigctm setmatrix
+   2 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      325 450 10.000 4.000 0 100 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      325 450 10.000 4.000 0 100 tgifarrowtip
+   closepath fill
+grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [20 0 0 -20 0 0] makefont setfont
+   gsave
+      625 104 moveto (microscopic) show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [20 0 0 -20 0 0] makefont setfont
+   gsave
+      625 304 moveto (mesoscopic) show
+   grestore
+
+% TEXT
+0 setgray
+/NewCenturySchlbk-Bold-8 findfont [20 0 0 -20 0 0] makefont setfont
+   gsave
+      625 504 moveto (macroscopic) show
+   grestore
+
+grestore
+tgifsavedpage restore
+end
+%MatchingCreationDate: Sun Jan 17 15:33:40 1999

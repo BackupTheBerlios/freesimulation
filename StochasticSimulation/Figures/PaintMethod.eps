@@ -1,0 +1,176 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 7 604 437 765
+%%Title: PaintMethod
+%%CreationDate: Tue May 18 14:36:12 1999
+%%Creator: Tgif-3.0-p17 by William Chia-Wei Cheng (william@cs.UCLA.edu)
+%%Pages: 1
+%%DocumentFonts: (atend)
+%%EndComments
+%%BeginProlog
+
+/tgifdict 7 dict def
+tgifdict begin
+
+/tgifellipsedict 6 dict def
+tgifellipsedict /mtrx matrix put
+
+/tgifellipse
+ { tgifellipsedict begin
+      /yrad exch def
+      /xrad exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      xrad yrad scale
+      0 0 1 0 360 arc
+      savematrix setmatrix
+   end
+ } def
+
+/tgifarrowtipdict 8 dict def
+tgifarrowtipdict /mtrx matrix put
+
+/tgifarrowtip
+ { tgifarrowtipdict begin
+      /dy exch def
+      /dx exch def
+      /h exch def
+      /w exch def
+      /y exch def
+      /x exch def
+      /savematrix mtrx currentmatrix def
+      x y translate
+      dy dx atan rotate
+      0 0 moveto
+      w neg h lineto
+      w neg h neg lineto
+      savematrix setmatrix
+   end
+ } def
+
+/tgifcentertext { dup stringwidth pop 2 div neg 0 rmoveto } def
+
+end
+
+%%EndProlog
+%%Page: 1 1
+
+%%PageBoundingBox: 7 604 437 765
+tgifdict begin
+/tgifsavedpage save def
+
+1 setmiterlimit
+1 setlinewidth
+
+0 setgray
+
+72 0 mul 72 11.00 mul translate
+72 128 div 100.000 mul 100 div dup neg scale
+
+gsave
+
+/tgiforigctm matrix currentmatrix def
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      325 197 moveto (Component.update\(Graphics g\)) tgifcentertext show
+   grestore
+
+% TEXT
+0 setgray
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      325 72 moveto (Component.repaint\(\) / Component.repaint\(long milliseconds\)) tgifcentertext show
+   grestore
+
+% TEXT
+1.000 0.000 0.000 setrgbcolor
+/Times-BoldItalic findfont [25 0 0 -25 0 0] makefont setfont
+   gsave
+      325 297 moveto (Component.paint\(Graphics g\)) tgifcentertext show
+   grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      300 75 moveto
+      100 0 atan dup cos 14.000 mul 300 exch sub
+      exch sin 14.000 mul 175 exch sub lineto
+   tgiforigctm setmatrix
+   4 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      300 175 14.000 6.000 0 100 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      300 175 14.000 6.000 0 100 tgifarrowtip
+   closepath fill
+grestore
+
+% POLY/OPEN-SPLINE
+0 setgray
+gsave
+   newpath
+      300 205 moveto
+      75 0 atan dup cos 14.000 mul 300 exch sub
+      exch sin 14.000 mul 280 exch sub lineto
+   tgiforigctm setmatrix
+   4 setlinewidth
+   stroke
+   1 setlinewidth
+grestore
+gsave
+   tgiforigctm setmatrix
+   newpath
+      300 280 14.000 6.000 0 75 tgifarrowtip
+   1 setgray closepath fill
+   0 setgray
+   newpath
+      300 280 14.000 6.000 0 75 tgifarrowtip
+   closepath fill
+grestore
+
+% OVAL
+1.000 0.000 0.000 setrgbcolor
+gsave
+   gsave
+      newpath 325 240 255 90 tgifellipse
+      4 setlinewidth
+      [8 8] 0 setdash
+      stroke
+   grestore
+grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [24 0 0 -24 0 0] makefont setfont
+   gsave
+      700 242 moveto (override these) tgifcentertext show
+   grestore
+
+% TEXT
+0 setgray
+/Times-Bold findfont [24 0 0 -24 0 0] makefont setfont
+   gsave
+      720 72 moveto (call this) tgifcentertext show
+   grestore
+
+grestore
+tgifsavedpage restore
+end
+showpage
+
+%%Trailer
+%MatchingCreationDate: Tue May 18 14:36:12 1999
+%%DocumentFonts: Times-Bold
+%%+ Times-BoldItalic
+%%EOF
