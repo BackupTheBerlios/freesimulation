@@ -1658,10 +1658,10 @@ and the second one is unstable.
 The Random-Telegraph process is the most simple Markov-process possible.
 It is a discrete process, which has only two possible states, called
 $n=0$ and $n=1$. The master-equation reads
-$$ \begin{cases}
+\begin{eqnarray}
  \frac{\partial}{\partial t} P(0,t\mid n'') &= bP(1,t\mid n'')-aP(0,t\mid n'') \\
  \frac{\partial}{\partial t} P(1,t\mid n'') &= aP(0,t\mid n'')-bP(1,t\mid n''). \\
-           \end{cases} $$
+\end{eqnarray}
 $a$ and $b$ are the transition rates from state $0\rightarrow 1$
 and $1\rightarrow 0$. Examples of this equation are processes, which jump
 from one state to the other and back (e.g. spin flipping). 
