@@ -23,7 +23,7 @@
  */
 /** this is the program nadel which simulates the buffon needle */
 
-import needle.*;
+import Needle;
 
 public class buffon {
         public static void main(String args[]){
@@ -39,7 +39,7 @@ public class buffon {
         y2=2.0;
         /* The First needle (object is created) 
               The object name is: needle */
-        needle FirstNeedle = new needle(x1,x2,y1,y2);
+        Needle FirstNeedle = new Needle(x1,x2,y1,y2);
         
         /* In the following loop we draw N needles.
            To this end we have to create needles with the NextNeedle
@@ -48,7 +48,7 @@ public class buffon {
            CrossInspection method of the needle class. */
         
         for (int i=1; i<N+1; i++){
-                needle Drawneedle=FirstNeedle.NextNeedle(FirstNeedle);
+                Needle Drawneedle=FirstNeedle.NextNeedle(FirstNeedle);
                 hit = Drawneedle.CrossInspection(Drawneedle.NeedleX1,
                 Drawneedle.NeedleX2,Drawneedle.NeedleY1,Drawneedle.NeedleY2);
         }        

@@ -31,7 +31,8 @@
  * @author Peter Biechele
  * @version
  */
-import VisualNumerics.math.*;
+
+import simulation.*;
 
 public class DataUsage {
     
