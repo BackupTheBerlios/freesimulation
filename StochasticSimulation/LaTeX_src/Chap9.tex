@@ -81,6 +81,7 @@ irreversible thermodynamic phenomena.
 Frage: Habe ich die Bemerkung zum Papier in dem das Wort master Gleichung zum
 erstem mal vorkommt schon in Kap, 2 gemacht?
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The Ehrenfest dog--flea model}
 The fundamental problem of statistical mechanics is to describe 
@@ -292,6 +293,207 @@ Wiederkehrzeit" $\bar{T}$ is found to be
 As soon as $"N$ is large and $n_0$ is wesentlich diferent from $N$m $\bar{T}$
 is a very large number!
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Parallel progamming with Java - Introduction}
+
+At this point it certainly makes sense to stop for a second with the 
+discussion of physics and enter an exciting and meanwhile important 
+part of program development: writing concurrent programs. The necessity
+for this section will be clear, when we do the simulations of the 
+nonequilibrium systems considered in the following sections and of 
+course it is much easier to study new things on a simple (toy) model,
+like the Ehrenfest model just discussed. So our aim will be to write
+a concurrent version of the Ehrenfest model and execute it in parallel
+on many computers at the same time.
+
+In the first section we will discuss general issues connected to
+concurrent (parallel) programming, which not only applies to Java, but
+also to FORTRAN and other programming languages. In the second section
+we will then apply our gained knowledge to writing concurrent programs
+in Java.
+
+\subsection{What is parallel/concurrent programming?  Why do we have to do it?}
+
+These are probably the most often asked questions of the late 90s. 
+Before we want to explain the terms in detail, let us look
+at the hardware development in the last 10 years to get an impression,
+why there is so much hype about parallel programming. 
+
+The CPUs get cheaper and cheaper almost every month and additionally
+the CPUs get faster too. To be honest, todays CPUs in usual PCs
+are much too powerful to be used as simple terminals for word 
+processing and some internet surfing. So the situation is that
+there are many many ``powerful'' CPUs connected mostly by some kind
+of networking cable to the internet, the name for the network of
+all computers in the world connected together or the intranet, the 
+computers connected e.g. in a company (not necessarily connected to the
+outer world, the intenet).
+
+On the high performance market the CPUs were getting more and more 
+expensive compared to the performance gained by using these formula one
+processors instead of off the shelf PC processors, most notably the
+Intel processors. So starting around 1990 the supercomputer companies
+started to use off the shelf processors, which are much cheaper and
+put them together with special (expensive) hardware, which connect
+these creating a very high performance connection between
+the CPUs. Although there are still companies producing specialized
+processors e.g. for vector computing the NEC machines, most of
+the modern supercomputers are made out of ``standard'' processors,
+also found in small Workstations and PCs\footnote{Actually Workstations 
+just refer to the machines used for some way of high performance
+in graphics, number crunching or somewhere else. The difference to
+the standard PC has almost vanished and so just a price
+difference refering to the more  expensive parts used for the Workstation (PC)
+remained.} 
+Examples are the Cray T3E, which uses standard DEC Alpha Chips 
+(21164 or 21264), the IBM SP2, which uses Power PC processors, the 
+SGI Origin, which uses the MIPS R10000 and will switch to the 
+Intel Merced in  the next few years, etc. All these processors are
+also available in single machines, e.g. COMPAQ PCs uses DEC Alpha
+chips, Apple and IBM sell Power PC computers and of course you
+will get the Intel Merced in a PC in the near future. 
+
+This leads to two important points to make: we now have a lot of
+computers all over the world connected by some sort of cable,
+having enough resources to do 
+interesting calculations, while somebody is still working on the
+machine. We should also mention that these machines are mostly used
+during the day and are switched off during the night and weekends
+or run idle. Second the supercomputers of the late 90s are ``just'' 
+a collection of single standard processors connected via a high
+performance network, which costs most of the money. 
+
+On the other side there are many difficult problems, which can
+only be solved using very fast computers. This just means that
+the time to do the calculation on one processor takes months or
+even years and more, which makes it unusable. A natural step 
+is therefore to ask: How can we use the given hardware consisting
+of many CPUs maybe even different ones connected by a network or
+a high performance network to get our caluclations done in a
+shorter time?
+
+The answer of course is to use all the CPUs available for one big 
+problem. So it is like inviting some friends to help moving
+from one appartment to another. Without your friends it would 
+take much longer, but now you have to manage ten people running
+around and have to tell them what to do, otherwise it would end up
+in a chaos. This already leads us to the problem of how to write
+concurrent programs?
+
+Before diving into the details, let us define, what we mean by parallel
+and concurrent:
+The task of the programmer is to write code, which can then be executed
+somehow by many CPUs in PARALLEL. Writing this kind of code is called
+writing a CONCURRENT program. This means the conmputer is later 
+taking care of running your code in parallel, you just have to write 
+the concurrent code for this to happen. Because this difference
+is somewhat cumbersome to keep up with, we will use both terms
+interchangeably.
+
+%%%%%%%%%%%%%%%
+\subsection{The Hardware}
+
+Basically there are certain problems to be aware of, when writing
+cocurrent programs: 
+\begin{itemize}
+\item There is still a lot of different hardware available, which
+        you might want to use as a parallel machine.
+        (the hardware question)
+\item How are the machines connected?
+        (the network question)
+\item Is your problem at hand capable of being run in parallel, or
+        differently stated: is it possible to get an algorithm
+        for solving your problem in parallel?
+        (the algortihm question)
+\item How to tell the processors, how to cooperate with each other?
+        (the software question)
+\end{itemize}
+Unfortunately there is still no possible way of avoiding to ask
+these questions before writing your code (at least you have to
+keep them in mind before you hit return and pollute the network
+and keep the processors busy.)
+
+\begin{figure}[htbp]
+  \begin{center}
+    \leavevmode
+    \includegraphics{Figures/NetworkOverview.eps}
+    \caption{The different hardware and networking models used to connect
+        the CPUs in a ``Parallel Computer''. The years just represent the
+        ``standard'' network used for most permanently connected systems.
+        This is by no means a complete overview, but it should give
+        an impression of what can be expected.}
+    \label{fig:NetworkOverview}
+  \end{center}
+\end{figure}
+The first two questions above are mostly interconnected with the
+second one often more difficult to answer than the first one. A 
+small (and incomplete) overview about possible network  
+technologies are given in figure \ref{fig:NetworkOverview}.
+
+A very important issue for writing concurrent programs and using
+a parallel machine is addressed by the memory model of the 
+machine in question. There are two different models implemented
+by the hardware: the shared memory model (SM) and the distributed
+memory model (DM). These refer to the access of the CPU to the
+memory available (not the disk space, this is a different concern).
+
+Lets look at two examples:  
+\begin{itemize}
+\item SM: a 2 processor SMP PC machine.\\
+If you have one machine (say a PC), which has two CPUs, each one a
+Intel Pentium II with 350 MHz and a main memory of 128 MB RAM, then
+this is a shared memory machine having two processors. Both machines
+can access the memory at the same speed and they have equal priority.
+Of course if one of the processors wants to write or read the same
+address they have to be careful and probably have to wait for the other
+processor.
+\item DM: five connected PCs each with 1 processor.\\
+Now we have a so called cluster of networked workstations or PCs.
+These are for example connected by an Ethernet, so each having a 
+network card (PCI or other) and a cable (e.g. twisted pair copper cable)
+connecting them. Each of the machines have 32 MB RAM, so altogether
+there are five times 32 MB RAM, which adds up to 160 MB RAM. But this
+memory is of course no longer available to all the processors at the
+same speed. If processor one wants to read/write a value to an address
+in one of the other machines, it has to commuicate using the network.
+So this time we have a distributed memory.
+\end{itemize}
+
+There are two special cases, which are very common and have to be mentioned
+seperately: The SMP and the NUMA architectures. The SMP machine as 
+already mentioned in the first example above is a computer/mainboard,
+which has two or more processors directly on one board. All the processors 
+together have one main memory, which they have to share. But for each
+CPU the computer looks exactly the same, therefore the name SMP 
+(Symmetric Multi Processor).
+
+The NUMA architecture refers to a special kind of shared memory architecture.
+For example the SGI Origin 2000 is an example thereof. In this model
+you take SMP boards (you can take single CPU boards too) each with
+a certain amount of onboard main memory and 
+put them together in a rack. The boards get connected by special
+networking hardware for example a crossbar. The racks can then
+also be connected again with specialized hardware. This hardware/network
+has to make sure that the total memory is available to all CPUs at
+(almost) the same speed and that the caches used forr the memory
+is always coherent (not out of date). Each processor can therefore
+access all the memory directly without any special considerations, but
+actually the time (called latency) to access different addesses in
+memory can be different depending on where the processor is and
+which memory you want to access (the name NUMA refers to this: Non Uniform 
+Memory Access). But the whole memory management is
+implemented in hardware and therefore hidden for the user.
+
+
+%%%%%%%%%%%%%%
+\subsection{The Software}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Master equations, entropy, asnd the $H$--theorem}
 In this section we are going to discuss in more detail the connections between
