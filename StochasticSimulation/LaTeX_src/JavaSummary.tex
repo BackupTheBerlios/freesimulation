@@ -36,15 +36,46 @@ The general structure of a Java program is:
 \end{itemize}
 \begin{figure}[h]
   \begin{center}
- \includegraphics[angle=-90,width=\textwidth]{Figures/ClassStructure.eps}
+ \includegraphics[angle=-90,width=.8\textwidth]{Figures/ClassStructure.eps}
  \caption{The class structure of a Java program, either application or an applet.}
  \label{fig:ClassStructure}
   \end{center}
 \end{figure}
 
-\section{The System class}
+\section{The \texttt{java.lang.System} class}
+%%\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{lp{5cm}p{.5\textwidth}}
+      Type & Field & Description \\\hline
+      PrintStream & err & standard error output stream \\
+      InputStream & in & standard input stream \\
+      PrintStream & out & standard output stream \\ \hline\hline
+      modifier & method & explanation \\\hline
+      static void & \verb|arraycopy(Object src, int srcpos, Object dst,| 
+                    \verb|int dstpos, int length)| &
+         Copies an array from the specified source array, beginning at 
+         the specified position, to the specified position of the
+         destination array. \\
+      static void & \verb|exit(int status)| & Terminates the currently 
+                                     running Java Virtual Machine.\\
+      static void & \verb|setErr(PrintStream err)| &  
+                   Reassigns the "standard" error output stream.\\
+      static void & \verb|setIn(InputStream err)| &  
+                   Reassigns the "standard" input output stream.\\
+      static void & \verb|setOut(PrintStream err)| &  
+                   Reassigns the "standard" output output stream.\\
+      static String & \verb|getProperty(String key)| & get the system property
+                            defined by the given key. \\
+      static String & \verb|setProperty(String key)| & set the system property
+                            defined by the given key. \\
+    \end{tabular}
+%%    \caption{Important fields and methods of the System class.}
+%%    \label{tab:SystemClass}
+  \end{center}
+%%\end{table}
+
 \section{Mathematics}
-\subsection{The Java Math class}
+\subsection{The \texttt{java.lang.Math} class}
 \subsection{JNL}
 \subsection{JavaSci}
 \subsection{Others}
@@ -58,6 +89,20 @@ The general structure of a Java program is:
 \section{Threads}
 \section{Printing}
 \section{Modifiers}
+%%\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{ll}
+      abstract method & A method having no body of code. The code can
+        be implemented in a subclass.\\
+      abstract class & A class containing at least one abstract method \\
+      interface & A class, where all defined methods are abstract by default.
+        No variables only constants are possible in interfaces. Interfaces
+        have to be implemented, not subclassed, and all methods have to be
+        overridden otherwise it must be declared abstract.\\
+    \end{tabular}
+%%    \label{tab:Modifiers}
+  \end{center}
+%%\end{table}
 \section{Debugger}
 \section{JDE and Emacs}
 
