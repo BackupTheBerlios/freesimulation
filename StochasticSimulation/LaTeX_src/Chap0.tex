@@ -27,7 +27,7 @@ algorithms will be presented in a highly interconnected (interwined), and, we
 hope, organic way.
 
 In order to stick to this idea it was necessary to choose a programming 
-language. The obvious criteria for teaking such a decision are
+language. The obvious criteria for taking such a decision are
 \cite[]{GARCIA}
 \begin{enumerate}
 \item Powerful,
@@ -38,11 +38,11 @@ language. The obvious criteria for teaking such a decision are
 \end{enumerate}
 The first criterion is of course very important because already simple 
 stochastic algorithms require a considerable amount of CPU time.
-A secondary aim of the course is to make the student aquainted with a 
+A secondary aim of the course is to make the student acquainted with a 
 programming language "in action" so they should learn something about a "good 
 programming style" for real-life problems. Visualization of the results 
-obtained allows to understand in a plastic way what is going on physicaly. so 
-the interface between program and visulaization tool/ graphical output should
+obtained allows to understand in a plastic way what is going on physically. so 
+the interface between program and visualization tool/ graphical output should
 be comfortable. Last not least the availability of the program should be
 guaranteed. The corresponding compilers should be available at low, in the 
 ideal case at no, cost to the students for home exercises. Furthermore, they
@@ -90,7 +90,7 @@ Mathematica& Win95 & Mathematica V??? & ? & \\\hline
    Fortran & Linux & Nag f90 Compiler & ? & \\\hline
     \end{tabular}
     \caption{Performance comparison for different scenarios and languages.
-      The test program is a onestep stochastic process. We create 100
+      The test program is a one-step stochastic process. We create 100
       realizations, $g(n)=0.4n, r(n)=0.5n$. On Windows 95 the JIT from
       Symantec is included and automatically used, when executing programs
       with the java command in the JDK. The TYA JIT for Linux is freely
@@ -101,8 +101,8 @@ Mathematica& Win95 & Mathematica V??? & ? & \\\hline
 
 
 Of course, in the above test we have not optimized the algorithm to the 
-different platforms. Nevertheless, the tabel clearly shows that MATLAB is 
-very slow. Even the compiled version of MATLAB is slower ba a factor of x 
+different platforms. Nevertheless, the table clearly shows that MATLAB is 
+very slow. Even the compiled version of MATLAB is slower by a factor of x 
 compared to the Fortran code. This is a good reason to disregard MATLAB!
 
 Now we have to decide between Java and Fortran. The argument in favour of 
@@ -113,7 +113,7 @@ it is available at no cost.
 
 Last not least, we want to mention another advantage of Java. It seems
 \cite[]{bigbucks} that there is  a great need for Java programmers in 
-different branches of industry today. This need will be even greate in future 
+different branches of industry today. This need will be even greater in future 
 years. So learning Java, might be a kind of "life insurance" for students of 
 physics. It will put them in the position to find a good (programming) job.
 
@@ -129,7 +129,7 @@ computational science point of view, in favour of Java.
 Sun has described Java as follows \cite[]{javanutshell}:
 \begin{quote}
 Java: A simple, object--oriented, distributed, interpreted, robust, secure,
-architecture neutral, portable, high--performance, multithread, and dynamic 
+architecture neutral, portable, high--performance, multi-thread, and dynamic 
 language.
 \end{quote}
 
@@ -160,10 +160,10 @@ and of the execution in Java. All Java programs are classes.
 Java is a distributed language, which simply means that it provides a lot of 
 tools for networking. Java is the programming language of the Internet.
 
-Java is an interpreted language. Tha Java compiler compiles the Java
+Java is an interpreted language. The Java compiler compiles the Java
 source code into Java byte--code, which is the machine language for the Java
 Virtual Machine (JVM). The JVM is an abstract machine which runs on each system
-that supports Java. Other languages may also be compiled into Java bytecode.
+that supports Java. Other languages may also be compiled into Java byte-code.
 
 Java is robust. Java contains features, exception handling, which simplify the
 tasks of error handling and recovery.
@@ -174,7 +174,7 @@ memory is not allowed. Java contains four different levels of security
 checks and enforcements to prevent the introduction of viruses. 
 In particular there is protection against deleting and modifying files.
 
-Java is architecture neutral and portable. The bytecode format is always the 
+Java is architecture neutral and portable. The byte-code format is always the 
 same regardless of the platform on which the Java compiler runs. Furthermore,
 there are no "implementation defined" behaviours in Java. For example, Java
 specifies the size of each primitive data type. For instance, the integer 
@@ -182,14 +182,14 @@ types byte, short, int, long as 8, 16, 32 or 64--bit long, respectively.
 
 Java is high--performance. Usually implementations of Java are used running 
 Java programs interpretatively. It is however possible to run Java with a 
-Just In Time (JIT) compiler. JIT compiling increases the performance of Jave 
+Just In Time (JIT) compiler. JIT compiling increases the performance of Java 
 considerably.
 
-Java is multithread. It supports multiple threads of execution which can 
-handle different tasks. Multithreading increases the interactive performance 
+Java is multi-thread. It supports multiple threads of execution which can 
+handle different tasks. Multi-threading increases the interactive performance 
 of Java.
 
-Java is dynamic. Any Java class can be laoded into a running Java interpreter 
+Java is dynamic. Any Java class can be loaded into a running Java interpreter 
 at any time.
 
 
@@ -201,21 +201,21 @@ packed files possible (ZIP)
 \label{sec:Basic_elements_of_Java}
 Like in other languages to write a program you first need an editor
 to type the source code. Second you need a compiler to translate
-the Java code to bytecode. And last, in contrast to most
+the Java code to byte-code. And last, in contrast to most
 traditional languages like C, C++ and Fortran, we need a virtual
-machine (interpreter, called JVM) to execute the bytecode.
+machine (interpreter, called JVM) to execute the byte-code.
 
 \begin{figure}[htbp]
   \begin{center}
     \leavevmode
     \includegraphics{Figures/Java_Overview.eps}
-    \caption{Overview of the Javav language execution model.}
+    \caption{Overview of the Java language execution model.}
     \label{fig:Java_Overview}
   \end{center}
 \end{figure}
 
 So for every platform, where a virtual machine is available,
-you can execute the bytecode without any compatability problems.
+you can execute the byte-code without any compatibility problems.
 But the ``look and feel'' can be different, for example Java buttons
 in Windows look different from buttons in X11/Motif using a UNIX
 operating system. The main reason for the wide availability of Java
@@ -246,13 +246,13 @@ uses the Unicode character set. Unicode consists of characters represented
 by 2 bytes instead of 1 byte like in the ASCII set. So you can not only
 use 256 different characters (ASCII) you can use all the 65535 different
 characters available in the Unicode set for writing a Java program.
-This means you can name your variables using for example japanese or greek
+This means you can name your variables using for example Japanese or Greek
 characters. Right from the beginning, Java is an international language.
 
 Java is also case sensitive and doesn't need any special characters
 to mark continuation lines. Comments are used just like in C and C++.
 You can use either the /* \ldots */ syntax (borrowed from C) for
-multiline comments or the // syntax (borrowed from C++) for single
+multi-line comments or the // syntax (borrowed from C++) for single
 line comments. Additionally you can use /** \ldots */ for comments
 to automatically generate a HTML documentation file for the class
 defined in the file.
@@ -265,30 +265,8 @@ in Java.
 \subsubsection{Application}
 
 \inputlisting{Listings_Java/HelloWorld_Application.java}
-
-Let us now try to understand the above code. The program consists of
-three lines. 
-
-In the first line the program declares 
-with the help of the \texttt{class} statement a class called 
-HalloWorld. The identifier following the \texttt{class} statement is
-the name name by which the class will be referenced. Each Java program
-is a class. The curly bracket appearing after the class name
-HalloWorld introduce the following class member. 
-
-
-In the second line the \verb|main| method is introduced. The main
-method is declared \verb|void| because the method does not return a
-value. The main method is executed when you run the class as an
-application. In the present case the only parameter, the argument, 
-of the main method is an array of String object.
-
-In the third line the method \verb|println| of the system class out
-is invoked. This method simply prints a string and terminiates with a 
-new--line  command.
-
-
-
+You have to save the program in a file called 
+\verb|HelloWorld.java|.
 To execute the above example you have to proceed as follows:
 \begin{itemize}
 \item \marginpar[Compiler]{Compiler}
@@ -298,7 +276,26 @@ To execute the above example you have to proceed as follows:
         \verb/java HelloWorld/
 \item Output on screen: \verb<Hello World !<
 \end{itemize}
-Explanation of Programm ???????????????????
+Let us now try to understand the above code. The program consists of
+three lines. 
+
+In the first line the program declares 
+with the help of the \texttt{class} statement a class called 
+HelloWorld. The identifier following the \texttt{class} statement is
+the name name by which the class will be referenced. Each Java program
+is a class. The curly bracket appearing after the class name
+HelloWorld introduce the following class member. 
+
+
+In the second line the \verb|main| method is introduced. The main
+method is declared \verb|void| because the method does not return a
+value. The main method is executed when you run the class as an
+application. In the present case the only parameter, the argument, 
+of the main method is an array of String object.
+
+In the third line the method \verb|println| of the system class out
+is invoked. This method simply prints a string and terminates with a 
+new--line  command.
 
 You have just written and executed your first application written in Java.
 
@@ -308,7 +305,7 @@ You have just written and executed your first application written in Java.
 Java offers another possibility to execute code, so called Applets.
 These are (small) Java programs, which are started by a server program,
 e.g. a WWW browser like Netscape Navigator\footnote{You need at least 
-version 4.06 or patches for earlier versions to run Java 1.1}, 
+version 4.06 or patches for earlier versions to use all features of Java 1.1}, 
 the Internet Explorer\footnote{Seems to run Java 1.1 programs since
 version 4.}(Don't),
 HotJava or the appletviewer\footnote{included with the JDK.}.
@@ -319,7 +316,7 @@ As you can see there is no main method in an applet. Instead if an applet
 is started by a server, the init() method is executed first. There is also
 a start() (stop()) method, which is executed if the applet becomes
 visible (disappears) in the server window (e.g. by scrolling in the
-Netscape Naviagtor window).
+Netscape Navigator window).
 
 The paint() method appearing in the ``Hello World'' applet is
 responsible for the visual part of the applet. It uses a canvas
@@ -336,18 +333,19 @@ To run the applet you can either type
 \begin{itemize}
 \item \verb|appletviewer  HelloWorld.html| or
 \item use the following URL in the browser: \\
-        \verb|PATH_TO_CLASS_AND_HTML_FILE/HelloWorld.html|
+        \verb|PATH_TO_CLASS_AND_HTML_FILE/HelloWorld.html| \\
+        e.g. \verb|/home/user/java/HelloWorld.html|
 \end{itemize}
 
 
 \subsection{Variables}
 \label{sec:Variables}
 
-Essentially, Java distingishes between two types of variables,
-primitive data types and refence data types.
+Essentially, Java distinguishes between two types of variables,
+primitive data types and reference data types.
 \subsubsection{Primitive data types}
 \label{sec:primitive_data_types}
-We already mentioned that in Java each variable or expresssion has a
+We already mentioned that in Java each variable or expression has a
 definite type and that each type has identical size and behaviour on
 all Java implementations.  Java has built in primitive data types
 to support integer, floating--point, boolean, and character values.
@@ -363,7 +361,7 @@ short & signed integer & 0 & 16 bit &-32768 & 32767 \\ \hline
 int &   signed integer & 0 & 32 bits&       &        \\ \hline
 long & signed integer & 0 & 64 bits &       &        \\ \hline
 float & floating--point & 0.0 & 32 bits &     &          \\ \hline
-doulbe & floating--point & 0.0 & 64 bits &    &        \\ \hline
+double & floating--point & 0.0 & 64 bits &    &        \\ \hline
 boolean & true or false      &  false & 1 bit&       &  \\ \hline
 char  & Unicode character & \u000 & 16 bits &      &   \\ \hline
 \end{tabular}
@@ -381,41 +379,82 @@ int i
 \end{quote}
 
 
-Char values represent characters. They apear in Java between single
+Char values represent characters. They appear in Java between single
 quotes, e.g.
 \begin{quote}
 char c = 'C`
 \end{quote}
 
 Float and double types have special values that may be the result of
-certain floating--point operations. For example in the java.lang.Float
+certain floating-point operations. For example in the java.lang.Float
 and java.lang.Double classes the special values
 \texttt{POSITIVE INFINITY}, $\texttt{NEGATIVE INFINITY}$, and 
-\texttt{NaN} (not--a--number) are
+\texttt{NaN} (not-a-number) are
 defined.
 
 In Java strings are not a primitive type. Java provides a String
 object type to deal with sequences of character data. The java string
 class provides methods to operate on String objects.
 
-\subsubsection{Refence data types}
+\subsubsection{Reference data types}
 \label{sec:Reference_data_types}
 
-All non--primitive data types in Java are objects and arrays. They are
-called also ``reference types'' because they are handeled by
+All non-primitive data types in Java are objects and arrays. They are
+called also ``reference types'' because they are handled by
 reference. For example you may pass the address of an object, which is
 stored in a variable, to a method. In contrast, primitive types are
 always passed by value.
 
 
+\subsubsection{Parameters from the command line or from a html file}
+The access of parameters given on the command line is as easy as it
+is in C and C++. The parameters are stored as Strings in Java and
+are given as the parameters to the main() method of the application.
+That is the reason for the Syntax:
+\begin{quotation}
+  \verb|public void main(String[] args) |
+\end{quotation}
+It means that the array \verb|args| (see section \ref{sec:Arrays}
+for an explanation of arrays) contains the parameters. Each parameter
+is separated with a space in the command line. Here is an example of a 
+program using command line parameters:
+\inputlisting{Listings_Java/ParamCommandLine.java}
+So if you run the program as \verb|java ParamCommandLine 12 34 abcd t5|
+the output on the screen will be
+\begin{verbatim}
+ Parameter No. 0 : 12
+ Parameter No. 1 : 34
+ Parameter No. 2 : abcd
+ Parameter No. 3 : t5
+\end{verbatim}
+and if you don't supply parameters it will be
+\begin{verbatim}
+ NO parameters specified !
+\end{verbatim}
 
+A little bit different is the behaviour of applets, because there is
+no command line. But there is also a way to transmit parameters from 
+the calling HTML file to the Java applet. In the HTML file you can
+specify \verb|<PARAM>| attributes like here:
+\inputlisting{Listings_Java/ParamApplet.html}
 
+In this case we supply two parameters, called \verb|NumberofPoints| and
+\verb|DisplayText| to the Java applet. The value is given in the string
+behind the keyword \verb|value|. The Java applet to this HTML file
+could look like this:
+\inputlisting{Listings_Java/ParamApplet.java}
 
+In the \verb|init()| method we get the parameter \verb|NumberofPoints|
+and convert it to an integer using a wrapper method. The string 
+of the parameter \verb|DisplayText| doesn't have
+to be converted. Then in the \verb|paint()| method we display
+the transmitted parameters on the screen. The putput in the 
+appletviewer or in Netscape should look like:
+\begin{verbatim}
+  Parameter NumberofPoints is 10000
 
-
-Primitive types, Strings, Objects (see later)
-\subsubsection{Parameters from the command line, from the calling html page}
-
+  Parameter DisplayText is ``This_is_a_test_parameter!"
+\end{verbatim}
 
 
 \subsection{Loops, Conditional Statements and simple Arithmetics}
@@ -444,7 +483,7 @@ in the directory, where the directory tree starts.
 
 You could also use an environment variable called \verb|CLASSPATH|. It
 describes the directories to search for the class files. So if the
-\verb|CLASSPATH|-variable includes \verb|/home/user/java | you can
+\verb|CLASSPATH|-variable includes \verb|/home/user/java| you can
 start the above example in this directory, if the class is in the 
 subdirectory  \verb|de/freiburg/simulation/|.
 
@@ -458,15 +497,15 @@ statement appearing in the part of any Java program before the actual
 definition of the class: the \verb|import|-statement. With \verb|import|
 you can make classes available, so you don't have to use the fully
 qualified name to the class. So if you would like to
-use the HelloWrold class from above in your programs, you could either
-type \verb|de.freiburg.simulation.HelloWorld() | in your programm
+use the HelloWorld class from above in your programs, you could either
+type \verb|de.freiburg.simulation.HelloWorld()| in your program
 or you can use
 \begin{verbatim}
 import de.freiburg.simulation.*;
 ....
    HelloWorld();
 \end{verbatim}
-to import all classes in the \verb|de.freiburg.simulation | class.
+to import all classes in the \verb|de.freiburg.simulation| class.
 You can also use:
 \begin{verbatim}
 import de.freiburg.simulation.HelloWorld;
@@ -483,7 +522,7 @@ will be explained later.
 
 
 
-As we already mentioned Java  supportsallmost all of the the standard
+As we already mentioned Java  supports almost all of the the standard
 C operators. The arithmetic operators that operate on numerical types
 are 
 \begin{center}
@@ -496,10 +535,10 @@ $/$ & division \\
 \end{tabular}
 \end{center}
 
-It is ipmortant to remark, that in Java integer division truncates
+It is important to remark, that in Java integer division truncates
 toward zero (7/2=3).
 
-Java has to special opertors for incremet $++$ and decremet $--$. The 
+Java has to special operators for increment $++$ and decrement $--$. The 
 expression \verb|i++| is equivalent to \verb|i=i+1| except that
 \verb|i| is evaluated only once.
 
@@ -513,7 +552,7 @@ $>=$ & greater then or equal to \\
 $<$  & less then \\
 $<=$ & less than or equal to \\
 $==$ & equal to \\
-$!=$ & not equalt to
+$!=$ & not equal to
 \end{tabular}
 \end{center}
 
@@ -528,7 +567,7 @@ The conditional operators
 operate on  boolean expressions only.
 
 Java has also bitwise operators which operate on integers and on
-boolena types
+boolean types
 \begin{center}
 \begin{tabular}{ll}
 \& & and \\
@@ -540,25 +579,41 @@ $ >>>$ unsigned right shift
 \end{tabular}
 \end{center}
 
-Lst not least we have to mention the fundamental assignment operator
+Last not least we have to mention the fundamental assignment operator
 $=$. It may be used in combination with other operators, e.g., $+=$
 means is incremented by.
 
+As an example we want to write a program to calculate the mean of
+a given number of random numbers. One posible implemntation
+could look like:
+\inputlisting{Listings_Java/DataMean.java}
 
+Here we used the class \verb|java.util.Random| which allows for
+the creation of random numbers. If we don't supply a seed, as is the
+case here, it just uses the time to initialize the generator. The
+initialization takes place in line 10, where a new generator is created.
+You can check this by running the application more than once and comparing
+the means -- they should not be the same. 
 
+The \verb|next.Double()| method returns a new random number of type
+double (for a float use rand.Float()). You can also create normally 
+distributed random numbers with the \verb|Random.Gauss()| method.
+The rest of the program should be self explaining.
 
 
 Operators +=,-=,++,\%, \&\&, ||, break,
 do while, while, switch, for
 
-Example: Mean of Random numbers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Arrays}
 \label{sec:Arrays}
 allokieren, instanzieren, multidimensional arrays
 
-Example: Mean using arrays
+\inputlisting{Listings_Java/DataMean_Array.java}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classes and Objects}
 \label{sec:Classes_and_Objects}
 Examples: Random Number, Moment Calculation
