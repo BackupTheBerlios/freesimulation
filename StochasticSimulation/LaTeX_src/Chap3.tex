@@ -149,7 +149,6 @@ Figs. (\ref{F_TRANDOM2_1}), (\ref{F_TRANDOM2_2}),
 (\ref{F_TRANDOM2_3}), and (\ref{F_TRANDOM2_4}).
 
 \subsubsection{Listing of the program trandom2.m}
-\inputlisting{./Listings/trandom2.m}
 
 \subsubsection{Listing of the function {\sf random1}}
 \inputlisting{./Listings/random1.m}
@@ -340,7 +339,7 @@ mean 0 and variance 2 generated according to the Box-Muller method.
 The continuous line represents the expected Gaussian density.}
 \end{figure}
 
-Let us end this subsection by mentioned that normal distributed
+Let us end this subsection by mentioning that normal distributed
 random numbers can be generated in MATLAB with the help of 
 the function {\sf randn}.
 
@@ -384,12 +383,12 @@ It is easy to demonstrate that the above method works. Let us apply
 Bayes'formula to the conditional probability $p(x|\xi \le d(y))$:
 \begin{equation}
 \label{A-R-BAYES}
-p(x|\xi \le d(y)) = \frac{{\rm Prob}(p(\xi \le d(y)|Y=x)q(x)}
+p_y(x|\xi \le d(y)) = \frac{{\rm Prob}(\xi \le d(y)|Y=x)q(x)}
                   {{\rm Prob}(\xi \le d(y))}.
 \end{equation}
 It is straightforward to compute
 \begin{eqnarray*}
-{\rm Prob}(p(\xi \le d(y)|Y=x) &=& {\rm Prob}(\xi \le d(x)) = 
+{\rm Prob}(\xi \le d(y)|Y=x) &=& {\rm Prob}(\xi \le d(x)) = 
           d(x) \\
 {\rm Prob}(\xi \le d(y)) & = & \int {\rm Prob}(\xi \le d(Y|Y=x)) q(x) dx \\
                &= & \int q(x) d(x)dx = \int dx \frac{p(x)}{C} = 
@@ -397,7 +396,7 @@ It is straightforward to compute
 \end{eqnarray*}
 Inserting into (\ref{A-R-BAYES}) we obtain finally
 \begin{equation*}
-p(x|\xi \le d(y) = Cd(x)q(x)=p(x),
+p_y(x|\xi \le d(y)) = Cd(x)q(x)=p(x),
 \end{equation*}
 which completes the proof.
 
@@ -422,7 +421,7 @@ The von--Neumann algorithm then simply reads \\
 1. Generate $\chi_1$ and $\chi_2$ uniformly distributed in 
     $[0,1)$. \\
 2. Evaluate $Y=a+\chi_2(b-a)$. \\
-3. If $\chi_1 \le p(x)/M$ then $Y$ is a variate distributed 
+3. If $\chi_1 \le p(y)/M$ then $Y$ is a variate distributed 
     according to $p(x)$. \\
 4. Go to 1.
 
@@ -481,7 +480,7 @@ I = \int dx f(x).
 \end{equation}
 The central idea of importance sampling is to select random 
 variates from regions in proportion to the importance these 
-regions hAve to the integral we want to evaluate, instead of 
+regions have to the integral we want to evaluate, instead of 
 spreading them evenly. To this end we rewrite the integral 
 (\ref{INT_VARRED}) in the form
 \begin{equation*}
@@ -676,12 +675,48 @@ Z_N = q^N.
 
 In order to demonstrate the above theoretical results we want to 
 simulate now a random walk on a two dimensional lattice.
-The listing can be seen below and will be discussed soon.
+The listing can be seen below and will.
 
 \subsubsection{Listing of the program random walk}
 \inputlisting{./Listings/rw_2d.m}
 
-Figuren: Konfigurationen !!!! \\
+A few comments to the listing seem appropriate. 
+The position of the random walker is stored in the matrix
+{\sf pos(1:realizations,1:N,1:2)}, where {\sf realizations} denotes
+the number of realizations, {\sf N} is the number of steps, and 
+the last argument records the position along the x and the y axis.
+In order to generate a realization (lines 31 to 58) we draw at 
+once N random numbers which are equally distributed between the 
+four discrete values 1,2,3, and 4, which number the four
+possible neighbors of the lattice point on which the walker is 
+resting. Then within a for loop over all steps 
+we select at random the new position of the walker
+with the help of the if-elseif-end construction in lines
+42 to 57. These procedure is repeated {\sf realizations} times.
+Finally, we plot the paths of the walker. Since we want to plot 
+all paths in the same square plot (in MATLAB this can be done
+with the help of the command {\sf axis square} it is necessary to find out
+the maximal distance reached by the walker in the 10 realizations.
+This is done in line 68 and the length of the axis is fixed in 
+line 69 with the command
+\begin{verbatim}
+axis([-maximum maximum -maximum maximum]);
+\end{verbatim}. 
+With the help of the {\sf hold on} {\sf hold off} construction we 
+already know we plot the ten realizations in the same plot.
+
+We run the program and generate 10 realizations of a random walk
+of 1000 step lengths. These realizations can be seen in Fig. 
+(\ref{F_RW_2D}).
+\begin{figure}
+\label{F_RW_2D}
+\includegraphics[width=10cm]{./Figures/f_rw_2d.eps}
+\caption{Ten realizations of a two--dimensional random walk on a square
+lattice.}
+\end{figure}
+It is now interesting to investigate the end--to--distance of the
+ideal polymer chain in order to check whether the simulation is in 
+agreement with the Gaussian polymer theory. bla bla bla...
 
 Figuren: end-to-end !!!!\\
 
@@ -690,7 +725,7 @@ Figuren/Tabelle: kritischer Exponent !!!! \\
 Diskussion \\
 
 \subsection{Real chains}
-In Fig. () we see that the realizations of the random walk, i.e. 
+In Fig. (\ref{F_RW_2D}) we see that the realizations of the random walk, i.e. 
 the polymer chains intersect themselves. This is of course an 
 unphysical behaviour since real polymer chains do not intersect.
 In order to simulate real chains on a lattice we still can 
@@ -706,8 +741,9 @@ clear that in $d=1$ a SAW is simply a rigid rod and we have
 $\nu=1$. For increasing dimension of the lattice $\nu$ 
 decreases as the self--avoiding constraint becomes less important. 
 For large dimensions the difference between random walk and SAW 
-vanishes. In fact for the critical dimension $d_c =4$ random walk 
-and SAW have the same universal properties. 
+vanishes. In fact for the critical dimension $d_c =4$ (and for higher
+dimensions) random walk 
+and SAW have the same universal properties \cite{DE_GENNES,RAPOSO}. 
 
 In general it is not 
 possible to evaluate the critical exponent $\nu$ analytically for the 
@@ -727,12 +763,15 @@ stochastic simulations (!!!!!).
 The total number of self--avoiding random walks of $N$  steps has 
 (for large $N$) the following asymptotic form
 \begin{equation*}
-Z_N = {\rm constant} \quad N^{\gamma-1} q_{\rm eff}^N.
+Z_N = {\rm constant} \times \quad N^{\gamma-1} q_{\rm eff}^N.
 \end{equation*}
 The second factor in the above scaling law reminds us of the expression
 (\ref{Z_NRW})  which holds for ideal random walks. The effective 
 coordination number is smaller then the coordination number $q$, 
-e.g. in 3 dimensions we have $q=6$ and $q_{\rm eff}=4.68$. The first factor
+e.g. in 3 dimensions on a cubic lattice 
+we have $q=6$ and $q_{\rm eff}=4.68$ and in two dimensions on a squared
+lattice we have $q=4$ and $q_{\rm eff}=2.63$ 
+\cite{KREMER_AND_BINDER}. The first factor
 $N^{\gamma -1}$  is called the enhancement factor. The universal
 exponent $\gamma$ depends on the dimension of the lattice
 \begin{equation*}
@@ -769,9 +808,9 @@ is possible. It is instructive to estimate that the success rate
 $s_N$, i.e., the fraction of walks that will continue successfully 
 for $N$ steps, is of the order
 \begin{equation*}
-s_N = \frac{Z_N(SAW)}{q(q-1)^N} \approx
-      \frac{N^{\gamma -1} q_{\rm eff}^N}{q(q-1)^N}
-       = \left( \frac{q_{\rm eff}^N}{q-1}\right) 
+s_N = \frac{Z_N}{q(q-1)^{N-1}} \approx
+      \frac{N^{\gamma -1} q_{\rm eff}^N}{q(q-1)^{N-1}}
+       = \left( \frac{q_{\rm eff}}{q-1}\right)^N 
          \left( \frac{q-1}{q} \right) N^{\gamma -1},
 \end{equation*}
 which for large $N$ decreases exponentially as
@@ -779,15 +818,15 @@ which for large $N$ decreases exponentially as
 s_N \approx \exp(-N \mu),
 \end{equation*}
 with $\mu=\ln[(q-1)/q_{\rm eff}]$. 
-On a two--dimesnional lattice $1/\mu = 7.75$, on a 3d lattice
-$1/\mu = 15.4$ (CHECK!!!!!!!!!!!!!!!!). Because of this exponential 
+On a two--dimensional square lattice $\mu = 0.128$, on a 3d cubic lattice
+$\mu = 0.065$ \cite{KREMER_AND_BINDER}. Because of this exponential 
 decrease it is very  difficult to generate very long chains with 
 the simple sampling algorithm. This problem is called the 
 "attrition problem".
 
 FIGUREN ZUM ATTRITION PROBLEM !!!!!!!!!
 
-\subsubsection{Biased sampling}
+\subsubsection{Importance sampling}
 To overcome the attrition problem it is necessary to exploit 
 biased sampling techniques. One such technique is the "inversely
 restricted sampling" of Rosenbluth and Rosenbluth \cite{ROSENBLUTH}. 
@@ -819,7 +858,8 @@ each chain in the sample by the factor
 \begin{equation*}
 W_N(\{ \vec{r}_i \}) =  \prod_{i=1}^N \frac{k_i}{q_0}.
 \end{equation*}
-Since, $W_N P_N = q_0^{-N}$ the biased sampling procedure samples 
+Note, that we have $W_N P_N = q_0^{-N}$. The importance 
+sampling procedure samples 
 exactly the same configuration space as simple sampling.
 
 The correct way to estimate $\langle \vec{R}^2 \rangle$ is
@@ -830,57 +870,186 @@ The correct way to estimate $\langle \vec{R}^2 \rangle$ is
 where the sum is over all realizations.
 
 In order to compare the two sampling techniques we have written a 
-program {\sf RW\_2D\_sa2.m} which by specifying an input parameter
+program {\sf RW\_2D\_sa2.m} (VORSCHLAG: SAW2 !!!!!!) 
+which by specifying an input parameter
 draws configurations of real chains on a two--dimensional squared lattice 
 with the simple sampling 
 technique or with the biased (importance) sampling technique.
-
+The flow diagram of the program can be seen in Fig. 
+(\ref{F_RW2D_ALGORITHM}).
+\begin{figure}
+\label{F_RW2D_ALGORITHM}
+\includegraphics[width=10cm]{./Figures/f_rw2d_algorithm.eps}
+\caption{The flow diagram of the program saw2.m.}
+\end{figure}
 
 
 \subsubsection{Listing of the program {\sf RW\_2D\_sa2.m}}
-\inputlisting{./Listings/RW_2D_sa2.m}
+\inputlisting{./Listings/rw_2D_sa2.m}
 
 Let us comment on the program. BLA BLA BLA !!!!!!!!!
+We run the program for the following set of parameters. We variate
+the length of the SAW from N=5 to N=55 in steps of 10. For each
+SAW length we generate 10 realizations first with the simple
+sampling technique and second with the importance sampling 
+technique. 
 
-In table (\ref{T_SAW}) we see some results of the simulations.
+First we run the program for the simple sampling algorithm.
+In Fig. (\ref{F_SAW1S}) we see 5 realizations of the self--avoiding 
+random walk for N=55 generated by the importance sampling technique. 
+In Fig. (\ref{F_SAW2S}) we show the mean square end--to--end 
+distance as a function of N in a double logarithmic plot. The 
+continuous line indicates the theoretically expected behaviour
+whereas the dotted line is the result of the least square fit to a 
+straight line from which we derived the scaling exponent. In 
+Fig. (\ref{F_SAW3S}) we plot the CPU time necessary to generate
+10 realizations of a polymer of a specific length as a function of 
+N. One easily recognizes that the CPU time increases 
+exponentially. The critical exponent determined by the least 
+square fit $R^2 \approx aN^s$ where a=0.81 and s=1.36.
+Thus the estimate of the critical exponent is 
+$\nu=0.68$ (the expected result is 0.75).
+
+\begin{figure}
+\label{F_SAW1S}
+\includegraphics[width=10cm]{./Figures/f_saw1s.eps}
+\caption{Five realizations of a two--dimensional self--avoiding 
+random walk on a square lattice generated by the simple sampling 
+technique.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW2S}
+\includegraphics[width=10cm]{./Figures/f_saw2s.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk generated by the simple sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW3S}
+\includegraphics[width=10cm]{./Figures/f_saw3s.eps}
+\caption{The CPU time for generating 10 realizations  of a 
+self--avoiding random walk  by the simple sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+Let us now discuss the importance sampling approach.
+In Fig. (\ref{F_SAW1}) we see 5 realizations of the self--avoiding 
+random walk for N=55 generated by the importance sampling technique. 
+In Fig. (\ref{F_SAW2}) we show the mean square end--to--end 
+distance as a function of N in a double logarithmic plot. The 
+continuous line indicates the theoretically expected behaviour
+whereas the dotted line is the result of the least square fit to a 
+straight line from which we derived the scaling exponent. In 
+Fig. (\ref{F_SAW3}) we plot the CPU time necessary to generate
+10 realizations of a polymer of a specific length as a function of 
+N. One easily recognizes that the CPU time increases 
+exponentially. The critical exponent determined by the least 
+square fit $R^2 \approx aN^s$ where a=0.424 and s=1.404.
+Thus the estimate of the critical exponent is 
+$\nu=0.702$ (the expected result is 0.75).
+\begin{figure}
+\label{F_SAW1}
+\includegraphics[width=10cm]{./Figures/f_saw1.eps}
+\caption{Five realizations of a two--dimensional self--avoiding 
+random walk on a square lattice generated by the importance sampling 
+technique.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW2}
+\includegraphics[width=10cm]{./Figures/f_saw2.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk generated by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+\begin{figure}
+\label{F_SAW3}
+\includegraphics[width=10cm]{./Figures/f_saw3.eps}
+\caption{The CPU time for generating 10 realizations  of a 
+self--avoiding random walk  by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+
+In table (\ref{T_SAW}) we sum up the results of the simulations.
 \begin{table}
 \label{T_SAW}
 \caption{Values of $<\vec{R}^2>$ as functions of $N$, 
-for the two--dimensional random walk with biased sampling.}
+for two--dimensional random walks generated by the simple sampling 
+(ss)
+and by the importance sampling (is) technique.}
 \begin{center}
-\begin{tabular}{rrrr} \hline \hline
-$N$ & Memory & No. chains & $<\vec{R}^2>$ \\ \hline
-10  & 0        & 1000     &    123 \\
-10  & $\infty$ & 1000     & 123 \\
-20  & 0        & 1000     & 123   \\
-20  & $\infty$ & 1000     & 123 \\
-30  & 0        & 1000     & 123 \\ 
-30  & $\infty$ & 1000     & 123 \\ \hline \hline
+\begin{tabular}{rrr} \hline \hline
+$N$ & $<\vec{R}^2>(ss) $  &  $<\vec{R}^2>(is) $    \\ \hline
+5   &  7.0       &  4.3   \\
+15  &  41.6       &  14.02  \\
+25  &  51.2       &  44.20     \\
+35  &  86.6       &  100.13 \\
+55  &  193.8       &  72.51    \\ 
+65  &  179.2       &  103.79   \\ \hline \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-
-In table (\ref{T_SAW_NU}) we show some estimated values of 
-the critical exponent $\mu$.
+In the next table  (\ref{T_SAW_LONG}) we show the result of another 
+run of the program
+{\sf rw\_2d\_sa2} which was run for 500 realizations.
 \begin{table}
-\label{T_SAW_NU}
-\caption{The critical exponent $\nu$.}
+\label{T_SAW_LONG}
+\caption{Mean square end--to--end distance estimated by importance
+sampling from a sample of 500 realizations.}
 \begin{center}
-\begin{tabular}{lll}\hline \hline
-Memory   & $\nu$ & $\nu_{\rm Theory}$ \\ \hline
-0        & 123   & 1/2 (RW)  \\
-$\infty$ & 123   & 3/4 (Flory) \\
+\begin{tabular}{ll}\hline \hline
+$N$  & $<\vec{R}^2>$  \\ \hline
+10   & 13.709    \\
+30   & 45.651  \\
+50   & 53.559 \\
+70   & 153.023  \\
+90   & 234.747 \\
+110  & 220.095 \\
+130  & 350.079 \\
+150  & 566.384 \\
+170  & 711.81 \\
+190  & 744.514  \\
 \hline \hline
 \end{tabular}
 \end{center}
 \end{table}
 
+The same data are depicted in Fig. (\ref{F_PLOTSAWLONG1}).
+\begin{figure}
+\label{F_PLOTSAWLONG1}
+\includegraphics[width=10cm]{./Figures/f_plotsawlong1.eps}
+\caption{The mean square end--to--end distance of a 
+self--avoiding random walk estimated from a sample of 500
+realizations by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+The scaling behaviour estimated from the above data is found to be
+$R^2=aN^s$, where a=0.38614 and s= 1.41248. Thus the critical 
+exponent is found to $\nu = 0.706$.
+
+Fig. (\ref{F_PLOTSAWLONG2}) shows the corresponding CPU time 
+consumption.
+\begin{figure}
+\label{F_PLOTSAWLONG2}
+\includegraphics[width=10cm]{./Figures/f_plotsawlong2.eps}
+\caption{The CPU time for generating 500 realizations  of a 
+self--avoiding random walk  by the importance sampling
+technique as a function of the polymer length.}
+\end{figure}
+
+
 IRGENDEIN VERGLEICH ZWISCHEN SIMPLE UND IMPORTANCE SAMPLING !!!!!
 
 
-FIGUREN: REALISIERUNGEN, SKALENVERHALTEN, End-TO-END ABSTAND,
-FEHLER, USW.
+FIGUREN: FEHLER!!!!
+
+\bibliographystyle{peter}
+\bibliography{V_98}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
