@@ -823,9 +823,428 @@ distribution.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Examples}
+In this section, we will learn how to use random variables for
+a simple example of a Monte Carlo simulation: the 
+discrete--time random walk.
 
-\subsection{File I/O in Java}
-????
+Before we look at the mathematical and physical part of this section, 
+it is time to look at file operations in Java. We want to use these
+to save all the data produced in the random walk program, which
+will be too much to store in memory, to the harddisk. Then it can
+be further analyzed and plotted by other specialized programs available (like 
+GNUPlot, PVWave, Octave, etc.). You could of course also use the graphical
+capabilities of Java (Ptplot) to get the figures, but often in 
+simulations it is of great importance to read and write data to
+disk for later usage, maybe also in a Java program. Later on in  
+\ref{sec:Symphony} we will apply these methods for Symphony, a
+program to solve a problem in parallel.
+
+A short comment upfront: to use file I/O in Java you have to use
+eception handling, but we still have not discussed it. Because it is
+still possible to understand I/O operations, we start with this. 
+In the next section we will tell you how to handle and
+understand exceptions.
+ 
+\subsection{File Input/Output in Java}
+\label{FileIO}
+The Java I/O package is one of the largest and for the beginner
+one of the most difficult core package at a first glance. But after a while
+you feel comfortable and it will be easy to use.
+
+In figure \ref{fig:FileIOClasses} you can see the main classes of the
+package, which are all subclasses of the \verb|java.lang.object| class.
+\begin{figure}[htbp]
+  \begin{center}
+%%    \includegraphics[width=\textwidth]{Figures/IOClasses.eps}
+    \caption{Overview of the \texttt{io} package in Java 1.1 and 
+      related classes.}
+    \label{fig:FileIOClasses}
+  \end{center}
+\end{figure}
+Except the \verb|Reader| and \verb|Writer| classes, all classes were
+already introduced in Java 1.0. In Java 1.1 the two additional
+classes just mentioned were added, because the \verb|InputStream|
+and \verb|OutputStream| classes are using 8 bit characters and
+the new classes use 16 bit unicode characters for international
+languages support. In Java 2 only small changes have taken place
+and therefore you can still stick to the Java 1.1 standard, but
+should avoid using Java 1.0 I/O syntax if possible. 
+This is also because the Java 1.1 Reader and Writer classes are
+faster than the old ones.
+Because File I/O almost always means handling strings, we have to
+discuss this also in more detail. 
+
+\paragraph{The concept of Streams}
+The basic concept of input and output in Java is the \emph{stream}.
+A stream is a collection of data in a certain order, which has to be
+transported from a source to a sink. For example you want to
+read data froma file, then you need a stream from the file, which
+is the source, to a sink, which could be an array. This array can
+of course be printed on screen to be read by the user. Thnis can also
+be seen as a stream using the array as a source and the screen as the
+sink. And really the \verb|System.out| method already familiar with
+is derived froma stream (the \verb|PrintStream| class).
+
+For any data communication from one ``point'' to another you
+always have to use a stream in Java (like in C++). A nice feature
+of streams is, that you can put two streams behind each other,
+meaning to put the output of the first stream to the input of the 
+second stream (see figure \ref{fig:ConnectingStreams}). 
+\begin{figure}[htbp]
+  \begin{center}
+    % \includegraphics[width=\textwidth]{Figures/StreamsConnect.eps}
+    \caption{Connecting two streams together to get advanced functionality.}
+    \label{fig:ConnectingStreams}
+  \end{center}
+\end{figure}
+This is the reason why modern programming languages
+prefer to use streams to realize a very flexible input/output
+API.  
+
+You can even create very easily your own streams realizing very complex
+filtering methods, but after reading this section you should be
+able to understand the basics of streams and go to the online
+API documentation and find your way through the classes yourself. 
+
+\paragraph{ASCII Files}
+But let us start with the most simple problem: We have an array 
+of double values, for example the x coordinates of the discrete--time
+random walk discussed afterwards and want to save them in a file
+in the format \verb|time  x-coordinate|. To that end we need
+to open a file for writing, write the array in it and close the file.
+
+You probably would tend to look at the \verb|File| class for reading and 
+writing files, but this class is only responsible for managing
+files, directories and paths. We can use it to create a name
+for our fiole to be created. For file access, you have to use the
+\verb|Reader| and \verb|Writer| classes. So our small sample
+program would look like:
+\lstinputlisting{Listings_Java/FileWriteSimple.java}
+
+First of all you realize that instead of just using the \verb|FileWriter|
+class we ``pipe'' it to a \verb|BufferedWriter|, which buffers
+the outgoing data between the disk and the memory. This is always
+desirable and should therefore always be used. Otherwise you get
+a very bad performance. Because it is inconvenient to remember all
+this, we have written a convenience class in our \verb|simulation|
+package. So you can have the same program, only lines 17-18 (or 19)
+have to be changed to (and you have to import the simulation package,
+see program \verb|FileWriteConvenience.java|.):
+\begin{lstlisting}{}
+    FileOut out = new FileOut( filename ); // open a buffered File stream
+\end{lstlisting}
+You can use a second argument to this constructor, which is a boolean
+variable and indicates if ythe data should be appended to
+the already existing file or not. The full syntax of the method
+is therefore \verb|FileOut(String filename, boolean append)|.
+
+Now we want to read the contents of the file back in. We use the
+classes \verb|FileReader| and \verb|BufferedReader| as you may have
+already guessed. The whole program looks like:
+\lstinputlisting{Listings_Java/FileReadSimple.java}
+Again you can use the convenience class \verb|FileIn| from the
+simulation package, changing again the lines 17-18 (or 19) by:
+\begin{lstlisting}{}
+    FileIn in = new FileIn ( filename ); // open a File stream
+\end{lstlisting}
+
+Important remark:
+\begin{quote}
+Java always overwrites old files without notification as the default
+behaviour! If you want to check if an old file already exists under
+this name, you have to do that by yourself. If you want to append the
+new data to the old one, use the second argument when creating a
+new \verb|FileWriter| instance.
+\end{quote}
+
+
+\paragraph{Using a StringBuffer}
+In the above examples and in all the \verb|System.out.println()| methods,
+we make use of the concatenation operator \verb|+|. So here seems to
+be the right place to discuss the fundamentals of string construction
+a bit more in detail.
+
+Often you are in the need of constructing a string from scratch, by
+putting lots of small pieces (strings) together. Actually the same
+problem as concatenating strings for (formatted) output. You could
+always use the Lava Rocks methods, here especially the \verb|sprintf()| 
+method explained in the next apragraph and in section \ref{sec:Symphony}.
+But here we want to discuss how this can be implemented in  core Java.
+
+The basic feature enabling string concatenation is the concept of a 
+\verb|StringBuffer|. This is a standard class in the \verb|java.lang|
+package and contains methods to manipulate strings. The \verb|String|
+class itself (also in the \verb|java.lang| package) provides basic
+functionality for fixed (non-changing) strings. As I already
+mentioned every time you use the concatenation operator, you are
+implicitly using the \verb|StringBuffer| methods. 
+
+If you want to create a string, which contains all the output you want
+to write to a file in one string, you could use a \verb|StringBuffer|.
+Here is the same class as above for writing a double array to a file,
+but this time we use the \verb|StringBuffer| to create a string
+containing all the output and write this string to the file.
+\lstinputlisting{Listings_Java/StringBufferDemo.java}
+Now you have to take care of the length of the buffer yourself,
+but if there is not enough space left Java automatically
+enlarges the buffer itself, so you do not have to care.
+
+Using a \verb|StringBuffer| is much faster and much less memory
+extensive than just the concatenation operator, if you are
+interested in the final string. If you just use it for output
+it does not matter.
+
+\paragraph{Stream- and StringTokenizer}
+These two classes in the \verb|java.io| and the \verb|java.lang|
+packages respectivly can be used to split up a stream of
+characters or a string into words. You can define the word
+separator yourself, the default is a white space. It is very
+convenient for analyzing keyboard inputs or sentences.
+You get the next word by using the \verb|nextToken()| method.
+The \verb|StringTokenizer| is very simple and the \verb|StreamTokenizer|
+is much more flexible and powerful.
+
+\paragraph{Formatting the output in a file}
+A common problem for writing files is the form of the produced
+output. Like in the case of formatted screen output, you can use
+one of the C language motivated \verb|printf| methods supplied by the
+Lava Rocks package (see section \ref{sec:LavaRocks}). But instead
+of using \verb|printf()| you have to use \verb|fprintf()| this time.
+
+If you are a (former) C programmer, you might miss the third
+output version of the formatting methods: in Lava Rocks it is also called
+\verb|sprintf()|. 
+
+A simple example of these routines would be to save
+a double array, which is e.g. the x-coordinate of a particle, and 
+the corresponding time in a file.
+\lstinputlisting{Listings_Java/FileSaveFormatted.java}
+
+\paragraph{Binary Files}
+We are now familiar with writing ASCII files, but sometimes it is
+necessary to write or read files in binary format, where the 
+values are stored in the way they are kept in memory of the computer.
+This makes it faster and most of the time it produces smaller
+output files than using ASCII output.
+
+The difference to other languages, where you have these two choices
+too, is that in Java on all platforms the binary format is the
+same, when it is saved. So here you do not have to mind using 
+binary data files on different machines and operating systems as
+long as you stick to Java.
+
+All of the basic I/O classes implement writing bytes to a stream,
+so you could actually use them. But there are two classes, which 
+already implement the conversion of the different data types to 
+a series of bytes and write these bytes to the desired stream.
+The first one is \verb|DataInputStream| and the second one is
+the \verb|DataOutputStream| class. They implement methods like
+\verb|writeDouble()| (\verb|readDouble|), \verb|writeBoolean()|
+(\verb|readBoolean()|), etc. There are also methods for
+writimg strings (\verb|readLine()|) in these two classes, but
+avoid them, because they do not convert the byte stream correctly
+to character streams. Instead use the above discussed writer and reader
+classes. 
+
+As an example we look at the same example as above and write 100 
+double variables to a file, so the file will be 800 bytes long
+(on all computers and operating systems).
+\lstinputlisting{Listings_Java/FileBinary.java} 
+Please note that we have used unbuffered I/O here and for your
+applications you should always use buffered I/O by inserting
+a \verb|BufferedInputStream| (\verb|BufferedOutputStream|) between
+the two streams used in the listing.
+
+This paragraph was the way to write files introduced in Java 1.0,
+the Reader and Writer classes were first introduced in Java 1.1.
+There are also classes to convert the old streams to the new reader/writer
+streams (classes). The \verb|InputStreamReader| class converts
+an \verb|InputStream| 
+to a \verb|Reader| class and the \verb|OutputStreamWriter| class 
+converts an \verb|OutputStream| to a \verb|Writer| class.
+
+
+\paragraph{Handling Files -- The File Class}
+Sometimes you need to delete, rename or copy files or must check
+if a file is already there or you have to seek in directories.
+For all these problems you have to refer to the \verb|File| class 
+(since Java 1.1) of
+the \verb|java.io| package. Take a look at the extensive list
+of methods available in this API and you will certainly find
+something suitable. 
+
+As a short example we want to discuss how show how to check if
+a file with a certain filename is already available and 
+how to handle directories and files therein.
+\lstinputlisting{Listings_Java/FileCheck.java}
+
+\paragraph{Direct File Access}
+Since Java 1.1 
+there is also a class called \verb|RandomAccessFile|, which is for
+creating and accessing files directly. This means you can store
+kind of data records and position the file exactly to a certain
+record instead of reading the whole file sequentially. Because
+in scientific applications this kind of file access is rather
+seldom, we do not discuss this feature. You have to consult the
+online API documentation for details. 
+
+\paragraph{Redirecting Standard Input and Ouput}
+You can redirect the standard output, input or error
+to a file for example or whatever you like (since Java 1.1). 
+This is of great use,
+because often you run long simulations and want to save the
+standard output or error to a file for later use. This can be
+done easily on UNIX systems, but still you have to do it manually.
+In Java you just use methods from the \verb|java.lang.System| class.
+For example to redirect the standard output and error to a file
+called \verb|Standard.out| of a program, use:
+\lstinputlisting{Listings_Java/RedirectStandard.java}
+The similar method for the standard input is called
+\verb|System.setIn(InputStream)|.
+
+\paragraph{Compressing Files}
+File compression is not only important for transfering files or applets 
+across the internet, it is also of concern for many scientists, who have
+large data sets and have to write these sets to disk for 
+postprocessing. 
+
+Since the advent of the zlib compression library\footnote{%
+\href{http://www.zlib.org}{http://www.zlib.org}} freely available under
+the GNU license, it is pretty easy to use compression in your 
+own programs in Fortran or C. But in Java the compression library is 
+already made available in the standard Java API \verb|java.util.zip|.
+As the name suggests not only the zlib compression algorithm used
+in the famous GZIP program -- mostly used on UNIX systems using the
+\verb|.gz| ending -- but also the algorithm of the famous zip
+program -- mostyl used on Windows based systems and has the ending
+\verb|.zip| -- is available in Java directly.
+
+The only drawback is that it is implemented on top of the old
+Java 1.0 I/O API and sometimes you have to mix the old Java 1.0
+and the new Java 1.1 I/O syntax. 
+
+The most easy interface is the GZIP one, so for most applications you 
+should use GZIP. The Zip interface allows for multiple program 
+compression in one file, but it is more cumbersume to use. Because
+most of the time you have to compress a single stream of data, we
+explain only the GZIP interface.
+
+Let us discuss the probelm ofg saving an array to a file again, but
+this time we want to store them compressed as a GZIP file.
+\lstinputlisting{Listings_Java/GZIPSaveArray.java}
+The first part stores it as a binary GZIP file \verb|test.bin.gz|
+and you will see that it
+does not save a lot of memory, because we are storing an array with random
+numbers, which is already (almost) best represented by the binary
+format. The second part produces an ASCII GZIP file \verb|test.asc.gz|,
+which is much smaller than the uncompressed file. You can check this by
+using the GZIP utility and uncompress the files. 
+
+Reading of GZIP files works the same, you just have to use
+the \verb|GZIPInputStream()| constructor and all the file I/O works
+like usual file handling.
+
+We have also implemented convenience classes for these complicated
+structures to open a GZIP file for writing and reading. They are
+called \verb|GZFileOutBin()| (\verb|GZFileOutAscii()|) and
+\verb|GZFileInBin()| (\verb|GZFileInAscii()|) and are used like
+the ones without compression. You can also take a look at the
+program \verb|GZIPReadArray.java|.
+
+\paragraph{Reading Files into Applets}
+Because of security reasons there is (almost) no way of reading files or
+writing files from within an applet. One way of doing it would be
+to use the security features of Java. In this case the browser has 
+to tell the applet explicitly that it is allowed to do file I/O. This
+can be accomplished by signing an applet, prepared in a jar file. Then
+the browser can check the signature and if the browser setup allows
+file I/O for this signature it works.
+
+A second way would be to use the network features of Java and
+access a file from a FTP server, probably the same computer
+the applet was coming from. Of course there is still the problem
+of a password to be transmitted unsecurely to the FTP server, but
+it is fairly easy to setup. The code to use is a freely available
+program called \verb|LinLyn.java|. We have included the code in
+our simulation package. The documentation is included in the Java file
+or you can study the simulation package documentation. 
+
+%%%%%%%
+\subsection{Exception Handling in Java}
+We have made extensive use of exceptions in the last section, but
+now we have to understand what we did there. Exceptions are
+``thrown'' if an exceptional condition or error occurs in a part
+of a Java program. This can be a division by zero, a file not
+found error or something else, which the JVM does not know 
+how to handle. So it is up to you to write code, which takes
+care of unusual conditions, which is called catching an exception 
+-- the most common situations are already
+caught by the standard Java implementation. 
+
+If a piece of code produces an exception it is checked if the
+code block surrounding the exception producing point is able
+of handling the exception. If not, the exception is propagated
+up to the next higher (calling) code block (method, class, etc.).
+If none of the code up to the main method catches the exception,
+an error message is shown on the command line and the program stops
+with a stacktrace showing the last commands executed. This progragation
+is a great simplification, because you can catch all of ythe exceptions
+in one place and not distribvuted through the whole class hierarchy.
+
+The exception handling is located in the \verb|java.lang.Throwable| class.
+Exceptions are objects and there are two types: Errors and Exceptions.
+Errors are usually not recoverable and the program has to exit with
+an error message. From exceptions you can recover, e.g. 
+``Array out of Bounds'', or ``IO Exception'', etc.
+
+The way of handling exceptions is easily seen in the above examples
+about file I/O. You put the code, which can throw an exception in a
+\verb|try { }| clause and use the \verb|catch() {}| clause afterwards
+to define what has to be done, if an exception occurs in the try block.
+\begin{verbatim}
+try {
+   // Code which throws exceptions.
+} catch ( java.lang.Throwable e ) {
+   // Code which catches/recovers from exceptions.
+} finally {
+   // Code which should be executed, no matter if an exception
+   // occured or not, before global catching of the exceptions 
+   // takes place.
+}
+\end{verbatim}
+The \verb|java.lang.Throwable| keyword in the catch clause has to be
+exchanged by one of the exceptions in table \ref{tab:Exceptions}. 
+
+\begin{table}[htbp]
+  \begin{center}
+    \begin{tabular}{ll}
+      Exception name & Ocurrence \\\hline
+      IOException & Some IO problem. \\
+      ArrayIndexOutOfBoundsException & array is out of bounds \\
+     ??? & ??? \\
+    \end{tabular}
+    \caption{Some of the important exceptions in the \texttt{java.lang.Throwable} class. A detailed list is in the API documentation.}
+    \label{tab:Exceptions}
+  \end{center}
+\end{table}
+Instead of explicitly catching exceptions you can also just
+write \verb|throws IOException| after the class definition, before
+the actual code. Then the exceptions are handed to the next higher 
+instance and if there is no calling class anymore an error is
+displayed. With this you can propagate all your exceptions to the
+parent class of all of the classes and catch all the exceptions there.
+
+If you ask how do you know what exceptions to catch, there are only
+two possibilities: read the whole code and look for exeptions, which
+can be thrown by it or wait for the exceptions to occur on the
+command line. 
+
+You can even use your own exceptions very easily by using the keyword
+\verb|throw| and your own name of an exception. That is an easy way
+of handling exceptional conditions in your own code, like energy
+turns zero or step size/accuracy gets too large.
+
+
 
 %%%%%%%%%%%%
 \subsection{The discrete--time random walk}
