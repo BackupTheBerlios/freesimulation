@@ -16,18 +16,10 @@
 ###
 
 ### 
-### Instructions:
+### Instructions:  Type "make help"
 ###
-### book / dvi 	--	Make the complete book (.dvi file, bibtex used)
-### ps		--	Make .ps file from the .dvi file
-### pdf		--	Make .pdf from .ps file
-### html	--	Make html files from .tex using latex2html
-###
-### Preface	--	Make the .dvi preface from all .tex files (also use Bibtex)
-### Appendix	--	Make the .dvi appendix from all .tex files (also use Bibtex)
-### Chap0	--	Make Chap0 .dvi from all .tex files (also use Bibtex)
-### The same up to "Chap12" !!
-### 
+
+##########################################################################################
 
 
 ### Operating System commands
@@ -86,6 +78,19 @@ CHAP12_SHORTCUTS=Risk Manage RM
 ALL_CHAPTERS=$(CHAP0) $(CHAP1) $(CHAP2) $(CHAP3) $(CHAP4) $(CHAP5) $(CHAP6) $(CHAP7) \
 	$(CHAP8) $(CHAP9) $(CHAP10) $(CHAP11) $(CHAP12)
 
+PART1:=$(CHAP0) $(CHAP1) $(CHAP2)
+PART2:=$(CHAP3) $(CHAP4) $(CHAP5)
+PART3:=$(CHAP6) $(CHAP7)
+PART4:=$(CHAP8) $(CHAP9) $(CHAP10)
+PART5:=$(CHAP11) $(CHAP12)
+
+PART1_TARGETS=Part1 PART1 part1
+PART2_TARGETS=Part2 PART2 part2
+PART3_TARGETS=Part3 PART3 part3
+PART4_TARGETS=Part4 PART4 part4
+PART5_TARGETS=Part5 PART5 part5
+
+
 APPENDIX=JavaSummary AppendixMainText Listings Solutions GNU_Docu_License GNU_Software_License
 APPENDIX_SHORTCUTS=appendix
 
@@ -96,6 +101,7 @@ APPENDIX_SHORTCUTS=appendix
 ###
 
 .PHONY: ps postscript viewdvi dviview Appendix clean html realclean tth book dvi \
+	help Help HELP pdf PDF PS\
 	Chap0 Chap1 Chap2 Chap3 Chap4 Chap5 Chap6 Chap7 Chap8 Chap9 Chap10 Chap11 Chap12\
 	$(CHAP0) $(CHAP1) $(CHAP2) $(CHAP3) $(CHAP4) $(CHAP5) $(CHAP6) $(CHAP7) \
 	$(CHAP8) $(CHAP9) $(CHAP10) $(CHAP11) $(CHAP12) \
@@ -277,17 +283,85 @@ Chap12 $(CHAP12_SHORTCUTS) $(CHAP12): $(CHAP12).tex $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 
+
+###
+### The Parts of the Book ....
+###
+$(PART1_TARGETS): $(addsuffix .tex,$(PART1))
+	@echo ""
+	@echo " Making Part 1 of the book using files: $(addsuffix .tex,$(PART1))"
+	@echo ""
+# Generating inclusion file
+	@echo "\includeonly{$(addsuffix $(COMMA),$(PART1))}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	-@for chap in $(PART1); do $(BIBTEX) $$chap; done
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+$(PART2_TARGETS): $(addsuffix .tex,$(PART2))
+	@echo ""
+	@echo " Making Part 2 of the book using files: $(addsuffix .tex,$(PART2))"
+	@echo ""
+# Generating inclusion file
+	@echo "\includeonly{$(addsuffix $(COMMA),$(PART2))}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	-@for chap in $(PART2); do $(BIBTEX) $$chap; done
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+$(PART3_TARGETS): $(addsuffix .tex,$(PART3))
+	@echo ""
+	@echo " Making Part 3 of the book using files: $(addsuffix .tex,$(PART3))"
+	@echo ""
+# Generating inclusion file
+	@echo "\includeonly{$(addsuffix $(COMMA),$(PART3))}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	-@for chap in $(PART3); do $(BIBTEX) $$chap; done
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+$(PART4_TARGETS): $(addsuffix .tex,$(PART4))
+	@echo ""
+	@echo " Making Part 4 of the book using files: $(addsuffix .tex,$(PART4))"
+	@echo ""
+# Generating inclusion file
+	@echo "\includeonly{$(addsuffix $(COMMA),$(PART4))}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	-@for chap in $(PART4); do $(BIBTEX) $$chap; done
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+$(PART5_TARGETS): $(addsuffix .tex,$(PART5))
+	@echo ""
+	@echo " Making Part 5 of the book using files: $(addsuffix .tex,$(PART5))"
+	@echo ""
+# Generating inclusion file
+	@echo "\includeonly{$(addsuffix $(COMMA),$(PART5))}" >$(INCLUDE_ONLY_FILENAME)
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	-@for chap in $(PART5); do $(BIBTEX) $$chap; done
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+
+###
+### The Printed Formats ....
+###
+
 ### Postscript File using dvips
-ps postscript $(MAIN_TEX_FILE).ps:
+PS ps postscript $(MAIN_TEX_FILE).ps:
 	@echo " Making Postscript file ..."
 	@echo " I do not check, if a tex file has changed !"
 	@$(DVIPS) $(MAIN_TEX_FILE).dvi
 
 ### PDF Format using pdf2ps
-pdf: $(MAIN_TEX_FILE).ps
+pdf PDF: $(MAIN_TEX_FILE).ps
 	@echo " Making PDF Format of book ..."
 	@echo " We are producing PDF V1.3 format, meaning Acrobat Reader V4.x compatibility."
 	@$(PS2PDF) -dCompatibility=1.3 $(MAIN_TEX_FILE).ps $(MAIN_TEX_FILE).pdf
+
+###
+### The view Targets ....
+###
 
 ### view ps file
 view psview:	$(MAIN_TEX_FILE).ps
@@ -302,6 +376,10 @@ viewdvi dviview:
 	@$(XDVI) $(MAIN_TEX_FILE).dvi
 
 
+###
+### The Interactive / Internet Formats ....
+###
+
 ### HTML 
 ## ATTENTION: Takes a LONG time ....
 html: $(MAIN_TEX_FILE).tex
@@ -311,6 +389,8 @@ html: $(MAIN_TEX_FILE).tex
 ### tth (HTML)
 tth: $(MAIN_TEX_FILE).tex
 	$(TTH) $(MAIN_TEX_FILE) -a -e1
+
+
 
 ###
 ### The complete book target
@@ -326,3 +406,24 @@ dvi book: realclean
 	-@for chap in $(ALL_CHAPTERS); do $(BIBTEX) $$chap; done
 	@$(LATEX) $(MAIN_TEX_FILE).tex
 	@$(LATEX) $(MAIN_TEX_FILE).tex
+
+
+### Help Screen
+help HELP Help:
+	@echo "### "
+	@echo "### The following targets exist:"
+	@echo "###"
+	@echo "### help 	--	This help !"
+	@echo "###"
+	@echo "### book / dvi 	--	Make the complete book (.dvi file, bibtex used)"
+	@echo "### ps		--	Make .ps file from the .dvi file"
+	@echo "### pdf		--	Make .pdf from .ps file"
+	@echo "### html	--	Make html files from .tex using latex2html"
+	@echo "###"
+	@echo "### Preface	--	Make the .dvi preface from all .tex files (also use Bibtex)"
+	@echo "### Appendix	--	Make the .dvi appendix from all .tex files (also use Bibtex)"
+	@echo "### Chap0	--	Make Chap0 .dvi from all .tex files (also use Bibtex)"
+	@echo "### The same up to "Chap12" !!"
+	@echo "### Part1	--	Make just Part 1 of Book"
+	@echo "### The same up to "Part5" !! "
+	@echo "###"
