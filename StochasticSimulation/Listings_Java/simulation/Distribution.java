@@ -5,32 +5,50 @@ import java.util.Random;
 /** This class contains many methods for generating random numbers
   with different distributions. */
 public class Distribution {
-  private static int count;    // nextNormal(Random)
-  private static double V1,V2; // nextNormal(Random)
-  private static int count2;     // nextNormal()
-  private static double V21,V22; // nextNormal() 
-  // GGL uniform deviates:
-  private static final long c=0, a=16807;            // nextUniform()
-  private static final long M=(int)Math.pow(2,31)-1; // nextUniform()
-  static long seed=1;  // for each Distribution object we have one
-  // VERY BAD uniform deviates:
-  private static final long cBad=0, aBad=65535;       // nextUniformBad()
-  private static final long MBad=(int)Math.pow(2,31)-1; // nextUniformBad()
-  static long seedBad=1;  // for each Distribution object we have one
+    private static int count;    // nextNormal(Random)
+    private static double V1,V2; // nextNormal(Random)
+    private static int count2;     // nextNormal()
+    private static double V21,V22; // nextNormal() 
+    // GGL uniform deviates:
+    private static final long c=0, a=16807;            // nextUniform()
+    private static final long M=(int)Math.pow(2,31)-1; // nextUniform()
+    static long seed=1;  // for each Distribution object we have one
+    // VERY BAD uniform deviates:
+    private static final long cBad=0, aBad=65535;         // nextUniformBad()
+    private static final long MBad=(int)Math.pow(2,31)-1; // nextUniformBad()
+    static long seedBad=1;  // for each Distribution object we have one
     
-  /** Constructor: create our own seed, if necessary.
-    initialize all seeds, so that the different generators can be
-    used in parallel. */
-  public Distribution (int seed) {
-    this.seed=seed;
-    this.seedBad=seed;
-  }
+    // the instance random number generator
+    private Random rand;
+    
+    /** Constructor: create our own seed, if necessary.
+        initialize all seeds, so that the different generators can be
+        used in parallel. */
+    public Distribution (int seed) {
+        this.seed=seed;
+        this.seedBad=seed;
+        this.rand = new Random();
+    }
+    
+    /** Calculate a integer random number between 0 and N 
+        (including 0 and N) 
+        -- use a Random class of the calling class */
+    public int nextInteger(Random rand2, int N) {
+        return (int)Math.round(N*rand2.nextDouble());
+    }
 
-  /** Calculate a integer random number between 0 and N 
-    (including 0 and N) -- use Random class */
-  public static int nextInteger(Random rand, int N) {
-    return (int)Math.round(N*rand.nextDouble());
-  }
+    /** Calculate a integer random number between 0 and N 
+        (including 0 and exluding N) <p>
+        This routine is available in JDK 1.2 (Java 2) and can
+        be used for JDK <= 1.1 to be compatible. The only change
+        to switch then, is to change the import statement in your
+        programs and the instantiation of the simulation.Distribution 
+        object to a java.util.Random object. 
+    */
+    public int nextInt(int N) {
+        return (int)Math.floor(N*rand.nextDouble());
+    }
+
 
     /** Generate uniformly distributed random numbers using
 	congruential method (the so-called GGL of IBM) */
@@ -38,6 +56,7 @@ public class Distribution {
 	seed = (seed*a+c) % M;
 	return (double)seed/(double)M;
     }
+
     /** Generate uniformly distributed random numbers using
 	congruential method (with a very bad choice of parameters) */
     public static double nextUniformBad() {
